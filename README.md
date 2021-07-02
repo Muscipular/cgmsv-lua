@@ -58,6 +58,7 @@ loadModule('admin', 'admin.lua') --加载admin模块
 3. warp 村落传送
 4. warp2 练级点传送
 5. welcome 示例模块
+6. itemPowerUp.lua 装备强化
    
 ### 开发中的模块
-1. itemPowerUp.lua 装备强化（WIP）
+
