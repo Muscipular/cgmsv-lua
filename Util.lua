@@ -1,3 +1,9 @@
+local _G = _G
+local Util = {}
+_G.Utils = Util;
+setmetatable(Util, { __index = _G });
+setfenv(1, Util);
+
 function log(module, level, msg, ...)
   print("[" .. level .. "][" .. module .. "]", msg, ...)
 end
@@ -147,4 +153,8 @@ function sqlValue(s)
     end
     return r .. "'";
   end
+end
+
+for i, v in pairs(Util) do
+  _G[i] = v;
 end

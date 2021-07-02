@@ -27,7 +27,9 @@ function loadModule(moduleName, path, forceReload)
     Modules[moduleName]:unload();
   end
   Modules[moduleName] = nil;
-  local result, module = pcall(dofile, path)
+  local result, module = pcall(function()
+    return loadfile(path, 'bt', setmetatable({}, { __index = _G }))()
+  end)
   if not result then
     log('ModuleSystem', 'ERROR', 'load module failed.', moduleName, path, forceReload, '\n', module)
     return nil;
@@ -146,7 +148,7 @@ function ModuleBase:createModule(name)
     self.__index = self;
     return o;
   end
-  
+
   return SubModule;
 end
 
