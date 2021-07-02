@@ -33,7 +33,7 @@ function loadModule(moduleName, path, forceReload)
     return nil;
   end
   module = module:new();
-  logInfo('ModuleSystem', 'new object', moduleName, module)
+  --logInfo('ModuleSystem', 'new object', moduleName, module)
   Modules[moduleName] = module;
   module.___path = oPath;
   module:load();
@@ -61,10 +61,14 @@ function reloadModule(moduleName)
   return nil;
 end
 
+function getModule(moduleName)
+  return Modules[moduleName];
+end
+
 local function makeEventHandle()
   local list = {}
   local fn = function(...)
-    logDebug('ModuleSystem', 'callback', ...)
+    --logDebug('ModuleSystem', 'callback', ...)
     local res;
     for i, v in pairs(list) do
       res = v(...)
@@ -94,7 +98,7 @@ function regGlobalEvent(eventName, fn, moduleName, extraSign)
   end
   ix = ix + 1;
   eventCallbacks[eventName .. extraSign][ix] = function(...)
-    logDebug('ModuleSystem', 'callback', eventName .. extraSign, fn, ...)
+    --logDebug('ModuleSystem', 'callback', eventName .. extraSign, fn, ...)
     local success, result = pcall(fn, ...)
     if not success then
       log(moduleName, 'ERROR', eventName .. extraSign .. ' event callback error: ', result)
@@ -186,6 +190,7 @@ function ModuleBase:migrate()
     end)
     for i, migration in ipairs(self.migrations) do
       if migration.version > version then
+        self:logInfo('run migration: ' .. migration.version)
         version = migration.version;
         if type(migration.value) == 'function' then
           migration.value();
@@ -196,6 +201,26 @@ function ModuleBase:migrate()
       end
     end
   end
+end
+
+function ModuleBase:log(level, msg, ...)
+  log(self.name, level, msg, ...)
+end
+
+function ModuleBase:logInfo(msg, ...)
+  logInfo(self.name, msg, ...)
+end
+
+function ModuleBase:logDebug(msg, ...)
+  logDebug(self.name, msg, ...)
+end
+
+function ModuleBase:logWarn(msg, ...)
+  logWarn(self.name, msg, ...)
+end
+
+function ModuleBase:logError(msg, ...)
+  logError(self.name, msg, ...)
 end
 
 function ModuleBase:load()

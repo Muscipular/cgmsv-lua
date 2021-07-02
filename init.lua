@@ -1,10 +1,4 @@
 dofile('lua/Const.lua')
 dofile('lua/Util.lua')
 dofile('lua/ModuleSystem.lua')
-
---loadModule('welcome', 'welcome.lua')
-loadModule('admin', 'admin.lua')
-loadModule('shop', 'shop.lua')
-loadModule('warp', 'warp.lua')
-loadModule('warp2', 'warp2.lua')
--- loadModule('autoStack', 'autoStack.lua')
+dofile('lua/ModuleConfig.lua')
