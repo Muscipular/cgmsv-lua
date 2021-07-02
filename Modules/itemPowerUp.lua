@@ -150,8 +150,9 @@ function ItemPowerUP:onDamageCalculateEvent(
         if (data.level or 0) > 0 then
           local itemType = Item.GetData(itemIndex, CONST.道具_类型);
           if isWeapon(itemType) then
-            self:logDebug('add damage' .. (math.ceil(data.level * data.level / 2) + data.level))
-            damage = damage + math.ceil(data.level * data.level / 2) + data.level;
+            local dmg = math.ceil((data.level * data.level / 100 + data.level / 100) * Item.GetData(itemIndex, CONST.道具_攻击));
+            self:logDebug('add damage' .. dmg)
+            damage = damage + dmg;
           end
         end
       end
@@ -166,7 +167,7 @@ function ItemPowerUP:onDamageCalculateEvent(
           local itemType = Item.GetData(itemIndex, CONST.道具_类型);
           if isArmour(itemType) then
             self:logDebug('dec damage' .. (data.level * 2))
-            damage = damage - data.level * 2;
+            damage = damage - data.level * 3;
           end
         end
       end
@@ -191,7 +192,8 @@ function ItemPowerUP:onItemOverLapEvent(charIndex, fromItemIndex, targetItemInde
       return 0
     end
     local rate = math.random(0, 100);
-    if rate < LevelRate[(data.level or 0) + 1] then
+    local rawLv = data.level or 0;
+    if rate < LevelRate[rawLv + 1] then
       if (data.level or 0) > 0 then
         if data.level >= SAVE_LEVEL2 then
           data.level = 0;
@@ -200,7 +202,7 @@ function ItemPowerUP:onItemOverLapEvent(charIndex, fromItemIndex, targetItemInde
         end
         self:setItemData(targetItemIndex, data);
       end
-      NLG.SystemMessage(charIndex, "[系统] 强化【" .. Item.GetData(targetItemIndex, CONST.道具_名字) .. "】失败。【" .. rate .. '/' .. LevelRate[(data.level or 0) + 1] .. "】");
+      NLG.SystemMessage(charIndex, "[系统] 强化【" .. Item.GetData(targetItemIndex, CONST.道具_名字) .. "】失败。【" .. rate .. '/' .. LevelRate[rawLv + 1] .. "】");
       if data.level > 0 then
         Item.SetData(targetItemIndex, CONST.道具_名字, data.name .. ' +' .. data.level);
       else
@@ -210,7 +212,7 @@ function ItemPowerUP:onItemOverLapEvent(charIndex, fromItemIndex, targetItemInde
       Item.UpItem(charIndex, -1);
       return 0;
     end
-    data.level = (data.level or 0) + 1;
+    data.level = rawLv + 1;
     if data.level > MAX_LEVEL then
       data.level = MAX_LEVEL;
     end
@@ -219,7 +221,7 @@ function ItemPowerUP:onItemOverLapEvent(charIndex, fromItemIndex, targetItemInde
     if isWeapon(type) then
     elseif isArmour(type) then
     end
-    NLG.SystemMessage(charIndex, "[系统] 强化【" .. Item.GetData(targetItemIndex, CONST.道具_名字) .. "】成功。【" .. rate .. '/' .. LevelRate[(data.level or 0) + 1] .. "】");
+    NLG.SystemMessage(charIndex, "[系统] 强化【" .. Item.GetData(targetItemIndex, CONST.道具_名字) .. "】成功。【" .. rate .. '/' .. LevelRate[rawLv + 1] .. "】");
     self:setItemData(targetItemIndex, data);
     Char.DelItem(charIndex, Item.GetData(fromItemIndex, CONST.道具_ID), 1);
     Item.UpItem(charIndex, -1);
