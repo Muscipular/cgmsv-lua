@@ -1,11 +1,4 @@
-local Shop = ModuleBase:new('shop')
-
-function Shop:new()
-  local o = ModuleBase:new('shop');
-  setmetatable(o, self)
-  self.__index = self
-  return o;
-end
+local Shop = ModuleBase:createModule('shop')
 
 local shopNpcPrefix = '100|100|3|10146|10147|10148|10149|10150|10151|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|1|';
 

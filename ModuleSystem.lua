@@ -124,7 +124,7 @@ function unRegGlobalEvent(eventName, fnIndex, moduleName, extraSign)
   return true;
 end
 
-local ModuleBase = { name = '', callbacks = {}, lastIx = 0 };
+local ModuleBase = { name = '', callbacks = {}, lastIx = 0, migrations = nil };
 
 _G["ModuleBase"] = ModuleBase;
 
@@ -136,6 +136,18 @@ function ModuleBase:new(name)
   o.callbacks = {};
   o.lastIx = 0;
   return o;
+end
+
+function ModuleBase:createModule(name)
+  local SubModule = ModuleBase:new(name)
+  function SubModule:new()
+    local o = ModuleBase:new(name);
+    setmetatable(o, self)
+    self.__index = self;
+    return o;
+  end
+  
+  return SubModule;
 end
 
 ---@param eventNameOrCallbackKeyOrFn string|nil|function
@@ -152,6 +164,8 @@ function ModuleBase:regCallback(eventNameOrCallbackKeyOrFn, fn)
   return eventNameOrCallbackKeyOrFn, self.lastIx, fnIndex;
 end
 
+---@param eventNameOrCallbackKey string
+---@param fnOrFnIndex function|number
 function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrFnIndex)
   local cbIndex = fnOrFnIndex;
   if type(fnOrFnIndex) == 'function' then

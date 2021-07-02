@@ -1,13 +1,6 @@
-local Admin = ModuleBase:new('admin')
+local Admin = ModuleBase:createModule('admin')
 local commands = {}
 local commandsNormal = {}
-
-function Admin:new()
-  local o = ModuleBase:new('admin');
-  setmetatable(o, self)
-  self.__index = self;
-  return o;
-end
 
 function commands.module(charIndex, args)
   if args[1] == 'reload' then

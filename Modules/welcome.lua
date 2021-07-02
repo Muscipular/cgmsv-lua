@@ -1,7 +1,7 @@
 --模块名称
 local moduleName = 'welcome'
 --模块类
-local Welcome = ModuleBase:new()
+local Welcome = ModuleBase:createModule(moduleName)
 --迁移定义
 Welcome.migrations = {
   {
@@ -15,15 +15,6 @@ Welcome.migrations = {
     end
   }
 };
-
-
---构造函数
-function Welcome:new()
-    local o = ModuleBase:new(moduleName);
-    setmetatable(o, self)
-    self.__index = self
-    return o;
-end
 
 -- 加载模块钩子
 function Welcome:onLoad()

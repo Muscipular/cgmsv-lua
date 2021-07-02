@@ -1,4 +1,4 @@
-local ItemPowerUP = ModuleBase:new('itemPowerUp')
+local ItemPowerUP = ModuleBase:createModule('itemPowerUp')
 ItemPowerUP.migrations = {
   {
     version = 1,
@@ -87,13 +87,6 @@ function ItemPowerUP:getItemData(itemIndex)
     end
   end
   return { };
-end
-
-function ItemPowerUP:new()
-  local o = ModuleBase:new('itemPowerUp');
-  setmetatable(o, self)
-  self.__index = self
-  return o;
 end
 
 function ItemPowerUP:onLoad()

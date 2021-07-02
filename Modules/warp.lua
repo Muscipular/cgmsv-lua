@@ -1,4 +1,4 @@
-local Warp = ModuleBase:new('warp')
+local Warp = ModuleBase:createModule('warp')
 
 --坐标可以在下面自行添加
 local warpPoints = {
@@ -28,13 +28,6 @@ local function calcwarp()
     local page = math.modf(#warpPoints / 8) + 1
     local remainder = math.fmod(#warpPoints, 8)
     return page, remainder
-end
-
-function Warp:new()
-    local o = ModuleBase:new('warp');
-    setmetatable(o, self)
-    self.__index = self
-    return o;
 end
 
 function Warp:onLoad()
