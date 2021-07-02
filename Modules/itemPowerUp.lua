@@ -66,10 +66,13 @@ function ItemPowerUP:setItemData(itemIndex, value)
   local args = Item.GetData(itemIndex, CONST.道具_自用参数)
   if not string.match(args, '^luaData_') then
     local t = formatNumber(os.time(), 36) .. formatNumber(math.random(1, 36 * 36), 36);
-    args = luaData_ .. t;
-    querySQL('replace into lua_itemData (id, data) VALUES (' .. sqlValue(args) .. ',' .. sqlValue(jsonEncode(value)) .. ')')
+    args = 'luaData_' .. t;
     Item.SetData(itemIndex, CONST.道具_自用参数, args);
   end
+  local sql = 'replace into lua_itemData (id, data) VALUES (' .. sqlValue(args) .. ',' .. sqlValue(jsonEncode(value)) .. ')';
+  local r = querySQL(sql)
+  --print(r, sql);
+  self.cache.set(args, value);
 end
 
 function ItemPowerUP:getItemData(itemIndex)
@@ -77,9 +80,9 @@ function ItemPowerUP:getItemData(itemIndex)
   if string.match(args, '^luaData_') then
     local data = self.cache.get(args)
     if not data then
-      data = querySQL('select data from lua_itemdata where id = \'' .. args .. '\'')
-      if data and data[1] then
-        data = data[1]
+      data = querySQL('select data from lua_itemdata where id = ' .. sqlValue(args))
+      if type(data) == 'table' and data[1] then
+        data = data[1][1]
         data = jsonDecode(data)
         self.cache.set(args, data);
         return data;
@@ -101,7 +104,7 @@ end
 local function getItemSlot(charIndex, itemIndex)
   local itemSlot = -1;
   for i = 0, 27 do
-    if Char.getItemIndex(charIndex, i) == itemIndex then
+    if Char.GetItemIndex(charIndex, i) == itemIndex then
       itemSlot = i;
       break
     end
@@ -110,26 +113,26 @@ local function getItemSlot(charIndex, itemIndex)
 end
 
 function ItemPowerUP:onItemOverLapEvent(charIndex, fromItemIndex, targetItemIndex, num)
-  if Item.getData(fromItemIndex, CONST.道具_名字) == '魔石' then
+  if Item.GetData(fromItemIndex, CONST.道具_名字) == '魔石' then
     self:logDebug('onItemOverLapEvent', charIndex, fromItemIndex, targetItemIndex, num);
-    if not Item.getData(targetItemIndex, CONST.道具_已装备) then
+    if not Item.GetData(targetItemIndex, CONST.道具_已装备) then
       return 0
     end
-    local fromSlot = getItemSlot(charIndex, fromItemIndex);
-    local type = Item.getData(targetItemIndex, CONST.道具_类型);
+    --local fromSlot = getItemSlot(charIndex, fromItemIndex);
+    local type = Item.GetData(targetItemIndex, CONST.道具_类型);
     local data = self:getItemData(targetItemIndex);
     if not (isArmour(type) and isArmour(type)) then
       return 0
     end
     data.level = (data.level or 0) + 1;
-    data.name = data.name or Item.getData(targetItemIndex, CONST.道具_名字);
-    Item.setData(targetItemIndex, CONST.道具_名字, data.name .. ' +' .. data.level);
+    data.name = data.name or Item.GetData(targetItemIndex, CONST.道具_名字);
+    Item.SetData(targetItemIndex, CONST.道具_名字, data.name .. ' +' .. data.level);
     if isWeapon(type) then
     elseif isArmour(type) then
     end
     self:setItemData(targetItemIndex, data);
-    Char.DelItem(charIndex, Item.getData(fromItemIndex, CONST.道具_ID), 1);
-    Item.UpItem(charIndex, fromSlot);
+    Char.DelItem(charIndex, Item.GetData(fromItemIndex, CONST.道具_ID), 1);
+    Item.UpItem(charIndex, -1);
     return 1;
   end
 end

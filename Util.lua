@@ -115,7 +115,7 @@ _G.LRU = dofile('lua/libs/lru.lua');
 ---@param n number
 ---@return string
 function formatNumber(n, base)
-  n = math.tointeger(n);
+  n = math.floor(n);
   if n == nil then
     error('n不是数字')
   end
@@ -125,12 +125,18 @@ function formatNumber(n, base)
   if base < 2 or base > 36 then
     error('base取值为2-36')
   end
+  if base == 10 or n == 0 then
+    return tostring(n)
+  end
   local s = '0123456789abcdefghijklmnopqrstuvwxyz'
   local r = ''
-  while (not n == 0) do
-    local k = math.floor(n / base);
-    r = r .. string.sub(s, k + 1, k + 2);
-    n = math.fmod(n, base)
+  while n > 0 do
+    if n == 0 then
+      break ;
+    end
+    local k = math.fmod(n, base);
+    r = string.sub(s, k + 1, k + 1) .. r;
+    n = math.floor(n / base)
   end
   return r;
 end
@@ -145,7 +151,7 @@ function sqlValue(s)
   if type(s) == 'string' then
     local r = "'"
     for i = 1, string.len(s) do
-      local v = string.sub(s, i, i + 1);
+      local v = string.sub(s, i, i);
       if v == '\\' or v == '\'' then
         r = r .. '\\'
       end
