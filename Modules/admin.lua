@@ -327,6 +327,10 @@ function commands.getPet(charIndex, args)
   Char.GivePet(charIndex, tonumber(args[1]))
 end
 
+function commands.giveItem(charIndex, args)
+  Char.GiveItem(charIndex, tonumber(args[1]), tonumber(args[2] or 1))
+end
+
 function Admin:onLoad()
   logInfo(self.name, 'load')
   local function handleChat(charIndex, msg, color, range, size)

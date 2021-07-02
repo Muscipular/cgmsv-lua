@@ -154,6 +154,7 @@ end
 
 ---@param eventNameOrCallbackKeyOrFn string|nil|function
 ---@param fn function|nil
+---@return string, number, number
 function ModuleBase:regCallback(eventNameOrCallbackKeyOrFn, fn)
   self.lastIx = self.lastIx + 1;
   if type(eventNameOrCallbackKeyOrFn) == 'function' then
