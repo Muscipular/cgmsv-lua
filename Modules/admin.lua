@@ -53,7 +53,7 @@ local function identity(player)
   return
 end
 
-local function repiar(player)
+local function repairEquipment(player)
   local Count = 0
   for ItemSlot = 8, 8 do
     local ItemIndex = Char.GetItemIndex(player, ItemSlot)
@@ -88,8 +88,8 @@ local function repiar(player)
   return
 end
 
-local function spriteRepiar(player)
-  local ZH = Char.GetData(player, 170);
+local function spriteRepair(player)
+  local ZH = Char.GetData(player, CONST.CHAR_掉魂);
   local money = Char.GetData(player, CONST.CHAR_金币);
   local LV = Char.GetData(player, CONST.CHAR_等级);
   local ZHMB = ZH * 200;
@@ -99,7 +99,7 @@ local function spriteRepiar(player)
   end
   if money >= ZHMBKC and ZH > 0 then
     Char.SetData(player, CONST.CHAR_金币, money - ZHMBKC);
-    Char.SetData(player, 170, ZH - ZH);
+    Char.SetData(player, CONST.CHAR_掉魂, 0);
     Char.FeverStop(player);
     NLG.UpChar(player);
     NLG.SystemMessage(player, "招魂完成。招魂数量为【" .. ZH .. "】费用为【" .. ZHMBKC .. "】魔币。");
@@ -109,50 +109,46 @@ local function spriteRepiar(player)
   end
 end
 
-local function healthRepiar(player)
-  local shoushang = Char.GetData(player, CONST.CHAR_受伤);
+local function healthRepair(player)
+  local i = Char.GetData(player, CONST.CHAR_受伤);
   local money = Char.GetData(player, CONST.CHAR_金币);
   if (Char.GetData(player, CONST.CHAR_受伤) < 1) then
     NLG.SystemMessage(player, "您未受伤。");
     return ;
   end
   if (money >= 200) and (Char.GetData(player, CONST.CHAR_受伤) > 0 and Char.GetData(player, CONST.CHAR_受伤) < 26) then
-    Char.SetData(player, CONST.CHAR_受伤, shoushang - shoushang);
+    Char.SetData(player, CONST.CHAR_受伤, 0);
     Char.SetData(player, CONST.CHAR_金币, money - 200);
     NLG.UpdateParty(player);
     NLG.UpChar(player);
     NLG.SystemMessage(player, "恭喜你治疗完毕。");
-    NLG.SendGraphEvent(player, 45, 0);
     NLG.SystemMessage(player, "扣除200魔币。");
     return ;
   end
   if (money >= 400) and (Char.GetData(player, CONST.CHAR_受伤) > 24 and Char.GetData(player, CONST.CHAR_受伤) < 51) then
-    Char.SetData(player, CONST.CHAR_受伤, shoushang - shoushang);
+    Char.SetData(player, CONST.CHAR_受伤, 0);
     Char.SetData(player, CONST.CHAR_金币, money - 400);
     NLG.UpdateParty(player);
     NLG.UpChar(player);
     NLG.SystemMessage(player, "恭喜你治疗完毕。");
-    NLG.SendGraphEvent(player, 45, 0);
     NLG.SystemMessage(player, "扣除400魔币。");
     return ;
   end
   if (money >= 800) and (Char.GetData(player, CONST.CHAR_受伤) > 49 and Char.GetData(player, CONST.CHAR_受伤) < 76) then
-    Char.SetData(player, CONST.CHAR_受伤, shoushang - shoushang);
+    Char.SetData(player, CONST.CHAR_受伤, 0);
     Char.SetData(player, CONST.CHAR_金币, money - 800);
     NLG.UpdateParty(player);
     NLG.UpChar(player);
     NLG.SystemMessage(player, "恭喜你治疗完毕。");
-    NLG.SendGraphEvent(player, 45, 0);
     NLG.SystemMessage(player, "扣除800魔币。");
     return ;
   end
   if (money >= 1000) and (Char.GetData(player, CONST.CHAR_受伤) > 74 and Char.GetData(player, CONST.CHAR_受伤) < 101) then
-    Char.SetData(player, CONST.CHAR_受伤, shoushang - shoushang);
+    Char.SetData(player, CONST.CHAR_受伤, 0);
     Char.SetData(player, CONST.CHAR_金币, money - 1000);
     NLG.UpdateParty(player);
     NLG.UpChar(player);
     NLG.SystemMessage(player, "恭喜你治疗完毕。");
-    NLG.SendGraphEvent(player, 45, 0);
     NLG.SystemMessage(player, "扣除1000魔币。");
     return ;
   else
@@ -175,11 +171,11 @@ function commandsNormal.where(charIndex)
   )
 end
 
-function commandsNormal.char(charIndex)
-  if args[1] == 'healthRepiar' then
-    return healthRepiar(charIndex)
-  elseif args[1] == 'spriteRepiar' then
-    return spriteRepiar(charIndex)
+function commandsNormal.char(charIndex, args)
+  if args[1] == 'healthRepair' then
+    return healthRepair(charIndex)
+  elseif args[1] == 'spriteRepair' then
+    return spriteRepair(charIndex)
   elseif args[1] == 'addFrame' then
     return addFrame(charIndex)
   end
@@ -199,8 +195,8 @@ function commandsNormal.item(charIndex, args)
     NLG.UpChar(charIndex);
   elseif args[1] == 'identity' then
     return identity(charIndex)
-  elseif args[1] == 'repiar' then
-    return repiar(charIndex)
+  elseif args[1] == 'repair' then
+    return repairEquipment(charIndex)
   end
 end
 
