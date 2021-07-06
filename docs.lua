@@ -74,4 +74,33 @@ end
 ---@param ItemID number
 ---@return number 如果目标有该道具，则返回该道具index，否则返回-1。
 function Char.HaveItem(CharIndex, ItemID)
-end 
+end
+
+---@param CharIndex number
+---@param Slot number
+---@return number 如果目标有，则返回index，否则返回-1。
+function Char.GetPet(CharIndex, Slot)
+end
+
+NLG = {}
+function NLG.ShowWindowTalked(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data)
+end
+
+function NLG.CanTalk(CharIndex, TargetCharIndex)
+end
+
+function NLG.UpChar(CharIndex)
+end
+
+Pet = {}
+function Pet.ReBirth(PlayerIndex, PetIndex)
+end
+
+function Pet.SetArtRank(PetIndex, ArtType, Value)
+end
+
+function Pet.GetArtRank(PetIndex, ArtType)
+end
+
+function Pet.UpPet(PlayerIndex, PetIndex)
+end

@@ -32,8 +32,9 @@ function _G.loadModule(moduleName, path, forceReload)
     Modules[moduleName]:unload();
   end
   Modules[moduleName] = nil;
+  local ctx = {}
   local result, module = pcall(function()
-    return loadfile(path, 'bt', setmetatable({}, { __index = _G }))()
+    return loadfile(path, 'bt', setmetatable(ctx, { __index = _G }))()
   end)
   if not result then
     log('ModuleSystem', 'ERROR', 'load module failed.', moduleName, path, forceReload, '\n', module)
@@ -43,6 +44,7 @@ function _G.loadModule(moduleName, path, forceReload)
   --logInfo('ModuleSystem', 'new object', moduleName, module)
   Modules[moduleName] = module;
   module.___path = oPath;
+  module.___ctx = ctx;
   module:load();
   return module;
 end

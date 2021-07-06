@@ -1,27 +1,76 @@
+---@class ModuleBase
+---@field name string
+---@field lastIx number
+---@field parts table[]
+---@field migrations {version:number,name:string,value:string|function}[]|nil
+---@field callbacks {fnCb: function, fnIndex: number, key: string}[]
 local ModuleBase = { name = '', callbacks = {}, lastIx = 0, migrations = nil };
 
 _G.ModuleBase = ModuleBase;
 
+local function loadPart(self, path)
+  path = 'lua/Modules/' .. path;
+  self:logInfo('load part ', path)
+  local result, module = pcall(function()
+    return loadfile(path, 'bt', self.___ctx)()
+  end)
+  if not result then
+    self:logError('load part failed.', path, '\n', module)
+    return nil;
+  end
+  return module;
+end
+
+ModuleBase.__index = ModuleBase;
 function ModuleBase:new(name)
   local o = {};
   setmetatable(o, self)
-  self.__index = self
   o.name = name;
   o.callbacks = {};
   o.lastIx = 0;
-  o.npcList = {};
   return o;
 end
 
-function ModuleBase:createModule(name)
+---@param name string
+---@param depParts string[]
+---@return ModuleBase|NPCPart
+function ModuleBase:createModule(name, depParts)
   local SubModule = ModuleBase:new(name)
+  SubModule.parts = { table.unpack(ModuleBase.parts) }
+  if depParts then
+    for i, v in ipairs(depParts) do
+      local part = loadPart(v);
+      if part then
+        table.insert(SubModule.parts, part);
+      end
+    end
+  end
+  for i, part in ipairs(SubModule.parts) do
+    for k, p in pairs(part) do
+      if k ~= 'load' and k ~= 'onLoad' and k ~= 'unload' and k ~= 'onUnload' then
+        SubModule[k] = p;
+      end
+    end
+  end
+  SubModule.__index = SubModule;
   function SubModule:new()
     local o = ModuleBase:new(name);
-    setmetatable(o, self)
-    self.__index = self;
+    setmetatable(o, SubModule)
     return o;
   end
 
+  return SubModule;
+end
+
+function ModuleBase:createPart(name)
+  local SubModule = {
+    name = name,
+    onLoad = function()
+    end,
+    onUnload = function()
+    end,
+    ___isPart = true,
+  }
   return SubModule;
 end
 
@@ -57,21 +106,6 @@ function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrFnIndex)
   logInfo(self.name, 'unRegGlobalEvent', fnCb.key, fnCb.fnIndex, fnCb.fn);
   unRegGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
   self.callbacks[cbIndex] = nil;
-end
-
-function ModuleBase:onUnload()
-
-end
-
-function ModuleBase:unload()
-  self:onUnload()
-  for i, v in pairs(self.npcList) do
-    NL.DelNpc(v);
-  end
-  for i, fnCb in pairs(self.callbacks) do
-    unRegGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
-  end
-  self.callbacks = {};
 end
 
 function ModuleBase:migrate()
@@ -117,51 +151,32 @@ function ModuleBase:logError(msg, ...)
 end
 
 function ModuleBase:load()
+  for i, part in pairs(self.parts) do
+    part.onLoad(self);
+  end
   self:migrate();
   self:onLoad()
+end
+
+function ModuleBase:unload()
+  for i, part in pairs(self.parts) do
+    part.onUnload(self);
+  end
+  self:onUnload()
+  for i, fnCb in pairs(self.callbacks) do
+    unRegGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
+  end
+  self.callbacks = {};
 end
 
 function ModuleBase:onLoad()
 
 end
 
-local function fillShopSellType(tb)
-  local all = tb == 'all';
-  local ret = {}
-  for i = 1, 48 do
-    if all or tb[i - 1] then
-      table.insert(ret, '1');
-    else
-      table.insert(ret, '0');
-    end
-  end
-  return ret;
+function ModuleBase:onUnload()
+
 end
 
-local sellAllTypes = table.range(0, 47, function()
-  return 1
-end)
-
----@param positionInfo {x:number,y:number,map:number,mapType:number,direction:number}
----@param shopBaseInfo {buyRate:number,sellRate:number,shopType:number,msgBuySell:number,msgBuy:number,msgMoneyNotEnough:number,msgBagFull:number,msgSell:number,msgAfterSell:number,sellTypes:table|'all'}
----@param image number
----@param name string
-function ModuleBase:NPC_createShop(name, image, positionInfo, shopBaseInfo, items)
-  local shopNpcPrefix = table.join({
-    shopBaseInfo.buyRate or 100,
-    shopBaseInfo.sellRate or 100,
-    shopBaseInfo.shopType or CONST.SHOP_TYPE_BOTH,
-    shopBaseInfo.msgBuySell or '10146',
-    shopBaseInfo.msgBuy or '10147',
-    shopBaseInfo.msgMoneyNotEnough or '10148',
-    shopBaseInfo.msgBagFull or '10149',
-    shopBaseInfo.msgSell or '10150',
-    shopBaseInfo.msgAfterSell or '10151',
-    table.unpack(fillShopSellType(shopBaseInfo.sellTypes or {})),
-  }, '|');
-  local ret = NL.CreateArgNpc("Itemshop2", shopNpcPrefix .. '|' .. table.join(items or {}, '|'), name, image, positionInfo.mapType, positionInfo.map, positionInfo.x, positionInfo.y, positionInfo.direction);
-  if ret >= 0 then
-    table.insert(self.npcList, ret);
-  end
-  return ret;
-end
+ModuleBase.parts = {
+  dofile('lua/libs/ModuleParts/Npc.lua'),
+}

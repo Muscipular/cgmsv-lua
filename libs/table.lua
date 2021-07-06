@@ -23,13 +23,20 @@ function table:find(fn)
   return nil
 end
 
-function table:join(text)
-  local n = ""
-  text = text or ""
-  for i, v in ipairs(self) do
-    n = n .. text .. tostring(v)
+table.join = table.concat;
+
+function table.combine(...)
+  local ret = {}
+  local args = { ... }
+  local n = 1;
+  for i, v in ipairs(args) do
+    if type(v) == 'table' then
+      for _i, x in ipairs(v) do
+        ret[n] = x;
+        n = n + 1;
+      end
+    end
   end
-  return n:sub(text:len() + 1)
 end
 
 function table:indexOf(value)
@@ -41,10 +48,16 @@ function table:indexOf(value)
   return -1;
 end
 
+function table:forEach(fn)
+  for i, v in ipairs(self) do
+    fn(v);
+  end
+end
+
 function table:map(fn)
   local res = {}
   for i, v in pairs(self) do
-    res[i] = fn(v);
+    res[i] = fn(v, i);
   end
   return res;
 end

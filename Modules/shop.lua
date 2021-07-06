@@ -1,7 +1,7 @@
 local Shop = ModuleBase:createModule('shop')
 
 function Shop:onLoad()
-  logInfo(self.name, 'load')
+  self:logInfo('load')
   local shopConfig = { sellTypes = 'all' };
   self:NPC_createShop('¿óÊ¯··Âô', 104863, { map = 1000, mapType = 0, x = 235, y = 86, direction = 4 }, shopConfig, {
     9600, 9601, 9602, 9603, 9604, 9605, 9606, 9607, 9608, 9609,

@@ -254,16 +254,16 @@ local function getPetBp(player, args)
       local arr_rank41 = Pet.FullArtRank(pet, CONST.PET_敏成);
       local arr_rank5 = Pet.GetArtRank(pet, CONST.PET_魔成);
       local arr_rank51 = Pet.FullArtRank(pet, CONST.PET_魔成);
-      local a1 = math.abs(arr_rank1 - arr_rank11);
-      local a2 = math.abs(arr_rank2 - arr_rank21);
-      local a3 = math.abs(arr_rank3 - arr_rank31);
-      local a4 = math.abs(arr_rank4 - arr_rank41);
-      local a5 = math.abs(arr_rank5 - arr_rank51);
+      local a1 = (arr_rank1 - arr_rank11);
+      local a2 = (arr_rank2 - arr_rank21);
+      local a3 = (arr_rank3 - arr_rank31);
+      local a4 = (arr_rank4 - arr_rank41);
+      local a5 = (arr_rank5 - arr_rank51);
       local a6 = a1 + a2 + a3 + a4 + a5;
       local a61 = arr_rank1 + arr_rank2 + arr_rank3 + arr_rank4 + arr_rank5;
-      NLG.SystemMessage(player, Char.GetData(pet, CONST.CHAR_名字) .. "总:" .. a61 .. "（-" .. a6 .. ')')
-      NLG.SystemMessage(player, "体:" .. arr_rank1 .. "(-" .. a1 .. ") 力:" .. arr_rank2 .. "(-" .. a2 .. ") 强:" .. arr_rank3 .. "(-" .. a3 .. ") 敏:" ..
-        arr_rank4 .. "(-" .. a4 .. ") 魔:" .. arr_rank5 .. "(-" .. a5 .. ")");
+      NLG.SystemMessage(player, Char.GetData(pet, CONST.CHAR_名字) .. "总:" .. a61 .. "（" .. a6 .. ')')
+      NLG.SystemMessage(player, "体:" .. arr_rank1 .. "(" .. a1 .. ") 力:" .. arr_rank2 .. "(" .. a2 .. ") 强:" .. arr_rank3 .. "(" .. a3 .. ") 敏:" ..
+        arr_rank4 .. "(" .. a4 .. ") 魔:" .. arr_rank5 .. "(" .. a5 .. ")");
     end
   end
   if not args[2] then
@@ -294,16 +294,16 @@ local function petRebirth(player, args)
     local arr_rank41 = Pet.FullArtRank(pet, CONST.PET_敏成);
     local arr_rank5 = Pet.GetArtRank(pet, CONST.PET_魔成);
     local arr_rank51 = Pet.FullArtRank(pet, CONST.PET_魔成);
-    local a1 = math.abs(arr_rank1 - arr_rank11);
-    local a2 = math.abs(arr_rank2 - arr_rank21);
-    local a3 = math.abs(arr_rank3 - arr_rank31);
-    local a4 = math.abs(arr_rank4 - arr_rank41);
-    local a5 = math.abs(arr_rank5 - arr_rank51);
+    local a1 = (arr_rank1 - arr_rank11);
+    local a2 = (arr_rank2 - arr_rank21);
+    local a3 = (arr_rank3 - arr_rank31);
+    local a4 = (arr_rank4 - arr_rank41);
+    local a5 = (arr_rank5 - arr_rank51);
     local a6 = a1 + a2 + a3 + a4 + a5;
     local a61 = arr_rank1 + arr_rank2 + arr_rank3 + arr_rank4 + arr_rank5;
-    NLG.SystemMessage(player, Char.GetData(pet, CONST.CHAR_名字) .. "总:" .. a61 .. "（-" .. a6 .. ')')
-    NLG.SystemMessage(player, "体:" .. arr_rank1 .. "(-" .. a1 .. ") 力:" .. arr_rank2 .. "(-" .. a2 .. ") 强:" .. arr_rank3 .. "(-" .. a3 .. ") 敏:" ..
-      arr_rank4 .. "(-" .. a4 .. ") 魔:" .. arr_rank5 .. "(-" .. a5 .. ")");
+    NLG.SystemMessage(player, Char.GetData(pet, CONST.CHAR_名字) .. "总:" .. a61 .. "（" .. a6 .. ')')
+    NLG.SystemMessage(player, "体:" .. arr_rank1 .. "(" .. a1 .. ") 力:" .. arr_rank2 .. "(" .. a2 .. ") 强:" .. arr_rank3 .. "(" .. a3 .. ") 敏:" ..
+      arr_rank4 .. "(" .. a4 .. ") 魔:" .. arr_rank5 .. "(" .. a5 .. ")");
   end
 end
 
@@ -321,6 +321,11 @@ end
 
 function commands.getPet(charIndex, args)
   Char.GivePet(charIndex, tonumber(args[1]))
+end
+
+function commands.upPet(charIndex, args)
+  Char.SetData(Char.GetPet(charIndex, tonumber(args[1])), CONST.CHAR_等级, tonumber(args[2]));
+  Pet.UpPet(charIndex, Char.GetPet(charIndex, tonumber(args[1])));
 end
 
 function commands.giveItem(charIndex, args)
