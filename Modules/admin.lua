@@ -334,16 +334,16 @@ function Admin:onLoad()
     local command = msg:match('^/([%w]+)')
     if commandsNormal[command] then
       local arg = msg:match('^/[%w]+ +(.+)$')
-      arg = arg and splitString(arg, ' ') or {}
+      arg = arg and string.split(arg, ' ') or {}
       commandsNormal[command](charIndex, arg);
       return
     end
-    if indexOf(gmList, cdKey) < 1 then
+    if table.indexOf(gmList, cdKey) < 1 then
       return 1
     end
     if commands[command] then
       local arg = msg:match('^/[%w]+ +(.+)$')
-      arg = arg and splitString(arg, ' ') or {}
+      arg = arg and string.split(arg, ' ') or {}
       commands[command](charIndex, arg);
       return
     end

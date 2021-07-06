@@ -1,6 +1,11 @@
 local Modules = {};
+local _initialed = false
 
-local function init()
+function _G.moduleInitial()
+  if _initialed then
+    return
+  end
+  _initialed = true;
   local sql = [[create table if not exists lua_migration
 (
     id     int          not null,
@@ -10,13 +15,13 @@ local function init()
         primary key (module, id)
 );
 ']]
-  querySQL(sql);
+  SQL.querySQL(sql);
 end
 
 ---@param forceReload boolean
 ---@param moduleName string
 ---@param path string
-function loadModule(moduleName, path, forceReload)
+function _G.loadModule(moduleName, path, forceReload)
   local oPath = path;
   path = 'lua/Modules/' .. path;
   log('ModuleSystem', 'INFO', 'load module ', moduleName, path, forceReload)
@@ -42,14 +47,14 @@ function loadModule(moduleName, path, forceReload)
   return module;
 end
 
-function unloadModule(moduleName)
+function _G.unloadModule(moduleName)
   if Modules[moduleName] then
     Modules[moduleName]:unload();
     Modules[moduleName] = nil;
   end
 end
 
-function reloadModule(moduleName)
+function _G.reloadModule(moduleName)
   for i, v in pairs(Modules) do
     print(i, v);
   end
@@ -63,7 +68,7 @@ function reloadModule(moduleName)
   return nil;
 end
 
-function getModule(moduleName)
+function _G.getModule(moduleName)
   return Modules[moduleName];
 end
 
@@ -81,7 +86,7 @@ local function makeEventHandle()
 end
 local eventCallbacks = {}
 local ix = 0;
-function regGlobalEvent(eventName, fn, moduleName, extraSign)
+function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   extraSign = extraSign or ''
   logInfo('ModuleSystem', 'regGlobalEvent', eventName, moduleName, ix + 1, eventCallbacks[eventName .. extraSign])
   if eventCallbacks[eventName .. extraSign] == nil then
@@ -110,14 +115,14 @@ function regGlobalEvent(eventName, fn, moduleName, extraSign)
   end
   return ix;
 end
-function unRegGlobalEvent(eventName, fnIndex, moduleName, extraSign)
+function _G.unRegGlobalEvent(eventName, fnIndex, moduleName, extraSign)
   extraSign = extraSign or ''
   log('ModuleSystem', 'INFO', 'unRegGlobalEvent', eventName .. extraSign, moduleName, fnIndex)
   if not eventCallbacks[eventName .. extraSign] then
     return true;
   end
   eventCallbacks[eventName .. extraSign][fnIndex] = nil
-  if isEmpty(eventCallbacks[eventName .. extraSign]) then
+  if table.isEmpty(eventCallbacks[eventName .. extraSign]) then
     if not NL['Reg' .. eventName] then
       eventCallbacks[eventName .. extraSign] = nil;
       _G[eventName .. extraSign] = nil;
@@ -125,128 +130,3 @@ function unRegGlobalEvent(eventName, fnIndex, moduleName, extraSign)
   end
   return true;
 end
-
-local ModuleBase = { name = '', callbacks = {}, lastIx = 0, migrations = nil };
-
-_G["ModuleBase"] = ModuleBase;
-
-function ModuleBase:new(name)
-  local o = {};
-  setmetatable(o, self)
-  self.__index = self
-  o.name = name;
-  o.callbacks = {};
-  o.lastIx = 0;
-  return o;
-end
-
-function ModuleBase:createModule(name)
-  local SubModule = ModuleBase:new(name)
-  function SubModule:new()
-    local o = ModuleBase:new(name);
-    setmetatable(o, self)
-    self.__index = self;
-    return o;
-  end
-
-  return SubModule;
-end
-
----@param eventNameOrCallbackKeyOrFn string|nil|function
----@param fn function|nil
----@return string, number, number
-function ModuleBase:regCallback(eventNameOrCallbackKeyOrFn, fn)
-  self.lastIx = self.lastIx + 1;
-  if type(eventNameOrCallbackKeyOrFn) == 'function' then
-    fn = eventNameOrCallbackKeyOrFn;
-    eventNameOrCallbackKeyOrFn = '_' .. self.name .. '_cb_' .. self.lastIx;
-  end
-  local fnIndex = regGlobalEvent(eventNameOrCallbackKeyOrFn, fn, self.name);
-  logInfo(self.name, 'regCallback', eventNameOrCallbackKeyOrFn, self.lastIx, fnIndex, fn);
-  self.callbacks[self.lastIx] = { key = eventNameOrCallbackKeyOrFn, fnIndex = fnIndex, fn = fn };
-  return eventNameOrCallbackKeyOrFn, self.lastIx, fnIndex;
-end
-
----@param eventNameOrCallbackKey string
----@param fnOrFnIndex function|number
-function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrFnIndex)
-  local cbIndex = fnOrFnIndex;
-  if type(fnOrFnIndex) == 'function' then
-    cbIndex = findIndex(self.callbacks, function(e)
-      return fnOrFnIndex == e.fn
-    end)
-  end
-  local fnCb = self.callbacks[cbIndex];
-  if not fnCb then
-    logWarn(self.name, 'cannot find callback of ' .. eventNameOrCallbackKey, fnOrFnIndex)
-    return
-  end
-  logInfo(self.name, 'unRegGlobalEvent', fnCb.key, fnCb.fnIndex, fnCb.fn);
-  unRegGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
-  self.callbacks[cbIndex] = nil;
-end
-
-function ModuleBase:onUnload()
-
-end
-
-function ModuleBase:unload()
-  self:onUnload()
-  for i, fnCb in pairs(self.callbacks) do
-    unRegGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
-  end
-  self.callbacks = {};
-end
-
-function ModuleBase:migrate()
-  if self.migrations then
-    local ret = querySQL('select ifnull(max(id), 0) version from lua_migration where module = \'' .. self.name .. '\';');
-    local version = tonumber(ret[1][1]);
-    table.sort(self.migrations, function(a, b)
-      return a.version - b.version
-    end)
-    for i, migration in ipairs(self.migrations) do
-      if migration.version > version then
-        self:logInfo('run migration: ' .. migration.version)
-        version = migration.version;
-        if type(migration.value) == 'function' then
-          migration.value();
-        elseif type(migration.value) == 'string' then
-          querySQL(migration.value);
-        end
-        querySQL('insert into lua_migration (id, name, module) values (' .. migration.version .. ', \'' .. migration.name .. '\', \'' .. self.name .. '\');')
-      end
-    end
-  end
-end
-
-function ModuleBase:log(level, msg, ...)
-  log(self.name, level, msg, ...)
-end
-
-function ModuleBase:logInfo(msg, ...)
-  logInfo(self.name, msg, ...)
-end
-
-function ModuleBase:logDebug(msg, ...)
-  logDebug(self.name, msg, ...)
-end
-
-function ModuleBase:logWarn(msg, ...)
-  logWarn(self.name, msg, ...)
-end
-
-function ModuleBase:logError(msg, ...)
-  logError(self.name, msg, ...)
-end
-
-function ModuleBase:load()
-  self:migrate();
-  self:onLoad()
-end
-
-function ModuleBase:onLoad()
-
-end
-
-init();

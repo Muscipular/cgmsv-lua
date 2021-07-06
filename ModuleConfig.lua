@@ -1,3 +1,5 @@
+moduleInitial();
+
 --loadModule('welcome', 'welcome.lua')
 loadModule('admin', 'admin.lua')
 loadModule('shop', 'shop.lua')

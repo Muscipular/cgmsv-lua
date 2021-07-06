@@ -4,7 +4,7 @@ ItemPowerUP.migrations = {
     version = 1,
     name = 'add item_LuaData',
     value = function()
-      querySQL([[create table if not exists lua_itemData
+      SQL.querySQL([[create table if not exists lua_itemData
 (
     id varchar(50) not null
         primary key,
@@ -55,15 +55,15 @@ local SAVE_LEVEL = 7;
 local LevelRate = { 0, 0, 0, 10, 20, 30, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 93, 93, 96, 96, 97, 97, 98, 98, 99, 99, 99, 99, 99, 99, 99, 99 }
 
 local function isWeapon(type)
-  return indexOf(WeaponType, type) > 0
+  return table.indexOf(WeaponType, type) > 0
 end
 
 local function isArmour(type)
-  return indexOf(ArmourType, type) > 0
+  return table.indexOf(ArmourType, type) > 0
 end
 
 local function isAccessory(type)
-  return indexOf(AccessoryType, type) > 0
+  return table.indexOf(AccessoryType, type) > 0
 end
 
 function ItemPowerUP:setItemData(itemIndex, value)
@@ -73,8 +73,8 @@ function ItemPowerUP:setItemData(itemIndex, value)
     args = 'luaData_' .. t;
     Item.SetData(itemIndex, CONST.道具_自用参数, args);
   end
-  local sql = 'replace into lua_itemData (id, data) VALUES (' .. sqlValue(args) .. ',' .. sqlValue(jsonEncode(value)) .. ')';
-  local r = querySQL(sql)
+  local sql = 'replace into lua_itemData (id, data) VALUES (' .. SQL.sqlValue(args) .. ',' .. SQL.sqlValue(JSON.encode(value)) .. ')';
+  local r = SQL.querySQL(sql)
   --print(r, sql);
   self.cache.set(args, value);
 end
@@ -84,10 +84,10 @@ function ItemPowerUP:getItemData(itemIndex)
   if string.match(args, '^luaData_') then
     local data = self.cache.get(args)
     if not data then
-      data = querySQL('select data from lua_itemdata where id = ' .. sqlValue(args))
+      data = SQL.querySQL('select data from lua_itemdata where id = ' .. SQL.sqlValue(args))
       if type(data) == 'table' and data[1] then
         data = data[1][1]
-        data = jsonDecode(data)
+        data = JSON.decode(data)
         self.cache.set(args, data);
         return data;
       end
@@ -139,6 +139,16 @@ end
 --3: 闪躲
 --4: 防御
 --5: 魔法伤害
+
+local DmgType = {
+  Normal = 0,
+  Crit = 1,
+  NoDmg = 2,
+  Miss = 3,
+  Defence = 4,
+  Magic = 5,
+}
+
 function ItemPowerUP:onDamageCalculateEvent(
   charIndex, defCharIndex, oriDamage, damage,
   battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
@@ -150,7 +160,11 @@ function ItemPowerUP:onDamageCalculateEvent(
         if (data.level or 0) > 0 then
           local itemType = Item.GetData(itemIndex, CONST.道具_类型);
           if isWeapon(itemType) then
-            local dmg = math.ceil((data.level * data.level / 100 + data.level / 100) * Item.GetData(itemIndex, CONST.道具_攻击));
+            local weaponDmg = Item.GetData(itemIndex, CONST.道具_攻击);
+            if Item.GetData(itemIndex, CONST.道具_魔攻) > 0 and flg == DmgType.Magic then
+              weaponDmg = weaponDmg + tonumber(Item.GetData(itemIndex, CONST.道具_魔攻));
+            end
+            local dmg = math.ceil((data.level * data.level / 100 + data.level / 100) * weaponDmg);
             self:logDebug('add damage' .. dmg)
             damage = damage + dmg;
           end
