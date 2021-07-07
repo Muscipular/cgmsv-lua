@@ -16,7 +16,7 @@ end
 
 function PetRebirth:onTalked(npc, player)
   if NLG.CanTalk(npc, player) then
-    NLG.ShowWindowTalked(player, npc, CONST.窗口_信息框, CONST.BUTTON_下取消, 1, '\\n\\n   大于150级的宠物可以转生\\n   转生后bp+3,技能栏+1,全属性+1\\n   费用: 10万魔币')
+    NLG.ShowWindowTalked(player, npc, CONST.窗口_信息框, CONST.BUTTON_下取消, 1, '\\n\\n   大于150级的宠物可以转生\\n   转生后bp+5,技能栏+1,全属性+1,抗性+5,暴击/闪避/反击/命中+5\\n   费用: 10万魔币')
   end
 end
 
@@ -88,7 +88,7 @@ function PetRebirth:confirmPage(npc, player, seqNo, select, data)
       Char.AddGold(player, -100000);
       local arts = { CONST.PET_体成, CONST.PET_力成, CONST.PET_强成, CONST.PET_敏成, CONST.PET_魔成 };
       arts = table.map(arts, function(v)
-        return { v, math.min(60, Pet.GetArtRank(pIndex, v) + 3) };
+        return { v, math.min(62, Pet.GetArtRank(pIndex, v) + 5) };
       end)
       Pet.ReBirth(player, pIndex);
       table.forEach(arts, function(v)
@@ -99,6 +99,12 @@ function PetRebirth:confirmPage(npc, player, seqNo, select, data)
       Char.SetData(pIndex, CONST.CHAR_火属性, math.min(10, Char.GetData(pIndex, CONST.CHAR_火属性) + 1));
       Char.SetData(pIndex, CONST.CHAR_风属性, math.min(10, Char.GetData(pIndex, CONST.CHAR_风属性) + 1));
       Char.SetData(pIndex, CONST.PET_技能栏, math.min(10, Char.GetData(pIndex, CONST.PET_技能栏) + 1));
+      arts = { CONST.CHAR_抗毒, CONST.CHAR_抗睡, CONST.CHAR_抗石, CONST.CHAR_抗醉, 
+               CONST.CHAR_抗乱, CONST.CHAR_抗忘, CONST.CHAR_必杀, CONST.CHAR_反击,
+               CONST.CHAR_命中, CONST.CHAR_闪躲, }
+      table.forEach(arts, function(e)
+        Char.SetData(pIndex, e, math.min(100, Char.GetData(pIndex, e) + 5));
+      end)
       Pet.UpPet(player, pIndex);
       NLG.UpChar(player);
       NLG.ShowWindowTalked(player, npc, CONST.窗口_信息框, CONST.BUTTON_关闭, 3, '\\n\\n   已成功转生');

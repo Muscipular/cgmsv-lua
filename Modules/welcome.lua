@@ -18,12 +18,12 @@ Welcome.migrations = {
 
 -- 加载模块钩子
 function Welcome:onLoad()
-    logInfo(self.name, 'load')
+    self:logInfo('load')
 end
 
 -- 卸载模块钩子
 function Welcome:onUnload()
-    logInfo(self.name, 'unload')
+  self:logInfo('unload')
 end
 
 return Welcome;

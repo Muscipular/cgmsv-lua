@@ -83,3 +83,10 @@ table.unpack = _G.unpack or table.unpack;
 table.pack = function(...)
   return { ... }
 end
+
+function table:reduce(fn, initVal)
+  for i, v in ipairs(self) do
+    initVal = fn(initVal, v, i)
+  end
+  return initVal;
+end

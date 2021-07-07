@@ -82,8 +82,20 @@ end
 function Char.GetPet(CharIndex, Slot)
 end
 
+function Char.GivePet(CharIndex, PetID, FullBP)
+end
+
+function Char.AddPet(CharIndex, PetID)
+end
+
 NLG = {}
 function NLG.ShowWindowTalked(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data)
+end
+
+function NLG.SystemMessage(CharIndex, Message)
+end
+
+function NLG.TalkToCli(ToIndex,TalkerIndex,Msg,FontColor,FontSize)
 end
 
 function NLG.CanTalk(CharIndex, TargetCharIndex)
@@ -104,3 +116,16 @@ end
 
 function Pet.UpPet(PlayerIndex, PetIndex)
 end
+
+Item = {}
+function Item.GetData(ItemIndex, Dataline)
+end
+
+function Item.SetData(ItemIndex, Dataline, value)
+end
+
+function Item.UpItem(CharIndex, Slot)
+end
+
+function Item.Kill(CharIndex, ItemIndex, Slot)
+end 
