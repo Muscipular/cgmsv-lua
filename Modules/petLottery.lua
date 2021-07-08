@@ -107,6 +107,7 @@ function PetLottery:onItemUsed(charIndex, targetCharIndex, itemSlot)
   if tonumber(Item.GetData(itemIndex, CONST.道具_ID)) == 47763 then
     --NLG.ShowWindowTalked(charIndex, charIndex, CONST.窗口_信息框, CONST.BUTTON_是否, 0, "\\n\\n    是否")
     --Char.DelItem(charIndex, 47763, 1);
+    Item.Kill(charIndex, itemIndex, itemSlot);
     local n = math.random(0, MAX_N)
     local k = n;
     for i, v in ipairs(pets) do

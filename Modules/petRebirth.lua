@@ -1,6 +1,23 @@
 ---宠物转生，全bp+3，技能栏+1
 local moduleName = 'petRebirth'
 local PetRebirth = ModuleBase:createModule(moduleName)
+PetRebirth.migrations = {
+  {
+    version = 1,
+    name = 'init_petData',
+    function(v)
+      SQL.querySQL([[create table if not exists lua_petData
+(
+	id int not null,
+	data text null,
+	create_time int default now() not null,
+	constraint lua_petData_pk
+		primary key (id)
+) engine innodb;
+]])
+    end
+  }
+}
 
 -- 加载模块钩子
 function PetRebirth:onLoad()

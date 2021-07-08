@@ -1,18 +1,17 @@
 local ItemPowerUP = ModuleBase:createModule('itemPowerUp')
 ItemPowerUP.migrations = {
-  {
-    version = 1,
-    name = 'add item_LuaData',
-    value = function()
-      SQL.querySQL([[create table if not exists lua_itemData
+  { version = 1, name = 'add item_LuaData', value = function()
+    SQL.querySQL([[create table if not exists lua_itemData
 (
     id varchar(50) not null
         primary key,
     data text null
 ) engine innodb;
 ]])
-    end
-  }
+  end },
+  { version = 2, name = 'add item_LuaData_create_time', value = function()
+    SQL.querySQL([[alter table lua_itemData add create_time int default now() not null;]])
+  end }
 };
 
 local MAX_CACHE_SIZE = 1000;
