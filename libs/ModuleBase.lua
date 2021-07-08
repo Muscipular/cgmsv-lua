@@ -74,6 +74,16 @@ function ModuleBase:createPart(name)
   return SubModule;
 end
 
+---@param version number 版本号
+---@param name string 名字
+---@param value function|string 具体迁移方法或sql
+function ModuleBase:addMigration(version, name, value)
+  if rawget(self, 'migrations') == nil then
+    rawset(self, 'migrations', {});
+  end
+  table.insert(self.migrations, { version = version, name = name, value = value });
+end
+
 ---@param eventNameOrCallbackKeyOrFn string|nil|function
 ---@param fn function|nil
 ---@return string, number, number

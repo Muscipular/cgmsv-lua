@@ -50,18 +50,14 @@ local MAX_N = table.reduce(pets, function(t, e)
   return t + e[2]
 end, 0);
 
--- 加载模块钩子
+--- 加载模块钩子
 function PetLottery:onLoad()
   self:logInfo('load')
   self:read();
-  self:regCallback('ItemUseEvent', function(...)
-    self:onItemUsed(...)
-  end)
+  self:regCallback('ItemUseEvent', Func.bind(self.onItemUsed, self));
   --59999	137	123
   self.npc = self:NPC_createNormal('PetLottery', 10000, { x = 137, y = 123, mapType = 0, map = 59999, direction = 0, })
-  self:NPC_regWindowTalkedEvent(self.npc, function(...)
-    self:onWindowTalked(...)
-  end)
+  self:NPC_regWindowTalkedEvent(self.npc, Func.bind(self.onWindowTalked, self));
 end
 
 local data = {};
@@ -106,10 +102,7 @@ function PetLottery:onItemUsed(charIndex, targetCharIndex, itemSlot)
   local itemIndex = Char.GetItemIndex(charIndex, itemSlot);
   if tonumber(Item.GetData(itemIndex, CONST.道具_ID)) == 47763 then
     --NLG.ShowWindowTalked(charIndex, charIndex, CONST.窗口_信息框, CONST.BUTTON_是否, 0, "\\n\\n    是否")
-    --Char.DelItem(charIndex, 47763, 1);
-    local itemId = Item.GetData(itemIndex, CONST.道具_ID);
-    local killResult = Item.Kill(charIndex, itemIndex, itemSlot);
-    self:logDebug('onItemUsed', charIndex, targetCharIndex, itemSlot, itemIndex, itemId, killResult);
+    Char.DelItem(charIndex, 47763, 1);
     local n = math.random(0, MAX_N)
     local k = n;
     for i, v in ipairs(pets) do
@@ -119,13 +112,13 @@ function PetLottery:onItemUsed(charIndex, targetCharIndex, itemSlot)
       end
       n = n - v[2]
     end
-    NLG.SystemMessage(charIndex, "什么都没发生？？")
+    NLG.SystemMessage(charIndex, "抽了个寂寞")
     return -1;
   end
   return 1;
 end
 
--- 卸载模块钩子
+--- 卸载模块钩子
 function PetLottery:onUnload()
   self:logInfo('unload')
 end

@@ -37,6 +37,7 @@ function table.combine(...)
       end
     end
   end
+  return ret;
 end
 
 function table:indexOf(value)

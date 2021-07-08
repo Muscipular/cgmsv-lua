@@ -5,6 +5,10 @@ local commands = {}
 local commandsNormal = {}
 --GM账号列表
 local gmList = { 'u01' };
+local gmDict = {};
+table.forEach(gmList, function(e)
+  gmDict[e] = true
+end)
 
 function commands.module(charIndex, args)
   if args[1] == 'reload' then
@@ -28,19 +32,19 @@ end
 
 local function identity(player)
   local Count = 0
-  for ItemSlot = 8, 27 do
-    local ItemIndex = Char.GetItemIndex(player, ItemSlot)
+  for itemSlot = 8, 27 do
+    local ItemIndex = Char.GetItemIndex(player, itemSlot)
     if ItemIndex > 0 then
       local money = Char.GetData(player, CONST.CHAR_金币);
-      local djdj = Item.GetData(ItemIndex, CONST.道具_等级);
-      local kcmb = djdj * 200;
-      if Item.GetData(ItemIndex, CONST.道具_已鉴定) == 0 and money >= (djdj * 200) then
+      local itemLv = Item.GetData(ItemIndex, CONST.道具_等级);
+      local price = itemLv * 200;
+      if Item.GetData(ItemIndex, CONST.道具_已鉴定) == 0 and money >= (itemLv * 200) then
         Count = Count + 1
-        Char.SetData(player, CONST.CHAR_金币, money - kcmb);
+        Char.SetData(player, CONST.CHAR_金币, money - price);
         Item.SetData(ItemIndex, CONST.道具_已鉴定, 1)
-        NLG.SystemMessage(player, "[系统] 您鉴定的道具等级为" .. djdj .. "级。扣除魔币" .. kcmb .. "G");
+        NLG.SystemMessage(player, "[系统] 您鉴定的道具等级为" .. itemLv .. "级。扣除魔币" .. price .. "G");
         NLG.SystemMessage(player, "[系统] 你身上的 " .. Item.GetData(ItemIndex, CONST.道具_鉴前名) .. "已鉴定为 " .. Item.GetData(ItemIndex, CONST.道具_名字))
-        Item.UpItem(player, ItemSlot);
+        Item.UpItem(player, itemSlot);
         NLG.UpChar(player);
         return ;
       end
@@ -58,24 +62,24 @@ local function repairEquipment(player)
   for ItemSlot = 8, 8 do
     local ItemIndex = Char.GetItemIndex(player, ItemSlot)
     local money = Char.GetData(player, CONST.CHAR_金币);
-    local djdj = Item.GetData(ItemIndex, CONST.道具_等级);
-    local djmz = Item.GetData(ItemIndex, CONST.道具_名字);
-    local djnj = Item.GetData(ItemIndex, CONST.道具_耐久);
-    local djzdnj = Item.GetData(ItemIndex, CONST.道具_最大耐久);
-    local xhnj = djzdnj - djnj
-    local jdnj = xhnj * 0.5
-    local xlfy = jdnj * 10
-    local djlb = Item.GetData(ItemIndex, CONST.道具_类型);
-    if money > xlfy and djzdnj > djnj and djlb >= 0 and djlb <= 14 then
+    local itemLv = Item.GetData(ItemIndex, CONST.道具_等级);
+    local itemName = Item.GetData(ItemIndex, CONST.道具_名字);
+    local itemDur = Item.GetData(ItemIndex, CONST.道具_耐久);
+    local itemMaxDur = Item.GetData(ItemIndex, CONST.道具_最大耐久);
+    local repairedDur = itemMaxDur - itemDur
+    --local decMaxDur = repairedDur * 1
+    local price = repairedDur * 10
+    local itemType = Item.GetData(ItemIndex, CONST.道具_类型);
+    if money > price and itemMaxDur > itemDur and itemType >= 0 and itemType <= 14 then
       Count = Count + 1
-      Char.SetData(player, CONST.CHAR_金币, money - xlfy);
-      Item.SetData(ItemIndex, CONST.道具_耐久, djnj + xhnj);
-      Item.UpItem(player, ItemSlot);
+      Char.SetData(player, CONST.CHAR_金币, money - price);
+      --Item.SetData(ItemIndex, CONST.道具_耐久, itemDur + xhnj);
+      --Item.UpItem(player, ItemSlot);
       -- local djnj1 = Item.GetData(ItemIndex,CONST.道具_耐久);
       -- local djzdnj1 = Item.GetData(ItemIndex,CONST.道具_最大耐久);
-      Item.SetData(ItemIndex, CONST.道具_耐久, djzdnj);
-      Item.SetData(ItemIndex, CONST.道具_最大耐久, djzdnj);
-      NLG.SystemMessage(player, "[系统] 您修理的装备【" .. djmz .. "】恢复了【" .. xhnj .. "】耐久。扣除魔币【" .. xlfy .. "G】");
+      Item.SetData(ItemIndex, CONST.道具_耐久, itemMaxDur);
+      Item.SetData(ItemIndex, CONST.道具_最大耐久, itemMaxDur);
+      NLG.SystemMessage(player, "[系统] 您修理的装备【" .. itemName .. "】恢复了【" .. repairedDur .. "】耐久。扣除魔币【" .. price .. "G】");
       Item.UpItem(player, ItemSlot);
       NLG.UpChar(player);
       return
@@ -333,7 +337,7 @@ function commands.giveItem(charIndex, args)
 end
 
 function Admin:onLoad()
-  logInfo(self.name, 'load')
+  self:logInfo('load')
   local function handleChat(charIndex, msg, color, range, size)
     local cdKey = Char.GetData(charIndex, CONST_CHAR_CD_KEY)
     local command = msg:match('^/([%w]+)')
@@ -343,7 +347,7 @@ function Admin:onLoad()
       commandsNormal[command](charIndex, arg);
       return
     end
-    if table.indexOf(gmList, cdKey) < 1 then
+    if not gmDict[cdKey] then
       return 1
     end
     if commands[command] then
@@ -358,7 +362,7 @@ function Admin:onLoad()
 end
 
 function Admin:onUnload()
-  logInfo(self.name, 'unload')
+  self:logInfo('unload')
 end
 
 return Admin;

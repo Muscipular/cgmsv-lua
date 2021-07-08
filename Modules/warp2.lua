@@ -28,23 +28,9 @@ local function calcWarp()
 end
 
 function Warp:onLoad()
-  logInfo(self.name, 'load')
-  self.npc = {}
-  local initFn = self:regCallback(function()
-    return true;
-  end)
-  local warpNPC = NL.CreateNpc(nil, initFn);
-  Char.SetData(warpNPC, CONST.CHAR_形象, 103010);
-  Char.SetData(warpNPC, CONST.CHAR_原形, 103010);
-  Char.SetData(warpNPC, CONST.CHAR_X, 242);
-  Char.SetData(warpNPC, CONST.CHAR_Y, 86);
-  Char.SetData(warpNPC, CONST.CHAR_地图, 1000);
-  Char.SetData(warpNPC, CONST.CHAR_方向, 6);
-  Char.SetData(warpNPC, CONST.CHAR_名字, "传送门");
-  NLG.UpChar(warpNPC);
-  table.insert(self.npc, warpNPC);
-
-  local warpNPCWinTalked = self:regCallback(function(npc, player, _seqno, _select, _data)
+  self:logInfo('load');
+  local warpNPC = self:NPC_createNormal('传送门', 103010, { x = 242, y = 86, mapType = 0, map = 1000, direction = 6 });
+  self:NPC_regWindowTalkedEvent(warpNPC, function(npc, player, _seqno, _select, _data)
     local column = tonumber(_data)
     local page = tonumber(_seqno)
     local warpPage = page;
@@ -88,9 +74,7 @@ function Warp:onLoad()
       Char.Warp(player, short[2], short[3], short[4], short[5])
     end
   end)
-  Char.SetWindowTalkedEvent(nil, warpNPCWinTalked, warpNPC);
-
-  local talkedFn = self:regCallback(function(npc, player)
+  self:NPC_regTalkedEvent(warpNPC, function(npc, player)
     if (NLG.CanTalk(npc, player) == true) then
       local msg = "1\\n请问你想去哪里\\n";
       for i = 1, 8 do
@@ -100,15 +84,10 @@ function Warp:onLoad()
     end
     return
   end)
-  Char.SetTalkedEvent(nil, talkedFn, warpNPC);
 end
 
 function Warp:onUnload()
-  logInfo(self.name, 'unload')
-
-  for i, v in pairs(self.npc) do
-    NL.DelNpc(v)
-  end
+  self:logInfo('unload')
 end
 
 return Warp;

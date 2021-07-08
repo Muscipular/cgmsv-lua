@@ -1,20 +1,4 @@
 local ItemPowerUP = ModuleBase:createModule('itemPowerUp')
-ItemPowerUP.migrations = {
-  { version = 1, name = 'add item_LuaData', value = function()
-    SQL.querySQL([[create table if not exists lua_itemData
-(
-    id varchar(50) not null
-        primary key,
-    data text null
-) engine innodb;
-]])
-  end },
-  { version = 2, name = 'add item_LuaData_create_time', value = function()
-    SQL.querySQL([[alter table lua_itemData add create_time int default now() not null;]])
-  end }
-};
-
-local MAX_CACHE_SIZE = 1000;
 
 local WeaponType = {
   CONST.ITEM_TYPE_剑,
@@ -66,57 +50,15 @@ local function isAccessory(type)
 end
 
 function ItemPowerUP:setItemData(itemIndex, value)
-  local args = Item.GetData(itemIndex, CONST.道具_自用参数)
-  if not string.match(args, '^luaData_') then
-    local t = formatNumber(os.time(), 36) .. formatNumber(math.random(1, 36 * 36), 36);
-    args = 'luaData_' .. t;
-    Item.SetData(itemIndex, CONST.道具_自用参数, args);
-  end
-  local sql = 'replace into lua_itemData (id, data) VALUES (' .. SQL.sqlValue(args) .. ',' .. SQL.sqlValue(JSON.encode(value)) .. ')';
-  local r = SQL.querySQL(sql)
-  --print(r, sql);
-  self.cache.set(args, value);
+  ---@type ItemExt
+  local itemExt = getModule('itemExt')
+  return itemExt:setItemData(itemIndex, value)
 end
 
 function ItemPowerUP:getItemData(itemIndex)
-  local args = Item.GetData(itemIndex, CONST.道具_自用参数)
-  if string.match(args, '^luaData_') then
-    local data = self.cache.get(args)
-    if not data then
-      data = SQL.querySQL('select data from lua_itemdata where id = ' .. SQL.sqlValue(args))
-      if type(data) == 'table' and data[1] then
-        data = data[1][1]
-        data = JSON.decode(data)
-        self.cache.set(args, data);
-        return data;
-      end
-    end
-  end
-  return { };
-end
-
-function ItemPowerUP:onLoad()
-  logInfo(self.name, 'load')
-  self.cache = LRU.new(MAX_CACHE_SIZE);
-  self:regCallback('ItemOverLapEvent', function(...)
-    return self:onItemOverLapEvent(...)
-  end)
-  --print(NL.RegDamageCalculateEvent)
-  local fnName = self:regCallback('DamageCalculateEvent', function(...)
-    return self:onDamageCalculateEvent(...)
-  end)
-  --NL.RegDamageCalculateEvent(nil, fnName);
-end
-
-local function getItemSlot(charIndex, itemIndex)
-  local itemSlot = -1;
-  for i = 0, 27 do
-    if Char.GetItemIndex(charIndex, i) == itemIndex then
-      itemSlot = i;
-      break
-    end
-  end
-  return itemSlot;
+  ---@type ItemExt
+  local itemExt = getModule('itemExt')
+  return itemExt:getItemData(itemIndex)
 end
 
 --CharIndex: 数值型 响应事件的对象index（攻击者），该值由Lua引擎传递给本函数。
@@ -132,13 +74,6 @@ end
 --DefCom3: 数值型 防御者使用的所對應的tech的ID，该值由Lua引擎传递给本函数。
 --Flg: 数值型 伤害模式，具体查看下面的值说明，该值由Lua引擎传递给本函数。
 --Flg 值说明
---0: 普通命中伤害
---1: 暴击伤害
---2: 无伤害
---3: 闪躲
---4: 防御
---5: 魔法伤害
-
 local DmgType = {
   Normal = 0,
   Crit = 1,
@@ -200,10 +135,10 @@ function ItemPowerUP:onItemOverLapEvent(charIndex, fromItemIndex, targetItemInde
     --end
     --local fromSlot = getItemSlot(charIndex, fromItemIndex);
     local type = Item.GetData(targetItemIndex, CONST.道具_类型);
-    local data = self:getItemData(targetItemIndex);
     if not (isArmour(type) or isWeapon(type)) then
       return 0
     end
+    local data = self:getItemData(targetItemIndex);
     local rate = math.random(0, 100);
     local rawLv = data.level or 0;
     if rate < LevelRate[rawLv + 1] then
@@ -246,8 +181,14 @@ function ItemPowerUP:onItemOverLapEvent(charIndex, fromItemIndex, targetItemInde
   end
 end
 
+function ItemPowerUP:onLoad()
+  self:logInfo('load')
+  self:regCallback('ItemOverLapEvent', Func.bind(self.onItemOverLapEvent, self));
+  self:regCallback('DamageCalculateEvent', Func.bind(self.onDamageCalculateEvent, self))
+end
+
 function ItemPowerUP:onUnload()
-  logInfo(self.name, 'unload')
+  self:logInfo('unload')
 end
 
 return ItemPowerUP;

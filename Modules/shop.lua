@@ -68,7 +68,7 @@ function Shop:onLoad()
 end
 
 function Shop:onUnload()
-  logInfo(self.name, 'unload')
+  self:logInfo('unload')
 end
 
 return Shop;

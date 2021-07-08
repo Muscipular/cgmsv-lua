@@ -74,14 +74,14 @@ function _G.getModule(moduleName)
   return Modules[moduleName];
 end
 
-local function makeEventHandle()
+local function makeEventHandle(name)
   local list = {}
   local fn = function(...)
-    --logDebug('ModuleSystem', 'callback', ...)
     local res;
     for i, v in pairs(list) do
       res = v(...)
     end
+    --logDebug('ModuleSystem', 'callback', name, res, ...)
     return res
   end
   return fn, list
@@ -93,7 +93,7 @@ function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   logInfo('ModuleSystem', 'regGlobalEvent', eventName, moduleName, ix + 1, eventCallbacks[eventName .. extraSign])
   if eventCallbacks[eventName .. extraSign] == nil then
     --logInfo('ModuleSystem', 'Reg2' .. eventName, NL['Reg' .. eventName])
-    local fn1, list = makeEventHandle()
+    local fn1, list = makeEventHandle(eventName);
     eventCallbacks[eventName .. extraSign] = list;
     _G[(eventName .. extraSign)] = fn1;
     if NL['Reg' .. eventName] then
@@ -113,6 +113,7 @@ function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
       log(moduleName, 'ERROR', eventName .. extraSign .. ' event callback error: ', result)
       return nil;
     end
+    --logDebug('ModuleSystem', 'callback', eventName .. extraSign, fn, result, ...)
     return result;
   end
   return ix;

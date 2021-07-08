@@ -1,27 +1,18 @@
---模块名称
+---模块名称
 local moduleName = 'welcome'
---模块类
+---模块类
 local Welcome = ModuleBase:createModule(moduleName)
---迁移定义
-Welcome.migrations = {
-  {
-    --版本号
-    version = 1,
-    --说明名称
-    name = 'initial module',
-    --迁移具体工作
-    value = function()
-      print('run migration version: 1');
-    end
-  }
-};
+---迁移定义
+Welcome:addMigration(1, 'initial module', function()
+  print('run migration version: 1');
+end);
 
--- 加载模块钩子
+--- 加载模块钩子
 function Welcome:onLoad()
-    self:logInfo('load')
+  self:logInfo('load')
 end
 
--- 卸载模块钩子
+--- 卸载模块钩子
 function Welcome:onUnload()
   self:logInfo('unload')
 end

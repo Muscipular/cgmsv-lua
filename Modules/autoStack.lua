@@ -1,18 +1,11 @@
-local Module = ModuleBase:new('autoStack')
-
-function Module:new()
-  local o = ModuleBase:new('autoStack');
-  setmetatable(o, self)
-  self.__index = self
-  return o;
-end
+local Module = ModuleBase:createModule('autoStack')
 
 function Module:onLoad()
-  logInfo(self.name, 'load')
+  self:logInfo('load')
 end
 
 function Module:onUnload()
-  logInfo(self.name, 'unload')
+  self:logInfo('unload')
 end
 
 return Module;
