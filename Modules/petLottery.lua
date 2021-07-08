@@ -107,18 +107,20 @@ function PetLottery:onItemUsed(charIndex, targetCharIndex, itemSlot)
   if tonumber(Item.GetData(itemIndex, CONST.道具_ID)) == 47763 then
     --NLG.ShowWindowTalked(charIndex, charIndex, CONST.窗口_信息框, CONST.BUTTON_是否, 0, "\\n\\n    是否")
     --Char.DelItem(charIndex, 47763, 1);
-    Item.Kill(charIndex, itemIndex, itemSlot);
+    local itemId = Item.GetData(itemIndex, CONST.道具_ID);
+    local killResult = Item.Kill(charIndex, itemIndex, itemSlot);
+    self:logDebug('onItemUsed', charIndex, targetCharIndex, itemSlot, itemIndex, itemId, killResult);
     local n = math.random(0, MAX_N)
     local k = n;
     for i, v in ipairs(pets) do
       if n <= v[2] then
         NLG.ShowWindowTalked(charIndex, self.npc, CONST.窗口_信息框, CONST.BUTTON_是否, v[1], "\\n\\n    (" .. k .. ")奖品为： " .. (data[tostring(v[1])] or '???') .. " 一只，是否领取？")
-        return 1;
+        return -1;
       end
       n = n - v[2]
     end
     NLG.SystemMessage(charIndex, "什么都没发生？？")
-    return 1;
+    return -1;
   end
   return 1;
 end
