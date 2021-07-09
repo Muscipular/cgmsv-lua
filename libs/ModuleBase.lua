@@ -78,10 +78,13 @@ end
 ---@param name string 名字
 ---@param value function|string 具体迁移方法或sql
 function ModuleBase:addMigration(version, name, value)
-  if rawget(self, 'migrations') == nil then
-    rawset(self, 'migrations', {});
+  local migrations = rawget(self, 'migrations')
+  --self:logDebug('addMigration', migrations);
+  if migrations == nil then
+    migrations = {}
+    rawset(self, 'migrations', migrations);
   end
-  table.insert(self.migrations, { version = version, name = name, value = value });
+  table.insert(migrations, { version = version, name = name, value = value });
 end
 
 ---@param eventNameOrCallbackKeyOrFn string|nil|function
@@ -123,7 +126,7 @@ function ModuleBase:migrate()
     local ret = SQL.querySQL('select ifnull(max(id), 0) version from lua_migration where module = \'' .. self.name .. '\';');
     local version = tonumber(ret[1][1]);
     table.sort(self.migrations, function(a, b)
-      return a.version - b.version
+      return b.version - a.version > 0
     end)
     for i, migration in ipairs(self.migrations) do
       if migration.version > version then
@@ -134,7 +137,10 @@ function ModuleBase:migrate()
         elseif type(migration.value) == 'string' then
           SQL.querySQL(migration.value);
         end
-        SQL.querySQL('insert into lua_migration (id, name, module) values (' .. migration.version .. ', \'' .. migration.name .. '\', \'' .. self.name .. '\');')
+        SQL.querySQL('insert into lua_migration (id, name, module) values (' 
+          .. SQL.sqlValue(migration.version) .. ', ' 
+          .. SQL.sqlValue(migration.name) .. ', '
+          .. SQL.sqlValue(self.name) .. ');');
       end
     end
   end
