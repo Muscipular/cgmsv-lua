@@ -1,7 +1,5 @@
----模块名称
-local moduleName = 'welcome'
 ---模块类
-local Welcome = ModuleBase:createModule(moduleName)
+local Welcome = ModuleBase:createModule('welcome')
 ---迁移定义
 Welcome:addMigration(1, 'initial module', function()
   print('run migration version: 1');

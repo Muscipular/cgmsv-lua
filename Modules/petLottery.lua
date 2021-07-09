@@ -60,37 +60,6 @@ function PetLottery:onLoad()
   self:NPC_regWindowTalkedEvent(self.npc, Func.bind(self.onWindowTalked, self));
 end
 
-local data = {};
-function PetLottery:read()
-  local t = {}
-  local file = io.open('data/enemy.txt')
-  for line in file:lines() do
-    if line then
-      local name, enemyId, baseId = string.match(line, '^(%S+)\t%S+\t(%d+)\t(%d+)\t1\t');
-      --print(name, enemyId)
-      if name and enemyId and baseId then
-        t[baseId] = { name, enemyId, baseId };
-      end
-    end
-  end
-  file:close();
-  file = io.open('data/enemybase.txt')
-  for line in file:lines() do
-    if line then
-      local name, baseId = string.match(line, '^(%S+)\t(%d+)\t');
-      --print(name, enemyId)
-      if name and baseId and t[baseId] then
-        data[t[baseId][2]] = name;
-      end
-    end
-  end
-  file:close();
-  --for i, v in pairs(data) do
-  --  print(i, v)
-  --end
-  --print(MAX_N);
-end
-
 function PetLottery:onWindowTalked(npc, player, seqNo, select, data)
   if select == CONST.BUTTON_是 then
     Char.GivePet(player, tonumber(seqNo));
@@ -107,7 +76,10 @@ function PetLottery:onItemUsed(charIndex, targetCharIndex, itemSlot)
     local k = n;
     for i, v in ipairs(pets) do
       if n <= v[2] then
-        NLG.ShowWindowTalked(charIndex, self.npc, CONST.窗口_信息框, CONST.BUTTON_是否, v[1], "\\n\\n    (" .. k .. ")奖品为： " .. (data[tostring(v[1])] or '???') .. " 一只，是否领取？")
+        ---@type GmsvData
+        local gmsv = getModule('gmsvData');
+        NLG.ShowWindowTalked(charIndex, self.npc, CONST.窗口_信息框, CONST.BUTTON_是否, v[1],
+          "\\n\\n    (" .. k .. ")奖品为： " .. (gmsv:getEnemyName(v[1]) or '???') .. " 一只，是否领取？")
         return -1;
       end
       n = n - v[2]
