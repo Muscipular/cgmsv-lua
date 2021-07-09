@@ -1,5 +1,16 @@
 CONST_CHAR_CD_KEY = 2002;
 CONST = {}
+-- 特殊相关
+CONST.道具_Func_InitFunc = 2005;
+CONST.道具_Func_WatchFunc = 2006;
+CONST.道具_Func_UseFunc = 2007;
+CONST.道具_Func_AttachFunc = 2008;
+CONST.道具_Func_DetachFunc = 2009;
+CONST.道具_Func_DropFunc = 2010;
+CONST.道具_Func_PrePickUpFunc = 2011;
+CONST.道具_Func_PickUpFunc = 2012;
+--
+
 CONST.SHOP_TYPE_SELL = 1;
 CONST.SHOP_TYPE_BUY = 2;
 CONST.SHOP_TYPE_BOTH = 3;
@@ -111,6 +122,7 @@ CONST.CHAR_图类 = 0;
 CONST.CHAR_名色 = 0;
 --CONST.CHAR_ALLOCPOINT = 0;
 CONST.CHAR_吃时 = 0;
+CONST.CHAR_ThankFlower = 0;
 CONST.CHAR_DataPN = 0;
 CONST.PET_主人RegistNumber = 0;
 CONST.CHAR_RegistNumber = 0;
@@ -808,6 +820,7 @@ CONST.CHAR_图类 = %对象_图类%;
 CONST.CHAR_名色= %对象_名色%;
 --CONST.CHAR_ALLOCPOINT = %对象_ALLOCPOINT%;
 CONST.CHAR_吃时 = %对象_吃时%;
+CONST.CHAR_ThankFlower = %对象_吃时% + 1;
 CONST.CHAR_DataPN = %对象_DataPN%;
 CONST.PET_主人RegistNumber = %宠物_主人RegistNumber%;
 CONST.CHAR_RegistNumber = %对象_RegistNumber%;

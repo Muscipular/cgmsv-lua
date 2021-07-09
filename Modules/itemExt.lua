@@ -16,11 +16,18 @@ ItemExt:addMigration(2, 'add item_LuaData_create_time', function()
 end);
 
 function ItemExt:setItemData(itemIndex, value)
-  local args = Item.GetData(itemIndex, CONST.道具_自用参数)
+  local type = Item.GetData(itemIndex, CONST.道具_类型)
+  local field = CONST.道具_自用参数;
+  if type >= 0 and type <= 21 then
+    field = CONST.道具_自用参数;
+  else
+    field = CONST.道具_Func_AttachFunc;
+  end
+  local args = Item.GetData(itemIndex, field) or ''
   if not string.match(args, '^luaData_') then
-    local t = formatNumber(os.time(), 36) .. formatNumber(math.random(1, 36 * 36 * 36), 36);
+    local t = string.formatNumber(os.time(), 36) .. string.formatNumber(math.random(1, 36 * 36 * 36), 36);
     args = 'luaData_' .. t;
-    Item.SetData(itemIndex, CONST.道具_自用参数, args);
+    Item.SetData(itemIndex, field, args);
   end
   local sql = 'replace into lua_itemData (id, data, create_time) VALUES ('
     .. SQL.sqlValue(args) .. ','

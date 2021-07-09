@@ -127,14 +127,14 @@ function PetRebirth:onSelected(npc, player, seqNo, select, data)
 end
 
 function PetRebirth:getPetData(charIndex)
-  ---@type CharExt
-  local charExt = getModule('charExt')
+  ---@type PetExt
+  local charExt = getModule('petExt')
   return charExt:getData(charIndex)
 end
 
 function PetRebirth:setPetData(charIndex, value)
-  ---@type CharExt
-  local charExt = getModule('charExt')
+  ---@type PetExt
+  local charExt = getModule('petExt')
   return charExt:setData(charIndex, value)
 end
 
