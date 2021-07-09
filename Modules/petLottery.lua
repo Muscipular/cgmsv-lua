@@ -53,7 +53,6 @@ end, 0);
 --- ¼ÓÔØÄ£¿é¹³×Ó
 function PetLottery:onLoad()
   self:logInfo('load')
-  self:read();
   self:regCallback('ItemUseEvent', Func.bind(self.onItemUsed, self));
   --59999	137	123
   self.npc = self:NPC_createNormal('PetLottery', 10000, { x = 137, y = 123, mapType = 0, map = 59999, direction = 0, })

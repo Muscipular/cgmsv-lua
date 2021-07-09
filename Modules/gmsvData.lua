@@ -1,4 +1,4 @@
----@class GmsvData
+---@class GmsvData: ModuleBase
 local GmsvData = ModuleBase:createModule('gmsvData')
 
 GmsvData.CONST = {};
@@ -111,6 +111,7 @@ GmsvData.CONST.EnemyBase.TechId10 = 46;
 function GmsvData:loadData()
   self.enemy = {}
   self.enemyBase = {}
+  local count = 0;
   local file = io.open('data/enemy.txt')
   for line in file:lines() do
     if line then
@@ -120,10 +121,13 @@ function GmsvData:loadData()
       local enemy = string.split(line, '\t');
       if enemy and #enemy == 48 then
         self.enemy[enemy[self.CONST.Enemy.EnemyId]] = enemy;
+        count = count + 1;
       end
     end
     :: continue ::
   end
+  self:logInfo('loaded enemy', count);
+  count = 0;
   file:close();
   file = io.open('data/enemybase.txt')
   for line in file:lines() do
@@ -134,10 +138,12 @@ function GmsvData:loadData()
       local enemyBase = string.split(line, '\t');
       if enemyBase and #enemyBase == 46 then
         self.enemyBase[enemyBase[self.CONST.EnemyBase.EnemyBaseId]] = enemyBase;
+        count = count + 1;
       end
     end
     :: continue ::
   end
+  self:logInfo('loaded enemyBase', count);
   file:close();
   --for i, v in pairs(data) do
   --  print(i, v)
@@ -149,8 +155,11 @@ end
 ---@return string
 function GmsvData:getEnemyName(enemyId)
   local enemy = self.enemy[tostring(enemyId)];
+  self:logInfo('enemy', enemyId, enemy, self.enemy);
   if enemy then
+    self:logInfo('enemy', enemy[GmsvData.CONST.Enemy.BaseId]);
     local base = self.enemyBase[enemy[GmsvData.CONST.Enemy.BaseId]];
+    self:logInfo('base', base);
     if base then
       return base[GmsvData.CONST.EnemyBase.Name];
     end

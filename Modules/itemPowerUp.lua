@@ -86,6 +86,9 @@ local DmgType = {
 function ItemPowerUP:onDamageCalculateEvent(
   charIndex, defCharIndex, oriDamage, damage,
   battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
+  if damage <= 0 or flg == DmgType.Miss or flg == NoDmg then
+    return damage;
+  end
   if Char.GetData(charIndex, CONST.CHAR_类型) == CONST.对象类型_人 then
     for i = 0, 7 do
       local itemIndex = Char.GetItemIndex(charIndex, i);

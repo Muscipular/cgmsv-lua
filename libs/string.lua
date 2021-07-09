@@ -28,21 +28,28 @@ function string.formatNumber(n, base)
   return r;
 end
 
-function string.split(text, delim)
-  -- returns an array of fields based on text and delimiter (one character only)
-  local result = {}
-  local magic = "().%+-*?[]^$"
-
-  if delim == nil then
-    delim = "%s"
-  elseif string.find(delim, magic, 1, true) then
-    -- escape magic
-    delim = "%" .. delim
+function string.split(str, separator)
+  local str = tostring(str)
+  local separator = tostring(separator)
+  local strB, arrayIndex = 1, 1
+  local targetArray = {}
+  if (separator == nil)
+  then
+    return false
   end
-
-  local pattern = "[^" .. delim .. "]+"
-  for w in string.gmatch(text, pattern) do
-    table.insert(result, w)
+  local condition = true
+  while (condition)
+  do
+    si, sd = string.find(str, separator, strB)
+    if (si)
+    then
+      targetArray[arrayIndex] = string.sub(str, strB, si - 1)
+      arrayIndex = arrayIndex + 1
+      strB = sd + 1
+    else
+      targetArray[arrayIndex] = string.sub(str, strB, string.len(str))
+      condition = false
+    end
   end
-  return result
+  return targetArray
 end

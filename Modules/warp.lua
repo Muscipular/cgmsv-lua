@@ -32,7 +32,7 @@ end
 
 function Warp:onLoad()
   self:logInfo('load');
-  local warpNPC = self:NPC_createNormal('传送门', 103010, { x = 242, y = 86, mapType = 0, map = 1000, direction = 6 });
+  local warpNPC = self:NPC_createNormal('传送门', 103010, { x = 242, y = 88, mapType = 0, map = 1000, direction = 6 });
   self:NPC_regWindowTalkedEvent(warpNPC, function(npc, player, _seqno, _select, _data)
     local column = tonumber(_data)
     local page = tonumber(_seqno)
