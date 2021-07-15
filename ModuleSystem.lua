@@ -57,9 +57,6 @@ function _G.unloadModule(moduleName)
 end
 
 function _G.reloadModule(moduleName)
-  for i, v in pairs(Modules) do
-    print(i, v);
-  end
   logInfo('ModuleSystem', moduleName, Modules[moduleName])
   local module = Modules[moduleName];
   if module then

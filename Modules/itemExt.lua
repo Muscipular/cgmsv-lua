@@ -15,6 +15,8 @@ ItemExt:addMigration(2, 'add item_LuaData_create_time', function()
   SQL.querySQL([[alter table lua_itemData add create_time int default 0 not null;]])
 end);
 
+---@param itemIndex number
+---@param value table
 function ItemExt:setItemData(itemIndex, value)
   local type = Item.GetData(itemIndex, CONST.道具_类型)
   local field = CONST.道具_自用参数;

@@ -107,10 +107,112 @@ GmsvData.CONST.EnemyBase.TechId7 = 43;
 GmsvData.CONST.EnemyBase.TechId8 = 44;
 GmsvData.CONST.EnemyBase.TechId9 = 45;
 GmsvData.CONST.EnemyBase.TechId10 = 46;
+GmsvData.CONST.ItemSet = {};
+GmsvData.CONST.ItemSet.未鉴定 = 1;
+GmsvData.CONST.ItemSet.鉴定过名称 = 2;
+GmsvData.CONST.ItemSet.双击效果 = 3;
+GmsvData.CONST.ItemSet.INIT_FUNCTION = 4;
+GmsvData.CONST.ItemSet.WATCH_FUNC = 5;
+GmsvData.CONST.ItemSet.USE_FUNC = 6;
+GmsvData.CONST.ItemSet.ATTACH_FUNC = 7;
+GmsvData.CONST.ItemSet.DETACH_FUNC = 8;
+GmsvData.CONST.ItemSet.DROP_FUNC = 9;
+GmsvData.CONST.ItemSet.PRE_PICK_UP_FUNC = 10;
+GmsvData.CONST.ItemSet.PICK_UP_FUNC = 11;
+GmsvData.CONST.ItemSet.Id = 12;
+GmsvData.CONST.ItemSet.图档 = 13;
+GmsvData.CONST.ItemSet.价格 = 14;
+GmsvData.CONST.ItemSet.物品种类 = 15;
+GmsvData.CONST.ItemSet.OTHERFLG其他标记 = 16;
+GmsvData.CONST.ItemSet.双手使用 = 17;
+GmsvData.CONST.ItemSet.能否双击 = 18;
+GmsvData.CONST.ItemSet.战斗使用领域0不能1物品2装备 = 19;
+GmsvData.CONST.ItemSet.TARGET目标 = 20;
+GmsvData.CONST.ItemSet.得到数量下限 = 21;
+GmsvData.CONST.ItemSet.得到数量上限 = 22;
+GmsvData.CONST.ItemSet.重叠数 = 23;
+GmsvData.CONST.ItemSet.物品等级 = 24;
+GmsvData.CONST.ItemSet.BASE_FAILED_PROB失败问题 = 25;
+GmsvData.CONST.ItemSet.耐久下限 = 26;
+GmsvData.CONST.ItemSet.耐久上限 = 27;
+GmsvData.CONST.ItemSet.普攻次数下限 = 28;
+GmsvData.CONST.ItemSet.普攻次数上限 = 29;
+GmsvData.CONST.ItemSet.ABLEEFFECTBETWEENHAVE之间有能够影响 = 30;
+GmsvData.CONST.ItemSet.百分比加成 = 31;
+GmsvData.CONST.ItemSet.攻击下限 = 32;
+GmsvData.CONST.ItemSet.攻击上限 = 33;
+GmsvData.CONST.ItemSet.防御下限 = 34;
+GmsvData.CONST.ItemSet.防御上限 = 35;
+GmsvData.CONST.ItemSet.敏捷下限 = 36;
+GmsvData.CONST.ItemSet.敏捷上限 = 37;
+GmsvData.CONST.ItemSet.精神下限 = 38;
+GmsvData.CONST.ItemSet.精神上限 = 39;
+GmsvData.CONST.ItemSet.回复下限 = 40;
+GmsvData.CONST.ItemSet.回复上限 = 41;
+GmsvData.CONST.ItemSet.必杀下限 = 42;
+GmsvData.CONST.ItemSet.必杀上限 = 43;
+GmsvData.CONST.ItemSet.反击下限 = 44;
+GmsvData.CONST.ItemSet.反击上限 = 45;
+GmsvData.CONST.ItemSet.命中下限 = 46;
+GmsvData.CONST.ItemSet.命中上限 = 47;
+GmsvData.CONST.ItemSet.闪躲下限 = 48;
+GmsvData.CONST.ItemSet.闪躲上限 = 49;
+GmsvData.CONST.ItemSet.生命下限 = 50;
+GmsvData.CONST.ItemSet.生命上限 = 51;
+GmsvData.CONST.ItemSet.魔力下限 = 52;
+GmsvData.CONST.ItemSet.魔力上限 = 53;
+GmsvData.CONST.ItemSet.隐藏运气下限 = 54;
+GmsvData.CONST.ItemSet.隐藏运气上限 = 55;
+GmsvData.CONST.ItemSet.个人魅力 = 56;
+GmsvData.CONST.ItemSet.个人魅力 = 57;
+GmsvData.CONST.ItemSet.魅力下限 = 58;
+GmsvData.CONST.ItemSet.魅力上限 = 59;
+GmsvData.CONST.ItemSet.属性1 = 60;
+GmsvData.CONST.ItemSet.属性2 = 61;
+GmsvData.CONST.ItemSet.属性1值 = 62;
+GmsvData.CONST.ItemSet.属性2值 = 63;
+GmsvData.CONST.ItemSet.隐藏耐力下限 = 64;
+GmsvData.CONST.ItemSet.隐藏耐力上限 = 65;
+GmsvData.CONST.ItemSet.隐藏灵巧下限 = 66;
+GmsvData.CONST.ItemSet.隐藏灵巧上限 = 67;
+GmsvData.CONST.ItemSet.隐藏智力下限 = 68;
+GmsvData.CONST.ItemSet.隐藏智力上限 = 69;
+GmsvData.CONST.ItemSet.抗毒下限 = 70;
+GmsvData.CONST.ItemSet.抗毒上限 = 71;
+GmsvData.CONST.ItemSet.抗睡下限 = 72;
+GmsvData.CONST.ItemSet.抗睡上限 = 73;
+GmsvData.CONST.ItemSet.抗石下限 = 74;
+GmsvData.CONST.ItemSet.抗石上限 = 75;
+GmsvData.CONST.ItemSet.抗醉下限 = 76;
+GmsvData.CONST.ItemSet.抗醉上限 = 77;
+GmsvData.CONST.ItemSet.抗乱下限 = 78;
+GmsvData.CONST.ItemSet.抗乱上限 = 79;
+GmsvData.CONST.ItemSet.抗忘下限 = 80;
+GmsvData.CONST.ItemSet.抗忘上限 = 81;
+GmsvData.CONST.ItemSet.特殊功能 = 82;
+GmsvData.CONST.ItemSet.子参数1 = 83;
+GmsvData.CONST.ItemSet.子参数2 = 84;
+GmsvData.CONST.ItemSet.宝石编号_武器 = 85;
+GmsvData.CONST.ItemSet.宝石编号_防具 = 86;
+GmsvData.CONST.ItemSet.宝石编号_配饰 = 87;
+GmsvData.CONST.ItemSet.USEACTION使用功能 = 88;
+GmsvData.CONST.ItemSet.登出消失 = 89;
+GmsvData.CONST.ItemSet.丢地消失 = 90;
+GmsvData.CONST.ItemSet.宠邮 = 91;
+GmsvData.CONST.ItemSet.抗魔下限 = 92;
+GmsvData.CONST.ItemSet.抗魔上限 = 93;
+GmsvData.CONST.ItemSet.能否出售 = 94;
+GmsvData.CONST.ItemSet.物品说明msg = 95;
+GmsvData.CONST.ItemSet.右键说明msg = 96;
+GmsvData.CONST.ItemSet.鉴定概率 = 97;
+GmsvData.CONST.ItemSet.白黑宝箱能开启 = 98;
+GmsvData.CONST.ItemSet.宝箱中出现 = 99;
+GmsvData.CONST.ItemSet.魔攻下限 = 100;
+GmsvData.CONST.ItemSet.魔攻上限 = 101;
+GmsvData.CONST.ItemSet.贩卖给NPC1组的数量 = 102;
 
 function GmsvData:loadData()
   self.enemy = {}
-  self.enemyBase = {}
   local count = 0;
   local file = io.open('data/enemy.txt')
   for line in file:lines() do
@@ -127,6 +229,7 @@ function GmsvData:loadData()
     :: continue ::
   end
   self:logInfo('loaded enemy', count);
+  self.enemyBase = {}
   count = 0;
   file:close();
   file = io.open('data/enemybase.txt')
@@ -144,6 +247,24 @@ function GmsvData:loadData()
     :: continue ::
   end
   self:logInfo('loaded enemyBase', count);
+  file:close();
+  count = 0;
+  self.itemSet = {}
+  file = io.open('data/itemset.txt')
+  for line in file:lines() do
+    if line then
+      if string.match(line, '^(%s*(#|$))') then
+        goto continue;
+      end
+      local itemSet = string.split(line, '\t');
+      if itemSet and #itemSet == 102 then
+        self.itemSet[itemSet[self.CONST.ItemSet.Id]] = itemSet;
+        count = count + 1;
+      end
+    end
+    :: continue ::
+  end
+  self:logInfo('loaded itemSet', count);
   file:close();
   --for i, v in pairs(data) do
   --  print(i, v)

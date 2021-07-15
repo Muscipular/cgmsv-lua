@@ -339,7 +339,7 @@ end
 function Admin:onLoad()
   self:logInfo('load')
   local function handleChat(charIndex, msg, color, range, size)
-    local cdKey = Char.GetData(charIndex, CONST_CHAR_CD_KEY)
+    local cdKey = Char.GetData(charIndex, CONST.CHAR_CDK)
     local command = msg:match('^/([%w]+)')
     if commandsNormal[command] then
       local arg = msg:match('^/[%w]+ +(.+)$')

@@ -23,6 +23,22 @@ function table:find(fn)
   return nil
 end
 
+function table:keys(fn)
+  local ret = {}
+  for i, v in pairs(self) do
+    table.insert(ret, i);
+  end
+  return ret;
+end
+
+function table:values(fn)
+  local ret = {}
+  for i, v in pairs(self) do
+    table.insert(ret, v);
+  end
+  return ret;
+end
+
 table.join = table.concat;
 
 function table.combine(...)

@@ -85,6 +85,10 @@ end
 function Char.GivePet(CharIndex, PetID, FullBP)
 end
 
+---@return number 道具栏使用数量
+function Char.ItemSlot(charIndex)
+end
+
 function Char.AddPet(CharIndex, PetID)
 end
 ---@return number 组队中的玩家人数，无组队返回-1，否则返回玩家人数，获取失败返回0，参数数据类型不对返回-2，对象index无效返回-3。
