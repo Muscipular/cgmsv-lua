@@ -27,7 +27,7 @@ function Data.ItemsetGetData(ItemsetIndex, DataPos)
   if ItemsetIndex < 0 or ItemsetIndex >= ItemTableMax then
     return nil;
   end
-  if DataPos >= 2000 then
+  if DataPos >= 2000 then --string32 * 13 
     DataPos = DataPos - 2000;
     if DataPos >= 13 then
       return nil;
@@ -35,8 +35,8 @@ function Data.ItemsetGetData(ItemsetIndex, DataPos)
     return FFI.readMemoryString(ItemTablePTR + ItemsetIndex * 1092 + 78 * 4 + DataPos * 32 + 4)
   end
   local p = 0;
-  if DataPos >= 78 then
-    if DataPos >= 92 then
+  if DataPos >= 78 then --ext data & function ptr
+    if DataPos >= 92 then --random data
       p = FFI.readMemoryInt32(ItemTablePTR + ItemsetIndex * 1092 + (DataPos - 90) * 4 + 4)
     end
     DataPos = 8 * 13 + DataPos
@@ -45,12 +45,4 @@ function Data.ItemsetGetData(ItemsetIndex, DataPos)
     end
   end
   return FFI.readMemoryInt32(ItemTablePTR + ItemsetIndex * 1092 + DataPos * 4 + 4) + p
-end
-print('index:', Data.ItemsetGetIndex(2035))
-for i = 0, 273 do
-  print('data', i, Data.ItemsetGetData(Data.ItemsetGetIndex(2035), i))
-end
-
-for i = 2000, 2015 do
-  print('data', i, Data.ItemsetGetData(Data.ItemsetGetIndex(2035), i))
 end
