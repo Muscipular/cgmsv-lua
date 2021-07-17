@@ -66,6 +66,7 @@ function hook.new(cast, callback, hook_addr, size)
   end
   new_hook.call = ffi.cast(cast, org_bytes)
   new_hook.org_bytes = org_bytes;
+  new_hook.callback = callback;
   hook.hooks[tostring(hook_addr)] = new_hook;
   return setmetatable(new_hook, {
     __call = function(self, ...)

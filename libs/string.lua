@@ -1,3 +1,9 @@
+local sBase62 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+local dBase62 = {}
+for i = 1, 62 do
+  dBase62[string.sub(sBase62, i, i)] = i - 1;
+end
+
 ---@param base number
 ---@param n number
 ---@return string
@@ -9,23 +15,31 @@ function string.formatNumber(n, base)
   if n < 0 then
     error('n不能少于0')
   end
-  if base < 2 or base > 36 then
-    error('base取值为2-36')
+  if base < 2 or base > 62 then
+    error('base取值为2-62')
   end
   if base == 10 or n == 0 then
     return tostring(n)
   end
-  local s = '0123456789abcdefghijklmnopqrstuvwxyz'
   local r = ''
   while n > 0 do
     if n == 0 then
       break ;
     end
     local k = math.fmod(n, base);
-    r = string.sub(s, k + 1, k + 1) .. r;
+    r = string.sub(sBase62, k + 1, k + 1) .. r;
     n = math.floor(n / base)
   end
   return r;
+end
+
+function string.decodeNumber(s, base)
+  local ret = 0;
+  for i = 1, string.len(s) do
+    print(string.sub(s, i, i), dBase62[string.sub(s, i, i)], ret);
+    ret = ret * base + dBase62[string.sub(s, i, i)]
+  end
+  return ret;
 end
 
 function string.split(str, separator)
