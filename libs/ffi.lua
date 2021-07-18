@@ -1,25 +1,35 @@
 local ffi = require "ffi";
 function ffi.readMemoryDWORD(addr)
   if addr == 0 then
-    return 0;
+    return nil;
   end
   return ffi.cast("uint32_t*", addr)[0]
 end
 function ffi.readMemoryInt32(addr)
   if addr == 0 then
-    return 0;
+    return nil;
   end
   return ffi.cast("int32_t*", addr)[0]
 end
+function ffi.setMemoryInt32(addr, value)
+  if addr == 0 then
+    return false;
+  end
+  if type(value) ~= 'number'  then
+    return false;
+  end
+  ffi.cast("int32_t*", addr)[0] = value;
+  return true;
+end
 function ffi.readMemoryWORD(addr)
   if addr == 0 then
-    return 0;
+    return nil;
   end
   return ffi.cast("uint16_t*", addr)[0]
 end
 function ffi.readMemoryBYTE(addr)
   if addr == 0 then
-    return 0;
+    return nil;
   end
   return ffi.cast("uint8_t*", addr)[0]
 end
@@ -79,3 +89,4 @@ end
 
 ffi.hook = hook;
 _G.FFI = ffi;
+_G.ffi = ffi;

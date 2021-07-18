@@ -54,6 +54,7 @@ CONST.CHAR_DEBUG开关 = 0;
 CONST.CHAR_使用MIC = 0;
 CONST.CHAR_已保存 = 0;
 CONST.CHAR_不遇敌开关 = 0;
+CONST.CHAR_BattleIndex = 379;
 CONST.地图类型_普通 = 0;
 CONST.地图类型_迷宫 = 0;
 CONST.地图类型_家族 = 0;

@@ -28,6 +28,7 @@ local CharaTableSize = FFI.readMemoryDWORD(0x091A6E58);
 print('CharaTableSize:', CharaTableSize)
 local ConnectionTable = FFI.readMemoryDWORD(0x1125704);
 print('ConnectionTable:', ConnectionTable)
+
 local _proto_send = FFI.cast('int (__cdecl *)(int fd, const char *str)', 0x00559370)
 local _makeEscapeStringBuff = FFI.cast('char*', 0x006818C0)
 local _makeEscapeString = FFI.cast("char *(__cdecl *)(const char *Str, char *target, int len)", 0x00407E80);
