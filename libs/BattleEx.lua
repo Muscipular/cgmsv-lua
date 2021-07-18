@@ -29,14 +29,14 @@ function Battle.SetNextBattle(BattleIndex, encountId)
     if FFI.readMemoryInt32(battleAddr) == 0 then
         return -2
     end
-    return FFI.setMemoryInt32(battleAddr, tonumber(encountId))
+    return FFI.setMemoryInt32(battleAddr + 0x38, tonumber(encountId))
 end
 
 local fnList = {}
 local enemyHooked = false
 local _ENEMY_getEnemyFromEncountArray
 
-function OnCallback(charAddr, encountId, )
+function OnCallback(charAddr, encountId, nextEncountId, formation, randRange, nnn)
     -- statements
 end
 
@@ -44,7 +44,7 @@ function hook()
     if enemyHooked == false then
         _ENEMY_getEnemyFromEncountArray =
             FFI.hook.new(
-            'void *(__cdecl *)(int a1, int encountId, int *nextEncountId, uint32_t *formation, uint32_t *randRange, uint32_t *a6)',
+            'void *(__cdecl *)(int a1, int encountId, int *nextEncountId, uint32_t *formation, uint32_t *randRange, uint32_t *nnn)',
             OnCallback,
             0x00462E10,
             5
