@@ -93,6 +93,7 @@ local function OnDispatch(fd, str)
     for i = 1, #list do
       list[i] = Protocol.nrprotoUnescapeString(list[i]);
     end
+    --print('收到', head, '封包，内容: ', unpack(list))
     if Protocol.Hooks[head] and _G[Protocol.Hooks[head]] then
       local ret = _G[Protocol.Hooks[head]](fd, head, list);
       if type(ret) == 'number' and ret < 0 then
@@ -129,17 +130,19 @@ function Protocol.OnRecv(Dofile, FuncName, PacketID)
   end
 end
 
--- ---@param fd number
--- ---@param head string 封包头
--- ---@param data string[] 封包内容
--- ---@return number 返回少于0为拦截封包, 0为封包正常通过 
---local function DumpPackageCallback(fd, head, data)
---  print('收到', head, '封包，内容: ', unpack(table.map()))
---  return 0;
---end
---_G.DumpPackageCallback = DumpPackageCallback;
---
---Protocol.OnRecv(nil, 'DumpPackageCallback', 'zA')
+--[[
+---@param fd number
+---@param head string 封包头
+---@param data string[] 封包内容
+---@return number 返回少于0为拦截封包, 0为封包正常通过 
+local function DumpPackageCallback(fd, head, data)
+  print(fd, '收到', head, '封包，内容: ', unpack(data))
+  return 0;
+end
+_G.DumpPackageCallback = DumpPackageCallback;
+
+Protocol.OnRecv(nil, 'DumpPackageCallback', 'zA')
+]]
 
 ---获取角色的指针
 function Char.GetCharPointer(charIndex)

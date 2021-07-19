@@ -36,11 +36,11 @@ local fnList = {}
 local enemyHooked = false
 local _ENEMY_getEnemyFromEncountArray
 
-function OnCallback(charAddr, encountId, nextEncountId, formation, randRange, nnn)
+local function OnCallback(charAddr, encountId, nextEncountId, formation, randRange, nnn)
     -- statements
 end
 
-function hook()
+local function hook()
     if enemyHooked == false then
         _ENEMY_getEnemyFromEncountArray =
             FFI.hook.new(
@@ -52,10 +52,10 @@ function hook()
     end
 end
 
-function NL.RegVSEnemyCreateEvent(Dofile, FuncName)
-    if Dofile and _G[FuncName] == nil then
-        dofile(Dofile)
-    end
-    fnList.VSEnemyCreateEvent = FuncName
-    hook()
-end
+--function NL.RegVSEnemyCreateEvent(Dofile, FuncName)
+--    if Dofile and _G[FuncName] == nil then
+--        dofile(Dofile)
+--    end
+--    fnList.VSEnemyCreateEvent = FuncName
+--    hook()
+--end
