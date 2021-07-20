@@ -1,4 +1,7 @@
 local ffi = require "ffi";
+ffi.cdef [[
+    void Sleep(int ms);
+]];
 function ffi.readMemoryDWORD(addr)
   if addr == 0 then
     return nil;
@@ -86,6 +89,15 @@ function hook.new(cast, callback, hook_addr, size)
   })
 end
 --HOOKS
+
+function printAsHex(...)
+  print(table.unpack(table.map({ ... }, function(e)
+    if type(e) == 'number' and e > 0 then
+      return string.formatNumber(e, 16)
+    end
+    return e;
+  end)))
+end
 
 ffi.hook = hook;
 _G.FFI = ffi;

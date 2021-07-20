@@ -43,9 +43,9 @@ function ModuleCard:onBattleOverEvent(battleIndex)
     if enemyDataList == nil then
       return
     end
-    for i, v in pairs(enemyDataList) do
-      print(i, v);
-    end
+    --for i, v in pairs(enemyDataList) do
+    --  print(i, v);
+    --end
     local chars = {}
     for i = 0, 9 do
       local charIndex = Battle.GetPlayer(battleIndex, i);
@@ -53,7 +53,7 @@ function ModuleCard:onBattleOverEvent(battleIndex)
         table.insert(chars, charIndex)
       end
     end
-    self:logDebug('chars', #chars);
+    --self:logDebug('chars', #chars);
     ---@type GmsvData
     local gmsvData = getModule('gmsvData');
     -- ---@type ItemExt

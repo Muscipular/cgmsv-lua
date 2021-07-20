@@ -1,34 +1,6 @@
-_G.Data = {}
-Protocol = { Hooks = {}, _hooked = false }
-FFI.cdef [[
-    void Sleep(int ms);
-]];
-
-local function ps(...)
-  print(table.unpack(table.map({ ... }, function(e)
-    if type(e) == 'number' and e > 0 then
-      return string.formatNumber(e, 16)
-    end
-    return e;
-  end)))
-end
+_G.Protocol = { Hooks = {}, _hooked = false }
 
 local _OnDispatch;
-local ItemIdMax = FFI.readMemoryDWORD(0x09205BE0);
-print('ItemIdMax:', ItemIdMax)
-local ItemIndexTblTPR = FFI.readMemoryDWORD(0x09205584);
-ps('item_index_tbl', ItemIndexTblTPR)
-local ItemTableMax = FFI.readMemoryDWORD(0x00687C80);
-print('ItemTableMax:', ItemTableMax)
-local ItemTablePTR = FFI.readMemoryDWORD(0x09205588);
-ps('item_tbl', ItemTablePTR)
-local CharaTablePTR = FFI.readMemoryDWORD(0x091A6E54);
-print('CharaTablePTR:', CharaTablePTR)
-local CharaTableSize = FFI.readMemoryDWORD(0x091A6E58);
-print('CharaTableSize:', CharaTableSize)
-local ConnectionTable = FFI.readMemoryDWORD(0x1125704);
-print('ConnectionTable:', ConnectionTable)
-
 local _proto_send = FFI.cast('int (__cdecl *)(int fd, const char *str)', 0x00559370)
 local _makeEscapeStringBuff = FFI.cast('char*', 0x006818C0)
 local _makeEscapeString = FFI.cast("char *(__cdecl *)(const char *Str, char *target, int len)", 0x00407E80);
@@ -143,47 +115,3 @@ _G.DumpPackageCallback = DumpPackageCallback;
 
 Protocol.OnRecv(nil, 'DumpPackageCallback', 'zA')
 ]]
-
----获取角色的指针
-function Char.GetCharPointer(charIndex)
-  if Char.GetData(charIndex, CONST.CHAR_类型) == 1 then
-    return CharaTablePTR + charIndex * 0x21EC;
-  end
-  return 0;
-end
-
----获取ItemsetIndex
-function Data.ItemsetGetIndex(ItemID)
-  if ItemID < 0 and ItemID >= ItemIdMax then
-    return -1;
-  end
-  return FFI.readMemoryInt32(ItemIndexTblTPR + 4 * ItemID)
-end
-
----获取Itemset数据
-function Data.ItemsetGetData(ItemsetIndex, DataPos)
-  if ItemsetIndex < 0 or ItemsetIndex >= ItemTableMax then
-    return nil;
-  end
-  if DataPos >= 2000 then
-    --string32 * 13 
-    DataPos = DataPos - 2000;
-    if DataPos >= 13 then
-      return nil;
-    end
-    return FFI.readMemoryString(ItemTablePTR + ItemsetIndex * 1092 + 78 * 4 + DataPos * 32 + 4)
-  end
-  local baseValue = 0;
-  if DataPos >= 78 then
-    --ext data & function ptr
-    if DataPos >= 92 then
-      --random data
-      baseValue = FFI.readMemoryInt32(ItemTablePTR + ItemsetIndex * 1092 + (DataPos - 90) * 4 + 4)
-    end
-    DataPos = 8 * 13 + DataPos
-    if DataPos >= 273 then
-      return nil
-    end
-  end
-  return FFI.readMemoryInt32(ItemTablePTR + ItemsetIndex * 1092 + DataPos * 4 + 4) + baseValue
-end
