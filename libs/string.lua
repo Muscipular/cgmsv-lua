@@ -54,7 +54,7 @@ function string.split(str, separator)
   local condition = true
   while (condition)
   do
-    si, sd = string.find(str, separator, strB)
+    local si, sd = string.find(str, separator, strB)
     if (si)
     then
       targetArray[arrayIndex] = string.sub(str, strB, si - 1)

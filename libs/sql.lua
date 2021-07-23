@@ -38,3 +38,4 @@ function SQL.querySQL(sql)
   end
   return result
 end
+SQL.CONST_RET_NO_ROW = -3;

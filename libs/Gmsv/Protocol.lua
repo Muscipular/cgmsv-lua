@@ -98,7 +98,7 @@ function Protocol.OnRecv(Dofile, FuncName, PacketID)
   if Protocol._hooked == false then
     Protocol._hooked = true;
     --00551800 ; int __cdecl nrproto_ServerDispatchMessage(int fd, char *encoded)
-    _OnDispatch = FFI.hook.new('int (__cdecl *)(uint32_t fd, char *encoded)', OnDispatch, 0x00551800, 5);
+    _OnDispatch = FFI.hook.new('int (__cdecl *)(uint32_t fd, const char *encoded)', OnDispatch, 0x00551800, 5);
   end
 end
 
