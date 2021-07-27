@@ -1,6 +1,7 @@
 local ffi = require "ffi";
 ffi.cdef [[
     void Sleep(int ms);
+    char *strstr(const char *str1, const char *str2);
 ]];
 function ffi.readMemoryDWORD(addr)
   if addr == 0 then
@@ -18,7 +19,7 @@ function ffi.setMemoryInt32(addr, value)
   if addr == 0 then
     return false;
   end
-  if type(value) ~= 'number'  then
+  if type(value) ~= 'number' then
     return false;
   end
   ffi.cast("int32_t*", addr)[0] = value;
