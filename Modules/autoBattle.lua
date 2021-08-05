@@ -52,7 +52,7 @@ function Module:battleOverEventCallback(battleIndex)
 end
 
 function Module:handleBattleAutoCommand(battleIndex)
-  local turn = ffi.readMemoryDWORD(Addresses.BattleTable + battleIndex * 0x1480 + 0x1c)
+  local turn = Battle.GetTurn(battleIndex)
   if battleData[battleIndex] == turn then
     return
   end

@@ -9,7 +9,7 @@ function Battle.GetNextBattle(BattleIndex)
     return -3
   end
   local battleAddr = Addresses.BattleTable + BattleIndex * 0x1480
-  if FFI.readMemoryInt32(battleAddr) == 0 then
+  if FFI.readMemoryDWORD(battleAddr) == 0 then
     return -2
   end
   return FFI.readMemoryInt32(battleAddr + 0x38)
@@ -28,6 +28,17 @@ function Battle.SetNextBattle(battleIndex, encountIndex)
     encountIndex = -1;
   end
   return FFI.setMemoryInt32(battleAddr + 0x38, encountIndex)
+end
+
+function Battle.GetTurn(battleIndex)
+  if battleIndex < 0 or battleIndex >= Addresses.BattleMax then
+    return -3
+  end
+  local battleAddr = Addresses.BattleTable + battleIndex * 0x1480
+  if FFI.readMemoryDWORD(battleAddr) == 0 then
+    return -2
+  end
+  return FFI.readMemoryInt32(battleAddr + 0x1c)
 end
 
 local fnList = {}
