@@ -63,7 +63,7 @@ function hook.new(cast, callback, hook_addr, size)
   local org_bytes = ffi.new('uint8_t[?]', _size + 10)
   ffi.copy(org_bytes, hookFnPtr, _size)
   org_bytes[_size] = 0xE9;
-  ffi.cast('uint32_t*', org_bytes + _size + 1)[0] = hook_addr - (ffi.cast('uint32_t', org_bytes) + _size);
+  ffi.cast('uint32_t*', org_bytes + _size + 1)[0] = hook_addr + size - (ffi.cast('uint32_t', org_bytes) + _size + 5);
   local hook_bytes = ffi.new('uint8_t[?]', _size, 0x90)
   hook_bytes[0] = 0xE9
   ffi.cast('uint32_t*', hook_bytes + 1)[0] = detour_addr - hook_addr - 5
@@ -88,6 +88,64 @@ function hook.new(cast, callback, hook_addr, size)
       return res
     end
   })
+end
+
+function hook.inlineHook(cast, callback, hookAddr, size, prefixCode, postCode)
+  local callbackAddr = tonumber(ffi.cast('intptr_t', ffi.cast('void*', ffi.cast(cast, callback))))
+  local hookFnPtr = ffi.cast('void*', hookAddr)
+  local oldProtectFlag = ffi.new('unsigned long[1]')
+  local tmpProtectFlag = ffi.new('unsigned long[1]')
+  local detourBytes = ffi.new('uint8_t[?]', 2048)
+  local backup = ffi.new('uint8_t[?]', size)
+  -- make backup
+  ffi.copy(backup, hookFnPtr, size);
+  -- prefixCode
+  for i, v in ipairs(prefixCode) do
+    detourBytes[i - 1] = v;
+  end
+  --call callback
+  detourBytes[#prefixCode] = 0xE8;
+  ffi.cast('uint32_t*', detourBytes + #prefixCode + 1)[0] = callbackAddr - (ffi.cast('uint32_t', detourBytes) + #prefixCode + 5);
+  -- prefixCode
+  for i, v in ipairs(postCode) do
+    detourBytes[i - 1 + 5 + #prefixCode] = v;
+  end
+  --origin code
+  ffi.copy(detourBytes + #prefixCode + 5 + #postCode, hookFnPtr, size);
+  --jmp to origin code
+  detourBytes[#prefixCode + 5 + size + #postCode] = 0xE9;
+  ffi.cast('int32_t*', detourBytes + #prefixCode + 5 + size + #postCode + 1)[0] = ffi.cast('int32_t', (hookAddr + size) - (ffi.cast('int32_t', detourBytes) + size + #postCode + #prefixCode + 10));
+  --mark memory executable
+  ffi.C.VirtualProtect(detourBytes, 2048, 0x40, tmpProtectFlag);
+  --mark memory writable
+  ffi.C.VirtualProtect(hookFnPtr, size, 0x40, oldProtectFlag)
+  --jmp to hook code
+  ffi.cast('uint8_t*', hookAddr)[0] = 0xE9;
+  ffi.cast('uint32_t*', hookAddr + 1)[0] = ffi.cast('uint32_t', detourBytes) - (hookAddr + 5);
+  for i = 5, size - 1 do
+    ffi.cast('uint8_t*', hookAddr + i)[0] = 0x90;
+  end
+  --restore memory protect 
+  ffi.C.VirtualProtect(hookFnPtr, size, oldProtectFlag[0], tmpProtectFlag)
+  local new_hook = {}
+  new_hook.uninstall = function()
+    ffi.C.VirtualProtect(hookFnPtr, size, 0x40, oldProtectFlag)
+    ffi.copy(hookFnPtr, backup, size)
+    ffi.C.VirtualProtect(hookFnPtr, size, oldProtectFlag[0], tmpProtectFlag)
+    hook.hooks[tostring(hookAddr)] = nil;
+  end
+  --new_hook.call = ffi.cast(cast, detourBytes)
+  new_hook.detourBytes = detourBytes;
+  new_hook.backup = backup;
+  new_hook.callback = callback;
+  hook.hooks[tostring(hookAddr)] = new_hook;
+  return new_hook;
+  --return setmetatable(new_hook, {
+  --  __call = function(self, ...)
+  --    local res = self.call(...)
+  --    return res
+  --  end
+  --})
 end
 --HOOKS
 

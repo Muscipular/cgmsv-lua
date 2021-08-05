@@ -11,6 +11,15 @@ CONST.µ¿æﬂ_Func_PrePickUpFunc = 2011;
 CONST.µ¿æﬂ_Func_PickUpFunc = 2012;
 CONST.CHAR_ENEMY_ID = 499;
 --
+CONST.CHAR_BattleMode = 0x00000000 / 4 + 0x5e8 / 4;
+CONST.CHAR_BattleIndex = 0x00000004 / 4 + 0x5e8 / 4;
+CONST.CHAR_BattleSide = 0x00000008 / 4 + 0x5e8 / 4;
+CONST.CHAR_BattleCom1 = 0x0000000C / 4 + 0x5e8 / 4;
+CONST.CHAR_BattleCom2 = 0x00000010 / 4 + 0x5e8 / 4;
+CONST.CHAR_BattleCom3 = 0x00000014 / 4 + 0x5e8 / 4;
+CONST.CHAR_Battle2Com1 = 0x00000018 / 4 + 0x5e8 / 4;
+CONST.CHAR_Battle2Com2 = 0x0000001C / 4 + 0x5e8 / 4;
+CONST.CHAR_Battle2Com3 = 0x00000020 / 4 + 0x5e8 / 4;
 
 CONST.SHOP_TYPE_SELL = 1;
 CONST.SHOP_TYPE_BUY = 2;
@@ -3070,6 +3079,6 @@ CONST.Enemy_’ŸªΩEnemy1 = %Enemy_’ŸªΩEnemy1%;
 CONST.Enemy_’ŸªΩEnemy2 = %Enemy_’ŸªΩEnemy2%;
 CONST.Enemy_Talk±‡∫≈ = %Enemy_Talk±‡∫≈%;
 
-for i, v in pairs(CONST) do
-print('const ', i, v);
-end
+--for i, v in pairs(CONST) do
+--print('const ', i, v);
+--end

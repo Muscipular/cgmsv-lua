@@ -71,9 +71,22 @@ function _G.getModule(moduleName)
   return Modules[moduleName];
 end
 
+local chained = {
+  TalkEvent = function(list, ...)
+    local res = 1;
+    for i, v in pairs(list) do
+      res = v(...)
+      if res ~= 1 then
+        return res;
+      end
+    end
+    return res
+  end
+}
+
 local function makeEventHandle(name)
   local list = {}
-  local fn = function(...)
+  local fn = function(list, ...)
     local res;
     for i, v in pairs(list) do
       res = v(...)
@@ -81,8 +94,9 @@ local function makeEventHandle(name)
     --logDebug('ModuleSystem', 'callback', name, res, ...)
     return res
   end
-  return fn, list
+  return Func.bind(chained[name] or fn, list), list
 end
+
 local eventCallbacks = {}
 local ix = 0;
 function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
