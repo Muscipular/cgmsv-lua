@@ -91,7 +91,10 @@ function hook.new(cast, callback, hook_addr, size)
 end
 
 function hook.inlineHook(cast, callback, hookAddr, size, prefixCode, postCode)
-  local callbackAddr = tonumber(ffi.cast('intptr_t', ffi.cast('void*', ffi.cast(cast, callback))))
+  local callbackAddr = type(callback) == 'function' and tonumber(ffi.cast('intptr_t', ffi.cast('void*', ffi.cast(cast, callback)))) or 0;
+  if type(callback) ~= 'function' and callback then
+    callbackAddr = callback;
+  end
   local hookFnPtr = ffi.cast('void*', hookAddr)
   local oldProtectFlag = ffi.new('unsigned long[1]')
   local tmpProtectFlag = ffi.new('unsigned long[1]')
@@ -104,8 +107,16 @@ function hook.inlineHook(cast, callback, hookAddr, size, prefixCode, postCode)
     detourBytes[i - 1] = v;
   end
   --call callback
-  detourBytes[#prefixCode] = 0xE8;
-  ffi.cast('uint32_t*', detourBytes + #prefixCode + 1)[0] = callbackAddr - (ffi.cast('uint32_t', detourBytes) + #prefixCode + 5);
+  if callback then
+    detourBytes[#prefixCode] = 0xE8;
+    ffi.cast('uint32_t*', detourBytes + #prefixCode + 1)[0] = callbackAddr - (ffi.cast('uint32_t', detourBytes) + #prefixCode + 5);
+  else
+    detourBytes[#prefixCode] = 0x90;
+    detourBytes[#prefixCode + 1] = 0x90;
+    detourBytes[#prefixCode + 2] = 0x90;
+    detourBytes[#prefixCode + 3] = 0x90;
+    detourBytes[#prefixCode + 4] = 0x90;
+  end
   -- prefixCode
   for i, v in ipairs(postCode) do
     detourBytes[i - 1 + 5 + #prefixCode] = v;
