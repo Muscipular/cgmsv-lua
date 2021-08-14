@@ -20,6 +20,16 @@ CONST.CHAR_BattleCom3 = 0x00000014 / 4 + 0x5e8 / 4;
 CONST.CHAR_Battle2Com1 = 0x00000018 / 4 + 0x5e8 / 4;
 CONST.CHAR_Battle2Com2 = 0x0000001C / 4 + 0x5e8 / 4;
 CONST.CHAR_Battle2Com3 = 0x00000020 / 4 + 0x5e8 / 4;
+CONST.CHAR_EnemyPetFlg = 0x7BC / 4;
+CONST.CHAR_EnemyActionFlag = 0x00000004 / 4 + 0x7BC / 4;
+CONST.CHAR_EnemyBossFlg = 0x00000008 / 4 + 0x7BC / 4;
+CONST.CHAR_EnemyModCaptureDefault = 0x0000000c / 4 + 0x7BC / 4;
+CONST.CHAR_EnemyTactics = 0x00000010 / 4 + 0x7BC / 4;
+CONST.CHAR_EnemySummon1 = 0x00000014 / 4 + 0x7BC / 4;
+CONST.CHAR_EnemySummon2 = 0x00000018 / 4 + 0x7BC / 4;
+CONST.CHAR_EnemyEscape = 0x0000001c / 4 + 0x7BC / 4;
+CONST.CHAR_EnemyMsg = 0x00000020 / 4 + 0x7BC / 4;
+CONST.CHAR_EnemyBattleAction = 0x00000024 / 4 + 0x7BC / 4;
 
 CONST.SHOP_TYPE_SELL = 1;
 CONST.SHOP_TYPE_BUY = 2;

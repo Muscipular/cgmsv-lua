@@ -102,7 +102,7 @@ function ItemPowerUP:onDamageCalculateEvent(
               weaponDmg = weaponDmg + tonumber(Item.GetData(itemIndex, CONST.道具_魔攻));
             end
             local dmg = math.ceil((data.level * data.level / 100 + data.level / 100) * weaponDmg);
-            self:logDebug('add damage' .. dmg)
+            --self:logDebug('add damage' .. dmg)
             damage = damage + dmg;
           end
         end
@@ -117,7 +117,7 @@ function ItemPowerUP:onDamageCalculateEvent(
         if (data.level or 0) > 0 then
           local itemType = Item.GetData(itemIndex, CONST.道具_类型);
           if isArmour(itemType) then
-            self:logDebug('dec damage' .. (data.level * 2))
+            --self:logDebug('dec damage' .. (data.level * 2))
             damage = damage - data.level * 3;
           end
         end
