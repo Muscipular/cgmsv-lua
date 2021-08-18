@@ -38,7 +38,7 @@ function Protocol.Send(charIndex, header, ...)
   if ptr <= 0 then
     return -1;
   end
-  local fd = FFI.readMemoryDWORD(ptr + 0x7DC);
+  local fd = FFI.readMemoryInt32(ptr + 0x7BC);
   if fd < 0 then
     return -1;
   end
