@@ -1,53 +1,10 @@
 local ItemPowerUP = ModuleBase:createModule('itemPowerUp')
 
-local WeaponType = {
-  CONST.ITEM_TYPE_剑,
-  CONST.ITEM_TYPE_斧,
-  CONST.ITEM_TYPE_枪,
-  CONST.ITEM_TYPE_杖,
-  CONST.ITEM_TYPE_弓,
-  CONST.ITEM_TYPE_小刀,
-  CONST.ITEM_TYPE_回力镖,
-}
 
-local ArmourType = {
-  CONST.ITEM_TYPE_盾,
-  CONST.ITEM_TYPE_盔,
-  CONST.ITEM_TYPE_帽,
-  CONST.ITEM_TYPE_铠,
-  CONST.ITEM_TYPE_衣,
-  CONST.ITEM_TYPE_袍,
-  CONST.ITEM_TYPE_靴,
-  CONST.ITEM_TYPE_鞋,
-}
-
-local AccessoryType = {
-  CONST.ITEM_TYPE_手环,
-  CONST.ITEM_TYPE_乐器,
-  CONST.ITEM_TYPE_项链,
-  CONST.ITEM_TYPE_戒指,
-  CONST.ITEM_TYPE_头带,
-  CONST.ITEM_TYPE_耳环,
-  CONST.ITEM_TYPE_护身符,
-}
-
-local CrystalType = CONST.ITEM_TYPE_水晶
 local MAX_LEVEL = 20;
 local SAVE_LEVEL2 = 10;
 local SAVE_LEVEL = 7;
 local LevelRate = { 0, 0, 0, 10, 20, 30, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 93, 93, 96, 96, 97, 97, 98, 98, 99, 99, 99, 99, 99, 99, 99, 99 }
-
-local function isWeapon(type)
-  return table.indexOf(WeaponType, type) > 0
-end
-
-local function isArmour(type)
-  return table.indexOf(ArmourType, type) > 0
-end
-
-local function isAccessory(type)
-  return table.indexOf(AccessoryType, type) > 0
-end
 
 function ItemPowerUP:setItemData(itemIndex, value)
   ---@type ItemExt
@@ -96,7 +53,7 @@ function ItemPowerUP:onDamageCalculateEvent(
         local data = self:getItemData(itemIndex)
         if (data.level or 0) > 0 then
           local itemType = Item.GetData(itemIndex, CONST.道具_类型);
-          if isWeapon(itemType) then
+          if Item.Types.isWeapon(itemType) then
             local weaponDmg = Item.GetData(itemIndex, CONST.道具_攻击);
             if Item.GetData(itemIndex, CONST.道具_魔攻) > 0 and flg == DmgType.Magic then
               weaponDmg = weaponDmg + tonumber(Item.GetData(itemIndex, CONST.道具_魔攻));
@@ -116,7 +73,7 @@ function ItemPowerUP:onDamageCalculateEvent(
         local data = self:getItemData(itemIndex)
         if (data.level or 0) > 0 then
           local itemType = Item.GetData(itemIndex, CONST.道具_类型);
-          if isArmour(itemType) then
+          if Item.Types.isArmour(itemType) then
             --self:logDebug('dec damage' .. (data.level * 2))
             damage = damage - data.level * 3;
           end
@@ -138,7 +95,7 @@ function ItemPowerUP:onItemOverLapEvent(charIndex, fromItemIndex, targetItemInde
     --end
     --local fromSlot = getItemSlot(charIndex, fromItemIndex);
     local type = Item.GetData(targetItemIndex, CONST.道具_类型);
-    if not (isArmour(type) or isWeapon(type)) then
+    if not (Item.Types.isArmour(type) or Item.Types.isWeapon(type)) then
       return 0
     end
     local data = self:getItemData(targetItemIndex);
@@ -173,8 +130,8 @@ function ItemPowerUP:onItemOverLapEvent(charIndex, fromItemIndex, targetItemInde
     end
     data.name = data.name or Item.GetData(targetItemIndex, CONST.道具_名字);
     Item.SetData(targetItemIndex, CONST.道具_名字, data.name .. ' +' .. data.level);
-    if isWeapon(type) then
-    elseif isArmour(type) then
+    if Item.Types.isWeapon(type) then
+    elseif Item.Types.isArmour(type) then
     end
     NLG.SystemMessage(charIndex, "[系统] 强化【" .. Item.GetData(targetItemIndex, CONST.道具_名字) .. "】成功。【" .. rate .. '/' .. LevelRate[rawLv + 1] .. "】");
     self:setItemData(targetItemIndex, data);
