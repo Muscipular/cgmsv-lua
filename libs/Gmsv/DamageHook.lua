@@ -1,5 +1,14 @@
 local callback;
 local function callCallback(aIndex, dIndex, flag, dmg)
+  print('RegDamageCalculateEvent:', aIndex, dIndex, flag, dmg);
+  print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
+  print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
+  print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
+  print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
+  print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
+  print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
+  print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
+  print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
   if (callback and _G[callback]) then
     local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
     local success, ret = pcall(_G[callback], aIndex, dIndex, dmg, dmg, battleIndex,
@@ -42,14 +51,6 @@ local function hookMagicDamage(attacker, defence, dmg)
   --print('hookMagicDamage', attacker, defence, dmg)
   local aIndex = ffi.readMemoryInt32(attacker + 4)
   local dIndex = ffi.readMemoryInt32(defence + 4)
-  --print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
-  --print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
-  --print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
-  --print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
-  --print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
-  --print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
-  --print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
-  --print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
   return callCallback(aIndex, dIndex, 5, dmg);
 end
 
@@ -94,40 +95,81 @@ end
 
 _fpDmg = ffi.hook.new('int (__cdecl*)(uint32_t, uint32_t)', hookFpDmg, 0x0049D5B0, 5);
 
-local function hookBloodAttackDamage(attacker, defence, dmg)
+local function hookAttackDamage(attacker, defence, dmg, flag)
   local aIndex = ffi.readMemoryInt32(attacker + 4)
   local dIndex = ffi.readMemoryInt32(defence + 4)
-  return callCallback(aIndex, dIndex, 0, dmg);
+  return callCallback(aIndex, dIndex, flag, dmg);
 end
-
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookBloodAttackDamage, 0x0049AF45, 6,
+--BloodAttack
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int, uint32_t)', hookAttackDamage, 0x0049AF45, 6,
   {
     0x8B, 0x95, 0xC8, 0xFE, 0xFF, 0xFF, --mov     edx, [ebp+var_138]
     0x50, --push eax
     0x52, --push edx
     0xff, 0x75, 0x0c, -- push [ebp+c]
     0x53, --push ebx
+    0xff, 0xB4, 0x24, 0xE4, 0x01, 0x00, 0x00 -- push [esp + 0x44 + 8 + 0x198]
   },
   {
     0x89, 0x85, 0xC8, 0xFE, 0xFF, 0xFF, --mov     [ebp+var_138], eax 
+    0x5b, --pop ebx
     0x5b, --pop ebx
     0x5a, --pop
     0x5a, --pop edx
     0x58, --pop eax
   }
 )
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookBloodAttackDamage, 0x0049AA8F, 6,
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int, uint32_t)', hookAttackDamage, 0x0049AA8F, 6,
   {
     0x50, --push eax
     0x52, --push edx
     0xff, 0x75, 0x0c, -- push [ebp+c]
-    0xff, 0x75, 0x08, --push [ebp+c]
+    0xff, 0x75, 0x08, -- push [ebp+8]
+    0xff, 0xB4, 0x24, 0xE4, 0x01, 0x00, 0x00 -- push [esp + 0x44 + 8 + 0x198]
   },
   {
     0x50, 0x5a, --push eax , pop edx 
     0x58, --pop 
+    0x58, --pop 
     0x58, --pop
     0x58, --pop 
+    0x58, --pop eax
+  }
+)
+--NormalAttack
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int, uint32_t)', hookAttackDamage, 0x0049B1CA, 6,
+  {
+    0x8B, 0x95, 0xE0, 0xFE, 0xFF, 0xFF, --mov     edx, [ebp+var_120]
+    0x50, --push eax
+    0x52, --push edx
+    0xff, 0x75, 0x0c, -- push [ebp+c]
+    0xff, 0x75, 0x08, -- push [ebp+8]
+    0xff, 0xB4, 0x24, 0xAC, 0x01, 0x00, 0x00 -- push [esp + 0x48 + 8 + 0x15c]
+  },
+  {
+    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+var_120], eax 
+    0x5a, --pop 
+    0x5a, --pop 
+    0x5a, --pop
+    0x5a, --pop edx
+    0x58, --pop eax
+  }
+)
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int, uint32_t)', hookAttackDamage, 0x0049B66C, 6,
+  {
+    0x8B, 0xBD, 0xC0, 0xFC, 0xFF, 0xFF, --mov     edi, [ebp+var_134]
+    0x50, --push eax
+    0x57, --push edi
+    0xff, 0x75, 0x0c, -- push [ebp+c]
+    0xff, 0x75, 0x08, -- push [ebp+8]
+    0xff, 0xB4, 0x24, 0xAC, 0x01, 0x00, 0x00 -- push [esp + 0x48 + 8 + 0x15c]
+  },
+  {
+    0x89, 0x85, 0xC0, 0xFC, 0xFF, 0xFF, --mov     [ebp+var_134], eax 
+    0x5f, --pop 
+    0x5f, --pop 
+    0x5f, --pop
+    0x5f, --pop edi
     0x58, --pop eax
   }
 )
