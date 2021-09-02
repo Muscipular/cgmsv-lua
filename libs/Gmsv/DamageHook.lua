@@ -30,6 +30,7 @@ local function RegDamageCalculateEvent(Dofile, FuncName)
   callback = FuncName;
 end
 
+NL.RegBattleDamageEvent = NL.RegDamageCalculateEvent;
 NL.RegDamageCalculateEvent = RegDamageCalculateEvent;
 
 --[[
@@ -79,6 +80,54 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage,
     0x5b, --pop
     0x5b, --pop ebx
     0x5a, --pop edx
+    0x58, --pop eax
+  }
+)
+
+local _fpDmg;
+local function hookFpDmg(aChar, dChar)
+  local dmg = _fpDmg(aChar, dChar);
+  local aIndex = ffi.readMemoryInt32(attacker + 4)
+  local dIndex = ffi.readMemoryInt32(defence + 4)
+  return callCallback(aIndex, dIndex, 0, dmg);
+end
+
+_fpDmg = ffi.hook.new('int (__cdecl*)(uint32_t, uint32_t)', hookFpDmg, 0x0049D5B0, 5);
+
+local function hookBloodAttackDamage(attacker, defence, dmg)
+  local aIndex = ffi.readMemoryInt32(attacker + 4)
+  local dIndex = ffi.readMemoryInt32(defence + 4)
+  return callCallback(aIndex, dIndex, 0, dmg);
+end
+
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookBloodAttackDamage, 0x0049AF45, 6,
+  {
+    0x8B, 0x95, 0xC8, 0xFE, 0xFF, 0xFF, --mov     edx, [ebp+var_138]
+    0x50, --push eax
+    0x52, --push edx
+    0xff, 0x75, 0x0c, -- push [ebp+c]
+    0x53, --push ebx
+  },
+  {
+    0x89, 0x85, 0xC8, 0xFE, 0xFF, 0xFF, --mov     [ebp+var_138], eax 
+    0x5b, --pop ebx
+    0x5a, --pop
+    0x5a, --pop edx
+    0x58, --pop eax
+  }
+)
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookBloodAttackDamage, 0x0049AA8F, 6,
+  {
+    0x50, --push eax
+    0x52, --push edx
+    0xff, 0x75, 0x0c, -- push [ebp+c]
+    0xff, 0x75, 0x08, --push [ebp+c]
+  },
+  {
+    0x50, 0x5a, --push eax , pop edx 
+    0x58, --pop 
+    0x58, --pop
+    0x58, --pop 
     0x58, --pop eax
   }
 )
