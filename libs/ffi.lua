@@ -90,7 +90,12 @@ function hook.new(cast, callback, hook_addr, size)
   })
 end
 
-function hook.inlineHook(cast, callback, hookAddr, size, prefixCode, postCode)
+function hook.inlineHook(cast, callback, hookAddr, size, prefixCode, postCode, config)
+  if config == nil then
+    config = {
+      ignoreOriginCode = false,
+    }
+  end
   local callbackAddr = type(callback) == 'function' and tonumber(ffi.cast('intptr_t', ffi.cast('void*', ffi.cast(cast, callback)))) or 0;
   if type(callback) ~= 'function' and callback then
     callbackAddr = callback;
@@ -117,12 +122,18 @@ function hook.inlineHook(cast, callback, hookAddr, size, prefixCode, postCode)
     detourBytes[#prefixCode + 3] = 0x90;
     detourBytes[#prefixCode + 4] = 0x90;
   end
-  -- prefixCode
+  -- postCode
   for i, v in ipairs(postCode) do
     detourBytes[i - 1 + 5 + #prefixCode] = v;
   end
   --origin code
-  ffi.copy(detourBytes + #prefixCode + 5 + #postCode, hookFnPtr, size);
+  if config.ignoreOriginCode then
+    for i = 1, size do
+      detourBytes[#prefixCode + 5 + #postCode + i - 1] = 0x90;
+    end
+  else
+    ffi.copy(detourBytes + #prefixCode + 5 + #postCode, hookFnPtr, size);
+  end
   --jmp to origin code
   detourBytes[#prefixCode + 5 + size + #postCode] = 0xE9;
   ffi.cast('int32_t*', detourBytes + #prefixCode + 5 + size + #postCode + 1)[0] = ffi.cast('int32_t', (hookAddr + size) - (ffi.cast('int32_t', detourBytes) + size + #postCode + #prefixCode + 10));
