@@ -10,8 +10,40 @@ local function hookMagicDamage(attacker, defence, dmg)
   print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
   print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
   print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
+  local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
+  if (callback and _G[callback]) then
+    return _G[callback](aIndex, dIndex, dmg, dmg, battleIndex,
+      Char.GetData(aIndex, CONST.CHAR_BattleCom1),
+      Char.GetData(aIndex, CONST.CHAR_BattleCom2),
+      Char.GetData(aIndex, CONST.CHAR_BattleCom3),
+      Char.GetData(dIndex, CONST.CHAR_BattleCom1),
+      Char.GetData(dIndex, CONST.CHAR_BattleCom2),
+      Char.GetData(dIndex, CONST.CHAR_BattleCom3),
+      5
+    )
+  end
   return dmg;
 end
+
+local callback;
+
+local function RegDamageCalculateEvent(Dofile, FuncName)
+  if Dofile then
+    local success, err = pcall(dofile, Dofile);
+    if not success then
+      print('RegDamageCalculateEvent dofile err:', err);
+      return
+    end
+  end
+  callback = FuncName;
+end
+
+NL.RegDamageCalculateEvent = RegDamageCalculateEvent;
+
+--[[
+NL.RegDamageCalculateEvent(Dofile, FuncName)
+DamageCalculateCallBack(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
+]]
 
 ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x0049A51F, 6,
   {
