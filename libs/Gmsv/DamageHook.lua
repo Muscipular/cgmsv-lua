@@ -85,8 +85,8 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage,
 )
 
 local _fpDmg;
-local function hookFpDmg(aChar, dChar)
-  local dmg = _fpDmg(aChar, dChar);
+local function hookFpDmg(attacker, defence)
+  local dmg = _fpDmg(attacker, defence);
   local aIndex = ffi.readMemoryInt32(attacker + 4)
   local dIndex = ffi.readMemoryInt32(defence + 4)
   return callCallback(aIndex, dIndex, 0, dmg);
