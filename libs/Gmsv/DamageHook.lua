@@ -1,3 +1,4 @@
+local callback;
 local function callCallback(aIndex, dIndex, flag, dmg)
   if (callback and _G[callback]) then
     local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
@@ -18,24 +19,6 @@ local function callCallback(aIndex, dIndex, flag, dmg)
   end
   return dmg;
 end
-
-local function hookMagicDamage(attacker, defence, dmg)
-  --print('hookMagicDamage', attacker, defence, dmg)
-  local aIndex = ffi.readMemoryInt32(attacker + 4)
-  local dIndex = ffi.readMemoryInt32(defence + 4)
-  --print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
-  --print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
-  --print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
-  --print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
-  --print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
-  --print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
-  --print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
-  --print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
-  return callCallback(aIndex, dIndex, 5, dmg);
-end
-
-local callback;
-
 local function RegDamageCalculateEvent(Dofile, FuncName)
   if Dofile then
     local success, err = pcall(dofile, Dofile);
@@ -53,6 +36,21 @@ NL.RegDamageCalculateEvent = RegDamageCalculateEvent;
 NL.RegDamageCalculateEvent(Dofile, FuncName)
 DamageCalculateCallBack(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
 ]]
+
+local function hookMagicDamage(attacker, defence, dmg)
+  --print('hookMagicDamage', attacker, defence, dmg)
+  local aIndex = ffi.readMemoryInt32(attacker + 4)
+  local dIndex = ffi.readMemoryInt32(defence + 4)
+  --print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
+  --print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
+  --print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
+  --print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
+  --print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
+  --print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
+  --print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
+  --print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
+  return callCallback(aIndex, dIndex, 5, dmg);
+end
 
 ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x0049A51F, 6,
   {
