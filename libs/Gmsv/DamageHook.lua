@@ -1,28 +1,37 @@
-local function hookMagicDamage(attacker, defence, dmg)
-  print('hookMagicDamage', attacker, defence, dmg)
-  local aIndex = ffi.readMemoryInt32(attacker + 4)
-  local dIndex = ffi.readMemoryInt32(defence + 4)
-  print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
-  print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
-  print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
-  print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
-  print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
-  print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
-  print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
-  print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
-  local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
+local function callCallback(aIndex, dIndex, flag, dmg)
   if (callback and _G[callback]) then
-    return _G[callback](aIndex, dIndex, dmg, dmg, battleIndex,
+    local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
+    local success, ret = pcall(_G[callback], aIndex, dIndex, dmg, dmg, battleIndex,
       Char.GetData(aIndex, CONST.CHAR_BattleCom1),
       Char.GetData(aIndex, CONST.CHAR_BattleCom2),
       Char.GetData(aIndex, CONST.CHAR_BattleCom3),
       Char.GetData(dIndex, CONST.CHAR_BattleCom1),
       Char.GetData(dIndex, CONST.CHAR_BattleCom2),
       Char.GetData(dIndex, CONST.CHAR_BattleCom3),
-      5
-    )
+      flag
+    );
+    if success then
+      return ret;
+    else
+      print('DamageCalculateCallBack err:', ret);
+    end
   end
   return dmg;
+end
+
+local function hookMagicDamage(attacker, defence, dmg)
+  --print('hookMagicDamage', attacker, defence, dmg)
+  local aIndex = ffi.readMemoryInt32(attacker + 4)
+  local dIndex = ffi.readMemoryInt32(defence + 4)
+  --print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
+  --print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
+  --print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
+  --print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
+  --print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
+  --print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
+  --print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
+  --print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
+  return callCallback(aIndex, dIndex, 5, dmg);
 end
 
 local callback;
