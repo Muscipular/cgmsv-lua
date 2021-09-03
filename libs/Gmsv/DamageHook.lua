@@ -1,15 +1,15 @@
 local callback;
 local function callCallback(aIndex, dIndex, flag, dmg)
-  print('RegDamageCalculateEvent:', aIndex, dIndex, flag, dmg);
-  print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
-  print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
-  print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
-  print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
-  print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
-  print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
-  print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
-  print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
-  dmg = 1;
+  --print('RegDamageCalculateEvent:', aIndex, dIndex, flag, dmg);
+  --print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
+  --print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
+  --print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
+  --print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
+  --print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
+  --print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
+  --print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
+  --print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
+  --dmg = 1;
   if (callback and _G[callback]) then
     local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
     local success, ret = pcall(_G[callback], aIndex, dIndex, dmg, dmg, battleIndex,
@@ -22,13 +22,13 @@ local function callCallback(aIndex, dIndex, flag, dmg)
       flag
     );
     if success then
-      print('dmg', ret);
+      --print('dmg', ret);
       return ret;
     else
       print('DamageCalculateCallBack err:', ret);
     end
   end
-  print('dmg', dmg);
+  --print('dmg', dmg);
   return dmg;
 end
 local function RegDamageCalculateEvent(Dofile, FuncName)
@@ -131,10 +131,10 @@ local function hookAttackDamage(ebp, attacker, defence, dmg)
   elseif ret == 0x004A88BE then
     flag = 0;
   end
-  printAsHex('hookAttackDamage', attacker, defence, dmg, flag)
-  printAsHex('ebp', ebp)
-  printAsHex('ret', ret)
-  printAsHex('ebpOld', ebpOld)
+  --printAsHex('hookAttackDamage', attacker, defence, dmg, flag)
+  --printAsHex('ebp', ebp)
+  --printAsHex('ret', ret)
+  --printAsHex('ebpOld', ebpOld)
   local aIndex = ffi.readMemoryInt32(attacker + 4)
   local dIndex = ffi.readMemoryInt32(defence + 4)
   return callCallback(aIndex, dIndex, flag, dmg);

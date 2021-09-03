@@ -81,6 +81,16 @@ local chained = {
       end
     end
     return res
+  end,
+  BattleDamageEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
+    local dmg = Damage;
+    for i, v in pairs(list) do
+      dmg = v(CharIndex, DefCharIndex, OriDamage, dmg, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
+      if type(dmg) ~= 'number' or dmg <= 0 then
+        dmg = 1
+      end
+    end
+    return dmg
   end
 }
 
