@@ -331,11 +331,10 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookPoisonDamage, 0x0049CB
     0x53, --push ebx
   },
   {
+    0x89, 0x85, 0xE0,  0xFE, 0xFF, 0xFF, -- mov     [ebp+var_120], eax
     0x50, 0x5a, --push eax , pop edx 
     0x5b, --pop ebx 
-    0x58, --pop 
-    0x58, --pop 
-    0x58, --pop 
+    0x5f, --pop
     0x5f, --pop eax
     0x5e, --pop eax
     0x5d, --pop eax
@@ -343,5 +342,6 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookPoisonDamage, 0x0049CB
     0x59, --pop eax
     0x58, --pop eax
     0x9D, --popfd
+    0xDB, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --fild    [ebp+var_120]
   }
 )
