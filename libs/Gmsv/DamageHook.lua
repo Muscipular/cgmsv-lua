@@ -1,15 +1,15 @@
 local callback;
 local function callCallback(aIndex, dIndex, flag, dmg)
-  --print('RegDamageCalculateEvent:', aIndex, dIndex, flag, dmg);
-  --print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
-  --print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
-  --print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
-  --print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
-  --print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
-  --print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
-  --print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
-  --print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
-  --dmg = 1;
+  print('RegDamageCalculateEvent:', aIndex, dIndex, flag, dmg);
+  print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
+  print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
+  print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
+  print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
+  print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
+  print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
+  print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
+  print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
+  dmg = 5;
   if (callback and _G[callback]) then
     local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
     local success, ret = pcall(_G[callback], aIndex, dIndex, dmg, dmg, battleIndex,
@@ -161,8 +161,9 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAt
   }
 )
 
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAttackDamage, 0x0049AA8F, 6,
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAttackDamage, 0x0049AA87, 6,
   {
+    0xDB, 0x9D, 0xE0, 0xFE, 0xFF, 0xFF, -- fistp   [ebp+var_120]
     0x9C, --pushfd
     0x50, --push eax
     0x51, --push eax
@@ -178,6 +179,7 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAt
   },
   {
     0x50, 0x5a, --push eax , pop edx 
+    0x89, 0x95, 0xE0, 0xFE, 0xFF, 0xFF, -- mov     [ebp+var_120], edx
     0x58, --pop 
     0x58, --pop 
     0x58, --pop
@@ -190,6 +192,7 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAt
     0x59, --pop eax
     0x58, --pop eax
     0x9D, --popfd
+    0xDB, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, -- fild    [ebp+var_120]
   }
 )
 --NormalAttack
@@ -331,7 +334,7 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookPoisonDamage, 0x0049CB
     0x53, --push ebx
   },
   {
-    0x89, 0x85, 0xE0,  0xFE, 0xFF, 0xFF, -- mov     [ebp+var_120], eax
+    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, -- mov     [ebp+var_120], eax
     0x50, 0x5a, --push eax , pop edx 
     0x5b, --pop ebx 
     0x5f, --pop

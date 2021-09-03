@@ -6,7 +6,8 @@ function _G.moduleInitial()
     return
   end
   _initialed = true;
-  local sql = [[create table if not exists lua_migration
+  local sql = [[
+create table if not exists lua_migration
 (
     id     int          not null,
     module varchar(100) not null,
@@ -15,7 +16,7 @@ function _G.moduleInitial()
         primary key (module, id)
 );
 ']]
-  SQL.querySQL(sql);
+  logInfo('-', SQL.querySQL(sql));
 end
 
 ---@param forceReload boolean
