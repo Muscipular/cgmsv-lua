@@ -238,37 +238,37 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAt
   }
 )
 
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAttackDamage, 0x0049B4DF, 6,
-  {
-    0x9C, --pushfd
-    0x50, --push eax
-    0x51, --push eax
-    0x53, --push eax
-    0x54, --push eax
-    0x55, --push eax
-    0x56, --push eax
-    0x57, --push eax
-    0x52, --push edx
-    0xff, 0x75, 0x0c, -- push [ebp+c]
-    0xff, 0x75, 0x08, -- push [ebp+8]
-    0x55, --push ebp
-  },
-  {
-    0x50, 0x5a, --push eax , pop edx 
-    0x58, --pop 
-    0x58, --pop 
-    0x58, --pop 
-    0x58, --pop 
-    0x5f, --pop eax
-    0x5e, --pop eax
-    0x5d, --pop eax
-    0x5c, --pop eax
-    0x5b, --pop eax
-    0x59, --pop eax
-    0x58, --pop eax
-    0x9D, --popfd
-  }
-)
+--ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAttackDamage, 0x0049B4DF, 6,
+--  {
+--    0x9C, --pushfd
+--    0x50, --push eax
+--    0x51, --push eax
+--    0x53, --push eax
+--    0x54, --push eax
+--    0x55, --push eax
+--    0x56, --push eax
+--    0x57, --push eax
+--    0x52, --push edx
+--    0xff, 0x75, 0x0c, -- push [ebp+c]
+--    0xff, 0x75, 0x08, -- push [ebp+8]
+--    0x55, --push ebp
+--  },
+--  {
+--    0x50, 0x5a, --push eax , pop edx 
+--    0x58, --pop 
+--    0x58, --pop 
+--    0x58, --pop 
+--    0x58, --pop 
+--    0x5f, --pop eax
+--    0x5e, --pop eax
+--    0x5d, --pop eax
+--    0x5c, --pop eax
+--    0x5b, --pop eax
+--    0x59, --pop eax
+--    0x58, --pop eax
+--    0x9D, --popfd
+--  }
+--)
 
 ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAttackDamage, 0x0049B406, 6,
   {
