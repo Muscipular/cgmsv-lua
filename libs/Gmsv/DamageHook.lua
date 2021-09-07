@@ -1,18 +1,28 @@
 local callback;
 local callbackHeal;
 
-local function callCallback(aIndex, dIndex, flag, dmg, type)
-  --print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, type or 'damage');
-  --print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
-  --print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
-  --print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
-  --print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
-  --print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
-  --print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
-  --print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
-  --print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
-  --dmg = 5;
-  local nCallback = type == 'heal' and callbackHeal or callback;
+local function callCallback(aIndex, dIndex, flag, dmg, cType)
+  print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or 'damage');
+  if _G.type(aIndex) == 'number' then
+    print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
+    print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
+    print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
+    print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
+  elseif type(aIndex) == 'table' then
+    for i, v in ipairs(aIndex) do
+      print('COMBO: ', i)
+      print(v, Char.GetData(v, CONST.CHAR_名字))
+      print('com1', Char.GetData(v, CONST.CHAR_BattleCom1))
+      print('com2', Char.GetData(v, CONST.CHAR_BattleCom2))
+      print('com3', Char.GetData(v, CONST.CHAR_BattleCom3))
+    end
+  end
+  print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
+  print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
+  print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
+  print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
+  dmg = 2;
+  local nCallback = cType == 'heal' and callbackHeal or callback;
   if (nCallback and _G[nCallback]) then
     local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
     local success, ret = pcall(_G[nCallback], aIndex, dIndex, dmg, dmg, battleIndex,
@@ -28,7 +38,7 @@ local function callCallback(aIndex, dIndex, flag, dmg, type)
       --print('dmg', ret);
       return ret;
     else
-      print((type == 'heal' and 'BattleHealCalculateCallBack' or 'DamageCalculateCallBack') .. ' ERROR:', ret);
+      print((cType == 'heal' and 'BattleHealCalculateCallBack' or 'DamageCalculateCallBack') .. ' ERROR:', ret);
     end
   end
   --print('dmg', dmg);
@@ -208,8 +218,28 @@ _fpDmg = ffi.hook.new('int (__cdecl*)(uint32_t, uint32_t)', hookFpDmg, 0x0049D5B
 local function hookAttackDamage(ebp, attacker, defence, dmg)
   local flag = 0;
   local ret = ffi.readMemoryDWORD(ebp + 4);
+  local comboFlag = ffi.readMemoryDWORD(ebp + 0x18);
   local ebpOld = ffi.readMemoryDWORD(ebp);
-  if ret == 0x004A59D3 then
+  if comboFlag == 2 then
+    --print(ret);
+    --flag = 10;
+    --local dIndex = ffi.readMemoryInt32(defence + 4)
+    --local pList = ffi.readMemoryDWORD(ebpOld + 0xC);
+    --local list = {};
+    --local battleIndex = Char.GetBattleIndex(dIndex)
+    --for i = 0, 9 do
+    --  local x = ffi.readMemoryDWORD(pList + i);
+    --  if x >= 0 then
+    --    local charIndex = Battle.GetPlayer(battleIndex, x);
+    --    if charIndex >= 0 then
+    --      table.insert(list, charIndex)
+    --    end
+    --  end
+    --end
+    --dmg = callCallback(list, dIndex, flag, dmg);
+    --ffi.setMemoryInt32(ebpOld - 0x65C, dmg);
+    return dmg;
+  elseif ret == 0x004A59D3 then
     flag = ffi.readMemoryDWORD(ebpOld - 0x554);
   elseif ret == 0x0049E456 then
     flag = ffi.readMemoryDWORD(ebpOld - 0x234);
@@ -407,6 +437,32 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAt
   },
   {
     0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+var_120], eax 
+    0x58, --pop 
+    0x58, --pop 
+    0x58, --pop 
+    0x58, --pop 
+    0x9D, --popfd
+    0x61, --popad
+  }
+)
+
+local function hookComboAttackDamage(flag, attacker, defence, dmg)
+  local aIndex = ffi.readMemoryInt32(attacker + 4)
+  local dIndex = ffi.readMemoryInt32(defence + 4)
+  return callCallback(aIndex, dIndex, (flag == 1 and 1 or 0) + 8, dmg);
+end
+
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookComboAttackDamage, 0x0049F6DA, 6,
+  {
+    0x60, --pushad
+    0x9C, --pushfd
+    0xff, 0xB5, 0xA4, 0xF9, 0xFF, 0xFF, -- push [ebp+var_65C]
+    0xff, 0xB5, 0xC8, 0xF9, 0xFF, 0xFF, -- push [ebp+var_638]
+    0x53, --push ebx
+    0xff, 0xB5, 0xB4, 0xF9, 0xFF, 0xFF, -- push [ebp+var_64C]
+  },
+  {
+    0x89, 0x85, 0xA4, 0xF9, 0xFF, 0xFF, --mov     [ebp+var_65C], eax 
     0x58, --pop 
     0x58, --pop 
     0x58, --pop 

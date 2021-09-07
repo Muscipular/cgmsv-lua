@@ -1,5 +1,22 @@
-CONST_CHAR_CD_KEY = 2002;
-CONST = {}
+CONST = CONST or {}
+CONST.DamageFlags = {
+  Normal = 0,
+  Critical = 1,
+  Miss = 2,
+  Dodge = 3,
+  Guard = 4,
+  Magic = 5,
+  Poison = 6,
+  Drunk = 7,
+  Combo = 8,
+  ComboCritical = 9,
+  --ComboFinal = 10,
+}
+CONST.HealDamageFlags = {
+  Heal = 0,
+  Recovery = 1,
+  Item = 2,
+}
 -- 特殊相关
 CONST.道具_Func_InitFunc = 2005;
 CONST.道具_Func_WatchFunc = 2006;
