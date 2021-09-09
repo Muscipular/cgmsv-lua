@@ -16,7 +16,7 @@ create table if not exists lua_migration
         primary key (module, id)
 );
 ]]
-  logInfo('-', SQL.querySQL(sql));
+  logInfo('ModuleSystem', 'initial:', SQL.querySQL(sql));
 end
 
 ---@param forceReload boolean

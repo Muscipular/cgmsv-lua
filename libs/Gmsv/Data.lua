@@ -60,4 +60,24 @@ function Data.GetEncountData(encountIndex, dataPos)
     return FFI.readMemoryInt32(Addresses.EncountTable + 0x94 * encountIndex + dataPos * 4)
   end
   return FFI.readMemoryDWORD(Addresses.EncountTable + 0x94 * encountIndex + dataPos * 4)
-end 
+end
+
+local msgList = {};
+local MSG_getMessage;
+local function hookGetMessage(msgId)
+  if msgList[msgId] ~= nil then
+    return msgList[msgId]
+  end
+  local s = MSG_getMessage(msgId);
+  return s;
+end
+function Data.SetMessage(msgId, val)
+  if MSG_getMessage == nil then
+    MSG_getMessage = ffi.hook.new('const char* (__cdecl *)(uint32_t msgId)', hookGetMessage, 0x00416F30, 6);
+  end
+  msgList[tonumber(msgId)] = tostring(val);
+end
+
+for i = 0, 5 do
+  Data.SetMessage(10146 + i, 10146 + i);
+end
