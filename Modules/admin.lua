@@ -336,6 +336,25 @@ function commands.giveItem(charIndex, args)
   Char.GiveItem(charIndex, tonumber(args[1]), tonumber(args[2] or 1))
 end
 
+function commands.recipe(charIndex, args)
+  if args[1] == 'del' then
+    if Recipe.DelRecipe(charIndex, tonumber(args[2])) == 1 then
+      NLG.SystemMessage(charIndex, '删除' .. args[2] .. '号配方')
+    end
+  elseif args[1] == 'add' then
+    if Recipe.AddRecipe(charIndex, tonumber(args[2])) == 1 then
+      NLG.SystemMessage(charIndex, '获得' .. args[2] .. '号配方')
+    end
+  elseif args[1] == 'get' then
+    for i = 0, 15 do
+      local recipeId = tonumber(args[2]);
+      if Recipe.GetData(recipeId, CONST.ITEM_RECIPE_ID) == 1 then
+        NLG.SystemMessage(charIndex, i .. ' ' .. recipeId .. '号配方: ' .. Recipe.GetData(recipeId, i))
+      end
+    end
+  end
+end
+
 function Admin:onLoad()
   self:logInfo('load')
   local function handleChat(charIndex, msg, color, range, size)
