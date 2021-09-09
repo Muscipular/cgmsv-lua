@@ -9,12 +9,7 @@ function AutoRegister:onLoad()
 end
 
 function AutoRegister:OnRecv(fd, head, data)
-  --self:logDebug('OnRecv', head);
-  --for i = 1, #data do
-  --  self:logDebug('data:', i, data[i]);
-  --end
   local user = SQL.querySQL('select * from tbl_user where CdKey = ' .. SQL.sqlValue(data[3]));
-  --print(user, 'select * from tbl_user where CdKey = ' .. SQL.sqlValue(data[3]));
   if user == SQL.CONST_RET_NO_ROW then
     local seq = SQL.querySQL('select max(SequenceNumber) + 1 from tbl_user');
     local sql = 'insert into tbl_user (CdKey, SequenceNumber, AccountID, AccountPassWord, '

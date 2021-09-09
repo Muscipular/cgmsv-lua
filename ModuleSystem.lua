@@ -15,7 +15,7 @@ create table if not exists lua_migration
     constraint lua_migration_pk
         primary key (module, id)
 );
-']]
+]]
   logInfo('-', SQL.querySQL(sql));
 end
 
