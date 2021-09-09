@@ -62,3 +62,12 @@ loadModule('admin', 'admin.lua') --加载admin模块
    
 ### 开发中的模块
 
+## GMSV 扩展模块
+1. BattleEx.lua 战斗相关扩展
+2. Char.lua  人物相关扩展
+3. DamageHook.lua 伤害修改补丁
+4. Data.lua Data相关
+5. Item.lua 物品相关
+6. LowCpuUsage.lua 减低cpu使用补丁
+7. Protocol.lua 封包拦截相关
+8. Recipe.lua 配方相关
