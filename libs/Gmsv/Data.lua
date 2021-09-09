@@ -78,6 +78,10 @@ function Data.SetMessage(msgId, val)
   msgList[tonumber(msgId)] = tostring(val);
 end
 
-for i = 0, 5 do
-  Data.SetMessage(10146 + i, 10146 + i);
+function Data.GetMessage(msgId)
+  msgId = tonumber(msgId)
+  if msgList[msgId] ~= nil then
+    return msgList[msgId]
+  end
+  return ffi.string(MSG_getMessage(msgId));
 end
