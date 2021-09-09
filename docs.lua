@@ -112,6 +112,12 @@ end
 function Char.Warp(CharIndex, MapType, FloorID, X, Y)
 end
 
+function Char.HaveSkill(CharIndex, SkillID)
+end
+
+function Char.GetSkillID(CharIndex, Slot)
+end
+
 NLG = {}
 function NLG.ShowWindowTalked(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data)
 end

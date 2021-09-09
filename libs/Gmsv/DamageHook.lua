@@ -2,26 +2,26 @@ local callback;
 local callbackHeal;
 
 local function callCallback(aIndex, dIndex, flag, dmg, cType)
-  print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or 'damage');
-  if _G.type(aIndex) == 'number' then
-    print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
-    print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
-    print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
-    print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
-  elseif type(aIndex) == 'table' then
-    for i, v in ipairs(aIndex) do
-      print('COMBO: ', i)
-      print(v, Char.GetData(v, CONST.CHAR_名字))
-      print('com1', Char.GetData(v, CONST.CHAR_BattleCom1))
-      print('com2', Char.GetData(v, CONST.CHAR_BattleCom2))
-      print('com3', Char.GetData(v, CONST.CHAR_BattleCom3))
-    end
-  end
-  print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
-  print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
-  print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
-  print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
-  dmg = 2;
+  --print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or 'damage');
+  --if _G.type(aIndex) == 'number' then
+  --  print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
+  --  print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
+  --  print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
+  --  print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
+  --elseif type(aIndex) == 'table' then
+  --  for i, v in ipairs(aIndex) do
+  --    print('COMBO: ', i)
+  --    print(v, Char.GetData(v, CONST.CHAR_名字))
+  --    print('com1', Char.GetData(v, CONST.CHAR_BattleCom1))
+  --    print('com2', Char.GetData(v, CONST.CHAR_BattleCom2))
+  --    print('com3', Char.GetData(v, CONST.CHAR_BattleCom3))
+  --  end
+  --end
+  --print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
+  --print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
+  --print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
+  --print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
+  --dmg = 2;
   local nCallback = cType == 'heal' and callbackHeal or callback;
   if (nCallback and _G[nCallback]) then
     local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
