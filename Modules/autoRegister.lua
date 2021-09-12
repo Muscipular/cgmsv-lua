@@ -16,7 +16,7 @@ function AutoRegister:OnRecv(fd, head, data)
       .. ' EnableFlg, UseFlg, BadMsg, TrialFlg, DownFlg, ExpFlg) values ('
       .. SQL.sqlValue(data[3]) .. ', ' .. SQL.sqlValue(seq[1][1]) .. ', '
       .. SQL.sqlValue(data[3]) .. ', '
-      .. SQL.sqlValue(data[2]) .. ',1,1,0,0,0,0);'
+      .. SQL.sqlValue(data[2]) .. ',1,1,0,8,0,0);'
     local r = SQL.querySQL(sql)
     --print(r, sql);
   end

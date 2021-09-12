@@ -39,7 +39,7 @@ function ModuleCard:onBattleOverEvent(battleIndex)
     local enemyDataList = self.cache[tostring(battleIndex)];
     self.cache[tostring(battleIndex)] = nil;
     local winSide = Battle.GetWinSide(battleIndex);
-    self:logDebug('enemyDataList', battleIndex, enemyDataList, winSide);
+    --self:logDebug('enemyDataList', battleIndex, enemyDataList, winSide);
     if enemyDataList == nil then
       return
     end

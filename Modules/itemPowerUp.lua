@@ -30,14 +30,7 @@ end
 --DefCom3: 数值型 防御者使用的所對應的tech的ID，该值由Lua引擎传递给本函数。
 --Flg: 数值型 伤害模式，具体查看下面的值说明，该值由Lua引擎传递给本函数。
 --Flg 值说明
-local DmgType = {
-  Normal = 0,
-  Crit = 1,
-  NoDmg = 2,
-  Miss = 3,
-  Defence = 4,
-  Magic = 5,
-}
+local DmgType = CONST.DamageFlags
 
 function ItemPowerUP:onDamageCalculateEvent(
   charIndex, defCharIndex, oriDamage, damage,
@@ -45,8 +38,21 @@ function ItemPowerUP:onDamageCalculateEvent(
   if damage <= 0 or flg == DmgType.Miss or flg == NoDmg then
     return damage;
   end
-  self:logDebug(charIndex, defCharIndex, oriDamage, damage,
-    battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
+  self:logDebug('battle', battleIndex, 'turn', Battle.GetTurn(battleIndex));
+  self:logDebug(
+    'charIndex:', charIndex,
+    'defCharIndex:', defCharIndex,
+    'oriDamage:', oriDamage,
+    'damage:', damage,
+    'battleIndex:', battleIndex,
+    'com1:', com1,
+    'com2:', com2,
+    'com3:', com3,
+    'defCom1:', defCom1,
+    'defCom2:', defCom2,
+    'defCom3:', defCom3,
+    'flg:', flg
+  )
   if Char.GetData(charIndex, CONST.CHAR_类型) == CONST.对象类型_人 then
     for i = 0, 7 do
       local itemIndex = Char.GetItemIndex(charIndex, i);
