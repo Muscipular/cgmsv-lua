@@ -2,7 +2,7 @@ local callback;
 local callbackHeal;
 
 local function callCallback(aIndex, dIndex, flag, dmg, cType)
---[[  
+ --[[  
   print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or 'damage');
   if _G.type(aIndex) == 'number' then
     print(aIndex, Char.GetData(aIndex, CONST.CHAR_Ãû×Ö))
@@ -23,7 +23,7 @@ local function callCallback(aIndex, dIndex, flag, dmg, cType)
   print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
   print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
   dmg = 2;
-  ]]
+  --]]
   local nCallback = cType == 'heal' and callbackHeal or callback;
   if (nCallback and _G[nCallback]) then
     local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
@@ -255,6 +255,27 @@ ffi.hook.inlineHook('int (__cdecl *)(int, uint32_t, uint32_t, int)', hookHeal, 0
     0x9d, --popfd
     0x8B, 0xB5, 0xE0, 0xFE, 0xFF, 0xFF, -- mov   esi, [ebp+var_120]
     0x8F, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, -- pop   [ebp+var_120]
+  }
+)
+
+--Ã÷¾µÖ¹Ë®
+ffi.hook.inlineHook('int (__cdecl *)(int, uint32_t, uint32_t, int)', hookHeal, 0x004BC9A6, 6,
+  {
+    0x9c, --pushfd
+    0x60, --pushad
+    0xff, 0xB5, 0x78, 0xFD, 0xFF, 0xFF, -- push [ebp+var_288]
+    0x53, --push ebx
+    0x53, --push ebx
+    0x6A, 0x04, -- push 4
+  },
+  {
+    0x89, 0x85, 0x78, 0xFD, 0xFF, 0xFF, --mov     [ebp+var_288], eax 
+    0x5b, --pop
+    0x5b, --pop
+    0x5b, --pop ebx
+    0x5a, --pop edx
+    0x61, --popad
+    0x9d, --popfd
   }
 )
 
