@@ -2,6 +2,7 @@ local callback;
 local callbackHeal;
 
 local function callCallback(aIndex, dIndex, flag, dmg, cType)
+--[[  
   print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or 'damage');
   if _G.type(aIndex) == 'number' then
     print(aIndex, Char.GetData(aIndex, CONST.CHAR_Ãû×Ö))
@@ -22,6 +23,7 @@ local function callCallback(aIndex, dIndex, flag, dmg, cType)
   print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
   print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
   dmg = 2;
+  ]]
   local nCallback = cType == 'heal' and callbackHeal or callback;
   if (nCallback and _G[nCallback]) then
     local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
@@ -185,7 +187,6 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage,
 )
 
 local function hookHeal(flag, attacker, defence, dmg)
-  print(flag, attacker, defence, dmg)
   local aIndex = ffi.readMemoryInt32(attacker + 4)
   local dIndex = ffi.readMemoryInt32(defence + 4)
   return callCallback(aIndex, dIndex, flag, dmg, 'heal');
