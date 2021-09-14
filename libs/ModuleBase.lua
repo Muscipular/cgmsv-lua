@@ -116,8 +116,8 @@ function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrFnIndex)
     logWarn(self.name, 'cannot find callback of ' .. eventNameOrCallbackKey, fnOrFnIndex)
     return
   end
-  logInfo(self.name, 'unRegGlobalEvent', fnCb.key, fnCb.fnIndex, fnCb.fn);
-  unRegGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
+  logInfo(self.name, 'removeGlobalEvent', fnCb.key, fnCb.fnIndex, fnCb.fn);
+  removeGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
   self.callbacks[cbIndex] = nil;
 end
 
@@ -180,7 +180,7 @@ function ModuleBase:unload()
   end
   self:onUnload()
   for i, fnCb in pairs(self.callbacks) do
-    unRegGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
+    removeGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
   end
   self.callbacks = {};
 end

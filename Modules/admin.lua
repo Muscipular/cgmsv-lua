@@ -16,7 +16,7 @@ function commands.module(charIndex, args)
   elseif args[1] == 'unload' then
     unloadModule(args[2]);
   elseif args[1] == 'load' then
-    loadModule(args[2], args[3]);
+    loadModule(args[2]);
   end
 end
 function commands.dofile(charIndex, args)

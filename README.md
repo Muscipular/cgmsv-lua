@@ -45,12 +45,13 @@
 7. `ModuleBase:logWarn(msg, ...)`  打印日志
 8. `ModuleBase:logError(msg, ...)`  打印日志
 9. `ModuleBase:log(level, msg, ...)`  打印日志
+10. `ModuleBase:addMigration(version, name, sqlOrFunction)` 创建一个新迁移
 
 ## 模块加载
 具体模块加载在ModuleConfig.lua
 
 ```
-loadModule('admin', 'admin.lua') --加载admin模块
+loadModule('admin') --加载admin模块
 ```
 ### 目前能用的模块
 1. admin 内挂相关、模块动态管理等
@@ -61,6 +62,7 @@ loadModule('admin', 'admin.lua') --加载admin模块
 6. itemPowerUp.lua 装备强化
    
 ### 开发中的模块
+- AI扩展
 
 ## GMSV 扩展模块
 1. BattleEx.lua 战斗相关扩展
