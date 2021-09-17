@@ -25,6 +25,16 @@ function ffi.setMemoryInt32(addr, value)
   ffi.cast("int32_t*", addr)[0] = value;
   return true;
 end
+function ffi.setMemoryByte(addr, value)
+  if addr == 0 then
+    return false;
+  end
+  if type(value) ~= 'number' then
+    return false;
+  end
+  ffi.cast("uint8_t*", addr)[0] = value;
+  return true;
+end
 function ffi.readMemoryWORD(addr)
   if addr == 0 then
     return nil;
@@ -170,6 +180,18 @@ function hook.inlineHook(cast, callback, hookAddr, size, prefixCode, postCode, c
   --})
 end
 --HOOKS
+
+---@param hookFnPtr number
+---@param value number[]
+function ffi.patch(hookFnPtr, value)
+  local old_prot = ffi.new('unsigned long[1]')
+  local old_prot2 = ffi.new('unsigned long[1]')
+  ffi.C.VirtualProtect(ffi.cast('void*', hookFnPtr), #value, 0x40, old_prot);
+  for i = 1, #value do
+    ffi.cast('uint8_t*', hookFnPtr)[i - 1] = value[i];
+  end
+  ffi.C.VirtualProtect(ffi.cast('void*', hookFnPtr), #value, old_prot[0], old_prot2);
+end
 
 function printAsHex(...)
   print(table.unpack(table.map({ ... }, function(e)
