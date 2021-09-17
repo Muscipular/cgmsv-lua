@@ -90,7 +90,7 @@ function ModuleCard:onBattleOverEvent(battleIndex)
             table.remove(chars, n)
           end
         end
-        :: continue ::
+        ::continue::
       end
     end
   end
