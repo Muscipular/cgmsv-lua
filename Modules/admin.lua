@@ -27,7 +27,15 @@ function commands.dofile(charIndex, args)
 end
 
 function commands.giveItem(charIndex, args)
-  Char.GiveItem(charIndex, tonumber(args[1]), tonumber(args[2]))
+  Char.GiveItem(charIndex, tonumber(args[1]), tonumber(args[2]), args[3] ~= '0')
+end
+
+function commands.delItem(charIndex, args)
+  Char.DelItem(charIndex, tonumber(args[1]), tonumber(args[2]), args[3] ~= '0')
+end
+
+function commands.delItemBySlot(charIndex, args)
+  Char.DelItemBySlot(charIndex, tonumber(args[1]), tonumber(args[2]));
 end
 
 local function identity(player)
@@ -330,10 +338,6 @@ end
 function commands.upPet(charIndex, args)
   Char.SetData(Char.GetPet(charIndex, tonumber(args[1])), CONST.CHAR_µÈ¼¶, tonumber(args[2]));
   Pet.UpPet(charIndex, Char.GetPet(charIndex, tonumber(args[1])));
-end
-
-function commands.giveItem(charIndex, args)
-  Char.GiveItem(charIndex, tonumber(args[1]), tonumber(args[2] or 1))
 end
 
 function commands.recipe(charIndex, args)

@@ -59,15 +59,17 @@ end
 ---@param CharIndex number
 ---@param ItemID number
 ---@param Amount number
+---@param ShowMsg boolean
 ---@return number 成功返回1，失败则返回0。
-function Char.DelItem(CharIndex, ItemID, Amount)
+function Char.DelItem(CharIndex, ItemID, Amount, ShowMsg)
 end
 
 ---@param CharIndex number
 ---@param ItemID number
 ---@param Amount number
+---@param ShowMsg boolean
 ---@return number 目标道具index，失败则返回负数。
-function Char.GiveItem(CharIndex, ItemID, Amount)
+function Char.GiveItem(CharIndex, ItemID, Amount, ShowMsg)
 end
 
 ---@param CharIndex number
