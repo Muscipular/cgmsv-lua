@@ -363,6 +363,7 @@ function Admin:onLoad()
   self:logInfo('load')
   local fnName, ix = self:regCallback('CCCWalkPostEvent' .. os.time(), function(charIndex)
     self:logDebug('WalkPostEvent 1', charIndex)
+    self:logDebug(Char.GetData(charIndex, CONST.CHAR_Ãû×Ö));
   end)
   local function handleChat(charIndex, msg, color, range, size)
     local cdKey = Char.GetData(charIndex, CONST.CHAR_CDK)

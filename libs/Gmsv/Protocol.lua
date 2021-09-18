@@ -77,7 +77,10 @@ local function OnDispatch(fd, str)
     end
     return _OnDispatch(fd, str);
   end)
-  return s and e or _OnDispatch(fd, str);
+  if s then
+    return e;
+  end
+  return _OnDispatch(fd, str);
 end
 
 ---根据fd获取角色Index
