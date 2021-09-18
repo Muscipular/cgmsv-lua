@@ -68,7 +68,7 @@ local function OnDispatch(fd, str)
     for i = 1, #list do
       list[i] = Protocol.nrprotoUnescapeString(list[i]);
     end
-    print('收到', head, '封包，内容: ', unpack(list))
+    --print('[Protocol]收到[' .. (head or 'nil') .. ']封包,内容: ', unpack(list))
     if Protocol.Hooks[head] and _G[Protocol.Hooks[head]] then
       local ret = _G[Protocol.Hooks[head]](fd, head, list);
       if type(ret) == 'number' and ret < 0 then
