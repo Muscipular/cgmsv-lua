@@ -120,6 +120,24 @@ end
 function Char.GetSkillID(CharIndex, Slot)
 end
 
+function Char.SetWalkPostEvent(Dofile, FuncName, CharIndex)
+end
+
+function Char.SetWalkPreEvent(Dofile, FuncName, CharIndex)
+end
+
+function Char.SetPostOverEvent(Dofile, FuncName, CharIndex)
+end
+
+function Char.SetItemPutEvent(Dofile, FuncName, CharIndex)
+end
+
+function Char.SetWatchEvent(Dofile, FuncName, CharIndex)
+end
+
+function Char.SetLoopEvent(Dofile, FuncName, CharIndex, Interval)
+end
+
 NLG = {}
 function NLG.ShowWindowTalked(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data)
 end

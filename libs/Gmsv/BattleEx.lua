@@ -1,6 +1,6 @@
 ----- @return number BatteIndex
 function Battle.GetCurrentBattle(CharIndex)
-  Char.GetData(CharIndex, CONST.CHAR_BattleIndex)
+  return Char.GetData(CharIndex, CONST.CHAR_BattleIndex)
 end
 
 ----- @return number encountIndex
@@ -15,6 +15,19 @@ function Battle.GetNextBattle(BattleIndex)
   return FFI.readMemoryInt32(battleAddr + 0x38)
 end
 
+function Battle.UnsetWinEvent(battleIndex)
+  if battleIndex < 0 or battleIndex >= Addresses.BattleMax then
+    return -3
+  end
+  local battleAddr = Addresses.BattleTable + battleIndex * 0x1480
+  if FFI.readMemoryInt32(battleAddr) == 0 then
+    return -2
+  end
+  FFI.setMemoryInt32(battleAddr + 0x13E4, 0)
+  FFI.setMemoryInt32(battleAddr + 0x1464, 0)
+  return 1
+end
+
 function Battle.SetNextBattle(battleIndex, encountIndex)
   if battleIndex < 0 or battleIndex >= Addresses.BattleMax then
     return -3
@@ -27,7 +40,10 @@ function Battle.SetNextBattle(battleIndex, encountIndex)
   if encountIndex < 0 or encountIndex == nil then
     encountIndex = -1;
   end
-  return FFI.setMemoryInt32(battleAddr + 0x38, encountIndex)
+  if not FFI.setMemoryInt32(battleAddr + 0x38, encountIndex) then
+    return -1;
+  end
+  return 1;
 end
 
 function Battle.GetTurn(battleIndex)

@@ -38,14 +38,14 @@ local eventCallbacks = {}
 local ix = 0;
 function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   extraSign = extraSign or ''
-  logInfo('ModuleSystem', 'regGlobalEvent', eventName, moduleName, ix + 1, eventCallbacks[eventName .. extraSign])
+  logInfo('GlobalEvent', 'regGlobalEvent', eventName, moduleName, ix + 1, eventCallbacks[eventName .. extraSign])
   if eventCallbacks[eventName .. extraSign] == nil then
     --logInfo('ModuleSystem', 'Reg2' .. eventName, NL['Reg' .. eventName])
     local fn1, list = makeEventHandle(eventName);
     eventCallbacks[eventName .. extraSign] = list;
     _G[(eventName .. extraSign)] = fn1;
     if NL['Reg' .. eventName] then
-      logInfo('ModuleSystem', 'NL.Reg' .. eventName, extraSign)
+      logInfo('GlobalEvent', 'NL.Reg' .. eventName, extraSign)
       if extraSign == '' then
         NL['Reg' .. eventName](nil, eventName .. extraSign);
       else
@@ -69,10 +69,12 @@ end
 
 function _G.removeGlobalEvent(eventName, fnIndex, moduleName, extraSign)
   extraSign = extraSign or ''
-  log('ModuleSystem', 'INFO', 'removeGlobalEvent', eventName .. extraSign, moduleName, fnIndex)
+  logInfo('GlobalEvent', 'removeGlobalEvent', eventName .. extraSign, moduleName, fnIndex)
+  --logInfo('GlobalEvent', 'callbacks', eventCallbacks[eventName .. extraSign])
   if not eventCallbacks[eventName .. extraSign] then
     return true;
   end
+  --logInfo('GlobalEvent', 'fnIndex', fnIndex, eventCallbacks[eventName .. extraSign][fnIndex])
   eventCallbacks[eventName .. extraSign][fnIndex] = nil
   if table.isEmpty(eventCallbacks[eventName .. extraSign]) then
     if not NL['Reg' .. eventName] then

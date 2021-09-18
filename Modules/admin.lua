@@ -361,6 +361,9 @@ end
 
 function Admin:onLoad()
   self:logInfo('load')
+  local fnName, ix = self:regCallback('CCCWalkPostEvent' .. os.time(), function(charIndex)
+    self:logDebug('WalkPostEvent 1', charIndex)
+  end)
   local function handleChat(charIndex, msg, color, range, size)
     local cdKey = Char.GetData(charIndex, CONST.CHAR_CDK)
     local command = msg:match('^/([%w]+)')
@@ -378,6 +381,12 @@ function Admin:onLoad()
       arg = arg and string.split(arg, ' ') or {}
       commands[command](charIndex, arg);
       return
+    end
+    if command == 'walkTest' then
+      Char.SetWalkPostEvent(nil, fnName, charIndex)
+    end
+    if command == 'walkTestOff' then
+      Char.UnsetWalkPostEvent(charIndex)
     end
     return 1
   end

@@ -28,6 +28,9 @@ function Protocol.nrprotoUnescapeString(str)
   return FFI.string(_nrproto_unescapeString(str));
 end
 
+local split = string.split;
+local formatNumber = string.formatNumber;
+
 ---发送封包到客户端
 ---@param charIndex number
 ---@param header string 封包头
@@ -46,7 +49,7 @@ function Protocol.Send(charIndex, header, ...)
   local package = header .. ' ';
   for i, v in ipairs(data) do
     if type(v) == 'number' then
-      package = package .. string.formatNumber(v, 62) .. ' '
+      package = package .. formatNumber(v, 62) .. ' '
     elseif type(v) == 'string' then
       package = package .. Protocol.nrprotoEscapeString(v) .. ' '
     else
@@ -59,13 +62,13 @@ end
 local function OnDispatch(fd, str)
   local s, e = pcall(function()
     local s = FFI.string(str);
-    local list = string.split(s, ' ');
+    local list = split(s, ' ');
     local head = list[1];
     table.remove(list, 1);
     for i = 1, #list do
       list[i] = Protocol.nrprotoUnescapeString(list[i]);
     end
-    --print('收到', head, '封包，内容: ', unpack(list))
+    print('收到', head, '封包，内容: ', unpack(list))
     if Protocol.Hooks[head] and _G[Protocol.Hooks[head]] then
       local ret = _G[Protocol.Hooks[head]](fd, head, list);
       if type(ret) == 'number' and ret < 0 then
