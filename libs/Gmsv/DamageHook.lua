@@ -26,7 +26,7 @@ local function callCallback(aIndex, dIndex, flag, dmg, cType)
   --]]
   local nCallback = cType == 'heal' and callbackHeal or callback;
   if (nCallback and _G[nCallback]) then
-    local battleIndex = Char.GetData(aIndex, CONST.CHAR_BattleIndex);
+    local battleIndex = Char.GetData(aIndex or dIndex, CONST.CHAR_BattleIndex);
     local success, ret = pcall(_G[nCallback], aIndex, dIndex, dmg, dmg, battleIndex,
       Char.GetData(aIndex, CONST.CHAR_BattleCom1),
       Char.GetData(aIndex, CONST.CHAR_BattleCom2),
