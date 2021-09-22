@@ -75,9 +75,9 @@ local function OnDispatch(fd, str)
         return -1;
       end
     end
-    return _OnDispatch(fd, str);
+    return nil;
   end)
-  if s then
+  if s and type(e) == 'number' then
     return e;
   end
   return _OnDispatch(fd, str);
