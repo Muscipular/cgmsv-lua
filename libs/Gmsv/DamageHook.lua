@@ -1,8 +1,18 @@
 local callback;
 local callbackHeal;
 
+---@generic T
+---@param s T|nil
+---@param v T
+local function ifNil(s, v)
+  if type(s) == 'nil' then
+    return v;
+  end
+  return s;
+end
+
 local function callCallback(aIndex, dIndex, flag, dmg, cType)
- --[[  
+  --[[  
   print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or 'damage');
   if _G.type(aIndex) == 'number' then
     print(aIndex, Char.GetData(aIndex, CONST.CHAR_Ãû×Ö))
@@ -27,13 +37,13 @@ local function callCallback(aIndex, dIndex, flag, dmg, cType)
   local nCallback = cType == 'heal' and callbackHeal or callback;
   if (nCallback and _G[nCallback]) then
     local battleIndex = Char.GetData(aIndex or dIndex, CONST.CHAR_BattleIndex);
-    local success, ret = pcall(_G[nCallback], aIndex, dIndex, dmg, dmg, battleIndex,
-      Char.GetData(aIndex, CONST.CHAR_BattleCom1),
-      Char.GetData(aIndex, CONST.CHAR_BattleCom2),
-      Char.GetData(aIndex, CONST.CHAR_BattleCom3),
-      Char.GetData(dIndex, CONST.CHAR_BattleCom1),
-      Char.GetData(dIndex, CONST.CHAR_BattleCom2),
-      Char.GetData(dIndex, CONST.CHAR_BattleCom3),
+    local success, ret = pcall(_G[nCallback], ifNil(aIndex, -1), ifNil(dIndex, -1), dmg, dmg, ifNil(battleIndex, -1),
+      ifNil(Char.GetData(aIndex, CONST.CHAR_BattleCom1), -1),
+      ifNil(Char.GetData(aIndex, CONST.CHAR_BattleCom2), -1),
+      ifNil(Char.GetData(aIndex, CONST.CHAR_BattleCom3), -1),
+      ifNil(Char.GetData(dIndex, CONST.CHAR_BattleCom1), -1),
+      ifNil(Char.GetData(dIndex, CONST.CHAR_BattleCom2), -1),
+      ifNil(Char.GetData(dIndex, CONST.CHAR_BattleCom3), -1),
       flag
     );
     if success then
