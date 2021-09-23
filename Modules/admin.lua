@@ -359,6 +359,57 @@ function commands.recipe(charIndex, args)
   end
 end
 
+function commands.joinParty(charIndex, args)
+  Char.JoinParty(charIndex, tonumber(args[1]))
+end
+
+function commands.createDummy(charIndex, args)
+  printAsHex('c', Char.GetCharPointer(charIndex))
+  local charIndex1 = Char.CreateDummy()
+  print('charIndex1', charIndex1)
+  Char.SetData(charIndex1, CONST.CHAR_形象, 103010);
+  Char.SetData(charIndex1, CONST.CHAR_原形, 103010);
+  Char.SetData(charIndex1, CONST.CHAR_X, Char.GetData(charIndex, CONST.CHAR_X));
+  Char.SetData(charIndex1, CONST.CHAR_Y, Char.GetData(charIndex, CONST.CHAR_Y));
+  Char.SetData(charIndex1, CONST.CHAR_地图, Char.GetData(charIndex, CONST.CHAR_地图));
+  Char.SetData(charIndex1, CONST.CHAR_名字, 'aaaa');
+  Char.SetData(charIndex1, CONST.CHAR_地图类型, 0);
+  Char.SetData(charIndex1, 0, 1);
+  Char.SetData(charIndex1, (0x5e8 + 0x12c) / 4, 1);
+  
+  NLG.UpChar(charIndex1);
+
+  --Char.Warp(charIndex1, 0, Char.GetData(charIndex, CONST.CHAR_地图), Char.GetData(charIndex, CONST.CHAR_X), Char.GetData(charIndex, CONST.CHAR_Y))
+  NLG.SystemMessage(charIndex, 'dummy: ' .. charIndex1)
+end
+
+function commands.setCharData(charIndex, args)
+  local cix = tonumber(args[1])
+  local dl = tonumber(args[2])
+  local v = args[3]
+  if dl >= 2000 then
+  else
+    v = tonumber(v)
+  end
+  NLG.SystemMessage(charIndex, 'Char.SetData: ' .. Char.SetData(cix, dl, v));
+end
+function commands.getCharData(charIndex, args)
+  local cix = tonumber(args[1])
+  local dl = tonumber(args[2])
+
+  local function ifNil(a, b)
+    if a == nil then
+      return b
+    end
+    return a;
+  end
+  NLG.SystemMessage(charIndex, 'Char.GetData: ' .. args[1] .. '-' .. args[2] .. '=' .. ifNil(Char.GetData(cix, dl), 'nil'));
+end
+
+function commands.delDummy(charIndex, args)
+  NL.DelNpc(tonumber(args[1]))
+end
+
 function Admin:onLoad()
   self:logInfo('load')
   local fnName, ix = self:regCallback('CCCWalkPostEvent' .. os.time(), function(charIndex)

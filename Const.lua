@@ -28,6 +28,7 @@ CONST.道具_Func_PrePickUpFunc = 2011;
 CONST.道具_Func_PickUpFunc = 2012;
 CONST.CHAR_ENEMY_ID = 499;
 --
+CONST.CHAR_PlayerFD = 0x7BC / 4;
 CONST.CHAR_BattleMode = 0x00000000 / 4 + 0x5e8 / 4;
 CONST.CHAR_BattleIndex = 0x00000004 / 4 + 0x5e8 / 4;
 CONST.CHAR_BattleSide = 0x00000008 / 4 + 0x5e8 / 4;
