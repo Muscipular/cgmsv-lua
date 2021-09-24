@@ -403,7 +403,6 @@ function commands.createDummy(charIndex, args)
   NLG.UpChar(charIndex1);
   Char.SetData(charIndex1, CONST.CHAR_Ñª, Char.GetData(charIndex1, CONST.CHAR_×î´óÑª));
 
-  --Char.Warp(charIndex1, 0, Char.GetData(charIndex, CONST.CHAR_µØÍ¼), Char.GetData(charIndex, CONST.CHAR_X), Char.GetData(charIndex, CONST.CHAR_Y))
   NLG.SystemMessage(charIndex, 'dummy: ' .. charIndex1)
 end
 

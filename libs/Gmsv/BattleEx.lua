@@ -116,9 +116,9 @@ function Battle.RegEnemyCommandEvent(luaFile, callback)
   end
 end
 
-Battle.Commands = {}
+_G.BattleCommands = {  }
 
-function Battle.Commands.GetTargets(battleIndex, attackerSlot)
+function BattleCommands.GetTargets(battleIndex, attackerSlot)
   local attacker = Battle.GetPlayer(battleIndex, attackerSlot);
   local weapon, weaponSlot = Char.GetWeapon(attacker);
   local isRanger = false;
@@ -147,12 +147,12 @@ function Battle.Commands.GetTargets(battleIndex, attackerSlot)
   return targets, allowTargets
 end
 
-function Battle.Commands.Attack(battleIndex, attackerSlot, action, slot)
+function BattleCommands.Attack(battleIndex, attackerSlot, action, slot)
   local attacker = Battle.GetPlayer(battleIndex, attackerSlot);
   if attacker < 0 then
     return -1;
   end
-  local targets, allowTargets = Battle.Commands.GetTargets(battleIndex, attackerSlot);
+  local targets, allowTargets = BattleCommands.GetTargets(battleIndex, attackerSlot);
   if slot == nil or Battle.GetPlayer(battleIndex, slot) < 0 or table.indexOf(allowTargets, slot) < 1 then
     slot = targets[math.random(0, #targets)]
   end
