@@ -164,5 +164,6 @@ function Char.LeaveParty(charIndex)
   if Char.GetData(charIndex, 0) ~= 1 then
     return -1;
   end
-  return leaveParty(charIndex);
+  local charPtr = Char.GetCharPointer(charIndex);
+  return leaveParty(charPtr);
 end

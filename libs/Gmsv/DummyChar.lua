@@ -71,17 +71,22 @@ end
 
 local function deleteDummy(charIndex)
   if Char.GetData(charIndex, CONST.CHAR_BattleIndex) >= 0 then
+    print('deleteDummy', 1)
     Battle.ExitBattle(charIndex);
   end
   if Char.PartyNum(charIndex) > 0 then
+    print('deleteDummy', 2)
     Char.LeaveParty(charIndex);
   end
   for i = 0, 27 do
+    print('deleteDummy', 3, i)
     Char.DelItemBySlot(charIndex, i);
   end
   for i = 0, 4 do
+    print('deleteDummy', 4, i)
     Char.DelSlotPet(charIndex, i);
   end
+  print('deleteDummy', 5)
   return NL.DelNpc(charIndex)
 end
 
