@@ -175,11 +175,16 @@ local function addFrame(charIndex)
   Char.SetData(charIndex, CONST.CHAR_声望, 200000);
 end
 
-function commandsNormal.where(charIndex)
-  NLG.TalkToCli(charIndex, -1, charIndex .. ' 地图:' .. tostring(Char.GetData(charIndex, CONST.CHAR_地图)) .. '/' .. tostring(Char.GetData(charIndex, CONST.CHAR_地图类型)) ..
-    ', X:' .. tostring(Char.GetData(charIndex, CONST.CHAR_X)) ..
-    ', Y:' .. tostring(Char.GetData(charIndex, CONST.CHAR_Y)) ..
-    ', 方向:' .. tostring(Char.GetData(charIndex, CONST.CHAR_方向))
+function commandsNormal.where(charIndex, args)
+  local target = charIndex;
+  if #args == 1 then
+    target = tonumber(args[1])
+  end
+  NLG.TalkToCli(charIndex, -1, target ..
+    ' 地图:' .. tostring(Char.GetData(target, CONST.CHAR_地图)) .. '/' .. tostring(Char.GetData(target, CONST.CHAR_地图类型)) ..
+    ', X:' .. tostring(Char.GetData(target, CONST.CHAR_X)) ..
+    ', Y:' .. tostring(Char.GetData(target, CONST.CHAR_Y)) ..
+    ', 方向:' .. tostring(Char.GetData(target, CONST.CHAR_方向))
   )
 end
 
@@ -412,6 +417,7 @@ function commands.setCharData(charIndex, args)
   end
   NLG.SystemMessage(charIndex, 'Char.SetData: ' .. Char.SetData(cix, dl, v));
 end
+
 function commands.getCharData(charIndex, args)
   local cix = tonumber(args[1])
   local dl = tonumber(args[2])
@@ -426,7 +432,11 @@ function commands.getCharData(charIndex, args)
 end
 
 function commands.delDummy(charIndex, args)
-  NL.DelNpc(tonumber(args[1]))
+  Char.DelDummy(tonumber(args[1]))
+end
+
+function commands.moveChar(charIndex, args)
+  Char.MoveArray(tonumber(args[1]), table.slice(args, 2))
 end
 
 function Admin:onLoad()

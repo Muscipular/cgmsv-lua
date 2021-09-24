@@ -128,4 +128,32 @@ function Char.JoinParty(sourceIndex, targetIndex)
   end
   joinParty_A(Char.GetCharPointer(sourceIndex), Char.GetCharPointer(targetIndex));
   return sendJoinPartyResult(Char.GetData(sourceIndex, CONST.CHAR_PlayerFD), 1, 1);
-end 
+end
+
+local _moveChara = ffi.cast('int (__cdecl *)(uint32_t charAddr, int x, int y, const char *walkArray, int leader_mb)', 0x00447370)
+local walkDirection = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'e' }
+
+---@param charIndex number
+---@param walkArray number[]
+function Char.MoveArray(charIndex, walkArray)
+  if Char.GetData(charIndex, 0) ~= 1 then
+    return -1;
+  end
+  local charPtr = Char.GetCharPointer(charIndex);
+  if Char.PartyNum(charIndex) > 0 and Char.GetPartyMember(charIndex, 0) ~= charIndex then
+    return -2;
+  end
+  if type(walkArray) ~= 'table' then
+    walkArray = '';
+  else
+    walkArray = table.join(table.map(walkArray, function(n)
+      n = tonumber(n)
+      if n == nil then
+        return ''
+      end
+      return walkDirection[tonumber(n) + 1] or ''
+    end), '')
+  end
+  _moveChara(charPtr, Char.GetData(charIndex, CONST.CHAR_X), Char.GetData(charIndex, CONST.CHAR_Y), walkArray, 1);
+  return 1;
+end

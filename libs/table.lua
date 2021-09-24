@@ -67,14 +67,14 @@ end
 
 function table:forEach(fn)
   for i, v in ipairs(self) do
-    fn(v);
+    fn(v, i, self);
   end
 end
 
 function table:map(fn)
   local res = {}
   for i, v in pairs(self) do
-    res[i] = fn(v, i);
+    res[i] = fn(v, i, self);
   end
   return res;
 end
