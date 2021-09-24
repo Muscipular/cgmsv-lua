@@ -360,24 +360,43 @@ function commands.recipe(charIndex, args)
 end
 
 function commands.joinParty(charIndex, args)
-  Char.JoinParty(charIndex, tonumber(args[1]))
+  if #args == 2 then
+    Char.JoinParty(tonumber(args[1]), tonumber(args[2]))
+  else
+    Char.JoinParty(charIndex, tonumber(args[1]))
+  end
+end
+
+function commands.setAction(charIndex, args)
+  local charIndex1 = tonumber(args[1])
+  local com1 = tonumber(args[2])
+  local com2 = tonumber(args[3])
+  local com3 = tonumber(args[4])
+  Char.SetData(charIndex1, CONST.CHAR_BattleCom1, com1)
+  Char.SetData(charIndex1, CONST.CHAR_BattleCom2, com2)
+  Char.SetData(charIndex1, CONST.CHAR_BattleCom3, com3)
+  if #args == 7 then
+    Char.SetData(charIndex1, CONST.CHAR_Battle2Com1, tonumber(args[5]))
+    Char.SetData(charIndex1, CONST.CHAR_Battle2Com2, tonumber(args[6]))
+    Char.SetData(charIndex1, CONST.CHAR_Battle2Com3, tonumber(args[7]))
+  end
+  Char.SetData(charIndex1, CONST.CHAR_BattleMode, 3)
 end
 
 function commands.createDummy(charIndex, args)
   printAsHex('c', Char.GetCharPointer(charIndex))
   local charIndex1 = Char.CreateDummy()
   print('charIndex1', charIndex1)
-  Char.SetData(charIndex1, CONST.CHAR_形象, 103010);
-  Char.SetData(charIndex1, CONST.CHAR_原形, 103010);
+  Char.SetData(charIndex1, CONST.CHAR_形象, Char.GetData(charIndex, CONST.CHAR_形象));
+  Char.SetData(charIndex1, CONST.CHAR_原形, Char.GetData(charIndex, CONST.CHAR_原形));
   Char.SetData(charIndex1, CONST.CHAR_X, Char.GetData(charIndex, CONST.CHAR_X));
   Char.SetData(charIndex1, CONST.CHAR_Y, Char.GetData(charIndex, CONST.CHAR_Y));
   Char.SetData(charIndex1, CONST.CHAR_地图, Char.GetData(charIndex, CONST.CHAR_地图));
-  Char.SetData(charIndex1, CONST.CHAR_名字, 'aaaa');
-  Char.SetData(charIndex1, CONST.CHAR_地图类型, 0);
-  Char.SetData(charIndex1, 0, 1);
-  Char.SetData(charIndex1, (0x5e8 + 0x12c) / 4, 1);
-  
+  Char.SetData(charIndex1, CONST.CHAR_名字, Char.GetData(charIndex, CONST.CHAR_名字) .. ' 复制');
+  Char.SetData(charIndex1, CONST.CHAR_地图类型, Char.GetData(charIndex, CONST.CHAR_地图类型));
+  Char.SetData(charIndex1, CONST.CHAR_体力, 999999);
   NLG.UpChar(charIndex1);
+  Char.SetData(charIndex1, CONST.CHAR_血, Char.GetData(charIndex1, CONST.CHAR_最大血));
 
   --Char.Warp(charIndex1, 0, Char.GetData(charIndex, CONST.CHAR_地图), Char.GetData(charIndex, CONST.CHAR_X), Char.GetData(charIndex, CONST.CHAR_Y))
   NLG.SystemMessage(charIndex, 'dummy: ' .. charIndex1)
