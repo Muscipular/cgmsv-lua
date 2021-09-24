@@ -20,6 +20,10 @@ function CharExt:setData(charIndex, value)
   if type ~= CONST.对象类型_人 then
     return nil;
   end
+  if Char.IsDummy(charIndex) then
+    self.dummyData[charIndex] = value;
+    return value;
+  end
   local args = tonumber(Char.GetData(charIndex, CONST.CHAR_ThankFlower));
   if not (args > 0) then
     args = self.n + 1;
@@ -33,11 +37,17 @@ function CharExt:setData(charIndex, value)
   local r = SQL.querySQL(sql)
   --print(r, sql);
   self.cache.set(args, value);
+  return value;
 end
 
 ---@return table
 function CharExt:getData(charIndex)
-  local args = tonumber(Char.GetData(charIndex, CONST.CHAR_吃时 + 1));
+  if Char.IsDummy(charIndex) then
+    local data = self.dummyData[charIndex] or {}
+    self.dummyData[charIndex] = data;
+    return data;
+  end
+  local args = tonumber(Char.GetData(charIndex, CONST.CHAR_ThankFlower));
   if args > 0 then
     local data = self.cache.get(args)
     if not data then
@@ -57,6 +67,10 @@ end
 function CharExt:onLoad()
   self:logInfo('load')
   self.cache = LRU.new(MAX_CACHE_SIZE);
+  self.dummyData = { nilData = '' };
+  self:regCallback('DeleteDummy', function(charIndex)
+    self.dummyData[charIndex] = nil;
+  end);
   self.n = SQL.querySQL('select ifnull(max(id), 0) from lua_charData')[1][1]
 end
 

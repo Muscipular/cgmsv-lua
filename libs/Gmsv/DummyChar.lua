@@ -60,9 +60,19 @@ function Char.CreateDummy()
   return charIndex;
 end
 
+local function delCallback(charIndex)
+  if _delCallback and type(_G[_delCallback]) == 'function' then
+    local r, msg = pcall(_G[_delCallback], charIndex)
+    if not r then
+      print('[LUA] DeleteDummyCallback error: ' .. (msg or ''))
+    end
+  end
+end
+
 local function ShutdownCallback()
   for i, charIndex in pairs(dummyChar) do
     if charIndex >= 0 then
+      delCallback(charIndex);
       NL.DelNpc(charIndex)
     end
   end
@@ -70,8 +80,21 @@ local function ShutdownCallback()
 end
 
 function Char.DelDummy(charIndex)
+  delCallback(charIndex);
   dummyChar[charIndex] = nil;
   return NL.DelNpc(charIndex)
+end
+
+local _delCallback;
+function NL.RegDeleteDummy(luaFile, callback)
+  if luaFile then
+    local r, msg = pcall(dofile, luaFile)
+    if not r then
+      print('[LUA] RegDeleteDummy error: ' .. (msg or ''))
+      return -1;
+    end
+  end
+  _delCallback = callback;
 end
 
 regGlobalEvent('ShutDownEvent', ShutdownCallback, 'DummyChar');
