@@ -157,3 +157,12 @@ function Char.MoveArray(charIndex, walkArray)
   _moveChara(charPtr, Char.GetData(charIndex, CONST.CHAR_X), Char.GetData(charIndex, CONST.CHAR_Y), walkArray, 1);
   return 1;
 end
+
+local leaveParty = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x00438B70);
+
+function Char.LeaveParty(charIndex)
+  if Char.GetData(charIndex, 0) ~= 1 then
+    return -1;
+  end
+  return leaveParty(charIndex);
+end

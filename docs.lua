@@ -138,6 +138,12 @@ end
 function Char.SetLoopEvent(Dofile, FuncName, CharIndex, Interval)
 end
 
+function Char.DelPet(CharIndex, PetID, Level, LevelSetting)
+end
+
+function Char.DelSlotPet(CharIndex, Slot)
+end
+
 NLG = {}
 function NLG.ShowWindowTalked(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data)
 end

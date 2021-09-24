@@ -69,11 +69,27 @@ local function delCallback(charIndex)
   end
 end
 
+local function deleteDummy(charIndex)
+  if Char.GetData(charIndex, CONST.CHAR_BattleIndex) >= 0 then
+    Battle.ExitBattle(charIndex);
+  end
+  if Char.PartyNum(charIndex) > 0 then
+    Char.LeaveParty(charIndex);
+  end
+  for i = 0, 27 do
+    Char.DelItemBySlot(charIndex, i);
+  end
+  for i = 0, 4 do
+    Char.DelSlotPet(charIndex, i);
+  end
+  return NL.DelNpc(charIndex)
+end
+
 local function ShutdownCallback()
   for i, charIndex in pairs(dummyChar) do
     if charIndex >= 0 then
       delCallback(charIndex);
-      NL.DelNpc(charIndex)
+      deleteDummy(charIndex);
     end
   end
   return 0;
@@ -82,7 +98,7 @@ end
 function Char.DelDummy(charIndex)
   delCallback(charIndex);
   dummyChar[charIndex] = nil;
-  return NL.DelNpc(charIndex)
+  return deleteDummy(charIndex)
 end
 
 local _delCallback;
