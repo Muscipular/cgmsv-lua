@@ -26,6 +26,7 @@ end
 hookedQueueSave = ffi.hook.new('int (__cdecl*)(uint32_t charAddr)', hookQueueSave, 0x0043B290, 9);
 hookedQueueSave2 = ffi.hook.new('int (__cdecl*)(uint32_t charAddr)', hookQueueSave2, 0x0043B390, 7);
 
+---@param charIndex number
 function Char.IsDummy(charIndex)
   return Char.GetData(charIndex, CONST.CHAR_¿‡–Õ) == 1 and dummyChar[charIndex] ~= nil;
 end
@@ -113,4 +114,23 @@ function NL.RegDeleteDummy(luaFile, callback)
   _delCallback = callback;
 end
 
+local battleDataDummy = {};
+local resetCharBattleState = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0048C020);
+
+local function battleExitEventCallback(charIndex, battleIndex, type)
+  if Char.IsDummy(charIndex) then
+    battleDataDummy[charIndex] = charIndex;
+  end
+end
+
+local battleLoop;
+battleLoop = ffi.hook.new('void (__cdecl*)()', function()
+  battleLoop();
+  for i, v in pairs(battleDataDummy) do
+    resetCharBattleState(Char.GetCharPointer(i));
+  end
+  battleDataDummy = {}
+end, 0x00487790, 5);
+
 regGlobalEvent('ShutDownEvent', ShutdownCallback, 'DummyChar');
+regGlobalEvent('BattleExitEvent', battleExitEventCallback, 'DummyChar');

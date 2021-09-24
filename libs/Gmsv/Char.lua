@@ -1,6 +1,6 @@
 ---获取角色的指针
 function Char.GetCharPointer(charIndex)
-  if Char.GetData(charIndex, CONST.CHAR_类型) == 1 then
+  if Char.GetData(charIndex, 0) == 1 then
     return Addresses.CharaTablePTR + charIndex * 0x21EC;
   end
   return 0;
@@ -167,3 +167,13 @@ function Char.LeaveParty(charIndex)
   local charPtr = Char.GetCharPointer(charIndex);
   return leaveParty(charPtr);
 end
+
+local _moveItem = ffi.cast('int (__cdecl*)(uint32_t a1, int itemSlot, int targetSlot, int amount)', 0x00449E80)
+
+function Char.MoveItem(charIndex, fromSlot, toSlot, amount)
+  local charPtr = Char.GetCharPointer(charIndex)
+  if charPtr <= 0 then
+    return -1;
+  end
+  return _moveItem(charPtr, fromSlot, toSlot, amount)
+end 

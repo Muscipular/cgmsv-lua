@@ -402,7 +402,8 @@ function commands.createDummy(charIndex, args)
   Char.SetData(charIndex1, CONST.CHAR_体力, 999999);
   NLG.UpChar(charIndex1);
   Char.SetData(charIndex1, CONST.CHAR_血, Char.GetData(charIndex1, CONST.CHAR_最大血));
-
+  Char.GiveItem(charIndex1, 2100, 1, false);
+  Char.MoveItem(charIndex1, 8, CONST.EQUIP_左手, -1);
   NLG.SystemMessage(charIndex, 'dummy: ' .. charIndex1)
 end
 

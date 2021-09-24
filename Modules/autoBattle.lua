@@ -42,32 +42,52 @@ function Module:handleBattleAutoCommand(battleIndex)
   local hasAutoBattle = false;
   self:logDebug('handleBattleAutoCommand', battleIndex)
   self:logDebug('turn', turn);
+  local hasPlayer = false;
   for i = 0, 9 do
     local charIndex = Battle.GetPlayer(battleIndex, i);
-    --if Char.GetData(charIndex, CONST.CHAR_类型) == CONST.对象类型_人 then
-    if Char.IsDummy(charIndex) then
-      self:logDebug('auto battle', charIndex);
-      hasAutoBattle = true;
-      Char.SetData(charIndex, CONST.CHAR_BattleMode, 3);
-      Char.SetData(charIndex, CONST.CHAR_BattleCom1, Battle.COM_LIST.BATTLE_COM_ATTACK);
-      Char.SetData(charIndex, CONST.CHAR_BattleCom2, 10);
-      Char.SetData(charIndex, CONST.CHAR_BattleCom3, -1);
-      Char.SetData(charIndex, CONST.CHAR_Battle2Com1, Battle.COM_LIST.BATTLE_COM_ATTACK);
-      Char.SetData(charIndex, CONST.CHAR_Battle2Com2, 10);
-      Char.SetData(charIndex, CONST.CHAR_Battle2Com3, -1);
+    if charIndex >= 0 then
+      --if Char.GetData(charIndex, CONST.CHAR_类型) == CONST.对象类型_人 then
+      if Char.IsDummy(charIndex) then
+        self:logDebug('auto battle', charIndex);
+        hasAutoBattle = true;
+        Char.SetData(charIndex, CONST.CHAR_BattleMode, 3);
+        Char.SetData(charIndex, CONST.CHAR_BattleCom1, Battle.COM_LIST.BATTLE_COM_ATTACK);
+        Char.SetData(charIndex, CONST.CHAR_BattleCom2, 10);
+        Char.SetData(charIndex, CONST.CHAR_BattleCom3, -1);
+        Char.SetData(charIndex, CONST.CHAR_Battle2Com1, Battle.COM_LIST.BATTLE_COM_ATTACK);
+        Char.SetData(charIndex, CONST.CHAR_Battle2Com2, 10);
+        Char.SetData(charIndex, CONST.CHAR_Battle2Com3, -1);
+      else
+        hasPlayer = true;
+      end
+      --local data = charData[charIndex]
+      --if type(data) == 'table' and Char.GetData(charIndex, CONST.CHAR_BattleMode) == 2 then
+      --  hasAutoBattle = true;
+      --  Char.SetData(charIndex, CONST.CHAR_BattleMode, 3);
+      --  Char.SetData(charIndex, CONST.CHAR_BattleCom1, data.comA1 or 0);
+      --  Char.SetData(charIndex, CONST.CHAR_BattleCom2, data.comA2 or -1);
+      --  Char.SetData(charIndex, CONST.CHAR_BattleCom3, data.comA3 or -1);
+      --  Char.SetData(charIndex, CONST.CHAR_Battle2Com1, data.comB1 or 0);
+      --  Char.SetData(charIndex, CONST.CHAR_Battle2Com2, data.comB2 or -1);
+      --  Char.SetData(charIndex, CONST.CHAR_Battle2Com3, data.comB3 or -1);
+      --end
+      --end
     end
-    --local data = charData[charIndex]
-    --if type(data) == 'table' and Char.GetData(charIndex, CONST.CHAR_BattleMode) == 2 then
-    --  hasAutoBattle = true;
-    --  Char.SetData(charIndex, CONST.CHAR_BattleMode, 3);
-    --  Char.SetData(charIndex, CONST.CHAR_BattleCom1, data.comA1 or 0);
-    --  Char.SetData(charIndex, CONST.CHAR_BattleCom2, data.comA2 or -1);
-    --  Char.SetData(charIndex, CONST.CHAR_BattleCom3, data.comA3 or -1);
-    --  Char.SetData(charIndex, CONST.CHAR_Battle2Com1, data.comB1 or 0);
-    --  Char.SetData(charIndex, CONST.CHAR_Battle2Com2, data.comB2 or -1);
-    --  Char.SetData(charIndex, CONST.CHAR_Battle2Com3, data.comB3 or -1);
-    --end
-    --end
+  end
+  self:logDebug(hasAutoBattle, hasPlayer, not hasPlayer)
+  if not hasPlayer and hasAutoBattle then
+    for i = 0, 9 do
+      local charIndex = Battle.GetPlayer(battleIndex, i);
+      if charIndex >= 0 then
+        Char.SetData(charIndex, CONST.CHAR_BattleMode, 3);
+        Char.SetData(charIndex, CONST.CHAR_BattleCom1, Battle.COM_LIST.BATTLE_COM_ESCAPE);
+        Char.SetData(charIndex, CONST.CHAR_BattleCom2, -1);
+        Char.SetData(charIndex, CONST.CHAR_BattleCom3, -1);
+        Char.SetData(charIndex, CONST.CHAR_Battle2Com1, Battle.COM_LIST.BATTLE_COM_ESCAPE);
+        Char.SetData(charIndex, CONST.CHAR_Battle2Com2, -1);
+        Char.SetData(charIndex, CONST.CHAR_Battle2Com3, -1);
+      end
+    end
   end
   return hasAutoBattle;
 end
