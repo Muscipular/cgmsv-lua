@@ -284,6 +284,36 @@ for i, v in pairs(Battle.COM_LIST) do
 end
 
 NL.RegEnemyCommandEvent = Battle.RegEnemyCommandEvent;
+local sendCommandUpdateToClient = ffi.cast('uint32_t (__cdecl *)(int battleIndex)', 0x0047C4B0);
+
+local _BeforeBattleTurnCallback;
+function NL.RegBeforeBattleTurnEvent(luaFile, fn)
+  if luaFile then
+    local r, msg = pcall(dofile, luaFile)
+    if not r then
+      print('[LUA] RegBeforeBattleTurnEvent error: ' .. msg);
+    end
+  end
+  _BeforeBattleTurnCallback = fn;
+end
+
+local function handleBeforeBattleTurn(battleIndex)
+  if _BeforeBattleTurnCallback and _G[_BeforeBattleTurnCallback] then
+    local r, msg = pcall(_G[_BeforeBattleTurnCallback], battleIndex)
+    if not r then
+      print('[LUA] BeforeBattleTurnCallback error: ' .. msg);
+    else
+      if msg then
+        sendCommandUpdateToClient(battleIndex);
+      end
+    end
+  end
+end
+
+ffi.hook.inlineHook('void (__cdecl *)(int battleIndex)', handleBeforeBattleTurn, 0x00487A40, 0xb,
+  { 0x50, 0x53 }, --push ebx
+  { 0x5b, 0x58 }  --pop ebx
+)
 
 --local enemyHooked = false
 --local _ENEMY_getEnemyFromEncountArray

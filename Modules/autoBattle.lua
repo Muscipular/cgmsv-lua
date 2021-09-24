@@ -20,32 +20,14 @@ local Module = ModuleBase:createModule('autoBattle')
 
 local battleData = {};
 
-local function handleBattleAutoCommand(battleIndex)
-  local module = getModule('autoBattle');
-  if module then
-    local s, err = pcall(module.handleBattleAutoCommand, module, battleIndex)
-    if s ~= true then
-      print('handleBattleAutoCommand error', s, err, battleIndex);
-    end
-  end
-end
-
 function Module:onLoad()
   self:logInfo('load')
   --self:regCallback('TalkEvent', Func.bind(Module.handleChat, self))
   --self:regCallback('LogoutEvent', Func.bind(Module.cleanUp, self))
   --self:regCallback('BattleActionEvent', Func.bind(Module.battleActionEventCallBack, self))
   self:regCallback('BattleOverEvent', Func.bind(Module.battleOverEventCallback, self))
-  local addr = 0x00487A40
-  if ffi.hook[tostring(addr)] == nil then
-    self.hook = ffi.hook.inlineHook('void (__cdecl *)(int battleIndex)', handleBattleAutoCommand, addr, 0xb,
-      { 0x53 }, --push ebx
-      { 0x5b }  --pop ebx
-    )
-  end
+  self:regCallback('BeforeBattleTurnEvent', Func.bind(Module.handleBattleAutoCommand, self))
 end
-
-local sendCommandUpdateToClient = ffi.cast('uint32_t (__cdecl *)(int battleIndex)', 0x0047C4B0);
 
 function Module:battleOverEventCallback(battleIndex)
   battleData[battleIndex] = nil;
@@ -87,9 +69,7 @@ function Module:handleBattleAutoCommand(battleIndex)
     --end
     --end
   end
-  if hasAutoBattle then
-    sendCommandUpdateToClient(battleIndex);
-  end
+  return hasAutoBattle;
 end
 
 --function Module:handleChat(charIndex, msg, color, range, size)

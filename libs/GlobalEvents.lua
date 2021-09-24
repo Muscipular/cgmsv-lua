@@ -9,6 +9,13 @@ local chained = {
     end
     return res
   end,
+  BeforeBattleTurnEvent = function(list, ...)
+    local res = false;
+    for i, v in pairs(list) do
+      res = v(...) or res;
+    end
+    return res
+  end,
   BattleDamageEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
     local dmg = Damage;
     for i, v in pairs(list) do
