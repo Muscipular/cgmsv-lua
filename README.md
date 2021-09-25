@@ -60,6 +60,12 @@ loadModule('admin') --加载admin模块
 4. warp2 练级点传送
 5. welcome 示例模块
 6. itemPowerUp.lua 装备强化
+7. manaPool 血魔池
+8. bag 背包切换
+9. autoRegister 自动注册
+10. petExt/charExt/itemExt 公共扩展模块
+11. petLottery 宠物抽奖
+12. petRebirth 宠物转生
    
 ### 开发中的模块
 - AI扩展
@@ -73,3 +79,8 @@ loadModule('admin') --加载admin模块
 6. LowCpuUsage.lua 减低cpu使用补丁
 7. Protocol.lua 封包拦截相关
 8. Recipe.lua 配方相关
+9. DummyChar.lua 假人相关
+10. NL.lua 扩展事件相关
+11. NLG_ShowWindowTalked_Patch.lua NLG.ShowWindowTalked 长度补丁
+12. Addresses.lua 基础地址
+13. Field.lua Field相关
