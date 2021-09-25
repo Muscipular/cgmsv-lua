@@ -162,9 +162,11 @@ function _G.loadModule(moduleName, opt)
   return module;
 end
 
-function _G.loadOldModule(moduleName)
+function _G.loadSimpleModule(moduleName)
   _G.loadModule(moduleName, { simpleModule = true, forceReload = true })
 end
+
+_G.useModule = loadSimpleModule;
 
 function _G.unloadModule(moduleName)
   if Modules[moduleName] then
