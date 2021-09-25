@@ -47,10 +47,8 @@ function Module:onBattleReset(charIndex)
   Char.SetData(charIndex, CONST.CHAR_Ä§, maxFp)
   NLG.UpChar(charIndex);
   local petIndex = Char.GetData(charIndex, CONST.CHAR_Õ½³è);
-  self:logDebug('pet', petIndex);
   if petIndex >= 0 then
     petIndex = Char.GetPet(charIndex, petIndex);
-    self:logDebug('petIndex', petIndex);
     lp = Char.GetData(petIndex, CONST.CHAR_Ñª)
     maxLp = Char.GetData(petIndex, CONST.CHAR_×î´óÑª)
     fp = Char.GetData(petIndex, CONST.CHAR_Ä§)
