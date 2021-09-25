@@ -41,6 +41,18 @@ end
 
 table.join = table.concat;
 
+function table:filter(fn)
+  local ret = {}
+  for i, v in pairs(self) do
+    if fn(v, i, self) then
+      table.insert(ret, v);
+    end
+  end
+  return ret;
+end
+
+table.where = table.filter;
+
 function table.combine(...)
   local ret = {}
   local args = { ... }

@@ -37,25 +37,26 @@ function ItemExt:setItemData(itemIndex, value)
     .. SQL.sqlValue(os.time()) .. ')';
   local r = SQL.querySQL(sql)
   --print(r, sql);
-  self.cache.set(args, value);
+  self.cache:set(args, value);
 end
 
 ---@return table
 function ItemExt:getItemData(itemIndex)
   local args = Item.GetData(itemIndex, CONST.道具_自用参数)
+  local data;
   if string.match(args, '^luaData_') then
-    local data = self.cache.get(args)
+    data = self.cache:get(args)
     if not data then
       data = SQL.querySQL('select data from lua_itemdata where id = ' .. SQL.sqlValue(args))
       if type(data) == 'table' and data[1] then
         data = data[1][1]
         data = JSON.decode(data)
-        self.cache.set(args, data);
-        return data;
       end
     end
   end
-  return { };
+  data = data or {}
+  self.cache:set(args, data);
+  return data;
 end
 --- 加载模块钩子
 function ItemExt:onLoad()

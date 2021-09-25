@@ -31,7 +31,8 @@ function Addresses.load()
   Addresses.BattleTable = BattleTable;
   local BattleMax = FFI.readMemoryDWORD(0x09203B80);
   Addresses.BattleMax = BattleMax;
-
+  local DBQueue = FFI.readMemoryDWORD(0x091A575C);
+  Addresses.DBQueue = DBQueue;
   for i, v in ipairs(callbacks.load) do
     v();
   end

@@ -32,25 +32,26 @@ function PetExt:setData(charIndex, value)
     .. SQL.sqlValue(os.time()) .. ')';
   local r = SQL.querySQL(sql)
   --print(r, sql);
-  self.cache.set(args, value);
+  self.cache:set(args, value);
 end
 
 ---@return table
 function PetExt:getData(charIndex)
-  local args = tonumber(Char.GetData(charIndex, CONST.CHAR_吃时 + 1));
+  local args = tonumber(Char.GetData(charIndex, CONST.CHAR_ThankFlower));
+  local data;
   if args > 0 then
-    local data = self.cache.get(args)
+    data = self.cache:get(args)
     if not data then
       data = SQL.querySQL('select data from lua_petData where id = ' .. SQL.sqlValue(args))
       if type(data) == 'table' and data[1] then
         data = data[1][1]
         data = JSON.decode(data)
-        self.cache.set(args, data);
-        return data;
       end
     end
   end
-  return { };
+  data = data or {};
+  self.cache:set(args, data);
+  return data;
 end
 
 --- 加载模块钩子

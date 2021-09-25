@@ -220,4 +220,9 @@ end
 function Battle.ExitBattle(CharIndex)
 end
 function Battle.SetPVPWinEvent(DoFile, FuncName, BattleIndex)
+end
+_G.Field = {}
+function Field.Get(CharIndex, Field)
+end
+function Field.Set(CharIndex, Field, Value)
 end 

@@ -33,7 +33,6 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
     table.insert(itemFields, i + 2000);
   end
   local bagDataO = charData.bag[charData.bagIndex] or {};
-  charData.bag[charData.bagIndex] = bagDataO;
   for i = 1, 20 do
     local itemIndex = Char.GetItemIndex(CharIndex, i + 7)
     self:logDebug('backup', i + 7, itemIndex);
@@ -49,11 +48,15 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
       bagDataO[i] = false;
     end
   end
+  bagDataO = table.filter(bagDataO, function(e)
+    return e ~= false
+  end);
+  charData.bag[charData.bagIndex] = bagDataO;
   local bagData = charData.bag[bagIndex] or {};
   charData.bag[bagIndex] = { };
   charData.bagIndex = bagIndex;
   for i, bagItem in ipairs(bagData) do
-    if bagItem then
+    if type(bagItem) == 'table' then
       self:logDebug('restore', bagItem[tostring(CONST.道具_ID)], bagItem[tostring(CONST.道具_堆叠数)]);
       local itemIndex = Char.GiveItem(CharIndex, bagItem[tostring(CONST.道具_ID)], 1, false);
       if itemIndex >= 0 then
