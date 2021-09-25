@@ -65,6 +65,8 @@ function CharExt:getData(charIndex)
     if type(data) == 'table' and data[1] then
       data = data[1][1]
       data = JSON.decode(data)
+    else
+      data = nil;
     end
   end
   data = data or {};
