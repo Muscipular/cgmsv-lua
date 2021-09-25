@@ -27,7 +27,8 @@ function NL.newEvent(event, defaultRet)
 end
 
 local CharaDeletedCallback = NL.newEvent('CharaDeletedEvent', 0)
-local ResetCharaBattleState = NL.newEvent('ResetCharaBattleState', 0)
+local ResetCharaBattleState = NL.newEvent('ResetCharaBattleStateEvent', 0)
+NL.newEvent('Init', 0)
 
 local hookOnCharaDeleted;
 hookOnCharaDeleted = ffi.hook.new('int (__cdecl*)(int a1)', function(queueIndex)

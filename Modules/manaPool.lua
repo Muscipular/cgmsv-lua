@@ -14,7 +14,7 @@ function Module:onLoad()
   local npc = self:NPC_createNormal('я╙д╖╪ссму╬', 101024, { map = 1000, x = 225, y = 81, direction = 4, mapType = 0 })
   self:NPC_regTalkedEvent(npc, Func.bind(self.onSellerTalked, self))
   self:NPC_regWindowTalkedEvent(npc, Func.bind(self.onSellerSelected, self));
-  self:regCallback('ResetCharaBattleState', Func.bind(self.onBattleReset, self))
+  self:regCallback('ResetCharaBattleStateEvent', Func.bind(self.onBattleReset, self))
 end
 
 function Module:onBattleReset(charIndex)

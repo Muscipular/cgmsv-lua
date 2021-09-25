@@ -16,6 +16,39 @@ local chained = {
     end
     return res
   end,
+  GetExpEvent = function(list, CharIndex, Exp)
+    local res = Exp;
+    for i, v in pairs(list) do
+      res = v(CharIndex, Exp);
+      if res == nil then
+        res = Exp;
+      end
+      Exp = res;
+    end
+    return res
+  end,
+  ProductSkillExpEvent = function(list, CharIndex, SkillID, Exp)
+    local res = Exp;
+    for i, v in pairs(list) do
+      res = v(CharIndex, SkillID, Exp);
+      if res == nil then
+        res = Exp;
+      end
+      Exp = res;
+    end
+    return res
+  end,
+  BattleSkillExpEvent = function(list, CharIndex, SkillID, Exp)
+    local res = Exp;
+    for i, v in pairs(list) do
+      res = v(CharIndex, SkillID, Exp);
+      if res == nil then
+        res = Exp;
+      end
+      Exp = res;
+    end
+    return res
+  end,
   BattleDamageEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
     local dmg = Damage;
     for i, v in pairs(list) do
@@ -30,9 +63,13 @@ local chained = {
 
 local function makeEventHandle(name)
   local list = {}
-  local fn = function(list, ...)
+  local fn = function(fnList, ...)
+    local list2 = {}
+    for i, v in pairs(fnList) do
+      list2[i] = v;
+    end
     local res;
-    for i, v in pairs(list) do
+    for i, v in pairs(list2) do
       res = v(...)
     end
     --logDebug('ModuleSystem', 'callback', name, res, ...)
