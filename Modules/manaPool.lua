@@ -45,9 +45,38 @@ function Module:onBattleReset(charIndex)
   end
   Char.SetData(charIndex, CONST.CHAR_Ñª, maxLp)
   Char.SetData(charIndex, CONST.CHAR_Ä§, maxFp)
+  NLG.UpChar(charIndex);
+  local petIndex = Char.GetData(charIndex, CONST.CHAR_Õ½³è);
+  self:logDebug('pet', petIndex);
+  if petIndex >= 0 then
+    petIndex = Char.GetPet(charIndex, petIndex);
+    self:logDebug('petIndex', petIndex);
+    lp = Char.GetData(petIndex, CONST.CHAR_Ñª)
+    maxLp = Char.GetData(petIndex, CONST.CHAR_×î´óÑª)
+    fp = Char.GetData(petIndex, CONST.CHAR_Ä§)
+    maxFp = Char.GetData(petIndex, CONST.CHAR_×î´óÄ§)
+    if lpPool > 0 and lp < maxLp then
+      lpPool = lpPool - maxLp + lp;
+      if lpPool < 0 then
+        maxLp = maxLp + lpPool;
+        lpPool = 0;
+      end
+      NLG.SystemMessage(charIndex, '[ÑªÄ§³Ø] ÒÑ»Ö¸´³èÎï: ' .. (maxLp - lp) .. 'LP, Ñª³ØÊ£Óà: ' .. lpPool);
+    end
+    if fpPool > 0 and fp < maxFp then
+      fpPool = fpPool - maxFp + fp;
+      if fpPool < 0 then
+        maxFp = maxFp + fpPool;
+        fpPool = 0;
+      end
+      NLG.SystemMessage(charIndex, '[ÑªÄ§³Ø] ÒÑ»Ö¸´³èÎï: ' .. (maxFp - fp) .. 'FP, Ä§³ØÊ£Óà: ' .. fpPool);
+    end
+    Char.SetData(petIndex, CONST.CHAR_Ñª, maxLp)
+    Char.SetData(petIndex, CONST.CHAR_Ä§, maxFp)
+    NLG.UpChar(petIndex);
+  end
   Field.Set(charIndex, 'LpPool', tostring(lpPool));
   Field.Set(charIndex, 'FpPool', tostring(fpPool));
-  NLG.UpChar(charIndex);
 end
 
 function Module:onSellerTalked(npc, player)
@@ -87,10 +116,10 @@ function Module:onSellerSelected(npc, player, seqNo, select, data)
   Field.Set(player, 'FpPool', tostring(fpPool + totalFp));
   NLG.UpChar(player);
   if totalLp > 0 then
-    NLG.SystemMessage(player, 'ÒÑ²¹³äÑª³Ø: ' .. totalLp .. ', ¹²: ' .. (lpPool + totalLp));
+    NLG.SystemMessage(player, '[ÑªÄ§³Ø] ²¹³äÑª³Ø: ' .. totalLp .. ', ¹²: ' .. (lpPool + totalLp));
   end
   if totalFp > 0 then
-    NLG.SystemMessage(player, 'ÒÑ²¹³äÄ§³Ø: ' .. totalFp .. ', ¹²: ' .. (fpPool + totalFp));
+    NLG.SystemMessage(player, '[ÑªÄ§³Ø] ²¹³äÄ§³Ø: ' .. totalFp .. ', ¹²: ' .. (fpPool + totalFp));
   end
 end
 
