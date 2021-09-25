@@ -61,14 +61,7 @@ function Char.CreateDummy()
   return charIndex;
 end
 
-local function delCallback(charIndex)
-  if _delCallback and type(_G[_delCallback]) == 'function' then
-    local r, msg = pcall(_G[_delCallback], charIndex)
-    if not r then
-      print('[LUA] DeleteDummyCallback error: ' .. (msg or ''))
-    end
-  end
-end
+local delCallback = NL.newEvent('DeleteDummyEvent', 0);
 
 local function deleteDummy(charIndex)
   if Char.GetData(charIndex, CONST.CHAR_BattleIndex) >= 0 then
@@ -100,18 +93,6 @@ function Char.DelDummy(charIndex)
   delCallback(charIndex);
   dummyChar[charIndex] = nil;
   return deleteDummy(charIndex)
-end
-
-local _delCallback;
-function NL.RegDeleteDummy(luaFile, callback)
-  if luaFile then
-    local r, msg = pcall(dofile, luaFile)
-    if not r then
-      print('[LUA] RegDeleteDummy error: ' .. (msg or ''))
-      return -1;
-    end
-  end
-  _delCallback = callback;
 end
 
 local battleDataDummy = {};

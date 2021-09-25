@@ -21,6 +21,7 @@ function Addresses.load()
   Addresses.CharaTablePTR = CharaTablePTR;
   local CharaTableSize = FFI.readMemoryDWORD(0x091A6E58);
   Addresses.CharaTableSize = CharaTableSize;
+  Addresses.CharaTablePTRMax = CharaTablePTR + (CharaTableSize - 1) * 0x21EC;
   local ConnectionTable = FFI.readMemoryDWORD(0x1125704);
   Addresses.ConnectionTable = ConnectionTable;
   local EncountTable = FFI.readMemoryDWORD(0x091A916C);

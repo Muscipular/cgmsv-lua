@@ -77,7 +77,7 @@ function CharExt:onLoad()
   self:logInfo('load')
   self.cache = LRU.new(MAX_CACHE_SIZE);
   self.dummyData = { nilData = '' };
-  self:regCallback('DeleteDummy', function(charIndex)
+  self:regCallback('DeleteDummyEvent', function(charIndex)
     self.dummyData[charIndex] = nil;
   end);
   --self.n = SQL.querySQL('select ifnull(max(id), 0) from lua_charData')[1][1]

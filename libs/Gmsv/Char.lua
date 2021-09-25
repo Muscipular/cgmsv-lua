@@ -176,4 +176,19 @@ function Char.MoveItem(charIndex, fromSlot, toSlot, amount)
     return -1;
   end
   return _moveItem(charPtr, fromSlot, toSlot, amount)
-end 
+end
+
+function Char.IsValidCharPtr(charPtr)
+  return charPtr >= Addresses.CharaTablePTR and charPtr <= Addresses.CharaTablePTRMax and ffi.readMemoryInt32(charPtr) == 1
+end
+
+function Char.IsValidCharIndex(charIndex)
+  return Char.GetData(charIndex, 0) == 1;
+end
+
+function Char.GetDataByPtr(charPtr, dataLine)
+  if Char.IsValidCharPtr(charPtr) then
+    return Char.GetData(ffi.readMemoryInt32(charPtr + 4), dataLine);
+  end
+  return nil
+end

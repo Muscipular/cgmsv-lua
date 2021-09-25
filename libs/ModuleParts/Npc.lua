@@ -64,6 +64,20 @@ function Part:NPC_createNormal(name, image, positionInfo, initCallback)
   return npc
 end
 
+---@param list {name:string,image:number,price:number,desc:string,count:number, maxCount:number}[]
+---@param image number
+---@param msg1 number
+---@param msg2 number
+---@param msg3 number
+---@param name string
+---@param name string
+---@return string
+function Part:NPC_buildBuyWindowData(image, name, msg1, msg2, msg3, list)
+  return table.join({ image, name, msg1, msg2, msg3, table.unpack(table.map(list, function(e)
+    return table.join({ e.name or '?', e.image or 0, e.price or 0, e.desc or '', e.count or 1, e.maxCount or 1 }, '|')
+  end)) }, '|')
+end
+
 function Part:NPC_regTalkedEvent(npc, fn)
   local talkedFn, lastIndex, fnIndex = self:regCallback(fn)
   Char.SetTalkedEvent(nil, talkedFn, npc);

@@ -226,3 +226,5 @@ function Field.Get(CharIndex, Field)
 end
 function Field.Set(CharIndex, Field, Value)
 end 
+
+_G.NL = {}
