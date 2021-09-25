@@ -86,7 +86,6 @@ end
 
 function Module:onSellerSelected(npc, player, seqNo, select, data)
   local items = string.split(data, '|');
-  self:logDebug('data', data, table.unpack(items));
   local lpPool = tonumber(Field.Get(player, 'LpPool')) or 0;
   local fpPool = tonumber(Field.Get(player, 'FpPool')) or 0;
   local gold = Char.GetData(player, CONST.CHAR_½ð±Ò)
