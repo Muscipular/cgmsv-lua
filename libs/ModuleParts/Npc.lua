@@ -78,18 +78,26 @@ function Part:NPC_buildBuyWindowData(image, name, msg1, msg2, msg3, list)
   end)) }, '|')
 end
 
+---注册npc Talked事件
+---@param npc number
+---@param fn function
 function Part:NPC_regTalkedEvent(npc, fn)
-  local talkedFn, lastIndex, fnIndex = self:regCallback(fn)
+  local talkedFn, lastIndex, fnIndex = self:regCallback(self.name .. '_npc_' .. npc .. '_TalkedEvent', fn)
   Char.SetTalkedEvent(nil, talkedFn, npc);
   return talkedFn, lastIndex, fnIndex
 end
 
+---注册npc WindowTalked事件
+---@param npc number
+---@param fn function
 function Part:NPC_regWindowTalkedEvent(npc, fn)
-  local talkedFn, lastIndex, fnIndex = self:regCallback(fn)
+  local talkedFn, lastIndex, fnIndex = self:regCallback(self.name .. '_npc_' .. npc .. '_WindowTalkedEvent', fn)
   Char.SetWindowTalkedEvent(nil, talkedFn, npc);
   return talkedFn, lastIndex, fnIndex
 end
 
+---@param title string
+---@param options string[]
 function Part:NPC_buildSelectionText(title, options)
   local msg = '1\\n' .. title .. '\\n'
   for i = 1, 8 do

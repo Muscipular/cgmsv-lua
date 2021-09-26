@@ -35,15 +35,15 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
   local bagDataO = charData.bag[charData.bagIndex] or {};
   for i = 1, 20 do
     local itemIndex = Char.GetItemIndex(CharIndex, i + 7)
-    self:logDebug('backup', i + 7, itemIndex);
+    --self:logDebug('backup', i + 7, itemIndex);
     if itemIndex >= 0 then
       bagDataO[i] = {};
       for _, v in pairs(itemFields) do
         bagDataO[i][tostring(v)] = Item.GetData(itemIndex, v);
-        self:logDebug(v, bagDataO[i][tostring(v)]);
+        --self:logDebug(v, bagDataO[i][tostring(v)]);
       end
       local r = Char.DelItemBySlot(CharIndex, i + 7);
-      self:logDebug('remove', i + 7, itemIndex, r);
+      --self:logDebug('remove', i + 7, itemIndex, r);
     else
       bagDataO[i] = false;
     end
@@ -57,7 +57,7 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
   charData.bagIndex = bagIndex;
   for i, bagItem in ipairs(bagData) do
     if type(bagItem) == 'table' then
-      self:logDebug('restore', bagItem[tostring(CONST.道具_ID)], bagItem[tostring(CONST.道具_堆叠数)]);
+      --self:logDebug('restore', bagItem[tostring(CONST.道具_ID)], bagItem[tostring(CONST.道具_堆叠数)]);
       local itemIndex = Char.GiveItem(CharIndex, bagItem[tostring(CONST.道具_ID)], 1, false);
       if itemIndex >= 0 then
         for _, field in pairs(itemFields) do
@@ -65,7 +65,7 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
           if type(bagItem[tostring(field)]) ~= 'nil' then
             r = Item.SetData(itemIndex, field, bagItem[tostring(field)]);
           end
-          self:logDebug(itemIndex, field, bagItem[tostring(field)], Item.GetData(itemIndex, field), r);
+          --self:logDebug(itemIndex, field, bagItem[tostring(field)], Item.GetData(itemIndex, field), r);
         end
       end
     end

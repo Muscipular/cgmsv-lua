@@ -36,13 +36,13 @@ function Char.CreateDummy()
   if charPtr < Addresses.CharaTablePTR then
     return -1;
   end
-  printAsHex('charPtr', charPtr);
+  --printAsHex('charPtr', charPtr);
   clearCharData(charPtr)
-  printAsHex('clearCharData', charPtr);
+  --printAsHex('clearCharData', charPtr);
   newChar(charPtr, 11, 1)
-  printAsHex('newChar', charPtr);
+  --printAsHex('newChar', charPtr);
   local charIndex = ffi.readMemoryInt32(charPtr + 4);
-  printAsHex('charPtr2', Addresses.CharaTablePTR + charIndex * 0x21EC);
+  --printAsHex('charPtr2', Addresses.CharaTablePTR + charIndex * 0x21EC);
   ffi.setMemoryInt32(charPtr + 0x5e8 + 0x12c, 1);
   ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_PlayerFD, -1);
   ffi.setMemoryInt32(charPtr, 1);
