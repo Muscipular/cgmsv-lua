@@ -49,10 +49,22 @@
 
 ## 模块加载
 具体模块加载在ModuleConfig.lua
-
+### loadModule 
+加载Modules下的Module，Module的作用域相互独立，除非手动指定全局变量，否则不会影响其他Module，如需访问其他Module可通过getModule获取
 ```
 loadModule('admin') --加载admin模块
 ```
+### useModule 
+加载Module目录下的普通lua, 普通lua都会在一个公共的作用域下执行。除非手动指定为全局变量，否则只会影响普通lua，module不能访问相关变量/方法
+```
+useModule('Welcome') --加载Welcome
+```
+### getModule
+获取对应的Module
+
+### unloadModule
+卸载Module
+
 ### 目前能用的模块
 1. admin 内挂相关、模块动态管理等
 2. shop 东门商店NPC配置
