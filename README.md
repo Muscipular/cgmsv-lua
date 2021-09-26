@@ -50,12 +50,12 @@
 ## 模块加载
 具体模块加载在ModuleConfig.lua
 ### loadModule 
-加载Modules下的Module，Module的作用域相互独立，除非手动指定全局变量，否则不会影响其他Module，如需访问其他Module可通过getModule获取
+加载`Modules`下的Module，Module的作用域相互独立，除非手动指定全局变量，否则不会影响其他Module，如需访问其他Module可通过getModule获取
 ```
 loadModule('admin') --加载admin模块
 ```
 ### useModule 
-加载Module目录下的普通lua, 普通lua都会在一个公共的作用域下执行。除非手动指定为全局变量，否则只会影响普通lua，module不能访问相关变量/方法
+加载`Module`目录下的普通lua, 普通lua都会在一个公共的作用域下执行。除非手动指定为全局变量，否则只会影响普通lua，module不能访问相关变量/方法
 ```
 useModule('Welcome') --加载Welcome
 ```
