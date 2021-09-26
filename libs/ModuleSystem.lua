@@ -68,6 +68,14 @@ local function forSimpleModule()
     end
   end
 
+  for i, v in pairs(NL) do
+    if string.sub(i, 1, 3) == 'Reg' then
+      simpleModuleCtx.NL[i] = function(file, cb, ...)
+        return v(nil, loadFile(file, cb), ...)
+      end
+    end
+  end
+
   simpleModuleCtx.string = setmetatable(simpleModuleCtx.string, { __index = string });
   simpleModuleCtx.table = setmetatable(simpleModuleCtx.table, { __index = table });
   simpleModuleCtx.NL = setmetatable(simpleModuleCtx.NL, { __index = NL });
