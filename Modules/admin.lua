@@ -347,11 +347,11 @@ end
 
 function commands.recipe(charIndex, args)
   if args[1] == 'del' then
-    if Recipe.DelRecipe(charIndex, tonumber(args[2])) == 1 then
+    if Recipe.RemoveRecipe(charIndex, tonumber(args[2])) == 1 then
       NLG.SystemMessage(charIndex, '删除' .. args[2] .. '号配方')
     end
   elseif args[1] == 'add' then
-    if Recipe.AddRecipe(charIndex, tonumber(args[2])) == 1 then
+    if Recipe.GiveRecipe(charIndex, tonumber(args[2])) == 1 then
       NLG.SystemMessage(charIndex, '获得' .. args[2] .. '号配方')
     end
   elseif args[1] == 'get' then

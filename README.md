@@ -84,3 +84,55 @@ loadModule('admin') --加载admin模块
 11. NLG_ShowWindowTalked_Patch.lua NLG.ShowWindowTalked 长度补丁
 12. Addresses.lua 基础地址
 13. Field.lua Field相关
+
+## 扩展事件/接口
+- `NL.RegEnemyCommandEvent`
+- `NL.RegCharaDeletedEvent`
+- `NL.RegResetCharaBattleStateEvent`
+- `NL.RegBattleDamageEvent`
+- `NL.RegDamageCalculateEvent` 
+- `NL.RegBattleHealCalculateEvent` 
+- `NL.RegDeleteDummyEvent` 
+- `Char.GetCharPointer`
+- `Char.GetWeapon`
+- `Char.GiveItem`
+- `Char.DelItem`
+- `Char.DelItemBySlot`
+- `Char.UnsetWalkPostEvent`
+- `Char.UnsetWalkPreEvent`
+- `Char.UnsetPostOverEvent`
+- `Char.UnsetLoopEvent`
+- `Char.UnsetTalkedEvent`
+- `Char.UnsetWindowTalkedEvent`
+- `Char.UnsetItemPutEvent`
+- `Char.UnsetWatchEvent`
+- `Char.MoveArray`
+- `Char.JoinParty`
+- `Char.LeaveParty`
+- `Char.MoveItem`
+- `Char.IsValidCharPtr`
+- `Char.IsValidCharIndex`
+- `Char.GetDataByPtr`
+- `Char.IsDummy`
+- `Char.CreateDummy`
+- `Char.DelDummy`
+- `Battle.UnsetWinEvent`
+- `Battle.UnsetPVPWinEvent`
+- `Battle.GetNextBattle`
+- `Battle.SetNextBattle`
+- `Battle.GetTurn`
+- `Data.ItemsetGetIndex`
+- `Data.ItemsetGetData`
+- `Data.GetEncountData`
+- `Data.SetMessage`
+- `Data.GetMessage`
+- `Item.GetSlot`
+- `Protocol.makeEscapeString`
+- `Protocol.makeStringFromEscaped`
+- `Protocol.nrprotoEscapeString`
+- `Protocol.nrprotoUnescapeString`
+- `Protocol.Send`
+- `Protocol.GetCharIndexFromFd`
+- `Protocol.OnRecv`
+- `Recipe.GiveRecipe`
+- `Recipe.RemoveRecipe`

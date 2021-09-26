@@ -6,6 +6,8 @@ function Char.GetCharPointer(charIndex)
   return 0;
 end
 
+---获取装备的武器 ItemIndex及位置
+---@return number,number itemIndex, 装备位置
 function Char.GetWeapon(charIndex)
   local ItemIndex = Char.GetItemIndex(charIndex, CONST.EQUIP_左手);
   if ItemIndex >= 0 and Item.isWeapon(Item.GetData(ItemIndex, CONST.道具_类型)) then
@@ -46,7 +48,8 @@ end
 
 local cDeleteCharItem = ffi.cast('int (__cdecl*)(const char * str1, int lineNo, uint32_t charAddr, uint32_t slot)', 0x00428390)
 local cRemoveItem = ffi.cast('void (__cdecl *)(int itemIndex, const char * str, int lineNo)', 0x004C8370)
-Char.DelItemBySlot = function(CharIndex, Slot)
+---根据位置删除物品
+function Char.DelItemBySlot(CharIndex, Slot)
   local charPtr = Char.GetCharPointer(CharIndex);
   if charPtr < Addresses.CharaTablePTR then
     return -1;
@@ -115,6 +118,7 @@ local checkPartyMemberCount = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x00437C10
 local joinParty_A = ffi.cast('uint32_t (__cdecl*)(uint32_t source, uint32_t target)', 0x00438140);
 local sendJoinPartyResult = ffi.cast('int (__cdecl*)(uint32_t fd, int a2, int a3)', 0x005564D0);
 
+---加入组队，无视组队开关及距离
 function Char.JoinParty(sourceIndex, targetIndex)
   if Char.GetData(targetIndex, CONST.CHAR_类型) ~= CONST.对象类型_人 then
     return -1;
@@ -133,8 +137,9 @@ end
 local _moveChara = ffi.cast('int (__cdecl *)(uint32_t charAddr, int x, int y, const char *walkArray, int leader_mb)', 0x00447370)
 local walkDirection = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'e' }
 
+---移动角色、NPC
 ---@param charIndex number
----@param walkArray number[]
+---@param walkArray number[] 移动列表，取值0-7对应 CONST里面的方向，不建议超过5次移动
 function Char.MoveArray(charIndex, walkArray)
   if Char.GetData(charIndex, 0) ~= 1 then
     return -1;
@@ -160,6 +165,7 @@ end
 
 local leaveParty = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x00438B70);
 
+---离开队伍
 function Char.LeaveParty(charIndex)
   if Char.GetData(charIndex, 0) ~= 1 then
     return -1;
@@ -170,6 +176,11 @@ end
 
 local _moveItem = ffi.cast('int (__cdecl*)(uint32_t a1, int itemSlot, int targetSlot, int amount)', 0x00449E80)
 
+---移动物品
+---@param charIndex number
+---@param fromSlot number 移动那个物品，取值0-27
+---@param toSlot number 移动到那个位置, 取值0-27
+---@param amount number 数量，整体移动取值可为-1
 function Char.MoveItem(charIndex, fromSlot, toSlot, amount)
   local charPtr = Char.GetCharPointer(charIndex)
   if charPtr <= 0 then
@@ -178,14 +189,17 @@ function Char.MoveItem(charIndex, fromSlot, toSlot, amount)
   return _moveItem(charPtr, fromSlot, toSlot, amount)
 end
 
+---检测ptr是否正确
 function Char.IsValidCharPtr(charPtr)
   return charPtr >= Addresses.CharaTablePTR and charPtr <= Addresses.CharaTablePTRMax and ffi.readMemoryInt32(charPtr) == 1
 end
 
+---检测index是否正确
 function Char.IsValidCharIndex(charIndex)
   return Char.GetData(charIndex, 0) == 1;
 end
 
+---通过ptr获取数据
 function Char.GetDataByPtr(charPtr, dataLine)
   if Char.IsValidCharPtr(charPtr) then
     return Char.GetData(ffi.readMemoryInt32(charPtr + 4), dataLine);

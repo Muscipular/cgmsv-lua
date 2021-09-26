@@ -71,6 +71,7 @@ local function hookGetMessage(msgId)
   local s = MSG_getMessage(msgId);
   return s;
 end
+
 function Data.SetMessage(msgId, val)
   if MSG_getMessage == nil then
     MSG_getMessage = ffi.hook.new('const char* (__cdecl *)(uint32_t msgId)', hookGetMessage, 0x00416F30, 6);

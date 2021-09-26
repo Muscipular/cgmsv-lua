@@ -35,7 +35,6 @@ local function forSimpleModule()
           moduleName = i;
         end
       end
-      print('load module XXXX', moduleName, file)
       loadModule(moduleName or file, { path = file, simpleModule = true, forceReload = true, absolutePath = true });
     end
     local key = '__callInCtx' .. cb;
@@ -48,7 +47,6 @@ local function forSimpleModule()
     VaildChar = Char.IsValidCharIndex,
     NL = {
       CreateNpc = function(file, cb)
-        print('hooked', 'CreateNPC')
         return NL.CreateNpc(nil, loadFile(file, cb));
       end
     },
@@ -63,9 +61,7 @@ local function forSimpleModule()
   for f, n in pairs({ Char = Char, Battle = Battle }) do
     for i, v in pairs(n) do
       if string.sub(i, 1, 3) == 'Set' and string.sub(i, #i - 4) == 'Event' then
-        print(f, i)
         simpleModuleCtx[f][i] = function(file, cb, ...)
-          print('hooked', f, i)
           return v(nil, loadFile(file, cb), ...)
         end
       end

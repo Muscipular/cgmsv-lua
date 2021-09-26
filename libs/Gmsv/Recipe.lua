@@ -9,7 +9,7 @@ local sendRecipeDataToClient = ffi.cast('int (__cdecl *)(uint32_t charAddr1, int
 _G.Recipe = _G.Recipe or {}
 
 ---@return number 成功时返回 1, 失败返回 0, charIndex无效返回 -1, 配方无效返回 -2, 配方已获得返回 -3
-function Recipe.AddRecipe(charIndex, recipeNo)
+function Recipe.GiveRecipe(charIndex, recipeNo)
   if charIndex < 0 then
     return -1;
   end
@@ -39,7 +39,7 @@ function Recipe.AddRecipe(charIndex, recipeNo)
 end
 
 ---@return number 成功时返回 1, 失败返回 0, charIndex无效返回 -1, 配方无效返回 -2, 配方未获得返回 -3
-function Recipe.DelRecipe(charIndex, recipeNo)
+function Recipe.RemoveRecipe(charIndex, recipeNo)
   if charIndex < 0 then
     return -1;
   end

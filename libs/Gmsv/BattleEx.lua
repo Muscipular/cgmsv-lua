@@ -28,6 +28,8 @@ function Battle.UnsetWinEvent(battleIndex)
   return 1
 end
 
+Battle.UnsetPVPWinEvent = Battle.UnsetWinEvent;
+
 function Battle.SetNextBattle(battleIndex, encountIndex)
   if battleIndex < 0 or battleIndex >= Addresses.BattleMax then
     return -3
@@ -46,6 +48,7 @@ function Battle.SetNextBattle(battleIndex, encountIndex)
   return 1;
 end
 
+---获取当前回合数
 function Battle.GetTurn(battleIndex)
   if battleIndex < 0 or battleIndex >= Addresses.BattleMax then
     return -3
@@ -100,7 +103,7 @@ local function HookEnemyCommand(battleIndex, side, slot)
   return ret;
 end
 
-function Battle.RegEnemyCommandEvent(luaFile, callback)
+local function RegEnemyCommandEvent(luaFile, callback)
   --004C27E0 ; char __cdecl Battle_Do_EnemyCommand(int battleIndex, unsigned int side, int a3)
   print('onReg', callback);
   if luaFile then
@@ -283,7 +286,7 @@ for i, v in pairs(Battle.COM_LIST) do
   Battle.COM_LIST[v] = i;
 end
 
-NL.RegEnemyCommandEvent = Battle.RegEnemyCommandEvent;
+NL.RegEnemyCommandEvent = RegEnemyCommandEvent;
 local sendCommandUpdateToClient = ffi.cast('uint32_t (__cdecl *)(int battleIndex)', 0x0047C4B0);
 
 local _BeforeBattleTurnCallback;
