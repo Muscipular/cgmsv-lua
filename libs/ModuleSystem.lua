@@ -25,6 +25,7 @@ end
 ---@field simpleModule boolean 是否兼容老的luaModule
 ---@field absolutePath boolean
 
+---解决兼容普通lua的问题
 local function forSimpleModule()
   local callInCtx;
   local function loadFile(file, cb)

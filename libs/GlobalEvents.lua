@@ -80,6 +80,13 @@ end
 
 local eventCallbacks = {}
 local ix = 0;
+
+--- 注册全局事件
+---@param eventName string
+---@param fn function
+---@param moduleName string
+---@param extraSign string|nil
+---@return number 全局注册Index
 function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   extraSign = extraSign or ''
   logInfo('GlobalEvent', 'regGlobalEvent', eventName, moduleName, ix + 1, eventCallbacks[eventName .. extraSign])
@@ -111,6 +118,11 @@ function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   return ix;
 end
 
+--- 移除全局事件
+---@param eventName string
+---@param fnIndex number 全局注册Index
+---@param moduleName string
+---@param extraSign string|nil
 function _G.removeGlobalEvent(eventName, fnIndex, moduleName, extraSign)
   extraSign = extraSign or ''
   logInfo('GlobalEvent', 'removeGlobalEvent', eventName .. extraSign, moduleName, fnIndex)

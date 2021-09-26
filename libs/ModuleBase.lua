@@ -1,7 +1,7 @@
 ---@class ModuleBase
 ---@field name string
 ---@field lastIx number
----@field parts table[]
+---@field parts ModulePart[]
 ---@field migrations {version:number,name:string,value:string|function}[]|nil
 ---@field callbacks {fnCb: function, fnIndex: number, key: string}[]
 local ModuleBase = { name = '', callbacks = {}, lastIx = 0, migrations = nil };
@@ -62,6 +62,14 @@ function ModuleBase:createModule(name, depParts)
   return SubModule;
 end
 
+---@class ModulePart
+---@field name string
+---@field onLoad function
+---@field onUnload function
+---@field ___isPart boolean
+
+---@param name string
+---@return ModulePart
 function ModuleBase:createPart(name)
   local SubModule = {
     name = name,

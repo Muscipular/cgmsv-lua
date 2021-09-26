@@ -1,5 +1,6 @@
 _G.SQL = _G.SQL or {}
 local SQL = _G.SQL;
+
 function SQL.sqlValue(s)
   if s == nil then
     return 'null'
@@ -22,7 +23,8 @@ function SQL.sqlValue(s)
   end
   return 'null';
 end
-function SQL.querySQL(sql)
+
+function SQL.querySQL(sql, returnNil)
   local result = SQL.Run(sql)
   if type(result) == "table" then
     local res = {}
@@ -35,6 +37,9 @@ function SQL.querySQL(sql)
       end
     end
     return res
+  end
+  if result == SQL.CONST_RET_NO_ROW and returnNil then
+    return nil;
   end
   return result
 end
