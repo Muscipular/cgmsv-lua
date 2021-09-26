@@ -101,53 +101,55 @@ useModule('Welcome') --加载Welcome
 13. Field.lua Field相关
 
 ## 扩展事件/接口
-- `NL.RegEnemyCommandEvent`
-- `NL.RegCharaDeletedEvent`
-- `NL.RegResetCharaBattleStateEvent`
-- `NL.RegBattleDamageEvent`
-- `NL.RegDamageCalculateEvent` 
-- `NL.RegBattleHealCalculateEvent` 
-- `NL.RegDeleteDummyEvent` 
-- `Char.GetCharPointer`
-- `Char.GetWeapon`
-- `Char.GiveItem`
-- `Char.DelItem`
-- `Char.DelItemBySlot`
-- `Char.UnsetWalkPostEvent`
-- `Char.UnsetWalkPreEvent`
-- `Char.UnsetPostOverEvent`
-- `Char.UnsetLoopEvent`
-- `Char.UnsetTalkedEvent`
-- `Char.UnsetWindowTalkedEvent`
-- `Char.UnsetItemPutEvent`
-- `Char.UnsetWatchEvent`
-- `Char.MoveArray`
-- `Char.JoinParty`
-- `Char.LeaveParty`
-- `Char.MoveItem`
-- `Char.IsValidCharPtr`
-- `Char.IsValidCharIndex`
-- `Char.GetDataByPtr`
-- `Char.IsDummy`
-- `Char.CreateDummy`
-- `Char.DelDummy`
-- `Battle.UnsetWinEvent`
-- `Battle.UnsetPVPWinEvent`
-- `Battle.GetNextBattle`
-- `Battle.SetNextBattle`
-- `Battle.GetTurn`
-- `Data.ItemsetGetIndex`
-- `Data.ItemsetGetData`
-- `Data.GetEncountData`
-- `Data.SetMessage`
-- `Data.GetMessage`
-- `Item.GetSlot`
-- `Protocol.makeEscapeString`
-- `Protocol.makeStringFromEscaped`
-- `Protocol.nrprotoEscapeString`
-- `Protocol.nrprotoUnescapeString`
-- `Protocol.Send`
-- `Protocol.GetCharIndexFromFd`
-- `Protocol.OnRecv`
-- `Recipe.GiveRecipe`
-- `Recipe.RemoveRecipe`
+- `NL.RegEnemyCommandEvent` 怪物行动事件
+- `NL.RegCharaDeletedEvent` 角色删除事件
+- `NL.RegResetCharaBattleStateEvent` 角色战斗结束事件
+- `NL.RegBattleDamageEvent` 原来的RegDamageCalculateEvent
+- `NL.RegDamageCalculateEvent` 补丁后的战斗伤害事件
+- `NL.RegBattleHealCalculateEvent` 战斗治疗事件
+- `NL.RegDeleteDummyEvent` 假人删除事件
+- `Char.GetCharPointer` 获取角色Ptr
+- `Char.GetWeapon` 获取武器
+- `Char.GiveItem` 添加物品，支持静默模式
+- `Char.DelItem` 删除物品，支持静默模式
+- `Char.DelItemBySlot` 删除指定位置的物品
+- `Char.UnsetWalkPostEvent` 移除事件
+- `Char.UnsetWalkPreEvent` 移除事件
+- `Char.UnsetPostOverEvent` 移除事件
+- `Char.UnsetLoopEvent` 移除事件
+- `Char.UnsetTalkedEvent` 移除事件
+- `Char.UnsetWindowTalkedEvent` 移除事件
+- `Char.UnsetItemPutEvent` 移除事件
+- `Char.UnsetWatchEvent` 移除事件
+- `Char.MoveArray` 角色连续移动
+- `Char.JoinParty` 加入队伍
+- `Char.LeaveParty` 离开队伍
+- `Char.MoveItem` 移动物品
+- `Char.IsValidCharPtr` 
+- `Char.IsValidCharIndex` 
+- `Char.GetDataByPtr` 根据Ptr获取数据
+- `Char.IsDummy` 是否是假人
+- `Char.CreateDummy` 创建假人
+- `Char.DelDummy` 删除假人
+- `Battle.UnsetWinEvent` 移除事件
+- `Battle.UnsetPVPWinEvent` 移除事件
+- `Battle.GetNextBattle` 获取下一场连战Id
+- `Battle.SetNextBattle` 设置下一场连战Id
+- `Battle.GetTurn` 获取当前回合
+- `Data.ItemsetGetIndex` 获取ItemsetIndex
+- `Data.ItemsetGetData` 获取Itemset数据
+- `Data.GetEncountData` 获取Encount数据
+- `Data.SetMessage` 获取Msg
+- `Data.GetMessage` 修改/新增Msg，动态创建物品时大概会有用
+- `Item.GetSlot` 获取ItemIndex对应位置
+- `Protocol.makeEscapeString` 编码字符串
+- `Protocol.makeStringFromEscaped` 解码字符串
+- `Protocol.nrprotoEscapeString` 封包编码字符串
+- `Protocol.nrprotoUnescapeString` 封包解码字符串
+- `Protocol.Send` 发送自定义封包
+- `Protocol.GetCharIndexFromFd` 通过fd获取charIndex
+- `Protocol.OnRecv` 拦截封包
+- `Recipe.GiveRecipe` 添加配方
+- `Recipe.RemoveRecipe` 删除配方
+- `regGlobalEvent` 注册全局事件，代替Delegate，Delegate也是包装这个方法
+- `removeGlobalEvent` 移除注册事件
