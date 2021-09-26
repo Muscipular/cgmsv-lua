@@ -65,6 +65,9 @@ useModule('Welcome') --加载Welcome
 ### unloadModule
 卸载Module
 
+### reloadModule
+重新加载Module
+
 ### 目前能用的模块
 1. admin 内挂相关、模块动态管理等
 2. shop 东门商店NPC配置
