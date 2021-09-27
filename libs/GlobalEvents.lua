@@ -58,16 +58,22 @@ local chained = {
       end
     end
     return dmg
-  end
+  end,
+  Init = function(fnList, ...)
+    fnList = table.copy(fnList)
+    local res;
+    for i, v in ipairs(fnList) do
+      res = v(...)
+    end
+    return res
+  end,
 }
 
 local defaultChain = function(fnList, ...)
-  fnList = table.copy(fnList)
   local res;
   for i, v in ipairs(fnList) do
     res = v(...)
   end
-  --logDebug('ModuleSystem', 'callback', name, res, ...)
   return res
 end
 
