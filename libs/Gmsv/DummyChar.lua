@@ -31,11 +31,20 @@ function Char.IsDummy(charIndex)
   return Char.GetData(charIndex, CONST.CHAR_类型) == 1 and dummyChar[charIndex] ~= nil;
 end
 
-function Char.CreateDummy()
+---@class DummyCreateOptions
+---@field mapType number
+---@field floor number
+---@field x number
+---@field y number
+---@field image number
+---@field name string
+---@param options DummyCreateOptions|nil
+function Char.CreateDummy(options)
   local charPtr = takeBufferedChar(0)
   if charPtr < Addresses.CharaTablePTR then
     return -1;
   end
+  options = options or {}
   --printAsHex('charPtr', charPtr);
   clearCharData(charPtr)
   --printAsHex('clearCharData', charPtr);
@@ -47,17 +56,19 @@ function Char.CreateDummy()
   ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_PlayerFD, -1);
   ffi.setMemoryInt32(charPtr, 1);
   ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_类型, 1);
-  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_地图类型, 0);
-  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_地图, 777);
-  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_X, 20);
-  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_Y, 90);
+  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_地图类型, options.mapType or 0);
+  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_地图, options.floor or 777);
+  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_X, options.x or 20);
+  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_Y, options.y or 90);
   --Char.SetData(charIndex, CONST.CHAR_图类, image);
-  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_原形, 100000);
-  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_原始图档, 100000);
+  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_原形, options.image or 100000);
+  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_原始图档, options.image or 100000);
+  ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_形象, options.image or 100000);
   local objectIndex = addCharaToMap(1, charPtr, 0, 777, 20, 90);
   ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_OBJ, objectIndex);
   Broadcast_ObjectState(objectIndex);
   dummyChar[charIndex] = charIndex;
+  Char.SetData(charIndex, CONST.CHAR_名字, options.name or string.formatNumber(charPtr, 62))
   return charIndex;
 end
 

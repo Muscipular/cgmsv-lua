@@ -91,6 +91,14 @@ function table:map(fn)
   return res;
 end
 
+function table:copy()
+  local res = {}
+  for i, v in pairs(self) do
+    res[i] = v;
+  end
+  return res;
+end
+
 function table.range(startNum, endNum, fn)
   local ret = {};
   local v;
