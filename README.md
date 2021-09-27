@@ -69,18 +69,19 @@ useModule('Welcome') --加载Welcome
 重新加载Module
 
 ### 目前能用的模块
-1. admin 内挂相关、模块动态管理等
-2. shop 东门商店NPC配置
-3. warp 村落传送
-4. warp2 练级点传送
-5. welcome 示例模块
-6. itemPowerUp.lua 装备强化
-7. manaPool 血魔池
-8. bag 背包切换
-9. autoRegister 自动注册
-10. petExt/charExt/itemExt 公共扩展模块
-11. petLottery 宠物抽奖
-12. petRebirth 宠物转生
+1. admin 模块动态管理等
+2. ng 内挂相关
+3. shop 东门商店NPC配置
+4. warp 村落传送
+5. warp2 练级点传送
+6. welcome 示例模块
+7. itemPowerUp.lua 装备强化
+8. manaPool 血魔池
+9. bag 背包切换
+10. autoRegister 自动注册
+11. petExt/charExt/itemExt 公共扩展模块
+12. petLottery 宠物抽奖
+13. petRebirth 宠物转生
    
 ### 开发中的模块
 - AI扩展
