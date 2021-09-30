@@ -16,39 +16,6 @@ local chained = {
     end
     return res
   end,
-  GetExpEvent = function(list, CharIndex, Exp)
-    local res = Exp;
-    for i, v in ipairs(list) do
-      res = v(CharIndex, Exp);
-      if res == nil then
-        res = Exp;
-      end
-      Exp = res;
-    end
-    return res
-  end,
-  ProductSkillExpEvent = function(list, CharIndex, SkillID, Exp)
-    local res = Exp;
-    for i, v in ipairs(list) do
-      res = v(CharIndex, SkillID, Exp);
-      if res == nil then
-        res = Exp;
-      end
-      Exp = res;
-    end
-    return res
-  end,
-  BattleSkillExpEvent = function(list, CharIndex, SkillID, Exp)
-    local res = Exp;
-    for i, v in ipairs(list) do
-      res = v(CharIndex, SkillID, Exp);
-      if res == nil then
-        res = Exp;
-      end
-      Exp = res;
-    end
-    return res
-  end,
   BattleDamageEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
     local dmg = Damage;
     for i, v in ipairs(list) do
@@ -68,6 +35,33 @@ local chained = {
     return res
   end,
 }
+
+for i, v in ipairs({
+  'GetExpEvent', 'ProductSkillExpEvent', 'ItemDropEvent', 'ItemAttachEvent', 'ItemUseEvent',
+}) do
+  chained[v] = function(list, ...)
+    for _i, fn in ipairs(list) do
+      local res = fn(...)
+      if res then
+        return 1;
+      end
+    end
+    return 0
+  end
+end
+for i, v in ipairs({ 'ItemPickUpEvent', 'ItemOverLapEvent', 'BattleSkillExpEvent', }) do
+  chained[v] = function(list, CharIndex, SkillID, Exp)
+    local res = Exp;
+    for _, fn in ipairs(list) do
+      res = fn(CharIndex, SkillID, Exp);
+      if res == nil then
+        res = Exp;
+      end
+      Exp = res;
+    end
+    return res
+  end
+end
 
 local defaultChain = function(fnList, ...)
   local res;
