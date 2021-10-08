@@ -25,6 +25,7 @@ end
 ---@field simpleModule boolean 是否兼容老的luaModule
 ---@field absolutePath boolean
 
+--[[
 ---解决兼容普通lua的问题
 local function forSimpleModule()
   local callInCtx;
@@ -109,6 +110,29 @@ local function forSimpleModule()
 end
 
 local simpleModuleCtx = forSimpleModule();
+]]
+
+local function loadModuleFile(path, moduleName, forceReload)
+  local ctx = {}
+  local rG = {
+    print = function(msg, ...)
+      if msg == nil then
+        msg = ''
+      end
+      logInfo(moduleName, msg, ...)
+    end,
+  };
+  local G = setmetatable(rG, { __index = _G })
+  local result, module = pcall(function()
+    return loadfile(path, 'bt', setmetatable(ctx, { __index = G }))()
+  end)
+  if not result then
+    logError('ModuleSystem', 'load module failed.', 'name=', moduleName, 'path=', path, 'forceReload=', forceReload, '\n', module)
+    return nil;
+  end
+  module = module:new();
+  return module, ctx;
+end
 
 ---@param opt loadModuleOpt
 ---@param moduleName string
@@ -138,27 +162,16 @@ function _G.loadModule(moduleName, opt)
     Modules[moduleName]:unload();
   end
   Modules[moduleName] = nil;
-  local ctx = opt.simpleModule and simpleModuleCtx or {}
-  local rG = {
-    print = function(msg, ...)
-      if msg == nil then
-        msg = ''
-      end
-      logInfo(moduleName, msg, ...)
-    end,
-  };
-  local G = setmetatable(rG, { __index = _G })
-  local result, module = pcall(function()
-    return loadfile(path, 'bt', setmetatable(ctx, { __index = G }))()
-  end)
-  if not result then
-    log('ModuleSystem', 'ERROR', 'load module failed.', moduleName, path, forceReload, '\n', module)
+  local ctx, module;
+  if opt.simpleModule then
+    module = LegacyModule:new(moduleName);
+    ctx = module.context;
+  else
+    module, ctx = loadModuleFile(path, moduleName, forceReload);
+  end
+  if not module then
     return nil;
   end
-  if opt.simpleModule then
-    module = ModuleBase:createModule(moduleName, {});
-  end
-  module = module:new();
   --logInfo('ModuleSystem', 'new object', moduleName, module)
   Modules[moduleName] = module;
   module.___path = oPath;

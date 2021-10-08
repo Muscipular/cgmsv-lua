@@ -47,6 +47,8 @@ function Part:NPC_createNormal(name, image, positionInfo, initCallback)
   local initFn = self:regCallback(initCallback or function()
     return true
   end)
+  self:logInfo('done')
+
   local npc = NL.CreateNpc(nil, initFn);
   if npc < 0 then
     return -1;

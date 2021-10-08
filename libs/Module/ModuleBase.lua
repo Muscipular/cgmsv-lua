@@ -36,7 +36,7 @@ end
 ---@return ModuleBase|NPCPart
 function ModuleBase:createModule(name, depParts)
   local SubModule = ModuleBase:new(name)
-  SubModule.parts = { table.unpack(ModuleBase.parts) }
+  SubModule.parts = table.slice(ModuleBase.parts);
   if depParts then
     for i, v in ipairs(depParts) do
       local part = loadPart(v);
@@ -47,7 +47,7 @@ function ModuleBase:createModule(name, depParts)
   end
   for i, part in ipairs(SubModule.parts) do
     for k, p in pairs(part) do
-      if k ~= 'load' and k ~= 'onLoad' and k ~= 'unload' and k ~= 'onUnload' then
+      if k ~= 'load' and k ~= 'onLoad' and k ~= 'unload' and k ~= 'onUnload' and k ~= 'name' then
         SubModule[k] = p;
       end
     end
@@ -145,8 +145,8 @@ function ModuleBase:migrate()
         elseif type(migration.value) == 'string' then
           SQL.querySQL(migration.value);
         end
-        SQL.querySQL('insert into lua_migration (id, name, module) values (' 
-          .. SQL.sqlValue(migration.version) .. ', ' 
+        SQL.querySQL('insert into lua_migration (id, name, module) values ('
+          .. SQL.sqlValue(migration.version) .. ', '
           .. SQL.sqlValue(migration.name) .. ', '
           .. SQL.sqlValue(self.name) .. ');');
       end
@@ -202,5 +202,5 @@ function ModuleBase:onUnload()
 end
 
 ModuleBase.parts = {
-  dofile('lua/libs/ModuleParts/Npc.lua'),
+  dofile('lua/libs/Module/Parts/Npc.lua'),
 }
