@@ -100,9 +100,22 @@ function LegacyModule:createContext()
   setmetatable(self.context, {
     __index = self.sharedContext,
     __newindex = function(table, key, value)
+      if rawget(table, key) then
+        rawset(table, key, value)
+        return
+      end
       self.sharedContext[key] = value;
     end
   })
+  self.context.dofile = function(path)
+    return loadfile(path, 'bt', self.context)();
+  end
+  self.context.load = function(path, name, mode, env)
+    return load(path, name, mode or 'bt', env or self.context);
+  end
+  self.context.loadfile = function(path, mode, env)
+    return loadfile(path, mode or 'bt', env or self.context);
+  end
   self.context.currentModule = self;
   self.context.print = function(msg, ...)
     if msg == nil then
