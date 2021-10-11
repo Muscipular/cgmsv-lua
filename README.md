@@ -109,6 +109,7 @@ useModule('Welcome') --加载Welcome
 - `NL.RegDamageCalculateEvent` 补丁后的战斗伤害事件
 - `NL.RegBattleHealCalculateEvent` 战斗治疗事件
 - `NL.RegDeleteDummyEvent` 假人删除事件
+- `NL.RegItemExpansionEvent` 用于物品说明处理
 - `Char.GetCharPointer` 获取角色Ptr
 - `Char.GetWeapon` 获取武器
 - `Char.GiveItem` 添加物品，支持静默模式
@@ -132,6 +133,7 @@ useModule('Welcome') --加载Welcome
 - `Char.IsDummy` 是否是假人
 - `Char.CreateDummy` 创建假人
 - `Char.DelDummy` 删除假人
+- `Char.CalcConsumeFp` 用于获取技能所需要的fp
 - `Battle.UnsetWinEvent` 移除事件
 - `Battle.UnsetPVPWinEvent` 移除事件
 - `Battle.GetNextBattle` 获取下一场连战Id
