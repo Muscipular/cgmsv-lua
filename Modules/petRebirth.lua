@@ -54,7 +54,8 @@ function PetRebirth:selectPage(npc, player, seqNo, select, data)
       '\\n\\n   ' .. Char.GetData(pIndex, CONST.CHAR_名字) .. ' lv.' .. Char.GetData(pIndex, CONST.CHAR_等级) .. ' 等级不足150')
     return
   end
-  NLG.ShowWindowTalked(player, npc, CONST.窗口_信息框, CONST.BUTTON_是否, 10 + pIndex,
+  Char.SetData(player, CONST.CHAR_WindowBuffer2, pIndex + 1);
+  NLG.ShowWindowTalked(player, npc, CONST.窗口_信息框, CONST.BUTTON_是否, 4,
     '\\n\\n   ' .. Char.GetData(pIndex, CONST.CHAR_名字) .. ' lv.' .. Char.GetData(pIndex, CONST.CHAR_等级) .. '\\n\\n   确定转生？')
 end
 
@@ -62,7 +63,11 @@ function PetRebirth:confirmPage(npc, player, seqNo, select, data)
   if select == CONST.BUTTON_否 then
     return
   end
-  local pIndex = seqNo - 10;
+  local pIndex = Char.GetData(player, CONST.CHAR_WindowBuffer2) - 1;
+  Char.SetData(player, CONST.CHAR_WindowBuffer2, 0);
+  if not Char.IsValidCharIndex(pIndex) then
+    return
+  end
   if Char.GetData(player, CONST.CHAR_金币) < 100000 then
     NLG.ShowWindowTalked(player, npc, CONST.窗口_信息框, CONST.BUTTON_确定, 3, '\\n\\n   金币不足')
     return
@@ -121,7 +126,7 @@ function PetRebirth:onSelected(npc, player, seqNo, select, data)
     self:firstPage(npc, player, seqNo, select, data)
   elseif seqNo == 2 then
     self:selectPage(npc, player, seqNo, select, data)
-  elseif seqNo >= 10 then
+  elseif seqNo == 4 then
     self:confirmPage(npc, player, seqNo, select, data)
   end
 end

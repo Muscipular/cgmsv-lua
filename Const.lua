@@ -48,6 +48,9 @@ CONST.CHAR_EnemySummon2 = 0x00000018 / 4 + 0x7BC / 4;
 CONST.CHAR_EnemyEscape = 0x0000001c / 4 + 0x7BC / 4;
 CONST.CHAR_EnemyMsg = 0x00000020 / 4 + 0x7BC / 4;
 CONST.CHAR_EnemyBattleAction = 0x00000024 / 4 + 0x7BC / 4;
+CONST.CHAR_WindowBuffer1 = 0x0000008C / 4 + 0x7BC / 4 - 1;
+CONST.CHAR_WindowBuffer2 = 0x0000008C / 4 + 0x7BC / 4;
+CONST.CHAR_WindowBuffer3 = 0x0000008C / 4 + 0x7BC / 4 + 1;
 
 --RECIPE START
 CONST.ITEM_RECIPE_ID = 0x0;

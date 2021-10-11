@@ -206,3 +206,24 @@ function Char.GetDataByPtr(charPtr, dataLine)
   end
   return nil
 end
+
+local calcConsumeFp = ffi.cast('int (__cdecl*)(uint32_t charAddr)', 0x00478F30);
+
+function Char.CalcConsumeFp(charIndex, techId)
+  if not Char.IsValidCharIndex(charIndex) then
+    return -1;
+  end
+  local oCom3 = Char.GetData(charIndex, CONST.CHAR_BattleCom3);
+  local battleIndex = Char.GetBattleIndex(charIndex);
+  local charPtr = Char.GetCharPointer(charIndex);
+  local flg = ffi.readMemoryInt32(charPtr + 0x21E8);
+  if battleIndex >= 0 and Battle.GetTurn(battleIndex) >= 0 then
+  else
+    ffi.setMemoryInt32(charPtr + 0x21E8, -1);
+  end
+  Char.SetData(charIndex, CONST.CHAR_BattleCom3, techId);
+  local fp = calcConsumeFp(charPtr);
+  Char.SetData(charIndex, CONST.CHAR_BattleCom3, oCom3);
+  ffi.setMemoryInt32(charPtr + 0x21E8, flg);
+  return fp;
+end

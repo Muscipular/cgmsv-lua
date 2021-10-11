@@ -82,9 +82,9 @@ function LegacyModule:createDelegate()
             return
           end
           self['_t_' .. key] = fn;
-          regGlobalEvent(key, function(...)
+          self:regCallback(key, function(...)
             return self:callInCtx(fn, ...);
-          end, self.name)
+          end)
         elseif type(fn) == 'function' then
           self:regCallback(key, fn);
         end

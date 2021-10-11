@@ -28,6 +28,7 @@ end
 
 local CharaDeletedCallback = NL.newEvent('CharaDeletedEvent', 0)
 local ResetCharaBattleState = NL.newEvent('ResetCharaBattleStateEvent', 0)
+NL.newEvent('ItemExpansionEvent', '')
 NL.newEvent('Init', 0)
 
 local hookOnCharaDeleted;

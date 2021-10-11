@@ -127,6 +127,10 @@ function commands.moveChar(charIndex, args)
   Char.MoveArray(tonumber(args[1]), table.slice(args, 2))
 end
 
+function commands.calcFp(charIndex, args)
+  NLG.SystemMessage(charIndex, string.format("%d => fp: %d %d", tonumber(args[1]), Char.CalcConsumeFp(charIndex, tonumber(args[1])), 999));
+end
+
 function AdminTest:onLoad()
   self:logInfo('load')
   local fnName, ix = self:regCallback(self.name .. '_WalkPostEvent', function(charIndex)

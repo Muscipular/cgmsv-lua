@@ -97,14 +97,15 @@ end
 
 ---@param eventNameOrCallbackKeyOrFn string|nil|function
 ---@param fn function|nil
+---@param extSign string
 ---@return string, number, number
-function ModuleBase:regCallback(eventNameOrCallbackKeyOrFn, fn)
+function ModuleBase:regCallback(eventNameOrCallbackKeyOrFn, fn, extSign)
   self.lastIx = self.lastIx + 1;
   if type(eventNameOrCallbackKeyOrFn) == 'function' then
     fn = eventNameOrCallbackKeyOrFn;
     eventNameOrCallbackKeyOrFn = '_' .. self.name .. '_cb_' .. self.lastIx;
   end
-  local fnIndex = regGlobalEvent(eventNameOrCallbackKeyOrFn, fn, self.name);
+  local fnIndex = regGlobalEvent(eventNameOrCallbackKeyOrFn, fn, self.name, extSign);
   logInfo(self.name, 'regCallback', eventNameOrCallbackKeyOrFn, self.lastIx, fnIndex, fn);
   self.callbacks[self.lastIx] = { key = eventNameOrCallbackKeyOrFn, fnIndex = fnIndex, fn = fn };
   return eventNameOrCallbackKeyOrFn, self.lastIx, fnIndex;

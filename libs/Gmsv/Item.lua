@@ -80,3 +80,20 @@ end
 function Item.isCrystal(itemIndex)
   return Item.Types.CrystalType == Item.GetData(itemIndex, CONST.道具_类型)
 end
+
+local function hookGetItemText(itemIndex, type, msg)
+  return NL.EmitItemExpansionEvent(itemIndex, type, ffi.string(msg)) or '';
+end
+
+ffi.hook.inlineHook('const char* (__cdecl *)(int itemIndex, int type, const char* s)', hookGetItemText, 0x004CD3EE, 9, {
+  0x89, 0x44, 0x24, 0x08, -- mov [esp + 8], eax
+  0xC7, 0x44, 0x24, 0x04, 0x01, 0x00, 0x00, 0x00, -- mov [esp + 8], 1
+  0x8B, 0x85, 0x10, 0x00, 0x00, 0x00, -- mov eax, [ebp + 0x10]
+  0x89, 0x04, 0x24, -- arg itemIndex
+}, {})
+ffi.hook.inlineHook('const char* (__cdecl *)(int itemIndex, int type, const char* s)', hookGetItemText, 0x004CD5BD, 6, {
+  0x89, 0x44, 0x24, 0x08, -- mov [esp + 8], eax
+  0xC7, 0x44, 0x24, 0x04, 0x02, 0x00, 0x00, 0x00, -- mov [esp + 8], 1
+  0x8B, 0x85, 0x10, 0x00, 0x00, 0x00, -- mov eax, [ebp + 0x10]
+  0x89, 0x04, 0x24, -- arg itemIndex
+}, {})

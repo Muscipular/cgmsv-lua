@@ -82,7 +82,7 @@ end
 
 ---注册npc Talked事件
 ---@param npc number
----@param fn function
+---@param fn fun(npc: number, player: number):void
 function Part:NPC_regTalkedEvent(npc, fn)
   local talkedFn, lastIndex, fnIndex = self:regCallback(self.name .. '_npc_' .. npc .. '_TalkedEvent', fn)
   Char.SetTalkedEvent(nil, talkedFn, npc);
@@ -91,7 +91,7 @@ end
 
 ---注册npc WindowTalked事件
 ---@param npc number
----@param fn function
+---@param fn fun(npc: number, player: number, seqno: number, select: number, data: string):void
 function Part:NPC_regWindowTalkedEvent(npc, fn)
   local talkedFn, lastIndex, fnIndex = self:regCallback(self.name .. '_npc_' .. npc .. '_WindowTalkedEvent', fn)
   Char.SetWindowTalkedEvent(nil, talkedFn, npc);
