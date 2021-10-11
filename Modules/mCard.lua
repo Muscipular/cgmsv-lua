@@ -76,14 +76,14 @@ function ModuleCard:onBattleOverEvent(battleIndex)
           local n = math.random(1, #chars);
           --print(n, chars[n])
           local charIndex = chars[n];
-          local itemIndex = Char.GiveItem(charIndex, 606627, 1);
+          local itemIndex = Char.GiveItem(charIndex, 606627, 1, false);
           if itemIndex >= 0 then
-            Item.SetData(itemIndex, CONST.道具_名字, gmsvData:getEnemyName(enemy.EnemyId) .. '的装备卡片');
-            Item.SetData(itemIndex, CONST.道具_Func_UseFunc, '');
+            Item.SetData(itemIndex, CONST.道具_名字, string.format("装备卡片(%s)", gmsvData:getEnemyName(enemy.EnemyId)));
+            Item.SetData(itemIndex, CONST.道具_Func_UseFunc, 'LUA_useMCard');
             Item.SetData(itemIndex, CONST.道具_Func_AttachFunc, '');
             Item.SetData(itemIndex, CONST.道具_自用参数, tostring(enemy.EnemyId));
-            Item.SetData(itemIndex, CONST.道具_Explanation1, 0);
-            Item.SetData(itemIndex, CONST.道具_Explanation2, 0);
+            Item.SetData(itemIndex, CONST.道具_Explanation1, -1);
+            Item.SetData(itemIndex, CONST.道具_Explanation2, -1);
             Item.UpItem(charIndex, itemIndex);
           end
           if Char.ItemSlot(charIndex) >= 20 then
@@ -96,12 +96,26 @@ function ModuleCard:onBattleOverEvent(battleIndex)
   end
 end
 
+---@param CharIndex number
+---@param TargetCharIndex number
+---@param ItemSlot number
+function ModuleCard:onUseCard(CharIndex, TargetCharIndex, ItemSlot)
+  return 0;
+end
+
+function ModuleCard:onItemExpansionEvent(itemIndex, type, msg)
+  self:logDebug('onItemExpansionEvent', itemIndex, type, msg);
+  return msg;
+end
+
 --- 加载模块钩子
 function ModuleCard:onLoad()
   self:logInfo('load')
   self.cache = { }
   self:regCallback('BattleStartEvent', Func.bind(self.onBattleStartEvent, self))
   self:regCallback('BattleOverEvent', Func.bind(self.onBattleOverEvent, self))
+  self:regCallback('ItemString', Func.bind(self.onUseCard, self), 'LUA_useMCard')
+  self:regCallback('ItemExpansionEvent', Func.bind(self.onItemExpansionEvent, self))
 end
 
 --- 卸载模块钩子
