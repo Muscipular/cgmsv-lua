@@ -217,10 +217,10 @@ function Char.CalcConsumeFp(charIndex, techId)
   local battleIndex = Char.GetBattleIndex(charIndex);
   local charPtr = Char.GetCharPointer(charIndex);
   local flg = ffi.readMemoryInt32(charPtr + 0x21E8);
-  if battleIndex >= 0 and Battle.GetTurn(battleIndex) >= 0 then
-  else
-    ffi.setMemoryInt32(charPtr + 0x21E8, -1);
-  end
+  --if battleIndex >= 0 and Battle.GetTurn(battleIndex) >= 0 then
+  --else
+  ffi.setMemoryInt32(charPtr + 0x21E8, -1);
+  --end
   Char.SetData(charIndex, CONST.CHAR_BattleCom3, techId);
   local fp = calcConsumeFp(charPtr);
   Char.SetData(charIndex, CONST.CHAR_BattleCom3, oCom3);
