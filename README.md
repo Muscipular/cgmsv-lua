@@ -144,6 +144,10 @@ useModule('Welcome') --加载Welcome
 - `Data.GetEncountData` 获取Encount数据
 - `Data.SetMessage` 获取Msg
 - `Data.GetMessage` 修改/新增Msg，动态创建物品时大概会有用
+- `Data.EnemyGetDataIndex` 获取EnemyDataIndex
+- `Data.EnemyGetData` 获取Enemy数据
+- `Data.EnemyBaseGetDataIndex` 获取EnemyBaseDataIndex
+- `Data.EnemyBaseGetData` 获取EnemyBase数据
 - `Item.GetSlot` 获取ItemIndex对应位置
 - `Protocol.makeEscapeString` 编码字符串
 - `Protocol.makeStringFromEscaped` 解码字符串
