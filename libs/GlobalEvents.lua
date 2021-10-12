@@ -26,6 +26,16 @@ local chained = {
     end
     return dmg
   end,
+  ItemExpansionEvent = function(list, itemIndex, type, msg)
+    for i, v in ipairs(list) do
+      local m = v(itemIndex, type, msg);
+      if m == nil then
+        m = msg;
+      end
+      msg = m;
+    end
+    return msg;
+  end,
   Init = function(fnList, ...)
     fnList = table.copy(fnList)
     local res;

@@ -107,7 +107,7 @@ function ModuleBase:regCallback(eventNameOrCallbackKeyOrFn, fn, extSign)
   end
   local fnIndex = regGlobalEvent(eventNameOrCallbackKeyOrFn, fn, self.name, extSign);
   logInfo(self.name, 'regCallback', eventNameOrCallbackKeyOrFn, self.lastIx, fnIndex, fn);
-  self.callbacks[self.lastIx] = { key = eventNameOrCallbackKeyOrFn, fnIndex = fnIndex, fn = fn };
+  self.callbacks[self.lastIx] = { key = eventNameOrCallbackKeyOrFn, fnIndex = fnIndex, fn = fn, extSign = extSign };
   return eventNameOrCallbackKeyOrFn, self.lastIx, fnIndex;
 end
 
@@ -126,7 +126,7 @@ function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrFnIndex)
     return
   end
   logInfo(self.name, 'removeGlobalEvent', fnCb.key, fnCb.fnIndex, fnCb.fn);
-  removeGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
+  removeGlobalEvent(fnCb.key, fnCb.fnIndex, self.name, fnCb.extSign);
   self.callbacks[cbIndex] = nil;
 end
 

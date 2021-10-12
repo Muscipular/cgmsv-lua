@@ -1,6 +1,6 @@
 ---@class ItemExt:ModuleBase
 local ItemExt = ModuleBase:createModule('itemExt')
-local MAX_CACHE_SIZE = 1000;
+local MAX_CACHE_SIZE = 5000;
 
 ItemExt:addMigration(1, 'add item_LuaData', function()
   SQL.querySQL([[create table if not exists lua_itemData
@@ -41,8 +41,16 @@ function ItemExt:setItemData(itemIndex, value)
 end
 
 ---@return table
-function ItemExt:getItemData(itemIndex)
-  local args = Item.GetData(itemIndex, CONST.道具_自用参数)
+---@param noCache boolean|nil 是否缓存
+function ItemExt:getItemData(itemIndex, noCache)
+  local itemType = Item.GetData(itemIndex, CONST.道具_类型)
+  local field = CONST.道具_自用参数;
+  if itemType >= 0 and itemType <= 21 then
+    field = CONST.道具_自用参数;
+  else
+    field = CONST.道具_Func_AttachFunc;
+  end
+  local args = Item.GetData(itemIndex, field)
   local data;
   if string.match(args, '^luaData_') then
     data = self.cache:get(args)
@@ -57,7 +65,9 @@ function ItemExt:getItemData(itemIndex)
     end
   end
   data = data or {}
-  self.cache:set(args, data);
+  if not noCache then
+    self.cache:set(args, data);
+  end
   return data;
 end
 --- 加载模块钩子
