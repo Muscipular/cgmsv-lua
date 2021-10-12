@@ -36,6 +36,60 @@ function Data.ItemsetGetData(ItemsetIndex, DataPos)
   return FFI.readMemoryInt32(Addresses.ItemTablePTR + ItemsetIndex * 1092 + DataPos * 4 + 4) + baseValue
 end
 
+---获取EnemyDataIndex
+function Data.EnemyGetDataIndex(enemyId)
+  if enemyId < 0 and enemyId > Addresses.Enemy_JMP_Size then
+    return -1;
+  end
+  return FFI.readMemoryInt32(Addresses.Enemy_JMP + 4 * enemyId)
+end
+
+---获取Enemy数据
+function Data.EnemyGetData(enemyIndex, DataPos)
+  if enemyIndex < 0 or enemyIndex > Addresses.EnemyTableSize then
+    return nil;
+  end
+  if DataPos >= 2000 then
+    --string32 * 13 
+    DataPos = DataPos - 2000;
+    if DataPos >= 2 then
+      return nil;
+    end
+    return FFI.readMemoryString(Addresses.EnemyTableTPR + enemyIndex * 0x13C + 46 * 4 + DataPos * 32)
+  end
+  if DataPos >= 46 then
+    return nil
+  end
+  return FFI.readMemoryInt32(Addresses.EnemyTableTPR + enemyIndex * 0x13C + DataPos * 4)
+end
+
+---获取EnemyBaseDataIndex
+function Data.EnemyBaseGetDataIndex(enemyBaseId)
+  if enemyBaseId < 0 and enemyBaseId > Addresses.EnemyBase_JMP_Size then
+    return -1;
+  end
+  return FFI.readMemoryInt32(Addresses.EnemyBase_JMP + 4 * enemyBaseId)
+end
+
+---获取EnemyBase数据
+function Data.EnemyBaseGetData(enemyBaseIndex, DataPos)
+  if enemyBaseIndex < 0 or enemyBaseIndex >= Addresses.EnemyBaseSize then
+    return nil;
+  end
+  if DataPos >= 2000 then
+    --string32 * 13 
+    DataPos = DataPos - 2000;
+    if DataPos >= 1 then
+      return nil;
+    end
+    return FFI.readMemoryString(Addresses.EnemyBaseTableTPR + enemyBaseIndex * 0xD4 + 45 * 4 + DataPos * 32)
+  end
+  if DataPos >= 45 then
+    return nil
+  end
+  return FFI.readMemoryInt32(Addresses.EnemyBaseTableTPR + enemyBaseIndex * 0xD4 + DataPos * 4)
+end
+
 local encountMapping = {}
 
 Addresses.onLoad(function()

@@ -70,15 +70,14 @@ function PetLottery:onItemUsed(charIndex, targetCharIndex, itemSlot)
   local itemIndex = Char.GetItemIndex(charIndex, itemSlot);
   if tonumber(Item.GetData(itemIndex, CONST.道具_ID)) == 47763 then
     --NLG.ShowWindowTalked(charIndex, charIndex, CONST.窗口_信息框, CONST.BUTTON_是否, 0, "\\n\\n    是否")
-    Char.DelItem(charIndex, 47763, 1);
+    Char.DelItemBySlot(charIndex, itemSlot);
     local n = math.random(0, MAX_N)
     local k = n;
     for i, v in ipairs(pets) do
       if n <= v[2] then
-        ---@type GmsvData
-        local gmsv = getModule('gmsvData');
+       local name = Data.EnemyBaseGetData(Data.EnemyBaseGetDataIndex(Data.EnemyGetData(Data.EnemyGetDataIndex(tonumber(v[1])), CONST.DATA_ENEMY_TEMPNO)), CONST.DATA_ENEMYBASE_NAME) or 'nil';
         NLG.ShowWindowTalked(charIndex, self.npc, CONST.窗口_信息框, CONST.BUTTON_是否, v[1],
-          "\\n\\n    (" .. k .. ")奖品为： " .. (gmsv:getEnemyName(v[1]) or '???') .. " 一只，是否领取？")
+          "\\n\\n    (" .. k .. ")奖品为： " .. name .. " 一只，是否领取？")
         return -1;
       end
       n = n - v[2]

@@ -34,6 +34,22 @@ function Addresses.load()
   Addresses.BattleMax = BattleMax;
   local DBQueue = FFI.readMemoryDWORD(0x091A575C);
   Addresses.DBQueue = DBQueue;
+  local EnemyTableSize = FFI.readMemoryDWORD(0x006858E0);
+  Addresses.EnemyTableSize = EnemyTableSize;
+  local EnemyTableTPR = FFI.readMemoryDWORD(0x091A9160);
+  Addresses.EnemyTableTPR = EnemyTableTPR;
+  local EnemyBaseSize = FFI.readMemoryDWORD(0x006858EC);
+  Addresses.EnemyBaseSize = EnemyBaseSize;
+  local EnemyBaseTableTPR = FFI.readMemoryDWORD(0x091A9164);
+  Addresses.EnemyBaseTableTPR = EnemyBaseTableTPR;
+  local EnemyBase_JMP_Size = FFI.readMemoryDWORD(0x006858F0);
+  Addresses.EnemyBase_JMP_Size = EnemyBase_JMP_Size;
+  local EnemyBase_JMP = FFI.readMemoryDWORD(0x006858F4);
+  Addresses.EnemyBase_JMP = EnemyBase_JMP;
+  local Enemy_JMP_Size = FFI.readMemoryDWORD(0x006858E4);
+  Addresses.Enemy_JMP_Size = Enemy_JMP_Size;
+  local Enemy_JMP = FFI.readMemoryDWORD(0x006858E8);
+  Addresses.Enemy_JMP = Enemy_JMP;
   for i, v in ipairs(callbacks.load) do
     v();
   end

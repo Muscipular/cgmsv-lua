@@ -14,10 +14,31 @@ function ModuleCard:onBattleStartEvent(battleIndex)
       local charIndex = Battle.GetPlayer(battleIndex, i);
       if charIndex >= 0 then
         local enemyId = Char.GetData(charIndex, CONST.CHAR_ENEMY_ID);
-        self:logDebug('enemy', battleIndex, i, charIndex, enemyId,
-          Char.GetData(charIndex, CONST.CHAR_EnemyBaseId),
-          Char.GetData(charIndex, CONST.CHAR_名字)
-        );
+        --self:logDebug('enemy', battleIndex, i, charIndex, enemyId,
+        --  Char.GetData(charIndex, CONST.CHAR_EnemyBaseId),
+        --  Char.GetData(charIndex, CONST.CHAR_名字)
+        --);
+        local enemyData = gmsvData.enemy[tostring(enemyId)];
+        if enemyData == nil then
+          self:logDebug('enemy data not found', enemyId);
+          goto continue;
+        end
+        local rate = NormalRate;
+        if enemyData[gmsvData.CONST.Enemy.IsBoss] then
+          rate = BossRate;
+        end
+        local itemIndex = Char.GiveItem(charIndex, 606627, 1, false);
+        if itemIndex >= 0 then
+          Item.SetData(itemIndex, CONST.道具_已鉴定, 1);
+          local name = Data.EnemyBaseGetData(Data.EnemyBaseGetDataIndex(Data.EnemyGetData(Data.EnemyGetDataIndex(tonumber(enemyId)), CONST.DATA_ENEMY_TEMPNO)), CONST.DATA_ENEMYBASE_NAME) or 'nil';
+          Item.SetData(itemIndex, CONST.道具_名字, string.format("装备卡片(%s)", name));
+          Item.SetData(itemIndex, CONST.道具_Func_UseFunc, 'LUA_useMCard');
+          Item.SetData(itemIndex, CONST.道具_Func_AttachFunc, '');
+          Item.SetData(itemIndex, CONST.道具_自用参数, tostring(enemyId));
+          Item.SetData(itemIndex, CONST.道具_Explanation1, -1);
+          Item.SetData(itemIndex, CONST.道具_Explanation2, -1);
+          Item.UpItem(charIndex, itemIndex);
+        end
         if enemyId and enemyId > 0 then
           enemyDataList[tostring(i)] = {
             EnemyBaseId = Char.GetData(charIndex, CONST.CHAR_EnemyBaseId),
@@ -28,10 +49,12 @@ function ModuleCard:onBattleStartEvent(battleIndex)
           };
         end
       end
+      :: continue ::
     end
   end
 end
 
+--[[
 function ModuleCard:onBattleOverEvent(battleIndex)
   local type = Battle.GetType(battleIndex)
   self:logDebug('battle over', battleIndex, type, CONST.战斗_普通)
@@ -70,7 +93,7 @@ function ModuleCard:onBattleOverEvent(battleIndex)
           rate = BossRate;
         end
         --if Char.GetData(charIndex, CONST.CHAR_CDK) == 'u01' then
-        --rate = 1000;
+        rate = 1000;
         --end
         if #chars > 0 and math.random(0, 100) < rate then
           local n = math.random(1, #chars);
@@ -90,21 +113,33 @@ function ModuleCard:onBattleOverEvent(battleIndex)
             table.remove(chars, n)
           end
         end
-        ::continue::
+        :: continue ::
       end
     end
   end
 end
+]]
 
 ---@param CharIndex number
 ---@param TargetCharIndex number
 ---@param ItemSlot number
 function ModuleCard:onUseCard(CharIndex, TargetCharIndex, ItemSlot)
+  self:logDebug('LUA_useMCard', CharIndex, TargetCharIndex, ItemSlot);
   return 0;
 end
 
 function ModuleCard:onItemExpansionEvent(itemIndex, type, msg)
   self:logDebug('onItemExpansionEvent', itemIndex, type, msg);
+  if Item.GetData(itemIndex, CONST.道具_Func_UseFunc) == 'LUA_useMCard' then
+    local enemyId = tonumber(Item.GetData(itemIndex, CONST.道具_自用参数));
+    local name = Data.EnemyBaseGetData(Data.EnemyBaseGetDataIndex(Data.EnemyGetData(Data.EnemyGetDataIndex(enemyId), CONST.DATA_ENEMY_TEMPNO)), CONST.DATA_ENEMYBASE_NAME) or 'nil';
+    if type == 1 then
+      return '封印着$5' .. name .. '$0的灵魂的卡片\n\n\n双击可以为装备附魔';
+    end
+    if type == 2 then
+      return '封印着$5' .. name .. '$0的灵魂的卡片\n效果: 攻击力 + 10';
+    end
+  end
   return msg;
 end
 

@@ -37,19 +37,20 @@ local chained = {
 }
 
 for i, v in ipairs({
-  'GetExpEvent', 'ProductSkillExpEvent', 'ItemDropEvent', 'ItemAttachEvent', 'ItemUseEvent',
+  'ItemPickUpEvent', 'ItemOverLapEvent', 'ItemDropEvent', 'ItemAttachEvent', 'ItemUseEvent',
 }) do
   chained[v] = function(list, ...)
     for _i, fn in ipairs(list) do
       local res = fn(...)
-      if res then
-        return 1;
+      if res < 0 then
+        return -1;
       end
     end
     return 0
   end
 end
-for i, v in ipairs({ 'ItemPickUpEvent', 'ItemOverLapEvent', 'BattleSkillExpEvent', }) do
+
+for i, v in ipairs({ 'GetExpEvent', 'ProductSkillExpEvent', 'BattleSkillExpEvent', }) do
   chained[v] = function(list, CharIndex, SkillID, Exp)
     local res = Exp;
     for _, fn in ipairs(list) do
