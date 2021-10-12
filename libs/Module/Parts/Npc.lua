@@ -68,9 +68,9 @@ end
 
 ---@param list {name:string,image:number,price:number,desc:string,count:number, maxCount:number}[]
 ---@param image number
----@param msg1 number
----@param msg2 number
----@param msg3 number
+---@param msg1 string
+---@param msg2 string
+---@param msg3 string
 ---@param name string
 ---@param name string
 ---@return string

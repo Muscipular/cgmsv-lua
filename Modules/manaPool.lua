@@ -91,7 +91,7 @@ end
 function Module:onSellerTalked(npc, player)
   if NLG.CanTalk(npc, player) then
     NLG.ShowWindowTalked(player, npc, CONST.窗口_商店买, CONST.BUTTON_是, 0,
-      self:NPC_buildBuyWindowData(101024, '血魔加油站', 1, 2, 3, itemList))
+      self:NPC_buildBuyWindowData(101024, '血魔加油站', '充值血魔池', '金钱不足', '背包已满', itemList))
   end
 end
 
