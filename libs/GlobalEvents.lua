@@ -47,13 +47,25 @@ local chained = {
 }
 
 for i, v in ipairs({
-  'ItemPickUpEvent', 'ItemOverLapEvent', 'ItemDropEvent', 'ItemAttachEvent', 'ItemUseEvent',
+  'ItemPickUpEvent', 'ItemDropEvent', 'ItemAttachEvent', 'ItemUseEvent',
 }) do
   chained[v] = function(list, ...)
     for _i, fn in ipairs(list) do
-      local res = fn(...)
+      local res = tonumber(fn(...)) or 0;
       if res < 0 then
         return -1;
+      end
+    end
+    return 0
+  end
+end
+
+for i, v in ipairs({ 'ItemOverLapEvent', }) do
+  chained[v] = function(list, ...)
+    for _i, fn in ipairs(list) do
+      local res = tonumber(fn(...)) or 0;
+      if res ~= 0 then
+        return 1;
       end
     end
     return 0
