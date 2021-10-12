@@ -23,6 +23,9 @@ function Module:onBattleReset(charIndex)
   end
   local lpPool = tonumber(Field.Get(charIndex, 'LpPool')) or 0;
   local fpPool = tonumber(Field.Get(charIndex, 'FpPool')) or 0;
+  if lpPool <= 0 and fpPool <= 0 then
+    return
+  end
   local lp = Char.GetData(charIndex, CONST.CHAR_Ñª)
   local maxLp = Char.GetData(charIndex, CONST.CHAR_×î´óÑª)
   local fp = Char.GetData(charIndex, CONST.CHAR_Ä§)
@@ -34,6 +37,8 @@ function Module:onBattleReset(charIndex)
       lpPool = 0;
     end
     NLG.SystemMessage(charIndex, '[ÑªÄ§³Ø] ÒÑ»Ö¸´: ' .. (maxLp - lp) .. 'LP, Ñª³ØÊ£Óà: ' .. lpPool);
+  else
+    maxLp = lp;
   end
   if fpPool > 0 and fp < maxFp then
     fpPool = fpPool - maxFp + fp;
@@ -42,6 +47,8 @@ function Module:onBattleReset(charIndex)
       fpPool = 0;
     end
     NLG.SystemMessage(charIndex, '[ÑªÄ§³Ø] ÒÑ»Ö¸´: ' .. (maxFp - fp) .. 'FP, Ä§³ØÊ£Óà: ' .. fpPool);
+  else
+    maxFp = fp;
   end
   Char.SetData(charIndex, CONST.CHAR_Ñª, maxLp)
   Char.SetData(charIndex, CONST.CHAR_Ä§, maxFp)
@@ -60,6 +67,8 @@ function Module:onBattleReset(charIndex)
         lpPool = 0;
       end
       NLG.SystemMessage(charIndex, '[ÑªÄ§³Ø] ÒÑ»Ö¸´³èÎï: ' .. (maxLp - lp) .. 'LP, Ñª³ØÊ£Óà: ' .. lpPool);
+    else
+      maxLp = lp;
     end
     if fpPool > 0 and fp < maxFp then
       fpPool = fpPool - maxFp + fp;
@@ -68,6 +77,8 @@ function Module:onBattleReset(charIndex)
         fpPool = 0;
       end
       NLG.SystemMessage(charIndex, '[ÑªÄ§³Ø] ÒÑ»Ö¸´³èÎï: ' .. (maxFp - fp) .. 'FP, Ä§³ØÊ£Óà: ' .. fpPool);
+    else
+      maxFp = fp;
     end
     Char.SetData(petIndex, CONST.CHAR_Ñª, maxLp)
     Char.SetData(petIndex, CONST.CHAR_Ä§, maxFp)
