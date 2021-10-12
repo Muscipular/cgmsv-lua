@@ -23,7 +23,7 @@ function ModuleCard:onBattleStartEvent(battleIndex)
         if Data.EnemyGetData(Data.EnemyGetDataIndex(enemyId), CONST.DATA_ENEMY_BOSS_FLG) == 1 then
           rate = BossRate;
         end
-        rate = 1000;
+        --rate = 1000;
         if math.random(0, 100) >= rate then
           goto continue;
         end
