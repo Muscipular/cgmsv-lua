@@ -98,7 +98,7 @@ end
 ---@param eventNameOrCallbackKeyOrFn string|nil|function
 ---@param fn function|nil
 ---@param extSign string
----@return string, number, number
+---@return string, number , number fnKey, cbIndex, fnIndex
 function ModuleBase:regCallback(eventNameOrCallbackKeyOrFn, fn, extSign)
   self.lastIx = self.lastIx + 1;
   if type(eventNameOrCallbackKeyOrFn) == 'function' then
@@ -112,17 +112,17 @@ function ModuleBase:regCallback(eventNameOrCallbackKeyOrFn, fn, extSign)
 end
 
 ---@param eventNameOrCallbackKey string
----@param fnOrFnIndex function|number
-function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrFnIndex)
-  local cbIndex = fnOrFnIndex;
-  if type(fnOrFnIndex) == 'function' then
+---@param fnOrCbIndex function|number
+function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrCbIndex)
+  local cbIndex = fnOrCbIndex;
+  if type(fnOrCbIndex) == 'function' then
     cbIndex = table.findIndex(self.callbacks, function(e)
-      return fnOrFnIndex == e.fn
+      return fnOrCbIndex == e.fn
     end)
   end
   local fnCb = self.callbacks[cbIndex];
   if not fnCb then
-    logWarn(self.name, 'cannot find callback of ' .. eventNameOrCallbackKey, fnOrFnIndex)
+    logWarn(self.name, 'cannot find callback of ' .. eventNameOrCallbackKey, fnOrCbIndex)
     return
   end
   logInfo(self.name, 'removeGlobalEvent', fnCb.key, fnCb.fnIndex, fnCb.fn);

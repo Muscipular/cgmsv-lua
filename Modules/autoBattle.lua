@@ -48,15 +48,23 @@ function Module:handleBattleAutoCommand(battleIndex)
     if charIndex >= 0 then
       --if Char.GetData(charIndex, CONST.CHAR_类型) == CONST.对象类型_人 then
       if Char.IsDummy(charIndex) then
-        self:logDebug('auto battle', charIndex);
+        local petIndex = Battle.GetPlayer(battleIndex, math.fmod(i + 5, 10));
+        self:logDebug('auto battle', charIndex, petIndex);
         hasAutoBattle = true;
         Char.SetData(charIndex, CONST.CHAR_BattleMode, 3);
-        Char.SetData(charIndex, CONST.CHAR_BattleCom1, Battle.COM_LIST.BATTLE_COM_ATTACK);
+        Char.SetData(charIndex, CONST.CHAR_BattleCom1, Battle.COM_LIST.BATTLE_COM_P_RANDOMSHOT);
         Char.SetData(charIndex, CONST.CHAR_BattleCom2, 10);
-        Char.SetData(charIndex, CONST.CHAR_BattleCom3, -1);
-        Char.SetData(charIndex, CONST.CHAR_Battle2Com1, Battle.COM_LIST.BATTLE_COM_ATTACK);
-        Char.SetData(charIndex, CONST.CHAR_Battle2Com2, 10);
-        Char.SetData(charIndex, CONST.CHAR_Battle2Com3, -1);
+        Char.SetData(charIndex, CONST.CHAR_BattleCom3, 9500);
+        if petIndex >= 0 then
+          Char.SetData(petIndex, CONST.CHAR_BattleMode, 3);
+          Char.SetData(petIndex, CONST.CHAR_BattleCom1, Battle.COM_LIST.BATTLE_COM_ATTACK);
+          Char.SetData(petIndex, CONST.CHAR_BattleCom2, 10);
+          Char.SetData(petIndex, CONST.CHAR_BattleCom3, -1);
+        else
+          Char.SetData(charIndex, CONST.CHAR_Battle2Com1, Battle.COM_LIST.BATTLE_COM_ATTACK);
+          Char.SetData(charIndex, CONST.CHAR_Battle2Com2, 10);
+          Char.SetData(charIndex, CONST.CHAR_Battle2Com3, -1);
+        end
       else
         hasPlayer = true;
       end
@@ -78,7 +86,7 @@ function Module:handleBattleAutoCommand(battleIndex)
   if not hasPlayer and hasAutoBattle then
     for i = 0, 9 do
       local charIndex = Battle.GetPlayer(battleIndex, i);
-      if charIndex >= 0 then
+      if charIndex >= 0 and Char.GetData(charIndex, CONST.CHAR_类型) == CONST.对象类型_人 then
         Char.SetData(charIndex, CONST.CHAR_BattleMode, 3);
         Char.SetData(charIndex, CONST.CHAR_BattleCom1, Battle.COM_LIST.BATTLE_COM_ESCAPE);
         Char.SetData(charIndex, CONST.CHAR_BattleCom2, -1);

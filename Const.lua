@@ -27,6 +27,7 @@ CONST.道具_Func_DropFunc = 2010;
 CONST.道具_Func_PrePickUpFunc = 2011;
 CONST.道具_Func_PickUpFunc = 2012;
 CONST.CHAR_ENEMY_ID = 499;
+CONST.PET_DepartureBattleStatus = 0xCC / 4 + 0x58 / 4;
 --
 CONST.CHAR_PlayerFD = 0x7BC / 4;
 CONST.CHAR_BattleMode = 0x00000000 / 4 + 0x5e8 / 4;

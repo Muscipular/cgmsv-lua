@@ -90,9 +90,21 @@ function commands.createDummy(charIndex, args)
   Char.SetData(charIndex1, CONST.CHAR_体力, 999999);
   NLG.UpChar(charIndex1);
   Char.SetData(charIndex1, CONST.CHAR_血, Char.GetData(charIndex1, CONST.CHAR_最大血));
+  Char.SetData(charIndex1, CONST.CHAR_魔, Char.GetData(charIndex1, CONST.CHAR_最大魔));
   Char.GiveItem(charIndex1, 2100, 1, false);
   Char.MoveItem(charIndex1, 8, CONST.EQUIP_左手, -1);
+  Char.SetData(charIndex1, CONST.CHAR_职业, 41);
+  Char.SetData(charIndex1, CONST.CHAR_职类ID, 40);
+  Char.SetData(charIndex1, CONST.CHAR_职阶, 1);
+  Char.AddSkill(charIndex1, 95);
+  Char.GivePet(charIndex1, 3004);
+  local changePetState = ffi.cast('int (__cdecl*)(uint32_t a1, char a2, char a3, char a4, char a5, char a6)', 0x004678D0);
+  changePetState(Char.GetCharPointer(charIndex1), 2, 0, 0, 0, 0)
+  --Char.SetData(charIndex1, CONST.CHAR_战宠, 0);
+  --local petIndex = Char.GetPet(charIndex1, 0);
+  --Char.SetData(petIndex, CONST.PET_DepartureBattleStatus, CONST.PET_STATE_战斗);
   NLG.SystemMessage(charIndex, 'dummy: ' .. charIndex1)
+  Char.JoinParty(charIndex1, charIndex);
 end
 
 function commands.setCharData(charIndex, args)
@@ -129,6 +141,14 @@ end
 
 function commands.calcFp(charIndex, args)
   NLG.SystemMessage(charIndex, string.format("%d => fp: %d %d", tonumber(args[1]), Char.CalcConsumeFp(charIndex, tonumber(args[1])), 999));
+end
+
+function commands.dofile2(charIndex, args)
+  local r, fn = pcall(dofile, args[1]);
+  logDebug('', r, fn);
+  if r then
+    pcall(fn, charIndex, table.slice(args, 2));
+  end
 end
 
 function AdminTest:onLoad()
