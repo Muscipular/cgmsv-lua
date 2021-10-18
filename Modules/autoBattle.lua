@@ -51,19 +51,13 @@ function Module:handleBattleAutoCommand(battleIndex)
         local petIndex = Battle.GetPlayer(battleIndex, math.fmod(i + 5, 10));
         self:logDebug('auto battle', charIndex, petIndex);
         hasAutoBattle = true;
-        Char.SetData(charIndex, CONST.CHAR_BattleMode, 3);
-        Char.SetData(charIndex, CONST.CHAR_BattleCom1, Battle.COM_LIST.BATTLE_COM_P_RANDOMSHOT);
-        Char.SetData(charIndex, CONST.CHAR_BattleCom2, 10);
-        Char.SetData(charIndex, CONST.CHAR_BattleCom3, 9500);
+        if Battle.IsWaitingCommand(charIndex) then
+          Battle.ActionSelect(charIndex, Battle.COM_LIST.BATTLE_COM_P_RANDOMSHOT, -1, 9500);
+        end
         if petIndex >= 0 then
-          Char.SetData(petIndex, CONST.CHAR_BattleMode, 3);
-          Char.SetData(petIndex, CONST.CHAR_BattleCom1, Battle.COM_LIST.BATTLE_COM_ATTACK);
-          Char.SetData(petIndex, CONST.CHAR_BattleCom2, 10);
-          Char.SetData(petIndex, CONST.CHAR_BattleCom3, -1);
+          Battle.ActionSelect(petIndex, Battle.COM_LIST.BATTLE_COM_ATTACK, -1, -1);
         else
-          Char.SetData(charIndex, CONST.CHAR_Battle2Com1, Battle.COM_LIST.BATTLE_COM_ATTACK);
-          Char.SetData(charIndex, CONST.CHAR_Battle2Com2, 10);
-          Char.SetData(charIndex, CONST.CHAR_Battle2Com3, -1);
+          Battle.ActionSelect(petIndex, Battle.COM_LIST.BATTLE_COM_ATTACK, -1, -1);
         end
       else
         hasPlayer = true;
@@ -87,13 +81,17 @@ function Module:handleBattleAutoCommand(battleIndex)
     for i = 0, 9 do
       local charIndex = Battle.GetPlayer(battleIndex, i);
       if charIndex >= 0 and Char.GetData(charIndex, CONST.CHAR_类型) == CONST.对象类型_人 then
-        Char.SetData(charIndex, CONST.CHAR_BattleMode, 3);
-        Char.SetData(charIndex, CONST.CHAR_BattleCom1, Battle.COM_LIST.BATTLE_COM_ESCAPE);
-        Char.SetData(charIndex, CONST.CHAR_BattleCom2, -1);
-        Char.SetData(charIndex, CONST.CHAR_BattleCom3, -1);
-        Char.SetData(charIndex, CONST.CHAR_Battle2Com1, Battle.COM_LIST.BATTLE_COM_ESCAPE);
-        Char.SetData(charIndex, CONST.CHAR_Battle2Com2, -1);
-        Char.SetData(charIndex, CONST.CHAR_Battle2Com3, -1);
+        local petIndex = Battle.GetPlayer(battleIndex, math.fmod(i + 5, 10));
+        self:logDebug('auto battle', charIndex, petIndex);
+        hasAutoBattle = true;
+        if Battle.IsWaitingCommand(charIndex) then
+          Battle.ActionSelect(charIndex, Battle.COM_LIST.BATTLE_COM_ESCAPE, -1, -1);
+        end
+        if petIndex >= 0 then
+          Battle.ActionSelect(petIndex, Battle.COM_LIST.BATTLE_COM_ATTACK, -1, -1);
+        else
+          Battle.ActionSelect(petIndex, Battle.COM_LIST.BATTLE_COM_ESCAPE, -1, -1);
+        end
       end
     end
   end

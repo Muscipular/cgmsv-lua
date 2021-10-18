@@ -31,6 +31,8 @@ function Char.IsDummy(charIndex)
   return Char.GetData(charIndex, CONST.CHAR_类型) == 1 and dummyChar[charIndex] ~= nil;
 end
 
+local initCharaFn1 = ffi.cast('int (__cdecl*)(uint32_t a1, int a3)', 0x00432FE0);
+
 ---@class DummyCreateOptions
 ---@field mapType number
 ---@field floor number
@@ -64,6 +66,11 @@ function Char.CreateDummy(options)
   ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_原形, options.image or 100000);
   ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_原始图档, options.image or 100000);
   ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_形象, options.image or 100000);
+  ffi.setMemoryInt32(charPtr + 0x5e8 + 0x188, -1);
+  ffi.setMemoryInt32(charPtr + 0x5e8 + 0x188 + 0xC, -1);
+  ffi.setMemoryInt32(charPtr + 0x5e8 + 0x188 + 0x18, 100);
+  ffi.setMemoryInt32(charPtr + 0x7bc + 0xac, -1);
+  initCharaFn1(charPtr, 1);
   local objectIndex = addCharaToMap(1, charPtr, 0, 777, 20, 90);
   ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_OBJ, objectIndex);
   Broadcast_ObjectState(objectIndex);

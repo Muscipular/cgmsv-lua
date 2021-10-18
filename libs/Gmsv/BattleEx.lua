@@ -344,3 +344,20 @@ ffi.hook.inlineHook('void (__cdecl *)(int battleIndex)', handleBeforeBattleTurn,
 ----    fnList.VSEnemyCreateEvent = FuncName
 ----    hook()
 ----end
+
+local _ProcessBattleCommand = ffi.cast('int (__cdecl *)(uint32_t charAddr, int com, int com2, int com3)', 0x0048BD50);
+
+function Battle.ActionSelect(charIndex, com1, com2, com3)
+  if not Char.IsValidCharIndex(charIndex) then
+    return -1;
+  end
+  if not Battle.IsWaitingCommand(charIndex) then
+    return -2;
+  end
+  local charPtr = Char.GetCharPointer(charIndex);
+  _ProcessBattleCommand(charPtr, com1, com2, com3);
+end
+
+function Battle.IsWaitingCommand(charIndex)
+  return Char.GetBattleIndex(charIndex) >= 0 and Char.GetData(charIndex, CONST.CHAR_BattleMode) == 2;
+end 

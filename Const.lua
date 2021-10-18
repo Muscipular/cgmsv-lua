@@ -26,6 +26,7 @@ CONST.道具_Func_DetachFunc = 2009;
 CONST.道具_Func_DropFunc = 2010;
 CONST.道具_Func_PrePickUpFunc = 2011;
 CONST.道具_Func_PickUpFunc = 2012;
+CONST.道具_所有者 = 0x000002E4 / 4;
 CONST.CHAR_ENEMY_ID = 499;
 CONST.PET_DepartureBattleStatus = 0xCC / 4 + 0x58 / 4;
 --
@@ -52,6 +53,7 @@ CONST.CHAR_EnemyBattleAction = 0x00000024 / 4 + 0x7BC / 4;
 CONST.CHAR_WindowBuffer1 = 0x0000008C / 4 + 0x7BC / 4 - 1;
 CONST.CHAR_WindowBuffer2 = 0x0000008C / 4 + 0x7BC / 4;
 CONST.CHAR_WindowBuffer3 = 0x0000008C / 4 + 0x7BC / 4 + 1;
+CONST.CHAR_ItemIndexes = 0x4CC / 4;
 
 --RECIPE START
 CONST.ITEM_RECIPE_ID = 0x0;

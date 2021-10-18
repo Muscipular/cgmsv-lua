@@ -227,3 +227,83 @@ function Char.CalcConsumeFp(charIndex, techId)
   ffi.setMemoryInt32(charPtr + 0x21E8, flg);
   return fp;
 end
+
+function Char.GetEmptySlot(charIndex)
+  if not Char.IsValidCharIndex(charIndex) then
+    return -1;
+  end
+  for i = 8, 27 do
+    if Char.GetItemIndex(charIndex, i) == -1 then
+      return i;
+    end
+  end
+  return -2;
+end
+
+function Char.TradeItem(fromChar, slot, toChar)
+  slot = tonumber(slot);
+  if not Char.IsValidCharIndex(fromChar) then
+    return -1;
+  end
+  if not Char.IsValidCharIndex(toChar) then
+    return -2;
+  end
+  if slot < 7 or slot > 27 then
+    return -3;
+  end
+  local itemIndex = Char.GetItemIndex(fromChar, slot);
+  if itemIndex < 0 then
+    return -4;
+  end
+  local toSlot = Char.GetEmptySlot(toChar);
+  if toSlot < 0 then
+    return -5;
+  end
+  Char.SetData(fromChar, CONST.CHAR_ItemIndexes + slot, -1);
+  Char.SetData(toChar, CONST.CHAR_ItemIndexes + toSlot, itemIndex);
+  Item.SetData(itemIndex, CONST.道具_所有者, toChar);
+  Item.UpItem(fromChar, slot);
+  Item.UpItem(toChar, toSlot);
+  return toSlot;
+end
+
+function Char.GetEmptyPetSlot(charIndex)
+  if not Char.IsValidCharIndex(charIndex) then
+    return -1;
+  end
+  for i = 0, 4 do
+    if Char.GetPet(charIndex, i) >= 0 then
+      return i;
+    end
+  end
+  return -2;
+end
+
+local AssignPetToChara = ffi.cast('int (__cdecl*)(uint32_t a1, uint32_t a2)', 0x00433F80);
+
+function Char.TradePet(fromChar, slot, toChar)
+  slot = tonumber(slot);
+  if not Char.IsValidCharIndex(fromChar) then
+    return -1;
+  end
+  if not Char.IsValidCharIndex(toChar) then
+    return -2;
+  end
+  if slot < 0 or slot > 4 then
+    return -3;
+  end
+  local petIndex = Char.GetPet(fromChar, slot);
+  if petIndex < 0 then
+    return -4;
+  end
+  local petPtr = Char.GetCharPointer(petIndex);
+  local fromPtr = Char.GetCharPointer(fromChar);
+  local toPtr = Char.GetCharPointer(toChar);
+  local fromPtrAddon = ffi.readMemoryDWORD(fromPtr + 0x0000053C);
+  ffi.setMemoryInt32(fromPtrAddon + 4 * slot, 0);
+  local toSlot = AssignPetToChara(toPtr, petPtr);
+  if toSlot < 0 then
+    return -5;
+  end
+  return toSlot;
+end
