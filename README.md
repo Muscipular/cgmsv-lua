@@ -134,6 +134,12 @@ useModule('Welcome') --加载Welcome
 - `Char.CreateDummy` 创建假人
 - `Char.DelDummy` 删除假人
 - `Char.CalcConsumeFp` 用于获取技能所需要的fp
+- `Char.SetPetDepartureState` 设置宠物战斗状态
+- `Char.SetPetDepartureStateAll` 设置宠物战斗状态
+- `Char.TradeItem` 直接交易物品
+- `Char.TradePet` 直接交易宠物
+- `Char.GetEmptyItemSlot` 获取空物品栏
+- `Char.GetEmptyPetSlot` 获取空宠物栏
 - `Battle.UnsetWinEvent` 移除事件
 - `Battle.UnsetPVPWinEvent` 移除事件
 - `Battle.GetNextBattle` 获取下一场连战Id
