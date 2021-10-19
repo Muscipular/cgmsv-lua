@@ -280,6 +280,7 @@ function Char.GetEmptyPetSlot(charIndex)
 end
 
 local AssignPetToChara = ffi.cast('int (__cdecl*)(uint32_t a1, uint32_t a2)', 0x00433F80);
+local UpdatePetStatus = ffi.cast('int (__cdecl *)(uint32_t a1, int slot, int flag)', 0x00441790);
 
 function Char.TradePet(fromChar, slot, toChar)
   slot = tonumber(slot);
@@ -296,14 +297,71 @@ function Char.TradePet(fromChar, slot, toChar)
   if petIndex < 0 then
     return -4;
   end
+  if Char.GetEmptyPetSlot(toChar) < 0 then
+    return -5;
+  end
   local petPtr = Char.GetCharPointer(petIndex);
   local fromPtr = Char.GetCharPointer(fromChar);
   local toPtr = Char.GetCharPointer(toChar);
+  if Char.GetData(fromChar, CONST.CHAR_Õ½³è) == slot then
+    Char.SetData(fromChar, CONST.CHAR_Õ½³è, -1);
+  end
   local fromPtrAddon = ffi.readMemoryDWORD(fromPtr + 0x0000053C);
   ffi.setMemoryInt32(fromPtrAddon + 4 * slot, 0);
   local toSlot = AssignPetToChara(toPtr, petPtr);
   if toSlot < 0 then
     return -5;
   end
+  Char.SetData(petIndex, CONST.PET_DepartureBattleStatus, 0);
+  UpdatePetStatus(fromPtr, slot, -1);
+  UpdatePetStatus(toPtr, toSlot, -1);
   return toSlot;
+end
+
+local changePetState = ffi.cast('int (__cdecl*)(uint32_t a1, char a2, char a3, char a4, char a5, char a6)', 0x004678D0);
+local bit = require("bit")
+
+---@param charIndex number
+---@param slot number
+---@param state number CONST.PET_STATE_*
+function Char.SetPetDepartureState(charIndex, slot, state)
+  if not Char.IsValidCharIndex(charIndex) then
+    return -1;
+  end
+  local petStates = { 0, 0, 0, 0, 0 }
+  local isBattle = bit.band(state, 0xf) == 2;
+  for i = 0, 4 do
+    local petIndex = Char.GetPet(charIndex, i);
+    if petIndex >= 0 then
+      local cState = Char.GetData(petIndex, CONST.PET_DepartureBattleStatus);
+      if i == slot then
+        cState = state;
+      else
+        if isBattle then
+          local cBattle = bit.band(cState, 0xf) == 2;
+          if cBattle then
+            cState = bit.band(cState, 0xfff0);
+          end
+        end
+      end
+      petStates[i + 1] = cState;
+    else
+      petStates[i + 1] = 0;
+    end
+  end
+  Char.SetPetDepartureStateAll(charIndex, table.unpack(petStates));
+end
+
+---@param charIndex number
+---@param pet1State number CONST.PET_STATE_*
+---@param pet2State number CONST.PET_STATE_*
+---@param pet3State number CONST.PET_STATE_*
+---@param pet4State number CONST.PET_STATE_*
+---@param pet5State number CONST.PET_STATE_*
+function Char.SetPetDepartureStateAll(charIndex, pet1State, pet2State, pet3State, pet4State, pet5State)
+  if not Char.IsValidCharIndex(charIndex) then
+    return -1;
+  end
+  print('SetPetDepartureStateAll', charIndex, pet1State, pet2State, pet3State, pet4State, pet5State);
+  return changePetState(Char.GetCharPointer(charIndex), pet1State, pet2State, pet3State, pet4State, pet5State)
 end

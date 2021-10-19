@@ -98,8 +98,7 @@ function commands.createDummy(charIndex, args)
   Char.SetData(charIndex1, CONST.CHAR_职阶, 1);
   Char.AddSkill(charIndex1, 95);
   Char.GivePet(charIndex1, 3004);
-  local changePetState = ffi.cast('int (__cdecl*)(uint32_t a1, char a2, char a3, char a4, char a5, char a6)', 0x004678D0);
-  changePetState(Char.GetCharPointer(charIndex1), 2, 0, 0, 0, 0)
+  Char.SetPetDepartureState(charIndex1, 0, CONST.PET_STATE_战斗);
   --Char.SetData(charIndex1, CONST.CHAR_战宠, 0);
   --local petIndex = Char.GetPet(charIndex1, 0);
   --Char.SetData(petIndex, CONST.PET_DepartureBattleStatus, CONST.PET_STATE_战斗);
