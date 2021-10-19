@@ -228,7 +228,7 @@ function Char.CalcConsumeFp(charIndex, techId)
   return fp;
 end
 
-function Char.GetEmptySlot(charIndex)
+function Char.GetEmptyItemSlot(charIndex)
   if not Char.IsValidCharIndex(charIndex) then
     return -1;
   end
@@ -255,7 +255,7 @@ function Char.TradeItem(fromChar, slot, toChar)
   if itemIndex < 0 then
     return -4;
   end
-  local toSlot = Char.GetEmptySlot(toChar);
+  local toSlot = Char.GetEmptyItemSlot(toChar);
   if toSlot < 0 then
     return -5;
   end
