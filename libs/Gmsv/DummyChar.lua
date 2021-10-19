@@ -68,7 +68,7 @@ function Char.CreateDummy(options)
   ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_пноС, options.image or 100000);
   ffi.setMemoryInt32(charPtr + 0x5e8 + 0x188, -1);
   ffi.setMemoryInt32(charPtr + 0x5e8 + 0x188 + 0xC, -1);
-  ffi.setMemoryInt32(charPtr + 0x5e8 + 0x188 + 0x18, 100);
+  ffi.setMemoryInt32(charPtr + 0x5e8 + 0x188 + 0x18, 100);   --walkSpeed
   ffi.setMemoryInt32(charPtr + 0x7bc + 0xac, -1);
   initCharaFn1(charPtr, 1);
   local objectIndex = addCharaToMap(1, charPtr, 0, 777, 20, 90);
