@@ -145,6 +145,8 @@ useModule('Welcome') --加载Welcome
 - `Battle.GetNextBattle` 获取下一场连战Id
 - `Battle.SetNextBattle` 设置下一场连战Id
 - `Battle.GetTurn` 获取当前回合
+- `Battle.ActionSelect` 选择战斗指令
+- `Battle.IsWaitingCommand` 判断是否等待指令
 - `Data.ItemsetGetIndex` 获取ItemsetIndex
 - `Data.ItemsetGetData` 获取Itemset数据
 - `Data.GetEncountData` 获取Encount数据
