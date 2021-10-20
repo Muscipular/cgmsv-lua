@@ -7,10 +7,23 @@ LegacyModule.sharedContext = {
   NL = {},
   Char = {},
   Battle = {},
+  Item = {},
+  Pet = {},
+  Recipe = {},
+  Field = {},
+  Data = {},
+  NLG = {},
+  Protocol = {},
+  Obj = {},
+  SQL = {},
 };
 local sharedContext = LegacyModule.sharedContext;
 
-function LegacyModule:loadFile(file, cb)
+function LegacyModule:loadFile(file, cb, name)
+  if not cb then
+    self:logError('callback is null', name, file, cb);
+    error('callback is null');
+  end
   if file then
     local moduleName = findLegacyModuleName(file);
     if not moduleName then
@@ -29,14 +42,18 @@ function LegacyModule:callInCtx(name, ...)
 end
 
 sharedContext.NL.CreateNpc = function(file, cb)
-  return NL.CreateNpc(nil, LegacyModule:loadFile(file, cb));
+  return NL.CreateNpc(nil, LegacyModule:loadFile(file, cb, 'NL.CreateNpc'));
+end
+
+sharedContext.Protocol.OnRecv = function(file, cb, header)
+  return Protocol.OnRecv(nil, LegacyModule:loadFile(file, cb, 'Protocol.OnRecv'), header);
 end
 
 for f, n in pairs({ Char = Char, Battle = Battle }) do
   for i, v in pairs(n) do
     if string.sub(i, 1, 3) == 'Set' and string.sub(i, #i - 4) == 'Event' then
       sharedContext[f][i] = function(file, cb, ...)
-        return v(nil, LegacyModule:loadFile(file, cb), ...)
+        return v(nil, LegacyModule:loadFile(file, cb, string.format('%s.%s', f, i)), ...)
       end
     end
   end
@@ -45,7 +62,7 @@ end
 for i, v in pairs(NL) do
   if string.sub(i, 1, 3) == 'Reg' then
     sharedContext.NL[i] = function(file, cb, ...)
-      return v(nil, LegacyModule:loadFile(file, cb), ...)
+      return v(nil, LegacyModule:loadFile(file, cb, string.format('NL.%s', i)), ...)
     end
   end
 end
@@ -55,6 +72,16 @@ sharedContext.table = setmetatable(sharedContext.table, { __index = table });
 sharedContext.NL = setmetatable(sharedContext.NL, { __index = NL });
 sharedContext.Char = setmetatable(sharedContext.Char, { __index = Char });
 sharedContext.Battle = setmetatable(sharedContext.Battle, { __index = Battle });
+sharedContext.Item = setmetatable(sharedContext.Item, { __index = Item });
+sharedContext.Pet = setmetatable(sharedContext.Pet, { __index = Pet });
+sharedContext.Recipe = setmetatable(sharedContext.Recipe, { __index = Recipe });
+sharedContext.Field = setmetatable(sharedContext.Field, { __index = Field });
+sharedContext.Data = setmetatable(sharedContext.Data, { __index = Data });
+sharedContext.NLG = setmetatable(sharedContext.NLG, { __index = NLG });
+sharedContext.Protocol = setmetatable(sharedContext.Protocol, { __index = Protocol });
+sharedContext.Obj = setmetatable(sharedContext.Obj, { __index = Obj });
+sharedContext.SQL = setmetatable(sharedContext.SQL, { __index = SQL });
+
 setmetatable(sharedContext, { __index = _G })
 
 ---@return LegacyModule
