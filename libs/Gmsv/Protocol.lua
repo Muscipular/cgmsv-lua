@@ -1,12 +1,12 @@
 _G.Protocol = { Hooks = {}, _hooked = false }
 
-local _OnDispatch;
-local _proto_send = FFI.cast('int (__cdecl *)(int fd, const char *str)', 0x00559370)
-local _makeEscapeStringBuff = FFI.cast('char*', 0x006818C0)
+local _ProtocolOnDispatch, _mlsvOnDispatch;
+local _proto_send = FFI.cast('int (__cdecl *)(int fd, const char *str)', 0x00559370);
+local _makeEscapeStringBuff = FFI.cast('char*', 0x006818C0);
 local _makeEscapeString = FFI.cast("char *(__cdecl *)(const char *Str, char *target, int len)", 0x00407E80);
-local _makeStringFromEscaped = FFI.cast('char* (__cdecl *)(const char* str)', 0x00407DD0)
-local _nrproto_escapeString = FFI.cast('char* (__cdecl *)(const char* str)', 0x000558F00)
-local _nrproto_unescapeString = FFI.cast('char* (__cdecl *)(const char* str)', 0x00559040)
+local _makeStringFromEscaped = FFI.cast('char* (__cdecl *)(const char* str)', 0x00407DD0);
+local _nrproto_escapeString = FFI.cast('char* (__cdecl *)(const char* str)', 0x000558F00);
+local _nrproto_unescapeString = FFI.cast('char* (__cdecl *)(const char* str)', 0x00559040);
 
 ---编码内容字符串，如消息封包的内容
 function Protocol.makeEscapeString(str)
@@ -59,7 +59,7 @@ function Protocol.Send(charIndex, header, ...)
   return _proto_send(fd, package);
 end
 
-local function OnDispatch(fd, str)
+local function ProtocolOnDispatch(fd, str)
   local s, e = pcall(function()
     local s = FFI.string(str);
     local list = split(s, ' ');
@@ -80,7 +80,7 @@ local function OnDispatch(fd, str)
   if s and type(e) == 'number' then
     return e;
   end
-  return _OnDispatch(fd, str);
+  return _ProtocolOnDispatch(fd, str);
 end
 
 ---根据fd获取角色Index
@@ -104,7 +104,7 @@ function Protocol.OnRecv(Dofile, FuncName, PacketID)
   if Protocol._hooked == false then
     Protocol._hooked = true;
     --00551800 ; int __cdecl nrproto_ServerDispatchMessage(int fd, char *encoded)
-    _OnDispatch = FFI.hook.new('int (__cdecl *)(uint32_t fd, const char *encoded)', OnDispatch, 0x00551800, 5);
+    _ProtocolOnDispatch = FFI.hook.new('int (__cdecl *)(uint32_t fd, const char *encoded)', ProtocolOnDispatch, 0x00551800, 5);
   end
 end
 

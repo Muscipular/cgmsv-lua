@@ -4,8 +4,7 @@ local AutoRegister = ModuleBase:createModule('autoRegister')
 --- ¼ÓÔØÄ£¿é¹³×Ó
 function AutoRegister:onLoad()
   self:logInfo('load');
-  local fn = self:regCallback(Func.bind(self.OnRecv, self));
-  Protocol.OnRecv(nil, fn, 'JFVf')
+  self:regCallback('ProtocolOnRecv', Func.bind(self.OnRecv, self), 'JFVf');
 end
 
 function AutoRegister:OnRecv(fd, head, data)

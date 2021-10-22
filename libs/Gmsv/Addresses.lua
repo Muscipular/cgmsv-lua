@@ -50,6 +50,14 @@ function Addresses.load()
   Addresses.Enemy_JMP_Size = Enemy_JMP_Size;
   local Enemy_JMP = FFI.readMemoryDWORD(0x006858E8);
   Addresses.Enemy_JMP = Enemy_JMP;
+  local DungeonConf_SIZE = FFI.readMemoryDWORD(0x006CE030);
+  Addresses.DungeonConf_SIZE = DungeonConf_SIZE;
+  local DungeonConf_TBL = FFI.readMemoryDWORD(0x09205D9C);
+  Addresses.DungeonConf_TBL = DungeonConf_TBL;
+  local ActiveDungeon_TBL_SIZE = FFI.readMemoryDWORD(0x011238C0 + 0x188);
+  Addresses.ActiveDungeon_TBL_SIZE = ActiveDungeon_TBL_SIZE;
+  local ActiveDungeon_TBL = FFI.readMemoryDWORD(0x0960B070);
+  Addresses.ActiveDungeon_TBL = ActiveDungeon_TBL;
   for i, v in ipairs(callbacks.load) do
     v();
   end

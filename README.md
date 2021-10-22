@@ -82,6 +82,7 @@ useModule('Welcome') --加载Welcome
 11. petExt/charExt/itemExt 公共扩展模块
 12. petLottery 宠物抽奖
 13. petRebirth 宠物转生
+14. autoUnlock 自动解锁崩端导致的卡号
    
 ### 开发中的模块
 - AI扩展
@@ -110,6 +111,9 @@ useModule('Welcome') --加载Welcome
 - `NL.RegBattleHealCalculateEvent` 战斗治疗事件
 - `NL.RegDeleteDummyEvent` 假人删除事件
 - `NL.RegItemExpansionEvent` 用于物品说明处理
+- `NLG.FindUser` 查找在线用户
+- `Map.GetDungeonExpireTime` 获取迷宫剩余时间
+- `Map.GetDungeonExpireAt` 获取迷宫过期时间
 - `Char.GetCharPointer` 获取角色Ptr
 - `Char.GetWeapon` 获取武器
 - `Char.GiveItem` 添加物品，支持静默模式

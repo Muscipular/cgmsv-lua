@@ -119,6 +119,22 @@ function LegacyModule:createDelegate()
       Delegate['Reg' .. key] = Delegate['RegDel' .. key];
     end
   end
+  Delegate.RegProtocolOnRecv = function(callback, head)
+    local fn = callback
+    local key = 'ProtocolOnRecv'
+    if type(fn) == 'string' then
+      if self['_t_' .. key] then
+        return
+      end
+      self['_t_' .. key] = fn;
+      self:regCallback(key, function(...)
+        return self:callInCtx(fn, ...);
+      end, head)
+    elseif type(fn) == 'function' then
+      self:regCallback(key, fn, head);
+    end
+  end
+  Delegate.RegDelProtocolOnRecv = Delegate.RegProtocolOnRecv;
   return Delegate;
 end
 

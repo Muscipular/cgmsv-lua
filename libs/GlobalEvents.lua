@@ -16,6 +16,16 @@ local chained = {
     end
     return res
   end,
+  ProtocolOnRecv = function(list, ...)
+    local res = 0;
+    for i, v in ipairs(list) do
+      res = v(...) or res;
+      if res < 0 then
+        return res;
+      end
+    end
+    return res
+  end,
   BattleDamageEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
     local dmg = Damage;
     for i, v in ipairs(list) do
@@ -104,7 +114,7 @@ local eventCallbacks = {}
 local ix = 0;
 
 local function takeCallbacks(eventName, extraSign, shouldInit)
-  local name = eventName .. (extraSign or '')
+  local name = eventName .. extraSign
   if eventCallbacks[name] then
     return eventCallbacks[name], name, _G[name]
   end
@@ -115,10 +125,12 @@ local function takeCallbacks(eventName, extraSign, shouldInit)
     if NL['Reg' .. eventName] then
       logInfo('GlobalEvent', 'NL.Reg' .. eventName, extraSign)
       if extraSign == '' then
-        NL['Reg' .. eventName](nil, eventName .. extraSign);
+        NL['Reg' .. eventName](nil, name);
       else
-        NL['Reg' .. eventName](nil, eventName .. extraSign, extraSign);
+        NL['Reg' .. eventName](nil, name, extraSign);
       end
+    elseif eventName == 'ProtocolOnRecv' then
+      Protocol.OnRecv(nil, name, extraSign);
     end
     return list, name, fn1;
   end
