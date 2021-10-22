@@ -172,7 +172,11 @@ end
 function LegacyModule:onLoad()
   self:logInfo('onLoad');
   local r, msg = pcall(function()
-    loadfile(self.___aPath, 'bt', self.context)();
+    local fn, m = loadfile(self.___aPath, 'bt', self.context);
+    if m then
+      error(m);
+    end
+    fn();
   end)
   if r == false then
     self:logError('load error', msg);

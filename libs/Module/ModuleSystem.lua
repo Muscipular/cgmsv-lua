@@ -37,7 +37,11 @@ local function loadModuleFile(path, moduleName, forceReload)
   };
   local G = setmetatable(rG, { __index = _G })
   local result, module = pcall(function()
-    return loadfile(path, 'bt', setmetatable(ctx, { __index = G }))()
+    local fn, m = loadfile(path, 'bt', setmetatable(ctx, { __index = G }))
+    if m then
+      error(m)
+    end
+    return fn()
   end)
   if not result then
     logError('ModuleSystem', 'load module failed.', 'name=', moduleName, 'path=', path, 'forceReload=', forceReload, '\n', module)
