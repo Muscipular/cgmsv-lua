@@ -1,17 +1,16 @@
 local emitter = NL.newEvent('ScriptCall', nil);
 
 local function OnCallBlock(textPtr, npcPtr, playerPtr)
-  local text = ffi.string(textPtr)
-  local npcIndex = ffi.readMemoryInt32(npcPtr + 4);
-  local playerIndex = ffi.readMemoryInt32(playerPtr + 4);
-  printAsHex(text, npcPtr, npcIndex, playerPtr, playerIndex)
-  if string.lower(string.sub(text, 1, 4)) == 'luac' then
-    local s = string.sub(text, 5)
-    print('ScriptCall', s, Char.GetData(npcIndex, CONST.CHAR_名字), Char.GetData(playerIndex, CONST.CHAR_名字));
-    if s then
+  local c = ffi.cast('uint32_t*', textPtr)[0];
+  if c == 0x6361756c then
+    local text = ffi.string(textPtr + 4)
+    local npcIndex = ffi.readMemoryInt32(npcPtr + 4);
+    local playerIndex = ffi.readMemoryInt32(playerPtr + 4);
+    print('ScriptCall', text, Char.GetData(npcIndex, CONST.CHAR_名字), Char.GetData(playerIndex, CONST.CHAR_名字));
+    if text then
       emitter(npcIndex, playerIndex, s);
     end
-    return string.len(text);
+    return string.len(text) + 4;
   end
   return 0;
 end

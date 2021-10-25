@@ -21,7 +21,7 @@ function Map.GetDungeonExpireAt(floor)
     local ptr = Addresses.ActiveDungeon_TBL + 0x68 * i
     if ffi.readMemoryInt32(ptr) == 1 then
       dSize = dSize + 1;
-      if ffi.readMemoryInt32(ptr + 0x14) == floor then
+      if ffi.readMemoryInt32(ptr + 0x8) == floor then
         local t = ffi.readMemoryInt32(ptr + 0xc)
         return t
       end
