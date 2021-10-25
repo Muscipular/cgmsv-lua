@@ -47,10 +47,10 @@ ffi.hook.inlineHook('int (__cdecl *)(char* text, uint32_t npc, uint32_t player)'
     0x74, 0x0D, -- je EIP + 0x0D
     0x01, 0x85, 0x44, 0xFB, 0xFF, 0xFF, -- add  [ebp-0x4bc], eax
     0xB8, 0xD1, 0x9A, 0x51, 0x00, -- mov eax, 0x00519AD1
-    0xff, 0xE0, --jmp [eax]
+    0xff, 0xE0, --jmp eax
   }
 )
-
+--[[
 local function OnCallInline(textPtr, npcPtr, playerPtr)
   local text = ffi.string(textPtr)
   local npcIndex = ffi.readMemoryInt32(npcPtr + 4);
@@ -103,3 +103,4 @@ ffi.hook.inlineHook('int (__cdecl *)(char* text, uint32_t npc, uint32_t player)'
     0xff, 0xE0, --jmp [eax]
   }
 )
+--]]
