@@ -13,6 +13,7 @@ dofile('lua/libs/Gmsv/Field.lua')
 dofile('lua/libs/Gmsv/Map.lua')
 dofile('lua/libs/Gmsv/LowCpuUsage.lua')
 dofile('lua/libs/Gmsv/DamageHook.lua')
+dofile('lua/libs/Gmsv/Script.lua')
 dofile('lua/libs/Gmsv/NLG_ShowWindowTalked_Patch.lua')
 
 Addresses.load();
