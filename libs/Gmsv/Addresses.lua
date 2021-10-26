@@ -58,6 +58,17 @@ function Addresses.load()
   Addresses.ActiveDungeon_TBL_SIZE = ActiveDungeon_TBL_SIZE;
   local ActiveDungeon_TBL = FFI.readMemoryDWORD(0x0960B070);
   Addresses.ActiveDungeon_TBL = ActiveDungeon_TBL;
+  Addresses.MapTable = {}
+  Addresses.MapTableSize = {}
+  Addresses.MapIndexMapping = {}
+  Addresses.MapCount = {}
+  for i = 0, 3 do
+    Addresses.MapTable[i] = FFI.readMemoryDWORD(0x092060DC + i * 4);
+    Addresses.MapTableSize[i] = FFI.readMemoryDWORD(0x092060C8 + i * 4);
+    Addresses.MapIndexMapping[i] = FFI.readMemoryDWORD(0x092060AC + i * 4);
+    Addresses.MapCount[i] = FFI.readMemoryDWORD(0x09205D88 + i * 4);
+  end
+
   for i, v in ipairs(callbacks.load) do
     v();
   end
