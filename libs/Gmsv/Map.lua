@@ -53,4 +53,21 @@ function Map.SetDungeonExpireAt(floor, time)
     end
   end
   return -1;
-end 
+end
+
+---@return number,number,number,number mapType floor x y
+function Map.FindDungeonEntry(dungeonId)
+  for i = 0, Addresses.ActiveDungeon_TBL_SIZE - 1 do
+    --if dSize >= Addresses.DungeonConf_SIZE then
+    --  return -1;
+    --end
+    local ptr = Addresses.ActiveDungeon_TBL + 0x68 * i
+    if ffi.readMemoryInt32(ptr) == 1 then
+      --dSize = dSize + 1;
+      if ffi.readMemoryInt32(ptr + 0x4) == dungeonId then
+        return ffi.readMemoryInt32(ptr + 0x10), ffi.readMemoryInt32(ptr + 0x14), ffi.readMemoryInt32(ptr + 0x18), ffi.readMemoryInt32(ptr + 0x1C)
+      end
+    end
+  end
+  return -1;
+end
