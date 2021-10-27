@@ -82,6 +82,18 @@ for i, v in ipairs({ 'ItemOverLapEvent', }) do
   end
 end
 
+for i, v in ipairs({ 'PartyEvent', }) do
+  chained[v] = function(list, ...)
+    for _i, fn in ipairs(list) do
+      local res = tonumberEx(fn(...)) or 0;
+      if res == 0 then
+        return 0;
+      end
+    end
+    return 1
+  end
+end
+
 for i, v in ipairs({ 'GetExpEvent', 'ProductSkillExpEvent', 'BattleSkillExpEvent', }) do
   chained[v] = function(list, CharIndex, SkillID, Exp)
     local res = Exp;
