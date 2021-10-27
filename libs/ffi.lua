@@ -25,6 +25,16 @@ function ffi.setMemoryInt32(addr, value)
   ffi.cast("int32_t*", addr)[0] = value;
   return true;
 end
+function ffi.setMemoryDWORD(addr, value)
+  if addr == 0 then
+    return false;
+  end
+  if type(value) ~= 'number' then
+    return false;
+  end
+  ffi.cast("uint32_t*", addr)[0] = value;
+  return true;
+end
 function ffi.setMemoryByte(addr, value)
   if addr == 0 then
     return false;
