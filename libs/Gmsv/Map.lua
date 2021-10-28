@@ -55,6 +55,12 @@ function Map.SetDungeonExpireAt(floor, time)
   return -1;
 end
 
+function Map.GetDungeonId(floor)
+  local mapIndex = ffi.readMemoryDWORD(Addresses.MapIndexMapping[1] + floor * 4)
+  local cfgId = ffi.readMemoryDWORD(Addresses.MapTable[1] + 0x80 * mapIndex + 0x4)
+  return cfgId;
+end
+
 ---@return number,number,number,number mapType floor x y
 function Map.FindDungeonEntry(dungeonId)
   for i = 0, Addresses.ActiveDungeon_TBL_SIZE - 1 do
