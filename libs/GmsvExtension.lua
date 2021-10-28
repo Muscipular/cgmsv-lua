@@ -15,5 +15,6 @@ dofile('lua/libs/Gmsv/LowCpuUsage.lua')
 dofile('lua/libs/Gmsv/DamageHook.lua')
 dofile('lua/libs/Gmsv/Script.lua')
 dofile('lua/libs/Gmsv/NLG_ShowWindowTalked_Patch.lua')
+dofile('lua/libs/Gmsv/NL_RegPartyEvent_Patch.lua')
 
 Addresses.load();
