@@ -36,8 +36,6 @@ function LoginModule:GetLoginPointEvent(charIndex, mapID, floorID, x, y)
           lastPoint = { mapID, floorID, x, y }
         end
       end
-    else
-      lastPoint = { mapID, floorID, x, y }
     end
   end
   if lastPoint == nil then
