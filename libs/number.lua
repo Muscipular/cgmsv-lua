@@ -7,7 +7,7 @@ function tonumberEx(n, base, trueValue, falseValue)
   end
   local t = type(n);
   if t == 'number' then
-    return t;
+    return n;
   end
   if t == 'string' then
     if t == '' then

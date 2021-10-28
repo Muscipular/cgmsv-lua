@@ -17,7 +17,8 @@ local function hookLeaveParty(charPtr)
   if Char.IsValidCharPtr(charPtr) then
     if ffi.readMemoryDWORD(0x09613C88) ~= 0 then
       local targetCharPtr = ffi.readMemoryDWORD(charPtr + 0x7bc + 0x24C);
-      if NPC_Lua_NL_PartyEventCallBack(charPtr, targetCharPtr, 1) == 0 then
+      local res = NPC_Lua_NL_PartyEventCallBack(charPtr, targetCharPtr, 1);
+      if res == 0 then
         return 1;
       end
     end
@@ -36,5 +37,5 @@ table.insert(s, fnPtr1[1]);
 table.insert(s, fnPtr1[2]);
 table.insert(s, fnPtr1[3]);
 ffi.patch(0x0040EE4C, s)
-_G.___script_buffer_RegPartyEvent = fnPtr;
-
+_G.___script_buffer_RegPartyEvent = { fnPtr, hookLeaveParty };
+print('[DEBUG] NL_RegPartyEvent_Patch done')

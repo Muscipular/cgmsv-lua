@@ -189,7 +189,13 @@ function _G.removeGlobalEvent(eventName, fnIndex, moduleName, extraSign)
   end
   --logInfo('GlobalEvent', 'fnIndex', fnIndex, eventCallbacks[eventName .. extraSign][fnIndex])
   if callbacks.map[fnIndex] ~= nil then
+    local ix = callbacks.map[fnIndex];
     table.remove(callbacks, callbacks.map[fnIndex]);
+    for i, v in pairs(callbacks.map) do
+      if v > ix then
+        callbacks.map[i] = v - 1;
+      end
+    end
     callbacks.map[fnIndex] = nil;
   end
   if #callbacks == 0 then
