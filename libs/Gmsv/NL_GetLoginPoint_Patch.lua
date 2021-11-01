@@ -1,5 +1,5 @@
 local fn = function(charPtr, mapType, floor, x, y)
-  printAsHex(charPtr, mapType, floor, x, y)
+  --printAsHex(charPtr, mapType, floor, x, y)
   ffi.setMemoryInt32(mapType, Char.GetDataByPtr(charPtr, CONST.CHAR_地图类型))
   ffi.setMemoryInt32(floor, Char.GetDataByPtr(charPtr, CONST.CHAR_地图))
   ffi.setMemoryInt32(x, Char.GetDataByPtr(charPtr, CONST.CHAR_X))
