@@ -14,8 +14,10 @@ end
 
 function Map.GetDungeonExpireAt(floor)
   --local dSize = 0;
-  local mapIndex = ffi.readMemoryDWORD(Addresses.MapIndexMapping[1] + floor * 4)
-  local cfgId = ffi.readMemoryDWORD(Addresses.MapTable[1] + 0x80 * mapIndex + 0x4)
+  local cfgId = Map.GetDungeonId(floor)
+  if cfgId < 0 then
+    return -1;
+  end
   for i = 0, Addresses.ActiveDungeon_TBL_SIZE - 1 do
     --if dSize >= Addresses.DungeonConf_SIZE then
     --  return -1;
@@ -34,8 +36,10 @@ end
 
 function Map.SetDungeonExpireAt(floor, time)
   --local dSize = 0;
-  local mapIndex = ffi.readMemoryDWORD(Addresses.MapIndexMapping[1] + floor * 4)
-  local cfgId = ffi.readMemoryDWORD(Addresses.MapTable[1] + 0x80 * mapIndex + 0x4)
+  local cfgId = Map.GetDungeonId(floor)
+  if cfgId < 0 then
+    return -1;
+  end
   for i = 0, Addresses.ActiveDungeon_TBL_SIZE - 1 do
     --if dSize >= Addresses.DungeonConf_SIZE then
     --  return -1;
@@ -56,7 +60,13 @@ function Map.SetDungeonExpireAt(floor, time)
 end
 
 function Map.GetDungeonId(floor)
+  if floor < 0 then
+    return -1;
+  end
   local mapIndex = ffi.readMemoryDWORD(Addresses.MapIndexMapping[1] + floor * 4)
+  if mapIndex < 0 or mapIndex >= Addresses.MapTableSize[1] then
+    return -1;
+  end
   local cfgId = ffi.readMemoryDWORD(Addresses.MapTable[1] + 0x80 * mapIndex + 0x4)
   return cfgId;
 end

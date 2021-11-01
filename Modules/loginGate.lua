@@ -45,7 +45,9 @@ function LoginModule:GetLoginPointEvent(charIndex, mapID, floorID, x, y)
         local expire = Map.GetDungeonExpireAt(lastPoint[2])
         if expire ~= lastPoint[5] then
           mapID, floorID, x, y = Map.FindDungeonEntry(lastPoint[6])
-          lastPoint = { mapID, floorID, x, y }
+          if mapID >= 0 then
+            lastPoint = { mapID, floorID, x, y }
+          end
         end
       end
     end
