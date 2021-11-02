@@ -80,6 +80,7 @@ function LoginModule:LogoutEvent(charIndex)
     lastPoint = nil
   end
   Field.Set(charIndex, 'LastLogoutPoint', JSON.encode(lastPoint));
+  return 0;
 end
 
 --- 加载模块钩子
@@ -87,6 +88,7 @@ function LoginModule:onLoad()
   self:logInfo('load')
   self:regCallback('GetLoginPointEvent', Func.bind(self.GetLoginPointEvent, self));
   self:regCallback('LogoutEvent', Func.bind(self.LogoutEvent, self))
+  self:regCallback('DropEvent', Func.bind(self.LogoutEvent, self))
 end
 
 --- 卸载模块钩子

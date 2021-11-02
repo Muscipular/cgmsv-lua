@@ -38,21 +38,21 @@ function ItemPowerUP:onDamageCalculateEvent(
   if damage <= 0 or flg == DmgType.Miss or flg == NoDmg then
     return damage;
   end
-  self:logDebug('battle', battleIndex, 'turn', Battle.GetTurn(battleIndex));
-  self:logDebug(
-    'charIndex:', charIndex,
-    'defCharIndex:', defCharIndex,
-    'oriDamage:', oriDamage,
-    'damage:', damage,
-    'battleIndex:', battleIndex,
-    'com1:', com1,
-    'com2:', com2,
-    'com3:', com3,
-    'defCom1:', defCom1,
-    'defCom2:', defCom2,
-    'defCom3:', defCom3,
-    'flg:', flg
-  )
+  --self:logDebug('battle', battleIndex, 'turn', Battle.GetTurn(battleIndex));
+  --self:logDebug(
+  --  'charIndex:', charIndex,
+  --  'defCharIndex:', defCharIndex,
+  --  'oriDamage:', oriDamage,
+  --  'damage:', damage,
+  --  'battleIndex:', battleIndex,
+  --  'com1:', com1,
+  --  'com2:', com2,
+  --  'com3:', com3,
+  --  'defCom1:', defCom1,
+  --  'defCom2:', defCom2,
+  --  'defCom3:', defCom3,
+  --  'flg:', flg
+  --)
   if Char.GetData(charIndex, CONST.CHAR_类型) == CONST.对象类型_人 then
     for i = 0, 7 do
       local itemIndex = Char.GetItemIndex(charIndex, i);
@@ -96,7 +96,7 @@ end
 
 function ItemPowerUP:onItemOverLapEvent(charIndex, fromItemIndex, targetItemIndex, num)
   if Item.GetData(fromItemIndex, CONST.道具_名字) == '魔石' then
-    self:logDebug('onItemOverLapEvent', charIndex, fromItemIndex, targetItemIndex, num);
+    --self:logDebug('onItemOverLapEvent', charIndex, fromItemIndex, targetItemIndex, num);
     --if not Item.GetData(targetItemIndex, CONST.道具_已装备) then
     --  return 0
     --end
