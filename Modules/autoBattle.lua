@@ -52,12 +52,12 @@ function Module:handleBattleAutoCommand(battleIndex)
         self:logDebug('auto battle', charIndex, petIndex);
         hasAutoBattle = true;
         if Battle.IsWaitingCommand(charIndex) then
-          Battle.ActionSelect(charIndex, Battle.COM_LIST.BATTLE_COM_P_RANDOMSHOT, 10, 9500);
+          Battle.ActionSelect(charIndex, CONST.BATTLE_COM.BATTLE_COM_P_RANDOMSHOT, 10, 9500);
         end
         if petIndex >= 0 then
-          Battle.ActionSelect(petIndex, Battle.COM_LIST.BATTLE_COM_ATTACK, 10, -1);
+          Battle.ActionSelect(petIndex, CONST.BATTLE_COM.BATTLE_COM_ATTACK, 10, -1);
         else
-          Battle.ActionSelect(petIndex, Battle.COM_LIST.BATTLE_COM_ATTACK, 10, -1);
+          Battle.ActionSelect(petIndex, CONST.BATTLE_COM.BATTLE_COM_ATTACK, 10, -1);
         end
       else
         hasPlayer = true;
@@ -85,12 +85,12 @@ function Module:handleBattleAutoCommand(battleIndex)
         self:logDebug('auto battle', charIndex, petIndex);
         hasAutoBattle = true;
         if Battle.IsWaitingCommand(charIndex) then
-          Battle.ActionSelect(charIndex, Battle.COM_LIST.BATTLE_COM_ESCAPE, -1, -1);
+          Battle.ActionSelect(charIndex, CONST.BATTLE_COM.BATTLE_COM_ESCAPE, -1, -1);
         end
         if petIndex >= 0 then
-          Battle.ActionSelect(petIndex, Battle.COM_LIST.BATTLE_COM_ATTACK, -1, -1);
+          Battle.ActionSelect(petIndex, CONST.BATTLE_COM.BATTLE_COM_ATTACK, -1, -1);
         else
-          Battle.ActionSelect(petIndex, Battle.COM_LIST.BATTLE_COM_ESCAPE, -1, -1);
+          Battle.ActionSelect(petIndex, CONST.BATTLE_COM.BATTLE_COM_ESCAPE, -1, -1);
         end
       end
     end
