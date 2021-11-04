@@ -134,7 +134,7 @@ CONST.BATTLE_COM = {
   BATTLE_COM_REBIRTH = 0xBB8,
 };
 
-for i, v in pairs(table.copy(CONST.BATTLE_COM)) do
+for i, v in pairs({ unpack(CONST.BATTLE_COM) }) do
   CONST.BATTLE_COM[v] = i;
 end
 

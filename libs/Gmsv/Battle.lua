@@ -197,6 +197,7 @@ end
 
 local emitCalcCriticalRateEvent = NL.newEvent('CalcCriticalRateEvent', nil)
 local function hookCalcCriticalRateEvent (charPtr, cri)
+  --printAsHex('CalcCriticalRateEvent', charPtr, cri);
   local ret = emitCalcCriticalRateEvent(ffi.readMemoryInt32(charPtr + 4), cri)
   if type(ret) == 'number' then
     if ret > 0 then
@@ -210,7 +211,7 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookCalcCriticalRateEvent,
   0x9C,
   0x51, -- push edx
   0x50, -- push eax
-  0xFF, 0xD5, 0xE0, 0xFE, 0xFF, 0xFF, -- push [ebp-120]
+  0xFF, 0xB5, 0xE0, 0xFE, 0xFF, 0xFF, -- push [ebp-120]
 }, {
   0x51 + 8, -- pop edx
   0x51 + 8, -- pop edx
@@ -221,6 +222,7 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookCalcCriticalRateEvent,
 local emitCalcFpConsumeEvent = NL.newEvent('CalcFpConsumeEvent', nil);
 local _orgCalcFpConsume;
 local function hookCalcFpConsumeEvent(charPtr)
+  --printAsHex('hookCalcFpConsumeEvent', charPtr);
   local org = _orgCalcFpConsume(charPtr);
   local ret = emitCalcFpConsumeEvent(ffi.readMemoryInt32(charPtr + 4), ffi.readMemoryInt32(charPtr + 4 * CONST.CHAR_BattleCom3), org);
   if type(ret) == 'number' then
