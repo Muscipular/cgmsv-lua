@@ -134,6 +134,11 @@ function LegacyModule:createDelegate()
       self:regCallback(key, fn, head);
     end
   end
+  Delegate.RegAllOutEvent = function(callback) 
+    Delegate.RegLogoutEvent(callback);
+    Delegate.RegDropEvent(callback);
+  end
+  Delegate.RegDelAllOutEvent = Delegate.RegAllOutEvent
   Delegate.RegDelProtocolOnRecv = Delegate.RegProtocolOnRecv;
   return Delegate;
 end
