@@ -81,6 +81,7 @@ function hook.new(cast, callback, hook_addr, size)
   local old_prot = ffi.new('unsigned long[1]')
   local old_prot2 = ffi.new('unsigned long[1]')
   local org_bytes = ffi.new('uint8_t[?]', _size + 10)
+  ffi.C.VirtualProtect(org_bytes, _size + 10, 0x40, old_prot)
   ffi.copy(org_bytes, hookFnPtr, _size)
   org_bytes[_size] = 0xE9;
   ffi.cast('uint32_t*', org_bytes + _size + 1)[0] = hook_addr + size - (ffi.cast('uint32_t', org_bytes) + _size + 5);
@@ -125,6 +126,7 @@ function hook.inlineHook(cast, callback, hookAddr, size, prefixCode, postCode, c
   local tmpProtectFlag = ffi.new('unsigned long[1]')
   local detourBytes = ffi.new('uint8_t[?]', 2048)
   local backup = ffi.new('uint8_t[?]', size)
+  ffi.C.VirtualProtect(backup, size, 0x40, oldProtectFlag)
   -- make backup
   ffi.copy(backup, hookFnPtr, size);
   -- prefixCode
