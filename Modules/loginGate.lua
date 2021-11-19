@@ -51,7 +51,7 @@ function LoginModule:GetLoginPointEvent(charIndex, mapID, floorID, x, y)
         end
       end
     else
-      self:logError('decode json failed:', json,lastPoint);
+      self:logError('decode json failed:', json, lastPoint);
       lastPoint = nil;
     end
   end
