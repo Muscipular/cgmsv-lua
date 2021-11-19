@@ -50,6 +50,9 @@ function LoginModule:GetLoginPointEvent(charIndex, mapID, floorID, x, y)
           end
         end
       end
+    else
+      self:logError('decode json failed:', json,lastPoint);
+      lastPoint = nil;
     end
   end
   --self:logDebug('LoginPoint', Char.GetData(charIndex, CONST.CHAR_µÇÂ½µã), table.unpack(lastPoint or {}))
@@ -71,6 +74,10 @@ function LoginModule:LogoutEvent(charIndex)
     Char.GetData(charIndex, CONST.CHAR_X),
     Char.GetData(charIndex, CONST.CHAR_Y),
   };
+  if lastPoint[1] == 0 and lastPoint[2] == 0 then
+    Field.Set(charIndex, 'LastLogoutPoint', 'null');
+    return 0;
+  end
   if lastPoint[1] == 1 then
     local expire = Map.GetDungeonExpireAt(lastPoint[2])
     lastPoint[5] = expire;
