@@ -21,15 +21,17 @@ function NLG.SetPetRandomShot(enable)
       if enablePetRandomShot ~= true or Char.GetDataByPtr(charPtr, CONST.CHAR_类型) ~= 3 then
         Char.SetDataByPtr(charPtr, CONST.CHAR_BattleCom1, CONST.BATTLE_COM.BATTLE_COM_ATTACK);
         Char.SetDataByPtr(charPtr, CONST.CHAR_BattleCom3, -1);
+      else
+        ffi.setMemoryDWORD(0x09202B10, 4);
       end
       return 0;
-    end, 0x0048612D, 14, {
+    end, 0x0048612D, 0x14, {
       0x60,
       0x52, --push edx
     }, {
       0x58, --pop eax
       0x61,
-    })
+    }, { ignoreOriginCode = true })
   end
   enablePetRandomShot = enable == true;
 end
@@ -43,10 +45,13 @@ function NLG.SetCriticalDamageAddition(enable)
         local lvA = Char.GetDataByPtr(attacker, CONST.CHAR_等级)
         local def = Char.GetDataByPtr(defence, CONST.CHAR_防御力)
         local lvD = Char.GetDataByPtr(defence, CONST.CHAR_等级)
+        print(dmg);
         dmg = dmg + tonumber(tostring(math.floor(def / 2 * lvA / lvD)));
+        printAsHex(dmg);
+        print(dmg);
       end
       return dmg;
-    end, 0x0049E26B, 0x2e, {
+    end, 0x0049E268, 0x37, {
       --0x60,
       0x51, --push ecx
       0x56, --push esi
@@ -58,7 +63,9 @@ function NLG.SetCriticalDamageAddition(enable)
       0x59, --pop ecx
       0x59, --pop ecx
       --0x61,
-    })
+    }, { ignoreOriginCode = true })
   end
   disableCriticalDmg = enable == true;
-end 
+end
+NLG.SetPetRandomShot(true);
+NLG.SetCriticalDamageAddition(true);
