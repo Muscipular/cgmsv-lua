@@ -67,5 +67,4 @@ function NLG.SetCriticalDamageAddition(enable)
   end
   disableCriticalDmg = enable == true;
 end
-NLG.SetPetRandomShot(true);
-NLG.SetCriticalDamageAddition(true);
+
