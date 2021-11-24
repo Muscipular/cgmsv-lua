@@ -81,8 +81,12 @@ function Item.isCrystal(itemIndex)
   return Item.Types.CrystalType == Item.GetData(itemIndex, CONST.道具_类型)
 end
 
-local function hookGetItemText(itemIndex, type, msg)
-  return NL.EmitItemExpansionEvent(itemIndex, type, ffi.string(msg)) or '';
+local function hookGetItemText(itemIndex, _type, msg)
+  local newMsg = NL.EmitItemExpansionEvent(itemIndex, _type, ffi.string(msg));
+  if type(newMsg) == 'string' then
+    return newMsg;
+  end
+  return msg;
 end
 
 ffi.hook.inlineHook('const char* (__cdecl *)(int itemIndex, int type, const char* s)', hookGetItemText, 0x004CD3EE, 9, {
