@@ -207,6 +207,14 @@ function Char.GetDataByPtr(charPtr, dataLine)
   return nil
 end
 
+---通过ptr获取数据
+function Char.SetDataByPtr(charPtr, dataLine, value)
+  if Char.IsValidCharPtr(charPtr) then
+    return Char.SetData(ffi.readMemoryInt32(charPtr + 4), dataLine, value);
+  end
+  return nil
+end
+
 local calcConsumeFp = ffi.cast('int (__cdecl*)(uint32_t charAddr)', 0x00478F30);
 
 function Char.CalcConsumeFp(charIndex, techId)
