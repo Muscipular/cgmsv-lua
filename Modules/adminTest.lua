@@ -130,6 +130,14 @@ function commands.getCharData(charIndex, args)
   NLG.SystemMessage(charIndex, 'Char.GetData: ' .. args[1] .. '-' .. args[2] .. '=' .. ifNil(Char.GetData(cix, dl), 'nil'));
 end
 
+function commands.autoBattle(charIndex, args)
+  if args[1] == 'on' then
+    Protocol.Send(charIndex, "SkipBtCmd");
+    Battle.ActionSelect(charIndex, CONST.BATTLE_COM.BATTLE_COM_ATTACK, 11, -1);
+    Battle.ActionSelect(charIndex, CONST.BATTLE_COM.BATTLE_COM_ATTACK, 11, -1);
+  end
+end
+
 function commands.delDummy(charIndex, args)
   Char.DelDummy(tonumber(args[1]))
 end
