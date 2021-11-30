@@ -94,7 +94,21 @@ for i, v in ipairs({ 'PartyEvent', }) do
   end
 end
 
-for i, v in ipairs({ 'GetExpEvent', 'ProductSkillExpEvent', 'BattleSkillExpEvent', }) do
+for i, v in ipairs({ 'GetExpEvent', }) do
+  chained[v] = function(list, CharIndex, Exp)
+    local res = Exp;
+    for _, fn in ipairs(list) do
+      res = fn(CharIndex, Exp);
+      if res == nil then
+        res = Exp;
+      end
+      Exp = res;
+    end
+    return res
+  end
+end
+
+for i, v in ipairs({ 'ProductSkillExpEvent', 'BattleSkillExpEvent', }) do
   chained[v] = function(list, CharIndex, SkillID, Exp)
     local res = Exp;
     for _, fn in ipairs(list) do
