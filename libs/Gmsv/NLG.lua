@@ -36,21 +36,23 @@ function NLG.SetPetRandomShot(enable)
   enablePetRandomShot = enable == true;
 end
 
-local disableCriticalDmg = nil;
----@param enable boolean
-function NLG.SetCriticalDamageAddition(enable)
-  if disableCriticalDmg == nil then
+local criticalDmgMode = nil;
+local criticalDmgValue = 1.5;
+
+---@param mode number|boolean 0 = 普通模式 1 = 倍率模式 2 = 无 true = 普通模式 false = 无
+---@param val number 倍率，默认1.5倍
+function NLG.SetCriticalDamageAddition(mode, val)
+  if criticalDmgMode == nil then
     ffi.hook.inlineHook("int (__cdecl *)(int a, uint32_t b, uint32_t c)", function(dmg, attacker, defence)
-      if disableCriticalDmg ~= true then
+      if criticalDmgMode == 0 then
         local lvA = Char.GetDataByPtr(attacker, CONST.CHAR_等级)
         local def = Char.GetDataByPtr(defence, CONST.CHAR_防御力)
         local lvD = Char.GetDataByPtr(defence, CONST.CHAR_等级)
-        print(dmg);
-        dmg = dmg + tonumber(tostring(math.floor(def / 2 * lvA / lvD)));
-        printAsHex(dmg);
-        print(dmg);
+        dmg = dmg + math.floor(def / 2 * lvA / lvD);
+      elseif criticalDmgMode == 1 then
+        dmg = criticalDmgValue * dmg;
       end
-      return dmg;
+      return math.floor(dmg);
     end, 0x0049E268, 0x37, {
       --0x60,
       0x51, --push ecx
@@ -65,6 +67,17 @@ function NLG.SetCriticalDamageAddition(enable)
       --0x61,
     }, { ignoreOriginCode = true })
   end
-  disableCriticalDmg = enable == true;
+  if type(mode) == 'boolean' then
+    if mode then
+      criticalDmgMode = 0;
+    else
+      criticalDmgMode = 2;
+    end
+  else
+    criticalDmgMode = tonumber(mode) or 0;
+  end
+  if criticalDmgMode == 1 then
+    criticalDmgValue = tonumber(val) or 1.5;
+  end
 end
 
