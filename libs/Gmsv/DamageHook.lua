@@ -48,7 +48,10 @@ local function callCallback(aIndex, dIndex, flag, dmg, cType)
     );
     if success then
       --print('dmg', ret);
-      return ret;
+      if type(ret) == 'number' then
+        return ret;        
+      end
+      return dmg;
     else
       print((cType == 'heal' and 'BattleHealCalculateCallBack' or 'DamageCalculateCallBack') .. ' ERROR:', ret);
     end
@@ -333,7 +336,7 @@ local function hookFpDmg(attacker, defence)
   local dmg = _fpDmg(attacker, defence);
   local aIndex = ffi.readMemoryInt32(attacker + 4)
   local dIndex = ffi.readMemoryInt32(defence + 4)
-  return callCallback(aIndex, dIndex, 0, dmg);
+  return callCallback(aIndex, dIndex, CONST.DamageFlags.FpDamage, dmg);
 end
 
 _fpDmg = ffi.hook.new('int (__cdecl*)(uint32_t, uint32_t)', hookFpDmg, 0x0049D5B0, 5);
