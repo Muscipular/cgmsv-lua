@@ -59,7 +59,7 @@ function CharExt:getData(charIndex)
   end
   local args = Char.GetData(charIndex, CONST.CHAR_RegistNumber) .. ':' .. Char.GetData(charIndex, CONST.CHAR_CDK)
   local data = self.cache:get(args)
-  if not data then
+  if data == nil then
     data = SQL.querySQL('select data from lua_charData where id = ' .. SQL.sqlValue(Char.GetData(charIndex, CONST.CHAR_RegistNumber))
       .. ' and cdkey = ' .. SQL.sqlValue(Char.GetData(charIndex, CONST.CHAR_CDK)));
     if type(data) == 'table' and data[1] then
@@ -86,6 +86,14 @@ function CharExt:onLoad()
   self:regCallback('CharaDeletedEvent', function(cdkey, regNum)
     SQL.querySQL('delete from lua_charData where id = ' .. SQL.sqlValue(regNum) .. ' and cdkey = ' .. SQL.sqlValue(cdkey));
     self.cache:delete(regNum .. ':' .. cdkey);
+  end)
+  self:regCallback('LogoutEvent', function(charIndex)
+    local args = Char.GetData(charIndex, CONST.CHAR_RegistNumber) .. ':' .. Char.GetData(charIndex, CONST.CHAR_CDK)
+    self.cache:delete(args);
+  end)
+  self:regCallback('DropEvent', function(charIndex)
+    local args = Char.GetData(charIndex, CONST.CHAR_RegistNumber) .. ':' .. Char.GetData(charIndex, CONST.CHAR_CDK)
+    self.cache:delete(args);
   end)
 end
 
