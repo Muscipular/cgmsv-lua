@@ -53,7 +53,7 @@ local function twist()
   for i = 0, n - 1 do
     local x = bor(band(MT[i], upper_mask), band(MT[math.fmod((i + 1), n)], lower_mask))
     local xA = rshift(x, 1)
-    if band(x, 1) ~= 0 then
+    if math.fmod(x, 2) ~= 0 then
       xA = bxor(xA, a)
     end
     MT[i] = int32(bxor(MT[math.fmod((i + m), n)], xA))
@@ -78,11 +78,12 @@ local function extract_number()
   y = bxor(y, rshift(y, l))
 
   index = index + 1
-  return int32(y)
+  return band(int32(y), 0x7fffffff);
 end
 
-
--- Function to call to get a random number
+--- Function to call to get a random number
+---@param p number|nil
+---@param q number|nil
 local function random(p, q)
   if p then
     if q then
