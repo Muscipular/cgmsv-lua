@@ -11,6 +11,7 @@
 -- Author: Mr Doomah
 -- Contact: https://forums.factorio.com/memberlist.php?mode=viewprofile&u=7604
 
+local bit32 = require 'bit'
 local w, n, m, r = 32, 624, 397, 31
 local a = 0x9908B0DF
 local u = 11
