@@ -130,3 +130,24 @@ function Item.GetTimeLimit(CharIndex, ItemIndex)
   end
   return nil;
 end
+
+---@param itemIndex number µÀ¾ßIndex
+---@param charIndex number ½ÇÉ«Index
+function Item.SetCharPointer(itemIndex, charIndex)
+  local ch = Char.GetCharPointer(charIndex)
+  if ch <= 0 then
+    return -1;
+  end
+  if itemIndex < 0 then
+    return -2;
+  end
+  if ffi.readMemoryInt32(Addresses.ItemExistsTableSize) <= itemIndex then
+    return -2;
+  end
+  local itemPtr = Addresses.ItemExistsTablePTR + itemIndex * 0x318;
+  if ffi.readMemoryDWORD(itemPtr) ~= 1 then
+    return -2;
+  end
+  ffi.setMemoryDWORD(itemPtr + 0x2e8, ch);
+  return 1;
+end

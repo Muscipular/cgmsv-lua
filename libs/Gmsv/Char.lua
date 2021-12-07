@@ -248,6 +248,9 @@ function Char.GetEmptyItemSlot(charIndex)
   return -2;
 end
 
+---@param fromChar number 从谁身上交出 CharIndex
+---@param toChar number 交易给谁 CharIndex
+---@param slot number 道具栏位置，8-27
 function Char.TradeItem(fromChar, slot, toChar)
   slot = tonumber(slot);
   if not Char.IsValidCharIndex(fromChar) then
@@ -269,7 +272,8 @@ function Char.TradeItem(fromChar, slot, toChar)
   end
   Char.SetData(fromChar, CONST.CHAR_ItemIndexes + slot, -1);
   Char.SetData(toChar, CONST.CHAR_ItemIndexes + toSlot, itemIndex);
-  Item.SetData(itemIndex, CONST.道具_所有者, toChar);
+  --Item.SetData(itemIndex, CONST.道具_所有者, toChar);
+  Item.SetCharPointer(itemIndex, toChar);
   Item.UpItem(fromChar, slot);
   Item.UpItem(toChar, toSlot);
   return toSlot;

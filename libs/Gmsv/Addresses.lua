@@ -17,6 +17,10 @@ function Addresses.load()
   Addresses.ItemTableMax = ItemTableMax;
   local ItemTablePTR = FFI.readMemoryDWORD(0x09205588);
   Addresses.ItemTablePTR = ItemTablePTR;
+  local ItemExistsTablePTR = FFI.readMemoryDWORD(0x09205BE4);
+  Addresses.ItemExistsTablePTR = ItemExistsTablePTR;
+  local ItemExistsTableSize = FFI.readMemoryDWORD(0x00688F80);
+  Addresses.ItemExistsTableSize = ItemExistsTableSize;
   local CharaTablePTR = FFI.readMemoryDWORD(0x091A6E54);
   Addresses.CharaTablePTR = CharaTablePTR;
   local CharaTableSize = FFI.readMemoryDWORD(0x091A6E58);
