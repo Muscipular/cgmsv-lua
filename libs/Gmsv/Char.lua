@@ -284,7 +284,7 @@ function Char.GetEmptyPetSlot(charIndex)
     return -1;
   end
   for i = 0, 4 do
-    if Char.GetPet(charIndex, i) >= 0 then
+    if Char.GetPet(charIndex, i) < 0 then
       return i;
     end
   end
