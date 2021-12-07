@@ -1,6 +1,7 @@
 -- 3rd libs
 _G.LRU = dofile('lua/libs/three_parts/lru.lua');
 _G.JSON = dofile('lua/libs/three_parts/json.lua');
+_G.JSON = dofile('lua/libs/three_parts/mt19937ar.lua');
 -- Base Extensions
 dofile('lua/libs/ffi.lua')
 dofile('lua/libs/logger.lua')
