@@ -6,6 +6,7 @@ _G.MT19937 = dofile('lua/libs/three_parts/mt19937ar.lua');
 dofile('lua/libs/ffi.lua')
 dofile('lua/libs/logger.lua')
 dofile('lua/libs/table.lua')
+dofile('lua/libs/file.lua')
 dofile('lua/libs/number.lua')
 dofile('lua/libs/string.lua')
 dofile('lua/libs/functions.lua')
