@@ -46,6 +46,15 @@ local chained = {
     end
     return msg;
   end,
+  BattleSurpriseEvent = function(list, battleIndex, result)
+    for i, v in ipairs(list) do
+      local m = v(battleIndex, result);
+      if type(m) == 'number' then
+        result = m;
+      end
+    end
+    return result;
+  end,
   Init = function(fnList, ...)
     fnList = table.copy(fnList)
     local res;

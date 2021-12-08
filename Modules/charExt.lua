@@ -74,6 +74,38 @@ function CharExt:getData(charIndex)
   return data;
 end
 
+function CharExt:setTmpData(charIndex, field, value)
+  local type = Char.GetData(charIndex, CONST.CHAR_类型);
+  if type ~= CONST.对象类型_人 then
+    return false;
+  end
+  if Char.IsDummy(charIndex) then
+    error('Dummy not support')
+    return false;
+  end
+  local tmpData = self.tmpData[charIndex] or {};
+  tmpData[field] = value;
+  self.tmpData[charIndex] = tmpData;
+  return true;
+end
+
+function CharExt:getTmpData(charIndex, field)
+  local type = Char.GetData(charIndex, CONST.CHAR_类型);
+  if type ~= CONST.对象类型_人 then
+    return nil;
+  end
+  if Char.IsDummy(charIndex) then
+    error('Dummy not support')
+    return nil;
+  end
+  local tmpData = self.tmpData[charIndex];
+  self:logDebug('tmpData', charIndex, tmpData, field, (tmpData or {})[field]);
+  if tmpData then
+    return tmpData[field];
+  end
+  return nil;
+end
+
 --- 加载模块钩子
 function CharExt:onLoad()
   self:logInfo('load')
@@ -90,11 +122,14 @@ function CharExt:onLoad()
   self:regCallback('LogoutEvent', function(charIndex)
     local args = Char.GetData(charIndex, CONST.CHAR_RegistNumber) .. ':' .. Char.GetData(charIndex, CONST.CHAR_CDK)
     self.cache:delete(args);
+    self.tmpData[charIndex] = nil;
   end)
   self:regCallback('DropEvent', function(charIndex)
     local args = Char.GetData(charIndex, CONST.CHAR_RegistNumber) .. ':' .. Char.GetData(charIndex, CONST.CHAR_CDK)
     self.cache:delete(args);
+    self.tmpData[charIndex] = nil;
   end)
+  self.tmpData = {};
 end
 
 --- 卸载模块钩子

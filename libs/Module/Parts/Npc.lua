@@ -100,7 +100,8 @@ end
 ---@param title string
 ---@param options string[]
 function Part:NPC_buildSelectionText(title, options)
-  local msg = '1\\n' .. title .. '\\n'
+  local line = #(string.split(title, '\n') or {}) or 1;
+  local msg = line .. '\\n' .. title .. '\\n'
   for i = 1, 8 do
     if options[i] == nil then
       return msg;

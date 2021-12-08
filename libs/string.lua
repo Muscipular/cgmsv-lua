@@ -42,6 +42,7 @@ function string.decodeNumber(s, base)
   return ret;
 end
 
+---@return string[]
 function string.split(str, separator)
   local str = tostring(str)
   local separator = tostring(separator)

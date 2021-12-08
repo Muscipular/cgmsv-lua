@@ -1,4 +1,13 @@
 CONST = CONST or {}
+CONST.BATTLE_SurpriseFlag = {
+  ---²»ÍµÏ®
+  Normal = 0,
+  ---ÍµÏ®
+  Surprise = 1,
+  ---±»ÍµÏ®
+  BeSurprise = 2,
+}
+
 CONST.DamageFlags = {
   Normal = 0,
   Critical = 1,

@@ -234,3 +234,15 @@ local function hookCalcFpConsumeEvent(charPtr)
   return org;
 end
 _orgCalcFpConsume = ffi.hook.new('int (__cdecl*)(uint32_t a1)', hookCalcFpConsumeEvent, 0x00478F30, 6)
+
+local emitBattleSurpriseEvent = NL.newEvent('BattleSurpriseEvent', nil);
+local _BattleSurprise;
+local function hookBattleSurprise(battleIndex)
+  local result = _BattleSurprise(battleIndex);
+  local ret = emitBattleSurpriseEvent(battleIndex, result);
+  if type(ret) == 'number' then
+    return ret;
+  end
+  return result;
+end
+_BattleSurprise = ffi.hook.new('int (__cdecl*)(int a1)', hookBattleSurprise, 0x004956A0, 6)
