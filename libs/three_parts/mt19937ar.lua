@@ -98,7 +98,7 @@ end
 
 seed_mt(os.time());
 
-_G.MT19937 = {
+return {
   seed = seed_mt,
   random = random,
 }
