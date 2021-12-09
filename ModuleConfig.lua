@@ -7,7 +7,7 @@ loadModule('itemExt')  --物品公共模块，扩展字段用
 --loadModule('gmsvData')  --Data相关
 
 loadModule('admin')
-loadModule('adminTest')
+loadModule('adminCommands')
 loadModule('ng')
 loadModule('shop')
 loadModule('warp')

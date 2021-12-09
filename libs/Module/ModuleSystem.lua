@@ -24,7 +24,6 @@ end
 ---@field forceReload boolean 强制重新加载
 ---@field simpleModule boolean 是否兼容老的luaModule
 ---@field absolutePath boolean
-
 local function loadModuleFile(path, moduleName, forceReload)
   local ctx = {}
   local rG = {
@@ -100,10 +99,12 @@ function _G.loadModule(moduleName, opt)
   return module;
 end
 
+---加载普通Module
 function _G.loadSimpleModule(moduleName)
   _G.loadModule(moduleName, { simpleModule = true, forceReload = true })
 end
 
+---加载普通Module
 _G.useModule = loadSimpleModule;
 
 function _G.unloadModule(moduleName)
@@ -124,10 +125,12 @@ function _G.reloadModule(moduleName)
   return nil;
 end
 
+---@return ModuleBase
 function _G.getModule(moduleName)
   return Modules[moduleName];
 end
 
+---@return string
 function _G.findLegacyModuleName(path)
   if path then
     local moduleName;

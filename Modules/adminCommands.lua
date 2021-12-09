@@ -1,4 +1,4 @@
-local AdminTest = ModuleBase:createModule('adminTest')
+local AdminCommands = ModuleBase:createModule('adminCommands')
 -- gm√¸¡Ó
 local commands = {}
 --GM’À∫≈¡–±Ì
@@ -157,8 +157,21 @@ function commands.dofile2(charIndex, args)
     pcall(fn, charIndex, table.slice(args, 2));
   end
 end
+--
+--function commands.rift(charIndex, args)
+--  local rift = getModule('rift')
+--  rift:loadConfig()
+--end
 
-function AdminTest:onLoad()
+function AdminCommands:regCommand(key, fn)
+  commands[key] = fn;
+end
+
+function AdminCommands:unloadCommand(key)
+  commands[key] = nil;
+end
+
+function AdminCommands:onLoad()
   self:logInfo('load')
   local fnName, ix = self:regCallback(self.name .. '_WalkPostEvent', function(charIndex)
     self:logDebug('WalkPostEvent', charIndex)
@@ -187,8 +200,8 @@ function AdminTest:onLoad()
   self:regCallback('TalkEvent', handleChat)
 end
 
-function AdminTest:onUnload()
+function AdminCommands:onUnload()
   self:logInfo('unload')
 end
 
-return AdminTest;
+return AdminCommands;
