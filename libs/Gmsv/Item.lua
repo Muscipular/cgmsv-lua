@@ -141,7 +141,7 @@ function Item.SetCharPointer(itemIndex, charIndex)
   if itemIndex < 0 then
     return -2;
   end
-  if ffi.readMemoryInt32(Addresses.ItemExistsTableSize) <= itemIndex then
+  if Addresses.ItemExistsTableSize <= itemIndex then
     return -2;
   end
   local itemPtr = Addresses.ItemExistsTablePTR + itemIndex * 0x318;

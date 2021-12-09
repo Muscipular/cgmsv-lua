@@ -217,6 +217,7 @@ end
 
 local calcConsumeFp = ffi.cast('int (__cdecl*)(uint32_t charAddr)', 0x00478F30);
 
+---计算技能所需的魔法
 function Char.CalcConsumeFp(charIndex, techId)
   if not Char.IsValidCharIndex(charIndex) then
     return -1;
@@ -240,12 +241,24 @@ function Char.GetEmptyItemSlot(charIndex)
   if not Char.IsValidCharIndex(charIndex) then
     return -1;
   end
+  if Char.GetData(charIndex, CONST.CHAR_类型) ~= CONST.对象类型_人 then
+    return -1;
+  end
   for i = 8, 27 do
-    if Char.GetItemIndex(charIndex, i) == -1 then
+    if Char.GetItemIndex(charIndex, i) == -2 then
       return i;
     end
   end
   return -2;
+end
+
+function Char.GetItemSlot(charIndex, itemIndex)
+  for i = 0, 27 do
+    if Char.GetItemIndex(charIndex, i) == itemIndex then
+      return i;
+    end
+  end
+  return -1;
 end
 
 ---@param fromChar number 从谁身上交出 CharIndex
@@ -257,6 +270,12 @@ function Char.TradeItem(fromChar, slot, toChar)
     return -1;
   end
   if not Char.IsValidCharIndex(toChar) then
+    return -2;
+  end
+  if Char.GetData(fromChar, CONST.CHAR_类型) ~= CONST.对象类型_人 then
+    return -1;
+  end
+  if Char.GetData(toChar, CONST.CHAR_类型) ~= CONST.对象类型_人 then
     return -2;
   end
   if slot < 7 or slot > 27 then
@@ -300,6 +319,12 @@ function Char.TradePet(fromChar, slot, toChar)
     return -1;
   end
   if not Char.IsValidCharIndex(toChar) then
+    return -2;
+  end
+  if Char.GetData(fromChar, CONST.CHAR_类型) ~= CONST.对象类型_人 then
+    return -1;
+  end
+  if Char.GetData(toChar, CONST.CHAR_类型) ~= CONST.对象类型_人 then
     return -2;
   end
   if slot < 0 or slot > 4 then
