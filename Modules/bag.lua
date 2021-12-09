@@ -58,7 +58,11 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
   for i, bagItem in ipairs(bagData) do
     if type(bagItem) == 'table' then
       --self:logDebug('restore', bagItem[tostring(CONST.道具_ID)], bagItem[tostring(CONST.道具_堆叠数)]);
-      local itemIndex = Char.GiveItem(CharIndex, bagItem[tostring(CONST.道具_ID)], 1, false);
+      local itemId = bagItem[tostring(CONST.道具_ID)];
+      if itemId < 0 then
+        itemId = 0
+      end
+      local itemIndex = Char.GiveItem(CharIndex, itemId, 1, false);
       if itemIndex >= 0 then
         for _, field in pairs(itemFields) do
           local r = 0;
