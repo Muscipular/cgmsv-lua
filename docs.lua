@@ -229,8 +229,19 @@ end
 
 _G.NL = {}
 
+function NL.CreateNPC(Dofile, InitFuncName)
+end
+
+function NL.DelNpc(NpcIndex)
+end
+
+function NL.CreateArgNpc(Type, Arg, Name, Image, Map, Floor, Xpos, Ypos, Dir, ShowTime)
+end
+
+function NL.SetArgNpc(NpcIndex, NewArg)
+end
+
 _G.NLG = {}
 
 function NLG.TalkToMap(Map, Floor, TalkerIndex, Msg, FontColor, FontSize)
-  
 end
