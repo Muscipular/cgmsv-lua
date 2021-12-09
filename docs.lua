@@ -225,6 +225,12 @@ _G.Field = {}
 function Field.Get(CharIndex, Field)
 end
 function Field.Set(CharIndex, Field, Value)
-end 
+end
 
 _G.NL = {}
+
+_G.NLG = {}
+
+function NLG.TalkToMap(Map, Floor, TalkerIndex, Msg, FontColor, FontSize)
+  
+end
