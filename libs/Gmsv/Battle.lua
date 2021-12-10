@@ -246,3 +246,20 @@ local function hookBattleSurprise(battleIndex)
   return result;
 end
 _BattleSurprise = ffi.hook.new('int (__cdecl*)(int a1)', hookBattleSurprise, 0x004956A0, 6)
+
+---ªÒ»°¬“…‰hit ˝ 1,2,3,4.....
+function Battle.GetRandomShotHit(battleIndex, playerSlot)
+  if battleIndex < 0 then
+    return -1;
+  end
+  if playerSlot < 0 or playerSlot > 19 then
+    return -2;
+  end
+  local offset = 0x6C;
+  if playerSlot >= 10 then
+    playerSlot = playerSlot - 10;
+    offset = offset + 0x968;
+  end
+  offset = offset + 0xC + 0xD0 * playerSlot + 0xA8;
+  return ffi.readMemoryInt32(Addresses.BattleTable + 0x1480 * battleIndex + offset)
+end 
