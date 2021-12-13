@@ -248,18 +248,20 @@ end
 _BattleSurprise = ffi.hook.new('int (__cdecl*)(int a1)', hookBattleSurprise, 0x004956A0, 6)
 
 ---获取乱射hit数 1,2,3,4.....
-function Battle.GetRandomShotHit(battleIndex, playerSlot)
+---@param defSlot number 防御者slot
+---@param battleIndex number
+function Battle.GetRandomShotHit(battleIndex, defSlot)
   if battleIndex < 0 then
     return -1;
   end
-  if playerSlot < 0 or playerSlot > 19 then
+  if defSlot < 0 or defSlot > 19 then
     return -2;
   end
   local offset = 0x6C;
-  if playerSlot >= 10 then
-    playerSlot = playerSlot - 10;
+  if defSlot >= 10 then
+    defSlot = defSlot - 10;
     offset = offset + 0x968;
   end
-  offset = offset + 0xC + 0xD0 * playerSlot + 0xA8;
+  offset = offset + 0xC + 0xD0 * defSlot + 0xA8;
   return ffi.readMemoryInt32(Addresses.BattleTable + 0x1480 * battleIndex + offset)
 end 

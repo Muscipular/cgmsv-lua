@@ -13,19 +13,33 @@ CONST.DamageFlags = {
   Critical = 1,
   Miss = 2,
   Dodge = 3,
+  ---防御？
   Guard = 4,
+  ---魔法
   Magic = 5,
+  ---中毒
   Poison = 6,
+  ---醉酒
   Drunk = 7,
+  ---合击
   Combo = 8,
+  ---合击暴击
   ComboCritical = 9,
+  ---战栗
   FpDamage = 11,
   --ComboFinal = 10,
 }
 CONST.HealDamageFlags = {
+  ---治疗
   Heal = 0,
+  ---恢复
   Recovery = 1,
+  ---物品
   Item = 2,
+  ---气绝
+  Revive = 3,
+  ---明镜
+  Consentration = 4,
 }
 CONST.TECH_ID = 0;
 CONST.TECH_COMMENT = 1;
