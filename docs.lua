@@ -199,7 +199,13 @@ function Battle.GetPlayIndex(BattleIndex, Slot)
 end
 function Battle.Encount(UpIndex, DownIndex)
 end
-function Battle.PVE(CharIndex, CreatePtr, DoFunc, EnemyIdAr, BaseLevelAr, Flg)
+---@param CharIndex number
+---@param CreatePtr number
+---@param DoFunc string
+---@param EnemyIdAr number[]
+---@param BaseLevelAr number[]
+---@param RandLv number[]
+function Battle.PVE(CharIndex, CreatePtr, DoFunc, EnemyIdAr, BaseLevelAr, RandLv)
 end
 function Battle.PVP(UpIndex, DownIndex)
 end

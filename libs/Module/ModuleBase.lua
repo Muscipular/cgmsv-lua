@@ -175,6 +175,26 @@ function ModuleBase:logError(msg, ...)
   logError(self.name, msg, ...)
 end
 
+function ModuleBase:logF(level, msg, ...)
+  log(self.name, level, string.format(msg, ...))
+end
+
+function ModuleBase:logInfoF(msg, ...)
+  logInfo(self.name, string.format(msg, ...))
+end
+
+function ModuleBase:logDebugF(msg, ...)
+  logDebug(self.name, string.format(msg, ...))
+end
+
+function ModuleBase:logWarnF(msg, ...)
+  logWarn(self.name, string.format(msg, ...))
+end
+
+function ModuleBase:logErrorF(msg, ...)
+  logError(self.name, string.format(msg, ...))
+end
+
 function ModuleBase:load()
   for i, part in pairs(self.parts) do
     part.onLoad(self);

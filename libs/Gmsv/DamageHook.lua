@@ -49,7 +49,7 @@ local function callCallback(aIndex, dIndex, flag, dmg, cType)
     if success then
       --print('dmg', ret);
       if type(ret) == 'number' then
-        return ret;        
+        return math.floor(ret);
       end
       return dmg;
     else

@@ -3,7 +3,7 @@ local chained = {
     local res = 1;
     for i, v in ipairs(list) do
       res = v(...)
-      if res ~= 1 then
+      if res ~= 1 and res ~= nil then
         return res;
       end
     end
@@ -54,6 +54,32 @@ local chained = {
       end
     end
     return result;
+  end,
+  DamageCalculateEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
+    for i, v in ipairs(list) do
+      local m = v(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg);
+      if type(m) == 'number' then
+        m = math.floor(m);
+        if m <= 0 then
+          m = 1;
+        end
+        Damage = m;
+      end
+    end
+    return Damage;
+  end,
+  BattleHealCalculateEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
+    for i, v in ipairs(list) do
+      local m = v(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg);
+      if type(m) == 'number' then
+        m = math.floor(m);
+        if m <= 0 then
+          m = 0;
+        end
+        Damage = m;
+      end
+    end
+    return Damage;
   end,
   Init = function(fnList, ...)
     fnList = table.copy(fnList)
