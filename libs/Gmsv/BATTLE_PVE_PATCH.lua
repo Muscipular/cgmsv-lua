@@ -6,7 +6,7 @@ Battle.PVE = function(CharIndex, CreatePtr, DoFunc, EnemyIdAr, BaseLevelAr, Rand
   if #EnemyIdAr < 1 then
     return -1;
   end
-  for i in 1, 10 do
+  for i = 1, 10 do
     if EnemyIdAr[i] == nil then
       EnemyIdAr[i] = -1;
     end
