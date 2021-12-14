@@ -12,7 +12,7 @@ local function ifNil(s, v)
 end
 
 local function callCallback(aIndex, dIndex, flag, dmg, cType)
-  print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or '-');
+  --print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or '-');
   --[[  
   print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or 'damage');
   if _G.type(aIndex) == 'number' then
@@ -39,7 +39,7 @@ local function callCallback(aIndex, dIndex, flag, dmg, cType)
   if cType == 'heal' then
     nCallback = callbackHeal;
   end
-  print(nCallback, _G[nCallback])
+  --print(nCallback, _G[nCallback])
   if (nCallback and _G[nCallback]) then
     local battleIndex = Char.GetData(aIndex or dIndex, CONST.CHAR_BattleIndex);
     local success, ret = pcall(_G[nCallback], ifNil(aIndex, -1), ifNil(dIndex, -1), dmg, dmg, ifNil(battleIndex, -1),

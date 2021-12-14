@@ -6,20 +6,6 @@ function Char.GetCharPointer(charIndex)
   return 0;
 end
 
----获取装备的武器 ItemIndex及位置
----@return number,number itemIndex, 装备位置
-function Char.GetWeapon(charIndex)
-  local ItemIndex = Char.GetItemIndex(charIndex, CONST.EQUIP_左手);
-  if ItemIndex >= 0 and Item.isWeapon(Item.GetData(ItemIndex, CONST.道具_类型)) then
-    return ItemIndex, CONST.EQUIP_左手;
-  end
-  ItemIndex = Char.GetItemIndex(charIndex, CONST.EQUIP_右手)
-  if ItemIndex >= 0 and Item.isWeapon(Item.GetData(ItemIndex, CONST.道具_类型)) then
-    return ItemIndex, CONST.EQUIP_右手;
-  end
-  return -1, -1;
-end
-
 local giveItem = Char.GiveItem;
 Char.GiveItem = function(CharIndex, ItemID, Amount, ShowMsg)
   ShowMsg = type(ShowMsg) ~= 'boolean' and true or ShowMsg;
@@ -62,56 +48,6 @@ function Char.DelItemBySlot(CharIndex, Slot)
   cRemoveItem(itemIndex, 'LUA cDeleteCharItem', 0);
   Item.UpItem(CharIndex, Slot)
   return 0;
-end
-
-function Char.UnsetWalkPostEvent(charIndex)
-  Char.SetData(charIndex, 1588, 0)
-  Char.SetData(charIndex, 1663, 0)
-  Char.SetData(charIndex, 1985, 0)
-end
-
-function Char.UnsetWalkPreEvent(charIndex)
-  Char.SetData(charIndex, 1587, 0)
-  Char.SetData(charIndex, 1631, 0)
-  Char.SetData(charIndex, 1984, 0)
-end
-
-function Char.UnsetPostOverEvent(charIndex)
-  Char.SetData(charIndex, 1759, 0)
-  Char.SetData(charIndex, 0x1F10 / 4, 0)
-  Char.SetData(charIndex, (0x18C8 + 0x30) / 4, 0)
-end
-
-function Char.UnsetLoopEvent(charIndex)
-  Char.SetData(charIndex, 0x1C7C / 4, 0)
-  Char.SetData(charIndex, 0x1F18 / 4, 0)
-  Char.SetData(charIndex, 0x1F2C / 4, 0)
-  Char.SetData(charIndex, 0x1F30 / 4, 0)
-  Char.SetData(charIndex, (0x18C8 + 0x2C) / 4, 0)
-end
-
-function Char.UnsetTalkedEvent(charIndex)
-  Char.SetData(charIndex, 0x1D7C / 4, 0)
-  Char.SetData(charIndex, 0x1F20 / 4, 0)
-  Char.SetData(charIndex, (0x18C8 + 0x18) / 4, 0)
-end
-
-function Char.UnsetWindowTalkedEvent(charIndex)
-  Char.SetData(charIndex, 0x1E7C / 4, 0)
-  Char.SetData(charIndex, 0x1F28 / 4, 0)
-  Char.SetData(charIndex, (0x18C8 + 0x28) / 4, 0)
-end
-
-function Char.UnsetItemPutEvent(charIndex)
-  Char.SetData(charIndex, 0x1CFC / 4, 0)
-  Char.SetData(charIndex, 0x1F1C / 4, 0)
-  Char.SetData(charIndex, (0x18C8 + 0x20) / 4, 0)
-end
-
-function Char.UnsetWatchEvent(charIndex)
-  Char.SetData(charIndex, 0x1A7C / 4, 0)
-  Char.SetData(charIndex, 0x1F08 / 4, 0)
-  Char.SetData(charIndex, (0x18C8 + 0xC) / 4, 0)
 end
 
 local checkPartyMemberCount = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x00437C10);
@@ -194,11 +130,6 @@ function Char.IsValidCharPtr(charPtr)
   return charPtr >= Addresses.CharaTablePTR and charPtr <= Addresses.CharaTablePTRMax and ffi.readMemoryInt32(charPtr) == 1
 end
 
----检测index是否正确
-function Char.IsValidCharIndex(charIndex)
-  return Char.GetData(charIndex, 0) == 1;
-end
-
 ---通过ptr获取数据
 function Char.GetDataByPtr(charPtr, dataLine)
   if Char.IsValidCharPtr(charPtr) then
@@ -237,30 +168,6 @@ function Char.CalcConsumeFp(charIndex, techId)
   return fp;
 end
 
-function Char.GetEmptyItemSlot(charIndex)
-  if not Char.IsValidCharIndex(charIndex) then
-    return -1;
-  end
-  if Char.GetData(charIndex, CONST.CHAR_类型) ~= CONST.对象类型_人 then
-    return -1;
-  end
-  for i = 8, 27 do
-    if Char.GetItemIndex(charIndex, i) == -2 then
-      return i;
-    end
-  end
-  return -2;
-end
-
-function Char.GetItemSlot(charIndex, itemIndex)
-  for i = 0, 27 do
-    if Char.GetItemIndex(charIndex, i) == itemIndex then
-      return i;
-    end
-  end
-  return -1;
-end
-
 ---@param fromChar number 从谁身上交出 CharIndex
 ---@param toChar number 交易给谁 CharIndex
 ---@param slot number 道具栏位置，8-27
@@ -296,18 +203,6 @@ function Char.TradeItem(fromChar, slot, toChar)
   Item.UpItem(fromChar, slot);
   Item.UpItem(toChar, toSlot);
   return toSlot;
-end
-
-function Char.GetEmptyPetSlot(charIndex)
-  if not Char.IsValidCharIndex(charIndex) then
-    return -1;
-  end
-  for i = 0, 4 do
-    if Char.GetPet(charIndex, i) < 0 then
-      return i;
-    end
-  end
-  return -2;
 end
 
 local AssignPetToChara = ffi.cast('int (__cdecl*)(uint32_t a1, uint32_t a2)', 0x00433F80);

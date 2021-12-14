@@ -168,7 +168,14 @@ end
 local function makeEventHandle(name)
   local list = {}
   list.map = {};
-  return Func.bind(chained[name] or defaultChain, list), list
+  return function(...)
+    local ok, ret = pcall(chained[name] or defaultChain, list, ...);
+    if ok then
+      return ret;
+    end
+    logError('GlobalEvent', 'invoke ' .. name .. ' callback error.', ret);
+    error(ret)
+  end, list
 end
 
 local eventCallbacks = {}
