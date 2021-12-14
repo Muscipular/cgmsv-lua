@@ -105,7 +105,7 @@ end
 
 local function RegEnemyCommandEvent(luaFile, callback)
   --004C27E0 ; char __cdecl Battle_Do_EnemyCommand(int battleIndex, unsigned int side, int a3)
-  print('onReg', callback);
+  --print('onReg', callback);
   if luaFile then
     local success, err = pcall(dofile, luaFile);
     if success == false then
