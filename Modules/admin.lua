@@ -35,7 +35,7 @@ function Admin:handleChat(charIndex, msg, color, range, size)
     local arg = msg:match('^/[%w]+ +(.+)$')
     arg = arg and string.split(arg, ' ') or {}
     commands[command](charIndex, arg);
-    return
+    return 0
   end
   return 1
 end

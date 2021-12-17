@@ -187,7 +187,7 @@ function AdminCommands:onLoad()
       local arg = msg:match('^/[%w]+ +(.+)$')
       arg = arg and string.split(arg, ' ') or {}
       commands[command](charIndex, arg);
-      return
+      return 0
     end
     if command == 'walkTest' then
       Char.SetWalkPostEvent(nil, fnName, charIndex)

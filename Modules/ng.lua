@@ -304,7 +304,7 @@ function ngModule:handleTalkEvent(charIndex, msg)
     local arg = msg:match('^/[%w]+ +(.+)$')
     arg = arg and string.split(arg, ' ') or {}
     commandsNormal[command](charIndex, arg);
-    return
+    return 0
   end
   return 1;
 end
