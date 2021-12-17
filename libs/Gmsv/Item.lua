@@ -21,6 +21,10 @@ ffi.hook.inlineHook('const char* (__cdecl *)(int itemIndex, int type, const char
   0x89, 0x04, 0x24, -- arg itemIndex
 }, {})
 
+---设置限时道具
+---@param CharIndex number
+---@param ItemIndex number
+---@param Time number 时间秒
 function Item.SetTimeLimit(CharIndex, ItemIndex, Time)
   if Time < 0 then
     Item.SetData(ItemIndex, 44, 0);
@@ -33,6 +37,9 @@ function Item.SetTimeLimit(CharIndex, ItemIndex, Time)
   Item.UpItem(CharIndex, slot);
 end
 
+---获取限时道具剩余时间
+---@param CharIndex number
+---@param ItemIndex number
 function Item.GetTimeLimit(CharIndex, ItemIndex)
   local mode = Item.SetData(ItemIndex, 44);
   local slot = Item.GetSlot(CharIndex, ItemIndex)
