@@ -5,9 +5,11 @@ function table:isEmpty()
   return true
 end
 
+---@param fn fun(e:any, i:number, list: table):boolean
+---@return number|nil
 function table:findIndex(fn)
   for i, v in pairs(self) do
-    if fn(v) then
+    if fn(v, i, self) then
       return i
     end
   end
