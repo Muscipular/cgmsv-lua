@@ -61,7 +61,11 @@ local chained = {
       if type(m) == 'number' then
         m = math.floor(m);
         if m <= 0 then
-          m = 1;
+          if OriDamage > 0 then
+            m = 1;
+          else
+            m = 0;
+          end
         end
         Damage = m;
       end
