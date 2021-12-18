@@ -235,6 +235,10 @@ function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   logInfo('GlobalEvent', 'regGlobalEvent', eventName, moduleName, ix + 1, eventCallbacks[eventName .. extraSign])
   local callbacks, name, fn1 = takeCallbacks(eventName, extraSign, true)
   ix = ix + 1;
+  local order = 0;
+  if type(fn) == 'table' and fn.type == 'OrderedCallback' then
+    order = fn.order or 0;
+  end
   local fx = OrderedCallback(function(...)
     --logDebug('ModuleSystem', 'callback', eventName .. extraSign, fn, ...)
     local success, result = pcall(fn, ...)
@@ -244,7 +248,7 @@ function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
     end
     --logDebug('ModuleSystem', 'callback', eventName .. extraSign, fn, result, ...)
     return result;
-  end, fn.order or 0);
+  end, order);
   callbacks[#callbacks + 1] = fx;
   table.sort(callbacks, function(a, b)
     return a.order > b.order;
