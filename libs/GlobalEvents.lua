@@ -209,24 +209,24 @@ local function takeCallbacks(eventName, extraSign, shouldInit)
   return nil;
 end
 
----@class OrderedFn
+---@class OrderedCallback
 ---@field order number
 ---@field fn function
 
----@return OrderedFn|function
+---@return OrderedCallback|function
 ---@param fn function
 ---@param order number
-function _G.makeOrderedFn(fn, order)
-  if type(fn) == 'table' and fn.type == 'OrderedFn' then
+function _G.OrderedCallback(fn, order)
+  if type(fn) == 'table' and fn.type == 'OrderedCallback' then
     return fn;
   end
-  local n = { fn = fn, order = 100 - (order or 0), type = 'OrderedFn' }
+  local n = { fn = fn, order = 100 - (order or 0), type = 'OrderedCallback' }
   return setmetatable(n, { __call = fn })
 end
 
 --- 注册全局事件
 ---@param eventName string
----@param fn function
+---@param fn function|OrderedCallback
 ---@param moduleName string
 ---@param extraSign string|nil
 ---@return number 全局注册Index
@@ -235,7 +235,7 @@ function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   logInfo('GlobalEvent', 'regGlobalEvent', eventName, moduleName, ix + 1, eventCallbacks[eventName .. extraSign])
   local callbacks, name, fn1 = takeCallbacks(eventName, extraSign, true)
   ix = ix + 1;
-  local fx = makeOrderedFn(function(...)
+  local fx = OrderedCallback(function(...)
     --logDebug('ModuleSystem', 'callback', eventName .. extraSign, fn, ...)
     local success, result = pcall(fn, ...)
     if not success then
@@ -244,7 +244,7 @@ function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
     end
     --logDebug('ModuleSystem', 'callback', eventName .. extraSign, fn, result, ...)
     return result;
-  end, 0);
+  end, fn.order or 0);
   callbacks[#callbacks + 1] = fx;
   table.sort(callbacks, function(a, b)
     return a.order > b.order;
