@@ -3,7 +3,10 @@ local chained = {
     local res = 1;
     for i, v in ipairs(list) do
       res = v(...)
-      if res ~= 1 and res ~= nil then
+      if res == nil then
+        res = 1;
+      end
+      if res ~= 1 then
         return res;
       end
     end
