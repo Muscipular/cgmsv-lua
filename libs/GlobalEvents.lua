@@ -1,6 +1,7 @@
 local chained = {
   TalkEvent = function(list, ...)
     local res = 1;
+    --print('TalkEventChain', ...)
     for i, v in ipairs(list) do
       res = v(...)
       if res == nil then
@@ -176,6 +177,7 @@ local function makeEventHandle(name)
   local list = {}
   list.map = {};
   return function(...)
+    --print('makeEventHandle', name, ...);
     local ok, ret = pcall(chained[name] or defaultChain, list, ...);
     if ok then
       return ret;
@@ -224,7 +226,9 @@ function _G.OrderedCallback(fn, order)
     return fn;
   end
   local n = { fn = fn, order = 100 - (order or 0), type = 'OrderedCallback' }
-  return setmetatable(n, { __call = fn })
+  return setmetatable(n, { __call = function(self, ...)
+    return fn(...);
+  end })
 end
 
 --- 注册全局事件

@@ -4,12 +4,11 @@ local newChar = ffi.cast('int (__cdecl*)(uint32_t a1, int a2, int a3)', 0x00438D
 local addCharaToMap = ffi.cast('int (__cdecl*)(int type, uint32_t charAddr, int mapId, int floor, int x, int y)', 0x00414930);
 local Broadcast_ObjectState = ffi.cast('int (__cdecl*)(int objIndex)', 0x0043FEF0);
 local GetCharWorkFlag = ffi.cast('uint8_t (__cdecl*)(const char *a2, int a3, uint32_t a4, int a5)', 0x00427F10);
+local dummyChar = { nilIndex = nil }
 
 --[[
 local hookedQueueSave;
 local hookedQueueSave2;
-
-local dummyChar = { nilIndex = nil }
 
 local function hookQueueSaveInner(charPtr, fn)
   if charPtr > 0 then
