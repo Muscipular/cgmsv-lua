@@ -45,6 +45,8 @@ sharedContext.NL.CreateNpc = function(file, cb)
   return NL.CreateNpc(nil, LegacyModule:loadFile(file, cb, 'NL.CreateNpc'));
 end
 
+sharedContext.NL.CreateNPC = sharedContext.NL.CreateNpc;
+
 sharedContext.Protocol.OnRecv = function(file, cb, header)
   return Protocol.OnRecv(nil, LegacyModule:loadFile(file, cb, 'Protocol.OnRecv'), header);
 end
