@@ -49,3 +49,34 @@ resetCharBattleState = ffi.hook.new('int (__cdecl*)(uint32_t a1)', function(char
   return ret;
 end, 0x0048C020, 5);
 
+local emitBeforeCharaSave = NL.newEvent('BeforeCharaSaveEvent', 0)
+local hookedQueueSave;
+local hookedQueueSave2;
+local function hookQueueSaveInner(charPtr, fn)
+  if charPtr > 0 then
+    local charIndex = ffi.readMemoryInt32(charPtr + 4);
+    if emitBeforeCharaSave(charIndex) == 1 then
+      return 1;
+    end
+  end
+  return fn(charPtr);
+end
+local function hookQueueSave(charPtr)
+  return hookQueueSaveInner(charPtr, hookedQueueSave);
+end
+local function hookQueueSave2(charPtr)
+  return hookQueueSaveInner(charPtr, hookedQueueSave2);
+end
+hookedQueueSave = ffi.hook.new('int (__cdecl*)(uint32_t charAddr)', hookQueueSave, 0x0043B290, 9);
+hookedQueueSave2 = ffi.hook.new('int (__cdecl*)(uint32_t charAddr)', hookQueueSave2, 0x0043B390, 7);
+
+local emitCharaSaved = NL.newEvent('CharaSavedEvent', 0);
+local hookOnCharaSaved;
+hookOnCharaSaved = ffi.hook.new('int (__cdecl*)(int a1)', function(queueIndex)
+  local queuePtr = Addresses.DBQueue + 0x58 * queueIndex
+  local success = ffi.readMemoryInt32(queuePtr + 0x18) ~= 0;
+  local playerPtr = ffi.readMemoryString(queuePtr + 0x48);
+  emitCharaSaved(ffi.readMemoryInt32(playerPtr + 4), success);
+  return hookOnCharaSaved(queueIndex);
+end, 0x004183E0, 5)
+

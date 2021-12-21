@@ -205,6 +205,17 @@ function ffi.patch(hookFnPtr, value)
   ffi.C.VirtualProtect(ffi.cast('void*', hookFnPtr), #value, old_prot[0], old_prot2);
 end
 
+function ffi.fnOffset(addr, fn, typeName)
+  local fnPtr = ffi.cast('uint32_t', ffi.cast('void*', ffi.cast(typeName, fn)));
+  return fnPtr - addr;
+end
+
+function ffi.uint32ToArray(n)
+  local v = ffi.new('uint8_t[4]')
+  ffi.cast('uint32_t*', v)[0] = n;
+  return { v[0], v[1], v[2], v[3] };
+end
+
 function printAsHex(...)
   print(table.unpack(table.map({ ... }, function(e)
     if type(e) == 'number' and e > 0 then

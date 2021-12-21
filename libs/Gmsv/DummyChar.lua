@@ -3,6 +3,9 @@ local clearCharData = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0042BDE0);
 local newChar = ffi.cast('int (__cdecl*)(uint32_t a1, int a2, int a3)', 0x00438D80);
 local addCharaToMap = ffi.cast('int (__cdecl*)(int type, uint32_t charAddr, int mapId, int floor, int x, int y)', 0x00414930);
 local Broadcast_ObjectState = ffi.cast('int (__cdecl*)(int objIndex)', 0x0043FEF0);
+local GetCharWorkFlag = ffi.cast('uint8_t (__cdecl*)(const char *a2, int a3, uint32_t a4, int a5)', 0x00427F10);
+
+--[[
 local hookedQueueSave;
 local hookedQueueSave2;
 
@@ -25,6 +28,22 @@ local function hookQueueSave2(charPtr)
 end
 hookedQueueSave = ffi.hook.new('int (__cdecl*)(uint32_t charAddr)', hookQueueSave, 0x0043B290, 9);
 hookedQueueSave2 = ffi.hook.new('int (__cdecl*)(uint32_t charAddr)', hookQueueSave2, 0x0043B390, 7);
+]]
+
+local function hookGetCharWorkFlag(a, b, charPtr, flag)
+  local f = GetCharWorkFlag(a, b, charPtr, flag);
+  if f ~= 0 then
+    if Char.IsDummy(ffi.readMemoryInt32(charPtr + 4)) then
+      return 0;
+    end
+  end
+  return f;
+end
+
+ffi.hook.hooks[tostring(0x00422991 + 1)] = hookGetCharWorkFlag;
+local hookGetCharWorkFlagPtr = ffi.cast('uint8_t (__cdecl*)(const char *a2, int a3, uint32_t a4, int a5)', hookGetCharWorkFlag)
+ffi.hook.hooks[tostring(0x00422991 + 1) .. '_1'] = hookGetCharWorkFlagPtr;
+ffi.patch(0x00422991 + 1, ffi.uint32ToArray(ffi.fnOffset(0x00422991 + 5, hookGetCharWorkFlagPtr, 'uint8_t (__cdecl*)(const char *a2, int a3, uint32_t a4, int a5)')));
 
 ---@param charIndex number
 function Char.IsDummy(charIndex)
@@ -131,5 +150,13 @@ battleLoop = ffi.hook.new('void (__cdecl*)()', function()
   battleDataDummy = {}
 end, 0x00487790, 5);
 
+local function beforeCharaSaveCallback(charIndex)
+  if Char.IsDummy(charIndex) then
+    return 1;
+  end
+  return 0;
+end
+
 regGlobalEvent('ShutDownEvent', ShutdownCallback, 'DummyChar');
 regGlobalEvent('BattleExitEvent', battleExitEventCallback, 'DummyChar');
+regGlobalEvent('BeforeCharaSaveEvent', beforeCharaSaveCallback, 'DummyChar');

@@ -318,3 +318,13 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookSellPrice, 0x00523E68,
   0x51 + 8,
   0x51 + 8,
 })
+
+local saveChara = ffi.cast('int (__cdecl*)(uint32_t *charAddr)', 0x0043B290);
+
+---保存用户数据到数据库（异步操作）
+function Char.SaveToDb(charIndex)
+  if not Char.IsPlayer(charIndex) then
+    return -1;
+  end
+  return saveChara(Char.GetCharPointer(charIndex));
+end 
