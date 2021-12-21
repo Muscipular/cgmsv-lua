@@ -225,7 +225,7 @@ function _G.OrderedCallback(fn, order)
   if type(fn) == 'table' and fn.type == 'OrderedCallback' then
     return fn;
   end
-  local n = { fn = fn, order = 100 - (order or 0), type = 'OrderedCallback' }
+  local n = { fn = fn, order = order, type = 'OrderedCallback' }
   return setmetatable(n, { __call = function(self, ...)
     return fn(...);
   end })
@@ -244,10 +244,10 @@ function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   ix = ix + 1;
   local order = 0;
   if type(fn) == 'table' and fn.type == 'OrderedCallback' then
-    order = fn.order or 0;
+    order = fn.order;
   end
   local fx = OrderedCallback(function(...)
-    --logDebug('ModuleSystem', 'callback', eventName .. extraSign, fn, ...)
+    --logDebug('ModuleSystem', 'callback', eventName .. extraSign, fn, order, ...)
     local success, result = pcall(fn, ...)
     if not success then
       logError(moduleName, name .. ' event callback error: ', result)
