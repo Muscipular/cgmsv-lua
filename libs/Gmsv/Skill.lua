@@ -96,7 +96,7 @@ ffi.hook.new('int (__cdecl*)(uint32_t charPtr, int isNotify)', function(charPtr,
             end
           end
         end
-        if iLv - 1 > 0 then
+        --if iLv - 1 > 0 then
           --[[
               if ( iLv_1 - 1 > 0 )
                     {
@@ -110,15 +110,17 @@ ffi.hook.new('int (__cdecl*)(uint32_t charPtr, int isNotify)', function(charPtr,
                       }
                     }
           ]]
-        end
+        --end
         for i, techIndex in ipairs(newTechIndexes) do
           if techIndex >= 0 then
             setTechId('Skill.lua hook updateSkill', 2, charPtr, slot, i - 1, Tech.GetData(techIndex, CONST.TECH_ID));
-            local recipeId = Tech.GetTechIndex(techIndex, CONST.TECH_REMEMBER_RECIPE1);
+            local recipeId = Tech.GetData(techIndex, CONST.TECH_REMEMBER_RECIPE1);
+            --print('update recipe', Tech.GetData(techIndex, CONST.TECH_ID), recipeId);
             if recipeId >= 0 then
               Recipe.GiveRecipe(charIndex, recipeId);
             end
-            local recipeId2 = Tech.GetTechIndex(techIndex, CONST.TECH_REMEMBER_RECIPE2);
+            local recipeId2 = Tech.GetData(techIndex, CONST.TECH_REMEMBER_RECIPE2);
+            --print('update recipe 2', Tech.GetData(techIndex, CONST.TECH_ID), recipeId2);
             if recipeId2 >= 0 then
               Recipe.GiveRecipe(charIndex, recipeId2);
             end
