@@ -35,7 +35,7 @@ Skill.SetExpForLv(2, 22, 3607);
 ---设置扩展技能经验表
 ---@param expId number
 ---@param lv number
----@param exp number 
+---@param exp number
 function Skill.SetExpForLv(expId, lv, exp)
   if expId < 0 then
     return -1;
@@ -55,10 +55,19 @@ function Skill.SetExpForLv(expId, lv, exp)
   expTable[index] = expTable[index] or {}
   expTable[index][lv - 1] = exp;
 end
-ffi.patch(0x00442533 + 2, { MAX_SKill_Lv });
-ffi.patch(0x00442811 + 2, { MAX_SKill_Lv });
-ffi.patch(0x004F9426 + 3, { MAX_SKill_Lv - 1 });
-ffi.patch(0x0044222F + 6, { MAX_SKill_Lv - 1 });
+
+---设置技能最大等级
+---@param level number
+function Skill.SetMaxLevel(level)
+  MAX_SKill_Lv = tonumber(level) or 10;
+  if MAX_SKill_Lv > 127 then
+    MAX_SKill_Lv = 127
+  end
+  ffi.patch(0x00442533 + 2, { MAX_SKill_Lv });
+  ffi.patch(0x00442811 + 2, { MAX_SKill_Lv });
+  ffi.patch(0x004F9426 + 3, { MAX_SKill_Lv - 1 });
+  ffi.patch(0x0044222F + 6, { MAX_SKill_Lv - 1 });
+end
 
 local getSkillIndex = ffi.cast('uint32_t (__cdecl*)(int a)', 0x004F4AB0);
 local getTechId = ffi.cast('int (__cdecl*)(const char *file, int lineNo, uint32_t charPtr, int slot, uint32_t lv)', 0x0042A590);
@@ -109,19 +118,19 @@ ffi.hook.new('int (__cdecl*)(uint32_t charPtr, int isNotify)', function(charPtr,
           end
         end
         --if iLv - 1 > 0 then
-          --[[
-              if ( iLv_1 - 1 > 0 )
+        --[[
+            if ( iLv_1 - 1 > 0 )
+                  {
+                    v10 = a1[2][0];
+                    for ( i = 1; v10 != -1; v10 = a1[2][i++] )
                     {
-                      v10 = a1[2][0];
-                      for ( i = 1; v10 != -1; v10 = a1[2][i++] )
-                      {
-                        if ( !TECH_getInt(v10, TECH_REMAIN) && a1[2][i] != -1 )
-                          a1[1][i + 10] = -1;
-                        if ( i >= iLv_1 - 1 )
-                          break;
-                      }
+                      if ( !TECH_getInt(v10, TECH_REMAIN) && a1[2][i] != -1 )
+                        a1[1][i + 10] = -1;
+                      if ( i >= iLv_1 - 1 )
+                        break;
                     }
-          ]]
+                  }
+        ]]
         --end
         for i, techIndex in ipairs(newTechIndexes) do
           if techIndex >= 0 then
