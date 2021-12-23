@@ -3,7 +3,7 @@ _G.Skill = _G.Skill or {}
 local getSkillExpDataInt;
 local expTable = {}
 
-local MAX_SKill_Lv = 15; --最大127 理论上？
+local MAX_SKill_Lv = 10; --最大127 理论上？
 
 local function hookGetSkillExpDataInt(index, lvIndex)
   --print(index, lvIndex);
