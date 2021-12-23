@@ -43,6 +43,13 @@ end
 
 table.join = table.concat;
 
+function table.fill(table, count, val)
+  for i = 1, count do
+    table[i] = val;
+  end
+  return table;
+end
+
 function table:filter(fn)
   local ret = {}
   for i, v in pairs(self) do

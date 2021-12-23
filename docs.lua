@@ -120,6 +120,9 @@ end
 function Char.GetSkillID(CharIndex, Slot)
 end
 
+function Char.GetSkillLv(CharIndex, Slot)
+end
+
 function Char.SetWalkPostEvent(Dofile, FuncName, CharIndex)
 end
 

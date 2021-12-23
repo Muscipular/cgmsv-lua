@@ -35,12 +35,12 @@ function Skill.SetExpForLv(expId, lv, exp)
   expTable[index] = expTable[index] or {}
   expTable[index][lv - 1] = exp;
 end
-ffi.patch(0x00442533 + 2, { MAX_SKill_Lv - 1 });
-ffi.patch(0x00442811 + 2, { MAX_SKill_Lv - 1 });
-ffi.patch(0x004F9426 + 3, { MAX_SKill_Lv - 2 });
+ffi.patch(0x00442533 + 2, { MAX_SKill_Lv });
+ffi.patch(0x00442811 + 2, { MAX_SKill_Lv });
+ffi.patch(0x004F9426 + 3, { MAX_SKill_Lv - 1 });
 --ffi.patch(0x0042A69D + 3, { 0x0F });
 --ffi.patch(0x0042A844 + 3, { 0x0F });
-ffi.patch(0x0044222F + 6, { MAX_SKill_Lv - 2 });
+ffi.patch(0x0044222F + 6, { MAX_SKill_Lv - 1 });
 --ffi.patch(0x00430A8F + 6, { 0x10 });
 ----expand stack size
 --ffi.patch(0x00430EBE + 2, { 0x0C, 0x02, 0x00, 0x00 });
@@ -48,13 +48,172 @@ ffi.patch(0x0044222F + 6, { MAX_SKill_Lv - 2 });
 
 --TODO HOOK
 
+local getSkillIndex = ffi.cast('uint32_t (__cdecl*)(int a)', 0x004F4AB0);
+local getTechId = ffi.cast('int (__cdecl*)(const char *file, int lineNo, uint32_t charPtr, int slot, uint32_t lv)', 0x0042A590);
+local setTechId = ffi.cast('int (__cdecl*)(const char *a1, int a2, uint32_t charPtr, int slot, uint32_t lv, int techId)', 0x0042A740);
+local getMaxSkillLevelOfJob = ffi.cast('int (__cdecl*)(int a1, int a2)', 0x004F3EC0);
+local sendUpdateToClient = ffi.cast('int (__cdecl*)(uint32_t a4, int slot)', 0x00442480);
+
 ffi.hook.new('int (__cdecl*)(uint32_t charPtr, int isNotify)', function(charPtr, isNotify)
   local MaxSkillSlot = Char.GetDataByPtr(charPtr, CONST.CHAR_技能栏);
   if MaxSkillSlot > 15 then
     MaxSkillSlot = 15;
   end
-  
+  if MaxSkillSlot < 0 then
+    return 1;
+  end
+  local techNum = ffi.readMemoryDWORD(0x011149EC);
+  local charIndex = ffi.readMemoryInt32(charPtr + 4);
+  for slot = 0, MaxSkillSlot - 1 do
+    local nowTechIds = {};
+    local newTechIndexes = {};
+    local newTechIds = {};
+    table.fill(nowTechIds, MAX_SKill_Lv, -1);
+    table.fill(newTechIndexes, MAX_SKill_Lv, -1);
+    table.fill(newTechIds, MAX_SKill_Lv, -1);
+    for iLv = 1, MAX_SKill_Lv do
+      nowTechIds[iLv] = getTechId('Skill.lua hook updateSkill', 0, charPtr, slot, iLv - 1);
+      setTechId('Skill.lua hook updateSkill', 1, charPtr, slot, iLv - 1, -1);
+    end
+    local skillId = Char.GetSkillID(charIndex, slot);
+    if skillId >= 0 then
+      local skillIndex = Skill.GetSkillIndex(skillId);
+      if skillIndex >= 0 then
+        local maxJobLv = Skill.GetMaxSkillLevelOfJob(skillIndex, Char.GetData(charIndex, CONST.CHAR_职业));
+        local iLv = 0
+        for techIndex = 0, techNum - 1 do
+          if Tech.GetData(techIndex, CONST.TECH_SKILLID) == skillId then
+            local skLv = Char.GetSkillLv(charIndex, slot);
+            if skLv >= Tech.GetData(techIndex, CONST.TECH_NECESSARYLV) then
+              if iLv > MAX_SKill_Lv then
+                break ;
+              end
+              if (Tech.GetData(techIndex, CONST.TECH_REMAIN) ~= 0 or maxJobLv >= Tech.GetData(techIndex, CONST.TECH_NECESSARYLV)) then
+                iLv = iLv + 1;
+                newTechIndexes[iLv] = techIndex;
+                newTechIds[iLv] = Tech.GetData(techIndex, CONST.TECH_ID);
+              end
+            end
+          end
+        end
+        if iLv - 1 > 0 then
+          --[[
+              if ( iLv_1 - 1 > 0 )
+                    {
+                      v10 = a1[2][0];
+                      for ( i = 1; v10 != -1; v10 = a1[2][i++] )
+                      {
+                        if ( !TECH_getInt(v10, TECH_REMAIN) && a1[2][i] != -1 )
+                          a1[1][i + 10] = -1;
+                        if ( i >= iLv_1 - 1 )
+                          break;
+                      }
+                    }
+          ]]
+        end
+        for i, techIndex in ipairs(newTechIndexes) do
+          if techIndex >= 0 then
+            setTechId('Skill.lua hook updateSkill', 2, charPtr, slot, i - 1, Tech.GetData(techIndex, CONST.TECH_ID));
+            local recipeId = Tech.GetTechIndex(techIndex, CONST.TECH_REMEMBER_RECIPE1);
+            if recipeId >= 0 then
+              Recipe.GiveRecipe(charIndex, recipeId);
+            end
+            local recipeId2 = Tech.GetTechIndex(techIndex, CONST.TECH_REMEMBER_RECIPE2);
+            if recipeId2 >= 0 then
+              Recipe.GiveRecipe(charIndex, recipeId2);
+            end
+          end
+        end
+        --if iLv > 0 then
+        --  for i = 1, iLv do
+        --  end
+        --end
+      end
+      if isNotify ~= 0 then
+        for i, v in ipairs(nowTechIds) do
+          if v >= 0 and table.indexOf(newTechIds, v) <= 0 then
+            local techIndex = Tech.GetTechIndex(v);
+            NLG.SystemMessage(charIndex, string.format("失去了%s的技能。", Tech.GetData(techIndex, CONST.TECH_NAME)));
+          end
+        end
+        for i, v in ipairs(newTechIds) do
+          if v >= 0 and table.indexOf(nowTechIds, v) <= 0 then
+            local techIndex = Tech.GetTechIndex(v);
+            NLG.SystemMessage(charIndex, string.format("得到了%s的技能。", Tech.GetData(techIndex, CONST.TECH_NAME)));
+          end
+        end
+      end
+      print('update skill', charIndex, slot);
+      print('now', table.unpack(nowTechIds));
+      print('new', table.unpack(newTechIds));
+      sendUpdateToClient(charPtr, slot);
+    end
+  end
+  return 1;
 end, 0x00430900, 6)
+
+local charSkillData = {};
+local _getTechId;
+_getTechId = ffi.hook.new('int (__cdecl*)(const char *file, int lineNo, uint32_t charPtr, int slot, uint32_t lv)',
+  function(file, lineNo, charPtr, slot, lv)
+    print('_getTechId', ffi.string(file), lineNo, charPtr, slot, lv)
+    if slot >= 15 or slot < 0 then
+      return -1;
+    end
+    if lv >= MAX_SKill_Lv then
+      return -1;
+    end
+    if lv <= 10 then
+      return _getTechId(file, lineNo, charPtr, slot, lv);
+    end
+    local charIndex = ffi.readMemoryInt32(charPtr + 4);
+    if charSkillData[charIndex] == nil then
+      return -1;
+    end
+    local n = charSkillData[charIndex][lv];
+    print('charSkillData', charIndex, lv, n);
+    if n == nil then
+      return -1
+    end
+    return n;
+  end, 0x0042A590, 5);
+local _setTechId;
+_setTechId = ffi.hook.new('int (__cdecl*)(const char *file, int lineNo, uint32_t charPtr, int slot, uint32_t lv, int techId)',
+  function(file, lineNo, charPtr, slot, lv, techId)
+    print('_setTechId', ffi.string(file), lineNo, charPtr, slot, lv, techId)
+    if slot >= 15 or slot < 0 then
+      return -1;
+    end
+    if lv >= MAX_SKill_Lv then
+      return -1;
+    end
+    if lv <= 10 then
+      return _setTechId(file, lineNo, charPtr, slot, lv, techId);
+    end
+    local charIndex = ffi.readMemoryInt32(charPtr + 4);
+    if charSkillData[charIndex] == nil then
+      charSkillData[charIndex] = {};
+    end
+    print('charSkillData save', charIndex, lv, charSkillData[charIndex][lv], techId);
+    charSkillData[charIndex][lv] = techId;
+    return 0;
+  end, 0x0042A740, 5);
+
+function Skill.GetMaxSkillLevelOfJob(skillIndex, job)
+  return getMaxSkillLevelOfJob(skillIndex, job)
+end
+
+function Skill.GetSkillIndex(id)
+  return getSkillIndex(id)
+end
+
+regGlobalEvent('LogoutEvent', function(charIndex)
+  charSkillData[charIndex] = nil;
+end)
+
+regGlobalEvent('DropEvent', function(charIndex)
+  charSkillData[charIndex] = nil;
+end)
 
 Skill.SetExpForLv(2, 11, 3300);
 Skill.SetExpForLv(2, 12, 3400);
