@@ -75,7 +75,7 @@ local hookOnCharaSaved;
 hookOnCharaSaved = ffi.hook.new('int (__cdecl*)(int a1)', function(queueIndex)
   local queuePtr = Addresses.DBQueue + 0x58 * queueIndex
   local success = ffi.readMemoryInt32(queuePtr + 0x18) ~= 0;
-  local playerPtr = ffi.readMemoryString(queuePtr + 0x48);
+  local playerPtr = ffi.readMemoryDWORD(queuePtr + 0x48);
   emitCharaSaved(ffi.readMemoryInt32(playerPtr + 4), success);
   return hookOnCharaSaved(queueIndex);
 end, 0x004183E0, 5)
