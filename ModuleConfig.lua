@@ -6,6 +6,7 @@ loadModule('petExt') --宠物公共模块，扩展字段用
 loadModule('itemExt')  --物品公共模块，扩展字段用
 --loadModule('gmsvData')  --Data相关
 
+--loadModule('tech15') --15级技能
 loadModule('admin')
 loadModule('adminCommands')
 loadModule('ng')
