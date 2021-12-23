@@ -6,7 +6,7 @@ local expTable = {}
 local MAX_SKill_Lv = 15;
 
 local function hookGetSkillExpDataInt(index, lvIndex)
-  print(index, lvIndex);
+  --print(index, lvIndex);
   if expTable[index] and expTable[index][lvIndex] then
     return expTable[index][lvIndex]
   end
@@ -143,9 +143,9 @@ ffi.hook.new('int (__cdecl*)(uint32_t charPtr, int isNotify)', function(charPtr,
           end
         end
       end
-      print('update skill', charIndex, slot);
-      print('now', table.unpack(nowTechIds));
-      print('new', table.unpack(newTechIds));
+      --print('update skill', charIndex, slot);
+      --print('now', table.unpack(nowTechIds));
+      --print('new', table.unpack(newTechIds));
       sendUpdateToClient(charPtr, slot);
     end
   end
@@ -156,22 +156,25 @@ local charSkillData = {};
 local _getTechId;
 _getTechId = ffi.hook.new('int (__cdecl*)(const char *file, int lineNo, uint32_t charPtr, int slot, uint32_t lv)',
   function(file, lineNo, charPtr, slot, lv)
-    print('_getTechId', ffi.string(file), lineNo, charPtr, slot, lv)
+    --print('_getTechId', ffi.string(file), lineNo, charPtr, slot, lv)
     if slot >= 15 or slot < 0 then
       return -1;
     end
     if lv >= MAX_SKill_Lv then
+      logError('SkillHook', 'over max skill lv ' .. MAX_SKill_Lv);
       return -1;
     end
     if lv <= 10 then
-      return _getTechId(file, lineNo, charPtr, slot, lv);
+      local ret = _getTechId(file, lineNo, charPtr, slot, lv);
+      --print('ret', ret);
+      return ret;
     end
     local charIndex = ffi.readMemoryInt32(charPtr + 4);
     if charSkillData[charIndex] == nil then
       return -1;
     end
-    local n = charSkillData[charIndex][lv];
-    print('charSkillData', charIndex, lv, n);
+    local n = charSkillData[charIndex][slot * 1000 + lv];
+    --print('charSkillData', charIndex, slot, lv, n);
     if n == nil then
       return -1
     end
@@ -180,24 +183,36 @@ _getTechId = ffi.hook.new('int (__cdecl*)(const char *file, int lineNo, uint32_t
 local _setTechId;
 _setTechId = ffi.hook.new('int (__cdecl*)(const char *file, int lineNo, uint32_t charPtr, int slot, uint32_t lv, int techId)',
   function(file, lineNo, charPtr, slot, lv, techId)
-    print('_setTechId', ffi.string(file), lineNo, charPtr, slot, lv, techId)
+    --print('_setTechId', ffi.string(file), lineNo, charPtr, slot, lv, techId)
     if slot >= 15 or slot < 0 then
+      logError('SkillHook', 'over slot ' .. slot);
       return -1;
     end
     if lv >= MAX_SKill_Lv then
+      logError('SkillHook', 'over max skill lv ' .. MAX_SKill_Lv);
       return -1;
     end
     if lv <= 10 then
-      return _setTechId(file, lineNo, charPtr, slot, lv, techId);
+      local ret = _setTechId(file, lineNo, charPtr, slot, lv, techId);
+      --print('ret', ret);
+      return ret;
     end
     local charIndex = ffi.readMemoryInt32(charPtr + 4);
     if charSkillData[charIndex] == nil then
       charSkillData[charIndex] = {};
     end
-    print('charSkillData save', charIndex, lv, charSkillData[charIndex][lv], techId);
-    charSkillData[charIndex][lv] = techId;
+    --print('charSkillData save', charIndex, lv, charSkillData[charIndex][slot * 1000 + lv], techId);
+    charSkillData[charIndex][slot * 1000 + lv] = techId;
     return 0;
   end, 0x0042A740, 5);
+
+local _checkNesseraryLv;
+_checkNesseraryLv = ffi.hook.new('int (__cdecl*)(uint32_t a1, int lv)', function(charPtr, lv)
+  if lv >= 10 then
+    lv = 10
+  end
+  return _checkNesseraryLv(charPtr, lv);
+end, 0x004FD570, 6);
 
 function Skill.GetMaxSkillLevelOfJob(skillIndex, job)
   return getMaxSkillLevelOfJob(skillIndex, job)
