@@ -16,7 +16,7 @@ function Tech15:onLoad()
   }
   for i, v in pairs(skillExpTable) do
     for i = 1, 5 do
-      Skill.SetExpForLv(v[1], 9 + i, v[i + 1])
+      Skill.SetExpForLv(v[1], 10 + i, v[i + 1])
     end
   end
 end
