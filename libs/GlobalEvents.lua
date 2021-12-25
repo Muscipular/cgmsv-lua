@@ -89,6 +89,19 @@ local chained = {
     end
     return Damage;
   end,
+  BattleInjuryEvent = function(list, charIndex, battleIndex, oVal, val)
+    for i, v in ipairs(list) do
+      local m = v(charIndex, battleIndex, oVal, val);
+      if type(m) == 'number' then
+        m = math.floor(m);
+        if m <= 0 then
+          return m;
+        end
+        val = m;
+      end
+    end
+    return val;
+  end,
   Init = function(fnList, ...)
     fnList = table.copy(fnList)
     local res;
