@@ -19,7 +19,7 @@ function Tech.GetData(techIndex, dataLine)
   if dataLine < 0 then
     return nil
   end
-  if dataLine > 2000 then
+  if dataLine >= 2000 then
     if dataLine > 2002 then
       return nil
     end
