@@ -156,14 +156,14 @@ ffi.hook.new('int (__cdecl*)(uint32_t charPtr, int isNotify)', function(charPtr,
         for i, v in ipairs(nowTechIds) do
           if v >= 0 and table.indexOf(newTechIds, v) <= 0 then
             local techIndex = Tech.GetTechIndex(v);
-            print(v, techIndex, Tech.GetData(techIndex, CONST.TECH_NAME));
+            --print(v, techIndex, Tech.GetData(techIndex, CONST.TECH_NAME));
             NLG.SystemMessage(charIndex, string.format("失去了%s的技能。", Tech.GetData(techIndex, CONST.TECH_NAME)));
           end
         end
         for i, v in ipairs(newTechIds) do
           if v >= 0 and table.indexOf(nowTechIds, v) <= 0 then
             local techIndex = Tech.GetTechIndex(v);
-            print(v, techIndex, Tech.GetData(techIndex, CONST.TECH_NAME));
+            --print(v, techIndex, Tech.GetData(techIndex, CONST.TECH_NAME));
             NLG.SystemMessage(charIndex, string.format("得到了%s的技能。", Tech.GetData(techIndex, CONST.TECH_NAME)));
           end
         end
