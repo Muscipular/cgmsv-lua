@@ -16,6 +16,7 @@ function BankExpand:onProtoHook(fd, head, data)
   --self:logDebug(fd, head, data, data[1]);
   data = tonumber(data[1]);
   local charIndex = Protocol.GetCharIndexFromFd(fd);
+  self:logDebug(fd, charIndex, head, data);
   local bIndex = self:getData(charIndex, "index") or 1;
   if bIndex == data then
     return ;
