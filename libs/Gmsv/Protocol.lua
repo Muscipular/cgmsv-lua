@@ -86,7 +86,7 @@ end
 ---根据fd获取角色Index
 function Protocol.GetCharIndexFromFd(fd)
   local charAddr = FFI.readMemoryDWORD(Addresses.ConnectionTable + 0x221E0 * fd + 0x22108);
-  if charAddr < Addresses.CharaTablePTR or charAddr >= Addresses.CharaTablePTR + Addresses.CharaTableSize then
+  if not Char.IsValidCharPtr(charAddr) then
     return -1;
   end
   return FFI.readMemoryInt32(charAddr + 4);
