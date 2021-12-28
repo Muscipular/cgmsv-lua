@@ -77,3 +77,57 @@ function Item.SetCharPointer(itemIndex, charIndex)
   ffi.setMemoryDWORD(itemPtr + 0x2e8, ch);
   return 1;
 end
+
+---@param itemIndex number 道具Index
+function Item.GetCharPointer(itemIndex)
+  if itemIndex < 0 then
+    return -2;
+  end
+  if Addresses.ItemExistsTableSize <= itemIndex then
+    return -2;
+  end
+  local itemPtr = Addresses.ItemExistsTablePTR + itemIndex * 0x318;
+  if ffi.readMemoryDWORD(itemPtr) ~= 1 then
+    return -2;
+  end
+  return ffi.readMemoryInt32(itemPtr + 0x2e8);
+end
+
+---@param itemIndex number 道具Index
+function Item.RemoveCharPointer(itemIndex)
+  if itemIndex < 0 then
+    return -2;
+  end
+  if Addresses.ItemExistsTableSize <= itemIndex then
+    return -2;
+  end
+  local itemPtr = Addresses.ItemExistsTablePTR + itemIndex * 0x318;
+  if ffi.readMemoryDWORD(itemPtr) ~= 1 then
+    return -2;
+  end
+  ffi.setMemoryDWORD(itemPtr + 0x2e8, 0);
+  return 1;
+end
+
+local makeItem = ffi.cast('int (__cdecl *)(int number)', 0x004CA750);
+
+function Item.MakeItem(itemId)
+  return makeItem(itemId);
+end
+
+local removeItem = ffi.cast('void (__cdecl *)(int itemIndex, const char *a4, int a5)', 0x004C8370);
+
+function Item.UnlinkItem(itemIndex)
+  local charPtr = Item.GetCharPointer(itemIndex);
+  if charPtr > 0 then
+    local charIndex = ffi.readMemoryInt32(charPtr + 4);
+    for i = 0, 27 do
+      if Char.GetItemIndex(charIndex, i) == itemIndex then
+        return Char.DelItemBySlot(charIndex, i)
+      end
+    end
+    Item.RemoveCharPointer(itemIndex);
+  end
+  removeItem(itemIndex, "Item.lua UnlinkItem", 0);
+  return 0;
+end

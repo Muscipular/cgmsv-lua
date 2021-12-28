@@ -298,6 +298,10 @@ function commandsNormal.pet(player, args)
   end
 end
 
+function commandsNormal.bank(player, args)
+  NLG.OpenBank(player, player);
+end
+
 function ngModule:handleTalkEvent(charIndex, msg)
   local command = msg:match('^/([%w]+)')
   if commandsNormal[command] then

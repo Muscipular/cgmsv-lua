@@ -86,7 +86,7 @@ function NLG.SetCriticalDamageAddition(mode, val)
   end
 end
 
-local bankManTalked = ffi.cast('int (__cdecl*) (uint32_t *a1, uint32_t *a2)', 0x0052DE40);
+local bankManTalked = ffi.cast('int (__cdecl*) (uint32_t a1, uint32_t a2)', 0x0052DE40);
 
 function NLG.OpenBank(npcOrPlayer, player)
   if Char.IsValidCharIndex(npcOrPlayer) and Char.IsPlayer(player) then

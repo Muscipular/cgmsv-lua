@@ -327,4 +327,70 @@ function Char.SaveToDb(charIndex)
     return -1;
   end
   return saveChara(Char.GetCharPointer(charIndex));
-end 
+end
+
+---获取银行物品ItemIndex
+---@param charIndex number
+---@param slot number
+---@return number itemIndex, -1无物品 -2无效charIndex -3无效pAddon
+function Char.GetPoolItem(charIndex, slot)
+  if not Char.IsPlayer(charIndex) then
+    return -2;
+  end
+  local ptr = Char.GetCharPointer(charIndex);
+  local pAddon = ffi.readMemoryDWORD(ptr + 0x53C);
+  if pAddon <= 0 or pAddon == 0xffffffff then
+    return -3;
+  end
+  return ffi.readMemoryInt32(pAddon + 0x3c + 4 * slot);
+end
+
+---设置银行物品ItemIndex
+---@param charIndex number
+---@param slot number 取值0-19
+---@param itemIndex number
+function Char.SetPoolItem(charIndex, slot, itemIndex)
+  if not Char.IsPlayer(charIndex) then
+    return -2;
+  end
+  local ptr = Char.GetCharPointer(charIndex);
+  local pAddon = ffi.readMemoryDWORD(ptr + 0x53C);
+  if pAddon <= 0 or pAddon == 0xffffffff then
+    return -3;
+  end
+  if itemIndex < 0 then
+    return -4;
+  end
+  if Addresses.ItemExistsTableSize <= itemIndex then
+    return -4;
+  end
+  local itemPtr = Addresses.ItemExistsTablePTR + itemIndex * 0x318;
+  if ffi.readMemoryDWORD(itemPtr) ~= 1 then
+    return -4;
+  end
+  if slot < 0 or slot > 19 then
+    return -5
+  end
+  Item.RemoveCharPointer(itemIndex);
+  ffi.setMemoryInt32(pAddon + 0x3c + 4 * slot, itemIndex);
+  return 0;
+end
+
+function Char.RemovePoolItem(charIndex, slot)
+  if slot < 0 or slot > 19 then
+    return -5
+  end
+  local itemIndex = Char.GetPoolItem(charIndex, slot)
+  if itemIndex < 0 then
+    return itemIndex;
+  end
+  Item.RemoveCharPointer(itemIndex);
+  Item.UnlinkItem(itemIndex);
+  local ptr = Char.GetCharPointer(charIndex);
+  local pAddon = ffi.readMemoryDWORD(ptr + 0x53C);
+  if pAddon <= 0 or pAddon == 0xffffffff then
+    return -3;
+  end
+  ffi.setMemoryInt32(pAddon + 0x3c + 4 * slot, -1);
+  return 0;
+end
