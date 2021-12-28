@@ -20,14 +20,17 @@ function BankExpand:onProtoHook(fd, head, data)
   if bIndex == data then
     return ;
   end
-  self:setData(charIndex, "index", data);
+  local dataSave = {
+    index = data,
+  }
+  --self:setData(charIndex, "index", data);
   for i = 0, 19 do
     local itemIndex = Char.GetPoolItem(charIndex, i);
     if itemIndex >= 0 then
-      self:setData(charIndex, string.format("slot-%d-%d", bIndex, i), self:readItemData(itemIndex));
+      dataSave[string.format("slot-%d-%d", bIndex, i)] = self:readItemData(itemIndex);
       Char.RemovePoolItem(charIndex, i);
     else
-      self:setData(charIndex, string.format("slot-%d-%d", bIndex, i), 0);
+      dataSave[string.format("slot-%d-%d", bIndex, i)] = 0;
     end
     local itemData = self:getData(charIndex, string.format("slot-%d-%d", data, i));
     if type(itemData) == 'table' then
@@ -45,6 +48,7 @@ function BankExpand:onProtoHook(fd, head, data)
       end
     end
   end
+  self:setData(charIndex, dataSave);
   NLG.OpenBank(charIndex, charIndex);
 end
 
@@ -91,7 +95,13 @@ function BankExpand:setData(charIndex, field, itemData)
   if data.bankExpand == nil then
     data.bankExpand = {}
   end
-  data.bankExpand[tostring(field)] = itemData;
+  if type(field) == 'table' then
+    for i, v in pairs(field) do
+      data.bankExpand[i] = v;
+    end
+  elseif type(field) == 'string' then
+    data.bankExpand[tostring(field)] = itemData;
+  end
   charExt:setData(charIndex, data);
 end
 
