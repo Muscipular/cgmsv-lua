@@ -51,6 +51,7 @@ function Map.GetDungeonExpireAt(floor)
   if cfgId < 0 then
     return -1;
   end
+  return Map.GetDungeonExpireAtByDungeonId(cfgId);
 end
 
 ---根据floor设置迷宫重置时间
