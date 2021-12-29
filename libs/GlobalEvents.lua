@@ -243,7 +243,7 @@ function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   extraSign = extraSign or ''
   logInfo('GlobalEvent', 'regGlobalEvent', eventName, moduleName, ix + 1)
   local callbacks, name, fn1 = takeCallbacks(eventName, extraSign, true)
-  logInfo('GlobalEvent', 'callbacks', #callbacks)
+  --logInfo('GlobalEvent', 'callbacks', #callbacks)
   ix = ix + 1;
   local order = 0;
   if type(fn) == 'table' and fn.type == 'OrderedCallback' then
