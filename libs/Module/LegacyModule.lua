@@ -38,6 +38,9 @@ function LegacyModule:loadFile(file, cb, name)
 end
 
 function LegacyModule:callInCtx(name, ...)
+  if self.sharedContext[name] == nil then
+    error(string.format('%s not found in sharedContext', name));
+  end
   return self.sharedContext[name](...)
 end
 
@@ -136,7 +139,7 @@ function LegacyModule:createDelegate()
       self:regCallback(key, fn, head);
     end
   end
-  Delegate.RegAllOutEvent = function(callback) 
+  Delegate.RegAllOutEvent = function(callback)
     Delegate.RegLogoutEvent(callback);
     Delegate.RegDropEvent(callback);
   end
