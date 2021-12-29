@@ -175,7 +175,7 @@ end
 
 local function makeEventHandle(name)
   local list = {}
-  list.map = {};
+  --list.map = {};
   return function(...)
     --print('makeEventHandle', name, ...);
     local ok, ret = pcall(chained[name] or defaultChain, list, ...);
@@ -217,6 +217,8 @@ end
 ---@class OrderedCallback
 ---@field order number
 ---@field fn function
+---@field type string
+---@field index number
 
 ---@return OrderedCallback|function
 ---@param fn function
@@ -239,8 +241,9 @@ end
 ---@return number È«¾Ö×¢²áIndex
 function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   extraSign = extraSign or ''
-  logInfo('GlobalEvent', 'regGlobalEvent', eventName, moduleName, ix + 1, eventCallbacks[eventName .. extraSign])
+  logInfo('GlobalEvent', 'regGlobalEvent', eventName, moduleName, ix + 1)
   local callbacks, name, fn1 = takeCallbacks(eventName, extraSign, true)
+  logInfo('GlobalEvent', 'callbacks', #callbacks)
   ix = ix + 1;
   local order = 0;
   if type(fn) == 'table' and fn.type == 'OrderedCallback' then
@@ -260,7 +263,9 @@ function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   table.sort(callbacks, function(a, b)
     return a.order > b.order;
   end)
-  callbacks.map[ix] = table.indexOf(callbacks, fx);
+  fx.index = ix;
+  --callbacks.map[ix] = table.indexOf(callbacks, fx);
+  --logInfo('GlobalEvent', 'mapIndex', ix, callbacks.map[ix], fx);
   return ix;
 end
 
@@ -273,21 +278,15 @@ function _G.removeGlobalEvent(eventName, fnIndex, moduleName, extraSign)
   extraSign = extraSign or ''
   logInfo('GlobalEvent', 'removeGlobalEvent', eventName .. extraSign, moduleName, fnIndex)
   local callbacks, name, fn1 = takeCallbacks(eventName, extraSign)
-  --logInfo('GlobalEvent', 'callbacks', eventCallbacks[eventName .. extraSign])
   if not callbacks then
     return true;
   end
+  --logInfo('GlobalEvent', 'callbacks', #callbacks, callbacks.map[fnIndex])
   --logInfo('GlobalEvent', 'fnIndex', fnIndex, eventCallbacks[eventName .. extraSign][fnIndex])
-  if callbacks.map[fnIndex] ~= nil then
-    local ix = callbacks.map[fnIndex];
-    table.remove(callbacks, callbacks.map[fnIndex]);
-    for i, v in pairs(callbacks.map) do
-      if v > ix then
-        callbacks.map[i] = v - 1;
-      end
-    end
-    callbacks.map[fnIndex] = nil;
-  end
+  local ix = table.findIndex(callbacks, function(e, i, list)
+    return e.index == fnIndex
+  end)
+  table.remove(callbacks, ix);
   if #callbacks == 0 then
     if not NL['Reg' .. eventName] then
       eventCallbacks[name] = nil;

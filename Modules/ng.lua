@@ -303,6 +303,7 @@ function commandsNormal.bank(player, args)
 end
 
 function ngModule:handleTalkEvent(charIndex, msg)
+  self:logDebug('ng', charIndex, msg);
   local command = msg:match('^/([%w]+)')
   if commandsNormal[command] then
     local arg = msg:match('^/[%w]+ +(.+)$')
