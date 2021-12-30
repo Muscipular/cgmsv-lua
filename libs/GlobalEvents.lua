@@ -74,6 +74,9 @@ local chained = {
         Damage = m;
       end
     end
+    if math.type and math.type(Damage) == 'float' then
+      Damage = math.tointeger(Damage)
+    end
     return Damage;
   end,
   BattleHealCalculateEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
@@ -86,6 +89,9 @@ local chained = {
         end
         Damage = m;
       end
+    end
+    if math.type and math.type(Damage) == 'float' then
+      Damage = math.tointeger(Damage)
     end
     return Damage;
   end,

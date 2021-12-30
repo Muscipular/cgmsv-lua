@@ -59,6 +59,7 @@ function NLG.SetCriticalDamageAddition(mode, val)
       end
       return math.floor(dmg);
     end, 0x0049E268, 0x37, {
+      0x9C, --pushfd
       --0x60,
       0x51, --push ecx
       0x56, --push esi
@@ -70,6 +71,7 @@ function NLG.SetCriticalDamageAddition(mode, val)
       0x59, --pop ecx
       0x59, --pop ecx
       --0x61,
+      0x9D, --popfd
     }, { ignoreOriginCode = true })
   end
   if type(mode) == 'boolean' then
