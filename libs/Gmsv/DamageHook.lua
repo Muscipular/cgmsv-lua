@@ -53,8 +53,10 @@ local function callCallback(aIndex, dIndex, flag, dmg, cType)
     );
     if success then
       --print('dmg', ret);
+      --print(battleIndex, aIndex, dIndex, dmg, ret, ffi.cast('int',ffi.cast('int32_t', math.floor(ret))));
       if type(ret) == 'number' then
-        return math.floor(ret);
+        return ret;
+        --return math.floor(ret);
       end
       return dmg;
     else

@@ -76,7 +76,10 @@ end
 function BankExpand:setItemData(itemIndex, itemData)
   if itemIndex >= 0 then
     for _, v in pairs(itemFields) do
-      Item.SetData(itemIndex, v, itemData[tostring(v)]);
+      local r = Item.SetData(itemIndex, v, itemData[tostring(v)]);
+      if r ~= 1 then
+        self:logWarnF("itemIndex %d, set field %d = %s error", itemIndex, v, tostring(itemData[tostring(v)]));
+      end
     end
   end
 end
