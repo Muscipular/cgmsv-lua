@@ -163,6 +163,9 @@ end
 function NLG.UpChar(CharIndex)
 end
 
+function NLG.c(str)
+end
+
 Pet = {}
 function Pet.ReBirth(PlayerIndex, PetIndex)
 end
