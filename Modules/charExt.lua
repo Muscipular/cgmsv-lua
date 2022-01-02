@@ -29,6 +29,9 @@ alter table lua_chardata
 		primary key (id, cdkey);
 ]]);
 end);
+CharExt:addMigration(3, 'extend value', function()
+  
+end)
 
 function CharExt:setData(charIndex, value)
   local type = Char.GetData(charIndex, CONST.CHAR_¿‡–Õ);

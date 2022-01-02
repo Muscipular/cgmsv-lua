@@ -5,7 +5,7 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
   if string.sub(Msg, 1, 4) ~= '/bag' then
     return 1;
   end
-  if Char.GetBattleIndex(CharIndex) >= 0 then
+  if Battle.GetCurrentBattle(CharIndex) >= 0 then
     NLG.SystemMessage(CharIndex, '战斗中无法切换背包')
     return 0;
   end
