@@ -130,7 +130,7 @@ function NL.RegBeforeBattleTurnEvent(luaFile, fn)
   if luaFile then
     local r, msg = pcall(dofile, luaFile)
     if not r then
-      print('[LUA] RegBeforeBattleTurnEvent error: ' .. msg);
+      print('[LUA] RegBeforeBattleTurnEvent error: ', msg);
     end
   end
   _BeforeBattleTurnCallback = fn;
@@ -140,7 +140,7 @@ local function handleBeforeBattleTurn(battleIndex)
   if _BeforeBattleTurnCallback and _G[_BeforeBattleTurnCallback] then
     local r, msg = pcall(_G[_BeforeBattleTurnCallback], battleIndex)
     if not r then
-      print('[LUA] BeforeBattleTurnCallback error: ' .. msg);
+      print('[LUA] BeforeBattleTurnCallback error: ', msg);
     else
       if msg then
         sendCommandUpdateToClient(battleIndex);
