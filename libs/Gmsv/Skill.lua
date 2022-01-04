@@ -132,9 +132,15 @@ ffi.hook.new('int (__cdecl*)(uint32_t charPtr, int isNotify)', function(charPtr,
                   }
         ]]
         --end
+        iLv = 0;
         for i, techIndex in ipairs(newTechIndexes) do
           if techIndex >= 0 then
-            setTechId('Skill.lua hook updateSkill', 2, charPtr, slot, i - 1, Tech.GetData(techIndex, CONST.TECH_ID));
+            if Tech.GetData(techIndex, CONST.TECH_REMAIN) == 0 then
+              setTechId('Skill.lua hook updateSkill', 2, charPtr, slot, 0, Tech.GetData(techIndex, CONST.TECH_ID));
+            else
+              setTechId('Skill.lua hook updateSkill', 3, charPtr, slot, iLv, Tech.GetData(techIndex, CONST.TECH_ID));
+              iLv = iLv + 1;
+            end
             local recipeId = Tech.GetData(techIndex, CONST.TECH_REMEMBER_RECIPE1);
             --print('update recipe', Tech.GetData(techIndex, CONST.TECH_ID), recipeId);
             if recipeId >= 0 then
@@ -185,14 +191,14 @@ _getTechId = ffi.hook.new('int (__cdecl*)(const char *file, int lineNo, uint32_t
     if slot >= 15 or slot < 0 then
       return -1;
     end
-    if lv > MAX_SKill_Lv then
-      logError('SkillHook', 'over max skill lv ' .. MAX_SKill_Lv);
-      return -1;
-    end
     if lv <= 10 then
       local ret = _getTechId(file, lineNo, charPtr, slot, lv);
       --print('ret', ret);
       return ret;
+    end
+    if lv > MAX_SKill_Lv then
+      logError('SkillHook', lv .. ' is over max skill lv ' .. MAX_SKill_Lv);
+      return -1;
     end
     local charIndex = ffi.readMemoryInt32(charPtr + 4);
     if charSkillData[charIndex] == nil then
