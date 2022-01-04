@@ -10,6 +10,7 @@ function Module:onLogin(fd, head, data)
     end
     self:logInfo('½âËø', data[3])
     SQL.querySQL('delete from tbl_lock where CdKey = ' .. SQL.sqlValue(data[3]));
+    SQL.querySQL('delete from tbl_lock2 where CdKey = ' .. SQL.sqlValue(data[3]));
   end
 end
 
