@@ -29,8 +29,11 @@ alter table lua_chardata
 		primary key (id, cdkey);
 ]]);
 end);
-CharExt:addMigration(3, 'extend value', function()
-  
+CharExt:addMigration(3, 'extend value', function() end)
+CharExt:addMigration(4, 'extend data', function() 
+  SQL.querySQL([[
+  alter table lua_chardata modify data longtext null;
+]]);
 end)
 
 function CharExt:setData(charIndex, value)
