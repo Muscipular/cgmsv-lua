@@ -110,9 +110,14 @@ function Item.RemoveCharPointer(itemIndex)
 end
 
 local makeItem = ffi.cast('int (__cdecl *)(int number)', 0x004CA750);
+local setWorkInt = ffi.cast('int (__cdecl*) (int itemIndex, int dataLine, int value)', 0x004C89B0);
 
 function Item.MakeItem(itemId)
-  return makeItem(itemId);
+  local itemIndex = makeItem(itemId)
+  if itemIndex >= 0 then
+    setWorkInt(itemIndex, 0, -1);
+  end
+  return itemIndex;
 end
 
 local removeItem = ffi.cast('void (__cdecl *)(int itemIndex, const char *a4, int a5)', 0x004C8370);
