@@ -67,6 +67,8 @@ function Skill.SetMaxLevel(level)
   ffi.patch(0x00442811 + 2, { MAX_SKill_Lv });
   ffi.patch(0x004F9426 + 3, { MAX_SKill_Lv - 1 });
   ffi.patch(0x0044222F + 6, { MAX_SKill_Lv - 1 });
+  ffi.patch(0x00443255 + 6, { MAX_SKill_Lv });
+  ffi.patch(0x0044325F + 2, { MAX_SKill_Lv });
 end
 
 local getSkillIndex = ffi.cast('uint32_t (__cdecl*)(int a)', 0x004F4AB0);
@@ -132,14 +134,14 @@ ffi.hook.new('int (__cdecl*)(uint32_t charPtr, int isNotify)', function(charPtr,
                   }
         ]]
         --end
-        iLv = 0;
+        --iLv = 0;
         for i, techIndex in ipairs(newTechIndexes) do
           if techIndex >= 0 then
             if Tech.GetData(techIndex, CONST.TECH_REMAIN) == 0 then
               setTechId('Skill.lua hook updateSkill', 2, charPtr, slot, 0, Tech.GetData(techIndex, CONST.TECH_ID));
             else
-              setTechId('Skill.lua hook updateSkill', 3, charPtr, slot, iLv, Tech.GetData(techIndex, CONST.TECH_ID));
-              iLv = iLv + 1;
+              local lv = math.max(0, Tech.GetData(techIndex, CONST.TECH_NECESSARYLV) - 1);
+              setTechId('Skill.lua hook updateSkill', 3, charPtr, slot, lv, Tech.GetData(techIndex, CONST.TECH_ID));
             end
             local recipeId = Tech.GetData(techIndex, CONST.TECH_REMEMBER_RECIPE1);
             --print('update recipe', Tech.GetData(techIndex, CONST.TECH_ID), recipeId);

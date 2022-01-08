@@ -157,7 +157,7 @@ end
 function NLG.TalkToCli(ToIndex, TalkerIndex, Msg, FontColor, FontSize)
 end
 
-function NLG.CanTalk(CharIndex, TargetCharIndex)
+function NLG.CanTalk(npc, player)
 end
 
 function NLG.UpChar(CharIndex)
