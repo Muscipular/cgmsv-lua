@@ -111,6 +111,7 @@ function hook.new(cast, callback, hook_addr, size)
   })
 end
 
+---@param config {ignoreOriginCode:boolean}
 function hook.inlineHook(cast, callback, hookAddr, size, prefixCode, postCode, config)
   if config == nil then
     config = {

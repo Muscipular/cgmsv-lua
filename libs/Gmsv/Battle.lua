@@ -1,3 +1,9 @@
+local bit32 = require 'bit'
+local bnot = bit32.bnot
+local bxor = bit32.bxor
+local band = bit32.band
+local bor = bit32.bor
+
 ----- @return number BatteIndex
 function Battle.GetCurrentBattle(CharIndex)
   if Char.GetData(CharIndex, CONST.CHAR_战斗状态) == 0 then
@@ -267,4 +273,42 @@ function Battle.GetRandomShotHit(battleIndex, defSlot)
   end
   offset = offset + 0xC + 0xD0 * defSlot + 0xA8;
   return ffi.readMemoryInt32(Addresses.BattleTable + 0x1480 * battleIndex + offset)
-end 
+end
+
+local emitBattleInjuryEvent = NL.newEvent('BattleInjuryEvent', nil);
+
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t a, int b)', function(charPtr, val)
+  local charIndex = ffi.readMemoryInt32(charPtr);
+  local battleIndex = Char.GetBattleIndex(charIndex);
+  local e = Char.GetData(charIndex, CONST.CHAR_受伤);
+  local ret = emitBattleInjuryEvent(charIndex, battleIndex, val, val);
+  if ret == nil then
+    ret = val;
+  end
+  if ret <= 0 then
+    if Char.GetData(charIndex, CONST.CHAR_受伤) > e then
+      return 1;
+    end
+    if e <= 0 then
+      local s = ffi.readMemoryDWORD(charPtr + 0x5e8 + 0x24);
+      s = band(s, bnot(0x2000))
+      ffi.setMemoryDWORD(charPtr + 0x5e8 + 0x24, s);
+    end
+    return 0;
+  end
+  Char.SetData(charIndex, CONST.CHAR_受伤, math.floor(math.max(1, math.min(100, ret))));
+  return 1;
+end, 0x00496AB0, 6, {
+  0x53, --push ebx
+  0x50, --push eax
+  0x53, --push ebx
+}, {
+  0x58 + 3, --pop ebx
+  0x58 + 3, --pop ebx
+  0x58 + 3, --pop ebx
+  0x85, 0xC0, --test eax,eax
+  0x75, 12, --jnz
+  0xB8, 0xFF, 0xFF, 0xFF, 0xFF, --mov eax, -1
+  0xB8 + 3, 0x09, 0x69, 0x49, 0x00, --mov ebx,0x00496909 
+  0xff, 0xE3, --jmp [ebx]
+}, { ignoreOriginCode = true })
