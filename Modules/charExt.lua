@@ -105,7 +105,7 @@ function CharExt:getTmpData(charIndex, field)
     return nil;
   end
   local tmpData = self.tmpData[charIndex];
-  self:logDebug('tmpData', charIndex, tmpData, field, (tmpData or {})[field]);
+  --self:logDebug('tmpData', charIndex, tmpData, field, (tmpData or {})[field]);
   if tmpData then
     return tmpData[field];
   end
