@@ -138,7 +138,13 @@ ffi.hook.new('int (__cdecl*)(uint32_t charPtr, int isNotify)', function(charPtr,
         for i, techIndex in ipairs(newTechIndexes) do
           if techIndex >= 0 then
             if Tech.GetData(techIndex, CONST.TECH_REMAIN) == 0 then
-              setTechId('Skill.lua hook updateSkill', 2, charPtr, slot, 0, Tech.GetData(techIndex, CONST.TECH_ID));
+              local techId = Tech.GetData(techIndex, CONST.TECH_ID);
+              if i > 1 then
+                for v = 1, i - 1 do
+                  newTechIds[v] = -1;
+                end
+              end
+              setTechId('Skill.lua hook updateSkill', 2, charPtr, slot, 0, techId);
             else
               local lv = math.max(0, Tech.GetData(techIndex, CONST.TECH_NECESSARYLV) - 1);
               setTechId('Skill.lua hook updateSkill', 3, charPtr, slot, lv, Tech.GetData(techIndex, CONST.TECH_ID));

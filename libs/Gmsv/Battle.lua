@@ -278,10 +278,11 @@ end
 local emitBattleInjuryEvent = NL.newEvent('BattleInjuryEvent', nil);
 
 ffi.hook.inlineHook('int (__cdecl *)(uint32_t a, int b)', function(charPtr, val)
-  local charIndex = ffi.readMemoryInt32(charPtr);
+  local charIndex = ffi.readMemoryInt32(charPtr + 4);
   local battleIndex = Char.GetBattleIndex(charIndex);
   local e = Char.GetData(charIndex, CONST.CHAR_ ‹…À);
   local ret = emitBattleInjuryEvent(charIndex, battleIndex, val, val);
+  print('BattleInjuryEvent', charIndex, battleIndex, val, ret);
   if ret == nil then
     ret = val;
   end
@@ -298,7 +299,7 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t a, int b)', function(charPtr, val)
   end
   Char.SetData(charIndex, CONST.CHAR_ ‹…À, math.floor(math.max(1, math.min(100, ret))));
   return 1;
-end, 0x00496AB0, 6, {
+end, 0x00496AA9, 6 + 7 + 6, {
   0x53, --push ebx
   0x50, --push eax
   0x53, --push ebx
@@ -309,6 +310,12 @@ end, 0x00496AB0, 6, {
   0x85, 0xC0, --test eax,eax
   0x75, 12, --jnz
   0xB8, 0xFF, 0xFF, 0xFF, 0xFF, --mov eax, -1
-  0xB8 + 3, 0x09, 0x69, 0x49, 0x00, --mov ebx,0x00496909 
-  0xff, 0xE3, --jmp [ebx]
+  0xB8, 0x09, 0x69, 0x49, 0x00, --mov eax,0x00496909 
+  0xff, 0xE0, --jmp [ebx]
+  0x83, 0xBD, 0xC8, 0xFE, 0xFF, 0xFF, 0x00, -- cmp     [ebp+var_138], 0
+  0x0F, 0x84, 0x07, 0x00, 0x00, 0x00, -- jz 
+  0xB8, 0xBC, 0x6A, 0x49, 0x00, --mov eax,0x00496ABC  
+  0xff, 0xE0, --jmp [ebx]
+  0xB8, 0x78, 0x6B, 0x49, 0x00, --mov eax,0x00496B78  
+  0xff, 0xE0, --jmp [ebx]
 }, { ignoreOriginCode = true })
