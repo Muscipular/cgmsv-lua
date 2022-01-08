@@ -27,11 +27,11 @@ ffi.hook.inlineHook('const char* (__cdecl *)(int itemIndex, int type, const char
 ---@param Time number  ±º‰√Î
 function Item.SetTimeLimit(CharIndex, ItemIndex, Time)
   if Time < 0 then
-    Item.SetData(ItemIndex, 44, 0);
-    Item.SetData(ItemIndex, 45, 0);
+    Item.SetData(ItemIndex, 0x44, 0);
+    Item.SetData(ItemIndex, 0x45, 0);
   else
-    Item.SetData(ItemIndex, 44, 1);
-    Item.SetData(ItemIndex, 45, Time + os.time());
+    Item.SetData(ItemIndex, 0x44, 1);
+    Item.SetData(ItemIndex, 0x45, Time + os.time());
   end
   local slot = Item.GetSlot(CharIndex, ItemIndex)
   Item.UpItem(CharIndex, slot);
