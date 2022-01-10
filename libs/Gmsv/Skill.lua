@@ -69,6 +69,8 @@ function Skill.SetMaxLevel(level)
   ffi.patch(0x0044222F + 6, { MAX_SKill_Lv - 1 });
   ffi.patch(0x00443255 + 6, { MAX_SKill_Lv });
   ffi.patch(0x0044325F + 2, { MAX_SKill_Lv });
+  ffi.patch(0x0050057F + 6, { MAX_SKill_Lv });
+  ffi.patch(0x00500589 + 2, { MAX_SKill_Lv });
 end
 
 local getSkillIndex = ffi.cast('uint32_t (__cdecl*)(int a)', 0x004F4AB0);
