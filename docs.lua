@@ -179,6 +179,12 @@ end
 function Pet.UpPet(PlayerIndex, PetIndex)
 end
 
+function Pet.GetSkill(PetIndex, SkillSlot)
+end
+
+function Pet.AddSkill(PetIndex, SkillID)
+end
+
 Item = {}
 function Item.GetData(ItemIndex, Dataline)
 end
