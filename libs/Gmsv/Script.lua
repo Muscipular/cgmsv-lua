@@ -88,7 +88,7 @@ local function OnCallInline(msgPtr, textPtr, npcPtr, playerPtr, type)
     local msg = ffi.string(msgPtr)
     local npcIndex = ffi.readMemoryInt32(npcPtr + 4);
     local playerIndex = ffi.readMemoryInt32(playerPtr + 4);
-    local offset = string.find(text, '[><|&=!+-]');
+    local offset = string.find(text, '[><|&=!]');
     local cmd = string.sub(text, 1, offset - 1);
     print('ScriptCall Inline', cmd, Char.GetData(npcIndex, CONST.CHAR_Ãû×Ö), msg, Char.GetData(playerIndex, CONST.CHAR_Ãû×Ö));
     local n = tonumber(emitter(npcIndex, playerIndex, cmd, msg)) or 0;
