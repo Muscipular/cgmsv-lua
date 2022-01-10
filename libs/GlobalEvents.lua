@@ -30,12 +30,6 @@ local chained = {
     end
     return res
   end,
-  LoginGate = function(list, ...)
-    for i, v in ipairs(list) do
-      v(...);
-    end
-    return 0
-  end,
   BattleDamageEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
     local dmg = Damage;
     for i, v in ipairs(list) do
@@ -134,6 +128,17 @@ for i, v in ipairs({
       if res < 0 then
         return -1;
       end
+    end
+    return 0
+  end
+end
+
+for i, v in ipairs({
+  'LoginGateEvent', 'LogoutEvent', 'LoginEvent',
+}) do
+  chained[v] = function(list, ...)
+    for i, v in ipairs(list) do
+      v(...);
     end
     return 0
   end
