@@ -176,6 +176,12 @@ end
 function Pet.GetArtRank(PetIndex, ArtType)
 end
 
+function Pet.ArtRank(PetIndex, ArtType)
+end
+
+function Pet.FullArtRank(PetIndex, ArtType)
+end
+
 function Pet.UpPet(PlayerIndex, PetIndex)
 end
 

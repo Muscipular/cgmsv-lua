@@ -1,3 +1,4 @@
+---@class ffi
 local ffi = require "ffi";
 ffi.cdef [[
     void Sleep(int ms);
@@ -14,6 +15,12 @@ function ffi.readMemoryInt32(addr)
     return nil;
   end
   return ffi.cast("int32_t*", addr)[0]
+end
+function ffi.readMemoryFloat(addr)
+  if addr == 0 then
+    return nil;
+  end
+  return ffi.cast("float*", addr)[0]
 end
 function ffi.setMemoryInt32(addr, value)
   if addr == 0 then
@@ -33,6 +40,16 @@ function ffi.setMemoryDWORD(addr, value)
     return false;
   end
   ffi.cast("uint32_t*", addr)[0] = value;
+  return true;
+end
+function ffi.setMemoryFloat(addr, value)
+  if addr == 0 then
+    return false;
+  end
+  if type(value) ~= 'number' then
+    return false;
+  end
+  ffi.cast("float*", addr)[0] = value;
   return true;
 end
 function ffi.setMemoryByte(addr, value)
@@ -112,6 +129,7 @@ function hook.new(cast, callback, hook_addr, size)
 end
 
 ---@param config {ignoreOriginCode:boolean}
+---@param hookAddr function|number
 function hook.inlineHook(cast, callback, hookAddr, size, prefixCode, postCode, config)
   if config == nil then
     config = {

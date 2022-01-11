@@ -1,6 +1,6 @@
 ---@class PetExt:ModuleBase
 local PetExt = ModuleBase:createModule('petExt')
-local MAX_CACHE_SIZE = 1000;
+local MAX_CACHE_SIZE = 5000;
 
 ---Ç¨ÒÆ¶¨Òå
 PetExt:addMigration(1, 'init lua_petData', function()
@@ -52,7 +52,9 @@ function PetExt:getData(charIndex)
     end
   end
   data = data or {};
-  self.cache:set(args, data);
+  if args ~= nil and args > 0 then
+    self.cache:set(args, data);
+  end
   return data;
 end
 
