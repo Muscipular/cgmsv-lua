@@ -14,6 +14,11 @@ PetExt:addMigration(1, 'init lua_petData', function()
 ) engine innodb;
 ]])
 end);
+PetExt:addMigration(2, 'extend data', function()
+  SQL.querySQL([[
+  alter table lua_petdata modify data longtext null;
+]])
+end);
 
 function PetExt:setData(charIndex, value)
   local type = Char.GetData(charIndex, CONST.CHAR_¿‡–Õ);

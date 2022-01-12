@@ -15,6 +15,12 @@ ItemExt:addMigration(2, 'add item_LuaData_create_time', function()
   SQL.querySQL([[alter table lua_itemData add create_time int default 0 not null;]])
 end);
 
+ItemExt:addMigration(3, 'extend data', function()
+  SQL.querySQL([[
+  alter table lua_itemData modify data longtext null;
+  ]]);
+end);
+
 ---@param itemIndex number
 ---@param value table
 function ItemExt:setItemData(itemIndex, value)
