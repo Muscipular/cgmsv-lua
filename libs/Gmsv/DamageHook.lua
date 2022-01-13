@@ -674,6 +674,76 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookDrunkDamage, 0x0049D17
   }
 )
 
+local hookMagicMissile = function(attacker, defence, dmg)
+  local aIndex = ffi.readMemoryInt32(attacker + 4)
+  local dIndex = ffi.readMemoryInt32(defence + 4)
+  return callCallback(aIndex, dIndex, CONST.DamageFlags.Normal, dmg);
+end
+
+---¾«Éñ³å»÷²¨
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicMissile, 0x004B9C61, 6, {
+  0x9C, --pushfd
+  0x50, --push eax
+  0x51, --push ecx
+  0x52, --push edx
+  0x53, --push ebx
+  0x54, --push esp
+  0x55, --push ebp
+  0x57, --push edi
+  -- protect
+  0x56, --push esi
+  0x53, --push ebx
+  0x8B, 0x55, 0x0C, --mov edx, [ebp+0xC]
+  0x52, --push edx
+}, {
+  0x50, --push eax
+  0x58 + 6, --pop esi
+  0x58, --pop eax
+  0x58, --pop eax
+  0x58, --pop eax
+  --restore
+  0x58 + 7, --pop edi
+  0x58 + 5, --pop ebp
+  0x58 + 4, --pop esp
+  0x58 + 3, --pop ebx
+  0x58 + 2, --pop edx
+  0x58 + 1, --pop ecx
+  0x58, --pop eax
+  0x9D, --popfd
+})
+
+ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicMissile, 0x004B9D5B, 7, {
+  0x9C, --pushfd
+  0x50, --push eax
+  0x51, --push ecx
+  0x52, --push edx
+  0x53, --push ebx
+  0x54, --push esp
+  0x55, --push ebp
+  0x57, --push edi
+  -- protect
+  0x56, --push esi
+  0x53, --push ebx
+  0x8B, 0x55, 0x0C, --mov edx, [ebp+0xC]
+  0x52, --push edx
+}, {
+  0x50, --push eax
+  0x58 + 6, --pop esi
+  0x58, --pop eax
+  0x58, --pop eax
+  0x58, --pop eax
+  --restore
+  0x58 + 7, --pop edi
+  0x58 + 5, --pop ebp
+  0x58 + 4, --pop esp
+  0x58 + 3, --pop ebx
+  0x58 + 2, --pop edx
+  0x58 + 1, --pop ecx
+  0x58, --pop eax
+  0x9D, --popfd
+})
+
+
 --ÐÞÕý¹¥»÷Òç³ö stage 1a
 ffi.patch(0x0049E207, {
   0xF7, 0xDA, 0x89, 0x7D, 0xDC, 0xDB, 0x45, 0xDC, 0xDC, 0xC8, 0x90, 0x90, 0x90,
