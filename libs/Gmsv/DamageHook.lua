@@ -675,10 +675,10 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookDrunkDamage, 0x0049D17
 )
 
 local hookMagicMissile = function(attacker, defence, dmg)
-  printAsHex(attacker, defence, dmg)
+  --printAsHex(attacker, defence, dmg)
   local aIndex = ffi.readMemoryInt32(attacker + 4)
   local dIndex = ffi.readMemoryInt32(defence + 4)
-  print(aIndex, dIndex)
+  --print(aIndex, dIndex)
   return callCallback(aIndex, dIndex, CONST.DamageFlags.Normal, dmg);
 end
 
