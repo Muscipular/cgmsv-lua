@@ -136,3 +136,13 @@ function Item.UnlinkItem(itemIndex)
   removeItem(itemIndex, "Item.lua UnlinkItem", 0);
   return 0;
 end
+
+---移除深蓝九号等级限制
+---@param value boolean
+function Item.TohelosIgnoreEnemyLv(value)
+  if value then
+    ffi.patch(0x004890B3, { 0x90, 0x90 });
+  else
+    ffi.patch(0x004890B3, { 0x7F, 0x22 });
+  end
+end 
