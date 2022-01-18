@@ -282,7 +282,7 @@ ffi.hook.inlineHook('int (__cdecl *)(uint32_t a, int b)', function(charPtr, val)
   local battleIndex = Char.GetBattleIndex(charIndex);
   local e = Char.GetData(charIndex, CONST.CHAR_ ‹…À);
   local ret = emitBattleInjuryEvent(charIndex, battleIndex, val, val);
-  print('BattleInjuryEvent', charIndex, battleIndex, val, ret);
+  --print('BattleInjuryEvent', charIndex, battleIndex, val, ret);
   if ret == nil then
     ret = val;
   end
