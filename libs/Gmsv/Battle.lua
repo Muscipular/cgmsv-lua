@@ -4,6 +4,8 @@ local bxor = bit32.bxor
 local band = bit32.band
 local bor = bit32.bor
 
+local _BattleNext = {}
+
 ----- @return number BatteIndex
 function Battle.GetCurrentBattle(CharIndex)
   if Char.GetData(CharIndex, CONST.CHAR_战斗状态) == 0 then
@@ -24,6 +26,10 @@ function Battle.GetNextBattle(BattleIndex)
   return FFI.readMemoryInt32(battleAddr + 0x38)
 end
 
+function Battle.GetNextBattleFlg(BattleIndex)
+  return _BattleNext[BattleIndex];
+end
+
 function Battle.UnsetWinEvent(battleIndex)
   if battleIndex < 0 or battleIndex >= Addresses.BattleMax then
     return -3
@@ -38,8 +44,6 @@ function Battle.UnsetWinEvent(battleIndex)
 end
 
 Battle.UnsetPVPWinEvent = Battle.UnsetWinEvent;
-
-local _BattleNext = {}
 
 ---@param encountIndex number encount编号， -1=取消连战， -2=lua生成连战
 ---@param flg number lua连战参数
@@ -406,3 +410,43 @@ end, 0x00487BEE, 7,
   }
 )
 
+local emitBattleSummonEnemyEvent = NL.newEvent('BattleSummonEnemyEvent', nil)
+--local pEnemyHook = ffi.cast('uint32_t', ffi.castAndRef('uint32_t (__cdecl*) (int enemyIndex, int lv, int randVal)', function(enemyIndex, lv, randLv)
+--  
+--end));
+
+ffi.hook.inlineHook('uint32_t (__cdecl *)(int, int, int)', function(battleIndex, slot, enemyId)
+  printAsHex(battleIndex, slot, enemyId)
+  local charIndex = Battle.GetPlayer(battleIndex, slot);
+  local ret = emitBattleSummonEnemyEvent(battleIndex, charIndex, enemyId);
+  if type(ret) == 'table' then
+    print(table.unpack(ret))
+    return ENEMY_createEnemy(tonumber(ret[1]), ret[2] or 0, ret[3] or 0);
+  end
+  return ENEMY_createEnemy(enemyId, 0, 0);
+end, 0x0047DC52, 0x0047DC6A - 0x0047DC52, {
+  0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, --pushad
+  0x9C, --pushfd
+  0x52, --push edx
+  0x8B, 0x55, 0x0C, --mov  edx, [ebp+0x0C]
+  0x52, --push edx
+  0x8B, 0x55, 0x08, --mov  edx, [ebp+0x08]
+  0x52, --push edx
+}, {
+  0x58 + 2, --pop edx
+  0x58 + 2, --pop edx
+  0x58 + 2, --pop edx
+  0x9D, --popfd
+  0x57 + 8, 0x56 + 8, 0x55 + 8, 0x54 + 8, 0x53 + 8, 0x52 + 8, 0x51 + 8, --popad
+}, { ignoreOriginCode = true })
+
+local _GetTechOption = ffi.cast('int (__cdecl*)(uint32_t a1, const char *type)', 0x0048E7A0)
+
+---@param type string 取值 DD: AR: 等
+function Battle.GetTechOption(charIndex, type)
+  local ptr = Char.GetCharPointer(charIndex);
+  if ptr <= 0 then
+    return nil;
+  end
+  return _GetTechOption(ptr, type);
+end 
