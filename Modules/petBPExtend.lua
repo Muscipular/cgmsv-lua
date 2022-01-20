@@ -9,13 +9,13 @@ local lshift = bit32.lshift
 if Pet.Hooked ~= true then
   Pet.Hooked = true;
   ffi.hook.inlineHook("int (__cdecl *)(uint32_t, uint32_t)", function(petPtr, enemyPtr)
-    printAsHex(petPtr);
+    --printAsHex(petPtr);
     local petIndex = ffi.readMemoryInt32(petPtr + 4);
     local enableExt = false;
     local bp = {};
     for i = 1, 5 do
       local k = Pet.FullArtRank(ffi.readMemoryInt32(enemyPtr + 4), i);
-      print('k', i, k);
+      --print('k', i, k);
       bp[i] = k;
       if k > 63 then
         enableExt = true;
@@ -28,10 +28,10 @@ if Pet.Hooked ~= true then
       for i = 1, 5 do
         local n = Pet.GetArtRank(ffi.readMemoryInt32(enemyPtr + 4), i);
         actualBp[i] = n;
-        print('actual', i, n, bp[i]);
+        --print('actual', i, n, bp[i]);
         if bp[i] > 63 then
           local r = math.fmod(bp[i], 64);
-          print('r', r);
+          --print('r', r);
           if n > r then
             if (64 + r) - n <= 5 then
               actualBp[i] = bp[i] + (n - (64 + r))
@@ -42,7 +42,7 @@ if Pet.Hooked ~= true then
             actualBp[i] = bp[i] + n
           end
         end
-        print('actual 2', i, actualBp[i]);
+        --print('actual 2', i, actualBp[i]);
       end
       ---@type PetExt
       local petExt = getModule('petExt');
@@ -97,7 +97,7 @@ if Pet.Hooked ~= true then
   );
   ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t)', function(ebp, petPtr)
     local petIndex = ffi.readMemoryInt32(petPtr + 4);
-    print('lvup', ffi.readMemoryFloat(ebp - 0x6c), Pet.GetArtRank(petIndex, 1));
+    --print('lvup', ffi.readMemoryFloat(ebp - 0x6c), Pet.GetArtRank(petIndex, 1));
     ffi.setMemoryFloat(ebp - 0x6c, Pet.GetArtRank(petIndex, 1) * 1.0);
     ffi.setMemoryFloat(ebp - 0x6c - 4, Pet.GetArtRank(petIndex, 2) * 1.0);
     ffi.setMemoryFloat(ebp - 0x6c - 8, Pet.GetArtRank(petIndex, 3) * 1.0);

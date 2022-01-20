@@ -39,7 +39,11 @@ end
 
 Battle.UnsetPVPWinEvent = Battle.UnsetWinEvent;
 
-function Battle.SetNextBattle(battleIndex, encountIndex)
+local _BattleNext = {}
+
+---@param encountIndex number encount编号， -1=取消连战， -2=lua生成连战
+---@param flg number lua连战参数
+function Battle.SetNextBattle(battleIndex, encountIndex, flg)
   if battleIndex < 0 or battleIndex >= Addresses.BattleMax then
     return -3
   end
@@ -48,8 +52,15 @@ function Battle.SetNextBattle(battleIndex, encountIndex)
     return -2
   end
   encountIndex = tonumber(encountIndex);
-  if encountIndex < 0 or encountIndex == nil then
+  if encountIndex == nil then
     encountIndex = -1;
+  end
+  if encountIndex < 0 and encountIndex ~= -2 then
+    encountIndex = -1;
+    _BattleNext[battleIndex] = nil;
+  end
+  if encountIndex == -2 then
+    _BattleNext[battleIndex] = flg;
   end
   if not FFI.setMemoryInt32(battleAddr + 0x38, encountIndex) then
     return -1;
@@ -311,13 +322,13 @@ end, 0x00496AA9, 6 + 7 + 6, {
   0x75, 12, --jnz
   0xB8, 0xFF, 0xFF, 0xFF, 0xFF, --mov eax, -1
   0xB8, 0x09, 0x69, 0x49, 0x00, --mov eax,0x00496909 
-  0xff, 0xE0, --jmp [ebx]
+  0xff, 0xE0, --jmp [eax]
   0x83, 0xBD, 0xC8, 0xFE, 0xFF, 0xFF, 0x00, -- cmp     [ebp+var_138], 0
   0x0F, 0x84, 0x07, 0x00, 0x00, 0x00, -- jz 
   0xB8, 0xBC, 0x6A, 0x49, 0x00, --mov eax,0x00496ABC  
-  0xff, 0xE0, --jmp [ebx]
+  0xff, 0xE0, --jmp [eax]
   0xB8, 0x78, 0x6B, 0x49, 0x00, --mov eax,0x00496B78  
-  0xff, 0xE0, --jmp [ebx]
+  0xff, 0xE0, --jmp [eax]
 }, { ignoreOriginCode = true })
 
 local _Battle_calcSomeDmgRateForAttr = ffi.cast('int (__cdecl*)(uint32_t a1, int a2)', 0x0049D9B0);
@@ -335,4 +346,64 @@ function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex)
   end
   return _Battle_calcSomeDmgRateForAttr(a, d) / 100.0;
 end
+
+local emitBattleNextEnemyEvent = NL.newEvent('BattleNextEnemyEvent', nil)
+local ENEMY_createEnemy = ffi.cast('uint32_t (__cdecl*) (int enemyIndex, int lv, int randVal)', 0x004621B0);
+local BATTLE_NewEntry = ffi.cast('int (__cdecl*)(uint32_t charAddr1, int battleIndex, int side, int slot)', 0x0047A1E0);
+_G.___0x00479CA0 = "\x8B\xC1\xB9\xA0\x9C\x47\x00\xff\xD1\xC3";
+local avgLv = ffi.cast('__fastcall int (*)(int)', ___0x00479CA0); -- mov eax, ecx; mov ecx,0x00479CA0;call [ecx];ret
+
+ffi.hook.inlineHook('int (__cdecl *)(int)', function(battleIndex)
+  local n = Battle.GetNextBattle(battleIndex)
+  if n == -2 then
+    local flg = _BattleNext[battleIndex];
+    Battle.SetNextBattle(battleIndex, -1);
+    local battleAddr = Addresses.BattleTable + battleIndex * 0x1480
+    local t = emitBattleNextEnemyEvent(battleIndex, flg);
+    local hasEnemy = false;
+    if type(t) == 'table' then
+      for i = 1, 10 do
+        local id = t[i * 2 - 1];
+        local lv = t[i * 2] or 1;
+        if id ~= nil and id >= 0 then
+          local charPtr = ENEMY_createEnemy(id, lv, 0);
+          if charPtr then
+            BATTLE_NewEntry(charPtr, battleIndex, 1, i - 1)
+            hasEnemy = true;
+          end
+        end
+      end
+    end
+    if hasEnemy then
+      avgLv(battleIndex);
+      ffi.setMemoryInt32(battleAddr + 0x28, -1);
+    else
+      ffi.setMemoryInt32(battleAddr + 0xC, 3);
+    end
+    return 0
+  end
+  return 1
+end, 0x00487BEE, 7,
+  {
+    0x60, --pushad
+    0x9C, --pushfd
+    0x53, --push ebx
+  },
+  {
+    0x58 + 3, --pop ebx
+    0x9D, --popfd
+    0x85, 0xC0, --test eax,eax
+    0x75, 8, --jnz
+    0x61, --popad
+    --0x53, --push ebx
+    --0x53, --push ebx
+    --0x58, --pop eax
+    --0xB8 + 3, 0xA0, 0x9C, 0x47, 0x00, --mov ebx,0x00479CA0
+    --0xff, 0xD0, --call [ebx]
+    --0x58 + 3, --pop ebx
+    0xB8, 0xF8, 0x77, 0x48, 0x00, --mov eax,0x004877F8
+    0xff, 0xE0, --jmp [eax]
+    0x61, --popad
+  }
+)
 

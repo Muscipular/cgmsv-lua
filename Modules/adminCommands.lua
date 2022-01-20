@@ -163,6 +163,11 @@ end
 --  rift:loadConfig()
 --end
 
+function commands.testNextBattle(charIndex)
+  local battleIndex = Battle.PVE(charIndex, charIndex, nil, { 1 }, { 1 });
+  Battle.SetNextBattle(battleIndex, -2, 0xeeff);
+end
+
 function AdminCommands:regCommand(key, fn)
   commands[key] = fn;
 end
@@ -177,6 +182,14 @@ function AdminCommands:onLoad()
     self:logDebug('WalkPostEvent', charIndex)
     self:logDebug(Char.GetData(charIndex, CONST.CHAR_Ãû×Ö));
   end)
+  self:regCallback('BattleNextEnemyEvent', function(battleIndex, flg)
+    if flg >= 0xeeff and flg < 0xeeff + 5 then
+      Battle.SetNextBattle(battleIndex, -2, flg + 1);
+      return { 0, 2 + flg - 0xeeff }
+    end
+    return nil
+  end)
+
   local function handleChat(charIndex, msg, color, range, size)
     local cdKey = Char.GetData(charIndex, CONST.CHAR_CDK)
     local command = msg:match('^/([%w]+)')

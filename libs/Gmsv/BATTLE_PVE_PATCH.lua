@@ -2,6 +2,12 @@ ffi.patch(0x00572A12, { 0x7D });
 --ffi.patch(0x005836FD, { 0x3B, 0x7D, 0x1C });
 
 local Pve = Battle.PVE
+---@param CharIndex number
+---@param CreatePtr number
+---@param DoFunc string
+---@param EnemyIdAr number[]
+---@param BaseLevelAr number[]
+---@param RandLv number[]
 Battle.PVE = function(CharIndex, CreatePtr, DoFunc, EnemyIdAr, BaseLevelAr, RandLv)
   if #EnemyIdAr < 1 then
     return -1;
