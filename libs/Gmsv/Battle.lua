@@ -319,3 +319,18 @@ end, 0x00496AA9, 6 + 7 + 6, {
   0xB8, 0x78, 0x6B, 0x49, 0x00, --mov eax,0x00496B78  
   0xff, 0xE0, --jmp [ebx]
 }, { ignoreOriginCode = true })
+
+local _Battle_calcSomeDmgRateForAttr = ffi.cast('int (__cdecl*)(uint32_t a1, int a2)', 0x0049D9B0);
+
+function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex)
+  local a = Char.GetCharPointer(attackerIndex)
+  if a <= 0 then
+    return 1
+  end
+  local d = Char.GetCharPointer(defenceIndex)
+  if d <= 0 then
+    return 1
+  end
+  return _Battle_calcSomeDmgRateForAttr(a, d);
+end
+
