@@ -244,6 +244,13 @@ function printAsHex(...)
   end)))
 end
 
+ffi._refs = {}
+
+function ffi.castAndRef(t, obj)
+  table.insert(ffi._refs, obj);
+  return ffi.cast(t, obj)
+end
+
 ffi.hook = hook;
 _G.FFI = ffi;
 _G.ffi = ffi;

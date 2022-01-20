@@ -350,8 +350,7 @@ end
 local emitBattleNextEnemyEvent = NL.newEvent('BattleNextEnemyEvent', nil)
 local ENEMY_createEnemy = ffi.cast('uint32_t (__cdecl*) (int enemyIndex, int lv, int randVal)', 0x004621B0);
 local BATTLE_NewEntry = ffi.cast('int (__cdecl*)(uint32_t charAddr1, int battleIndex, int side, int slot)', 0x0047A1E0);
-_G.___0x00479CA0 = "\x8B\xC1\xB9\xA0\x9C\x47\x00\xff\xD1\xC3";
-local avgLv = ffi.cast('__fastcall int (*)(int)', ___0x00479CA0); -- mov eax, ecx; mov ecx,0x00479CA0;call [ecx];ret
+local avgLv = ffi.castAndRef('__fastcall int (*)(int)', "\x8B\xC1\xB9\xA0\x9C\x47\x00\xff\xD1\xC3"); -- mov eax, ecx; mov ecx,0x00479CA0;call [ecx];ret
 
 ffi.hook.inlineHook('int (__cdecl *)(int)', function(battleIndex)
   local n = Battle.GetNextBattle(battleIndex)
