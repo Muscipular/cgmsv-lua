@@ -322,6 +322,8 @@ end, 0x00496AA9, 6 + 7 + 6, {
 
 local _Battle_calcSomeDmgRateForAttr = ffi.cast('int (__cdecl*)(uint32_t a1, int a2)', 0x0049D9B0);
 
+---获取属性克制关系
+---@return number 克制比率
 function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex)
   local a = Char.GetCharPointer(attackerIndex)
   if a <= 0 then
@@ -331,6 +333,6 @@ function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex)
   if d <= 0 then
     return 1
   end
-  return _Battle_calcSomeDmgRateForAttr(a, d);
+  return _Battle_calcSomeDmgRateForAttr(a, d) / 100.0;
 end
 
