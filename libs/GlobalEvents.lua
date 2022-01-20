@@ -109,6 +109,26 @@ local chained = {
     end
     return val;
   end,
+  BattleSummonEnemyEvent = function(list, battleIndex, charIndex, enemyId)
+    local ret = nil;
+    for i, v in ipairs(list) do
+      local m = v(battleIndex, charIndex, enemyId);
+      if type(m) == 'table' then
+        ret = m;
+      end
+    end
+    return ret;
+  end,
+  BattleNextEnemyEvent = function(list, battleIndex, flg)
+    local ret = nil;
+    for i, v in ipairs(list) do
+      local m = v(battleIndex, flg);
+      if type(m) == 'table' then
+        ret = m;
+      end
+    end
+    return ret;
+  end,
   Init = function(fnList, ...)
     fnList = table.copy(fnList)
     local res;

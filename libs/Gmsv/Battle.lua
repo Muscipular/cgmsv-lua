@@ -409,7 +409,7 @@ end, 0x00487BEE, 7,
     0x61, --popad
   }
 )
-
+--NL.RegBattleSummonEnemyEvent(battleIndex, charIndex, enemyId)
 local emitBattleSummonEnemyEvent = NL.newEvent('BattleSummonEnemyEvent', nil)
 --local pEnemyHook = ffi.cast('uint32_t', ffi.castAndRef('uint32_t (__cdecl*) (int enemyIndex, int lv, int randVal)', function(enemyIndex, lv, randLv)
 --  
