@@ -174,6 +174,7 @@ CONST.BATTLE_COM = {
 };
 
 CONST.BATTLE_COM_TARGETS = {
+  NONE = -1,
   SINGLE = {
     SIDE_0 = {
       POS_0 = 0,
