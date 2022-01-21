@@ -420,7 +420,7 @@ ffi.hook.inlineHook('uint32_t (__cdecl *)(int, int, int)', function(battleIndex,
   local charIndex = Battle.GetPlayer(battleIndex, slot);
   local ret = emitBattleSummonEnemyEvent(battleIndex, charIndex, enemyId);
   if type(ret) == 'table' then
-    print(table.unpack(ret))
+    --print(table.unpack(ret))
     return ENEMY_createEnemy(tonumber(ret[1]), ret[2] or 0, ret[3] or 0);
   end
   return ENEMY_createEnemy(enemyId, 0, 0);
@@ -439,6 +439,26 @@ end, 0x0047DC52, 0x0047DC6A - 0x0047DC52, {
   0x9D, --popfd
   0x57 + 8, 0x56 + 8, 0x55 + 8, 0x54 + 8, 0x53 + 8, 0x52 + 8, 0x51 + 8, --popad
 }, { ignoreOriginCode = true })
+
+local emitBattleSummonedEnemyEvent = NL.newEvent('BattleSummonedEnemyEvent', nil)
+
+ffi.hook.inlineHook('int (__cdecl *)(int, int, uint32_t)', function(battleIndex, slot, charPtr)
+  local charIndex = Battle.GetPlayer(battleIndex, slot);
+  emitBattleSummonedEnemyEvent(battleIndex, charIndex, ffi.readMemoryInt32(charPtr + 4));
+  return 0;
+end, 0x0047DCB1, 6, {
+  0x60, 0x9c,
+  0x56, --push esi
+  0x8B, 0x55, 0x0C, --mov  edx, [ebp+0x0C]
+  0x52, --push edx
+  0x8B, 0x55, 0x08, --mov  edx, [ebp+0x08]
+  0x52, --push edx
+}, {
+  0x58, --pop eax
+  0x58, --pop eax
+  0x58, --pop eax
+  0x9d, 0x61,
+});
 
 local _GetTechOption = ffi.cast('int (__cdecl*)(uint32_t a1, const char *type)', 0x0048E7A0)
 

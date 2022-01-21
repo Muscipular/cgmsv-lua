@@ -29,7 +29,7 @@ function Module:onLoad()
     end
   end)
 
-  self:regCallback('BattleSummonEnemyEvent', function(battleIndex, charPtr, enemyId)
+  self:regCallback('BattleSummonEnemyEvent', function(battleIndex, charIndex, enemyId)
     if Battle.GetNextBattleFlg(battleIndex) and Battle.GetNextBattleFlg(battleIndex) >= 0xeeff and Battle.GetNextBattleFlg(battleIndex) < 0xeeff + 5 then
       return { 2, 10, 0 }
     end
