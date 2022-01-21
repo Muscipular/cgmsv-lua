@@ -109,6 +109,15 @@ local chained = {
     end
     return val;
   end,
+  TechOptionEvent = function(list, charIndex, option, techID, val)
+    for i, v in ipairs(list) do
+      local m = v(charIndex, option, techID, val);
+      if type(m) == 'number' then
+        val = m;
+      end
+    end
+    return val;
+  end,
   BattleSummonEnemyEvent = function(list, battleIndex, charIndex, enemyId)
     local ret = nil;
     for i, v in ipairs(list) do
