@@ -173,9 +173,75 @@ CONST.BATTLE_COM = {
   BATTLE_COM_REBIRTH = 0xBB8,
 };
 
+CONST.BATTLE_COM_TARGETS = {
+  SINGLE = {
+    SIDE_0 = {
+      POS_0 = 0,
+      POS_1 = 1,
+      POS_2 = 2,
+      POS_3 = 3,
+      POS_4 = 4,
+      POS_5 = 5,
+      POS_6 = 6,
+      POS_7 = 7,
+      POS_8 = 8,
+      POS_9 = 9,
+    },
+    SIDE_1 = {
+      POS_0 = 10,
+      POS_1 = 11,
+      POS_2 = 12,
+      POS_3 = 13,
+      POS_4 = 14,
+      POS_5 = 15,
+      POS_6 = 16,
+      POS_7 = 17,
+      POS_8 = 18,
+      POS_9 = 19,
+    },
+  },
+  RANGE = {
+    SIDE_0 = {
+      POS_0 = 20,
+      POS_1 = 21,
+      POS_2 = 22,
+      POS_3 = 23,
+      POS_4 = 24,
+      POS_5 = 25,
+      POS_6 = 26,
+      POS_7 = 27,
+      POS_8 = 28,
+      POS_9 = 29,
+    },
+    SIDE_1 = {
+      POS_0 = 30,
+      POS_1 = 31,
+      POS_2 = 32,
+      POS_3 = 33,
+      POS_4 = 34,
+      POS_5 = 35,
+      POS_6 = 36,
+      POS_7 = 37,
+      POS_8 = 38,
+      POS_9 = 39,
+    },
+  },
+  ALL = {
+    SIDE_0 = 40,
+    SIDE_1 = 41,
+    SIDE_ALL = 42,
+  }
+};
+
 for i, v in pairs({ unpack(CONST.BATTLE_COM) }) do
   CONST.BATTLE_COM[v] = i;
 end
+
+CONST.BATTLE_FIELD_ATTR_EARTH = 1;
+CONST.BATTLE_FIELD_ATTR_WATER = 2;
+CONST.BATTLE_FIELD_ATTR_FIRE = 4;
+CONST.BATTLE_FIELD_ATTR_WIND = 8;
+CONST.BATTLE_FIELD_ATTR_SEALED_MAGIC = 0x10;
 
 -- 特殊相关
 CONST.道具_Func_InitFunc = 2005;
@@ -200,6 +266,13 @@ CONST.CHAR_BattleCom3 = 0x00000014 / 4 + 0x5e8 / 4;
 CONST.CHAR_Battle2Com1 = 0x00000018 / 4 + 0x5e8 / 4;
 CONST.CHAR_Battle2Com2 = 0x0000001C / 4 + 0x5e8 / 4;
 CONST.CHAR_Battle2Com3 = 0x00000020 / 4 + 0x5e8 / 4;
+CONST.CHAR_Battle2Com3 = 0x0000009C / 4 + 0x5e8 / 4;
+CONST.CHAR_BattleDamageAbsrob = (0x0000009C + 0x5e8) / 4;
+CONST.CHAR_BattleDamageReflec = (0x000000A0 + 0x5e8) / 4;
+CONST.CHAR_BattleDamageVanish = (0x000000A4 + 0x5e8) / 4;
+CONST.CHAR_BattleDamageMagicAbsrob = (0x000000A8 + 0x5e8) / 4;
+CONST.CHAR_BattleDamageMagicReflec = (0x000000AC + 0x5e8) / 4;
+CONST.CHAR_BattleDamageMagicVanish = (0x000000B0 + 0x5e8) / 4;
 CONST.CHAR_EnemyPetFlg = 0x7BC / 4;
 CONST.CHAR_EnemyActionFlag = 0x00000004 / 4 + 0x7BC / 4;
 CONST.CHAR_EnemyBossFlg = 0x00000008 / 4 + 0x7BC / 4;

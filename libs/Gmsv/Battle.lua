@@ -449,4 +449,30 @@ function Battle.GetTechOption(charIndex, type)
     return nil;
   end
   return _GetTechOption(ptr, type);
-end 
+end
+
+---@return number,number,number
+function Battle.GetBattleFieldAttribute(BattleIndex)
+  if BattleIndex < 0 or BattleIndex >= Addresses.BattleMax then
+    return -3
+  end
+  local battleAddr = Addresses.BattleTable + BattleIndex * 0x1480
+  if FFI.readMemoryDWORD(battleAddr) == 0 then
+    return -2
+  end
+  return FFI.readMemoryInt32(battleAddr + 0x2C), FFI.readMemoryInt32(battleAddr + 0x2C + 4), FFI.readMemoryInt32(battleAddr + 0x2C + 8)
+end
+
+function Battle.SetBattleFieldAttribute(BattleIndex, Attribute, TurnCount, AttributePower)
+  if BattleIndex < 0 or BattleIndex >= Addresses.BattleMax then
+    return -3
+  end
+  local battleAddr = Addresses.BattleTable + BattleIndex * 0x1480
+  if FFI.readMemoryDWORD(battleAddr) == 0 then
+    return -2
+  end
+  FFI.setMemoryInt32(battleAddr + 0x2C, Attribute)
+  FFI.setMemoryInt32(battleAddr + 0x2C + 4, TurnCount)
+  FFI.setMemoryInt32(battleAddr + 0x2C + 8, AttributePower)
+  return 1
+end
