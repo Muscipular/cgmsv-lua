@@ -302,7 +302,9 @@ ffi.hook.inlineHook('int (__cdecl *)(int, uint32_t, uint32_t, int)', hookHeal, 0
 local function hookHealRecovery(defence, dmg)
   local aIndex = -1
   local dIndex = ffi.readMemoryInt32(defence + 4)
-  return callCallback(aIndex, dIndex, 1, dmg, 'heal');
+  local ret = callCallback(aIndex, dIndex, CONST.HealDamageFlags.Recovery, dmg, 'heal');
+  --print('hookHealRecovery', aIndex, dIndex, dmg, ret)
+  return ret;
 end
 
 ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookHealRecovery, 0x0049C8FD, 9,

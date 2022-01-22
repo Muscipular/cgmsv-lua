@@ -89,23 +89,24 @@ local Battle_Do_EnemyCommand;
 --local BATTLE_Bid2No = ffi.cast('int (__cdecl*)(int battleIndex, uint32_t charAddr)', 0x00479B90);
 --00479B90 ; int __cdecl BATTLE_Bid2No(int a1, Char *a2)
 
-local function RunBattleCommand(fn, battleIndex, side, slot)
+local function RunBattleCommand(fn, battleIndex, side, slot, n)
   local p = Battle.GetPlayer(battleIndex, slot);
-  --print('[BATTLE EX] loop', slot, p)
+  --print('[BATTLE EX] RunBattleCommand', battleIndex, side, slot, n)
   if p >= 0 then
-    local success, err = pcall(fn, battleIndex, side, slot, 0)
+    local success, err = pcall(fn, battleIndex, side, slot, n)
     if not success then
       print('[BATTLE][HookEnemyCommand] error:', err, battleIndex, side, slot);
     end
-    if Char.GetData(p, CONST.CHAR_EnemyActionFlag) == 1 then
-      success, err = pcall(fn, battleIndex, side, slot, 1)
-      if not success then
-        print('[BATTLE][HookEnemyCommand] error:', err, battleIndex, side, slot);
-      end
-    end
+    --if Char.GetData(p, CONST.CHAR_EnemyActionFlag) == 1 then
+    --  success, err = pcall(fn, battleIndex, side, slot, 1)
+    --  if not success then
+    --    print('[BATTLE][HookEnemyCommand] error:', err, battleIndex, side, slot);
+    --  end
+    --end
   end
 end
 
+local commandCache = LRU.new(1000)
 local function HookEnemyCommand(battleIndex, side, slot)
   --print('[BATTLE EX]', battleIndex, side, slot)
   --print(Battle.GetType(battleIndex), fnList[addr .. ''], _G[fnList[addr .. '']])
@@ -114,14 +115,24 @@ local function HookEnemyCommand(battleIndex, side, slot)
   if Battle.GetType(battleIndex) == CONST.Õ½¶·_PVP then
     return ret;
   end
+  --print('HookEnemyCommand ret', ret, 'side', side, 'slot', slot);
+  local p = Battle.GetPlayer(battleIndex, slot)
+  --print(
+  --  Char.GetData(p, CONST.CHAR_BattleMode),
+  --  Char.GetData(p, CONST.CHAR_EnemyActionFlag)
+  --)
   local fn = fnList[addr .. ''];
   if fn and _G[fn .. ''] then
     if slot == 0 then
       for i = 10, 19 do
-        RunBattleCommand(_G[fn], battleIndex, side, i);
+        commandCache:set(string.format("%d:%d", battleIndex, i), 0);
+        RunBattleCommand(_G[fn], battleIndex, side, i, Char.GetData(p, CONST.CHAR_EnemyActionFlag));
       end
     else
-      RunBattleCommand(_G[fn], battleIndex, side, slot);
+      if commandCache:get(string.format("%d:%d", battleIndex, slot)) == 0 then
+        commandCache:set(string.format("%d:%d", battleIndex, slot), 1);
+        RunBattleCommand(_G[fn], battleIndex, side, slot, Char.GetData(p, CONST.CHAR_EnemyActionFlag));
+      end
     end
   end
   return ret;

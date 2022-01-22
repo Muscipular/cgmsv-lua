@@ -98,7 +98,7 @@ end
 ---@param eventNameOrCallbackKeyOrFn string|nil|function
 ---@param fn function|nil
 ---@param extSign string
----@return string, number , number fnKey, cbIndex, fnIndex
+---@return string,number,number fnKey, cbIndex, fnIndex
 function ModuleBase:regCallback(eventNameOrCallbackKeyOrFn, fn, extSign)
   self.lastIx = self.lastIx + 1;
   if type(eventNameOrCallbackKeyOrFn) == 'function' then

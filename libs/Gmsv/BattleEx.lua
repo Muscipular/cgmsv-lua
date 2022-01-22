@@ -46,3 +46,11 @@ function BattleCommands.Attack(battleIndex, attackerSlot, action, slot)
   return 0;
 end
 
+function Battle.GetSlot(battleIndex, charIndex)
+  for i = 0, 19 do
+    if Battle.GetPlayer(battleIndex, i) == charIndex then
+      return i;
+    end
+  end
+  return -1;
+end 
