@@ -116,7 +116,7 @@ local function HookEnemyCommand(battleIndex, side, slot)
     return ret;
   end
   --print('HookEnemyCommand ret', ret, 'side', side, 'slot', slot);
-  local p = Battle.GetPlayer(battleIndex, slot)
+  --local p = Battle.GetPlayer(battleIndex, slot)
   --print(
   --  Char.GetData(p, CONST.CHAR_BattleMode),
   --  Char.GetData(p, CONST.CHAR_EnemyActionFlag)
@@ -126,12 +126,12 @@ local function HookEnemyCommand(battleIndex, side, slot)
     if slot == 0 then
       for i = 10, 19 do
         commandCache:set(string.format("%d:%d", battleIndex, i), 0);
-        RunBattleCommand(_G[fn], battleIndex, side, i, Char.GetData(p, CONST.CHAR_EnemyActionFlag));
+        RunBattleCommand(_G[fn], battleIndex, side, i, 0);
       end
     else
       if commandCache:get(string.format("%d:%d", battleIndex, slot)) == 0 then
         commandCache:set(string.format("%d:%d", battleIndex, slot), 1);
-        RunBattleCommand(_G[fn], battleIndex, side, slot, Char.GetData(p, CONST.CHAR_EnemyActionFlag));
+        RunBattleCommand(_G[fn], battleIndex, side, slot, 1);
       end
     end
   end
