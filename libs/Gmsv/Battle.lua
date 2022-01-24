@@ -84,6 +84,18 @@ function Battle.GetTurn(battleIndex)
   return FFI.readMemoryInt32(battleAddr + 0x1c)
 end
 
+---设置当前回合数
+function Battle.SetTurn(battleIndex, turn)
+  if battleIndex < 0 or battleIndex >= Addresses.BattleMax or turn < 1 then
+    return -3
+  end
+  local battleAddr = Addresses.BattleTable + battleIndex * 0x1480
+  if FFI.readMemoryDWORD(battleAddr) == 0 then
+    return -2
+  end
+  return FFI.setMemoryInt32(battleAddr + 0x1c, turn)
+end
+
 local fnList = {}
 local Battle_Do_EnemyCommand;
 --local BATTLE_Bid2No = ffi.cast('int (__cdecl*)(int battleIndex, uint32_t charAddr)', 0x00479B90);
@@ -363,6 +375,7 @@ function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex)
 end
 
 local emitBattleNextEnemyEvent = NL.newEvent('BattleNextEnemyEvent', nil)
+local emitBattleNextEnemyInitEvent = NL.newEvent('BattleNextEnemyInitEvent', nil)
 local ENEMY_createEnemy = ffi.cast('uint32_t (__cdecl*) (int enemyIndex, int lv, int randVal)', 0x004621B0);
 local BATTLE_NewEntry = ffi.cast('int (__cdecl*)(uint32_t charAddr1, int battleIndex, int side, int slot)', 0x0047A1E0);
 local avgLv = ffi.castAndRef('__fastcall int (*)(int)', "\x8B\xC1\xB9\xA0\x9C\x47\x00\xff\xD1\xC3"); -- mov eax, ecx; mov ecx,0x00479CA0;call [ecx];ret
@@ -376,14 +389,20 @@ ffi.hook.inlineHook('int (__cdecl *)(int)', function(battleIndex)
     local t = emitBattleNextEnemyEvent(battleIndex, flg);
     local hasEnemy = false;
     if type(t) == 'table' then
+      --print(table.unpack(t))
       for i = 1, 10 do
         local id = t[i * 2 - 1];
         local lv = t[i * 2] or 1;
         if id ~= nil and id >= 0 then
-          local charPtr = ENEMY_createEnemy(id, lv, 0);
-          if charPtr then
-            BATTLE_NewEntry(charPtr, battleIndex, 1, i - 1)
-            hasEnemy = true;
+          id = Data.EnemyGetDataIndex(id);
+          if id >= 0 then
+            local charPtr = ENEMY_createEnemy(id, lv, 0);
+            --print('ENEMY_createEnemy', charPtr, id, lv)
+            if charPtr and charPtr > 0 then
+              local e = BATTLE_NewEntry(charPtr, battleIndex, 1, i - 1)
+              --print('BATTLE_NewEntry', i, e)
+              hasEnemy = true;
+            end
           end
         end
       end
@@ -391,6 +410,8 @@ ffi.hook.inlineHook('int (__cdecl *)(int)', function(battleIndex)
     if hasEnemy then
       avgLv(battleIndex);
       ffi.setMemoryInt32(battleAddr + 0x28, -1);
+      --print(battleIndex, hasEnemy, flg, ffi.readMemoryInt32(battleAddr + 0xc));
+      emitBattleNextEnemyInitEvent(battleIndex, flg);
     else
       ffi.setMemoryInt32(battleAddr + 0xC, 3);
     end

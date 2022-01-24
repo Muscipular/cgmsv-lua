@@ -11,7 +11,7 @@ function Module:onLoad()
   self:regCallback('BattleNextEnemyEvent', function(battleIndex, flg)
     if flg >= 0xeeff and flg < 0xeeff + 5 then
       Battle.SetNextBattle(battleIndex, -2, flg + 1);
-      return { 0, 2 + flg - 0xeeff }
+      return { 0, 2 + flg - 0xeeff, 0, 10, 3, 1 }
     end
     return nil
   end)
