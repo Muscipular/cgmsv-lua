@@ -8,6 +8,10 @@ table.forEach(gmList, function(e)
   gmDict[e] = true
 end)
 
+function commands.addGold(charIndex, args)
+  Char.AddGold(charIndex, tonumber(args[1]))
+end
+
 function commands.giveItem(charIndex, args)
   Char.GiveItem(charIndex, tonumber(args[1]), tonumber(args[2]), args[3] ~= '0')
 end

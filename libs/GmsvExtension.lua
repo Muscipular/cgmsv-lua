@@ -24,5 +24,6 @@ dofile('lua/libs/Gmsv/NLG_ShowWindowTalked_Patch.lua')
 dofile('lua/libs/Gmsv/NL_RegPartyEvent_Patch.lua')
 dofile('lua/libs/Gmsv/NL_GetLoginPoint_Patch.lua')
 dofile('lua/libs/Gmsv/BATTLE_PVE_PATCH.lua')
+dofile('lua/libs/Gmsv/TechOptionEventPatch.lua')
 
 Addresses.load();

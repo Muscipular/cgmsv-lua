@@ -1,4 +1,5 @@
 ffi.patch(0x00572A12, { 0x7D });
+ffi.patch(0x004618D1 + 1, { 0x42 });
 --ffi.patch(0x005836FD, { 0x3B, 0x7D, 0x1C });
 
 local Pve = Battle.PVE
