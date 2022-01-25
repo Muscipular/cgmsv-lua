@@ -448,7 +448,7 @@ local emitBattleSummonEnemyEvent = NL.newEvent('BattleSummonEnemyEvent', nil)
 --end));
 
 ffi.hook.inlineHook('uint32_t (__cdecl *)(int, int, int)', function(battleIndex, slot, enemyId)
-  printAsHex(battleIndex, slot, enemyId)
+  --printAsHex(battleIndex, slot, enemyId)
   local charIndex = Battle.GetPlayer(battleIndex, slot);
   local ret = emitBattleSummonEnemyEvent(battleIndex, charIndex, enemyId);
   if type(ret) == 'table' then
