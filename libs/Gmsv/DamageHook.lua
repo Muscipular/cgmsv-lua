@@ -759,9 +759,10 @@ ffi.patch(0x0049E0F4, {
 
 
 --Õ½ÀõÒç³ö
-ffi.patch(0x0049D687, { 0x90, 0x90, 0x90 });
+ffi.patch(0x0049D687, { 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90, 0x90 });
 ffi.hook.inlineHook('int (__cdecl *)(int, int, int)', function(a, b, c)
-  return math.floor((a * b * c + 5000.0) / 10000)
+  --print(a, b, c, math.floor((a * b * c + 5000.0) / 10000));  
+  return math.floor((a * b * c + 5000.0) / 10000);
 end, 0x0049D692, 0x0049D6A9 - 0x0049D692, {
   0x9C,
   0x50, --push eax
