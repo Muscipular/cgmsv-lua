@@ -2,11 +2,11 @@
 ---@return number,number,number itemIndex, 装备位置, 装备类型
 function Char.GetWeapon(charIndex)
   local ItemIndex = Char.GetItemIndex(charIndex, CONST.EQUIP_左手);
-  if ItemIndex >= 0 and Item.isWeapon(Item.GetData(ItemIndex, CONST.道具_类型)) then
+  if ItemIndex >= 0 and Item.isWeapon(ItemIndex) then
     return ItemIndex, CONST.EQUIP_左手, Item.GetData(ItemIndex, CONST.道具_类型);
   end
   ItemIndex = Char.GetItemIndex(charIndex, CONST.EQUIP_右手)
-  if ItemIndex >= 0 and Item.isWeapon(Item.GetData(ItemIndex, CONST.道具_类型)) then
+  if ItemIndex >= 0 and Item.isWeapon(ItemIndex) then
     return ItemIndex, CONST.EQUIP_右手, Item.GetData(ItemIndex, CONST.道具_类型);
   end
   return -1, -1, -1;
