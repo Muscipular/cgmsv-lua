@@ -57,9 +57,6 @@ function ItemPowerUP:onDamageCalculateEvent(
     for i = 0, 7 do
       local itemIndex = Char.GetItemIndex(charIndex, i);
       if itemIndex >= 0 then
-        --if Item.GetData(itemIndex, CONST.道具_ID) == 0 then
-        --  return 99999999;
-        --end
         local data = self:getItemData(itemIndex)
         if (data.level or 0) > 0 then
           local itemType = Item.GetData(itemIndex, CONST.道具_类型);

@@ -184,11 +184,10 @@ function AdminCommands:onLoad()
   end)
 
   local function handleChat(charIndex, msg, color, range, size)
-    local cdKey = Char.GetData(charIndex, CONST.CHAR_CDK)
-    local command = msg:match('^/([%w]+)')
-    if not gmDict[cdKey] then
+    if not getModule('admin'):isAdmin(charIndex) then
       return 1
     end
+    local command = msg:match('^/([%w]+)')
     if commands[command] then
       local arg = msg:match('^/[%w]+ +(.+)$')
       arg = arg and string.split(arg, ' ') or {}

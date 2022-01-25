@@ -25,12 +25,19 @@ function commands.dofile(charIndex, args)
   end
 end
 
-function Admin:handleChat(charIndex, msg, color, range, size)
+function Admin:isAdmin(charIndex)
   local cdKey = Char.GetData(charIndex, CONST.CHAR_CDK)
-  local command = msg:match('^/([%w]+)')
   if not gmDict[cdKey] then
+    return false
+  end
+  return true;
+end
+
+function Admin:handleChat(charIndex, msg, color, range, size)
+  if not self:isAdmin(charIndex) then
     return 1
   end
+  local command = msg:match('^/([%w]+)')
   if commands[command] then
     local arg = msg:match('^/[%w]+ +(.+)$')
     arg = arg and string.split(arg, ' ') or {}
