@@ -528,3 +528,9 @@ function Battle.SetBattleFieldAttribute(BattleIndex, Attribute, TurnCount, Attri
   FFI.setMemoryInt32(battleAddr + 0x2C + 8, AttributePower)
   return 1
 end
+
+function Battle.AppendBattleMsg(msg)
+  local ptr = ffi.readMemoryDWORD(0x09203B88);
+  ffi.copy(ffi.cast('void*', ptr), msg);
+  ffi.setMemoryDWORD(0x09203B88, ptr + #msg);
+end 
