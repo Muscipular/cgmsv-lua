@@ -756,3 +756,38 @@ ffi.patch(0x0049E207, {
 ffi.patch(0x0049E0F4, {
   0x89, 0x7D, 0xDC, 0xDB, 0x45, 0xDC, 0xDC, 0xC8, 0x90, 0x90, 0x90,
 })
+
+
+--Õ½ÀõÒç³ö
+ffi.patch(0x0049D687, { 0x90, 0x90, 0x90 });
+ffi.hook.inlineHook('int (__cdecl *)(int, int, int)', function(a, b, c)
+  return math.floor((a * b * c + 5000.0) / 10000)
+end, 0x0049D692, 0x0049D6A9 - 0x0049D692, {
+  0x9C,
+  0x50, --push eax
+  0x51, --push ecx
+  0x52, --push edx
+  0x53, --push ebx
+  0x54, --push esp
+  0x55, --push ebp
+  0x57, --push edi
+  --
+  0x50, --push eax
+  0x51, --push ecx
+  0x56, --push esi
+}, {
+  0x50, --push eax
+  0x58 + 6, --pop esi
+  0x58, --pop eax
+  0x58, --pop eax
+  0x58, --pop eax
+  --
+  0x58 + 7, --pop edi
+  0x58 + 5, --pop ebp
+  0x58 + 4, --pop esp
+  0x58 + 3, --pop ebx
+  0x58 + 2, --pop edx
+  0x58 + 1, --pop ecx
+  0x58, --pop eax
+  0x9D, --popfd
+}, { ignoreOriginCode = true });

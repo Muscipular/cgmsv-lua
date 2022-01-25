@@ -41,17 +41,17 @@ end
 ---@param CharIndex number
 ---@param ItemIndex number
 function Item.GetTimeLimit(CharIndex, ItemIndex)
-  local mode = Item.SetData(ItemIndex, 44);
+  local mode = Item.SetData(ItemIndex, 0x44);
   local slot = Item.GetSlot(CharIndex, ItemIndex)
   if slot < 0 then
     return nil;
   end
   if mode == 2 then
     Item.UpItem(CharIndex, slot);
-    mode = Item.GetData(ItemIndex, 44);
+    mode = Item.GetData(ItemIndex, 0x44);
   end
   if mode == 1 then
-    local Time = Item.SetData(ItemIndex, 45);
+    local Time = Item.SetData(ItemIndex, 0x45);
     return Time - os.time();
   end
   return nil;
