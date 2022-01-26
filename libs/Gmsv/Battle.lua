@@ -95,108 +95,113 @@ function Battle.SetTurn(battleIndex, turn)
   end
   return FFI.setMemoryInt32(battleAddr + 0x1c, turn)
 end
+--
+--local fnList = {}
+--local Battle_Do_EnemyCommand;
+----local BATTLE_Bid2No = ffi.cast('int (__cdecl*)(int battleIndex, uint32_t charAddr)', 0x00479B90);
+----00479B90 ; int __cdecl BATTLE_Bid2No(int a1, Char *a2)
+--
+--local function RunBattleCommand(fn, battleIndex, side, slot, n)
+--  local p = Battle.GetPlayer(battleIndex, slot);
+--  --print('[BATTLE EX] RunBattleCommand', battleIndex, side, slot, n)
+--  if p >= 0 then
+--    local success, err = pcall(fn, battleIndex, side, slot, n)
+--    if not success then
+--      print('[BATTLE][HookEnemyCommand] error:', err, battleIndex, side, slot);
+--    end
+--    --if Char.GetData(p, CONST.CHAR_EnemyActionFlag) == 1 then
+--    --  success, err = pcall(fn, battleIndex, side, slot, 1)
+--    --  if not success then
+--    --    print('[BATTLE][HookEnemyCommand] error:', err, battleIndex, side, slot);
+--    --  end
+--    --end
+--  end
+--end
+--
+--local commandCache = LRU.new(1000)
+--local function HookEnemyCommand(battleIndex, side, slot)
+--  --print('[BATTLE EX]', battleIndex, side, slot)
+--  --print(Battle.GetType(battleIndex), fnList[addr .. ''], _G[fnList[addr .. '']])
+--  local addr = 0x004C27E0;
+--  local ret = Battle_Do_EnemyCommand(battleIndex, side, slot);
+--  if Battle.GetType(battleIndex) == CONST.Õ½¶·_PVP then
+--    return ret;
+--  end
+--  --print('HookEnemyCommand ret', ret, 'side', side, 'slot', slot);
+--  --local p = Battle.GetPlayer(battleIndex, slot)
+--  --print(
+--  --  Char.GetData(p, CONST.CHAR_BattleMode),
+--  --  Char.GetData(p, CONST.CHAR_EnemyActionFlag)
+--  --)
+--  local fn = fnList[addr .. ''];
+--  if fn and _G[fn .. ''] then
+--    if slot == 0 then
+--      for i = 10, 19 do
+--        commandCache:set(string.format("%d:%d", battleIndex, i), 0);
+--        RunBattleCommand(_G[fn], battleIndex, side, i, 0);
+--      end
+--    else
+--      if commandCache:get(string.format("%d:%d", battleIndex, slot)) == 0 then
+--        commandCache:set(string.format("%d:%d", battleIndex, slot), 1);
+--        RunBattleCommand(_G[fn], battleIndex, side, slot, 1);
+--      end
+--    end
+--  end
+--  return ret;
+--end
+--
+--local function RegEnemyCommandEvent(luaFile, callback)
+--  --004C27E0 ; char __cdecl Battle_Do_EnemyCommand(int battleIndex, unsigned int side, int a3)
+--  --print('onReg', callback);
+--  if luaFile then
+--    local success, err = pcall(dofile, luaFile);
+--    if success == false then
+--      print('[BATTLE][EnemyCommandEvent]', 'load lua error', err);
+--    end
+--  end
+--  local addr = 0x004C27E0;
+--  fnList[addr .. ''] = callback;
+--  if Battle_Do_EnemyCommand == nil then
+--    Battle_Do_EnemyCommand = ffi.hook.new('char (__cdecl *)(int battleIndex, unsigned int side, int slot)', HookEnemyCommand, addr, 5)
+--  end
+--end
 
-local fnList = {}
-local Battle_Do_EnemyCommand;
---local BATTLE_Bid2No = ffi.cast('int (__cdecl*)(int battleIndex, uint32_t charAddr)', 0x00479B90);
---00479B90 ; int __cdecl BATTLE_Bid2No(int a1, Char *a2)
+--NL.RegEnemyCommandEvent = RegEnemyCommandEvent;
 
-local function RunBattleCommand(fn, battleIndex, side, slot, n)
-  local p = Battle.GetPlayer(battleIndex, slot);
-  --print('[BATTLE EX] RunBattleCommand', battleIndex, side, slot, n)
-  if p >= 0 then
-    local success, err = pcall(fn, battleIndex, side, slot, n)
-    if not success then
-      print('[BATTLE][HookEnemyCommand] error:', err, battleIndex, side, slot);
-    end
-    --if Char.GetData(p, CONST.CHAR_EnemyActionFlag) == 1 then
-    --  success, err = pcall(fn, battleIndex, side, slot, 1)
-    --  if not success then
-    --    print('[BATTLE][HookEnemyCommand] error:', err, battleIndex, side, slot);
-    --  end
-    --end
-  end
-end
+NL.newEvent('EnemyCommandEvent', 0);
 
-local commandCache = LRU.new(1000)
-local function HookEnemyCommand(battleIndex, side, slot)
-  --print('[BATTLE EX]', battleIndex, side, slot)
-  --print(Battle.GetType(battleIndex), fnList[addr .. ''], _G[fnList[addr .. '']])
-  local addr = 0x004C27E0;
-  local ret = Battle_Do_EnemyCommand(battleIndex, side, slot);
-  if Battle.GetType(battleIndex) == CONST.Õ½¶·_PVP then
-    return ret;
-  end
-  --print('HookEnemyCommand ret', ret, 'side', side, 'slot', slot);
-  --local p = Battle.GetPlayer(battleIndex, slot)
-  --print(
-  --  Char.GetData(p, CONST.CHAR_BattleMode),
-  --  Char.GetData(p, CONST.CHAR_EnemyActionFlag)
-  --)
-  local fn = fnList[addr .. ''];
-  if fn and _G[fn .. ''] then
-    if slot == 0 then
-      for i = 10, 19 do
-        commandCache:set(string.format("%d:%d", battleIndex, i), 0);
-        RunBattleCommand(_G[fn], battleIndex, side, i, 0);
-      end
-    else
-      if commandCache:get(string.format("%d:%d", battleIndex, slot)) == 0 then
-        commandCache:set(string.format("%d:%d", battleIndex, slot), 1);
-        RunBattleCommand(_G[fn], battleIndex, side, slot, 1);
-      end
-    end
-  end
-  return ret;
-end
+--local sendCommandUpdateToClient = ffi.cast('uint32_t (__cdecl *)(int battleIndex)', 0x0047C4B0);
+--
+--local _BeforeBattleTurnCallback;
+--function NL.RegBeforeBattleTurnEvent(luaFile, fn)
+--  if luaFile then
+--    local r, msg = pcall(dofile, luaFile)
+--    if not r then
+--      print('[LUA] RegBeforeBattleTurnEvent error: ', msg);
+--    end
+--  end
+--  _BeforeBattleTurnCallback = fn;
+--end
+--
+--local function handleBeforeBattleTurn(battleIndex)
+--  if _BeforeBattleTurnCallback and _G[_BeforeBattleTurnCallback] then
+--    local r, msg = pcall(_G[_BeforeBattleTurnCallback], battleIndex)
+--    if not r then
+--      print('[LUA] BeforeBattleTurnCallback error: ', msg);
+--    else
+--      if msg then
+--        sendCommandUpdateToClient(battleIndex);
+--      end
+--    end
+--  end
+--end
+--
+--ffi.hook.inlineHook('void (__cdecl *)(int battleIndex)', handleBeforeBattleTurn, 0x00487A40, 0xb,
+--  { 0x50, 0x53 }, --push ebx
+--  { 0x5b, 0x58 }  --pop ebx
+--)
 
-local function RegEnemyCommandEvent(luaFile, callback)
-  --004C27E0 ; char __cdecl Battle_Do_EnemyCommand(int battleIndex, unsigned int side, int a3)
-  --print('onReg', callback);
-  if luaFile then
-    local success, err = pcall(dofile, luaFile);
-    if success == false then
-      print('[BATTLE][EnemyCommandEvent]', 'load lua error', err);
-    end
-  end
-  local addr = 0x004C27E0;
-  fnList[addr .. ''] = callback;
-  if Battle_Do_EnemyCommand == nil then
-    Battle_Do_EnemyCommand = ffi.hook.new('char (__cdecl *)(int battleIndex, unsigned int side, int slot)', HookEnemyCommand, addr, 5)
-  end
-end
-
-NL.RegEnemyCommandEvent = RegEnemyCommandEvent;
-local sendCommandUpdateToClient = ffi.cast('uint32_t (__cdecl *)(int battleIndex)', 0x0047C4B0);
-
-local _BeforeBattleTurnCallback;
-function NL.RegBeforeBattleTurnEvent(luaFile, fn)
-  if luaFile then
-    local r, msg = pcall(dofile, luaFile)
-    if not r then
-      print('[LUA] RegBeforeBattleTurnEvent error: ', msg);
-    end
-  end
-  _BeforeBattleTurnCallback = fn;
-end
-
-local function handleBeforeBattleTurn(battleIndex)
-  if _BeforeBattleTurnCallback and _G[_BeforeBattleTurnCallback] then
-    local r, msg = pcall(_G[_BeforeBattleTurnCallback], battleIndex)
-    if not r then
-      print('[LUA] BeforeBattleTurnCallback error: ', msg);
-    else
-      if msg then
-        sendCommandUpdateToClient(battleIndex);
-      end
-    end
-  end
-end
-
-ffi.hook.inlineHook('void (__cdecl *)(int battleIndex)', handleBeforeBattleTurn, 0x00487A40, 0xb,
-  { 0x50, 0x53 }, --push ebx
-  { 0x5b, 0x58 }  --pop ebx
-)
+NL.newEvent('BeforeBattleTurnEvent', 0);
 
 --local enemyHooked = false
 --local _ENEMY_getEnemyFromEncountArray

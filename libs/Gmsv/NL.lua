@@ -26,6 +26,14 @@ function NL.newEvent(event, defaultRet)
   return NL['Emit' .. event];
 end
 
+_G.__EmitEvent = function(event, ...)
+  print('Recent event', event, ...)
+  if NL['Emit' .. event] then
+    return NL['Emit' .. event](...);
+  end
+  return 0;
+end
+
 local CharaDeletedCallback = NL.newEvent('CharaDeletedEvent', 0)
 local ResetCharaBattleState = NL.newEvent('ResetCharaBattleStateEvent', 0)
 NL.newEvent('ItemExpansionEvent', nil)
