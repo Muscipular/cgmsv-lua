@@ -288,16 +288,16 @@ local emitCalcFpConsumeEvent = NL.newEvent('CalcFpConsumeEvent', nil);
 --_orgCalcFpConsume = ffi.hook.new('int (__cdecl*)(uint32_t a1)', hookCalcFpConsumeEvent, 0x00478F30, 6)
 
 local emitBattleSurpriseEvent = NL.newEvent('BattleSurpriseEvent', nil);
-local _BattleSurprise;
-local function hookBattleSurprise(battleIndex)
-  local result = _BattleSurprise(battleIndex);
-  local ret = emitBattleSurpriseEvent(battleIndex, result);
-  if type(ret) == 'number' then
-    return ret;
-  end
-  return result;
-end
-_BattleSurprise = ffi.hook.new('int (__cdecl*)(int a1)', hookBattleSurprise, 0x004956A0, 6)
+--local _BattleSurprise;
+--local function hookBattleSurprise(battleIndex)
+--  local result = _BattleSurprise(battleIndex);
+--  local ret = emitBattleSurpriseEvent(battleIndex, result);
+--  if type(ret) == 'number' then
+--    return ret;
+--  end
+--  return result;
+--end
+--_BattleSurprise = ffi.hook.new('int (__cdecl*)(int a1)', hookBattleSurprise, 0x004956A0, 6)
 
 ---获取乱射hit数 1,2,3,4.....
 ---@param defSlot number 防御者slot
@@ -319,49 +319,49 @@ function Battle.GetRandomShotHit(battleIndex, defSlot)
 end
 
 local emitBattleInjuryEvent = NL.newEvent('BattleInjuryEvent', nil);
-
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t a, int b)', function(charPtr, val)
-  local charIndex = ffi.readMemoryInt32(charPtr + 4);
-  local battleIndex = Char.GetBattleIndex(charIndex);
-  local e = Char.GetData(charIndex, CONST.CHAR_受伤);
-  local ret = emitBattleInjuryEvent(charIndex, battleIndex, val, val);
-  --print('BattleInjuryEvent', charIndex, battleIndex, val, ret);
-  if ret == nil then
-    ret = val;
-  end
-  if ret <= 0 then
-    if Char.GetData(charIndex, CONST.CHAR_受伤) > e then
-      return 1;
-    end
-    if e <= 0 then
-      local s = ffi.readMemoryDWORD(charPtr + 0x5e8 + 0x24);
-      s = band(s, bnot(0x2000))
-      ffi.setMemoryDWORD(charPtr + 0x5e8 + 0x24, s);
-    end
-    return 0;
-  end
-  Char.SetData(charIndex, CONST.CHAR_受伤, math.floor(math.max(1, math.min(100, ret))));
-  return 1;
-end, 0x00496AA9, 6 + 7 + 6, {
-  0x53, --push ebx
-  0x50, --push eax
-  0x53, --push ebx
-}, {
-  0x58 + 3, --pop ebx
-  0x58 + 3, --pop ebx
-  0x58 + 3, --pop ebx
-  0x85, 0xC0, --test eax,eax
-  0x75, 12, --jnz
-  0xB8, 0xFF, 0xFF, 0xFF, 0xFF, --mov eax, -1
-  0xB8, 0x09, 0x69, 0x49, 0x00, --mov eax,0x00496909 
-  0xff, 0xE0, --jmp [eax]
-  0x83, 0xBD, 0xC8, 0xFE, 0xFF, 0xFF, 0x00, -- cmp     [ebp+var_138], 0
-  0x0F, 0x84, 0x07, 0x00, 0x00, 0x00, -- jz 
-  0xB8, 0xBC, 0x6A, 0x49, 0x00, --mov eax,0x00496ABC  
-  0xff, 0xE0, --jmp [eax]
-  0xB8, 0x78, 0x6B, 0x49, 0x00, --mov eax,0x00496B78  
-  0xff, 0xE0, --jmp [eax]
-}, { ignoreOriginCode = true })
+--
+--ffi.hook.inlineHook('int (__cdecl *)(uint32_t a, int b)', function(charPtr, val)
+--  local charIndex = ffi.readMemoryInt32(charPtr + 4);
+--  local battleIndex = Char.GetBattleIndex(charIndex);
+--  local e = Char.GetData(charIndex, CONST.CHAR_受伤);
+--  local ret = emitBattleInjuryEvent(charIndex, battleIndex, val, val);
+--  --print('BattleInjuryEvent', charIndex, battleIndex, val, ret);
+--  if ret == nil then
+--    ret = val;
+--  end
+--  if ret <= 0 then
+--    if Char.GetData(charIndex, CONST.CHAR_受伤) > e then
+--      return 1;
+--    end
+--    if e <= 0 then
+--      local s = ffi.readMemoryDWORD(charPtr + 0x5e8 + 0x24);
+--      s = band(s, bnot(0x2000))
+--      ffi.setMemoryDWORD(charPtr + 0x5e8 + 0x24, s);
+--    end
+--    return 0;
+--  end
+--  Char.SetData(charIndex, CONST.CHAR_受伤, math.floor(math.max(1, math.min(100, ret))));
+--  return 1;
+--end, 0x00496AA9, 6 + 7 + 6, {
+--  0x53, --push ebx
+--  0x50, --push eax
+--  0x53, --push ebx
+--}, {
+--  0x58 + 3, --pop ebx
+--  0x58 + 3, --pop ebx
+--  0x58 + 3, --pop ebx
+--  0x85, 0xC0, --test eax,eax
+--  0x75, 12, --jnz
+--  0xB8, 0xFF, 0xFF, 0xFF, 0xFF, --mov eax, -1
+--  0xB8, 0x09, 0x69, 0x49, 0x00, --mov eax,0x00496909 
+--  0xff, 0xE0, --jmp [eax]
+--  0x83, 0xBD, 0xC8, 0xFE, 0xFF, 0xFF, 0x00, -- cmp     [ebp+var_138], 0
+--  0x0F, 0x84, 0x07, 0x00, 0x00, 0x00, -- jz 
+--  0xB8, 0xBC, 0x6A, 0x49, 0x00, --mov eax,0x00496ABC  
+--  0xff, 0xE0, --jmp [eax]
+--  0xB8, 0x78, 0x6B, 0x49, 0x00, --mov eax,0x00496B78  
+--  0xff, 0xE0, --jmp [eax]
+--}, { ignoreOriginCode = true })
 
 local _Battle_calcSomeDmgRateForAttr = ffi.cast('int (__cdecl*)(uint32_t a1, int a2)', 0x0049D9B0);
 
