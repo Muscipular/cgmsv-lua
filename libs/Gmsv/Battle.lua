@@ -382,70 +382,70 @@ end
 local emitBattleNextEnemyEvent = NL.newEvent('BattleNextEnemyEvent', nil)
 local emitBattleNextEnemyInitEvent = NL.newEvent('BattleNextEnemyInitEvent', nil)
 local ENEMY_createEnemy = ffi.cast('uint32_t (__cdecl*) (int enemyIndex, int lv, int randVal)', 0x004621B0);
-local BATTLE_NewEntry = ffi.cast('int (__cdecl*)(uint32_t charAddr1, int battleIndex, int side, int slot)', 0x0047A1E0);
-local avgLv = ffi.castAndRef('__fastcall int (*)(int)', "\x8B\xC1\xB9\xA0\x9C\x47\x00\xff\xD1\xC3"); -- mov eax, ecx; mov ecx,0x00479CA0;call [ecx];ret
-
-ffi.hook.inlineHook('int (__cdecl *)(int)', function(battleIndex)
-  local n = Battle.GetNextBattle(battleIndex)
-  if n == -2 then
-    local flg = _BattleNext[battleIndex];
-    Battle.SetNextBattle(battleIndex, -1);
-    local battleAddr = Addresses.BattleTable + battleIndex * 0x1480
-    local t = emitBattleNextEnemyEvent(battleIndex, flg);
-    local hasEnemy = false;
-    if type(t) == 'table' then
-      --print(table.unpack(t))
-      for i = 1, 10 do
-        local id = t[i * 2 - 1];
-        local lv = t[i * 2] or 1;
-        if id ~= nil and id >= 0 then
-          id = Data.EnemyGetDataIndex(id);
-          if id >= 0 then
-            local charPtr = ENEMY_createEnemy(id, lv, 0);
-            --print('ENEMY_createEnemy', charPtr, id, lv)
-            if charPtr and charPtr > 0 then
-              local e = BATTLE_NewEntry(charPtr, battleIndex, 1, i - 1)
-              --print('BATTLE_NewEntry', i, e)
-              hasEnemy = true;
-            end
-          end
-        end
-      end
-    end
-    if hasEnemy then
-      avgLv(battleIndex);
-      ffi.setMemoryInt32(battleAddr + 0x28, -1);
-      --print(battleIndex, hasEnemy, flg, ffi.readMemoryInt32(battleAddr + 0xc));
-      emitBattleNextEnemyInitEvent(battleIndex, flg);
-    else
-      ffi.setMemoryInt32(battleAddr + 0xC, 3);
-    end
-    return 0
-  end
-  return 1
-end, 0x00487BEE, 7,
-  {
-    0x60, --pushad
-    0x9C, --pushfd
-    0x53, --push ebx
-  },
-  {
-    0x58 + 3, --pop ebx
-    0x9D, --popfd
-    0x85, 0xC0, --test eax,eax
-    0x75, 8, --jnz
-    0x61, --popad
-    --0x53, --push ebx
-    --0x53, --push ebx
-    --0x58, --pop eax
-    --0xB8 + 3, 0xA0, 0x9C, 0x47, 0x00, --mov ebx,0x00479CA0
-    --0xff, 0xD0, --call [ebx]
-    --0x58 + 3, --pop ebx
-    0xB8, 0xF8, 0x77, 0x48, 0x00, --mov eax,0x004877F8
-    0xff, 0xE0, --jmp [eax]
-    0x61, --popad
-  }
-)
+--local BATTLE_NewEntry = ffi.cast('int (__cdecl*)(uint32_t charAddr1, int battleIndex, int side, int slot)', 0x0047A1E0);
+--local avgLv = ffi.castAndRef('__fastcall int (*)(int)', "\x8B\xC1\xB9\xA0\x9C\x47\x00\xff\xD1\xC3"); -- mov eax, ecx; mov ecx,0x00479CA0;call [ecx];ret
+--
+--ffi.hook.inlineHook('int (__cdecl *)(int)', function(battleIndex)
+--  local n = Battle.GetNextBattle(battleIndex)
+--  if n == -2 then
+--    local flg = _BattleNext[battleIndex];
+--    Battle.SetNextBattle(battleIndex, -1);
+--    local battleAddr = Addresses.BattleTable + battleIndex * 0x1480
+--    local t = emitBattleNextEnemyEvent(battleIndex, flg);
+--    local hasEnemy = false;
+--    if type(t) == 'table' then
+--      --print(table.unpack(t))
+--      for i = 1, 10 do
+--        local id = t[i * 2 - 1];
+--        local lv = t[i * 2] or 1;
+--        if id ~= nil and id >= 0 then
+--          id = Data.EnemyGetDataIndex(id);
+--          if id >= 0 then
+--            local charPtr = ENEMY_createEnemy(id, lv, 0);
+--            --print('ENEMY_createEnemy', charPtr, id, lv)
+--            if charPtr and charPtr > 0 then
+--              local e = BATTLE_NewEntry(charPtr, battleIndex, 1, i - 1)
+--              --print('BATTLE_NewEntry', i, e)
+--              hasEnemy = true;
+--            end
+--          end
+--        end
+--      end
+--    end
+--    if hasEnemy then
+--      avgLv(battleIndex);
+--      ffi.setMemoryInt32(battleAddr + 0x28, -1);
+--      --print(battleIndex, hasEnemy, flg, ffi.readMemoryInt32(battleAddr + 0xc));
+--      emitBattleNextEnemyInitEvent(battleIndex, flg);
+--    else
+--      ffi.setMemoryInt32(battleAddr + 0xC, 3);
+--    end
+--    return 0
+--  end
+--  return 1
+--end, 0x00487BEE, 7,
+--  {
+--    0x60, --pushad
+--    0x9C, --pushfd
+--    0x53, --push ebx
+--  },
+--  {
+--    0x58 + 3, --pop ebx
+--    0x9D, --popfd
+--    0x85, 0xC0, --test eax,eax
+--    0x75, 8, --jnz
+--    0x61, --popad
+--    --0x53, --push ebx
+--    --0x53, --push ebx
+--    --0x58, --pop eax
+--    --0xB8 + 3, 0xA0, 0x9C, 0x47, 0x00, --mov ebx,0x00479CA0
+--    --0xff, 0xD0, --call [ebx]
+--    --0x58 + 3, --pop ebx
+--    0xB8, 0xF8, 0x77, 0x48, 0x00, --mov eax,0x004877F8
+--    0xff, 0xE0, --jmp [eax]
+--    0x61, --popad
+--  }
+--)
 --NL.RegBattleSummonEnemyEvent(battleIndex, charIndex, enemyId)
 local emitBattleSummonEnemyEvent = NL.newEvent('BattleSummonEnemyEvent', nil)
 --local pEnemyHook = ffi.cast('uint32_t', ffi.castAndRef('uint32_t (__cdecl*) (int enemyIndex, int lv, int randVal)', function(enemyIndex, lv, randLv)
