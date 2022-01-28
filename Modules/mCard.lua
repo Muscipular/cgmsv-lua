@@ -13,14 +13,14 @@ function ModuleCard:onBattleStartEvent(battleIndex)
     for i = 10, 19 do
       local charIndex = Battle.GetPlayer(battleIndex, i);
       if charIndex >= 0 then
-        local enemyId = Char.GetData(charIndex, CONST.CHAR_ENEMY_ID);
+        local enemyId = Char.GetData(charIndex, CONST.CHAR_EnemyBaseId);
         --self:logDebug('enemy', battleIndex, i, charIndex, enemyId,
         --  Char.GetData(charIndex, CONST.CHAR_EnemyBaseId),
         --  Char.GetData(charIndex, CONST.CHAR_名字)
         --);
 
         local rate = NormalRate;
-        if Data.EnemyGetData(Data.EnemyGetDataIndex(enemyId), CONST.DATA_ENEMY_BOSS_FLG) == 1 then
+        if Char.GetData(charIndex, CONST.CHAR_EnemyBossFlg) == 1 then
           rate = BossRate;
         end
         --rate = 1000;
@@ -30,7 +30,7 @@ function ModuleCard:onBattleStartEvent(battleIndex)
         local itemIndex = Char.GiveItem(charIndex, 606627, 1, false);
         if itemIndex >= 0 then
           Item.SetData(itemIndex, CONST.道具_已鉴定, 1);
-          local name = Data.EnemyBaseGetData(Data.EnemyBaseGetDataIndex(Data.EnemyGetData(Data.EnemyGetDataIndex(tonumber(enemyId)), CONST.DATA_ENEMY_TEMPNO)), CONST.DATA_ENEMYBASE_NAME) or 'nil';
+          local name = Data.EnemyBaseGetData(Data.EnemyBaseGetDataIndex(enemyId), CONST.DATA_ENEMYBASE_NAME) or 'nil';
           Item.SetData(itemIndex, CONST.道具_名字, string.format("装备卡片(%s)", name));
           Item.SetData(itemIndex, CONST.道具_Func_UseFunc, 'LUA_useMCard');
           Item.SetData(itemIndex, CONST.道具_Func_AttachFunc, '');
