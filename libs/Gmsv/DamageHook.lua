@@ -97,114 +97,114 @@ NL.RegBattleHealCalculateEvent = RegBattleHealCalculateEvent;
 NL.RegDamageCalculateEvent(Dofile, FuncName)
 DamageCalculateCallBack(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
 ]]
-
-local function hookMagicDamage(attacker, defence, dmg)
-  --print('hookMagicDamage', attacker, defence, dmg)
-  local aIndex = ffi.readMemoryInt32(attacker + 4)
-  local dIndex = ffi.readMemoryInt32(defence + 4)
-  return callCallback(aIndex, dIndex, 5, dmg);
-end
-
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x0049A51F, 6,
-  {
-    0x8B, 0x95, 0xE0, 0xFE, 0xFF, 0xFF, --mov     edx, [ebp+a2]
-    0x9c, --pushfd
-    0x60, --pushad
-    0x52, --push edx
-    0x53, --push ebx
-    0xff, 0x75, 0x08, -- push [ebp+8]
-  },
-  {
-    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+a2], eax 
-    0x5b, --pop
-    0x5b, --pop ebx
-    0x5a, --pop edx
-    0x61, --popad
-    0x9d, --popfd
-  }
-)
-
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x0049A16A, 6,
-  {
-    0x8B, 0x95, 0xE0, 0xFE, 0xFF, 0xFF, --mov     edx, [ebp+a2]   0xE0FEFFFF
-    0x9c, --pushfd
-    0x60, --pushad
-    0x52, --push edx
-    0x53, --push ebx
-    0xff, 0x75, 0x08, -- push [ebp+8]
-  },
-  {
-    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+a2], eax 
-    0x5b, --pop
-    0x5b, --pop ebx
-    0x5a, --pop edx
-    0x61, --popad
-    0x9d, --popfd
-  }
-)
-
---침俱
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x0049A432, 6,
-  {
-    0xff, 0xB5, 0xE0, 0xFE, 0xFF, 0xFF, --push [ebp+a2]
-    0xD9, 0xAD, 0xDC, 0xFE, 0xFF, 0xFF, -- fldcw   [ebp+var_124]
-    0xDB, 0x9D, 0xE0, 0xFE, 0xFF, 0xFF, -- fistp   [ebp+a2]
-    0xD9, 0xAD, 0xDE, 0xFE, 0xFF, 0xFF, -- fldcw   [ebp+var_122]
-    0x9c, --pushfd
-    0x60, --pushad
-    0xff, 0xB5, 0xE0, 0xFE, 0xFF, 0xFF, --push [ebp+a2]
-    0xff, 0x75, 0x0C, -- push [ebp+C]
-    0xff, 0x75, 0x08, -- push [ebp+8]
-  },
-  {
-    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+a2], eax 
-    0x5b, --pop
-    0x5b, --pop ebx
-    0x5a, --pop edx
-    0x61, --popad
-    0x9d, --popfd
-    0xDB, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, -- fild   [ebp+a2]
-    0x8F, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, -- pop   [ebp+a2]
-  }
-)
-
---침럽1
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x0049A38F, 6,
-  {
-    0x9c, --pushfd
-    0x60, --pushad
-    0xff, 0xB5, 0xE0, 0xFE, 0xFF, 0xFF, --push [ebp+a2]
-    0xff, 0x75, 0x0C, -- push [ebp+C]
-    0xff, 0x75, 0x08, -- push [ebp+8]
-  },
-  {
-    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+a2], eax 
-    0x5b, --pop
-    0x5b, --pop ebx
-    0x5a, --pop edx
-    0x61, --popad
-    0x9d, --popfd
-  }
-)
-
---침럽2
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x00499FB9, 6,
-  {
-    0x9c, --pushfd
-    0x60, --pushad
-    0xff, 0xB5, 0xE0, 0xFE, 0xFF, 0xFF, --push [ebp+a2]
-    0xff, 0x75, 0x0C, -- push [ebp+C]
-    0xff, 0x75, 0x08, -- push [ebp+8]
-  },
-  {
-    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+a2], eax 
-    0x5b, --pop
-    0x5b, --pop ebx
-    0x5a, --pop edx
-    0x61, --popad
-    0x9d, --popfd
-  }
-)
+--
+--local function hookMagicDamage(attacker, defence, dmg)
+--  --print('hookMagicDamage', attacker, defence, dmg)
+--  local aIndex = ffi.readMemoryInt32(attacker + 4)
+--  local dIndex = ffi.readMemoryInt32(defence + 4)
+--  return callCallback(aIndex, dIndex, 5, dmg);
+--end
+--
+--ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x0049A51F, 6,
+--  {
+--    0x8B, 0x95, 0xE0, 0xFE, 0xFF, 0xFF, --mov     edx, [ebp+a2]
+--    0x9c, --pushfd
+--    0x60, --pushad
+--    0x52, --push edx
+--    0x53, --push ebx
+--    0xff, 0x75, 0x08, -- push [ebp+8]
+--  },
+--  {
+--    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+a2], eax 
+--    0x5b, --pop
+--    0x5b, --pop ebx
+--    0x5a, --pop edx
+--    0x61, --popad
+--    0x9d, --popfd
+--  }
+--)
+--
+--ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x0049A16A, 6,
+--  {
+--    0x8B, 0x95, 0xE0, 0xFE, 0xFF, 0xFF, --mov     edx, [ebp+a2]   0xE0FEFFFF
+--    0x9c, --pushfd
+--    0x60, --pushad
+--    0x52, --push edx
+--    0x53, --push ebx
+--    0xff, 0x75, 0x08, -- push [ebp+8]
+--  },
+--  {
+--    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+a2], eax 
+--    0x5b, --pop
+--    0x5b, --pop ebx
+--    0x5a, --pop edx
+--    0x61, --popad
+--    0x9d, --popfd
+--  }
+--)
+--
+----침俱
+--ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x0049A432, 6,
+--  {
+--    0xff, 0xB5, 0xE0, 0xFE, 0xFF, 0xFF, --push [ebp+a2]
+--    0xD9, 0xAD, 0xDC, 0xFE, 0xFF, 0xFF, -- fldcw   [ebp+var_124]
+--    0xDB, 0x9D, 0xE0, 0xFE, 0xFF, 0xFF, -- fistp   [ebp+a2]
+--    0xD9, 0xAD, 0xDE, 0xFE, 0xFF, 0xFF, -- fldcw   [ebp+var_122]
+--    0x9c, --pushfd
+--    0x60, --pushad
+--    0xff, 0xB5, 0xE0, 0xFE, 0xFF, 0xFF, --push [ebp+a2]
+--    0xff, 0x75, 0x0C, -- push [ebp+C]
+--    0xff, 0x75, 0x08, -- push [ebp+8]
+--  },
+--  {
+--    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+a2], eax 
+--    0x5b, --pop
+--    0x5b, --pop ebx
+--    0x5a, --pop edx
+--    0x61, --popad
+--    0x9d, --popfd
+--    0xDB, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, -- fild   [ebp+a2]
+--    0x8F, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, -- pop   [ebp+a2]
+--  }
+--)
+--
+----침럽1
+--ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x0049A38F, 6,
+--  {
+--    0x9c, --pushfd
+--    0x60, --pushad
+--    0xff, 0xB5, 0xE0, 0xFE, 0xFF, 0xFF, --push [ebp+a2]
+--    0xff, 0x75, 0x0C, -- push [ebp+C]
+--    0xff, 0x75, 0x08, -- push [ebp+8]
+--  },
+--  {
+--    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+a2], eax 
+--    0x5b, --pop
+--    0x5b, --pop ebx
+--    0x5a, --pop edx
+--    0x61, --popad
+--    0x9d, --popfd
+--  }
+--)
+--
+----침럽2
+--ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicDamage, 0x00499FB9, 6,
+--  {
+--    0x9c, --pushfd
+--    0x60, --pushad
+--    0xff, 0xB5, 0xE0, 0xFE, 0xFF, 0xFF, --push [ebp+a2]
+--    0xff, 0x75, 0x0C, -- push [ebp+C]
+--    0xff, 0x75, 0x08, -- push [ebp+8]
+--  },
+--  {
+--    0x89, 0x85, 0xE0, 0xFE, 0xFF, 0xFF, --mov     [ebp+a2], eax 
+--    0x5b, --pop
+--    0x5b, --pop ebx
+--    0x5a, --pop edx
+--    0x61, --popad
+--    0x9d, --popfd
+--  }
+--)
 
 local function hookHeal(flag, attacker, defence, dmg)
   local aIndex = ffi.readMemoryInt32(attacker + 4)
@@ -232,7 +232,6 @@ ffi.hook.inlineHook('int (__cdecl *)(int, uint32_t, uint32_t, int)', hookHeal, 0
     0x9d, --popfd
   }
 )
-
 ffi.hook.inlineHook('int (__cdecl *)(int, uint32_t, uint32_t, int)', hookHeal, 0x004BB199, 5,
   {
     0x9c, --pushfd
