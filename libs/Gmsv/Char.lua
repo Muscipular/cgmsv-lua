@@ -298,26 +298,26 @@ function Char.SetPetDepartureStateAll(charIndex, pet1State, pet2State, pet3State
   return changePetState(Char.GetCharPointer(charIndex), pet1State, pet2State, pet3State, pet4State, pet5State)
 end
 
-local emitShopSellCalcTotalPriceEvent = NL.newEvent('ShopSellCalcTotalPriceEvent', nil)
-local function hookSellPrice(charPtr, price)
-  local ret = emitShopSellCalcTotalPriceEvent(ffi.readMemoryInt32(charPtr + 4), price)
-  if type(ret) == 'number' then
-    if ret > 0 then
-      return ret;
-    end
-    return 1;
-  end
-  return price;
-end
-ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookSellPrice, 0x00523E68, 10, {
-  0x51, --push edx
-  0x50, --push eax
-  0x50 + 6, --push esi
-}, {
-  0x51 + 8,
-  0x51 + 8,
-  0x51 + 8,
-})
+--local emitShopSellCalcTotalPriceEvent = NL.newEvent('ShopSellCalcTotalPriceEvent', nil)
+--local function hookSellPrice(charPtr, price)
+--  local ret = emitShopSellCalcTotalPriceEvent(ffi.readMemoryInt32(charPtr + 4), price)
+--  if type(ret) == 'number' then
+--    if ret > 0 then
+--      return ret;
+--    end
+--    return 1;
+--  end
+--  return price;
+--end
+--ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookSellPrice, 0x00523E68, 10, {
+--  0x51, --push edx
+--  0x50, --push eax
+--  0x50 + 6, --push esi
+--}, {
+--  0x51 + 8,
+--  0x51 + 8,
+--  0x51 + 8,
+--})
 
 local saveChara = ffi.cast('int (__cdecl*)(uint32_t *charAddr)', 0x0043B290);
 
