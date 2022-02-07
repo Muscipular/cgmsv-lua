@@ -301,6 +301,7 @@ CONST.CHAR_EnemyBattleAction = 0x00000024 / 4 + 0x7BC / 4;
 CONST.CHAR_WindowBuffer1 = 0x0000008C / 4 + 0x7BC / 4 - 1;
 CONST.CHAR_WindowBuffer2 = 0x0000008C / 4 + 0x7BC / 4;
 CONST.CHAR_WindowBuffer3 = 0x0000008C / 4 + 0x7BC / 4 + 1;
+CONST.CHAR_ENEMY_ID = 0x0000006C / 4 + 0x7BC / 4;
 CONST.CHAR_ItemIndexes = 0x4CC / 4;
 
 --RECIPE START

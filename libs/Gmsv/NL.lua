@@ -27,7 +27,7 @@ function NL.newEvent(event, defaultRet)
 end
 
 _G.__EmitEvent = function(event, ...)
-  print('Recent event', event, ...)
+  print('Recent event', event, NL['Emit' .. event], ...)
   if NL['Emit' .. event] then
     return NL['Emit' .. event](...);
   end
