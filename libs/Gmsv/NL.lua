@@ -36,11 +36,14 @@ end
 
 local CharaDeletedCallback = NL.newEvent('CharaDeletedEvent', 0)
 local ResetCharaBattleState = NL.newEvent('ResetCharaBattleStateEvent', 0)
-NL.newEvent('ItemExpansionEvent', nil)
-NL.newEvent('Init', 0)
-NL.newEvent('AfterCalcCharaBpEvent', 0)
-NL.newEvent('AfterCalcCharaStatusEvent', 0)
-
+NL.newEvent('ItemExpansionEvent', nil);
+NL.newEvent('Init', 0);
+-- function AfterCalcCharaBpEventCallback(charIndex) end 
+NL.newEvent('AfterCalcCharaBpEvent', 0);
+-- function AfterCalcCharaStatusEventCallback(charIndex) end 
+NL.newEvent('AfterCalcCharaStatusEvent', 0);
+-- function CheckDummyDollEventCallback(charIndex, battleIndex, dmg, type) end 
+NL.newEvent('CheckDummyDollEvent', 0);
 --local hookOnCharaDeleted;
 --hookOnCharaDeleted = ffi.hook.new('int (__cdecl*)(int a1)', function(queueIndex)
 --  local queuePtr = Addresses.DBQueue + 0x58 * queueIndex
