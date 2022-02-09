@@ -1,82 +1,82 @@
-local callback;
-local callbackHeal;
+--local callback;
+--local callbackHeal;
 
----@generic T
----@param s T|nil
----@param v T
-local function ifNil(s, v)
-  if type(s) == 'nil' then
-    return v;
-  end
-  return s;
-end
+-----@generic T
+-----@param s T|nil
+-----@param v T
+--local function ifNil(s, v)
+--  if type(s) == 'nil' then
+--    return v;
+--  end
+--  return s;
+--end
 
-local function callCallback(aIndex, dIndex, flag, dmg, cType)
-  --print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or '-');
-  --[[  
-  print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or 'damage');
-  if _G.type(aIndex) == 'number' then
-    print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
-    print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
-    print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
-    print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
-  elseif type(aIndex) == 'table' then
-    for i, v in ipairs(aIndex) do
-      print('COMBO: ', i)
-      print(v, Char.GetData(v, CONST.CHAR_名字))
-      print('com1', Char.GetData(v, CONST.CHAR_BattleCom1))
-      print('com2', Char.GetData(v, CONST.CHAR_BattleCom2))
-      print('com3', Char.GetData(v, CONST.CHAR_BattleCom3))
-    end
-  end
-  print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
-  print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
-  print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
-  print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
-  dmg = 2;
-  --]]
-  local nCallback = callback;
-  if cType == 'heal' then
-    nCallback = callbackHeal;
-  end
-  --print(nCallback, _G[nCallback])
-  if (nCallback and _G[nCallback]) then
-    local battleIndex = Char.GetData(aIndex or dIndex, CONST.CHAR_BattleIndex);
-    local success, ret = pcall(_G[nCallback], ifNil(aIndex, -1), ifNil(dIndex, -1), dmg, dmg, ifNil(battleIndex, -1),
-      ifNil(Char.GetData(aIndex, CONST.CHAR_BattleCom1), -1),
-      ifNil(Char.GetData(aIndex, CONST.CHAR_BattleCom2), -1),
-      ifNil(Char.GetData(aIndex, CONST.CHAR_BattleCom3), -1),
-      ifNil(Char.GetData(dIndex, CONST.CHAR_BattleCom1), -1),
-      ifNil(Char.GetData(dIndex, CONST.CHAR_BattleCom2), -1),
-      ifNil(Char.GetData(dIndex, CONST.CHAR_BattleCom3), -1),
-      flag
-    );
-    if success then
-      --print('dmg', ret);
-      --print(battleIndex, aIndex, dIndex, dmg, ret, ffi.cast('int',ffi.cast('int32_t', math.floor(ret))));
-      if type(ret) == 'number' then
-        return ret;
-        --return math.floor(ret);
-      end
-      return dmg;
-    else
-      print((cType == 'heal' and 'BattleHealCalculateCallBack' or 'DamageCalculateCallBack') .. ' ERROR:', ret);
-    end
-  end
-  --print('dmg', dmg);
-  return dmg;
-end
-
-local function RegDamageCalculateEvent(Dofile, FuncName)
-  if Dofile then
-    local success, err = pcall(dofile, Dofile);
-    if not success then
-      print('RegDamageCalculateEvent dofile err:', err);
-      return
-    end
-  end
-  callback = FuncName;
-end
+--local function callCallback(aIndex, dIndex, flag, dmg, cType)
+--  --print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or '-');
+--  --[[  
+--  print('CalcDamageCallback:', aIndex, dIndex, flag, dmg, cType or 'damage');
+--  if _G.type(aIndex) == 'number' then
+--    print(aIndex, Char.GetData(aIndex, CONST.CHAR_名字))
+--    print('com1', Char.GetData(aIndex, CONST.CHAR_BattleCom1))
+--    print('com2', Char.GetData(aIndex, CONST.CHAR_BattleCom2))
+--    print('com3', Char.GetData(aIndex, CONST.CHAR_BattleCom3))
+--  elseif type(aIndex) == 'table' then
+--    for i, v in ipairs(aIndex) do
+--      print('COMBO: ', i)
+--      print(v, Char.GetData(v, CONST.CHAR_名字))
+--      print('com1', Char.GetData(v, CONST.CHAR_BattleCom1))
+--      print('com2', Char.GetData(v, CONST.CHAR_BattleCom2))
+--      print('com3', Char.GetData(v, CONST.CHAR_BattleCom3))
+--    end
+--  end
+--  print(dIndex, Char.GetData(dIndex, CONST.CHAR_名字))
+--  print('com1', Char.GetData(dIndex, CONST.CHAR_BattleCom1))
+--  print('com2', Char.GetData(dIndex, CONST.CHAR_BattleCom2))
+--  print('com3', Char.GetData(dIndex, CONST.CHAR_BattleCom3))
+--  dmg = 2;
+--  --]]
+--  local nCallback = callback;
+--  if cType == 'heal' then
+--    nCallback = callbackHeal;
+--  end
+--  --print(nCallback, _G[nCallback])
+--  if (nCallback and _G[nCallback]) then
+--    local battleIndex = Char.GetData(aIndex or dIndex, CONST.CHAR_BattleIndex);
+--    local success, ret = pcall(_G[nCallback], ifNil(aIndex, -1), ifNil(dIndex, -1), dmg, dmg, ifNil(battleIndex, -1),
+--      ifNil(Char.GetData(aIndex, CONST.CHAR_BattleCom1), -1),
+--      ifNil(Char.GetData(aIndex, CONST.CHAR_BattleCom2), -1),
+--      ifNil(Char.GetData(aIndex, CONST.CHAR_BattleCom3), -1),
+--      ifNil(Char.GetData(dIndex, CONST.CHAR_BattleCom1), -1),
+--      ifNil(Char.GetData(dIndex, CONST.CHAR_BattleCom2), -1),
+--      ifNil(Char.GetData(dIndex, CONST.CHAR_BattleCom3), -1),
+--      flag
+--    );
+--    if success then
+--      --print('dmg', ret);
+--      --print(battleIndex, aIndex, dIndex, dmg, ret, ffi.cast('int',ffi.cast('int32_t', math.floor(ret))));
+--      if type(ret) == 'number' then
+--        return ret;
+--        --return math.floor(ret);
+--      end
+--      return dmg;
+--    else
+--      print((cType == 'heal' and 'BattleHealCalculateCallBack' or 'DamageCalculateCallBack') .. ' ERROR:', ret);
+--    end
+--  end
+--  --print('dmg', dmg);
+--  return dmg;
+--end
+--
+--local function RegDamageCalculateEvent(Dofile, FuncName)
+--  if Dofile then
+--    local success, err = pcall(dofile, Dofile);
+--    if not success then
+--      print('RegDamageCalculateEvent dofile err:', err);
+--      return
+--    end
+--  end
+--  callback = FuncName;
+--end
 
 --local function RegBattleHealCalculateEvent(Dofile, FuncName)
 --  if Dofile then
@@ -208,11 +208,11 @@ DamageCalculateCallBack(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex,
 --  }
 --)
 
-local function hookHeal(flag, attacker, defence, dmg)
-  local aIndex = ffi.readMemoryInt32(attacker + 4)
-  local dIndex = ffi.readMemoryInt32(defence + 4)
-  return callCallback(aIndex, dIndex, flag, dmg, 'heal');
-end
+--local function hookHeal(flag, attacker, defence, dmg)
+--  local aIndex = ffi.readMemoryInt32(attacker + 4)
+--  local dIndex = ffi.readMemoryInt32(defence + 4)
+--  return callCallback(aIndex, dIndex, flag, dmg, 'heal');
+--end
 
 --ffi.hook.inlineHook('int (__cdecl *)(int, uint32_t, uint32_t, int)', hookHeal, 0x004BB6E9, 6,
 --  {
@@ -300,13 +300,13 @@ end
 --  }
 --)
 
-local function hookHealRecovery(defence, dmg)
-  local aIndex = -1
-  local dIndex = ffi.readMemoryInt32(defence + 4)
-  local ret = callCallback(aIndex, dIndex, CONST.HealDamageFlags.Recovery, dmg, 'heal');
-  --print('hookHealRecovery', aIndex, dIndex, dmg, ret)
-  return ret;
-end
+--local function hookHealRecovery(defence, dmg)
+--  local aIndex = -1
+--  local dIndex = ffi.readMemoryInt32(defence + 4)
+--  local ret = callCallback(aIndex, dIndex, CONST.HealDamageFlags.Recovery, dmg, 'heal');
+--  --print('hookHealRecovery', aIndex, dIndex, dmg, ret)
+--  return ret;
+--end
 --
 --ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookHealRecovery, 0x0049C8FD, 9,
 --  {
@@ -351,61 +351,61 @@ end
 --
 --_fpDmg = ffi.hook.new('int (__cdecl*)(uint32_t, uint32_t)', hookFpDmg, 0x0049D5B0, 5);
 
-local function hookAttackDamage(ebp, attacker, defence, dmg)
-  local flag = 0;
-  local ret = ffi.readMemoryDWORD(ebp + 4);
-  local comboFlag = ffi.readMemoryDWORD(ebp + 0x18);
-  local ebpOld = ffi.readMemoryDWORD(ebp);
-  if comboFlag == 2 then
-    --print(ret);
-    --flag = 10;
-    --local dIndex = ffi.readMemoryInt32(defence + 4)
-    --local pList = ffi.readMemoryDWORD(ebpOld + 0xC);
-    --local list = {};
-    --local battleIndex = Char.GetBattleIndex(dIndex)
-    --for i = 0, 9 do
-    --  local x = ffi.readMemoryDWORD(pList + i);
-    --  if x >= 0 then
-    --    local charIndex = Battle.GetPlayer(battleIndex, x);
-    --    if charIndex >= 0 then
-    --      table.insert(list, charIndex)
-    --    end
-    --  end
-    --end
-    --dmg = callCallback(list, dIndex, flag, dmg);
-    --ffi.setMemoryInt32(ebpOld - 0x65C, dmg);
-    return dmg;
-  elseif ret == 0x004A59D3 then
-    flag = ffi.readMemoryDWORD(ebpOld - 0x554);
-  elseif ret == 0x0049E456 then
-    flag = ffi.readMemoryDWORD(ebpOld - 0x234);
-  elseif ret == 0x0049FD86 then
-    flag = ffi.readMemoryDWORD(ebpOld - 0x64c);
-  elseif ret == 0x0049FDEB then
-    flag = ffi.readMemoryDWORD(ebpOld - 0x64c);
-  elseif ret == 0x0049FF86 then
-    flag = ffi.readMemoryDWORD(ebpOld - 0x64c);
-  elseif ret == 0x004A0791 then
-    flag = ffi.readMemoryDWORD(ebpOld - 0x64c);
-  elseif ret == 0x004A0EE4 then
-    flag = ffi.readMemoryDWORD(ebpOld - 0x77C);
-  elseif ret == 0x004A200B then
-    flag = ffi.readMemoryDWORD(ebpOld - 0x550);
-  elseif ret == 0x004A85AE then
-    flag = ffi.readMemoryDWORD(ebpOld - 0x220);
-  elseif ret == 0x004A4623 then
-    flag = ffi.readMemoryDWORD(ebpOld - 0x274);
-  elseif ret == 0x004A88BE then
-    flag = 0;
-  end
-  --printAsHex('hookAttackDamage', attacker, defence, dmg, flag)
-  --printAsHex('ebp', ebp)
-  --printAsHex('ret', ret)
-  --printAsHex('ebpOld', ebpOld)
-  local aIndex = ffi.readMemoryInt32(attacker + 4)
-  local dIndex = ffi.readMemoryInt32(defence + 4)
-  return callCallback(aIndex, dIndex, flag, dmg);
-end
+--local function hookAttackDamage(ebp, attacker, defence, dmg)
+--  local flag = 0;
+--  local ret = ffi.readMemoryDWORD(ebp + 4);
+--  local comboFlag = ffi.readMemoryDWORD(ebp + 0x18);
+--  local ebpOld = ffi.readMemoryDWORD(ebp);
+--  if comboFlag == 2 then
+--    --print(ret);
+--    --flag = 10;
+--    --local dIndex = ffi.readMemoryInt32(defence + 4)
+--    --local pList = ffi.readMemoryDWORD(ebpOld + 0xC);
+--    --local list = {};
+--    --local battleIndex = Char.GetBattleIndex(dIndex)
+--    --for i = 0, 9 do
+--    --  local x = ffi.readMemoryDWORD(pList + i);
+--    --  if x >= 0 then
+--    --    local charIndex = Battle.GetPlayer(battleIndex, x);
+--    --    if charIndex >= 0 then
+--    --      table.insert(list, charIndex)
+--    --    end
+--    --  end
+--    --end
+--    --dmg = callCallback(list, dIndex, flag, dmg);
+--    --ffi.setMemoryInt32(ebpOld - 0x65C, dmg);
+--    return dmg;
+--  elseif ret == 0x004A59D3 then
+--    flag = ffi.readMemoryDWORD(ebpOld - 0x554);
+--  elseif ret == 0x0049E456 then
+--    flag = ffi.readMemoryDWORD(ebpOld - 0x234);
+--  elseif ret == 0x0049FD86 then
+--    flag = ffi.readMemoryDWORD(ebpOld - 0x64c);
+--  elseif ret == 0x0049FDEB then
+--    flag = ffi.readMemoryDWORD(ebpOld - 0x64c);
+--  elseif ret == 0x0049FF86 then
+--    flag = ffi.readMemoryDWORD(ebpOld - 0x64c);
+--  elseif ret == 0x004A0791 then
+--    flag = ffi.readMemoryDWORD(ebpOld - 0x64c);
+--  elseif ret == 0x004A0EE4 then
+--    flag = ffi.readMemoryDWORD(ebpOld - 0x77C);
+--  elseif ret == 0x004A200B then
+--    flag = ffi.readMemoryDWORD(ebpOld - 0x550);
+--  elseif ret == 0x004A85AE then
+--    flag = ffi.readMemoryDWORD(ebpOld - 0x220);
+--  elseif ret == 0x004A4623 then
+--    flag = ffi.readMemoryDWORD(ebpOld - 0x274);
+--  elseif ret == 0x004A88BE then
+--    flag = 0;
+--  end
+--  --printAsHex('hookAttackDamage', attacker, defence, dmg, flag)
+--  --printAsHex('ebp', ebp)
+--  --printAsHex('ret', ret)
+--  --printAsHex('ebpOld', ebpOld)
+--  local aIndex = ffi.readMemoryInt32(attacker + 4)
+--  local dIndex = ffi.readMemoryInt32(defence + 4)
+--  return callCallback(aIndex, dIndex, flag, dmg);
+--end
 ----BloodAttack
 --ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookAttackDamage, 0x0049AF45, 6,
 --  {
@@ -583,11 +583,11 @@ end
 --  }
 --)
 
-local function hookComboAttackDamage(flag, attacker, defence, dmg)
-  local aIndex = ffi.readMemoryInt32(attacker + 4)
-  local dIndex = ffi.readMemoryInt32(defence + 4)
-  return callCallback(aIndex, dIndex, (flag == 1 and 1 or 0) + 8, dmg);
-end
+--local function hookComboAttackDamage(flag, attacker, defence, dmg)
+--  local aIndex = ffi.readMemoryInt32(attacker + 4)
+--  local dIndex = ffi.readMemoryInt32(defence + 4)
+--  return callCallback(aIndex, dIndex, (flag == 1 and 1 or 0) + 8, dmg);
+--end
 
 --ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, uint32_t, int)', hookComboAttackDamage, 0x0049F6DA, 6,
 --  {
@@ -609,11 +609,11 @@ end
 --  }
 --)
 
-local function hookPoisonDamage(charAddr, dmg)
-  local aIndex = -1
-  local dIndex = ffi.readMemoryInt32(charAddr + 4)
-  return callCallback(aIndex, dIndex, 6, dmg);
-end
+--local function hookPoisonDamage(charAddr, dmg)
+--  local aIndex = -1
+--  local dIndex = ffi.readMemoryInt32(charAddr + 4)
+--  return callCallback(aIndex, dIndex, 6, dmg);
+--end
 
 --ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookPoisonDamage, 0x0049CB14, 5,
 --  {
@@ -646,11 +646,11 @@ end
 --  }
 --)
 
-local function hookDrunkDamage(charAddr, dmg)
-  local aIndex = -1
-  local dIndex = ffi.readMemoryInt32(charAddr + 4)
-  return callCallback(aIndex, dIndex, 7, dmg);
-end
+--local function hookDrunkDamage(charAddr, dmg)
+--  local aIndex = -1
+--  local dIndex = ffi.readMemoryInt32(charAddr + 4)
+--  return callCallback(aIndex, dIndex, 7, dmg);
+--end
 --ffi.hook.inlineHook('int (__cdecl *)(uint32_t, int)', hookDrunkDamage, 0x0049D170, 9,
 --  {
 --    0x9C, --pushfd
@@ -677,13 +677,13 @@ end
 --  }
 --)
 
-local hookMagicMissile = function(attacker, defence, dmg)
-  --printAsHex(attacker, defence, dmg)
-  local aIndex = ffi.readMemoryInt32(attacker + 4)
-  local dIndex = ffi.readMemoryInt32(defence + 4)
-  --print(aIndex, dIndex)
-  return callCallback(aIndex, dIndex, CONST.DamageFlags.Normal, dmg);
-end
+--local hookMagicMissile = function(attacker, defence, dmg)
+--  --printAsHex(attacker, defence, dmg)
+--  local aIndex = ffi.readMemoryInt32(attacker + 4)
+--  local dIndex = ffi.readMemoryInt32(defence + 4)
+--  --print(aIndex, dIndex)
+--  return callCallback(aIndex, dIndex, CONST.DamageFlags.Normal, dmg);
+--end
 
 -----精神冲击波
 --ffi.hook.inlineHook('int (__cdecl *)(uint32_t, uint32_t, int)', hookMagicMissile, 0x004B9C61, 5, {
