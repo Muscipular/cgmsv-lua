@@ -28,6 +28,8 @@ CONST.DamageFlags = {
   ---’Ω¿ı
   FpDamage = 11,
   --ComboFinal = 10,
+  Boom = 12,
+  EarthQuake = 13,
 }
 CONST.HealDamageFlags = {
   ---÷Œ¡∆
