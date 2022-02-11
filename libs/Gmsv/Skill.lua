@@ -1,60 +1,60 @@
 _G.Skill = _G.Skill or {}
 
-local getSkillExpDataInt;
-local expTable = {}
+--local getSkillExpDataInt;
+--local expTable = {}
 
 local MAX_SKill_Lv = 10; --最大127 理论上？
 
-local function hookGetSkillExpDataInt(index, lvIndex)
-  --print(index, lvIndex);
-  if expTable[index] and expTable[index][lvIndex] then
-    return expTable[index][lvIndex]
-  end
-  return getSkillExpDataInt(index, lvIndex)
-end
-
-getSkillExpDataInt = ffi.hook.new('int (__cdecl*)(int a1, int a2)', hookGetSkillExpDataInt, 0x004F5420, 6);
-local getSkillExpIndex = ffi.cast('int (__cdecl*)(int a)', 0x004F5490);
-
-
---[[
---设置扩展技能经验表例子
-Skill.SetExpForLv(2, 11, 3300);
-Skill.SetExpForLv(2, 12, 3400);
-Skill.SetExpForLv(2, 13, 3500);
-Skill.SetExpForLv(2, 14, 3500);
-Skill.SetExpForLv(2, 15, 3600);
-Skill.SetExpForLv(2, 16, 3601);
-Skill.SetExpForLv(2, 17, 3602);
-Skill.SetExpForLv(2, 18, 3603);
-Skill.SetExpForLv(2, 19, 3604);
-Skill.SetExpForLv(2, 20, 3605);
-Skill.SetExpForLv(2, 21, 3606);
-Skill.SetExpForLv(2, 22, 3607);
-]]
----设置扩展技能经验表
----@param expId number
----@param lv number
----@param exp number
-function Skill.SetExpForLv(expId, lv, exp)
-  if expId < 0 then
-    return -1;
-  end
-  if lv < 1 then
-    return -2;
-  end
-  local index = getSkillExpIndex(expId);
-  if index < 0 then
-    return -3;
-  end
-  if exp <= 0 then
-    exp = nil
-  else
-    exp = math.floor(exp);
-  end
-  expTable[index] = expTable[index] or {}
-  expTable[index][lv - 1] = exp;
-end
+--local function hookGetSkillExpDataInt(index, lvIndex)
+--  --print(index, lvIndex);
+--  if expTable[index] and expTable[index][lvIndex] then
+--    return expTable[index][lvIndex]
+--  end
+--  return getSkillExpDataInt(index, lvIndex)
+--end
+--
+--getSkillExpDataInt = ffi.hook.new('int (__cdecl*)(int a1, int a2)', hookGetSkillExpDataInt, 0x004F5420, 6);
+--local getSkillExpIndex = ffi.cast('int (__cdecl*)(int a)', 0x004F5490);
+--
+--
+----[[
+----设置扩展技能经验表例子
+--Skill.SetExpForLv(2, 11, 3300);
+--Skill.SetExpForLv(2, 12, 3400);
+--Skill.SetExpForLv(2, 13, 3500);
+--Skill.SetExpForLv(2, 14, 3500);
+--Skill.SetExpForLv(2, 15, 3600);
+--Skill.SetExpForLv(2, 16, 3601);
+--Skill.SetExpForLv(2, 17, 3602);
+--Skill.SetExpForLv(2, 18, 3603);
+--Skill.SetExpForLv(2, 19, 3604);
+--Skill.SetExpForLv(2, 20, 3605);
+--Skill.SetExpForLv(2, 21, 3606);
+--Skill.SetExpForLv(2, 22, 3607);
+--]]
+-----设置扩展技能经验表
+-----@param expId number
+-----@param lv number
+-----@param exp number
+--function Skill.SetExpForLv(expId, lv, exp)
+--  if expId < 0 then
+--    return -1;
+--  end
+--  if lv < 1 then
+--    return -2;
+--  end
+--  local index = getSkillExpIndex(expId);
+--  if index < 0 then
+--    return -3;
+--  end
+--  if exp <= 0 then
+--    exp = nil
+--  else
+--    exp = math.floor(exp);
+--  end
+--  expTable[index] = expTable[index] or {}
+--  expTable[index][lv - 1] = exp;
+--end
 
 ---设置技能最大等级
 ---@param level number
@@ -247,13 +247,13 @@ _setTechId = ffi.hook.new('int (__cdecl*)(const char *file, int lineNo, uint32_t
     return 0;
   end, 0x0042A740, 5);
 
-local _checkNesseraryLv;
-_checkNesseraryLv = ffi.hook.new('int (__cdecl*)(uint32_t a1, int lv)', function(charPtr, lv)
-  if lv >= 10 then
-    lv = 10
-  end
-  return _checkNesseraryLv(charPtr, lv);
-end, 0x004FD570, 6);
+--local _checkNesseraryLv;
+--_checkNesseraryLv = ffi.hook.new('int (__cdecl*)(uint32_t a1, int lv)', function(charPtr, lv)
+--  if lv >= 10 then
+--    lv = 10
+--  end
+--  return _checkNesseraryLv(charPtr, lv);
+--end, 0x004FD570, 6);
 
 function Skill.GetMaxSkillLevelOfJob(skillIndex, job)
   return getMaxSkillLevelOfJob(skillIndex, job)
