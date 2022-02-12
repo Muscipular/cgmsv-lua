@@ -282,7 +282,7 @@ end
 
 ---@return OrderedCallback|function
 ---@param fn function
----@param order number
+---@param order number 越大越优先执行
 function _G.OrderedCallback(fn, order)
   if type(fn) == 'table' and fn.type == 'OrderedCallback' then
     return fn;
