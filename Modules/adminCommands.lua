@@ -158,7 +158,8 @@ function commands.dofile2(charIndex, args)
   local r, fn = pcall(dofile, args[1]);
   logDebug('', r, fn);
   if r then
-    pcall(fn, charIndex, table.slice(args, 2));
+    r, fn = pcall(fn, charIndex, table.slice(args, 2));
+    print(r, fn);
   end
 end
 --

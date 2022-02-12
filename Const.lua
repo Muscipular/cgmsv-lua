@@ -240,6 +240,10 @@ for i, v in pairs({ unpack(CONST.BATTLE_COM) }) do
   CONST.BATTLE_COM[v] = i;
 end
 
+CONST.CharExtFields = {
+  UUID = -1,
+};
+
 CONST.BATTLE_FIELD_ATTR_EARTH = 1;
 CONST.BATTLE_FIELD_ATTR_WATER = 2;
 CONST.BATTLE_FIELD_ATTR_FIRE = 4;

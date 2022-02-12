@@ -13,6 +13,19 @@ end
 function Char.SetData(charIndex, dataIndex, value)
 end
 
+---@param charIndex number
+---@param dataIndex number
+---@return string | number
+function Char.GetExtData(charIndex, dataIndex)
+end
+
+---@param charIndex number
+---@param dataIndex number
+---@param value string|number
+---@return number
+function Char.SetExtData(charIndex, dataIndex, value)
+end
+
 ---当value为0时清除标旗
 ---@param charIndex number
 ---@param flag number
