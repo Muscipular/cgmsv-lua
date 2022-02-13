@@ -168,6 +168,7 @@ local PetBPExtend = ModuleBase:createModule('petBPExtend')
 --- 加载模块钩子
 function PetBPExtend:onLoad()
   self:logInfo('load')
+  Pet.AllowBpOverflow();
 end
 
 --- 卸载模块钩子
