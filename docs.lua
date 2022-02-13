@@ -13,17 +13,40 @@ end
 function Char.SetData(charIndex, dataIndex, value)
 end
 
+---设置自定义数据（保存到数据库）
 ---@param charIndex number
 ---@param dataIndex number
 ---@return string | number
 function Char.GetExtData(charIndex, dataIndex)
 end
 
+---获取自定义数据（保存到数据库）
 ---@param charIndex number
 ---@param dataIndex number
 ---@param value string|number
 ---@return number
 function Char.SetExtData(charIndex, dataIndex, value)
+end
+
+---设置临时数据（不保存到数据库）
+---@param charIndex number
+---@param dataIndex number
+---@return string | number
+function Char.GetTempData(charIndex, dataIndex)
+end
+
+---获取临时数据（不保存到数据库）
+---@param charIndex number
+---@param dataIndex number
+---@param value string|number
+---@return number
+function Char.SetTempData(charIndex, dataIndex, value)
+end
+
+---获取一个唯一ID
+---@param charIndex number
+---@return string
+function Char.GetUUID(charIndex)
 end
 
 ---当value为0时清除标旗
@@ -202,6 +225,10 @@ function Pet.GetSkill(PetIndex, SkillSlot)
 end
 
 function Pet.AddSkill(PetIndex, SkillID)
+end
+
+---启用宠物突破63bp限制
+function Pet.AllowBpOverflow()
 end
 
 Item = {}
