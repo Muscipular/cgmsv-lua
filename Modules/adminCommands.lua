@@ -154,7 +154,7 @@ function commands.calcFp(charIndex, args)
   NLG.SystemMessage(charIndex, string.format("%d => fp: %d %d", tonumber(args[1]), Char.CalcConsumeFp(charIndex, tonumber(args[1])), 999));
 end
 
-function commands.dofile2(charIndex, args)
+function commands.dolua(charIndex, args)
   local r, fn = pcall(dofile, args[1]);
   logDebug('', r, fn);
   if r then

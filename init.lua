@@ -1,5 +1,6 @@
 collectgarbage()
 collectgarbage('stop')
+math.randomseed(os.time())
 dofile('lua/Const.lua')
 dofile('lua/Util.lua')
 dofile('lua/libs/GmsvExtension.lua')

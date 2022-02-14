@@ -202,6 +202,12 @@ end
 function NLG.c(str)
 end
 
+---@param min number
+---@param max number
+---@return number
+function NLG.Rand(min, max)  
+end
+
 Pet = {}
 function Pet.ReBirth(PlayerIndex, PetIndex)
 end
