@@ -11,6 +11,15 @@ function NL.newEvent(event, defaultRet)
       end
     end
     cb = callback;
+    if callback then
+      if NL.RegCallback then
+        NL.RegCallback(event, callback);
+      end
+    else
+      if NL.RemoveCallback then
+        NL.RemoveCallback(event);
+      end
+    end
   end
   NL['Emit' .. event] = function(...)
     if cb and _G[cb] then
@@ -46,6 +55,7 @@ NL.newEvent('AfterCalcCharaStatusEvent', 0);
 NL.newEvent('CheckDummyDollEvent', 1);
 -- function PreItemPickUpEventCallBack(CharIndex, ItemIndex) end
 NL.newEvent('PreItemPickUpEvent', 0);
+NL.newEvent('ItemBoxGenerateEvent', nil);
 --local hookOnCharaDeleted;
 --hookOnCharaDeleted = ffi.hook.new('int (__cdecl*)(int a1)', function(queueIndex)
 --  local queuePtr = Addresses.DBQueue + 0x58 * queueIndex

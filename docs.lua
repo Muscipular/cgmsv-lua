@@ -311,6 +311,12 @@ end
 function NL.SetArgNpc(NpcIndex, NewArg)
 end
 
+function NL.RegCallback(event, callbackStr)
+end
+
+function NL.RemoveCallback(event)
+end
+
 _G.NLG = {}
 
 function NLG.TalkToMap(Map, Floor, TalkerIndex, Msg, FontColor, FontSize)

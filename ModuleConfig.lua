@@ -29,6 +29,7 @@ loadModule('adminDamage')
 --loadModule('noBattleInjury')
 --loadModule('summonDemo')
 loadModule('setupMagicAttr')
+--loadModule('itembox') --ºÚ°×±¦Ïä¸ÅÂÊµ÷Õûlua
 --loadModule('petBPExtend')
 --useModule('Welcome2')
 --useModule('LvOnePet')
