@@ -35,7 +35,11 @@ local chained = {
     for i, v in ipairs(list) do
       dmg = v(CharIndex, DefCharIndex, OriDamage, dmg, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
       if type(dmg) ~= 'number' or dmg <= 0 then
-        dmg = 1
+        if Flg == CONST.DamageFlags.Miss or Flg == CONST.DamageFlags.Dodge then
+          dmg = 0
+        else
+          dmg = 1
+        end
       end
     end
     return dmg
@@ -65,10 +69,10 @@ local chained = {
       if type(m) == 'number' then
         m = math.floor(m);
         if m <= 0 then
-          if OriDamage > 0 then
-            m = 1;
+          if Flg == CONST.DamageFlags.Miss or Flg == CONST.DamageFlags.Dodge then
+            m = 0
           else
-            m = 0;
+            m = 1
           end
         end
         Damage = m;
