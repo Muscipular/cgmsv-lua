@@ -202,6 +202,11 @@ end
 function NLG.c(str)
 end
 
+---降低cpu使用
+---@param ms number 少0时关闭，大于或等于0时为Sleep时间，不建议大于2
+function NLG.LowCpuUsage(ms)
+end
+
 ---@param min number
 ---@param max number
 ---@return number
