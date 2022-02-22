@@ -141,12 +141,21 @@ end
 ---@return number 返回1代表成功，返回0失败，参数数据类型不对返回-2，对象index无效返回-3。
 function Char.DischargeParty(CharIndex)
 end
+
 ---@return number 成功返回当前战斗index，返回-1代表没有战斗，参数数据类型不对返回-2，对象index无效返回-3。
 function Char.GetBattleIndex(CharIndex)
 end
+
+---加入组队，无视组队开关及距离
+---@param sourceIndex number 队员index
+---@param targetIndex number 队长index
+function Char.JoinParty(sourceIndex, targetIndex)
+end
+
 ---@return number 成功返回玩家对象激活的称号ID，返回-1代表失败，参数数据类型不对返回-2，对象index无效返回-3。
 function Char.GetTitle(CharIndex)
 end
+
 function Char.Warp(CharIndex, MapType, FloorID, X, Y)
 end
 
@@ -183,7 +192,15 @@ end
 function Char.DelSlotPet(CharIndex, Slot)
 end
 
-NLG = {}
+---移动物品
+---@param charIndex number
+---@param fromSlot number 移动那个物品，取值0-27
+---@param toSlot number 移动到那个位置, 取值0-27
+---@param amount number 数量，整体移动取值可为-1
+function Char.MoveItem(charIndex, fromSlot, toSlot, amount)  
+end
+
+NLG = NLG or {}
 function NLG.ShowWindowTalked(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data)
 end
 
@@ -200,6 +217,9 @@ function NLG.UpChar(CharIndex)
 end
 
 function NLG.c(str)
+end
+
+function NLG.TalkToMap(Map, Floor, TalkerIndex, Msg, FontColor, FontSize)
 end
 
 ---降低cpu使用
@@ -320,9 +340,4 @@ function NL.RegCallback(event, callbackStr)
 end
 
 function NL.RemoveCallback(event)
-end
-
-_G.NLG = {}
-
-function NLG.TalkToMap(Map, Floor, TalkerIndex, Msg, FontColor, FontSize)
 end

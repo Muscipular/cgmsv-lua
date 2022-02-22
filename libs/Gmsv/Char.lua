@@ -55,6 +55,8 @@ local joinParty_A = ffi.cast('uint32_t (__cdecl*)(uint32_t source, uint32_t targ
 local sendJoinPartyResult = ffi.cast('int (__cdecl*)(uint32_t fd, int a2, int a3)', 0x005564D0);
 
 ---加入组队，无视组队开关及距离
+---@param sourceIndex number 队员index
+---@param targetIndex number 队长index
 function Char.JoinParty(sourceIndex, targetIndex)
   if Char.GetData(targetIndex, CONST.CHAR_类型) ~= CONST.对象类型_人 then
     return -1;
