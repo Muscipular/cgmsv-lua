@@ -227,11 +227,16 @@ end
 function NLG.LowCpuUsage(ms)
 end
 
+---@overload fun(cdkey: string):number
+---@param cdkey string
+---@param regId number
+---@return number charIndex
+function NLG.FindUser(cdkey, regId) end
+
 ---@param min number
 ---@param max number
 ---@return number
-function NLG.Rand(min, max)
-end
+function NLG.Rand(min, max) end
 
 Pet = {}
 function Pet.ReBirth(PlayerIndex, PetIndex)
