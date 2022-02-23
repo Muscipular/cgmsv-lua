@@ -400,3 +400,9 @@ function NL.RegItemBoxGenerateEvent(dofile, callback) end
 ---@param adm number 影响出产物品，作用未知
 ---@return number[] 返回宝箱参数 {itemBoxType, adm}
 function NL.ItemBoxGenerateEventCallback(mapId, floor, itemBoxType, adm) end
+
+
+---@param sql string sql
+---@vararg string|number 绑定参数，最多40个
+---@return {status:number, effectRows:number, rows: table} 返回查询内容
+function SQL.QueryEx(sql, ...) end
