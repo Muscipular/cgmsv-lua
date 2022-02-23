@@ -387,3 +387,16 @@ function NL.RegItemBoxLootEvent(dofile, callback) end
 ---@param adm number
 ---@return number 返回1拦截默认物品
 function NL.ItemBoxLootEventCallback(charaIndex, mapId, floor, X, Y, boxType, adm) end
+
+---宝箱生成事件
+---@param callback string callback回调参数 
+---@see NL.ItemBoxGenerateEventCallback
+function NL.RegItemBoxGenerateEvent(dofile, callback) end
+
+---宝箱生成事件回调
+---@param mapId number
+---@param floor number
+---@param itemBoxType number 宝箱编号
+---@param adm number 影响出产物品，作用未知
+---@return number[] 返回宝箱参数 {itemBoxType, adm}
+function NL.ItemBoxGenerateEventCallback(mapId, floor, itemBoxType, adm) end
