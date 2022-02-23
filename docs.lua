@@ -197,7 +197,7 @@ end
 ---@param fromSlot number 移动那个物品，取值0-27
 ---@param toSlot number 移动到那个位置, 取值0-27
 ---@param amount number 数量，整体移动取值可为-1
-function Char.MoveItem(charIndex, fromSlot, toSlot, amount)  
+function Char.MoveItem(charIndex, fromSlot, toSlot, amount)
 end
 
 NLG = NLG or {}
@@ -230,7 +230,7 @@ end
 ---@param min number
 ---@param max number
 ---@return number
-function NLG.Rand(min, max)  
+function NLG.Rand(min, max)
 end
 
 Pet = {}
@@ -341,3 +341,49 @@ end
 
 function NL.RemoveCallback(event)
 end
+
+---宝箱遇敌事件
+---@param callback string callback回调参数 fun(charaIndex:number,mapId:number,floor:number,X:number,Y:number,boxType:number):number[]|nil
+function NL.RegItemBoxEncountEvent(dofile, callback) end
+
+---宝箱遇敌事件回调
+---@param charaIndex number
+---@param mapId number
+---@param floor number
+---@param X number
+---@param Y number
+---@param boxType number
+---@return number[]|nil 遇敌数组 每个怪物3个参数，分别为 id，等级，随机等级， 返回nil不拦截， 例子： {0, 100, 5, 1, 1, 0} 生成0号怪物100-105级，1号怪物1级
+function NL.ItemBoxEncountRateEventCallback(charaIndex, mapId, floor, X, Y, boxType) end
+
+---宝箱遇敌概率事件
+---@param callback string callback回调参数 
+---@see NL.ItemBoxEncountRateEventCallback
+function NL.RegItemBoxEncountRateEvent(dofile, callback) end
+
+---宝箱遇敌概率事件回调
+---@param charaIndex number
+---@param mapId number
+---@param floor number
+---@param X number
+---@param Y number
+---@param boxType number
+---@param rate number 遇敌率
+---@return number 遇敌率
+function NL.ItemBoxEncountRateEventCallback(charaIndex, mapId, floor, X, Y, boxType, rate) end
+
+---宝箱获取物品事件
+---@param callback string callback回调参数 
+---@see NL.ItemBoxLootEventCallback
+function NL.RegItemBoxLootEvent(dofile, callback) end
+
+---宝箱获取物品事件回调
+---@param charaIndex number
+---@param mapId number
+---@param floor number
+---@param X number
+---@param Y number
+---@param boxType number
+---@param adm number
+---@return number 返回1拦截默认物品
+function NL.ItemBoxLootEventCallback(charaIndex, mapId, floor, X, Y, boxType, adm) end

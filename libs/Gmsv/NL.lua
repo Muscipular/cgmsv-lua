@@ -96,6 +96,9 @@ local emitBeforeCharaSave = NL.newEvent('BeforeCharaSaveEvent', 0)
 --hookedQueueSave2 = ffi.hook.new('int (__cdecl*)(uint32_t charAddr)', hookQueueSave2, 0x0043B390, 7);
 
 local emitCharaSaved = NL.newEvent('CharaSavedEvent', 0);
+NL.newEvent('ItemBoxEncountEvent', nil);
+NL.newEvent('ItemBoxEncountRateEvent', nil);
+NL.newEvent('ItemBoxLootEvent', nil);
 --local hookOnCharaSaved;
 --hookOnCharaSaved = ffi.hook.new('int (__cdecl*)(int a1)', function(queueIndex)
 --  local queuePtr = Addresses.DBQueue + 0x58 * queueIndex
