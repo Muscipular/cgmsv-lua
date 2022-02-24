@@ -1,6 +1,40 @@
 ---模块类
 local BagModule = ModuleBase:createModule('bag')
 
+BagModule:addMigration(1, "migrate1", function()
+  local res = SQL.QueryEx("select * from lua_chardata");
+  print(JSON.encode(res));
+  if res.rows then
+    for i, row in ipairs(res.rows) do
+      pcall(function()
+        local data = JSON.decode(row.data);
+        local regId = row.id;
+        local cdkey = row.cdkey;
+        if data.bag and data.bagIndex then
+          for i = 1, 5 do
+            for j = 1, 20 do
+              if data.bag[i] and data.bag[i][j] then
+                SQL.QueryEx("insert into hook_charaext (cdKey, regNo, sKey, val, valType) values (?,?,?,?,?)",
+                  cdkey, regId, string.format("bag-%d-%d", i, j), JSON.encode(data.bag[i][j]), 0);
+              end
+            end
+          end
+          SQL.QueryEx("insert into hook_charaext (cdKey, regNo, sKey, val, valType) values (?,?,?,?,?)",
+            cdkey, regId, "bag-index", data.bagIndex, 1);
+        end
+      end)
+    end
+  end
+end)
+
+local itemFields = { }
+for i = 0, 0x4b do
+  table.insert(itemFields, i);
+end
+for i = 0, 0xd do
+  table.insert(itemFields, i + 2000);
+end
+
 function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
   if string.sub(Msg, 1, 4) ~= '/bag' then
     return 1;
@@ -14,50 +48,38 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
     NLG.SystemMessage(CharIndex, '无效背包')
     return 0;
   end
-  ---@type CharExt
-  local charExt = getModule('charExt')
-  local charData = charExt:getData(CharIndex);
-  charData.bagIndex = charData.bagIndex or 1;
-  self:logDebug('bagIndex', charData.bagIndex, '=>', bagIndex);
-  if bagIndex == charData.bagIndex then
+  local oBagIndex = Char.GetExtData(CharIndex, "bag-index") or 1;
+  self:logDebug('bagIndex', oBagIndex, '=>', bagIndex);
+  if bagIndex == oBagIndex then
     NLG.SystemMessage(CharIndex, '无须切换背包')
-    charData.bagIndex = bagIndex;
+    Char.SetExtData(CharIndex, "bag-index", 1);
     return 0;
   end
-  charData.bag = charData.bag or {};
-  local itemFields = { }
-  for i = 0, 0x4b do
-    table.insert(itemFields, i);
-  end
-  for i = 0, 0xd do
-    table.insert(itemFields, i + 2000);
-  end
-  local bagDataO = charData.bag[charData.bagIndex] or {};
+  Char.SetExtData(CharIndex, "bag-index", bagIndex);
   for i = 1, 20 do
     local itemIndex = Char.GetItemIndex(CharIndex, i + 7)
     --self:logDebug('backup', i + 7, itemIndex);
     if itemIndex >= 0 then
-      bagDataO[i] = {};
+      local item = {};
       for _, v in pairs(itemFields) do
-        bagDataO[i][tostring(v)] = Item.GetData(itemIndex, v);
-        --self:logDebug(v, bagDataO[i][tostring(v)]);
+        item[tostring(v)] = Item.GetData(itemIndex, v);
       end
       local r = Char.DelItemBySlot(CharIndex, i + 7);
-      --self:logDebug('remove', i + 7, itemIndex, r);
+      Char.SetExtData(CharIndex, string.format("bag-%d-%d", oBagIndex, i), JSON.encode(item));
     else
-      bagDataO[i] = false;
+      Char.SetExtData(CharIndex, string.format("bag-%d-%d", oBagIndex, i), nil);
     end
   end
-  bagDataO = table.filter(bagDataO, function(e)
-    return e ~= false
-  end);
-  charData.bag[charData.bagIndex] = bagDataO;
-  local bagData = charData.bag[bagIndex] or {};
-  charData.bag[bagIndex] = { };
-  charData.bagIndex = bagIndex;
-  for i, bagItem in ipairs(bagData) do
+  for i = 1, 20 do
+    local bagItem = Char.GetExtData(CharIndex, string.format("bag-%d-%d", bagIndex, i));
+    Char.SetExtData(CharIndex, string.format("bag-%d-%d", bagIndex, i), nil);
+    pcall(function()
+      if bagItem then
+        bagItem = JSON.decode(bagItem);
+      end
+    end)
     if type(bagItem) == 'table' then
-      --self:logDebug('restore', bagItem[tostring(CONST.道具_ID)], bagItem[tostring(CONST.道具_堆叠数)]);
+      --self:logDebug('restore', bagItem[tostring(CONST.道具_ID)], bagItem[tostring(CONST.道具_堆叠数)]);tbl_character_down
       local itemId = bagItem[tostring(CONST.道具_ID)];
       if itemId < 0 then
         itemId = 0
@@ -80,7 +102,6 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
     end
   end
   Item.UpItem(CharIndex, -1);
-  charExt:setData(CharIndex, charData);
   NLG.SystemMessage(CharIndex, '切换背包' .. bagIndex)
   return 0;
 end
