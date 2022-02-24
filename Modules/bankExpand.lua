@@ -16,23 +16,27 @@ function BankExpand:onProtoHook(fd, head, data)
   --self:logDebug(fd, head, data, data[1]);
   data = tonumber(data[1]);
   local charIndex = Protocol.GetCharIndexFromFd(fd);
-  local bIndex = self:getData(charIndex, "index") or 1;
+  local bIndex = Char.GetExtData(charIndex, "bank-index") or 1;
   if bIndex == data then
     return ;
   end
-  local dataSave = {
-    index = data,
-  }
+  Char.SetExtData(charIndex, "bank-index", data);
   --self:setData(charIndex, "index", data);
   for i = 0, 19 do
     local itemIndex = Char.GetPoolItem(charIndex, i);
     if itemIndex >= 0 then
-      dataSave[string.format("slot-%d-%d", bIndex, i)] = self:readItemData(itemIndex);
+      Char.SetExtData(charIndex, string.format("bank-%d-%d", bIndex, i), self:readItemData(itemIndex));
       Char.RemovePoolItem(charIndex, i);
     else
-      dataSave[string.format("slot-%d-%d", bIndex, i)] = 0;
+      Char.SetExtData(charIndex, string.format("bank-%d-%d", bIndex, i), nil);
     end
-    local itemData = self:getData(charIndex, string.format("slot-%d-%d", data, i));
+    local itemData = Char.GetExtData(charIndex, string.format("bank-%d-%d", data, i));
+    pcall(function()
+      if itemData then
+        itemData = JSON.decode(itemData);
+      end
+    end)
+    Char.SetExtData(charIndex, string.format("bank-%d-%d", data, i), nil);
     if type(itemData) == 'table' then
       local itemId = itemData['0'];
       if itemId <= 0 then
@@ -48,7 +52,6 @@ function BankExpand:onProtoHook(fd, head, data)
       end
     end
   end
-  self:setData(charIndex, dataSave);
   NLG.OpenBank(charIndex, charIndex);
 end
 
@@ -76,36 +79,11 @@ end
 function BankExpand:setItemData(itemIndex, itemData)
   if itemIndex >= 0 then
     for _, v in pairs(itemFields) do
-      local r = Item.SetData(itemIndex, v, itemData[tostring(v)]);
-      if r ~= 1 then
-        self:logWarnF("itemIndex %d, set field %d = %s error", itemIndex, v, tostring(itemData[tostring(v)]));
+      if type(itemData[tostring(v)]) ~= 'nil' then
+        Item.SetData(itemIndex, v, itemData[tostring(v)]);
       end
     end
   end
-end
-
-function BankExpand:getData(charIndex, field)
-  ---@type CharExt
-  local charExt = getModule('charExt')
-  local data = charExt:getData(charIndex).bankExpand or {};
-  return data[tostring(field)];
-end
-
-function BankExpand:setData(charIndex, field, itemData)
-  ---@type CharExt
-  local charExt = getModule('charExt')
-  local data = charExt:getData(charIndex);
-  if data.bankExpand == nil then
-    data.bankExpand = {}
-  end
-  if type(field) == 'table' then
-    for i, v in pairs(field) do
-      data.bankExpand[i] = v;
-    end
-  elseif type(field) == 'string' then
-    data.bankExpand[tostring(field)] = itemData;
-  end
-  charExt:setData(charIndex, data);
 end
 
 return BankExpand;
