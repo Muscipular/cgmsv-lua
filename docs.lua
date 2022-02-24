@@ -433,3 +433,13 @@ function Battle.GetNextBattleFlg(battleIndex) end
 ---@param dp number[] 4属性，地、水、火、风
 ---@return number
 function Battle.CalcPropScore(ap, dp) end
+
+---设置Msg
+---@param msgId number
+---@param val string
+function Data.SetMessage(msgId, val) end
+
+---获取Msg
+---@param msgId number
+---@return string
+function Data.GetMessage(msgId) end

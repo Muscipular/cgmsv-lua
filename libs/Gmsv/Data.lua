@@ -116,30 +116,30 @@ function Data.GetEncountData(encountIndex, dataPos)
   return FFI.readMemoryDWORD(Addresses.EncountTable + 0x94 * encountIndex + dataPos * 4)
 end
 
-local msgList = {};
-local MSG_getMessage;
-local function hookGetMessage(msgId)
-  if msgList[msgId] ~= nil then
-    return msgList[msgId]
-  end
-  local s = MSG_getMessage(msgId);
-  return s;
-end
-
-function Data.SetMessage(msgId, val)
-  if MSG_getMessage == nil then
-    MSG_getMessage = ffi.hook.new('const char* (__cdecl *)(uint32_t msgId)', hookGetMessage, 0x00416F30, 6);
-  end
-  msgList[tonumber(msgId)] = tostring(val);
-end
-
-function Data.GetMessage(msgId)
-  msgId = tonumber(msgId)
-  if msgList[msgId] ~= nil then
-    return msgList[msgId]
-  end
-  return ffi.string(MSG_getMessage(msgId));
-end
+--local msgList = {};
+--local MSG_getMessage;
+--local function hookGetMessage(msgId)
+--  if msgList[msgId] ~= nil then
+--    return msgList[msgId]
+--  end
+--  local s = MSG_getMessage(msgId);
+--  return s;
+--end
+--
+--function Data.SetMessage(msgId, val)
+--  if MSG_getMessage == nil then
+--    MSG_getMessage = ffi.hook.new('const char* (__cdecl *)(uint32_t msgId)', hookGetMessage, 0x00416F30, 6);
+--  end
+--  msgList[tonumber(msgId)] = tostring(val);
+--end
+--
+--function Data.GetMessage(msgId)
+--  msgId = tonumber(msgId)
+--  if msgList[msgId] ~= nil then
+--    return msgList[msgId]
+--  end
+--  return ffi.string(MSG_getMessage(msgId));
+--end
 
 function Data.GetEnemyBaseIdByEnemyId(enemyId)
   enemyId = tonumber(enemyId)
