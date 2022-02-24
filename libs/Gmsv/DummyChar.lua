@@ -44,10 +44,10 @@ hookedQueueSave2 = ffi.hook.new('int (__cdecl*)(uint32_t charAddr)', hookQueueSa
 --ffi.hook.hooks[tostring(0x00422991 + 1) .. '_1'] = hookGetCharWorkFlagPtr;
 --ffi.patch(0x00422991 + 1, ffi.uint32ToArray(ffi.fnOffset(0x00422991 + 5, hookGetCharWorkFlagPtr, 'uint8_t (__cdecl*)(const char *a2, int a3, uint32_t a4, int a5)')));
 
----@param charIndex number
-function Char.IsDummy(charIndex)
-  return Char.GetData(charIndex, CONST.CHAR_类型) == 1 and dummyChar[charIndex] ~= nil;
-end
+-- ---@param charIndex number
+--function Char.IsDummy(charIndex)
+--  return Char.GetData(charIndex, CONST.CHAR_类型) == 1 and dummyChar[charIndex] ~= nil;
+--end
 
 local initCharaFn1 = ffi.cast('int (__cdecl*)(uint32_t a1, int a3)', 0x00432FE0);
 
@@ -93,6 +93,7 @@ function Char.CreateDummy(options)
   ffi.setMemoryInt32(charPtr + 4 * CONST.CHAR_OBJ, objectIndex);
   Broadcast_ObjectState(objectIndex);
   dummyChar[charIndex] = charIndex;
+  Char.SetDummy(charIndex);
   Char.SetData(charIndex, CONST.CHAR_名字, options.name or string.formatNumber(charPtr, 62))
   return charIndex;
 end

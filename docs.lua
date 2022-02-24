@@ -200,6 +200,14 @@ end
 function Char.MoveItem(charIndex, fromSlot, toSlot, amount)
 end
 
+---@param charIndex number
+---@return number
+function Char.IsDummy(charIndex) end
+
+---@param charIndex number
+---@return number
+function Char.SetDummy(charIndex) end
+
 NLG = NLG or {}
 function NLG.ShowWindowTalked(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data)
 end
