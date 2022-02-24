@@ -230,7 +230,6 @@ NL.newEvent('BeforeBattleTurnEvent', 0);
 ----    hook()
 ----end
 
-local _ProcessBattleCommand = ffi.cast('int (__cdecl *)(uint32_t charAddr, int com, int com2, int com3)', 0x0048BD50);
 
 function Battle.ActionSelect(charIndex, com1, com2, com3)
   if not Char.IsValidCharIndex(charIndex) then
@@ -240,6 +239,7 @@ function Battle.ActionSelect(charIndex, com1, com2, com3)
     return -2;
   end
   local charPtr = Char.GetCharPointer(charIndex);
+  local _ProcessBattleCommand = ffi.cast('int (__cdecl *)(uint32_t charAddr, int com, int com2, int com3)', 0x0048BD50);
   _ProcessBattleCommand(charPtr, com1, com2, com3);
 end
 
@@ -363,7 +363,6 @@ local emitBattleInjuryEvent = NL.newEvent('BattleInjuryEvent', nil);
 --  0xff, 0xE0, --jmp [eax]
 --}, { ignoreOriginCode = true })
 
-local _Battle_calcSomeDmgRateForAttr = ffi.cast('int (__cdecl*)(uint32_t a1, int a2)', 0x0049D9B0);
 
 ---获取属性克制关系
 ---@return number 克制比率
@@ -376,6 +375,7 @@ function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex)
   if d <= 0 then
     return 1
   end
+  local _Battle_calcSomeDmgRateForAttr = ffi.cast('int (__cdecl*)(uint32_t a1, int a2)', 0x0049D9B0);
   return _Battle_calcSomeDmgRateForAttr(a, d) / 100.0;
 end
 
@@ -497,7 +497,6 @@ local emitBattleSummonedEnemyEvent = NL.newEvent('BattleSummonedEnemyEvent', nil
 --  0x9d, 0x61,
 --});
 
-local _GetTechOption = ffi.cast('int (__cdecl*)(uint32_t a1, const char *type)', 0x0048E7A0)
 
 ---@param type string 取值 DD: AR: 等
 function Battle.GetTechOption(charIndex, type)
@@ -505,6 +504,7 @@ function Battle.GetTechOption(charIndex, type)
   if ptr <= 0 then
     return nil;
   end
+  local _GetTechOption = ffi.cast('int (__cdecl*)(uint32_t a1, const char *type)', 0x0048E7A0)
   return _GetTechOption(ptr, type);
 end
 

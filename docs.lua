@@ -427,3 +427,9 @@ function Battle.GetNextBattle(battleIndex) end
 ---@param battleIndex number
 ---@return number flg
 function Battle.GetNextBattleFlg(battleIndex) end
+
+---计算属性伤害比率
+---@param ap number[] 4属性，地、水、火、风
+---@param dp number[] 4属性，地、水、火、风
+---@return number
+function Battle.CalcPropScore(ap, dp) end
