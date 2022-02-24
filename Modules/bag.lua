@@ -3,7 +3,6 @@ local BagModule = ModuleBase:createModule('bag')
 
 BagModule:addMigration(1, "migrate1", function()
   local res = SQL.QueryEx("select * from lua_chardata");
-  print(JSON.encode(res));
   if res.rows then
     for i, row in ipairs(res.rows) do
       pcall(function()
