@@ -406,8 +406,24 @@ function NL.RegItemBoxGenerateEvent(dofile, callback) end
 ---@return number[] 返回宝箱参数 {itemBoxType, adm}
 function NL.ItemBoxGenerateEventCallback(mapId, floor, itemBoxType, adm) end
 
-
 ---@param sql string sql
 ---@vararg string|number 绑定参数，最多40个
 ---@return {status:number, effectRows:number, rows: table} 返回查询内容
 function SQL.QueryEx(sql, ...) end
+
+---@overload fun(battleIndex: number, encountIndex: number):number
+---@param battleIndex number
+---@param encountIndex number encount编号， -1=取消连战， -2=lua生成连战
+---@param flg number lua连战参数
+---@return number 成功返回0
+function Battle.SetNextBattle(battleIndex, encountIndex, flg) end
+
+---获取连战id
+---@param battleIndex number
+---@return number encountIndex
+function Battle.GetNextBattle(battleIndex) end
+
+---获取lua连战flg
+---@param battleIndex number
+---@return number flg
+function Battle.GetNextBattleFlg(battleIndex) end

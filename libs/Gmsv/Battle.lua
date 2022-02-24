@@ -14,21 +14,21 @@ function Battle.GetCurrentBattle(CharIndex)
   return Char.GetData(CharIndex, CONST.CHAR_BattleIndex)
 end
 
------ @return number encountIndex
-function Battle.GetNextBattle(BattleIndex)
-  if BattleIndex < 0 or BattleIndex >= Addresses.BattleMax then
-    return -3
-  end
-  local battleAddr = Addresses.BattleTable + BattleIndex * 0x1480
-  if FFI.readMemoryDWORD(battleAddr) == 0 then
-    return -2
-  end
-  return FFI.readMemoryInt32(battleAddr + 0x38)
-end
-
-function Battle.GetNextBattleFlg(BattleIndex)
-  return _BattleNext[BattleIndex];
-end
+-- ----- @return number encountIndex
+--function Battle.GetNextBattle(BattleIndex)
+--  if BattleIndex < 0 or BattleIndex >= Addresses.BattleMax then
+--    return -3
+--  end
+--  local battleAddr = Addresses.BattleTable + BattleIndex * 0x1480
+--  if FFI.readMemoryDWORD(battleAddr) == 0 then
+--    return -2
+--  end
+--  return FFI.readMemoryInt32(battleAddr + 0x38)
+--end
+--
+--function Battle.GetNextBattleFlg(BattleIndex)
+--  return _BattleNext[BattleIndex];
+--end
 
 function Battle.UnsetWinEvent(battleIndex)
   if battleIndex < 0 or battleIndex >= Addresses.BattleMax then
@@ -45,32 +45,32 @@ end
 
 Battle.UnsetPVPWinEvent = Battle.UnsetWinEvent;
 
----@param encountIndex number encount编号， -1=取消连战， -2=lua生成连战
----@param flg number lua连战参数
-function Battle.SetNextBattle(battleIndex, encountIndex, flg)
-  if battleIndex < 0 or battleIndex >= Addresses.BattleMax then
-    return -3
-  end
-  local battleAddr = Addresses.BattleTable + battleIndex * 0x1480
-  if FFI.readMemoryInt32(battleAddr) == 0 then
-    return -2
-  end
-  encountIndex = tonumber(encountIndex);
-  if encountIndex == nil then
-    encountIndex = -1;
-  end
-  if encountIndex < 0 and encountIndex ~= -2 then
-    encountIndex = -1;
-    _BattleNext[battleIndex] = nil;
-  end
-  if encountIndex == -2 then
-    _BattleNext[battleIndex] = flg;
-  end
-  if not FFI.setMemoryInt32(battleAddr + 0x38, encountIndex) then
-    return -1;
-  end
-  return 1;
-end
+-- ---@param encountIndex number encount编号， -1=取消连战， -2=lua生成连战
+-- ---@param flg number lua连战参数
+--function Battle.SetNextBattle(battleIndex, encountIndex, flg)
+--  if battleIndex < 0 or battleIndex >= Addresses.BattleMax then
+--    return -3
+--  end
+--  local battleAddr = Addresses.BattleTable + battleIndex * 0x1480
+--  if FFI.readMemoryInt32(battleAddr) == 0 then
+--    return -2
+--  end
+--  encountIndex = tonumber(encountIndex);
+--  if encountIndex == nil then
+--    encountIndex = -1;
+--  end
+--  if encountIndex < 0 and encountIndex ~= -2 then
+--    encountIndex = -1;
+--    _BattleNext[battleIndex] = nil;
+--  end
+--  if encountIndex == -2 then
+--    _BattleNext[battleIndex] = flg;
+--  end
+--  if not FFI.setMemoryInt32(battleAddr + 0x38, encountIndex) then
+--    return -1;
+--  end
+--  return 1;
+--end
 
 ---获取当前回合数
 function Battle.GetTurn(battleIndex)
