@@ -15,14 +15,14 @@ end
 
 ---设置自定义数据（保存到数据库）
 ---@param charIndex number
----@param dataIndex number
+---@param dataIndex string
 ---@return string | number
 function Char.GetExtData(charIndex, dataIndex)
 end
 
 ---获取自定义数据（保存到数据库）
 ---@param charIndex number
----@param dataIndex number
+---@param dataIndex string
 ---@param value string|number
 ---@return number
 function Char.SetExtData(charIndex, dataIndex, value)
@@ -30,14 +30,14 @@ end
 
 ---设置临时数据（不保存到数据库）
 ---@param charIndex number
----@param dataIndex number
+---@param dataIndex string
 ---@return string | number
 function Char.GetTempData(charIndex, dataIndex)
 end
 
 ---获取临时数据（不保存到数据库）
 ---@param charIndex number
----@param dataIndex number
+---@param dataIndex string
 ---@param value string|number
 ---@return number
 function Char.SetTempData(charIndex, dataIndex, value)
