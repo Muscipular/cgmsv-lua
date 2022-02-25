@@ -93,7 +93,7 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
             --  self:logWarnF("itemIndex %s, %s, set field %d = %s error", r, itemIndex, field, tostring(bagItem[tostring(field)]));
             --end
           else
-            self:logWarnF("itemIndex %d, field %s is nil", itemIndex, tostring(field));
+            --self:logWarnF("itemIndex %d, field %s is nil", itemIndex, tostring(field));
           end
           --self:logDebug(itemIndex, field, bagItem[tostring(field)], Item.GetData(itemIndex, field), r);
         end

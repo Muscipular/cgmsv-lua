@@ -1,30 +1,31 @@
 ---模块类
 local BankExpand = ModuleBase:createModule('bankExpand')
 
---BankExpand:addMigration(1, 'migrate1', function()
---  local res = SQL.QueryEx("select * from lua_chardata");
---  if res.rows then
---    for i, row in ipairs(res.rows) do
---      pcall(function()
---        local data = JSON.decode(row.data);
---        local regId = row.id;
---        local cdkey = row.cdkey;
---        if data.bag and data.bagIndex then
---          for i = 1, 5 do
---            for j = 1, 20 do
---              if data.bag[i] and data.bag[i][j] then
---                SQL.QueryEx("insert into hook_charaext (cdKey, regNo, sKey, val, valType) values (?,?,?,?,?)",
---                  cdkey, regId, string.format("bag-%d-%d", i, j), JSON.encode(data.bag[i][j]), 0);
---              end
---            end
---          end
---          SQL.QueryEx("insert into hook_charaext (cdKey, regNo, sKey, val, valType) values (?,?,?,?,?)",
---            cdkey, regId, "bag-index", data.bagIndex, 1);
---        end
---      end)
---    end
---  end
---end);
+BankExpand:addMigration(1, 'migrate1', function()
+  local res = SQL.QueryEx("select * from lua_chardata");
+  if res.rows then
+    for i, row in ipairs(res.rows) do
+      pcall(function()
+        local data = JSON.decode(row.data);
+        local regId = row.id;
+        local cdkey = row.cdkey;
+        if data.bankExpand then
+          for i = 1, 9 do
+            for j = 1, 20 do
+              local key = string.format("slot-%d-%d", i,j);
+              if type(data.bankExpand[key]) == 'table' then
+                SQL.QueryEx("insert into hook_charaext (cdKey, regNo, sKey, val, valType) values (?,?,?,?,?)",
+                  cdkey, regId, string.format("bank-%d-%d", i, j), JSON.encode(data.bankExpand[key]), 0);
+              end
+            end
+          end
+          SQL.QueryEx("insert into hook_charaext (cdKey, regNo, sKey, val, valType) values (?,?,?,?,?)",
+            cdkey, regId, "bank-index", data.bankExpand.index, 1);
+        end
+      end)
+    end
+  end
+end);
 
 --- 加载模块钩子
 function BankExpand:onLoad()
