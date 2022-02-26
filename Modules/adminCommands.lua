@@ -183,6 +183,9 @@ end
 
 function AdminCommands:onLoad()
   self:logInfo('load')
+  if getModule('admin') == nil then
+    error('adminÄ£¿éÎ´¼ÓÔØ')
+  end
   local fnName, ix = self:regCallback(self.name .. '_WalkPostEvent', function(charIndex)
     self:logDebug('WalkPostEvent', charIndex)
     self:logDebug(Char.GetData(charIndex, CONST.CHAR_Ãû×Ö));

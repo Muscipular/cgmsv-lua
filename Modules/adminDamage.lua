@@ -3,6 +3,12 @@ local Module = ModuleBase:createModule('adminDamage')
 --- 加载模块钩子
 function Module:onLoad()
   self:logInfo('load')
+  if getModule('admin') == nil then
+    error('admin模块未加载')
+  end
+  if getModule('adminCommands') == nil then
+    error('adminCommands模块未加载')
+  end
   self.dmg = nil;
   self.dmg2 = nil;
   getModule('adminCommands'):regCommand('dmg', function(c, args)
