@@ -10,3 +10,6 @@ end_of_line = crlf
 trim_trailing_whitespace = false
 insert_final_newline = true
 charset = gbk
+
+[*.lua]
+ij_lua_keep_simple_blocks_in_one_line = true
