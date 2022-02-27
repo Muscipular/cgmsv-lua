@@ -11,7 +11,7 @@ BankExpand:addMigration(1, 'migrate1', function()
         local cdkey = row.cdkey;
         if data.bankExpand then
           for i = 1, 9 do
-            for j = 1, 20 do
+            for j = 0, 19 do
               local key = string.format("slot-%d-%d", i, j);
               if type(data.bankExpand[key]) == 'table' then
                 SQL.QueryEx("insert into hook_charaext (cdKey, regNo, sKey, val, valType) values (?,?,?,?,?)",
