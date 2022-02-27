@@ -133,7 +133,7 @@ function Char.DelDummy(charIndex)
 end
 
 local battleDataDummy = {};
-local resetCharBattleState = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0048C020);
+--local resetCharBattleState = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0048C020);
 
 local function battleExitEventCallback(charIndex, battleIndex, type)
   if Char.IsDummy(charIndex) then
@@ -144,8 +144,11 @@ end
 local battleLoop;
 battleLoop = ffi.hook.new('void (__cdecl*)()', function()
   battleLoop();
+  local resetCharBattleState = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0048C020);
   for i, v in pairs(battleDataDummy) do
-    resetCharBattleState(Char.GetCharPointer(i));
+    if Char.GetCharPointer(i) > 0 then
+      resetCharBattleState(Char.GetCharPointer(i));
+    end
   end
   battleDataDummy = {}
 end, 0x00487790, 5);
