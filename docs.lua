@@ -400,3 +400,11 @@ function Data.SetMessage(msgId, val) end
 ---@param msgId number
 ---@return string
 function Data.GetMessage(msgId) end
+
+---设置魔法属性
+---@param techId number
+---@param earth number 每10等于1格属性
+---@param water number 每10等于1格属性
+---@param fire number 每10等于1格属性
+---@param wind number 每10等于1格属性
+function Tech.SetTechMagicAttribute(techId, earth, water, fire, wind) end
