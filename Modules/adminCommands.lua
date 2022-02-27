@@ -1,3 +1,4 @@
+---@class AdminCommands:ModuleBase|NPCPart|AssetsPart
 local AdminCommands = ModuleBase:createModule('adminCommands')
 -- gmÃüÁî
 local commands = {}
