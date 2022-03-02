@@ -133,25 +133,34 @@ function Char.DelDummy(charIndex)
 end
 
 local battleDataDummy = {};
---local resetCharBattleState = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0048C020);
+local resetCharBattleState = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0048C020);
+
+_G.DummyLoop = function(charIndex)
+  print('reset dummy', charIndex);
+  Char.UnsetLoopEvent(charIndex);
+  resetCharBattleState(Char.GetCharPointer(charIndex));
+end
 
 local function battleExitEventCallback(charIndex, battleIndex, type)
   if Char.IsDummy(charIndex) then
-    battleDataDummy[charIndex] = charIndex;
+    --resetCharBattleState(Char.GetCharPointer(charIndex));
+    --battleDataDummy[battleIndex] = battleDataDummy[battleIndex] or {};
+    --battleDataDummy[battleIndex][tostring(charIndex)] = charIndex;
+    Char.SetLoopEvent(nil, 'DummyLoop', charIndex, 1000);
   end
 end
 
-local battleLoop;
-battleLoop = ffi.hook.new('void (__cdecl*)()', function()
-  battleLoop();
-  local resetCharBattleState = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0048C020);
-  for i, v in pairs(battleDataDummy) do
-    if Char.GetCharPointer(i) > 0 then
-      resetCharBattleState(Char.GetCharPointer(i));
-    end
-  end
-  battleDataDummy = {}
-end, 0x00487790, 5);
+--local battleLoop;
+--battleLoop = ffi.hook.new('void (__cdecl*)()', function()
+--  battleLoop();
+--  local resetCharBattleState = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0048C020);
+--  for i, v in pairs(battleDataDummy) do
+--    if Char.GetCharPointer(i) > 0 then
+--      resetCharBattleState(Char.GetCharPointer(i));
+--    end
+--  end
+--  battleDataDummy = {}
+--end, 0x00487790, 5);
 
 local function beforeCharaSaveCallback(charIndex)
   if Char.IsDummy(charIndex) then
@@ -160,6 +169,19 @@ local function beforeCharaSaveCallback(charIndex)
   return 0;
 end
 
+--local function battleOverCallback(battleIndex)
+--  if battleDataDummy[battleIndex] then
+--    local resetCharBattleState = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0048C020);
+--    for i, v in pairs(battleDataDummy[battleIndex]) do
+--      if Char.GetCharPointer(v) > 0 then
+--        resetCharBattleState(Char.GetCharPointer(v));
+--      end
+--    end
+--    battleDataDummy[battleIndex] = nil;
+--  end
+--end
+
 regGlobalEvent('ShutDownEvent', ShutdownCallback, 'DummyChar');
 regGlobalEvent('BattleExitEvent', battleExitEventCallback, 'DummyChar');
 regGlobalEvent('BeforeCharaSaveEvent', beforeCharaSaveCallback, 'DummyChar');
+--regGlobalEvent("BattleOverEvent", battleOverCallback, 'DummyChar');
