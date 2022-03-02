@@ -296,7 +296,7 @@ function Char.SetPetDepartureStateAll(charIndex, pet1State, pet2State, pet3State
   if not Char.IsValidCharIndex(charIndex) then
     return -1;
   end
-  print('SetPetDepartureStateAll', charIndex, pet1State, pet2State, pet3State, pet4State, pet5State);
+  --print('SetPetDepartureStateAll', charIndex, pet1State, pet2State, pet3State, pet4State, pet5State);
   return changePetState(Char.GetCharPointer(charIndex), pet1State, pet2State, pet3State, pet4State, pet5State)
 end
 

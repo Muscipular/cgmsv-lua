@@ -136,7 +136,7 @@ local battleDataDummy = {};
 local resetCharBattleState = ffi.cast('int (__cdecl*)(uint32_t a1)', 0x0048C020);
 
 _G.DummyLoop = function(charIndex)
-  print('reset dummy', charIndex);
+  --print('reset dummy', charIndex);
   Char.UnsetLoopEvent(charIndex);
   resetCharBattleState(Char.GetCharPointer(charIndex));
 end
