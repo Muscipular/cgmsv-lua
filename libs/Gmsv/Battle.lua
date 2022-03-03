@@ -230,28 +230,28 @@ NL.newEvent('BeforeBattleTurnEvent', 0);
 ----    hook()
 ----end
 
-local _ProcessBattleCommand = ffi.cast('int (__cdecl *)(uint32_t charAddr, int com, int com2, int com3)', 0x0048BD50);
-
-function Battle.ActionSelect(charIndex, com1, com2, com3)
-  if not Char.IsValidCharIndex(charIndex) then
-    return -1;
-  end
-  if not Battle.IsWaitingCommand(charIndex) then
-    return -2;
-  end
-  if com1 == nil or com2 == nil or com3 == nil then
-    error("参数错误");
-  end
-  local charPtr = Char.GetCharPointer(charIndex);
-  if charPtr <= 0 then
-    return -1;
-  end
-  _ProcessBattleCommand(charPtr, com1, com2, com3);
-end
-
-function Battle.IsWaitingCommand(charIndex)
-  return Char.GetBattleIndex(charIndex) >= 0 and Char.GetData(charIndex, CONST.CHAR_BattleMode) == 2;
-end
+--local _ProcessBattleCommand = ffi.cast('int (__cdecl *)(uint32_t charAddr, int com, int com2, int com3)', 0x0048BD50);
+--
+--function Battle.ActionSelect(charIndex, com1, com2, com3)
+--  if not Char.IsValidCharIndex(charIndex) then
+--    return -1;
+--  end
+--  if not Battle.IsWaitingCommand(charIndex) then
+--    return -2;
+--  end
+--  if com1 == nil or com2 == nil or com3 == nil then
+--    error("参数错误");
+--  end
+--  local charPtr = Char.GetCharPointer(charIndex);
+--  if charPtr <= 0 then
+--    return -1;
+--  end
+--  _ProcessBattleCommand(charPtr, com1, com2, com3);
+--end
+--
+--function Battle.IsWaitingCommand(charIndex)
+--  return Char.GetBattleIndex(charIndex) >= 0 and Char.GetData(charIndex, CONST.CHAR_BattleMode) == 2;
+--end
 
 local emitCalcCriticalRateEvent = NL.newEvent('CalcCriticalRateEvent', nil)
 --local function hookCalcCriticalRateEvent (charPtr, cri)
