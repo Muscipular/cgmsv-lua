@@ -391,6 +391,24 @@ function Battle.GetNextBattleFlg(battleIndex) end
 ---@return number
 function Battle.CalcPropScore(ap, dp) end
 
+---让指定玩家对象加入另一个玩家对象的战斗中，也就是让CharIndex2加入CharIndex1的战斗
+---@param a number 目标的对象index，在战斗中的玩家
+---@param b number 目标的对象index，不在战斗中的玩家
+---@return number 其中0为成功，其他失败。
+function Battle.JoinBattle(a, b) end
+
+---让对象执行指定的战斗操作，必须在对象Battle.IsWaitingCommand(index)返回值为1时才可以有效使用。
+---@param charIndex number
+---@param com1 number @see CONST.BATTLE_COM
+---@param com2 number @see CONST.BATTLE_COM_TARGET
+---@param com3 number techId
+---@return number
+function Battle.ActionSelect(charIndex, com1, com2, com3) end
+
+---判断当前对象是否在战斗中且处于等待输入战斗指令的状态。
+---@return number 返回1为等待指令
+function Battle.IsWaitingCommand(charIndex) end
+
 ---设置Msg
 ---@param msgId number
 ---@param val string
