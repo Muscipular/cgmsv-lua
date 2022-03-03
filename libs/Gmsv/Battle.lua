@@ -239,9 +239,12 @@ function Battle.ActionSelect(charIndex, com1, com2, com3)
   if not Battle.IsWaitingCommand(charIndex) then
     return -2;
   end
-  local charPtr = Char.GetCharPointer(charIndex);
   if com1 == nil or com2 == nil or com3 == nil then
     error("²ÎÊý´íÎó");
+  end
+  local charPtr = Char.GetCharPointer(charIndex);
+  if charPtr <= 0 then
+    return -1;
   end
   _ProcessBattleCommand(charPtr, com1, com2, com3);
 end
