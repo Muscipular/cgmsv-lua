@@ -230,6 +230,7 @@ NL.newEvent('BeforeBattleTurnEvent', 0);
 ----    hook()
 ----end
 
+local _ProcessBattleCommand = ffi.cast('int (__cdecl *)(uint32_t charAddr, int com, int com2, int com3)', 0x0048BD50);
 
 function Battle.ActionSelect(charIndex, com1, com2, com3)
   if not Char.IsValidCharIndex(charIndex) then
@@ -239,7 +240,9 @@ function Battle.ActionSelect(charIndex, com1, com2, com3)
     return -2;
   end
   local charPtr = Char.GetCharPointer(charIndex);
-  local _ProcessBattleCommand = ffi.cast('int (__cdecl *)(uint32_t charAddr, int com, int com2, int com3)', 0x0048BD50);
+  if com1 == nil or com2 == nil or com3 == nil then
+    error("²ÎÊý´íÎó");
+  end
   _ProcessBattleCommand(charPtr, com1, com2, com3);
 end
 
