@@ -409,6 +409,30 @@ function Battle.ActionSelect(charIndex, com1, com2, com3) end
 ---@return number 返回1为等待指令
 function Battle.IsWaitingCommand(charIndex) end
 
+---获取当前技能参数
+---@param charIndex number
+---@param type string 取值 DD: AR: 等
+---@return number|nil
+function Battle.GetTechOption(charIndex, type) end
+
+---获取属性克制关系
+---@param attackerIndex number
+---@param defenceIndex number
+---@return number 克制比率
+function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex) end
+
+---计算种族伤害
+---@param a number 攻击方种族
+---@param b number 防御方种族
+---@return number
+function Battle.CalcTribeRate(a, b) end
+
+---计算当前战斗种族伤害
+---@param aIndex number 攻击方index
+---@param bIndex number 防御方index
+---@return number
+function Battle.CalcTribeDmgRate(aIndex, bIndex) end
+
 ---设置Msg
 ---@param msgId number
 ---@param val string

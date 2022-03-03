@@ -1,10 +1,10 @@
-local bit32 = require 'bit'
-local bnot = bit32.bnot
-local bxor = bit32.bxor
-local band = bit32.band
-local bor = bit32.bor
+--local bit32 = require 'bit'
+--local bnot = bit32.bnot
+--local bxor = bit32.bxor
+--local band = bit32.band
+--local bor = bit32.bor
 
-local _BattleNext = {}
+--local _BattleNext = {}
 
 ----- @return number BatteIndex
 function Battle.GetCurrentBattle(CharIndex)
@@ -370,6 +370,7 @@ local emitBattleInjuryEvent = NL.newEvent('BattleInjuryEvent', nil);
 --}, { ignoreOriginCode = true })
 
 
+--[[
 ---获取属性克制关系
 ---@return number 克制比率
 function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex)
@@ -384,6 +385,7 @@ function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex)
   local _Battle_calcSomeDmgRateForAttr = ffi.cast('int (__cdecl*)(uint32_t a1, int a2)', 0x0049D9B0);
   return _Battle_calcSomeDmgRateForAttr(a, d) / 100.0;
 end
+]]
 
 local emitBattleNextEnemyEvent = NL.newEvent('BattleNextEnemyEvent', nil)
 local emitBattleNextEnemyInitEvent = NL.newEvent('BattleNextEnemyInitEvent', nil)
@@ -503,8 +505,11 @@ local emitBattleSummonedEnemyEvent = NL.newEvent('BattleSummonedEnemyEvent', nil
 --  0x9d, 0x61,
 --});
 
-
+--[[
+---获取当前技能参数
+---@param charIndex number
 ---@param type string 取值 DD: AR: 等
+---@return number|nil
 function Battle.GetTechOption(charIndex, type)
   local ptr = Char.GetCharPointer(charIndex);
   if ptr <= 0 then
@@ -513,6 +518,7 @@ function Battle.GetTechOption(charIndex, type)
   local _GetTechOption = ffi.cast('int (__cdecl*)(uint32_t a1, const char *type)', 0x0048E7A0)
   return _GetTechOption(ptr, type);
 end
+]]
 
 ---@return number,number,number
 function Battle.GetBattleFieldAttribute(BattleIndex)
