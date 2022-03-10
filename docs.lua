@@ -450,3 +450,10 @@ function Data.GetMessage(msgId) end
 ---@param fire number 每10等于1格属性
 ---@param wind number 每10等于1格属性
 function Tech.SetTechMagicAttribute(techId, earth, water, fire, wind) end
+
+---发送封包到客户端
+---@param charIndex number
+---@param header string 封包头
+---@vararg number|string data，根据封包内容而定，数字及字符串无须进行封包编码，会默认处理
+---@return number 返回少于0为失败，其他可视为成功
+function Protocol.Send(charIndex, header, ...) end
