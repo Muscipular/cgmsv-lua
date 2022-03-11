@@ -5,15 +5,18 @@ local Module = ModuleBase:createModule('charAutoBattle')
 function Module:onLoad()
   self:logInfo('load')
   self:regCallback("ProtocolOnRecv", function(fd, head, list)
-    local charIndex = Protocol.GetCharIndexFromFd(fd);
+    self:logDebugF("AutoBattle %d %s", fd, head);
+    local charIndex = tonumber(Protocol.GetCharIndexFromFd(fd));
     Protocol.Send(charIndex, "AutoBattle");
     local p = Battle.GetSlot(Battle.GetCurrentBattle(charIndex), charIndex);
     p = math.fmod(p + 5, 10);
-    p = Battle.GetPlayer(Battle.GetCurrentBattle(charIndex), p);
-    Char.ActionSelect(charIndex, CONST.BATTLE_COM.BATTLE_COM_ATTACK, CONST.BATTLE_COM_TARGETS.SINGLE.SIDE_1.POS_0);
-    Char.ActionSelect(charIndex, CONST.BATTLE_COM.BATTLE_COM_ATTACK, CONST.BATTLE_COM_TARGETS.SINGLE.SIDE_1.POS_0);
+    p = Battle.GetPlayer(Battle.GetCurrentBattle(charIndex), p) or -1;
+    self:logDebugF("AutoBattle %d %s %s %s", fd, head, charIndex, p);
+    Battle.ActionSelect(charIndex, CONST.BATTLE_COM.BATTLE_COM_ATTACK, CONST.BATTLE_COM_TARGETS.SINGLE.SIDE_1.POS_0, -1);
     if p >= 0 then
-      Char.ActionSelect(p, CONST.BATTLE_COM.BATTLE_COM_ATTACK, CONST.BATTLE_COM_TARGETS.SINGLE.SIDE_1.POS_0);
+      Battle.ActionSelect(p, CONST.BATTLE_COM.BATTLE_COM_ATTACK, CONST.BATTLE_COM_TARGETS.SINGLE.SIDE_1.POS_0, -1);
+    else
+      Battle.ActionSelect(charIndex, CONST.BATTLE_COM.BATTLE_COM_ATTACK, CONST.BATTLE_COM_TARGETS.SINGLE.SIDE_1.POS_0, -1);
     end
   end, "AutoBattle")
 end
