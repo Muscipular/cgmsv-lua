@@ -105,10 +105,16 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
   return 0;
 end
 
+function BagModule:onLoginEvent(charIndex)
+  local bIndex = Char.GetExtData(charIndex, "bag-index") or 1;
+  Protocol.Send(charIndex, "bagIndex",  tonumber(bIndex));
+end
+
 --- 加载模块钩子
 function BagModule:onLoad()
   self:logInfo('load')
   self:regCallback('TalkEvent', Func.bind(self.onTalkEvent, self));
+  self:regCallback('LoginEvent', Func.bind(self.onLoginEvent, self));
 end
 
 --- 卸载模块钩子

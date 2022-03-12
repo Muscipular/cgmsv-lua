@@ -31,11 +31,17 @@ end);
 function BankExpand:onLoad()
   self:logInfo('load')
   self:regCallback('ProtocolOnRecv', Func.bind(self.onProtoHook, self), 'rh');
+  self:regCallback('LoginEvent', Func.bind(self.onLoginEvent, self));
 end
 
 --- Ð¶ÔØÄ£¿é¹³×Ó
 function BankExpand:onUnload()
   self:logInfo('unload')
+end
+
+function BankExpand:onLoginEvent(charIndex)
+  local bIndex = Char.GetExtData(charIndex, "bank-index") or 1;
+  Protocol.Send(charIndex, "bankIndex", tonumber(bIndex));
 end
 
 function BankExpand:onProtoHook(fd, head, data)
