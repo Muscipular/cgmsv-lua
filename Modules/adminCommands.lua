@@ -157,10 +157,10 @@ end
 
 function commands.dolua(charIndex, args)
   local r, fn = pcall(dofile, args[1]);
-  logDebug('', r, fn);
+  logDebug(AdminCommands.name, 'dofile', r, fn);
   if r then
     r, fn = pcall(fn, charIndex, table.slice(args, 2));
-    print(r, fn);
+    logDebug(AdminCommands.name, 'execute', r, fn);
   end
 end
 --
