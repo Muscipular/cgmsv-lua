@@ -207,6 +207,22 @@ function NLG.Rand(min, max) end
 ---@param player number 玩家index
 function NLG.OpenBank(npcOrPlayer, player) end
 
+---宠物乱射(全局开启)
+---@param enable number 启用:1 不启用:0
+---@overload
+function NLG.SetPetRandomShot(enable) end
+
+---宠物乱射(某种宠物开启)
+---@param enable number 启用:1 不启用:0
+---@param petId number 宠物id（EnemyBaseId）
+---@overload
+function NLG.SetPetRandomShot(petId, enable) end
+
+---修改暴击时伤害计算
+-----@param mode number|boolean 取值： 0 = 普通模式 1 = 倍率模式 2 = 无 true = 普通模式 false = 无
+-----@param val number 倍率，默认1.5倍
+function NLG.SetCriticalDamageAddition(mode, val) end
+
 Pet = {}
 
 function Pet.ReBirth(PlayerIndex, PetIndex) end
