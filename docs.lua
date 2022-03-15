@@ -208,12 +208,12 @@ function NLG.Rand(min, max) end
 function NLG.OpenBank(npcOrPlayer, player) end
 
 ---宠物乱射(全局开启)
----@param enable number 启用:1 不启用:0
+---@param enable boolean 启用:1 不启用:0
 ---@overload
 function NLG.SetPetRandomShot(enable) end
 
 ---宠物乱射(某种宠物开启)
----@param enable number 启用:1 不启用:0
+---@param enable boolean 启用:1 不启用:0
 ---@param petId number 宠物id（EnemyBaseId）
 ---@overload
 function NLG.SetPetRandomShot(petId, enable) end
