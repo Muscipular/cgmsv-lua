@@ -1,3 +1,6 @@
+print("")
+print("[LUA] init 0.2.11")
+print("")
 collectgarbage()
 collectgarbage('stop')
 math.randomseed(os.time())
