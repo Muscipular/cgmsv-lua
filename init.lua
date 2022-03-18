@@ -1,5 +1,5 @@
 print("")
-print("[LUA] init 0.2.11")
+print("[LUA] init 0.2.12")
 print("")
 collectgarbage()
 collectgarbage('stop')
