@@ -51,7 +51,7 @@ function BagModule:onTalkEvent(CharIndex, Msg, Color, Range, Size)
   self:logDebug('bagIndex', oBagIndex, '=>', bagIndex);
   if bagIndex == oBagIndex then
     NLG.SystemMessage(CharIndex, 'ÎÞÐëÇÐ»»±³°ü')
-    Char.SetExtData(CharIndex, "bag-index", 1);
+    --Char.SetExtData(CharIndex, "bag-index", 1);
     return 0;
   end
   Char.SetExtData(CharIndex, "bag-index", bagIndex);
