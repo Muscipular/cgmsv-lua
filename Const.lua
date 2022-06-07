@@ -273,7 +273,6 @@ CONST.CHAR_BattleCom3 = 0x00000014 / 4 + 0x5e8 / 4;
 CONST.CHAR_Battle2Com1 = 0x00000018 / 4 + 0x5e8 / 4;
 CONST.CHAR_Battle2Com2 = 0x0000001C / 4 + 0x5e8 / 4;
 CONST.CHAR_Battle2Com3 = 0x00000020 / 4 + 0x5e8 / 4;
-CONST.CHAR_Battle2Com3 = 0x0000009C / 4 + 0x5e8 / 4;
 CONST.CHAR_BattleDamageAbsrob = (0x0000009C + 0x5e8) / 4;
 CONST.CHAR_BattleDamageReflec = (0x000000A0 + 0x5e8) / 4;
 CONST.CHAR_BattleDamageVanish = (0x000000A4 + 0x5e8) / 4;
