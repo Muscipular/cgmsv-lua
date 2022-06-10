@@ -397,13 +397,13 @@ function Char.RemovePoolItem(charIndex, slot)
   return 0;
 end
 
-local UpCharStatus = ffi.cast('int (__cdecl*)(uint32_t a1, int a3)', 0x00432FE0);
-
-function Char.UpCharStatus(charIndex)
-  local ptr = Char.GetCharPointer(charIndex)
-  if ptr < Addresses.CharaTablePTR then
-    return -1;
-  end
-  UpCharStatus(ptr, 1)
-  return 0;
-end
+--local UpCharStatus = ffi.cast('int (__cdecl*)(uint32_t a1, int a3)', 0x00432FE0);
+--
+--function Char.UpCharStatus(charIndex)
+--  local ptr = Char.GetCharPointer(charIndex)
+--  if ptr < Addresses.CharaTablePTR then
+--    return -1;
+--  end
+--  UpCharStatus(ptr, 1)
+--  return 0;
+--end
