@@ -320,6 +320,20 @@ function NL.RegCallback(event, callbackStr) end
 
 function NL.RemoveCallback(event) end
 
+---道具说明修改事件
+---@param callback string callback回调参数 
+---@see NL.RegItemExpansionEventCallback
+function NL.RegItemExpansionEvent(dofile, callback) end
+
+---道具说明修改事件回调
+---@param itemIndex number
+---@param type number
+---@param msg string
+---@param charIndex number
+---@param slot number
+---@return string
+function NL.RegItemExpansionEventCallback(itemIndex, type, msg, charIndex, slot) end
+
 ---宝箱遇敌事件
 ---@param callback string callback回调参数 fun(charaIndex:number,mapId:number,floor:number,X:number,Y:number,boxType:number):number[]|nil
 function NL.RegItemBoxEncountEvent(dofile, callback) end
