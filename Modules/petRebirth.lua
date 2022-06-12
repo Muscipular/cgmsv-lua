@@ -18,13 +18,12 @@ function PetRebirth:firstPage(npc, player, seqNo, select, data)
     for i = 0, 4 do
       local pIndex = Char.GetPet(player, i);
       if pIndex >= 0 then
-        local data2 = self:getPetData(pIndex);
-        data2 = data2.rebirthTime or 0;
+        local rebirthTime = Char.GetExtData(pIndex, 'rebirthTime') or 0;
         local lv = Char.GetData(pIndex, CONST.CHAR_等级)
         if lv > 150 then
-          table.insert(list, Char.GetData(pIndex, CONST.CHAR_名字) .. ' lv.' .. lv .. ' ' .. data2 .. '转');
+          table.insert(list, Char.GetData(pIndex, CONST.CHAR_名字) .. ' lv.' .. lv .. ' ' .. rebirthTime .. '转');
         else
-          table.insert(list, Char.GetData(pIndex, CONST.CHAR_名字) .. ' lv.' .. lv .. ' ' .. data2 .. '转' .. '（等级不足）');
+          table.insert(list, Char.GetData(pIndex, CONST.CHAR_名字) .. ' lv.' .. lv .. ' ' .. rebirthTime .. '转' .. '（等级不足）');
         end
       else
         table.insert(list, '[空]');
@@ -103,11 +102,11 @@ function PetRebirth:confirmPage(npc, player, seqNo, select, data)
       table.forEach(arts, function(e)
         Char.SetData(pIndex, e, math.min(100, Char.GetData(pIndex, e) + 5));
       end)
-      local petExtData = self:getPetData(pIndex)
-      petExtData.rebirthTime = (petExtData.rebirthTime or 0) + 1;
-      self:setPetData(pIndex, petExtData);
+      local rebirthTime = Char.GetExtData(pIndex, 'rebirthTime')
+      rebirthTime = (rebirthTime or 0) + 1;
+      Char.SetExtData(pIndex, 'rebirthTime', rebirthTime);
       --self:logDebug('rebirthTime=', petExtData.rebirthTime);
-      if (petExtData.rebirthTime or 0) > 5 then
+      if (rebirthTime or 0) > 5 then
         Char.SetData(pIndex, CONST.CHAR_种族, CONST.种族_邪魔);
       end
       Pet.UpPet(player, pIndex);
@@ -131,17 +130,17 @@ function PetRebirth:onSelected(npc, player, seqNo, select, data)
   end
 end
 
-function PetRebirth:getPetData(charIndex)
-  ---@type PetExt
-  local charExt = getModule('petExt')
-  return charExt:getData(charIndex)
-end
+--function PetRebirth:getPetData(charIndex)
+--  ---@type PetExt
+--  local charExt = getModule('petExt')
+--  return charExt:getData(charIndex)
+--end
 
-function PetRebirth:setPetData(charIndex, value)
-  ---@type PetExt
-  local charExt = getModule('petExt')
-  return charExt:setData(charIndex, value)
-end
+--function PetRebirth:setPetData(charIndex, value)
+--  ---@type PetExt
+--  local charExt = getModule('petExt')
+--  return charExt:setData(charIndex, value)
+--end
 
 --- 加载模块钩子
 function PetRebirth:onLoad()
