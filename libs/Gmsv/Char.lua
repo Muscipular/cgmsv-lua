@@ -321,7 +321,7 @@ end
 --  0x51 + 8,
 --})
 
-local saveChara = ffi.cast('int (__cdecl*)(uint32_t *charAddr)', 0x0043B290);
+local saveChara = ffi.cast('int (__cdecl*)(uint32_t charAddr)', 0x0043B290);
 
 ---保存用户数据到数据库（异步操作）
 function Char.SaveToDb(charIndex)
