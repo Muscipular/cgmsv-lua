@@ -44,9 +44,9 @@ local chained = {
     end
     return dmg
   end,
-  ItemExpansionEvent = function(list, itemIndex, type, msg)
+  ItemExpansionEvent = function(list, itemIndex, type, msg, charIndex, slot)
     for i, v in ipairs(list) do
-      local m = v(itemIndex, type, msg);
+      local m = v(itemIndex, type, msg, charIndex, slot);
       if m == nil then
         m = msg;
       end
