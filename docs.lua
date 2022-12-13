@@ -393,6 +393,18 @@ function NL.RegItemBoxGenerateEvent(dofile, callback) end
 ---@return number[] 返回宝箱参数 {itemBoxType, adm}
 function NL.ItemBoxGenerateEventCallback(mapId, floor, itemBoxType, adm) end
 
+---种族伤害比率事件
+---@param callback string callback回调参数 
+---@see NL.ItemTribeRateEventCallback
+function NL.RegItemTribeRateEvent(dofile, callback) end
+
+---种族伤害比率事件回调
+---@param a number 进攻种族
+---@param b number 防守种族
+---@param rate number 克制比率
+---@return number 返回新的克制比率
+function NL.ItemTribeRateEventCallback(a, b, rate) end
+
 ---@param sql string sql
 ---@vararg string|number 绑定参数，最多40个
 ---@return {status:number, effectRows:number, rows: table} 返回查询内容
@@ -472,6 +484,12 @@ function Data.SetMessage(msgId, val) end
 ---@param msgId number
 ---@return string
 function Data.GetMessage(msgId) end
+
+---设置种族伤害比率
+---@param a number 进攻种族 支持 0 ~ 19
+---@param b number 防守种族 支持 0 ~ 19
+---@param rate number 克制比率支持 -128 ~ 127
+function Data.SetTribeMapValue(a, b, rate) end
 
 ---设置魔法属性
 ---@param techId number
