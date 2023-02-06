@@ -335,7 +335,8 @@ function NL.RegItemExpansionEvent(dofile, callback) end
 function NL.RegItemExpansionEventCallback(itemIndex, type, msg, charIndex, slot) end
 
 ---宝箱遇敌事件
----@param callback string callback回调参数 fun(charaIndex:number,mapId:number,floor:number,X:number,Y:number,boxType:number):number[]|nil
+---@param callback string callback回调参数 
+---@see NL.ItemBoxEncountEventCallback
 function NL.RegItemBoxEncountEvent(dofile, callback) end
 
 ---宝箱遇敌事件回调
@@ -344,9 +345,9 @@ function NL.RegItemBoxEncountEvent(dofile, callback) end
 ---@param floor number
 ---@param X number
 ---@param Y number
----@param boxType number
+---@param itemIndex number 箱子物品index
 ---@return number[]|nil 遇敌数组 每个怪物3个参数，分别为 id，等级，随机等级， 返回nil不拦截， 例子： {0, 100, 5, 1, 1, 0} 生成0号怪物100-105级，1号怪物1级
-function NL.ItemBoxEncountRateEventCallback(charaIndex, mapId, floor, X, Y, boxType) end
+function NL.ItemBoxEncountEventCallback(charaIndex, mapId, floor, X, Y, itemIndex) end
 
 ---宝箱遇敌概率事件
 ---@param callback string callback回调参数 
@@ -359,10 +360,11 @@ function NL.RegItemBoxEncountRateEvent(dofile, callback) end
 ---@param floor number
 ---@param X number
 ---@param Y number
+---@param itemIndex number 箱子物品index
 ---@param boxType number
 ---@param rate number 遇敌率
 ---@return number 遇敌率
-function NL.ItemBoxEncountRateEventCallback(charaIndex, mapId, floor, X, Y, boxType, rate) end
+function NL.ItemBoxEncountRateEventCallback(charaIndex, mapId, floor, X, Y, itemIndex, rate, boxType) end
 
 ---宝箱获取物品事件
 ---@param callback string callback回调参数 
