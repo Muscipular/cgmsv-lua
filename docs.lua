@@ -250,6 +250,41 @@ function Pet.GetUUID() end
 
 Item = {}
 
+---扩展自定义物品类别名称
+---@param type number 类型
+---@param name string 名称
+---@return boolean
+function Item.SetItemTypeName(type, name) end
+
+---获取扩展自定义物品类别名称
+---@param type number 类型
+---@return string 名称
+function Item.GetItemTypeName(type) end
+
+---扩展自定义物品类别装备位置
+---@param type number 类型
+---@param place string 位置
+---@return boolean
+function Item.SetItemTypeEquipPlace(type, place) end
+
+---获取扩展自定义物品类别装备位置
+---@param type number 类型
+---@return {number} 位置
+function Item.GetItemTypeEquipPlace(type) end
+
+---扩展自定义物品类别职业装备等级
+---@param job number 职业ID
+---@param type number 类型
+---@param level number 等级
+---@return boolean
+function Item.SetItemTypeEquipLevelForJob(job, type, level) end
+
+---获取扩展自定义物品类别职业装备等级
+---@param job number 职业ID
+---@param type number 类型
+---@return {number} 位置
+function Item.GetItemTypeEquipLevelForJob(job, type) end
+
 function Item.GetData(ItemIndex, Dataline) end
 
 function Item.SetData(ItemIndex, Dataline, value) end
@@ -507,3 +542,20 @@ function Tech.SetTechMagicAttribute(techId, earth, water, fire, wind) end
 ---@vararg number|string data，根据封包内容而定，数字及字符串无须进行封包编码，会默认处理
 ---@return number 返回少于0为失败，其他可视为成功
 function Protocol.Send(charIndex, header, ...) end
+
+---发送封包到客户端
+---@param fd number
+---@param header string 封包头
+---@vararg number|string data，根据封包内容而定，数字及字符串无须进行封包编码，会默认处理
+---@return number 返回少于0为失败，其他可视为成功
+function Protocol.SendToFd(fd, header, ...) end
+
+---获取客户端IP
+---@param fd number
+---@return string ip
+function Protocol.GetIp(fd) end
+
+---获取fd
+---@param charIndex number
+---@return number fd
+function Protocol.GetFdByCharIndex(charIndex) end

@@ -79,7 +79,7 @@ useModule('Welcome') --加载Welcome
 8. manaPool 血魔池
 9. bag 背包切换
 10. autoRegister 自动注册
-11. petExt/charExt/itemExt 公共扩展模块
+11. ~~petExt/charExt/itemExt 公共扩展模块(已废弃)~~
 12. petLottery 宠物抽奖
 13. petRebirth 宠物转生
 14. autoUnlock 自动解锁崩端导致的卡号
@@ -172,3 +172,4 @@ useModule('Welcome') --加载Welcome
 - `Recipe.RemoveRecipe` 删除配方
 - `regGlobalEvent` 注册全局事件，代替Delegate，Delegate也是包装这个方法
 - `removeGlobalEvent` 移除注册事件
+- 更多接口参考 [docs.lua](docs.lua)
