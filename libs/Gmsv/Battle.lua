@@ -520,7 +520,9 @@ function Battle.GetTechOption(charIndex, type)
 end
 ]]
 
----@return number,number,number
+---获取属性领域参数
+---@param BattleIndex integer
+---@return number 属性,number 剩余回合,number 威力
 function Battle.GetBattleFieldAttribute(BattleIndex)
   if BattleIndex < 0 or BattleIndex >= Addresses.BattleMax then
     return -3
@@ -532,6 +534,12 @@ function Battle.GetBattleFieldAttribute(BattleIndex)
   return FFI.readMemoryInt32(battleAddr + 0x2C), FFI.readMemoryInt32(battleAddr + 0x2C + 4), FFI.readMemoryInt32(battleAddr + 0x2C + 8)
 end
 
+---设置属性领域
+---@param BattleIndex integer
+---@param Attribute integer 属性
+---@param TurnCount integer 剩余回合
+---@param AttributePower integer 威力
+---@return integer 是否成功 返回1为成功 其他为失败
 function Battle.SetBattleFieldAttribute(BattleIndex, Attribute, TurnCount, AttributePower)
   if BattleIndex < 0 or BattleIndex >= Addresses.BattleMax then
     return -3

@@ -547,7 +547,7 @@ function Battle.ActionSelect(charIndex, com1, com2, com3) end
 ---@return number 返回1为等待指令
 function Battle.IsWaitingCommand(charIndex) end
 
----获取当前技能参数
+---获取当前动作技能参数
 ---@param charIndex number
 ---@param type string 取值 DD: AR: 等
 ---@return number|nil
@@ -575,6 +575,34 @@ function Battle.CalcTribeDmgRate(aIndex, bIndex) end
 ---@param battleIndex number 
 ---@return number
 function Battle.GetTurn(battleIndex) end
+
+---设置当前回合数
+---@param battleIndex number 
+---@param turn number 
+function Battle.SetTurn(battleIndex, turn) end
+
+---伤害事件中获取乱射hit数 1,2,3,4.....
+---@param defSlot number 防御者slot
+---@param battleIndex number
+---@return integer
+function Battle.GetRandomShotHit(battleIndex, defSlot) end
+
+---获取属性领域参数
+---@param BattleIndex integer
+---@return number 属性, number 剩余回合, number 威力
+function Battle.GetBattleFieldAttribute(BattleIndex) end
+
+---设置属性领域
+---@param BattleIndex integer
+---@param Attribute integer 属性
+---@param TurnCount integer 剩余回合
+---@param AttributePower integer 威力
+---@return integer 是否成功 返回1为成功 其他为失败
+function Battle.SetBattleFieldAttribute(BattleIndex, Attribute, TurnCount, AttributePower) end
+
+---为当前处理的战斗添加信息
+---@param msg string
+function Battle.AppendBattleMsg(msg) end
 
 _G.Field = {}
 
