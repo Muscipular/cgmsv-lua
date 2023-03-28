@@ -1205,7 +1205,6 @@ CONST.SEND_StallEnd = 0;
 CONST.SEND_StallBrowse = 0;
 CONST.SEND_StallBuy = 0;
 CONST.PET_体成 = 0;
-CONST.PET_体成 = 0;
 CONST.PET_力成 = 0;
 CONST.PET_力成 = 0;
 CONST.PET_强成 = 0;
@@ -2073,7 +2072,7 @@ CONST.Encount_Rect_Y = 0x00000084 / 4 + 1
 CONST.Encount_Rect_Width = 0x00000084 / 4 + 2
 CONST.Encount_Rect_Height = 0x00000084 / 4 + 3
 
-CONST.PET_体成 = %宠档_体成%;
+local TEXT = [[
 CONST.PET_体成 = %宠档_体成%;
 CONST.PET_力成 = %宠档_力成%;
 CONST.PET_力成 = %宠档_力成%;
@@ -3575,7 +3574,9 @@ CONST.Enemy_是否BOSS = %Enemy_是否BOSS%;
 CONST.Enemy_召唤Enemy1 = %Enemy_召唤Enemy1%;
 CONST.Enemy_召唤Enemy2 = %Enemy_召唤Enemy2%;
 CONST.Enemy_Talk编号 = %Enemy_Talk编号%;
+]]
 
+loadstring(TEXT)();
 --for i, v in pairs(CONST) do
 --print('const ', i, v);
 --end

@@ -1,4 +1,4 @@
-_G.Data = _G.Data or {}
+Data = _G.Data or {}
 
 ---ªÒ»°ItemsetIndex
 function Data.ItemsetGetIndex(ItemID)

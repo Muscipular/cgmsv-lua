@@ -91,6 +91,7 @@ function _G.loadModule(moduleName, opt)
   --logInfo('ModuleSystem', 'new object', moduleName, module)
   Modules[moduleName] = module;
   module.___path = oPath;
+  ---@diagnostic disable-next-line: invisible
   module.___aPath = path;
   module.___ctx = ctx;
   module.___absolutePath = opt.absolutePath;

@@ -1,5 +1,6 @@
 ---@class ModuleBase
 ---@field name string
+---@field protected ___aPath string
 ---@field lastIx number
 ---@field parts ModulePart[]
 ---@field migrations {version:number,name:string,value:string|function}[]|nil
