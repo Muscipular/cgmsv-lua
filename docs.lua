@@ -367,13 +367,11 @@ function NLG.OpenBank(npcOrPlayer, player) end
 
 ---宠物乱射(全局开启)
 ---@param enable boolean 启用:1 不启用:0
----@overload
 function NLG.SetPetRandomShot(enable) end
 
 ---宠物乱射(某种宠物开启)
 ---@param enable boolean 启用:1 不启用:0
 ---@param petId number 宠物id（EnemyBaseId）
----@overload
 function NLG.SetPetRandomShot(petId, enable) end
 
 ---修改暴击时伤害计算
@@ -427,7 +425,7 @@ function Item.SetItemTypeEquipPlace(type, place) end
 
 ---获取扩展自定义物品类别装备位置
 ---@param type number 类型
----@return {number} 位置
+---@return number 位置
 function Item.GetItemTypeEquipPlace(type) end
 
 ---扩展自定义物品类别职业装备等级
@@ -440,7 +438,7 @@ function Item.SetItemTypeEquipLevelForJob(job, type, level) end
 ---获取扩展自定义物品类别职业装备等级
 ---@param job number 职业ID
 ---@param type number 类型
----@return {number} 位置
+---@return number 位置
 function Item.GetItemTypeEquipLevelForJob(job, type) end
 
 function Item.GetData(ItemIndex, Dataline) end
