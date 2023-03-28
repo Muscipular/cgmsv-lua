@@ -1,4 +1,4 @@
-_G.Map = {} or _G.Map;
+Map = _G.Map or {};
 
 ---获取迷宫的剩余时间
 function Map.GetDungeonExpireTimeByDungeonId(dungeonId)

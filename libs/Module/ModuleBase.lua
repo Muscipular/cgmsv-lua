@@ -32,7 +32,7 @@ function ModuleBase:new(name)
 end
 
 ---@param name string
----@param depParts string[]
+---@param depParts? string[]
 ---@return ModuleBase|NPCPart|AssetsPart
 function ModuleBase:createModule(name, depParts)
   local SubModule = ModuleBase:new(name)
@@ -62,7 +62,7 @@ function ModuleBase:createModule(name, depParts)
   return SubModule;
 end
 
----@class ModulePart
+---@class ModulePart: ModuleBase
 ---@field name string
 ---@field onLoad function
 ---@field onUnload function
@@ -71,6 +71,7 @@ end
 ---@param name string
 ---@return ModulePart
 function ModuleBase:createPart(name)
+  ---@type ModulePart
   local SubModule = {
     name = name,
     onLoad = function()
@@ -95,20 +96,20 @@ function ModuleBase:addMigration(version, name, value)
   table.insert(migrations, { version = version, name = name, value = value });
 end
 
----@param eventNameOrCallbackKeyOrFn string|nil|function
----@param fn function|nil
+---@param eventName string
+---@param fn function
 ---@param extSign string
----@return string,number,number fnKey, cbIndex, fnIndex
-function ModuleBase:regCallback(eventNameOrCallbackKeyOrFn, fn, extSign)
+---@return string fnKey, number cbIndex, number fnIndex
+function ModuleBase:regCallback(eventName, fn, extSign)
   self.lastIx = self.lastIx + 1;
-  if type(eventNameOrCallbackKeyOrFn) == 'function' then
-    fn = eventNameOrCallbackKeyOrFn;
-    eventNameOrCallbackKeyOrFn = '_' .. self.name .. '_cb_' .. self.lastIx;
+  if type(eventName) == 'function' then
+    fn = eventName;
+    eventName = '_' .. self.name .. '_cb_' .. self.lastIx;
   end
-  local fnIndex = regGlobalEvent(eventNameOrCallbackKeyOrFn, fn, self.name, extSign);
-  logInfo(self.name, 'regCallback', eventNameOrCallbackKeyOrFn, self.lastIx, fnIndex, fn);
-  self.callbacks[self.lastIx] = { key = eventNameOrCallbackKeyOrFn, fnIndex = fnIndex, fn = fn, extSign = extSign };
-  return eventNameOrCallbackKeyOrFn, self.lastIx, fnIndex;
+  local fnIndex = regGlobalEvent(eventName, fn, self.name, extSign);
+  logInfo(self.name, 'regCallback', eventName, self.lastIx, fnIndex, fn);
+  self.callbacks[self.lastIx] = { key = eventName, fnIndex = fnIndex, fn = fn, extSign = extSign };
+  return eventName, self.lastIx, fnIndex;
 end
 
 ---@param eventNameOrCallbackKey string

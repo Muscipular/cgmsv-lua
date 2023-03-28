@@ -6,7 +6,7 @@ local getRecipeIntData = ffi.cast('int (__cdecl *)(int recipeIndex, int a2)', 0x
 local getRecipeStrData = ffi.cast('const char *(__cdecl *)(int a1, int a2)', 0x004DA1B0)
 local sendRecipeDataToClient = ffi.cast('int (__cdecl *)(uint32_t charAddr1, int skillSlot)', 0x00442DE0)
 
-_G.Recipe = _G.Recipe or {}
+Recipe = _G.Recipe or {}
 
 ---@return number 成功时返回 1, 失败返回 0, charIndex无效返回 -1, 配方无效返回 -2, 配方已获得返回 -3
 function Recipe.GiveRecipe(charIndex, recipeNo)

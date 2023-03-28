@@ -602,13 +602,13 @@ function Battle.SetBattleFieldAttribute(BattleIndex, Attribute, TurnCount, Attri
 ---@param msg string
 function Battle.AppendBattleMsg(msg) end
 
-_G.Field = {}
+Field = Field or {}
 
 function Field.Get(CharIndex, Field) end
 
 function Field.Set(CharIndex, Field, Value) end
 
-_G.NL = {}
+NL = NL or {}
 
 function NL.CreateNPC(Dofile, InitFuncName) end
 
@@ -714,6 +714,8 @@ function NL.ItemTribeRateEventCallback(a, b, rate) end
 ---@return {status:number, effectRows:number, rows: table} 返回查询内容
 function SQL.QueryEx(sql, ...) end
 
+Data = Data or {}
+
 ---设置Msg
 ---@param msgId number
 ---@param val string
@@ -757,7 +759,7 @@ function Data.GetEnemyBaseIdByEnemyId(enemyId) end
 function Data.GetEnemyBaseIndexByEnemyId(enemyId) end
 
 
-_G.Tech = Tech or {}
+Tech = Tech or {}
 
 ---获取TechIndex
 ---@param techId integer
@@ -813,7 +815,7 @@ function Protocol.GetFdByCharIndex(charIndex) end
 ---@param PacketID string 封包头
 function Protocol.OnRecv(Dofile, FuncName, PacketID) end
 
-_G.Recipe = Recipe or {}
+Recipe = Recipe or {}
 
 ---@return number 成功时返回 1, 失败返回 0, charIndex无效返回 -1, 配方无效返回 -2, 配方已获得返回 -3
 function Recipe.GiveRecipe(charIndex, recipeNo) end
@@ -826,7 +828,7 @@ function Recipe.HasRecipe(charIndex, recipeNo) end
 
 function Recipe.GetData(recipeNo, dataLine) end
 
-_G.Skill = Skill or {}
+Skill = Skill or {}
 
 ---设置扩展技能经验表
 ---@param expId number 经验表Id
@@ -849,7 +851,7 @@ function Skill.GetMaxSkillLevelOfJob(skillIndex, job) end
 ---@return integer
 function Skill.GetSkillIndex(id) end
 
-_G.Map = Map or {}
+Map = Map or {}
 
 ---获取迷宫的剩余时间
 ---@param dungeonId integer

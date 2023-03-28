@@ -1,7 +1,7 @@
----@module AssetsPart:ModuleBase
-local Part = ModuleBase:createPart('AssetsPart');
+---@class AssetsPart: ModulePart
+local AssetsPart = ModuleBase:createPart('AssetsPart');
 
-function Part:readConfigFile()
+function AssetsPart:readConfigFile()
   local path = string.gsub(self.___aPath, "(.*[\\\\/])[^\\\\/].+$", '%1' .. self.name .. '.config.lua')
   local fn, msg = loadfile(path, 'bt', { CONST = CONST });
   if msg then
@@ -16,7 +16,7 @@ function Part:readConfigFile()
   return res;
 end
 
-function Part:parseFile(name, mode)
+function AssetsPart:parseFile(name, mode)
   local path = string.gsub(self.___aPath, "(.*[\\\\/])[^\\\\/].+$", '%1' .. name)
   local ok, data = pcall(fs.parseFile, path, mode or 'r');
   if not ok then
@@ -26,4 +26,4 @@ function Part:parseFile(name, mode)
   return data;
 end
 
-return Part;
+return AssetsPart;

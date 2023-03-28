@@ -1,4 +1,4 @@
-_G.Skill = _G.Skill or {}
+Skill = _G.Skill or {}
 
 --local getSkillExpDataInt;
 --local expTable = {}

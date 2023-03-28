@@ -1,6 +1,9 @@
----@module NPCPart:ModuleBase
+---@class NPCPart: ModulePart
 ---@field npcList number[]
-local Part = ModuleBase:createPart('NpcPart');
+local NPCPart = ModuleBase:createPart('NpcPart');
+
+---@alias NpcPosition {x:number,y:number,map:number,mapType:number,direction:number}
+---@alias ShopBaseInfo {buyRate:number,sellRate:number,shopType:number,msgBuySell:number,msgBuy:number,msgMoneyNotEnough:number,msgBagFull:number,msgSell:number,msgAfterSell:number,sellTypes:table|'all'}
 
 local function fillShopSellType(tb)
   local all = tb == 'all';
@@ -17,9 +20,10 @@ end
 
 ---@param name string
 ---@param image number
----@param positionInfo {x:number,y:number,map:number,mapType:number,direction:number}
----@param shopBaseInfo {buyRate:number,sellRate:number,shopType:number,msgBuySell:number,msgBuy:number,msgMoneyNotEnough:number,msgBagFull:number,msgSell:number,msgAfterSell:number,sellTypes:table|'all'}
-function Part:NPC_createShop(name, image, positionInfo, shopBaseInfo, items)
+---@param positionInfo NpcPosition
+---@param shopBaseInfo ShopBaseInfo
+---@return CharIndex
+function NPCPart:NPC_createShop(name, image, positionInfo, shopBaseInfo, items)
   local shopNpcPrefix = table.join({
     shopBaseInfo.buyRate or 100,
     shopBaseInfo.sellRate or 100,
@@ -39,11 +43,13 @@ function Part:NPC_createShop(name, image, positionInfo, shopBaseInfo, items)
   return ret;
 end
 
+
 ---@param name string
 ---@param image number
----@param positionInfo {x:number,y:number,map:number,mapType:number,direction:number}
+---@param positionInfo NpcPosition
 ---@param initCallback fun(charIndex:number):boolean
-function Part:NPC_createNormal(name, image, positionInfo, initCallback)
+---@return CharIndex
+function NPCPart:NPC_createNormal(name, image, positionInfo, initCallback)
   local initFn, cbIndex, fnIndex = self:regCallback(initCallback or function()
     return true
   end)
@@ -71,9 +77,8 @@ end
 ---@param msg2 string
 ---@param msg3 string
 ---@param name string
----@param name string
 ---@return string
-function Part:NPC_buildBuyWindowData(image, name, msg1, msg2, msg3, list)
+function NPCPart:NPC_buildBuyWindowData(image, name, msg1, msg2, msg3, list)
   return table.join({ image, name, msg1, msg2, msg3, table.unpack(table.map(list, function(e)
     return table.join({ e.name or '?', e.image or 0, e.price or 0, e.desc or '', e.count or 1, e.maxCount or 1 }, '|')
   end)) }, '|')
@@ -82,7 +87,10 @@ end
 ---注册npc Talked事件
 ---@param npc number
 ---@param fn fun(npc: number, player: number):void
-function Part:NPC_regTalkedEvent(npc, fn)
+---@return string fnKey
+---@return number lastIndex
+---@return number fnIndex
+function NPCPart:NPC_regTalkedEvent(npc, fn)
   local talkedFn, lastIndex, fnIndex = self:regCallback(self.name .. '_npc_' .. npc .. '_TalkedEvent', fn)
   Char.SetTalkedEvent(nil, talkedFn, npc);
   return talkedFn, lastIndex, fnIndex
@@ -91,7 +99,10 @@ end
 ---注册npc WindowTalked事件
 ---@param npc number
 ---@param fn fun(npc: number, player: number, seqno: number, select: number, data: string):void
-function Part:NPC_regWindowTalkedEvent(npc, fn)
+---@return string fnKey
+---@return number lastIndex
+---@return number fnIndex
+function NPCPart:NPC_regWindowTalkedEvent(npc, fn)
   local talkedFn, lastIndex, fnIndex = self:regCallback(self.name .. '_npc_' .. npc .. '_WindowTalkedEvent', fn)
   Char.SetWindowTalkedEvent(nil, talkedFn, npc);
   return talkedFn, lastIndex, fnIndex
@@ -99,7 +110,8 @@ end
 
 ---@param title string
 ---@param options string[]
-function Part:NPC_buildSelectionText(title, options)
+---@return string
+function NPCPart:NPC_buildSelectionText(title, options)
   local line = #(string.split(title, '\\n') or {}) or 1;
   local msg = line .. '\\n' .. title .. '\\n'
   for i = 1, 8 do
@@ -111,14 +123,14 @@ function Part:NPC_buildSelectionText(title, options)
   return msg;
 end
 
-function Part:onLoad()
+function NPCPart:onLoad()
   self.npcList = {};
 end
 
-function Part:onUnload()
+function NPCPart:onUnload()
   for i, v in pairs(self.npcList) do
     NL.DelNpc(v);
   end
 end
 
-return Part;
+return NPCPart;

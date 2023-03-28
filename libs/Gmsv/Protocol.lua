@@ -84,6 +84,8 @@ local _ProtocolOnDispatch, _mlsvOnDispatch;
 --end
 
 ---根据fd获取角色Index
+---@param fd integer
+---@return integer charIndex
 function Protocol.GetCharIndexFromFd(fd)
   local charAddr = FFI.readMemoryDWORD(Addresses.ConnectionTable + 0x221E0 * fd + 0x22108);
   if not Char.IsValidCharPtr(charAddr) then
