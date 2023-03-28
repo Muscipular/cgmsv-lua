@@ -1,4 +1,111 @@
-Char = {}
+---@return string
+function getHookVer() end
+
+---加载Module模块
+function loadModule(string) end 
+
+---加载普通LUA
+function useModule(string) end 
+
+---获取模块
+---@param name string 模块ID
+---@return ModuleBase 
+function getModule(name) end
+
+---重载模块
+---@param name string 模块ID
+function reloadModule(name) end
+
+---卸载模块
+---@param name string 模块ID
+function unloadModule(name) end
+
+--- 注册全局事件
+---@param eventName string
+---@param fn function|OrderedCallback
+---@param moduleName string
+---@param extraSign string
+---@return number 全局注册Index
+function regGlobalEvent(eventName, fn, moduleName, extraSign) end
+
+--- 注册全局事件
+---@param eventName string
+---@param fn function|OrderedCallback
+---@return number 全局注册Index
+function regGlobalEvent(eventName, fn) end
+
+--- 移除全局事件
+---@param eventName string
+---@param fnIndex number 全局注册Index
+---@param moduleName string|nil
+---@param extraSign string|nil
+function removeGlobalEvent(eventName, fnIndex, moduleName, extraSign) end
+
+--- 移除全局事件
+---@param eventName string
+---@param fnIndex number 全局注册Index
+function removeGlobalEvent(eventName, fnIndex) end
+
+Char = Char or {}
+
+---获取装备的武器 ItemIndex及位置
+---@param charIndex number
+---@return number 装备位置 ,number 装备类型, number itemIndex
+function Char.GetWeapon(charIndex) end
+
+---@param charIndex number
+function Char.UnsetWalkPostEvent(charIndex) end
+
+---@param charIndex number
+function Char.UnsetWalkPreEvent(charIndex) end
+
+---@param charIndex number
+function Char.UnsetPostOverEvent(charIndex) end
+
+---@param charIndex number
+function Char.UnsetLoopEvent(charIndex) end
+
+---@param charIndex number
+function Char.UnsetTalkedEvent(charIndex) end
+
+---@param charIndex number
+function Char.UnsetWindowTalkedEvent(charIndex) end
+
+---@param charIndex number
+function Char.UnsetItemPutEvent(charIndex) end
+
+---@param charIndex number
+function Char.UnsetWatchEvent(charIndex) end
+
+---@param ptr number
+---@return boolean
+function Char.IsValidCharPtr(ptr) end
+
+---@param charIndex number
+---@return boolean
+function Char.IsValidCharIndex(charIndex) end
+
+---通过ptr获取数据
+---@param charPtr number
+---@param dataLine number
+---@return string|number|nil
+function Char.GetDataByPtr(charPtr, dataLine) end
+
+---通过ptr获取数据
+---@param charPtr number
+---@param dataLine number
+---@param value string|number
+function Char.SetDataByPtr(charPtr, dataLine, value) end
+
+---根据位置删除物品
+---@param CharIndex number
+---@param Slot number
+function Char.DelItemBySlot(CharIndex, Slot) end
+
+---移动角色、NPC
+---@param charIndex number
+---@param walkArray number[] 移动列表，取值0-7对应 CONST里面的方向，不建议超过5次移动
+function Char.MoveArray(charIndex, walkArray) end
 
 ---@param charIndex number
 ---@param dataIndex number
@@ -46,7 +153,7 @@ function Char.GetUUID(charIndex) end
 ---@param charIndex number
 ---@param flag number
 ---@param value number '0' | '1'
----@return void
+---@return nil
 function Char.NowEvent(charIndex, flag, value) end
 
 ---获取当前标旗
@@ -59,7 +166,7 @@ function Char.NowEvent(charIndex, flag) end
 ---@param charIndex number
 ---@param flag number
 ---@param value number '0' | '1'
----@return void
+---@return nil
 function Char.EndEvent(charIndex, flag, value) end
 
 ---获取当前标旗
@@ -131,6 +238,10 @@ function Char.GetBattleIndex(CharIndex) end
 ---@param targetIndex number 队长index
 function Char.JoinParty(sourceIndex, targetIndex) end
 
+---离开队伍
+---@param charIndex number
+function Char.LeaveParty(charIndex) end
+
 ---@return number 成功返回玩家对象激活的称号ID，返回-1代表失败，参数数据类型不对返回-2，对象index无效返回-3。
 function Char.GetTitle(CharIndex) end
 
@@ -165,13 +276,60 @@ function Char.DelSlotPet(CharIndex, Slot) end
 ---@param amount number 数量，整体移动取值可为-1
 function Char.MoveItem(charIndex, fromSlot, toSlot, amount) end
 
----@param charIndex number
----@return number
+---检测是否假人
+---@param charIndex integer
+---@return boolean
 function Char.IsDummy(charIndex) end
 
----@param charIndex number
----@return number
+---标记为假人
+---@param charIndex integer
 function Char.SetDummy(charIndex) end
+
+---删除假人
+---@param charIndex integer
+function Char.DelDummy(charIndex) end
+
+---计算技能所需的魔法
+---@param charIndex integer
+---@param techId integer
+function Char.CalcConsumeFp(charIndex, techId) end
+
+---设置宠物战斗状态
+---@param charIndex integer
+---@param slot integer
+---@param state integer CONST.PET_STATE_*
+function Char.SetPetDepartureState(charIndex, slot, state) end
+
+---设置宠物战斗状态(批量)
+---@param charIndex integer
+---@param pet1State integer CONST.PET_STATE_*
+---@param pet2State integer CONST.PET_STATE_*
+---@param pet3State integer CONST.PET_STATE_*
+---@param pet4State integer CONST.PET_STATE_*
+---@param pet5State integer CONST.PET_STATE_*
+function Char.SetPetDepartureStateAll(charIndex, pet1State, pet2State, pet3State, pet4State, pet5State) end
+
+---直接交易物品
+---@param fromChar integer 从谁身上交出 CharIndex
+---@param toChar integer 交易给谁 CharIndex
+---@param slot integer 道具栏位置，8-27
+function Char.TradeItem(fromChar, slot, toChar) end
+
+---直接交易宠物
+---@param fromChar integer 从谁身上交出 CharIndex
+---@param toChar integer 交易给谁 CharIndex
+---@param slot integer 道具栏位置，8-27
+function Char.TradePet(fromChar, slot, toChar) end
+
+---获取空的ItemSlot
+---@param charIndex integer
+---@return integer
+function Char.GetEmptyItemSlot(charIndex) end
+
+---获取空的PetSlot
+---@param charIndex integer
+---@return integer
+function Char.GetEmptyPetSlot(charIndex) end
 
 NLG = NLG or {}
 function NLG.ShowWindowTalked(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data) end
@@ -335,6 +493,89 @@ function Battle.ExitBattle(CharIndex) end
 
 function Battle.SetPVPWinEvent(DoFile, FuncName, BattleIndex) end
 
+---@param battleIndex integer
+function Battle.UnsetWinEvent(battleIndex) end
+
+---@param battleIndex integer
+function Battle.UnsetPVPWinEvent(battleIndex) end
+
+---连战设置
+---@overload fun(battleIndex: number, encountIndex: number):number
+---@param battleIndex number
+---@param encountIndex number -1=取消连战，  -2=lua生成连战
+---@param flg number lua连战参数
+---@return number 成功返回0
+function Battle.SetNextBattle(battleIndex, encountIndex, flg) end
+
+---连战设置
+---@param battleIndex number
+---@param encountIndex number encount编号，  -1=取消连战
+---@return number 成功返回0
+function Battle.SetNextBattle(battleIndex, encountIndex) end
+
+---获取连战id
+---@param battleIndex number
+---@return number encountIndex
+function Battle.GetNextBattle(battleIndex) end
+
+---获取lua连战flg
+---@param battleIndex number
+---@return number flg
+function Battle.GetNextBattleFlg(battleIndex) end
+
+---计算属性伤害比率
+---@param ap number[] 4属性，地、水、火、风
+---@param dp number[] 4属性，地、水、火、风
+---@return number
+function Battle.CalcPropScore(ap, dp) end
+
+---让指定玩家对象加入另一个玩家对象的战斗中，也就是让CharIndex2加入CharIndex1的战斗
+---@param a number 目标的对象index，在战斗中的玩家
+---@param b number 目标的对象index，不在战斗中的玩家
+---@return number 其中0为成功，其他失败。
+function Battle.JoinBattle(a, b) end
+
+---让对象执行指定的战斗操作，必须在对象Battle.IsWaitingCommand(index)返回值为1时才可以有效使用。
+---@param charIndex number
+---@param com1 number @see CONST.BATTLE_COM
+---@param com2 number @see CONST.BATTLE_COM_TARGET
+---@param com3 number techId
+---@return number
+function Battle.ActionSelect(charIndex, com1, com2, com3) end
+
+---判断当前对象是否在战斗中且处于等待输入战斗指令的状态。
+---@return number 返回1为等待指令
+function Battle.IsWaitingCommand(charIndex) end
+
+---获取当前技能参数
+---@param charIndex number
+---@param type string 取值 DD: AR: 等
+---@return number|nil
+function Battle.GetTechOption(charIndex, type) end
+
+---获取属性克制关系
+---@param attackerIndex number
+---@param defenceIndex number
+---@return number 克制比率
+function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex) end
+
+---计算种族伤害
+---@param a number 攻击方种族
+---@param b number 防御方种族
+---@return number
+function Battle.CalcTribeRate(a, b) end
+
+---计算当前战斗种族伤害
+---@param aIndex number 攻击方index
+---@param bIndex number 防御方index
+---@return number
+function Battle.CalcTribeDmgRate(aIndex, bIndex) end
+
+---获取当前战斗回合
+---@param battleIndex number 
+---@return number
+function Battle.GetTurn(battleIndex) end
+
 _G.Field = {}
 
 function Field.Get(CharIndex, Field) end
@@ -447,71 +688,6 @@ function NL.ItemTribeRateEventCallback(a, b, rate) end
 ---@return {status:number, effectRows:number, rows: table} 返回查询内容
 function SQL.QueryEx(sql, ...) end
 
----@overload fun(battleIndex: number, encountIndex: number):number
----@param battleIndex number
----@param encountIndex number encount编号， -1=取消连战， -2=lua生成连战
----@param flg number lua连战参数
----@return number 成功返回0
-function Battle.SetNextBattle(battleIndex, encountIndex, flg) end
-
----获取连战id
----@param battleIndex number
----@return number encountIndex
-function Battle.GetNextBattle(battleIndex) end
-
----获取lua连战flg
----@param battleIndex number
----@return number flg
-function Battle.GetNextBattleFlg(battleIndex) end
-
----计算属性伤害比率
----@param ap number[] 4属性，地、水、火、风
----@param dp number[] 4属性，地、水、火、风
----@return number
-function Battle.CalcPropScore(ap, dp) end
-
----让指定玩家对象加入另一个玩家对象的战斗中，也就是让CharIndex2加入CharIndex1的战斗
----@param a number 目标的对象index，在战斗中的玩家
----@param b number 目标的对象index，不在战斗中的玩家
----@return number 其中0为成功，其他失败。
-function Battle.JoinBattle(a, b) end
-
----让对象执行指定的战斗操作，必须在对象Battle.IsWaitingCommand(index)返回值为1时才可以有效使用。
----@param charIndex number
----@param com1 number @see CONST.BATTLE_COM
----@param com2 number @see CONST.BATTLE_COM_TARGET
----@param com3 number techId
----@return number
-function Battle.ActionSelect(charIndex, com1, com2, com3) end
-
----判断当前对象是否在战斗中且处于等待输入战斗指令的状态。
----@return number 返回1为等待指令
-function Battle.IsWaitingCommand(charIndex) end
-
----获取当前技能参数
----@param charIndex number
----@param type string 取值 DD: AR: 等
----@return number|nil
-function Battle.GetTechOption(charIndex, type) end
-
----获取属性克制关系
----@param attackerIndex number
----@param defenceIndex number
----@return number 克制比率
-function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex) end
-
----计算种族伤害
----@param a number 攻击方种族
----@param b number 防御方种族
----@return number
-function Battle.CalcTribeRate(a, b) end
-
----计算当前战斗种族伤害
----@param aIndex number 攻击方index
----@param bIndex number 防御方index
----@return number
-function Battle.CalcTribeDmgRate(aIndex, bIndex) end
-
 ---设置Msg
 ---@param msgId number
 ---@param val string
@@ -527,6 +703,19 @@ function Data.GetMessage(msgId) end
 ---@param b number 防守种族 支持 0 ~ 19
 ---@param rate number 克制比率支持 -128 ~ 127
 function Data.SetTribeMapValue(a, b, rate) end
+
+_G.Tech = Tech or {}
+
+---获取TechIndex
+---@param techId integer
+---@return integer
+function Tech.GetTechIndex(techId) end
+
+---获取Tech数据
+---@param techIndex integer
+---@param dataLine integer
+---@return integer|string
+function Tech.GetData(techIndex, dataLine) end
 
 ---设置魔法属性
 ---@param techId number
@@ -559,3 +748,11 @@ function Protocol.GetIp(fd) end
 ---@param charIndex number
 ---@return number fd
 function Protocol.GetFdByCharIndex(charIndex) end
+
+_G.Recipe = Recipe or {}
+
+---@return number 成功时返回 1, 失败返回 0, charIndex无效返回 -1, 配方无效返回 -2, 配方已获得返回 -3
+function Recipe.GiveRecipe(charIndex, recipeNo) end
+
+---@return number 成功时返回 1, 失败返回 0, charIndex无效返回 -1, 配方无效返回 -2, 配方已获得返回 -3
+function Recipe.RemoveRecipe(charIndex, recipeNo) end
