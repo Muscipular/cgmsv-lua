@@ -732,6 +732,33 @@ function Data.GetMessage(msgId) end
 ---@param rate number 克制比率支持 -128 ~ 127
 function Data.SetTribeMapValue(a, b, rate) end
 
+---获取ItemsetIndex
+function Data.ItemsetGetIndex(ItemID) end
+
+---获取Itemset数据
+function Data.ItemsetGetData(ItemsetIndex, DataPos) end
+
+---获取EnemyDataIndex
+function Data.EnemyGetDataIndex(enemyId) end
+
+---获取Enemy数据
+function Data.EnemyGetData(enemyIndex, DataPos) end
+
+---获取EnemyBaseDataIndex
+function Data.EnemyBaseGetDataIndex(enemyBaseId) end
+
+---获取EnemyBase数据
+function Data.EnemyBaseGetData(enemyBaseIndex, DataPos) end
+
+function Data.GetEncountIndex(encountId) end
+
+function Data.GetEncountData(encountIndex, dataPos) end
+
+function Data.GetEnemyBaseIdByEnemyId(enemyId) end
+
+function Data.GetEnemyBaseIndexByEnemyId(enemyId) end
+
+
 _G.Tech = Tech or {}
 
 ---获取TechIndex
@@ -752,6 +779,11 @@ function Tech.GetData(techIndex, dataLine) end
 ---@param fire number 每10等于1格属性
 ---@param wind number 每10等于1格属性
 function Tech.SetTechMagicAttribute(techId, earth, water, fire, wind) end
+
+---根据fd获取角色Index
+---@param fd integer
+---@return integer charIndex
+function Protocol.GetCharIndexFromFd(fd) end
 
 ---发送封包到客户端
 ---@param charIndex number
@@ -777,6 +809,12 @@ function Protocol.GetIp(fd) end
 ---@return number fd
 function Protocol.GetFdByCharIndex(charIndex) end
 
+---拦截封包回调
+---@param Dofile string 加载文件
+---@param FuncName string 回调名字
+---@param PacketID string 封包头
+function Protocol.OnRecv(Dofile, FuncName, PacketID) end
+
 _G.Recipe = Recipe or {}
 
 ---@return number 成功时返回 1, 失败返回 0, charIndex无效返回 -1, 配方无效返回 -2, 配方已获得返回 -3
@@ -784,3 +822,73 @@ function Recipe.GiveRecipe(charIndex, recipeNo) end
 
 ---@return number 成功时返回 1, 失败返回 0, charIndex无效返回 -1, 配方无效返回 -2, 配方已获得返回 -3
 function Recipe.RemoveRecipe(charIndex, recipeNo) end
+
+---@return number 返回值 有配方时返回 1, 无配方返回 0, charIndex无效返回 -1, 配方无效返回 -2
+function Recipe.HasRecipe(charIndex, recipeNo) end
+
+function Recipe.GetData(recipeNo, dataLine) end
+
+_G.Skill = Skill or {}
+
+---设置扩展技能经验表
+---@param expId number 经验表Id
+---@param lv number 技能等级
+---@param exp number 需要的经验
+function Skill.SetExpForLv(expId, lv, exp) end
+
+---设置技能最大等级
+---@param level number 最大支持127
+function Skill.SetMaxLevel(level) end
+
+---获取职业最高技能等级
+---@param skillIndex any
+---@param job any
+---@return integer
+function Skill.GetMaxSkillLevelOfJob(skillIndex, job) end
+
+---获取skillIndex
+---@param id integer 技能id
+---@return integer
+function Skill.GetSkillIndex(id) end
+
+_G.Map = Map or {}
+
+---获取迷宫的剩余时间
+---@param dungeonId integer
+---@return integer 时间（秒）
+function Map.GetDungeonExpireTimeByDungeonId(dungeonId) end
+
+---获取迷宫地图的剩余时间
+---@param floor integer
+---@return integer 时间（秒）
+function Map.GetDungeonExpireTime(floor) end
+
+---获取迷宫的过期时间
+---@param dungeonId integer
+---@return integer 时间（UnixTime）
+function Map.GetDungeonExpireAtByDungeonId(dungeonId) end
+
+---获取迷宫的过期时间
+---@param floor integer floor
+---@return integer 时间（UnixTime）
+function Map.GetDungeonExpireAt(floor) end
+
+---根据floor设置迷宫重置时间 
+---@param floor integer floor
+---@param time integer UnixTime
+function Map.SetDungeonExpireAt(floor, time) end
+
+---根据迷宫Id设置迷宫重置时间 
+---@param dungeonId integer dungeonId
+---@param time integer UnixTime
+function Map.SetDungeonExpireAtByDungeonId(dungeonId, time) end
+
+---获取迷宫Id
+---@param floor integer
+---@return integer dungeonId 迷宫id
+function Map.GetDungeonId(floor) end
+
+---获取迷宫入口
+---@param dungeonId integer dungeonId
+---@return number mapType, number floor, number x, number y
+function Map.FindDungeonEntry(dungeonId) end

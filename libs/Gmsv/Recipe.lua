@@ -68,7 +68,7 @@ function Recipe.RemoveRecipe(charIndex, recipeNo)
   return 1;
 end
 
----@return number 有配方时返回 1, 无配方返回 0, charIndex无效返回 -1, 配方无效返回 -2
+---@return number 返回值 有配方时返回 1, 无配方返回 0, charIndex无效返回 -1, 配方无效返回 -2
 function Recipe.HasRecipe(charIndex, recipeNo)
   if charIndex < 0 then
     return -1;

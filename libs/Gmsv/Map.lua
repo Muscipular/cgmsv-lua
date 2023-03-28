@@ -99,7 +99,8 @@ function Map.GetDungeonId(floor)
 end
 
 ---获取迷宫入口
----@return number,number,number,number mapType floor x y
+---@param dungeonId integer dungeonId
+---@return number mapType, number floor, number x, number y
 function Map.FindDungeonEntry(dungeonId)
   for i = 0, Addresses.ActiveDungeon_TBL_SIZE - 1 do
     --if dSize >= Addresses.DungeonConf_SIZE then
