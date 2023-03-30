@@ -855,6 +855,11 @@ function Skill.GetMaxSkillLevelOfJob(skillIndex, job) end
 ---@return integer
 function Skill.GetSkillIndex(id) end
 
+---修改调教增加的宠物忠诚度
+---@param lv integer 等级
+---@param add integer 增加的忠诚度，默认每级1点忠诚
+function Skill.SetPetTrainAddition(lv, add) end
+
 ---设置普通职业最大成功率
 ---@param rate number
 function Skill.SetNormalJobStealMaxRate(rate) end
