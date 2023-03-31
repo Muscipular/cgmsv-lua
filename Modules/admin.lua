@@ -26,6 +26,9 @@ function commands.dofile(charIndex, args)
   end
 end
 
+---是否管理员
+---@param charIndex CharIndex
+---@return boolean
 function Admin:isAdmin(charIndex)
   local cdKey = Char.GetData(charIndex, CONST.CHAR_CDK)
   if not gmDict[cdKey] then

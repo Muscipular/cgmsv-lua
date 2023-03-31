@@ -174,10 +174,15 @@ end
 --  Battle.SetNextBattle(battleIndex, -2, 0xeeff);
 --end
 
+---×¢²á¹ÜÀíÃüÁî
+---@param key string
+---@param fn fun(charIndex: CharIndex, args: string[]):integer|void
 function AdminCommands:regCommand(key, fn)
   commands[key] = fn;
 end
 
+---È¡Ïû×¢²áÃüÁî
+---@param key string
 function AdminCommands:unloadCommand(key)
   commands[key] = nil;
 end
@@ -193,7 +198,7 @@ function AdminCommands:onLoad()
   end)
 
   local function handleChat(charIndex, msg, color, range, size)
-    if not getModule('admin'):isAdmin(charIndex) then
+    if not getModule('admin')--[[@as Admin]]:isAdmin(charIndex) then
       return 1
     end
     local command = msg:match('^/([%w]+)')

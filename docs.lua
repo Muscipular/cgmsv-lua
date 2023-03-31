@@ -851,6 +851,36 @@ function Skill.GetMaxSkillLevelOfJob(skillIndex, job) end
 ---@return integer
 function Skill.GetSkillIndex(id) end
 
+---设置普通职业最大成功率
+---@param rate number
+function Skill.SetNormalJobStealMaxRate(rate) end
+
+---设置医生ID
+---@param jobId number
+function Skill.AddDoctorJob(jobId) end
+
+---移除医生ID
+---@param jobId number
+function Skill.RemoveDoctorJob(jobId) end
+
+---设置普通职业成功率
+---@param lv integer 
+---@param mode 0|1|2|3 0=白伤，1=黄，2=紫，3=红
+---@param rate integer 失败概率
+function Skill.SetNormalJobMedicalTreatmentRate(lv, mode, rate) end
+
+---设置医生职业成功率
+---@param lv integer 
+---@param mode 0|1|2|3 0=白伤，1=黄，2=紫，3=红
+---@param rate integer 失败概率
+function Skill.SetDockerJobMedicalTreatmentRate(lv, mode, rate) end
+
+---设置医生职业成功率
+---@param lv integer 
+---@param mode 0|1|2|3 0=白伤，1=黄，2=紫，3=红
+---@param rate integer 失败概率
+function Skill.SetDockerJobExMedicalTreatmentRate(lv, mode, rate) end
+
 Map = Map or {}
 
 ---获取迷宫的剩余时间

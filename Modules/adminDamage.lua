@@ -11,7 +11,8 @@ function Module:onLoad()
   end
   self.dmg = nil;
   self.dmg2 = nil;
-  getModule('adminCommands'):regCommand('dmg', function(c, args)
+  local adminCommands = getModule('adminCommands')--[[@as AdminCommands]];
+  adminCommands:regCommand('dmg', function(c, args)
     if args[1] == 'off' then
       NLG.SystemMessage(c, '关闭攻击伤害修改')
       self.dmg = nil;
@@ -21,7 +22,7 @@ function Module:onLoad()
     end
     return 1
   end)
-  getModule('adminCommands'):regCommand('dmg2', function(c, args)
+  adminCommands:regCommand('dmg2', function(c, args)
     if args[1] == 'off' then
       NLG.SystemMessage(c, '关闭防御伤害修改')
       self.dmg2 = nil;
@@ -31,7 +32,7 @@ function Module:onLoad()
     end
     return 1
   end)
-  getModule('adminCommands'):regCommand('hp', function(c, args)
+  adminCommands:regCommand('hp', function(c, args)
     if args[1] then
       NLG.SystemMessage(c, 'hp调整为: ' .. args[1])
       Char.SetData(c, CONST.CHAR_血, tonumber(args[1]))
@@ -39,7 +40,7 @@ function Module:onLoad()
     end
     return 1
   end)
-  getModule('adminCommands'):regCommand('hp2', function(c, args)
+  adminCommands:regCommand('hp2', function(c, args)
     if args[1] then
       NLG.SystemMessage(c, 'hp调整为: ' .. args[1] .. '%')
       Char.SetData(c, CONST.CHAR_血, tonumber(args[1]) / 100 * Char.GetData(c, CONST.CHAR_最大血));
@@ -48,7 +49,7 @@ function Module:onLoad()
     return 1
   end)
   self:regCallback('DamageCalculateEvent', function(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
-    local admin = getModule('admin')
+    local admin = getModule('admin')--[[@as Admin]]
     if admin:isAdmin(charIndex) and self.dmg ~= nil then
       return self.dmg
     end
