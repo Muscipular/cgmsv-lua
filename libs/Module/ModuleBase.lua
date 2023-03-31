@@ -4,7 +4,7 @@
 ---@field lastIx number
 ---@field parts ModulePart[]
 ---@field migrations {version:number,name:string,value:string|function}[]|nil
----@field callbacks {fnCb: function, fnIndex: number, key: string}[]
+---@field callbacks {fn: function, fnIndex: number, key: string, extSign?:string}[]
 local ModuleBase = { name = '', callbacks = {}, lastIx = 0, migrations = nil };
 
 _G.ModuleBase = ModuleBase;
@@ -116,11 +116,11 @@ end
 ---@param eventNameOrCallbackKey string
 ---@param fnOrCbIndex function|number
 function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrCbIndex)
-  local cbIndex = fnOrCbIndex;
+  local cbIndex = fnOrCbIndex--[[@as number]];
   if type(fnOrCbIndex) == 'function' then
     cbIndex = table.findIndex(self.callbacks, function(e)
       return fnOrCbIndex == e.fn
-    end)
+    end) --[[@as number]]
   end
   local fnCb = self.callbacks[cbIndex];
   if not fnCb then

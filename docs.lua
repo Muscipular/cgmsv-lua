@@ -379,6 +379,10 @@ function NLG.SetPetRandomShot(petId, enable) end
 -----@param val number 倍率，默认1.5倍
 function NLG.SetCriticalDamageAddition(mode, val) end
 
+---设置乱敏概率
+---@param rate integer 0-100
+function NLG.SetDexRearrangeRate(rate) end
+
 Pet = {}
 
 function Pet.ReBirth(PlayerIndex, PetIndex) end
