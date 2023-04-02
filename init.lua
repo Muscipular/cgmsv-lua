@@ -1,4 +1,4 @@
-_HookVer = '0.2.29'
+_HookVer = '0.2.30'
 if getHookVer == nil then
   error(string.format('[ERR] HOOK not load %s', _HookVer))
 end

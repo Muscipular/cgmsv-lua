@@ -381,7 +381,8 @@ function NLG.SetCriticalDamageAddition(mode, val) end
 
 ---设置乱敏概率
 ---@param rate integer 0-100
-function NLG.SetDexRearrangeRate(rate) end
+---@param mode? nil|0|1|2 0 @0=PVE&PVP 1=PVE 2=PVP
+function NLG.SetDexRearrangeRate(rate, mode) end
 
 Pet = {}
 
@@ -864,31 +865,31 @@ function Skill.SetPetTrainAddition(lv, add) end
 ---@param rate number
 function Skill.SetNormalJobStealMaxRate(rate) end
 
----设置医生ID
+---设置医生职业ID
 ---@param jobId number
 function Skill.AddDoctorJob(jobId) end
 
----移除医生ID
+---移除医生职业ID
 ---@param jobId number
 function Skill.RemoveDoctorJob(jobId) end
 
----设置普通职业成功率
+---设置普通职业治疗成功率
 ---@param lv integer 
 ---@param mode 0|1|2|3 0=白伤，1=黄，2=紫，3=红
 ---@param rate integer 失败概率
 function Skill.SetNormalJobMedicalTreatmentRate(lv, mode, rate) end
 
----设置医生职业成功率
+---设置医生职业治疗成功率
 ---@param lv integer 
 ---@param mode 0|1|2|3 0=白伤，1=黄，2=紫，3=红
 ---@param rate integer 失败概率
-function Skill.SetDockerJobMedicalTreatmentRate(lv, mode, rate) end
+function Skill.SetDoctorJobMedicalTreatmentRate(lv, mode, rate) end
 
----设置医生职业成功率
+---设置医生职业成治疗功率(带了专属饰品)
 ---@param lv integer 
 ---@param mode 0|1|2|3 0=白伤，1=黄，2=紫，3=红
 ---@param rate integer 失败概率
-function Skill.SetDockerJobExMedicalTreatmentRate(lv, mode, rate) end
+function Skill.SetDoctorJobExMedicalTreatmentRate(lv, mode, rate) end
 
 Map = Map or {}
 
