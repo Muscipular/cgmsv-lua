@@ -384,6 +384,8 @@ function NLG.SetCriticalDamageAddition(mode, val) end
 ---@param mode? nil|0|1|2 0 @0=PVE&PVP 1=PVE 2=PVP
 function NLG.SetDexRearrangeRate(rate, mode) end
 
+function NLG.DropPlayer(charIndex) end
+
 Pet = {}
 
 function Pet.ReBirth(PlayerIndex, PetIndex) end
