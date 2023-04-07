@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X</title>
+    <script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>注册账号</h1>
+        <form>
+            <div class="grid">
+                <label for="account">
+                    账号
+                    <input type="text" id="account" name="account" placeholder="账号" required>
+                </label>
+                <label for="password">
+                    密码
+                    <input type="text" id="password" name="password" placeholder="密码" required>
+                </label>
+            </div>
+            <button type="button" id="btnRegister" role="button">注册</button>
+        </form>
+    </div>
+    <script>
+        $('#btnRegister').on('click', function () {
+            var account = $('#account').val();
+            var password = $('#password').val();
+            $.ajax({
+                type: "POST",
+                url: "/api/register",
+                processData: false,
+                contentType: 'application/json',
+                data: JSON.stringify({ account: account, password: password }),
+                success: function (r) {
+                }
+            }).then(function (data) {
+                alert(data == 'true' ? '注册成功' : "注册失败");
+            })
+        });
+    </script>
+</body>
+
+</html>

@@ -56,6 +56,7 @@ NL.newEvent('CheckDummyDollEvent', 1);
 -- function PreItemPickUpEventCallBack(CharIndex, ItemIndex) end
 NL.newEvent('PreItemPickUpEvent', 0);
 NL.newEvent('ItemBoxGenerateEvent', nil);
+NL.newEvent('HttpRequestEvent', "");
 --local hookOnCharaDeleted;
 --hookOnCharaDeleted = ffi.hook.new('int (__cdecl*)(int a1)', function(queueIndex)
 --  local queuePtr = Addresses.DBQueue + 0x58 * queueIndex

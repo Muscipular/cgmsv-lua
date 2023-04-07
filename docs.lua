@@ -716,6 +716,11 @@ function NL.RegItemTribeRateEvent(dofile, callback) end
 ---@return number 返回新的克制比率
 function NL.ItemTribeRateEventCallback(a, b, rate) end
 
+---Http请求事件
+---@param callback string callback回调参数 
+---@see Http.HttpRequestEventCallback
+function NL.RegHttpRequestEvent(dofile, callback) end
+
 ---@param sql string sql
 ---@vararg string|number 绑定参数，最多40个
 ---@return {status:number, effectRows:number, rows: table} 返回查询内容
@@ -934,3 +939,38 @@ function Map.GetDungeonId(floor) end
 ---@param dungeonId integer dungeonId
 ---@return number mapType, number floor, number x, number y
 function Map.FindDungeonEntry(dungeonId) end
+
+Http = _G.Http or {}
+
+---初始化Http服务器
+function Http.Init() end
+
+---开启Http服务
+---@param addr string 监听IP,例如: "0.0.0.0"
+---@param port integer 端口 建议10000以上
+---@return integer ret @1：成功，其他为失败
+function Http.Start(addr, port) end
+
+---关闭Http服务器，需要注意，在请求中停止会导致请求响应502并且强制关闭所有未处理的请求
+function Http.Stop() end
+
+---获取Http服务器状态
+---@return 0|1|2 status  @0=未初始化 1=未启动 2=运行中
+function Http.GetStatus() end
+
+---绑定静态资源
+---@param path string url地址
+---@param dir string 本地目录
+function Http.AddMountPoint(path, dir) end
+
+---移除静态资源
+---@param path string url地址
+function Http.RemoveMountPoint(path) end
+
+---http请求回调
+---@param method string
+---@param api string API名字
+---@param params {string:string} 参数
+---@param body string body内容
+---@return string body 返回内容
+function Http.HttpRequestEventCallback(method, api, params, body) end

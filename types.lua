@@ -54,3 +54,14 @@ NPCPart = NPCPart or {};
 ---@return CharIndex
 function NPCPart:NPC_createNormal(name, image, positionInfo) end
 
+JSON = JSON or {};
+
+---@generic T
+---@param s string
+---@return T
+function JSON.decode(s) end
+
+---@generic T
+---@param s T
+---@return string
+function JSON.encode(s) end

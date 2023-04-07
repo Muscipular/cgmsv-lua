@@ -8,7 +8,7 @@ local Pve = Battle.PVE
 ---@param DoFunc string
 ---@param EnemyIdAr number[]
 ---@param BaseLevelAr number[]
----@param RandLv number[]
+---@param RandLv? number[]
 Battle.PVE = function(CharIndex, CreatePtr, DoFunc, EnemyIdAr, BaseLevelAr, RandLv)
   if #EnemyIdAr < 1 then
     return -1;
