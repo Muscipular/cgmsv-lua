@@ -96,7 +96,10 @@ function _G.loadModule(moduleName, opt)
   module.___ctx = ctx;
   module.___absolutePath = opt.absolutePath;
   module.___isSimpleModule = opt.simpleModule;
-  module:load();
+  local r1, e1 = pcall(module.load, module);
+  if e1 then
+    logError(moduleName, "load module error: " .. e1);
+  end
   return module;
 end
 
