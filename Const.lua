@@ -560,7 +560,7 @@ CONST.CHAR_DEBUG开关 = 0;
 CONST.CHAR_使用MIC = 0;
 CONST.CHAR_已保存 = 0;
 CONST.CHAR_不遇敌开关 = 0;
-CONST.CHAR_BattleIndex = 379;
+CONST.对象_BattleIndex = 379;
 CONST.地图类型_普通 = 0;
 CONST.地图类型_迷宫 = 0;
 CONST.地图类型_家族 = 0;
@@ -2081,12 +2081,8 @@ CONST.Encount_Rect_Height = 0x00000084 / 4 + 3
 local TEXT = [[
 CONST.PET_体成 = %宠档_体成%;
 CONST.PET_力成 = %宠档_力成%;
-CONST.PET_力成 = %宠档_力成%;
-CONST.PET_强成 = %宠档_强成%;
 CONST.PET_强成 = %宠档_强成%;
 CONST.PET_敏成 = %宠档_敏成%;
-CONST.PET_敏成 = %宠档_敏成%;
-CONST.PET_魔成 = %宠档_魔成%;
 CONST.PET_魔成 = %宠档_魔成%;
 CONST.PET_STATE_无 = %宠物状态_无%;
 CONST.PET_STATE_待命 = %宠物状态_待命%;
@@ -3586,6 +3582,8 @@ CONST.道具_VAR1 = %道具_VAR1%;
 CONST.道具_VAR2 = %道具_VAR2%;
 CONST.道具_VAR3 = %道具_VAR3%;
 CONST.道具_VAR4 = %道具_VAR4%;
+CONST.CHAR_BattleIndex = %对象_BattleIndex%;
+CONST.对象_BattleIndex = %对象_BattleIndex%;
 ]]
 
 local split = function(str, separator)
@@ -3623,7 +3621,7 @@ for i, p in ipairs(split(TEXT, ";")) do
     if e then
       e();
     else
-      print(p, s, e)
+      print("not found", p, s, e)
     end    
   end 
 end

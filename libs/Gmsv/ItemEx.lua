@@ -87,13 +87,35 @@ if Item.SetTimeLimit == nil then
   ---@param Time number 时间秒
   function Item.SetTimeLimit(CharIndex, ItemIndex, Time)
     if Time < 0 then
-      Item.SetData(ItemIndex, 0x44, 0);
-      Item.SetData(ItemIndex, 0x45, 0);
+      Item.SetData(ItemIndex, CONST.道具_TIMELIMIT, 0);
+      Item.SetData(ItemIndex, CONST.道具_ENDTIME, 0);
     else
-      Item.SetData(ItemIndex, 0x44, 1);
-      Item.SetData(ItemIndex, 0x45, Time + os.time());
+      Item.SetData(ItemIndex, CONST.道具_TIMELIMIT, 1);
+      Item.SetData(ItemIndex, CONST.道具_ENDTIME, Time + os.time());
     end
     local slot = Item.GetSlot(CharIndex, ItemIndex)
     Item.UpItem(CharIndex, slot);
+  end
+end
+
+if Item.GetTimeLimit == nil then
+  ---获取限时道具剩余时间
+  ---@param CharIndex number
+  ---@param ItemIndex number
+  function Item.GetTimeLimit(CharIndex, ItemIndex)
+    local mode = Item.SetData(ItemIndex, CONST.道具_TIMELIMIT);
+    local slot = Item.GetSlot(CharIndex, ItemIndex)
+    if slot < 0 then
+      return nil;
+    end
+    if mode == 2 then
+      Item.UpItem(CharIndex, slot);
+      mode = Item.GetData(ItemIndex, CONST.道具_TIMELIMIT);
+    end
+    if mode == 1 then
+      local Time = Item.SetData(ItemIndex, CONST.道具_ENDTIME);
+      return Time - os.time();
+    end
+    return nil;
   end
 end

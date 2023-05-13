@@ -54,3 +54,11 @@ function Battle.GetSlot(battleIndex, charIndex)
   end
   return -1;
 end 
+
+----- @return number BatteIndex
+function Battle.GetCurrentBattle(CharIndex)
+  if Char.GetData(CharIndex, CONST.CHAR_Õ½¶·×´Ì¬) == 0 then
+    return -1;
+  end
+  return Char.GetData(CharIndex, CONST.CHAR_BattleIndex)
+end

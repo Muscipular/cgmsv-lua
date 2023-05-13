@@ -1,5 +1,6 @@
 _HookVer = '0.2.31'
 _HookFunc = false;
+_GMVS_ = nil;
 if NL.Version == nil or NL.Version() < 20230511 then
   if getHookVer == nil then
     error(string.format('[ERR]HOOK not load %s', _HookVer))
@@ -15,6 +16,8 @@ if NL.Version == nil or NL.Version() < 20230511 then
   print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   _HookFunc = true;
+else
+  _GMVS_ = NL.Version();
 end
 print("[LUA]Initial Lua System......")
 collectgarbage()
