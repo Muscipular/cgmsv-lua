@@ -937,6 +937,12 @@ CONST.道具_Obj索引 = 0;
 CONST.道具_已装备 = 0;
 CONST.道具_Explanation1 = 0;
 CONST.道具_Explanation2 = 0;
+CONST.道具_TIMELIMIT = 68;
+CONST.道具_ENDTIME = 69;
+CONST.道具_VAR1 = 70;
+CONST.道具_VAR2 = 71;
+CONST.道具_VAR3 = 72;
+CONST.道具_VAR4 = 73;
 CONST.CHAR_EnemyBaseId = 61;
 CONST.窗口_信息框 = 0;
 CONST.窗口_输入框 = 0;
@@ -1318,7 +1324,7 @@ CONST.对象_经验 = 0;
 CONST.对象_升级点 = 0;
 CONST.对象_图类 = 0;
 CONST.对象_名色 = 0;
---CONST.对象_ALLOCPOINT = 0;
+CONST.对象_ALLOCPOINT = 0;
 CONST.对象_吃时 = 0;
 CONST.对象_DataPN = 0;
 CONST.宠物_主人RegistNumber = 0;
@@ -1493,8 +1499,8 @@ CONST.对象_魔攻 = 0;
 CONST.对象_魔法攻击力 = 0;
 CONST.对象_魔强 = 0;
 CONST.对象_魔抗 = 0;
---CONST.对象_魔法防御力 = 0;
---CONST.对象_魔法抗性 = 0;
+CONST.对象_魔法防御力 = 0;
+CONST.对象_魔法抗性 = 0;
 CONST.对象_香下限 = 0;
 CONST.对象_香上限 = 0;
 CONST.对象_香步数 = 0;
@@ -1936,11 +1942,11 @@ CONST.道栏_17 = 0;
 CONST.道栏_18 = 0;
 CONST.道栏_19 = 0;
 CONST.道栏_20 = 0;
---CONST.宠物栏_1 = 0;
---CONST.宠物栏_2 = 0;
---CONST.宠物栏_3 = 0;
---CONST.宠物栏_4 = 0;
---CONST.宠物栏_5 = 0;
+CONST.宠物栏_1 = 0;
+CONST.宠物栏_2 = 0;
+CONST.宠物栏_3 = 0;
+CONST.宠物栏_4 = 0;
+CONST.宠物栏_5 = 0;
 CONST.队员_1 = 0;
 CONST.队员_2 = 0;
 CONST.队员_3 = 0;
@@ -2187,7 +2193,7 @@ CONST.CHAR_经验 = %对象_经验%;
 CONST.CHAR_升级点 = %对象_升级点%;
 CONST.CHAR_图类 = %对象_图类%;
 CONST.CHAR_名色 = %对象_名色%;
---CONST.CHAR_ALLOCPOINT = %对象_ALLOCPOINT%;
+CONST.CHAR_ALLOCPOINT = %对象_ALLOCPOINT%;
 CONST.CHAR_吃时 = %对象_吃时%;
 CONST.CHAR_ThankFlower = %对象_吃时% + 1;
 CONST.CHAR_DataPN = %对象_DataPN%;
@@ -2859,7 +2865,7 @@ CONST.对象_经验 = %对象_经验%;
 CONST.对象_升级点 = %对象_升级点%;
 CONST.对象_图类 = %对象_图类%;
 CONST.对象_名色 = %对象_名色%;
---CONST.对象_ALLOCPOINT = %对象_ALLOCPOINT%;
+CONST.对象_ALLOCPOINT = %对象_ALLOCPOINT%;
 CONST.对象_吃时 = %对象_吃时%;
 CONST.对象_DataPN = %对象_DataPN%;
 CONST.宠物_主人RegistNumber = %宠物_主人RegistNumber%;
@@ -3034,8 +3040,8 @@ CONST.对象_魔攻 = %对象_魔攻%;
 CONST.对象_魔法攻击力 = %对象_魔法攻击力%;
 CONST.对象_魔强 = %对象_魔强%;
 CONST.对象_魔抗 = %对象_魔抗%;
---CONST.对象_魔法防御力 = %对象_魔法防御力%;
---CONST.对象_魔法抗性 = %对象_魔法抗性%;
+CONST.对象_魔法防御力 = %对象_魔法防御力%;
+CONST.对象_魔法抗性 = %对象_魔法抗性%;
 CONST.对象_香下限 = %对象_香下限%;
 CONST.对象_香上限 = %对象_香上限%;
 CONST.对象_香步数 = %对象_香步数%;
@@ -3477,11 +3483,11 @@ CONST.道栏_17 = %道栏_17%;
 CONST.道栏_18 = %道栏_18%;
 CONST.道栏_19 = %道栏_19%;
 CONST.道栏_20 = %道栏_20%;
---CONST.宠物栏_1 = %宠物栏_1%;
---CONST.宠物栏_2 = %宠物栏_2%;
---CONST.宠物栏_3 = %宠物栏_3%;
---CONST.宠物栏_4 = %宠物栏_4%;
---CONST.宠物栏_5 = %宠物栏_5%;
+CONST.宠物栏_1 = %宠物栏_1%;
+CONST.宠物栏_2 = %宠物栏_2%;
+CONST.宠物栏_3 = %宠物栏_3%;
+CONST.宠物栏_4 = %宠物栏_4%;
+CONST.宠物栏_5 = %宠物栏_5%;
 CONST.队员_1 = %队员_1%;
 CONST.队员_2 = %队员_2%;
 CONST.队员_3 = %队员_3%;
@@ -3574,9 +3580,56 @@ CONST.Enemy_是否BOSS = %Enemy_是否BOSS%;
 CONST.Enemy_召唤Enemy1 = %Enemy_召唤Enemy1%;
 CONST.Enemy_召唤Enemy2 = %Enemy_召唤Enemy2%;
 CONST.Enemy_Talk编号 = %Enemy_Talk编号%;
+CONST.道具_TIMELIMIT = %道具_TIMELIMIT%;
+CONST.道具_ENDTIME = %道具_ENDTIME%;
+CONST.道具_VAR1 = %道具_VAR1%;
+CONST.道具_VAR2 = %道具_VAR2%;
+CONST.道具_VAR3 = %道具_VAR3%;
+CONST.道具_VAR4 = %道具_VAR4%;
 ]]
 
-loadstring(TEXT)();
---for i, v in pairs(CONST) do
---print('const ', i, v);
---end
+local split = function(str, separator)
+  local str = tostring(str)
+  local separator = tostring(separator)
+  local strB, arrayIndex = 1, 1
+  local targetArray = {}
+  if (separator == nil)
+  then
+    return false
+  end
+  local condition = true
+  while (condition)
+  do
+    local si, sd = string.find(str, separator, strB)
+    if (si)
+    then
+      targetArray[arrayIndex] = string.sub(str, strB, si - 1)
+      arrayIndex = arrayIndex + 1
+      strB = sd + 1
+    else
+      targetArray[arrayIndex] = string.sub(str, strB, string.len(str))
+      condition = false
+    end
+  end
+  return targetArray
+end
+
+for i, p in ipairs(split(TEXT, ";")) do
+  -- print(i, p);
+  local s, e = pcall(loadstring, p);
+  if s ~= true then
+    print("Load CONST error: ", p, s, e);
+  else
+    if e then
+      e();
+    else
+      print(p, s, e)
+    end    
+  end 
+end
+-- print(CONST.对象_声望获取时间, %对象_声望获取时间%)
+ 
+-- for i, v in pairs(CONST) do
+-- print('const ', i, v);
+-- end
+

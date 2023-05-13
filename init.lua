@@ -1,4 +1,5 @@
 _HookVer = '0.2.31'
+_HookFunc = false;
 if NL.Version == nil or NL.Version() < 20230511 then
   if getHookVer == nil then
     error(string.format('[ERR]HOOK not load %s', _HookVer))
@@ -13,6 +14,7 @@ if NL.Version == nil or NL.Version() < 20230511 then
   print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+  _HookFunc = true;
 end
 print("[LUA]Initial Lua System......")
 collectgarbage()
@@ -20,15 +22,13 @@ collectgarbage('stop')
 math.randomseed(os.time())
 dofile('lua/Const.lua')
 dofile('lua/Util.lua')
-if NL.Version == nil and getHookVer then
-  dofile('lua/libs/GmsvExtension.lua')
-end
+dofile('lua/libs/GmsvExtension.lua')
 dofile('lua/libs/ModuleSystem.lua')
 collectgarbage('restart')
 collectgarbage()
 print("[LUA]Initial Lua System done.")
 dofile('lua/ModuleConfig.lua')
 pcall(dofile, 'lua/Modules/Private/Config.lua')
-if NL.Version == nil and getHookVer then
+if _HookFunc then
   NL.EmitInit()
 end

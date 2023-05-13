@@ -1,5 +1,5 @@
 function Item.GetSlot(charIndex, itemIndex)
-  for i = 0, 27 do
+  for i = 8, 27 do
     if Char.GetItemIndex(charIndex, i) == itemIndex then
       return i;
     end
@@ -78,4 +78,22 @@ end
 
 function Item.isCrystal(itemIndex)
   return Item.Types.CrystalType == Item.GetData(itemIndex, CONST.道具_类型)
+end
+
+if Item.SetTimeLimit == nil then
+  ---设置限时道具
+  ---@param CharIndex number
+  ---@param ItemIndex number
+  ---@param Time number 时间秒
+  function Item.SetTimeLimit(CharIndex, ItemIndex, Time)
+    if Time < 0 then
+      Item.SetData(ItemIndex, 0x44, 0);
+      Item.SetData(ItemIndex, 0x45, 0);
+    else
+      Item.SetData(ItemIndex, 0x44, 1);
+      Item.SetData(ItemIndex, 0x45, Time + os.time());
+    end
+    local slot = Item.GetSlot(CharIndex, ItemIndex)
+    Item.UpItem(CharIndex, slot);
+  end
 end
