@@ -263,16 +263,16 @@ CONST.道具_所有者 = 0x000002E4 / 4;
 CONST.CHAR_ENEMY_AI = 499;
 CONST.PET_DepartureBattleStatus = 0xCC / 4 + 0x58 / 4;
 --
-CONST.CHAR_PlayerFD = 0x7BC / 4;
-CONST.CHAR_BattleMode = 0x00000000 / 4 + 0x5e8 / 4;
-CONST.CHAR_BattleIndex = 0x00000004 / 4 + 0x5e8 / 4;
-CONST.CHAR_BattleSide = 0x00000008 / 4 + 0x5e8 / 4;
-CONST.CHAR_BattleCom1 = 0x0000000C / 4 + 0x5e8 / 4;
-CONST.CHAR_BattleCom2 = 0x00000010 / 4 + 0x5e8 / 4;
-CONST.CHAR_BattleCom3 = 0x00000014 / 4 + 0x5e8 / 4;
-CONST.CHAR_Battle2Com1 = 0x00000018 / 4 + 0x5e8 / 4;
-CONST.CHAR_Battle2Com2 = 0x0000001C / 4 + 0x5e8 / 4;
-CONST.CHAR_Battle2Com3 = 0x00000020 / 4 + 0x5e8 / 4;
+CONST.CHAR_PlayerFD = CONST.对象_FD or (0x7BC / 4);
+CONST.CHAR_BattleMode = CONST.对象_战斗状态 or (0x00000000 / 4 + 0x5e8 / 4);
+CONST.CHAR_BattleIndex = CONST.对象_战斗Index or (0x00000004 / 4 + 0x5e8 / 4);
+CONST.CHAR_BattleSide = CONST.对象_战斗Side or (0x00000008 / 4 + 0x5e8 / 4);
+CONST.CHAR_BattleCom1 = CONST.CHAR_BattleSide + 1;
+CONST.CHAR_BattleCom2 = CONST.CHAR_BattleSide + 2;
+CONST.CHAR_BattleCom3 = CONST.CHAR_BattleSide + 3;
+CONST.CHAR_Battle2Com1 = CONST.CHAR_BattleSide + 4;
+CONST.CHAR_Battle2Com2 = CONST.CHAR_BattleSide + 5;
+CONST.CHAR_Battle2Com3 = CONST.CHAR_BattleSide + 6;
 CONST.CHAR_BattleDamageAbsrob = (0x0000009C + 0x5e8) / 4;
 CONST.CHAR_BattleDamageReflec = (0x000000A0 + 0x5e8) / 4;
 CONST.CHAR_BattleDamageVanish = (0x000000A4 + 0x5e8) / 4;
@@ -860,15 +860,15 @@ CONST.ITEM_TYPE_香草 = 0;
 CONST.ITEM_TYPE_药草 = 0;
 CONST.ITEM_TYPE_宝石 = 0;
 CONST.ITEM_TYPE_B类材料 = 0;
-CONST.ITEM_TYPE_封印卡 = 40;--封印卡;
-CONST.ITEM_TYPE_图鉴卡 = 41;--图鉴卡;
-CONST.ITEM_TYPE_料理_其他 = 42;--料理;
-CONST.ITEM_TYPE_药水 = 43;--药水;
-CONST.ITEM_TYPE_书 = 44;--书（貌似古文书和4.0以后的那几本没用的书）;
-CONST.ITEM_TYPE_未知_地图 = 45;--未知（地图）;
-CONST.ITEM_TYPE_其它_红色三棱镜 = 46;--其它（红色三棱镜）;
-CONST.ITEM_TYPE_彩票 = 47;--彩票;
-CONST.ITEM_TYPE_很多物品 = 48;--很多物品，有通行证，骑宠学习手册，树海的钥匙;
+CONST.ITEM_TYPE_封印卡 = 40; --封印卡;
+CONST.ITEM_TYPE_图鉴卡 = 41; --图鉴卡;
+CONST.ITEM_TYPE_料理_其他 = 42; --料理;
+CONST.ITEM_TYPE_药水 = 43;   --药水;
+CONST.ITEM_TYPE_书 = 44;      --书（貌似古文书和4.0以后的那几本没用的书）;
+CONST.ITEM_TYPE_未知_地图 = 45; --未知（地图）;
+CONST.ITEM_TYPE_其它_红色三棱镜 = 46; --其它（红色三棱镜）;
+CONST.ITEM_TYPE_彩票 = 47;   --彩票;
+CONST.ITEM_TYPE_很多物品 = 48; --很多物品，有通行证，骑宠学习手册，树海的钥匙;
 CONST.道具_鉴前名 = 0;
 CONST.道具_名字 = 0;
 CONST.道具_刻印 = 0;
@@ -3622,12 +3622,11 @@ for i, p in ipairs(split(TEXT, ";")) do
       e();
     else
       print("not found", p, s, e)
-    end    
-  end 
+    end
+  end
 end
 -- print(CONST.对象_声望获取时间, %对象_声望获取时间%)
- 
+
 -- for i, v in pairs(CONST) do
 -- print('const ', i, v);
 -- end
-
