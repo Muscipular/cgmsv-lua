@@ -108,7 +108,7 @@ function commands.createDummy(charIndex, args)
   --local petIndex = Char.GetPet(charIndex1, 0);
   --Char.SetData(petIndex, CONST.PET_DepartureBattleStatus, CONST.PET_STATE_Õ½¶·);
   NLG.SystemMessage(charIndex, 'dummy: ' .. charIndex1)
-  Char.JoinParty(charIndex1, charIndex);
+  Char.JoinParty(charIndex1, charIndex, true);
 end
 
 function commands.setCharData(charIndex, args)
