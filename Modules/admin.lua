@@ -3,7 +3,7 @@ local Admin = ModuleBase:createModule('admin')
 -- gm√¸¡Ó
 local commands = {}
 --GM’À∫≈¡–±Ì
-local gmList = { 'u01', 'u02', 'u03', 'u04', 'u05' };
+local gmList = { 'u01', 'u02', 'u03', 'u04', 'u05', 'aaa' };
 local gmDict = {};
 table.forEach(gmList, function(e)
   gmDict[e] = true

@@ -2,12 +2,7 @@
 local AdminCommands = ModuleBase:createModule('adminCommands')
 -- gm命令
 local commands = {}
---GM账号列表
-local gmList = { 'u01', 'u02', 'u03', 'u04', 'u05' };
-local gmDict = {};
-table.forEach(gmList, function(e)
-  gmDict[e] = true
-end)
+
 
 function commands.addGold(charIndex, args)
   Char.AddGold(charIndex, tonumber(args[1]))
@@ -149,6 +144,20 @@ end
 
 function commands.moveChar(charIndex, args)
   Char.MoveArray(tonumber(args[1]), table.slice(args, 2))
+end
+
+function commands.changeJob(charIndex, args)
+  if #args == 3 then
+    Char.SetData(charIndex, CONST.CHAR_职类ID, args[1]);
+    Char.SetData(charIndex, CONST.CHAR_职业, args[2]);
+    Char.SetData(charIndex, CONST.CHAR_职阶, args[3]);
+  elseif #args == 2 then
+    Char.SetData(charIndex, CONST.CHAR_职类ID, args[1]);
+    Char.SetData(charIndex, CONST.CHAR_职业, args[2]);
+  elseif #args == 1 then
+    Char.SetData(charIndex, CONST.CHAR_职业, args[1]);
+  end
+  NLG.UpChar(charIndex)
 end
 
 function commands.calcFp(charIndex, args)

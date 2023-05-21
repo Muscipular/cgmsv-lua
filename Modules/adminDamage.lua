@@ -48,6 +48,22 @@ function Module:onLoad()
     end
     return 1
   end)
+  adminCommands:regCommand('fp', function(c, args)
+    if args[1] then
+      NLG.SystemMessage(c, 'fp调整为: ' .. args[1])
+      Char.SetData(c, CONST.CHAR_魔, tonumber(args[1]))
+      NLG.UpChar(c)
+    end
+    return 1
+  end)
+  adminCommands:regCommand('fp2', function(c, args)
+    if args[1] then
+      NLG.SystemMessage(c, 'fp调整为: ' .. args[1] .. '%')
+      Char.SetData(c, CONST.CHAR_魔, tonumber(args[1]) / 100 * Char.GetData(c, CONST.CHAR_最大魔));
+      NLG.UpChar(c)
+    end
+    return 1
+  end)
   self:regCallback('DamageCalculateEvent', function(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
     local admin = getModule('admin')--[[@as Admin]]
     if admin:isAdmin(charIndex) and self.dmg ~= nil then
