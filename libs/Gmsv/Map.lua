@@ -66,7 +66,7 @@ function Map.SetDungeonExpireAt(floor, time)
   return Map.SetDungeonExpireAtByDungeonId(cfgId, time)
 end
 
-if Map.SetDungeonExpireAtByDungeonId then
+if Map.SetDungeonExpireAtByDungeonId == nil then
   ---根据迷宫Id设置迷宫重置时间
   function Map.SetDungeonExpireAtByDungeonId(dungeonId, time)
     for i = 0, Addresses.ActiveDungeon_TBL_SIZE - 1 do

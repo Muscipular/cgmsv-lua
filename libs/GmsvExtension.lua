@@ -23,6 +23,7 @@ dofile('lua/libs/Gmsv/NL_RegPartyEvent_Patch.lua')
 dofile('lua/libs/Gmsv/NL_GetLoginPoint_Patch.lua')
 dofile('lua/libs/Gmsv/BATTLE_PVE_PATCH.lua')
 dofile('lua/libs/Gmsv/TechOptionEventPatch.lua')
+dofile('lua/libs/Gmsv/Map.lua')
 
 Addresses.load();
 
@@ -31,4 +32,3 @@ dofile('lua/libs/Gmsv/ItemEx.lua')
 dofile('lua/libs/Gmsv/DataEx.lua')
 dofile('lua/libs/Gmsv/CharEx.lua')
 dofile('lua/libs/Gmsv/BattleEx.lua')
-dofile('lua/libs/Gmsv/Map.lua')
