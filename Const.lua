@@ -25,6 +25,8 @@ CONST.DamageFlags = {
   Combo = 8,
   ---合击暴击
   ComboCritical = 9,
+  ---合并最终伤害
+  ComboFinal = 10,
   ---战栗
   FpDamage = 11,
   --ComboFinal = 10,
