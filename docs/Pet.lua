@@ -1,7 +1,3 @@
----@alias string string
----@alias number number
-
-
 ---获取指定宠物的指定属性的成长值，使用该函数减去FullArtRank函数的结果，就是宠物的档数信息。
 ---@param PetIndex  number 目标宠物对象index。
 ---@param ArtType  number 要查看的属性，具体请参考附录的宠物常量。
@@ -33,8 +29,7 @@ function Pet.ReBirth(PlayerIndex, PetIndex) end
 ---@return any @
 function Pet.UpPet(PlayerIndex, PetIndex) end
 
----获取宠物的拥有者对象index。
-注意:如果宠物丢在地上,或者主人已经下线返回值为-1
+---获取宠物的拥有者对象index。 注意:如果宠物丢在地上,或者主人已经下线返回值为-1
 ---@param PetIndex  number 目标宠物对象index。
 ---@return number @返回-1为未找到，否则为对象index。
 function Pet.GetOwner(PetIndex) end

@@ -1,17 +1,13 @@
----@alias string string
----@alias number number
-
-
 ---获取配方指定信息栏数据
 ---@param recipeNo number 配方id
----@param dataLine CONST.ITEM_RECIPE
+---@param dataLine number CONST.ITEM_RECIPE
 ---@return any @指定信息栏信息
 function Recipe.GetData(recipeNo, dataLine) end
 
 ---指定配方指定信息栏数据
 ---@param recipeNo number 配方id
----@param dataLine CONST.ITEM_RECIPE
----@param val 指定值
+---@param dataLine number CONST.ITEM_RECIPE
+---@param val string|number 指定值
 ---@return any @
 function Recipe.SetData(recipeNo, dataLine,val) end
 

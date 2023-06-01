@@ -1,18 +1,14 @@
----@alias string string
----@alias number number
-
-
 ---创建一个指定封包接受到后触发的函数
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[OnRecvCallBack]
----@param PacketID  number 封包头定义，请参考附录的[常量定义]。
+---@param PacketID  string 封包头
 ---@return any @
 function Protocol.OnRecv(Dofile, FuncName, PacketID) end
 
 ---OnRecv的回调函数
 ---@param Fd  number 响应事件的对象的网络套接字ID，该值由Lua引擎传递给本函数，可以通过Protocol.GetCharByFd获取对应的玩家对象。
----@param Head  number 封包头定义，请参考[常量定义]。
----@param Packet  string 封包内容，用” “间隔封包内容。
+---@param Head  string 封包头
+---@param Packet  string[] 封包内容。
 ---@return number @返回0则不拦截该封包，返回1则拦截该封包（服务端将不会进一步处理该封包，等同于中转封包过滤）。
 function OnRecvCallBack(Fd, Head, Packet) end
 
@@ -22,26 +18,26 @@ function OnRecvCallBack(Fd, Head, Packet) end
 function Protocol.GetCharByFd(Fd) end
 
 ---根据玩家客户端连接号获取玩家对象
----@param Fd  number 网络套接字ID。
+---@param fd  number 网络套接字ID。
 ---@return number @成功返回对象index，失败返回-1。
 function Protocol.GetCharIndexFromFd(fd) end
 
 ---自定义发送封包。
 ---@param CharIndex  number 目标的 对象index。
----@param PacketID  number 封包头定义，请参考附录的[常量定义]。
----@param Packet  string 封包内容。
+---@param header  string 封包头
+---@param ...string|number 封包内容
 ---@return number @返回0失败，返回1成功。
-function Protocol.Send(CharIndex, PacketID, Packet) end
+function Protocol.Send(CharIndex, header, ...) end
 
 ---自定义发送封包。
----@param CharIndex  number 目标的 对象index。
----@param PacketID  number 封包头定义，请参考附录的[常量定义]。
----@param Packet  string 封包内容。
+---@param fd  number 网络套接字ID。
+---@param header  number 封包头
+---@param ...string|number 封包内容
 ---@return number @返回0失败，返回1成功。
 function Protocol.SendToFd(fd, header, ...) end
 
 ---获取客户端IP
----@param Fd  number 网络套接字ID。
+---@param fd  number 网络套接字ID。
 ---@return any @ip
 function Protocol.GetIp(fd) end
 
