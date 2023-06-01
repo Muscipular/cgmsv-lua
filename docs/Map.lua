@@ -1,5 +1,5 @@
----@alias 字符串 string
----@alias 数值型 number
+---@alias string string
+---@alias number number
 
 
 ---获取迷宫Id
@@ -48,28 +48,28 @@ function Map.SetImage(Map,Floor,Xpos,Ypos,Tile,Obj) end
 function Map.GetMapSize(Map,Floor) end
 
 ---创建复制地图。新地图的mapid为CONST.地图类型_LUAMAP
----@param mapid  数值型 要复制的地图的Map ID。
----@param floor  数值型 要复制的地图的Floor ID。
+---@param mapid  number 要复制的地图的Map ID。
+---@param floor  number 要复制的地图的Floor ID。
 ---@return number @成功返回新的FloorID，失败返回-1。
 function Map.MakeCopyMap(mapid, floor) end
 
 ---删除Lua生成的地图，释放地图编号。
----@param floor  数值型 地图的Floor ID。
+---@param floor  number 地图的Floor ID。
 ---@return number @成功返回0，失败返回-1。
 function Map.DelLuaMap(floor) end
 
 ---创建随机地图。
 ---@param Dofile 回调函数所在文件 字符串
 ---@param InitFuncName 回调函数名，当随机地图生成成功以后，会触发定义的回调函数 MakeMazeMapCallBack 字符串
----@param Xsize地图x坐标最大值 数值型
+---@param Xsize地图x坐标最大值 number
 ---@param Ysize 地图y坐标最大值 数值型
 ---@param MapName 地图名 字符串
 ---@return number @成功返回新的FloorID，失败返回-1。
 function Map.MakeMazeMap(Dofile, InitFuncName,Xsize,Ysize,MapName) end
 
 ---这个是Map.MakeMazeMap生成随机地图结果的回调函数
----@param FloodID  数值型 生成的地图的编号
----@param Doneflg  数值型 生成地图的结果，如果该值为1则生成成功，如果为0则生成失败。
+---@param FloodID  number 生成的地图的编号
+---@param Doneflg  number 生成地图的结果，如果该值为1则生成成功，如果为0则生成失败。
 ---@return any @
 function MapCallBack(FloorID, Doneflg) end
 

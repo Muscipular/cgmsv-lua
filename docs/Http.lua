@@ -1,5 +1,5 @@
----@alias 字符串 string
----@alias 数值型 number
+---@alias string string
+---@alias number number
 
 
 ---初始化Http服务器

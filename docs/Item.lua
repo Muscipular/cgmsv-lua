@@ -1,30 +1,30 @@
----@alias 字符串 string
----@alias 数值型 number
+---@alias string string
+---@alias number number
 
 
 ---获取道具对象index的指定信息。
----@param ItemIndex  数值型 目标的 道具index。
----@param Dataline  数值型 说指定的对象实例信息栏位，具体栏位常量请查看附录。
+---@param ItemIndex  number 目标的 道具index。
+---@param Dataline  number 说指定的对象实例信息栏位，具体栏位常量请查看附录。
 ---@return any @指定信息栏位的值
 function Item.GetData(ItemIndex,Dataline) end
 
 ---设置道具对象index的指定信息。
----@param CharIndex  数值型 目标的 道具对象index。
----@param Dataline  数值型 说指定的对象实例信息栏位，具体栏位常量请查看附录。
----@param Data  数值型 或 字符串 新的值
+---@param CharIndex  number 目标的 道具对象index。
+---@param Dataline  number 说指定的对象实例信息栏位，具体栏位常量请查看附录。
+---@param Data  number 或 字符串 新的值
 ---@return any @0为失败，1为成功。
 function Item.SetData(ItemIndex,Dataline,Data) end
 
 ---发送更新道具的封包给关联的玩家。
----@param CharIndex  数值型 目标对象index。
----@param Slot  数值型 指定背包的位置，如果为-1则遍历所有的道具。
+---@param CharIndex  number 目标对象index。
+---@param Slot  number 指定背包的位置，如果为-1则遍历所有的道具。
 ---@return any @
 function Item.UpItem(CharIndex, Slot) end
 
 ---删除道具并且发送封包通知玩家。
----@param CharIndex  数值型 目标对象index。
----@param ItemIndex  数值型 目标道具index。
----@param Slot  数值型 指定背包的位置。
+---@param CharIndex  number 目标对象index。
+---@param ItemIndex  number 目标道具index。
+---@param Slot  number 指定背包的位置。
 ---@return number @道具删除成功返回1,失败返回0或负数。
 function Item.Kill(CharIndex, ItemIndex, Slot) end
 
