@@ -1,33 +1,35 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----è·å–é…æ–¹æŒ‡å®šä¿¡æ¯æ æ•°æ®
----@param recipeNo number é…æ–¹id
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---»ñÈ¡Åä·½Ö¸¶¨ĞÅÏ¢À¸Êı¾İ
+---@param recipeNo number Åä·½id
 ---@param dataLine CONST.ITEM_RECIPE
----@return any æŒ‡å®šä¿¡æ¯æ ä¿¡æ¯
+---@return any Ö¸¶¨ĞÅÏ¢À¸ĞÅÏ¢
 function Recipe.GetData(recipeNo, dataLine) end
 
----æŒ‡å®šé…æ–¹æŒ‡å®šä¿¡æ¯æ æ•°æ®
----@param recipeNo number é…æ–¹id
+---Ö¸¶¨Åä·½Ö¸¶¨ĞÅÏ¢À¸Êı¾İ
+---@param recipeNo number Åä·½id
 ---@param dataLine CONST.ITEM_RECIPE
----@param val æŒ‡å®šå€¼
+---@param val Ö¸¶¨Öµ
 ---@return any 
 function Recipe.SetData(recipeNo, dataLine,val) end
 
----ä¹ å¾—é…æ–¹
----@param charIndex number å¯¹è±¡index
----@param recipeNo number é…æ–¹id
----@return number æˆåŠŸæ—¶è¿”å› 1, å¤±è´¥è¿”å› 0, charIndexæ— æ•ˆè¿”å› -1, é…æ–¹æ— æ•ˆè¿”å› -2, é…æ–¹å·²è·å¾—è¿”å› -3
+---Ï°µÃÅä·½
+---@param charIndex number ¶ÔÏóindex
+---@param recipeNo number Åä·½id
+---@return number ³É¹¦Ê±·µ»Ø 1, Ê§°Ü·µ»Ø 0, charIndexÎŞĞ§·µ»Ø -1, Åä·½ÎŞĞ§·µ»Ø -2, Åä·½ÒÑ»ñµÃ·µ»Ø -3
 function Recipe.GiveRecipe(charIndex, recipeNo) end
 
----åˆ é™¤é…æ–¹
----@param charIndex number å¯¹è±¡index
----@param recipeNo number é…æ–¹id
----@return number æˆåŠŸæ—¶è¿”å› 1, å¤±è´¥è¿”å› 0, charIndexæ— æ•ˆè¿”å› -1, é…æ–¹æ— æ•ˆè¿”å› -2, é…æ–¹å·²è·å¾—è¿”å› -3
+---É¾³ıÅä·½
+---@param charIndex number ¶ÔÏóindex
+---@param recipeNo number Åä·½id
+---@return number ³É¹¦Ê±·µ»Ø 1, Ê§°Ü·µ»Ø 0, charIndexÎŞĞ§·µ»Ø -1, Åä·½ÎŞĞ§·µ»Ø -2, Åä·½ÒÑ»ñµÃ·µ»Ø -3
 function Recipe.RemoveRecipe(charIndex, recipeNo) end
 
----åˆ¤æ–­æ˜¯å¦å­¦ä¼šé…æ–¹
----@param charIndex number å¯¹è±¡index
----@param recipeNo number é…æ–¹id CONST.RECIPE
----@return number è¿”å›å€¼ æœ‰é…æ–¹æ—¶è¿”å› 1, æ— é…æ–¹è¿”å› 0, charIndexæ— æ•ˆè¿”å› -1, é…æ–¹æ— æ•ˆè¿”å› -2
+---ÅĞ¶ÏÊÇ·ñÑ§»áÅä·½
+---@param charIndex number ¶ÔÏóindex
+---@param recipeNo number Åä·½id CONST.RECIPE
+---@return number ·µ»ØÖµ ÓĞÅä·½Ê±·µ»Ø 1, ÎŞÅä·½·µ»Ø 0, charIndexÎŞĞ§·µ»Ø -1, Åä·½ÎŞĞ§·µ»Ø -2
 function Recipe.HasRecipe(charIndex, recipeNo) end
 

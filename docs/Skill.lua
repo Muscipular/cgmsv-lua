@@ -1,26 +1,28 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----è·å–æŠ€èƒ½æŒ‡å®šä¿¡æ¯
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---»ñÈ¡¼¼ÄÜÖ¸¶¨ĞÅÏ¢
 ---@param skillIndex
 ---@param dataLine CONST.SKILL
----@return any æŒ‡å®šæŠ€èƒ½ä¿¡æ¯æ ä¿¡æ¯
+---@return any Ö¸¶¨¼¼ÄÜĞÅÏ¢À¸ĞÅÏ¢
 function Skill.GetData(skillIndex, dataLine) end
 
----è®¾ç½®æŠ€èƒ½æŒ‡å®šä¿¡æ¯
+---ÉèÖÃ¼¼ÄÜÖ¸¶¨ĞÅÏ¢
 ---@param skillIndex
 ---@param dataLine CONST.SKILL
----@param val æŒ‡å®šä¿¡æ¯
+---@param val Ö¸¶¨ĞÅÏ¢
 ---@return any 
 function Skill.SetData(skillIndex, dataLine, val) end
 
----è·å–skillIndex
+---»ñÈ¡skillIndex
 ---@param id number skillId
 ---@return number skillIndex
 function Skill.GetSkillIndex(id) end
 
----è·å–èŒä¸šæœ€é«˜æŠ€èƒ½ç­‰çº§
+---»ñÈ¡Ö°Òµ×î¸ß¼¼ÄÜµÈ¼¶
 ---@param skillIndex
----@param job èŒä¸šID
----@return any èŒä¸šæœ€é«˜æŠ€èƒ½ç­‰çº§
+---@param job Ö°ÒµID
+---@return any Ö°Òµ×î¸ß¼¼ÄÜµÈ¼¶
 function Skill.GetMaxSkillLevelOfJob(skillIndex, job) end
 

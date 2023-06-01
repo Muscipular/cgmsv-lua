@@ -1,92 +1,94 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----è·å–Msg
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---»ñÈ¡Msg
 ---@param msgId number
 ---@return any msg
 function Data.GetMessage(msgId) end
 
----è®¾ç½®Msg
+---ÉèÖÃMsg
 ---@param msgId number
 ---@param val string
 ---@return any 
 function Data.SetMessage(msgId, val) end
 
----è®¾ç½®ç§æ—ä¼¤å®³æ¯”ç‡
----@param a number è¿›æ”»ç§æ— æ”¯æŒ 0 ~ 19
----@param b number é˜²å®ˆç§æ— æ”¯æŒ 0 ~ 19
----@param rate number å…‹åˆ¶æ¯”ç‡æ”¯æŒ -128 ~ 127
+---ÉèÖÃÖÖ×åÉËº¦±ÈÂÊ
+---@param a number ½ø¹¥ÖÖ×å Ö§³Ö 0 ~ 19
+---@param b number ·ÀÊØÖÖ×å Ö§³Ö 0 ~ 19
+---@param rate number ¿ËÖÆ±ÈÂÊÖ§³Ö -128 ~ 127
 ---@return any 
 function Data.SetTribeMapValue(a, b, rate) end
 
----è·å–EnemyDataIndex
+---»ñÈ¡EnemyDataIndex
 ---@param enemyId number
 ---@return number EnemyDataIndex
 function Data.EnemyGetDataIndex(enemyId) end
 
----è·å–Enemyæ•°æ®
+---»ñÈ¡EnemyÊı¾İ
 ---@param enemyIndex number
 ---@param DataPos number CONST.DATA_ENEMY
----@return any Enemyæ•°æ®
+---@return any EnemyÊı¾İ
 function Data.EnemyGetData(enemyIndex, DataPos) end
 
----æŒ‡å®šEnemyæ•°æ®
+---Ö¸¶¨EnemyÊı¾İ
 ---@param enemyIndex number
 ---@param DataPos number CONST.DATA_ENEMY
----@param val æŒ‡å®šä¿¡æ¯
+---@param val Ö¸¶¨ĞÅÏ¢
 ---@return any 
 function Data.EnemySetData(enemyIndex, DataPos, val) end
 
----è·å–EnemyBaseDataIndex
+---»ñÈ¡EnemyBaseDataIndex
 ---@param enemyIndex number
 ---@return number EnemyBaseDataIndex
 function Data.EnemyBaseGetDataIndex(enemyBaseId) end
 
----è·å–EnemyBaseæ•°æ®
+---»ñÈ¡EnemyBaseÊı¾İ
 ---@param enemybaseIndex number
 ---@param DataPos number CONST.DATA_ENEMYBASE
----@return any EnemyBaseæ•°æ®
+---@return any EnemyBaseÊı¾İ
 function Data.EnemyBaseGetData(enemyBaseIndex, DataPos) end
 
----æŒ‡å®šEnemyBaseæ•°æ®
+---Ö¸¶¨EnemyBaseÊı¾İ
 ---@param enemybaseIndex number
 ---@param DataPos number CONST.DATA_ENEMYBASE
----@param val æŒ‡å®šä¿¡æ¯
+---@param val Ö¸¶¨ĞÅÏ¢
 ---@return any 
 function Data.EnemyBaseSetData(enemyBaseIndex, DataPos, val) end
 
----è·å–ItemsetIndex
+---»ñÈ¡ItemsetIndex
 ---@param ItemID number
 ---@return number ItemsetIndex
 function Data.ItemsetGetIndex(ItemID) end
 
----è·å–Itemsetæ•°æ®
+---»ñÈ¡ItemsetÊı¾İ
 ---@param ItemsetIndex number
 ---@param DataPos number CONST.ITEMSET
----@return any Itemsetæ•°æ®
+---@return any ItemsetÊı¾İ
 function Data.ItemsetGetData(ItemsetIndex, DataPos) end
 
----æŒ‡å®šItemsetæ•°æ®
+---Ö¸¶¨ItemsetÊı¾İ
 ---@param ItemsetIndex number
 ---@param DataPos number CONST.ITEMSET
----@param val æŒ‡å®šä¿¡æ¯
+---@param val Ö¸¶¨ĞÅÏ¢
 ---@return any 
 function Data.ItemsetSetData(ItemsetIndex, DataPos, val) end
 
----è·å–encountIndex
+---»ñÈ¡encountIndex
 ---@param encountID number
 ---@return number encountIndex
 function Data.GetEncountIndex(encountId) end
 
----è·å–encountæ•°æ®
+---»ñÈ¡encountÊı¾İ
 ---@param encountIndex number
 ---@param DataPos number CONST.ENCOUNT_* 
----@return any encountæ•°æ®
+---@return any encountÊı¾İ
 function Data.GetEncountData(encountIndex,DataPos) end
 
----æŒ‡å®šencountæ•°æ®
+---Ö¸¶¨encountÊı¾İ
 ---@param encountIndex number
 ---@param DataPos number CONST.ENCOUNT_* 
----@param val æŒ‡å®šä¿¡æ¯
+---@param val Ö¸¶¨ĞÅÏ¢
 ---@return any 
 function Data.SetEncountData(encountIndex,DataPos,val) end
 

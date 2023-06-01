@@ -1,15 +1,17 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----è¯»å–ç›®æ ‡ç©å®¶çš„ å¯¹è±¡index æŒ‡å®šFieldçš„å€¼ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Field  å­—ç¬¦ä¸² æ•°æ®æ åç§°ã€‚
----@return any æŒ‡å®šæ•°æ®æ ä¿å­˜çš„æ•°å€¼ã€‚
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---¶ÁÈ¡Ä¿±êÍæ¼ÒµÄ ¶ÔÏóindex Ö¸¶¨FieldµÄÖµ¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Field  ×Ö·û´® Êı¾İÀ¸Ãû³Æ¡£
+---@return any Ö¸¶¨Êı¾İÀ¸±£´æµÄÊıÖµ¡£
 function Field.Get(CharIndex, Field) end
 
----è®¾ç½®ç›®æ ‡ç©å®¶çš„ å¯¹è±¡index æŒ‡å®šFieldçš„å€¼ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Field  å­—ç¬¦ä¸² æ•°æ®æ åç§°ã€‚
----@param Value  å­—ç¬¦ä¸² è¦å®šä¹‰çš„å€¼ã€‚
+---ÉèÖÃÄ¿±êÍæ¼ÒµÄ ¶ÔÏóindex Ö¸¶¨FieldµÄÖµ¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Field  ×Ö·û´® Êı¾İÀ¸Ãû³Æ¡£
+---@param Value  ×Ö·û´® Òª¶¨ÒåµÄÖµ¡£
 ---@return any 
 function Field.Set(CharIndex, Field, Value) end
 

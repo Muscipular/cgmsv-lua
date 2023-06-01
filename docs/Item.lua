@@ -1,91 +1,93 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----è·å–é“å…·å¯¹è±¡indexçš„æŒ‡å®šä¿¡æ¯ã€‚
----@param ItemIndex  æ•°å€¼å‹ ç›®æ ‡çš„ é“å…·indexã€‚
----@param Dataline  æ•°å€¼å‹ è¯´æŒ‡å®šçš„å¯¹è±¡å®ä¾‹ä¿¡æ¯æ ä½ï¼Œå…·ä½“æ ä½å¸¸é‡è¯·æŸ¥çœ‹é™„å½•ã€‚
----@return any æŒ‡å®šä¿¡æ¯æ ä½çš„å€¼
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---»ñÈ¡µÀ¾ß¶ÔÏóindexµÄÖ¸¶¨ĞÅÏ¢¡£
+---@param ItemIndex  ÊıÖµĞÍ Ä¿±êµÄ µÀ¾ßindex¡£
+---@param Dataline  ÊıÖµĞÍ ËµÖ¸¶¨µÄ¶ÔÏóÊµÀıĞÅÏ¢À¸Î»£¬¾ßÌåÀ¸Î»³£Á¿Çë²é¿´¸½Â¼¡£
+---@return any Ö¸¶¨ĞÅÏ¢À¸Î»µÄÖµ
 function Item.GetData(ItemIndex,Dataline) end
 
----è®¾ç½®é“å…·å¯¹è±¡indexçš„æŒ‡å®šä¿¡æ¯ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡çš„ é“å…·å¯¹è±¡indexã€‚
----@param Dataline  æ•°å€¼å‹ è¯´æŒ‡å®šçš„å¯¹è±¡å®ä¾‹ä¿¡æ¯æ ä½ï¼Œå…·ä½“æ ä½å¸¸é‡è¯·æŸ¥çœ‹é™„å½•ã€‚
----@param Data  æ•°å€¼å‹ æˆ– å­—ç¬¦ä¸² æ–°çš„å€¼
----@return any 0ä¸ºå¤±è´¥ï¼Œ1ä¸ºæˆåŠŸã€‚
+---ÉèÖÃµÀ¾ß¶ÔÏóindexµÄÖ¸¶¨ĞÅÏ¢¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±êµÄ µÀ¾ß¶ÔÏóindex¡£
+---@param Dataline  ÊıÖµĞÍ ËµÖ¸¶¨µÄ¶ÔÏóÊµÀıĞÅÏ¢À¸Î»£¬¾ßÌåÀ¸Î»³£Á¿Çë²é¿´¸½Â¼¡£
+---@param Data  ÊıÖµĞÍ »ò ×Ö·û´® ĞÂµÄÖµ
+---@return any 0ÎªÊ§°Ü£¬1Îª³É¹¦¡£
 function Item.SetData(ItemIndex,Dataline,Data) end
 
----å‘é€æ›´æ–°é“å…·çš„å°åŒ…ç»™å…³è”çš„ç©å®¶ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@param Slot  æ•°å€¼å‹ æŒ‡å®šèƒŒåŒ…çš„ä½ç½®ï¼Œå¦‚æœä¸º-1åˆ™éå†æ‰€æœ‰çš„é“å…·ã€‚
+---·¢ËÍ¸üĞÂµÀ¾ßµÄ·â°ü¸ø¹ØÁªµÄÍæ¼Ò¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@param Slot  ÊıÖµĞÍ Ö¸¶¨±³°üµÄÎ»ÖÃ£¬Èç¹ûÎª-1Ôò±éÀúËùÓĞµÄµÀ¾ß¡£
 ---@return any 
 function Item.UpItem(CharIndex, Slot) end
 
----åˆ é™¤é“å…·å¹¶ä¸”å‘é€å°åŒ…é€šçŸ¥ç©å®¶ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@param ItemIndex  æ•°å€¼å‹ ç›®æ ‡é“å…·indexã€‚
----@param Slot  æ•°å€¼å‹ æŒ‡å®šèƒŒåŒ…çš„ä½ç½®ã€‚
----@return number é“å…·åˆ é™¤æˆåŠŸè¿”å›1,å¤±è´¥è¿”å›0æˆ–è´Ÿæ•°ã€‚
+---É¾³ıµÀ¾ß²¢ÇÒ·¢ËÍ·â°üÍ¨ÖªÍæ¼Ò¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@param ItemIndex  ÊıÖµĞÍ Ä¿±êµÀ¾ßindex¡£
+---@param Slot  ÊıÖµĞÍ Ö¸¶¨±³°üµÄÎ»ÖÃ¡£
+---@return number µÀ¾ßÉ¾³ı³É¹¦·µ»Ø1,Ê§°Ü·µ»Ø0»ò¸ºÊı¡£
 function Item.Kill(CharIndex, ItemIndex, Slot) end
 
----åˆ›å»ºæ–°çš„é“å…·ç±»å‹
----@param type number é“å…·ç±»å‹ç¼–å·
----@param name string é“å…·ç±»å‹åç§°
----@param defaultImage number æœªé‰´å®šæ—¶å›¾æ¡£
----@param place number è£…å¤‡ä½ç½®
----@param flags number æ­¦å™¨ç±»å‹ã€‚1-æ™®é€šæ­¦å™¨ï¼Œ2-å¼“ï¼Œ4-å°åˆ€ï¼Œ8-å›åŠ›é•–ï¼Œ255-æ‰€æœ‰æ­¦å™¨ï¼ŒæŠ•æ·ç±»æ­¦å™¨=2+4+8=14
+---´´½¨ĞÂµÄµÀ¾ßÀàĞÍ
+---@param type number µÀ¾ßÀàĞÍ±àºÅ
+---@param name string µÀ¾ßÀàĞÍÃû³Æ
+---@param defaultImage number Î´¼ø¶¨Ê±Í¼µµ
+---@param place number ×°±¸Î»ÖÃ
+---@param flags number ÎäÆ÷ÀàĞÍ¡£1-ÆÕÍ¨ÎäÆ÷£¬2-¹­£¬4-Ğ¡µ¶£¬8-»ØÁ¦ïÚ£¬255-ËùÓĞÎäÆ÷£¬Í¶ÖÀÀàÎäÆ÷=2+4+8=14
 ---@return any 
 function Item.CreateNewItemType(type, name, defaultImage, place, flags)) end
 
----è·å¾—æ–°å¾—é“å…·ç±»å‹ä¿¡æ¯
----@param type number é“å…·ç±»å‹ç¼–å·
----@return any number, type, number, number, number	ç”±CreateNewItemTypeè¾“å…¥çš„type, name, place, defaultImage, flags
+---»ñµÃĞÂµÃµÀ¾ßÀàĞÍĞÅÏ¢
+---@param type number µÀ¾ßÀàĞÍ±àºÅ
+---@return any number, type, number, number, number	ÓÉCreateNewItemTypeÊäÈëµÄtype, name, place, defaultImage, flags
 function Item.GetNewItemType(type) end
 
----è·å–æ‰©å±•è‡ªå®šä¹‰ç‰©å“ç±»åˆ«èŒä¸šè£…å¤‡ç­‰çº§
----@param job number èŒä¸šID
----@param type number é“å…·ç±»å‹
----@return any è¯¥ç‰©å“ç±»åˆ«çš„èŒä¸šè£…å¤‡ç­‰çº§
+---»ñÈ¡À©Õ¹×Ô¶¨ÒåÎïÆ·Àà±ğÖ°Òµ×°±¸µÈ¼¶
+---@param job number Ö°ÒµID
+---@param type number µÀ¾ßÀàĞÍ
+---@return any ¸ÃÎïÆ·Àà±ğµÄÖ°Òµ×°±¸µÈ¼¶
 function Item.GetItemTypeEquipLevelForJob(job, type) end
 
----æ‰©å±•è‡ªå®šä¹‰ç‰©å“ç±»åˆ«èŒä¸šè£…å¤‡ç­‰çº§
----@param job number èŒä¸šID
----@param type number é“å…·ç±»å‹
----@param level number èŒä¸šè£…å¤‡ç­‰çº§
+---À©Õ¹×Ô¶¨ÒåÎïÆ·Àà±ğÖ°Òµ×°±¸µÈ¼¶
+---@param job number Ö°ÒµID
+---@param type number µÀ¾ßÀàĞÍ
+---@param level number Ö°Òµ×°±¸µÈ¼¶
 ---@return any 
 function Item.SetItemTypeEquipLevelForJob(job, type, level) end
 
----è·å–é“å…·çš„userdata
----@param ItemIndex number é“å…·index
----@return any é“å…·çš„userdata
+---»ñÈ¡µÀ¾ßµÄuserdata
+---@param ItemIndex number µÀ¾ßindex
+---@return any µÀ¾ßµÄuserdata
 function Item.GetCharPointer(ItemIndex) end
 
----å®šä¹‰é“å…·çš„userdata
----@param ItemIndex number é“å…·index
+---¶¨ÒåµÀ¾ßµÄuserdata
+---@param ItemIndex number µÀ¾ßindex
 ---@param val userdata 
 ---@return any 
 function Item.SetCharPointer(ItemIndex, val) end
 
----ç§»é™¤é“å…·çš„userdata
----@param ItemIndex number é“å…·index
----@return any é“å…·çš„userdata
+---ÒÆ³ıµÀ¾ßµÄuserdata
+---@param ItemIndex number µÀ¾ßindex
+---@return any µÀ¾ßµÄuserdata
 function Item.RemoveCharPointer(ItemIndex) end
 
----è·å–itemIdçš„åå­—
----@param itemId number é“å…·id
----@return any string é“å…·å
+---»ñÈ¡itemIdµÄÃû×Ö
+---@param itemId number µÀ¾ßid
+---@return any string µÀ¾ßÃû
 function Item.GetNameFromNumber(ItemId) end
 
----åˆ é™¤é“å…·
----@param ItemIndex number é“å…·index
+---É¾³ıµÀ¾ß
+---@param ItemIndex number µÀ¾ßindex
 ---@return any 
 function Item.UnlinkItem(ItemIndex) end
 
----åˆ¤æ–­é“å…·æ˜¯å¦æ˜¯æ­¦å™¨
----@param ItemIndex number é“å…·index
+---ÅĞ¶ÏµÀ¾ßÊÇ·ñÊÇÎäÆ÷
+---@param ItemIndex number µÀ¾ßindex
 ---@return any 
 function Item.IsWeaponType(ItemIndex) end
 
----åˆ¶ä½œæ–°ç‰©å“ï¼Œæ–°ç‰©å“æ˜¯æ— ä¸»ç‰©å“
----@param itemId number é“å…·id
----@return number number è¿”å›é“å…·itemindex
+---ÖÆ×÷ĞÂÎïÆ·£¬ĞÂÎïÆ·ÊÇÎŞÖ÷ÎïÆ·
+---@param itemId number µÀ¾ßid
+---@return number number ·µ»ØµÀ¾ßitemindex
 function Item.MakeItem(itemId) end
 

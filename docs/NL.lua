@@ -1,974 +1,976 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----ä½¿ç”¨Luaè„šæœ¬åˆ›å»ºNPCï¼Œå¹¶æ‰§è¡ŒDofileæ–‡ä»¶ä¸­çš„InitFuncNameå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² Initå‡½æ•°çš„åç§°,NPCåˆ›å»ºåæ‰§è¡Œçš„å‡½æ•°,ç”³æ˜æ ¼å¼è¯·å‚è€ƒä¸‹é¢çš„[InitCallBack]
----@return number åˆ›å»ºæˆåŠŸåˆ™è¿”å› å¯¹è±¡index, å¤±è´¥åˆ™è¿”å›è´Ÿæ•°
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---Ê¹ÓÃLua½Å±¾´´½¨NPC£¬²¢Ö´ĞĞDofileÎÄ¼şÖĞµÄInitFuncNameº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® Initº¯ÊıµÄÃû³Æ,NPC´´½¨ºóÖ´ĞĞµÄº¯Êı,ÉêÃ÷¸ñÊ½Çë²Î¿¼ÏÂÃæµÄ[InitCallBack]
+---@return number ´´½¨³É¹¦Ôò·µ»Ø ¶ÔÏóindex, Ê§°ÜÔò·µ»Ø¸ºÊı
 function NL.CreateNPC(Dofile, InitFuncName) end
 
----CreateNPCçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯
+---CreateNPCµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É
 function InitCallBack(CharIndex) end
 
----åˆ é™¤ç”¨Luaåˆ›å»ºçš„NPCï¼Œéœ€è¦æ³¨æ„çš„æ˜¯ï¼Œåˆ é™¤NPCåæœ¬å‡½æ•°ä¸ä¼šå°†NpcIndexçš„å€¼è®¾ç½®ä¸ºnilï¼Œè¯·åœ¨å‡½æ•°åè‡ªè¡Œå¤„ç†NpcIndexçš„å€¼ã€‚
----@param NpcIndex  æ•°å€¼å‹ è¦åˆ é™¤çš„Npcçš„å¯¹è±¡æŒ‡é’ˆ
----@return number åˆ›å»ºæˆåŠŸåˆ™è¿”å› 1, å¤±è´¥åˆ™è¿”å› 0
+---É¾³ıÓÃLua´´½¨µÄNPC£¬ĞèÒª×¢ÒâµÄÊÇ£¬É¾³ıNPCºó±¾º¯Êı²»»á½«NpcIndexµÄÖµÉèÖÃÎªnil£¬ÇëÔÚº¯Êıºó×ÔĞĞ´¦ÀíNpcIndexµÄÖµ¡£
+---@param NpcIndex  ÊıÖµĞÍ ÒªÉ¾³ıµÄNpcµÄ¶ÔÏóÖ¸Õë
+---@return number ´´½¨³É¹¦Ôò·µ»Ø 1, Ê§°ÜÔò·µ»Ø 0
 function NL.DelNpc(NpcIndex) end
 
----ç›´æ¥åˆ›å»ºdata/npc.txtä¸­æ”¯æŒçš„å„ç§ç±»å‹çš„npcï¼Œå¯ä»¥ç›´æ¥è°ƒç”¨npc.txtæ”¯æŒçš„npcç±»å‹å’Œç›¸åº”çš„å‚æ•°ï¼Œå¹¶ä¸”å¯ä»¥è·å¾—åˆ›å»ºçš„npcçš„å¯¹è±¡ã€‚
----@param Type  å­—ç¬¦å‹ npcçš„ç±»å‹æ–‡æœ¬ï¼ˆå¤§å°å†™æ•æ„Ÿï¼‰ï¼Œå¦‚â€Itemshop2â€
----@param Arg  å­—ç¬¦å‹ å¯¹åº”çš„npcç±»å‹çš„å‚æ•°ï¼Œå³npc.txtä¸­æ¯ä¸ªnpcçš„æœ€åä¸€ç»„å‚æ•°
----@param Name  å­—ç¬¦å‹ npcæ˜¾ç¤ºçš„åå­—
----@param Image  æ•°å€¼å‹ npcçš„å›¾æ¡£ç¼–å·
----@param Map  æ•°å€¼å‹ npcæ‰€åœ¨çš„MapID
----@param Floor  æ•°å€¼å‹ npcæ‰€åœ¨çš„FloorID
----@param Xpos  æ•°å€¼å‹ npcæ‰€åœ¨çš„xåæ ‡
----@param Ypos  æ•°å€¼å‹ npcæ‰€åœ¨çš„yåæ ‡
----@param Dir  æ•°å€¼å‹ npcé¢æœçš„æ–¹å‘
----@param ShowTime  æ•°å€¼å‹ å¯é€‰å‚æ•°,NPCçš„æ˜¾ç¤ºæ—¶é—´,å…·ä½“è®¾ç½®å‚è€ƒçµå ‚å…¥å£å£«å…µ
----@return any è¿”å›è´Ÿæ•°è¡¨ç¤ºå¤±è´¥ï¼Œå¤§äº0çš„æ­£æ•´æ•°è¡¨ç¤ºæˆåŠŸï¼Œå¹¶ä¸”è¯¥å€¼ä¸ºnpcçš„å¯¹è±¡ç´¢å¼•å€¼
+---Ö±½Ó´´½¨data/npc.txtÖĞÖ§³ÖµÄ¸÷ÖÖÀàĞÍµÄnpc£¬¿ÉÒÔÖ±½Óµ÷ÓÃnpc.txtÖ§³ÖµÄnpcÀàĞÍºÍÏàÓ¦µÄ²ÎÊı£¬²¢ÇÒ¿ÉÒÔ»ñµÃ´´½¨µÄnpcµÄ¶ÔÏó¡£
+---@param Type  ×Ö·ûĞÍ npcµÄÀàĞÍÎÄ±¾£¨´óĞ¡Ğ´Ãô¸Ğ£©£¬Èç¡±Itemshop2¡±
+---@param Arg  ×Ö·ûĞÍ ¶ÔÓ¦µÄnpcÀàĞÍµÄ²ÎÊı£¬¼´npc.txtÖĞÃ¿¸önpcµÄ×îºóÒ»×é²ÎÊı
+---@param Name  ×Ö·ûĞÍ npcÏÔÊ¾µÄÃû×Ö
+---@param Image  ÊıÖµĞÍ npcµÄÍ¼µµ±àºÅ
+---@param Map  ÊıÖµĞÍ npcËùÔÚµÄMapID
+---@param Floor  ÊıÖµĞÍ npcËùÔÚµÄFloorID
+---@param Xpos  ÊıÖµĞÍ npcËùÔÚµÄx×ø±ê
+---@param Ypos  ÊıÖµĞÍ npcËùÔÚµÄy×ø±ê
+---@param Dir  ÊıÖµĞÍ npcÃæ³¯µÄ·½Ïò
+---@param ShowTime  ÊıÖµĞÍ ¿ÉÑ¡²ÎÊı,NPCµÄÏÔÊ¾Ê±¼ä,¾ßÌåÉèÖÃ²Î¿¼ÁéÌÃÈë¿ÚÊ¿±ø
+---@return any ·µ»Ø¸ºÊı±íÊ¾Ê§°Ü£¬´óÓÚ0µÄÕıÕûÊı±íÊ¾³É¹¦£¬²¢ÇÒ¸ÃÖµÎªnpcµÄ¶ÔÏóË÷ÒıÖµ
 function NL.CreateArgNpc(Type, Arg, Name, Image, Map, Floor, Xpos, Ypos, Dir [, ShowTime]) end
 
----ä¿®æ”¹NL.CreateArgNpcåˆ›å»ºçš„npcçš„å‚æ•°
----@param NpcIndex  æ•°å€¼å‹ npcçš„å¯¹è±¡ç´¢å¼•ï¼Œä¸€èˆ¬ä¸ºNL.CreateArgNpcçš„è¿”å›å€¼
----@param NewArg  å­—ç¬¦ä¸² æ–°çš„npcçš„å‚æ•°
----@return any è¿”å›è´Ÿæ•°ä»£è¡¨å¤±è´¥ï¼Œ0è¡¨ç¤ºæˆåŠŸï¼Œnpcä¼šè‡ªåŠ¨åˆ·æ–°ï¼ˆæ³¨æ„ï¼Œå¦‚æœåœ¨æœ‰ç©å®¶è§¦å‘äº†npcçš„æ—¶å€™ä¿®æ”¹npcçš„å‚æ•°ï¼Œå¯èƒ½ä¼šé€ æˆbugç­‰å½±å“ï¼Œæ‰€ä»¥æœ€å¥½å…ˆéšè—NPCå†ä¿®æ”¹ï¼‰
+---ĞŞ¸ÄNL.CreateArgNpc´´½¨µÄnpcµÄ²ÎÊı
+---@param NpcIndex  ÊıÖµĞÍ npcµÄ¶ÔÏóË÷Òı£¬Ò»°ãÎªNL.CreateArgNpcµÄ·µ»ØÖµ
+---@param NewArg  ×Ö·û´® ĞÂµÄnpcµÄ²ÎÊı
+---@return any ·µ»Ø¸ºÊı´ú±íÊ§°Ü£¬0±íÊ¾³É¹¦£¬npc»á×Ô¶¯Ë¢ĞÂ£¨×¢Òâ£¬Èç¹ûÔÚÓĞÍæ¼Ò´¥·¢ÁËnpcµÄÊ±ºòĞŞ¸ÄnpcµÄ²ÎÊı£¬¿ÉÄÜ»áÔì³ÉbugµÈÓ°Ïì£¬ËùÒÔ×îºÃÏÈÒş²ØNPCÔÙĞŞ¸Ä£©
 function NL.SetArgNpc(NpcIndex, NewArg) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶ç™»é™†æ¸¸æˆæ—¶å€™è‡ªåŠ¨è§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œç©å®¶ç™»é™†ä¼šè‡ªåŠ¨è§¦å‘FuncNameçš„Luaå‡½æ•°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[LoginEventCallBack]
+---´´½¨Ò»¸öËùÓĞÍæ¼ÒµÇÂ½ÓÎÏ·Ê±ºò×Ô¶¯´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬Íæ¼ÒµÇÂ½»á×Ô¶¯´¥·¢FuncNameµÄLuaº¯Êı£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[LoginEventCallBack]
 ---@return any 
 function NL.RegLoginEvent(Dofile, FuncName) end
 
----LoginEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯
+---LoginEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É
 function LoginEventCallBack(CharIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶ç™»å‡ºå›è®°å½•ç‚¹å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ï¼Œç©å®¶åªæœ‰ç‚¹å‡»å®¢æˆ·ç«¯â€ç™»å‡ºå›è®°å½•ç‚¹â€æŒ‰é’®æ—¶æ‰å¯è§¦å‘è¯¥å‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[LoginGateEventCallBack]
+---´´½¨Ò»¸öËùÓĞÍæ¼ÒµÇ³ö»Ø¼ÇÂ¼µã¾Í»á´¥·¢µÄLuaº¯Êı£¬Íæ¼ÒÖ»ÓĞµã»÷¿Í»§¶Ë¡±µÇ³ö»Ø¼ÇÂ¼µã¡±°´Å¥Ê±²Å¿É´¥·¢¸Ãº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[LoginGateEventCallBack]
 ---@return any 
 function NL.RegLoginGateEvent(Dofile, FuncName) end
 
----LoginGateEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯
+---LoginGateEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É
 function LoginGateEventCallBack(CharIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶ç™»å‡ºæ¸¸æˆå°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[LogoutEventCallBack]
+---´´½¨Ò»¸öËùÓĞÍæ¼ÒµÇ³öÓÎÏ·¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[LogoutEventCallBack]
 ---@return any 
 function NL.RegLogoutEvent(Dofile, FuncName) end
 
----LogoutEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯
+---LogoutEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É
 function LogoutEventCallBack(CharIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶è¯´è¯å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ï¼Œç©å®¶åœ¨æ¸¸æˆä¸­è¯´è¯å³å¯è§¦å‘è¯¥äº‹ä»¶ï¼Œå¯ä»¥ç”¨æ¥æ–°å»ºæŒ‡ä»¤ï¼ŒGMå‘½ä»¤ç­‰ï¼ŒåŒæ—¶å¯ä»¥å¯¹GMå‘½ä»¤è¿›è¡Œåˆ†çº§æˆæƒã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[TalkEventCallBack]
+---´´½¨Ò»¸öËùÓĞÍæ¼ÒËµ»°¾Í»á´¥·¢µÄLuaº¯Êı£¬Íæ¼ÒÔÚÓÎÏ·ÖĞËµ»°¼´¿É´¥·¢¸ÃÊÂ¼ş£¬¿ÉÒÔÓÃÀ´ĞÂ½¨Ö¸Áî£¬GMÃüÁîµÈ£¬Í¬Ê±¿ÉÒÔ¶ÔGMÃüÁî½øĞĞ·Ö¼¶ÊÚÈ¨¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[TalkEventCallBack]
 ---@return any 
 function NL.RegTalkEvent(Dofile, FuncName) end
 
----TalkEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Msg  æ–‡æœ¬å‹ è¯çš„å†…å®¹ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Color  æ•°å€¼å‹ è¯´è¯é¢œè‰²ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Range  æ•°å€¼å‹ è¯´è¯éŸ³é‡ï¼ˆèŒƒå›´ï¼‰ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°
----@param Size  æ•°å€¼å‹ è¯´è¯å­—ä½“å¤§å°ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0æ‹¦æˆªè¯´è¯å†…å®¹ï¼Œè¿”å›1æ­£å¸¸å‘é€
+---TalkEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Msg  ÎÄ±¾ĞÍ »°µÄÄÚÈİ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Color  ÊıÖµĞÍ Ëµ»°ÑÕÉ«£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Range  ÊıÖµĞÍ Ëµ»°ÒôÁ¿£¨·¶Î§£©£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı
+---@param Size  ÊıÖµĞÍ Ëµ»°×ÖÌå´óĞ¡£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0À¹½ØËµ»°ÄÚÈİ£¬·µ»Ø1Õı³£·¢ËÍ
 function TalkEventCallBack(CharIndex, Msg, Color, Range, Size) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶è§’è‰²å‡çº§è§¦å‘çš„Luaå‡½æ•°ï¼Œç©å®¶åœ¨æ¸¸æˆä¸­è§’è‰²å‡çº§åå°±å¯è§¦å‘ï¼Œå¯ä»¥ç”¨æ¥åœ¨ç‰¹å®šç­‰çº§ç»™äºˆç‰¹å®šå¥–åŠ±ï¼Œè®°å½•ç©å®¶å†²çº§é€Ÿåº¦æ’è¡Œç­‰ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[LevelUpCallBack]
+---´´½¨Ò»¸öËùÓĞÍæ¼Ò½ÇÉ«Éı¼¶´¥·¢µÄLuaº¯Êı£¬Íæ¼ÒÔÚÓÎÏ·ÖĞ½ÇÉ«Éı¼¶ºó¾Í¿É´¥·¢£¬¿ÉÒÔÓÃÀ´ÔÚÌØ¶¨µÈ¼¶¸øÓèÌØ¶¨½±Àø£¬¼ÇÂ¼Íæ¼Ò³å¼¶ËÙ¶ÈÅÅĞĞµÈ¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[LevelUpCallBack]
 ---@return any 
 function NL.RegLevelUpEvent(Dofile, FuncName) end
 
----LevelUpEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯
+---LevelUpEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É
 function LevelUpCallBack(CharIndex) end
 
----åˆ›å»ºä¸€ä¸ªè§’è‰²è¿›å…¥æˆ˜æ–—å³å¯è§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[BattleStartEventCallBack]
+---´´½¨Ò»¸ö½ÇÉ«½øÈëÕ½¶·¼´¿É´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[BattleStartEventCallBack]
 ---@return any 
 function NL.RegBattleStartEvent(Dofile, FuncName) end
 
----BattleStartEventçš„å›è°ƒå‡½æ•°
----@param BattleIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„æˆ˜æ–—indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯
+---BattleStartEventµÄ»Øµ÷º¯Êı
+---@param BattleIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄÕ½¶·index£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É
 function BattleStartEventCallBack(BattleIndex) end
 
----åˆ›å»ºä¸€ä¸ªæˆ˜æ–—ç»“æŸå³å¯è§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[BattleOverEventCallBack]
+---´´½¨Ò»¸öÕ½¶·½áÊø¼´¿É´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[BattleOverEventCallBack]
 ---@return any 
 function NL.RegBattleOverEvent(Dofile, FuncName) end
 
----BattleOverEventçš„å›è°ƒå‡½æ•°
----@param BattleIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„æˆ˜æ–—indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯
+---BattleOverEventµÄ»Øµ÷º¯Êı
+---@param BattleIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄÕ½¶·index£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É
 function BattleOverEventCallBack(BattleIndex) end
 
----åˆ›å»ºä¸€ä¸ªç©å®¶é€šè¿‡ä¼ é€ç‚¹æ—¶è§¦å‘çš„Luaå‡½æ•°ï¼Œå¯ä»¥ç”¨æ¥è®°å½•ç©å®¶çš„ä¼ é€è½¨è¿¹ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[WarpEventCallBack]
+---´´½¨Ò»¸öÍæ¼ÒÍ¨¹ı´«ËÍµãÊ±´¥·¢µÄLuaº¯Êı£¬¿ÉÒÔÓÃÀ´¼ÇÂ¼Íæ¼ÒµÄ´«ËÍ¹ì¼£¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[WarpEventCallBack]
 ---@return any 
 function NL.RegWarpEvent(Dofile, FuncName) end
 
----åˆ›å»ºä¸€ä¸ªç©å®¶é€šè¿‡ä¼ é€ç‚¹æ—¶è§¦å‘çš„Luaå‡½æ•°ï¼Œå¯ä»¥ç”¨æ¥è®°å½•ç©å®¶çš„ä¼ é€è½¨è¿¹ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[WarpEventCallBack]
+---´´½¨Ò»¸öÍæ¼ÒÍ¨¹ı´«ËÍµãÊ±´¥·¢µÄLuaº¯Êı£¬¿ÉÒÔÓÃÀ´¼ÇÂ¼Íæ¼ÒµÄ´«ËÍ¹ì¼£¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[WarpEventCallBack]
 ---@return any 
 function NL.RegAfterWarpEvent(Dofile, FuncName) end
 
----WarpEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Ori_MapId  æ•°å€¼å‹ ä¼ é€å‰çš„mapidï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Ori_FloorId  æ•°å€¼å‹ ä¼ é€å‰çš„floor idï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Ori_X  æ•°å€¼å‹ ä¼ é€å‰çš„xï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Ori_Y  æ•°å€¼å‹ ä¼ é€å‰çš„yï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Target_MapId  æ•°å€¼å‹ ä¼ é€åçš„mapidï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Target_FloorId  æ•°å€¼å‹ ä¼ é€åçš„floor idï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Target_X  æ•°å€¼å‹ ä¼ é€åçš„xï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Target_Y  æ•°å€¼å‹ ä¼ é€åçš„yï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯
+---WarpEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Ori_MapId  ÊıÖµĞÍ ´«ËÍÇ°µÄmapid£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Ori_FloorId  ÊıÖµĞÍ ´«ËÍÇ°µÄfloor id£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Ori_X  ÊıÖµĞÍ ´«ËÍÇ°µÄx£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Ori_Y  ÊıÖµĞÍ ´«ËÍÇ°µÄy£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Target_MapId  ÊıÖµĞÍ ´«ËÍºóµÄmapid£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Target_FloorId  ÊıÖµĞÍ ´«ËÍºóµÄfloor id£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Target_X  ÊıÖµĞÍ ´«ËÍºóµÄx£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Target_Y  ÊıÖµĞÍ ´«ËÍºóµÄy£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É
 function WarpEventCallBack(CharIndex, Ori_MapId, Ori_FloorId, Ori_X, Ori_Y, Target_MapId, Target_FloorId, Target_X, Target_Y) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶æ‰çº¿å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[DropEventCallBack]
+---´´½¨Ò»¸öËùÓĞÍæ¼ÒµôÏß¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[DropEventCallBack]
 ---@return any 
 function NL.RegDropEvent(Dofile, FuncName) end
 
----DropEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯ã€‚
+---DropEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É¡£
 function DropEventCallBack(CharIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶è§’è‰²æ›´æ¢ç§°å·å³å¯è§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[TitleChangedCallBack]
+---´´½¨Ò»¸öËùÓĞÍæ¼Ò½ÇÉ«¸ü»»³ÆºÅ¼´¿É´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[TitleChangedCallBack]
 ---@return any 
 function NL.RegTitleChangedEvent(Dofile, FuncName) end
 
----TitleChangedEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Ori_Title  æ•°å€¼å‹ æ—§title idï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param New_Title  æ•°å€¼å‹ æ–°title idï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0æ­£å¸¸åˆ‡æ¢ç§°å·,è¿”å›å€¼å°äº0åˆ™æ‹¦æˆªã€‚
+---TitleChangedEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Ori_Title  ÊıÖµĞÍ ¾Étitle id£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param New_Title  ÊıÖµĞÍ ĞÂtitle id£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0Õı³£ÇĞ»»³ÆºÅ,·µ»ØÖµĞ¡ÓÚ0ÔòÀ¹½Ø¡£
 function TitleChangedCallBack(CharIndex, Ori_Title, New_Title) end
 
----åˆ›å»ºä¸€ä¸ªå¯¹è±¡è·å–æˆ˜æ–—ç»éªŒæ—¶è§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[GetExpEventCallBack]
+---´´½¨Ò»¸ö¶ÔÏó»ñÈ¡Õ½¶·¾­ÑéÊ±´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[GetExpEventCallBack]
 ---@return any 
 function NL.RegGetExpEvent(Dofile, FuncName) end
 
----GetExpEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Exp  æ•°å€¼å‹ è·å–çš„ç»éªŒå€¼ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å¯¹è±¡è¦è·å–çš„ç»éªŒå€¼ï¼Œå¦‚ä¸å¯¹ç»éªŒå€¼æ“ä½œï¼Œè¯·ä¸è¦å†™returnè¯­å¥æˆ–è€…å†™return Exp; è¿™ä¸ªå‡½æ•°æ¯”é“å…·å¯¹ç»éªŒçš„åŠ æˆä¼˜å…ˆï¼Œä¹Ÿå°±æ˜¯è¯´é“å…·åŠ æˆçš„ç»éªŒå€¼æ˜¯åœ¨æœ¬å‡½æ•°è¿”å›å€¼å¾—åŸºç¡€ä¸Šè®¡ç®—çš„ã€‚
+---GetExpEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Exp  ÊıÖµĞÍ »ñÈ¡µÄ¾­ÑéÖµ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»Ø¶ÔÏóÒª»ñÈ¡µÄ¾­ÑéÖµ£¬Èç²»¶Ô¾­ÑéÖµ²Ù×÷£¬Çë²»ÒªĞ´returnÓï¾ä»òÕßĞ´return Exp; Õâ¸öº¯Êı±ÈµÀ¾ß¶Ô¾­ÑéµÄ¼Ó³ÉÓÅÏÈ£¬Ò²¾ÍÊÇËµµÀ¾ß¼Ó³ÉµÄ¾­ÑéÖµÊÇÔÚ±¾º¯Êı·µ»ØÖµµÃ»ù´¡ÉÏ¼ÆËãµÄ¡£
 function GetExpEventCallBack(CharIndex, Exp) end
 
----åˆ›å»ºä¸€ä¸ªå¯¹è±¡è·å–æˆ˜æ–—æŠ€èƒ½ç»éªŒæ—¶è§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[GetBattleSkillExpEventCallBack]
+---´´½¨Ò»¸ö¶ÔÏó»ñÈ¡Õ½¶·¼¼ÄÜ¾­ÑéÊ±´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[GetBattleSkillExpEventCallBack]
 ---@return any 
 function NL.RegBattleSkillExpEvent(Dofile, FuncName) end
 
----BattleSkillExpEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param SkillID  æ•°å€¼å‹ æŠ€èƒ½IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Exp  æ•°å€¼å‹ è·å–çš„ç»éªŒå€¼ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›è¦è·å–çš„ç»éªŒå€¼ï¼Œå¦‚ä¸å¯¹ç»éªŒå€¼æ“ä½œï¼Œè¯·ä¸è¦å†™returnè¯­å¥æˆ–è€…å†™return Exp; è¿™ä¸ªå‡½æ•°æ¯”é“å…·å¯¹ç»éªŒçš„åŠ æˆä¼˜å…ˆï¼Œä¹Ÿå°±æ˜¯è¯´é“å…·åŠ æˆçš„ç»éªŒå€¼æ˜¯åœ¨æœ¬å‡½æ•°è¿”å›å€¼å¾—åŸºç¡€ä¸Šè®¡ç®—çš„ã€‚
+---BattleSkillExpEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param SkillID  ÊıÖµĞÍ ¼¼ÄÜID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Exp  ÊıÖµĞÍ »ñÈ¡µÄ¾­ÑéÖµ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÒª»ñÈ¡µÄ¾­ÑéÖµ£¬Èç²»¶Ô¾­ÑéÖµ²Ù×÷£¬Çë²»ÒªĞ´returnÓï¾ä»òÕßĞ´return Exp; Õâ¸öº¯Êı±ÈµÀ¾ß¶Ô¾­ÑéµÄ¼Ó³ÉÓÅÏÈ£¬Ò²¾ÍÊÇËµµÀ¾ß¼Ó³ÉµÄ¾­ÑéÖµÊÇÔÚ±¾º¯Êı·µ»ØÖµµÃ»ù´¡ÉÏ¼ÆËãµÄ¡£
 function GetBattleSkillExpEventCallBack(CharIndex, SkillID, Exp) end
 
----åˆ›å»ºä¸€ä¸ªå¯¹è±¡è·å–ç”Ÿäº§æŠ€èƒ½ç»éªŒæ—¶è§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[GetProductSkillExpEventCallBack]
+---´´½¨Ò»¸ö¶ÔÏó»ñÈ¡Éú²ú¼¼ÄÜ¾­ÑéÊ±´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[GetProductSkillExpEventCallBack]
 ---@return any 
 function NL.RegProductSkillExpEvent(Dofile, FuncName) end
 
----GetProductSkillExpEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param SkillID  æ•°å€¼å‹ æŠ€èƒ½IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Exp  æ•°å€¼å‹ è·å–çš„ç»éªŒå€¼ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›è¦è·å–çš„ç»éªŒå€¼ï¼Œå¦‚ä¸å¯¹ç»éªŒå€¼æ“ä½œï¼Œè¯·ä¸è¦å†™returnè¯­å¥æˆ–è€…å†™return Exp; è¿™ä¸ªå‡½æ•°æ¯”é“å…·å¯¹ç»éªŒçš„åŠ æˆä¼˜å…ˆï¼Œä¹Ÿå°±æ˜¯è¯´é“å…·åŠ æˆçš„ç»éªŒå€¼æ˜¯åœ¨æœ¬å‡½æ•°è¿”å›å€¼å¾—åŸºç¡€ä¸Šè®¡ç®—çš„ã€‚
+---GetProductSkillExpEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param SkillID  ÊıÖµĞÍ ¼¼ÄÜID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Exp  ÊıÖµĞÍ »ñÈ¡µÄ¾­ÑéÖµ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÒª»ñÈ¡µÄ¾­ÑéÖµ£¬Èç²»¶Ô¾­ÑéÖµ²Ù×÷£¬Çë²»ÒªĞ´returnÓï¾ä»òÕßĞ´return Exp; Õâ¸öº¯Êı±ÈµÀ¾ß¶Ô¾­ÑéµÄ¼Ó³ÉÓÅÏÈ£¬Ò²¾ÍÊÇËµµÀ¾ß¼Ó³ÉµÄ¾­ÑéÖµÊÇÔÚ±¾º¯Êı·µ»ØÖµµÃ»ù´¡ÉÏ¼ÆËãµÄ¡£
 function GetProductSkillExpEventCallBack(CharIndex, SkillID, Exp) end
 
----åˆ›å»ºä¸€ä¸ªå® ç‰©å‡çº§è§¦å‘çš„Luaå‡½æ•°ï¼Œç©å®¶å® ç‰©åœ¨æ¸¸æˆä¸­å‡çº§åå°±å¯è§¦å‘ï¼Œå¯ä»¥ç”¨æ¥åœ¨ç‰¹å®šç­‰çº§ç»™äºˆç‰¹å®šå¥–åŠ±ï¼Œè®°å½•ç©å®¶å® ç‰©å†²çº§é€Ÿåº¦æ’è¡Œç­‰ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[LevelUpCallBack]
+---´´½¨Ò»¸ö³èÎïÉı¼¶´¥·¢µÄLuaº¯Êı£¬Íæ¼Ò³èÎïÔÚÓÎÏ·ÖĞÉı¼¶ºó¾Í¿É´¥·¢£¬¿ÉÒÔÓÃÀ´ÔÚÌØ¶¨µÈ¼¶¸øÓèÌØ¶¨½±Àø£¬¼ÇÂ¼Íæ¼Ò³èÎï³å¼¶ËÙ¶ÈÅÅĞĞµÈ¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[LevelUpCallBack]
 ---@return any 
 function NL.RegPetLevelUpEvent(Dofile, FuncName) end
 
----PetLevelUpEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯ã€‚
+---PetLevelUpEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É¡£
 function LevelUpCallBack(CharIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶ç¦»å¼€æˆ˜æ–—å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[BattleExitCallBack]
+---´´½¨Ò»¸öËùÓĞÍæ¼ÒÀë¿ªÕ½¶·¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[BattleExitCallBack]
 ---@return any 
 function NL.RegBattleExitEvent(Dofile, FuncName) end
 
----BattleExitEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—Indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Type  æ•°å€¼å‹ ç¦»å¼€æˆ˜æ–—çš„æ–¹å¼ï¼Œå¦‚æœå€¼ä¸º1åˆ™è¡¨ç¤ºæ­£å¸¸ç¦»å¼€ï¼ˆåŒ…æ‹¬æˆ˜æ–—èƒœåˆ©ã€å¤±è´¥ã€é€ƒè·‘ã€ç™»å‡ºï¼‰ï¼Œå¦‚æœè¯¥å€¼ä¸º2ï¼Œåˆ™è¡¨ç¤ºç©å®¶è¢«é£ã€‚è¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---BattleExitEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·Index£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Type  ÊıÖµĞÍ Àë¿ªÕ½¶·µÄ·½Ê½£¬Èç¹ûÖµÎª1Ôò±íÊ¾Õı³£Àë¿ª£¨°üÀ¨Õ½¶·Ê¤Àû¡¢Ê§°Ü¡¢ÌÓÅÜ¡¢µÇ³ö£©£¬Èç¹û¸ÃÖµÎª2£¬Ôò±íÊ¾Íæ¼Ò±»·É¡£¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function BattleExitCallBack(CharIndex, BattleIndex, Type) end
 
----åˆ›å»ºä¸€ä¸ªç©å®¶å³é”®ç‚¹å‡»å…¶ä»–ç©å®¶å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[RightClickCallBack]
+---´´½¨Ò»¸öÍæ¼ÒÓÒ¼üµã»÷ÆäËûÍæ¼Ò¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[RightClickCallBack]
 ---@return any 
 function NL.RegRightClickEvent(Dofile, FuncName) end
 
----RightClickEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶ï¼ˆå‘èµ·äº‹ä»¶ï¼‰çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚(è§¦å‘äº‹ä»¶çš„ç©å®¶)
----@param TargetCharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶ï¼ˆè¢«å“åº”äº‹ä»¶ï¼‰çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚(è¢«å³é”®ç‚¹å‡»çš„ç©å®¶)
+---RightClickEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼ş£¨·¢ÆğÊÂ¼ş£©µÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£(´¥·¢ÊÂ¼şµÄÍæ¼Ò)
+---@param TargetCharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼ş£¨±»ÏìÓ¦ÊÂ¼ş£©µÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£(±»ÓÒ¼üµã»÷µÄÍæ¼Ò)
 ---@return any 
 function RightClickCallBack(CharIndex, TargetCharIndex) end
 
----åˆ›å»ºä¸€ä¸ªæœåŠ¡å™¨ç¨‹åºå…³é—­è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[ShutDownCallBack]
+---´´½¨Ò»¸ö·şÎñÆ÷³ÌĞò¹Ø±Õ´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[ShutDownCallBack]
 ---@return any 
 function NL.RegShutDownEvent(Dofile, FuncName) end
 
----ShutDownEventçš„å›è°ƒå‡½æ•°
+---ShutDownEventµÄ»Øµ÷º¯Êı
 ---@param 
----@return number è¿”å›0å³å¯ã€‚
+---@return number ·µ»Ø0¼´¿É¡£
 function ShutDownCallBack() end
 
----åˆ›å»ºä¸€ä¸ªç©å®¶ç»„é˜Ÿè§¦å‘çš„äº‹ä»¶ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[PartyEventCallBack]
+---´´½¨Ò»¸öÍæ¼Ò×é¶Ó´¥·¢µÄÊÂ¼ş¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[PartyEventCallBack]
 ---@return any 
 function NL.RegPartyEvent(Dofile, FuncName) end
 
----PartyEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆé˜Ÿå‘˜ï¼‰
----@param TargetCharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆé˜Ÿé•¿ï¼‰
----@param Type  æ•°å€¼å‹ æ¨¡å¼ï¼Œç¦»é˜Ÿè¿˜æ˜¯åŠ å…¥å›¢é˜Ÿï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆ0 åŠ å…¥ç»„é˜Ÿï¼Œ1 ç¦»å¼€ç»„é˜Ÿï¼‰
----@return number è¿”å›1è¡¨ç¤ºå…è®¸æ“ä½œï¼Œè¿”å›0è¡¨ç¤ºç¦æ­¢æ“ä½œï¼ˆç»„é˜Ÿå¤±è´¥/ç¦»é˜Ÿå¤±è´¥ï¼‰
+---PartyEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨¶ÓÔ±£©
+---@param TargetCharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨¶Ó³¤£©
+---@param Type  ÊıÖµĞÍ Ä£Ê½£¬Àë¶Ó»¹ÊÇ¼ÓÈëÍÅ¶Ó£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨0 ¼ÓÈë×é¶Ó£¬1 Àë¿ª×é¶Ó£©
+---@return number ·µ»Ø1±íÊ¾ÔÊĞí²Ù×÷£¬·µ»Ø0±íÊ¾½ûÖ¹²Ù×÷£¨×é¶ÓÊ§°Ü/Àë¶ÓÊ§°Ü£©
 function PartyEventCallBack(CharIndex, TargetCharIndex, Type) end
 
----å½“ç©å®¶è¿›è¡Œå® ç‰©å°å°çš„æ—¶å€™ä¼šè§¦å‘è¯¥äº‹ä»¶ï¼Œå¹¶ä¸”è¿”å›å°å°çš„ç»“æœï¼ŒåŒæ—¶Luaä¹Ÿå¯ä»¥å¯¹å°å°ç»“æœè¿›è¡Œä¿®æ”¹ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
+---µ±Íæ¼Ò½øĞĞ³èÎï·âÓ¡µÄÊ±ºò»á´¥·¢¸ÃÊÂ¼ş£¬²¢ÇÒ·µ»Ø·âÓ¡µÄ½á¹û£¬Í¬Ê±LuaÒ²¿ÉÒÔ¶Ô·âÓ¡½á¹û½øĞĞĞŞ¸Ä¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
 ---@param 
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[SealEventCallBack]
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[SealEventCallBack]
 ---@return any 
 function NL.RegSealEvent(Dofile, FuncName) end
 
----SealEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param EnemyIndex  æ•°å€¼å‹ è¢«å°å°çš„æ€ªç‰©å¯¹è±¡ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Ret  æ•°å€¼å‹ å°å°çš„ç»“æœï¼Œå…·ä½“è¯·æŸ¥çœ‹ä¸‹é¢å¯¹RetFlgçš„å€¼çš„è§£æï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---SealEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param EnemyIndex  ÊıÖµĞÍ ±»·âÓ¡µÄ¹ÖÎï¶ÔÏó£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Ret  ÊıÖµĞÍ ·âÓ¡µÄ½á¹û£¬¾ßÌåÇë²é¿´ÏÂÃæ¶ÔRetFlgµÄÖµµÄ½âÎö£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@param Ret
----@param RetFlgä¸ºæœåŠ¡ç«¯å¯¹å°å°åŠ¨ä½œçš„åˆ¤å®šç»“æœï¼Œå€¼å¯èƒ½ä¸ºè´Ÿæ•°ï¼Œä¹Ÿå¯èƒ½ä¸ºæ­£æ•°ï¼Œå¦‚æœä¸ºè´Ÿæ•°åˆ™è¡¨ç¤ºå°å°å¤±è´¥ï¼Œå¦‚æœä¸ºæ­£æ•°åˆ™è¡¨ç¤ºå°å°æˆåŠŸã€‚ å°å°å¤±è´¥è¿”å›å€¼å¯¹åº”è§£æï¼š
----@param -1 ï¼šè¢«å°å°å¯¹è±¡çš„ç±»å‹é”™è¯¯
----@param -2 ï¼šè¢«å°å°å¯¹è±¡ä¸èƒ½ä½œä¸ºå® ç‰©
----@param -3 ï¼šç©å®¶èº«ä¸Šæ²¡æœ‰è¶³å¤Ÿæ ä½
----@param -4 ï¼šç©å®¶ç­‰çº§ä¸è¶³ä»¥å°å°å® ç‰©
----@param -5 ï¼šè¢«å°å°çš„å® ç‰©æ˜¯å¬å”¤å‡ºæ¥çš„è€Œéé‡ç”Ÿçš„
----@param -6 ï¼šç©å®¶æ²¡æœ‰è¢«å°å°å® ç‰©çš„å›¾é‰´
----@param -7 ï¼šä½¿ç”¨çš„å°å°å¡é“å…·ä¸å­˜åœ¨
----@param -8 ï¼šä½¿ç”¨çš„é“å…·å¹¶ä¸æ˜¯å°å°å¡é“å…·
----@param -9 ï¼šä½¿ç”¨çš„å°å°å¡æ²¡æœ‰å‚æ•°è®¾ç½®
----@param -10ï¼šä½¿ç”¨çš„å°å°å¡ç§æ—ä¸æ­£ç¡®
----@param -11ï¼šä¸èƒ½å°å°é‚ªé­”ç³»å® ç‰©
----@param â‡-100ï¼šå°å°éšæœºå‡ ç‡ä¸è¶³ï¼Œè¿˜åŸå°å°éšæœºå‡ ç‡çš„å…¬å¼ä¸º abs(rate/100)-1
----@return any å¯ä»¥ç›´æ¥è¿”å›RetFlgå‚æ•°ï¼Œä¹Ÿå¯æ ¹æ®éœ€æ±‚è¿”å›æ­£æ•°æˆ–è€…è´Ÿæ•°ï¼Œè¿”å›å€¼å°†å½±å“ç©å®¶å°å°æ•ˆæœ
+---@param RetFlgÎª·şÎñ¶Ë¶Ô·âÓ¡¶¯×÷µÄÅĞ¶¨½á¹û£¬Öµ¿ÉÄÜÎª¸ºÊı£¬Ò²¿ÉÄÜÎªÕıÊı£¬Èç¹ûÎª¸ºÊıÔò±íÊ¾·âÓ¡Ê§°Ü£¬Èç¹ûÎªÕıÊıÔò±íÊ¾·âÓ¡³É¹¦¡£ ·âÓ¡Ê§°Ü·µ»ØÖµ¶ÔÓ¦½âÎö£º
+---@param -1 £º±»·âÓ¡¶ÔÏóµÄÀàĞÍ´íÎó
+---@param -2 £º±»·âÓ¡¶ÔÏó²»ÄÜ×÷Îª³èÎï
+---@param -3 £ºÍæ¼ÒÉíÉÏÃ»ÓĞ×ã¹»À¸Î»
+---@param -4 £ºÍæ¼ÒµÈ¼¶²»×ãÒÔ·âÓ¡³èÎï
+---@param -5 £º±»·âÓ¡µÄ³èÎïÊÇÕÙ»½³öÀ´µÄ¶ø·ÇÒ°ÉúµÄ
+---@param -6 £ºÍæ¼ÒÃ»ÓĞ±»·âÓ¡³èÎïµÄÍ¼¼ø
+---@param -7 £ºÊ¹ÓÃµÄ·âÓ¡¿¨µÀ¾ß²»´æÔÚ
+---@param -8 £ºÊ¹ÓÃµÄµÀ¾ß²¢²»ÊÇ·âÓ¡¿¨µÀ¾ß
+---@param -9 £ºÊ¹ÓÃµÄ·âÓ¡¿¨Ã»ÓĞ²ÎÊıÉèÖÃ
+---@param -10£ºÊ¹ÓÃµÄ·âÓ¡¿¨ÖÖ×å²»ÕıÈ·
+---@param -11£º²»ÄÜ·âÓ¡Ğ°Ä§Ïµ³èÎï
+---@param ?-100£º·âÓ¡Ëæ»ú¼¸ÂÊ²»×ã£¬»¹Ô­·âÓ¡Ëæ»ú¼¸ÂÊµÄ¹«Ê½Îª abs(rate/100)-1
+---@return any ¿ÉÒÔÖ±½Ó·µ»ØRetFlg²ÎÊı£¬Ò²¿É¸ù¾İĞèÇó·µ»ØÕıÊı»òÕß¸ºÊı£¬·µ»ØÖµ½«Ó°ÏìÍæ¼Ò·âÓ¡Ğ§¹û
 function SealEventCallBack(CharIndex, EnemyIndex, Ret) end
 
----å½“ç©å®¶æˆ°é¬¥ä¸­ç™¼å‡ºæŒ‡ä»¤çš„æ—¶å€™ä¼šè§¦å‘è¯¥äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[BattleActionEventCallBack]
+---µ±Íæ¼Ò‘ğôYÖĞ°l³öÖ¸ÁîµÄÊ±ºò»á´¥·¢¸ÃÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[BattleActionEventCallBack]
 ---@return any 
 function NL.RegBattleActionEvent(Dofile, FuncName) end
 
----BattleActionEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param BattleIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„æˆ˜æ–—indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Com1  æ•°å€¼å‹ æˆ°é¬¥ä½¿ç”¨çš„å‹•ä½œç·¨è™Ÿï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Com2  æ•°å€¼å‹ å‹•ä½œçš„ç›®æ¨™å°è±¡çš„ä½ç½®ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Com3  æ•°å€¼å‹ æ‰€å°æ‡‰çš„techçš„IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ActionNum  æ•°å€¼å‹ æ˜¯å°è±¡çš„ç¬¬å¹¾å‹•ä½œï¼Œé€šå¸¸ä¸å¸¶å¯µç‰©å¯ä»¥æœ‰2æ¬¡æœ‰æ•ˆå‹•ä½œï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---BattleActionEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param BattleIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄÕ½¶·index£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Com1  ÊıÖµĞÍ ‘ğôYÊ¹ÓÃµÄ„Ó×÷¾Ì–£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Com2  ÊıÖµĞÍ „Ó×÷µÄÄ¿˜ËŒ¦ÏóµÄÎ»ÖÃ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Com3  ÊıÖµĞÍ ËùŒ¦‘ªµÄtechµÄID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ActionNum  ÊıÖµĞÍ ÊÇŒ¦ÏóµÄµÚ×„Ó×÷£¬Í¨³£²»§Œ™Îï¿ÉÒÔÓĞ2´ÎÓĞĞ§„Ó×÷£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function BattleActionEventCallBack(CharIndex, BattleIndex, Com1, Com2, Com3, ActionNum) end
 
----ç©å®¶æ‰€æœ‰çš„Actionäº‹ä»¶éƒ½æœƒè§¸ç™¼æœ¬å‡½æ•¸ï¼Œå¦‚ä½¿ç”¨æšˆå€’ï¼Œæ”»æ“Šï¼Œå‰ªåˆ€ï¼ŒçŸ³é ­ï¼Œå¸ƒç­‰ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[CharActionEventCallBack]
+---Íæ¼ÒËùÓĞµÄActionÊÂ¼ş¶¼•şÓ|°l±¾º¯”µ£¬ÈçÊ¹ÓÃ•µ¹£¬¹¥“ô£¬¼ôµ¶£¬Ê¯î^£¬²¼µÈ¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[CharActionEventCallBack]
 ---@return any 
 function NL.RegCharActionEvent(Dofile, FuncName) end
 
----CharActionEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶ï¼ˆå‘èµ·äº‹ä»¶ï¼‰çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ActionID  æ•°å€¼å‹ ç©å®¶çš„å‹•ä½œIDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---CharActionEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼ş£¨·¢ÆğÊÂ¼ş£©µÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ActionID  ÊıÖµĞÍ Íæ¼ÒµÄ„Ó×÷ID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function CharActionEventCallBack(CharIndex, ActionID) end
 
----ç•¶ç©å®¶ä½¿ç”¨ç”Ÿç”¢æŠ€èƒ½è£½ä½œé“å…·çš„æ™‚å€™æœƒè§¸ç™¼ï¼Œå¯ä»¥é€šéè©²äº‹ä»¶ç²å–ç©å®¶å°è±¡ï¼ŒæŠ€èƒ½çš„IDã€ç­‰ç´šå’Œç”Ÿæˆçš„é“å…·å°è±¡ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[MergeItemEventCallBack]
+---®”Íæ¼ÒÊ¹ÓÃÉú®a¼¼ÄÜÑu×÷µÀ¾ßµÄ•rºò•şÓ|°l£¬¿ÉÒÔÍ¨ß^Ô“ÊÂ¼ş«@È¡Íæ¼ÒŒ¦Ïó£¬¼¼ÄÜµÄID¡¢µÈ¼‰ºÍÉú³ÉµÄµÀ¾ßŒ¦Ïó¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[MergeItemEventCallBack]
 ---@return any 
 function NL.RegMergeItemEvent(Dofile, FuncName) end
 
----MerGeItemEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param SkillID  æ•°å€¼å‹ ç”Ÿç”¢é“å…·æ‰€ç”¨çš„æŠ€èƒ½IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param SkillLv  æ•°å€¼å‹ ç”Ÿç”¢é“å…·æ‰€ç”¨çš„æŠ€èƒ½ç­‰ç´šï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ItemIndex  æ•°å€¼å‹ ç”Ÿæˆå‡ºçš„é“å…·çš„å°è±¡ï¼Œå¦‚æœç‚º-1ï¼Œå‰‡è¡¨ç¤ºç”Ÿæˆé“å…·å¤±æ•—ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---MerGeItemEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param SkillID  ÊıÖµĞÍ Éú®aµÀ¾ßËùÓÃµÄ¼¼ÄÜID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param SkillLv  ÊıÖµĞÍ Éú®aµÀ¾ßËùÓÃµÄ¼¼ÄÜµÈ¼‰£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ItemIndex  ÊıÖµĞÍ Éú³É³öµÄµÀ¾ßµÄŒ¦Ïó£¬Èç¹ûé-1£¬„t±íÊ¾Éú³ÉµÀ¾ßÊ§”¡£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function MergeItemEventCallBack(CharIndex, SkillID, SkillLv, ItemIndex) end
 
----åˆ›å»ºä¸€ä¸ªé“å…·é‡å è§¦å‘çš„äº‹ä»¶ï¼Œè¿™ä¸ªé“å…·é‡å çš„æ„æ€æ˜¯ï¼Œåœ¨é“å…·æ æŠŠä¸€ä¸ªé“å…·æ‹–å‘å¦ä¸€ä¸ªé“å…·ä¼šè§¦å‘çš„äº‹ä»¶ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[ItemOverLapEventCallBack]
+---´´½¨Ò»¸öµÀ¾ßÖØµş´¥·¢µÄÊÂ¼ş£¬Õâ¸öµÀ¾ßÖØµşµÄÒâË¼ÊÇ£¬ÔÚµÀ¾ßÀ¸°ÑÒ»¸öµÀ¾ßÍÏÏòÁíÒ»¸öµÀ¾ß»á´¥·¢µÄÊÂ¼ş¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[ItemOverLapEventCallBack]
 ---@return any 
 function NL.RegItemOverLapEvent(Dofile, FuncName) end
 
----ItemOverLapEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param FromItemIndex  æ•°å€¼å‹ è¢«é€‰ä¸­çš„é“å…·çš„å¯¹è±¡ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param TargetItemIndex  æ•°å€¼å‹ è¢«è¦†ç›–çš„é“å…·çš„å¯¹è±¡ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Num  æ•°å€¼å‹ è¢«é€‰ä¸­çš„é“å…·çš„æ•°é‡ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°
----@return number å¦‚æœæœ‰æ“ä½œåˆ™è¿”å›é0å€¼ï¼Œå¦åˆ™è¿”å›0ï¼ˆæ‰§è¡Œç§»åŠ¨é“å…·çš„æ“ä½œï¼‰
+---ItemOverLapEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param FromItemIndex  ÊıÖµĞÍ ±»Ñ¡ÖĞµÄµÀ¾ßµÄ¶ÔÏó£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param TargetItemIndex  ÊıÖµĞÍ ±»¸²¸ÇµÄµÀ¾ßµÄ¶ÔÏó£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Num  ÊıÖµĞÍ ±»Ñ¡ÖĞµÄµÀ¾ßµÄÊıÁ¿£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı
+---@return number Èç¹ûÓĞ²Ù×÷Ôò·µ»Ø·Ç0Öµ£¬·ñÔò·µ»Ø0£¨Ö´ĞĞÒÆ¶¯µÀ¾ßµÄ²Ù×÷£©
 function ItemOverLapEventCallBack(CharIndex, FromItemIndex, TargetItemIndex, Num) end
 
----åˆ›å»ºä¸€ä¸ªç”¨æˆ·ç™»å½•çš„æ—¶å€™è·å–ç™»é™†ç‚¹ä¿¡æ¯è§¦å‘çš„äº‹ä»¶ï¼Œè¿™ä¸ªäº‹ä»¶å¯ä»¥æ›¿ä»£Loginäº‹ä»¶ä¸­çš„åŸåœ°ç™»é™†åŠŸèƒ½ï¼Œåªéœ€è¦åœ¨Callbackä¸­ç›´æ¥è®¾ç½®å¯¹è±¡çš„åæ ‡ç­‰ä¿¡æ¯å³å¯ï¼Œæ— éœ€warpã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[GetLoginPointEventCallBack]
+---´´½¨Ò»¸öÓÃ»§µÇÂ¼µÄÊ±ºò»ñÈ¡µÇÂ½µãĞÅÏ¢´¥·¢µÄÊÂ¼ş£¬Õâ¸öÊÂ¼ş¿ÉÒÔÌæ´úLoginÊÂ¼şÖĞµÄÔ­µØµÇÂ½¹¦ÄÜ£¬Ö»ĞèÒªÔÚCallbackÖĞÖ±½ÓÉèÖÃ¶ÔÏóµÄ×ø±êµÈĞÅÏ¢¼´¿É£¬ÎŞĞèwarp¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[GetLoginPointEventCallBack]
 ---@return any 
 function NL.RegGetLoginPointEvent(Dofile, FuncName) end
 
----GetLOginPointEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param MapID  æ•°å€¼å‹ ç™»é™†çš„Map IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param FloorID  æ•°å€¼å‹ ç™»é™†çš„Floor IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param X  æ•°å€¼å‹ ç™»é™†çš„Xåæ ‡ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Y  æ•°å€¼å‹ ç™»é™†çš„Yåæ ‡ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---GetLOginPointEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param MapID  ÊıÖµĞÍ µÇÂ½µÄMap ID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param FloorID  ÊıÖµĞÍ µÇÂ½µÄFloor ID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param X  ÊıÖµĞÍ µÇÂ½µÄX×ø±ê£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Y  ÊıÖµĞÍ µÇÂ½µÄY×ø±ê£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function GetLoginPointEventCallBack(CharIndex, MapID, FloorID, X, Y) end
 
----åˆ›å»ºä¸€ä¸ªå¯ä»¥åœ¨itemsetä¸­ä½¿ç”¨çš„é“å…·æ•ˆæœå­—æ®µï¼Œå½“é“å…·è§¦å‘è¯¥å­—æ®µæ—¶ï¼Œå°†ä¼šè‡ªåŠ¨è°ƒç”¨å®šä¹‰çš„luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
----@param ItemSigh  å­—ç¬¦ä¸² Itemsetä¸­å¯¹åº”çš„åŠŸèƒ½å­—æ®µï¼Œåˆå§‹åŒ–è§¦å‘çš„å‡½æ•°ç”¨LUA_initå¼€å¤´ã€ä½¿ç”¨è§¦å‘çš„å‡½æ•°ç”¨LUA_useå¼€å¤´ã€è£…å¤‡é“å…·è§¦å‘çš„å‡½æ•°ç”¨LUA_attå¼€å¤´ã€å¸é™¤è£…å¤‡è§¦å‘çš„å‡½æ•°ç”¨LUA_detå¼€å¤´ã€é“å…·ä¸¢ä¸‹æ—¶è§¦å‘çš„å‡½æ•°ç”¨LUA_dropå¼€å¤´ã€é“å…·æ‹¾å–å‰è§¦å‘çš„å‡½æ•°ç”¨LUA_prepickå¼€å¤´ã€é“å…·æ‹¾å–åè§¦å‘çš„å‡½æ•°ç”¨LUA_pickå¼€å¤´
----@param itemset.txtä¸­çš„è‡ªå®šä¹‰å‡½æ•°åæ‰€å¯¹åº”çš„åˆ—ä¸åŒ.
----@param FuncNameæ‰€å®šä¹‰çš„å‡½æ•°çš„ç”³æ˜æ ¼å¼æ ¹æ®ä¸åŒçš„é“å…·æ•ˆæœè€Œä¸åŒï¼Œå…·ä½“è¯·å‚è€ƒä»¥ä¸‹æ•°æ® 
+---´´½¨Ò»¸ö¿ÉÒÔÔÚitemsetÖĞÊ¹ÓÃµÄµÀ¾ßĞ§¹û×Ö¶Î£¬µ±µÀ¾ß´¥·¢¸Ã×Ö¶ÎÊ±£¬½«»á×Ô¶¯µ÷ÓÃ¶¨ÒåµÄluaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
+---@param ItemSigh  ×Ö·û´® ItemsetÖĞ¶ÔÓ¦µÄ¹¦ÄÜ×Ö¶Î£¬³õÊ¼»¯´¥·¢µÄº¯ÊıÓÃLUA_init¿ªÍ·¡¢Ê¹ÓÃ´¥·¢µÄº¯ÊıÓÃLUA_use¿ªÍ·¡¢×°±¸µÀ¾ß´¥·¢µÄº¯ÊıÓÃLUA_att¿ªÍ·¡¢Ğ¶³ı×°±¸´¥·¢µÄº¯ÊıÓÃLUA_det¿ªÍ·¡¢µÀ¾ß¶ªÏÂÊ±´¥·¢µÄº¯ÊıÓÃLUA_drop¿ªÍ·¡¢µÀ¾ßÊ°È¡Ç°´¥·¢µÄº¯ÊıÓÃLUA_prepick¿ªÍ·¡¢µÀ¾ßÊ°È¡ºó´¥·¢µÄº¯ÊıÓÃLUA_pick¿ªÍ·
+---@param itemset.txtÖĞµÄ×Ô¶¨Òåº¯ÊıÃûËù¶ÔÓ¦µÄÁĞ²»Í¬.
+---@param FuncNameËù¶¨ÒåµÄº¯ÊıµÄÉêÃ÷¸ñÊ½¸ù¾İ²»Í¬µÄµÀ¾ßĞ§¹û¶ø²»Í¬£¬¾ßÌåÇë²Î¿¼ÒÔÏÂÊı¾İ 
 ---@param 
----@param LUA_initï¼š [ItemStringInitCallBack] é“å…·åˆå§‹åŒ–è§¦å‘,itemset.txtç¬¬4åˆ—å¡«è‡ªå®šä¹‰å‡½æ•°å.
----@param LUA_use ï¼š [ItemStringUseCallBack] é“å…·ä½¿ç”¨è§¦å‘,itemset.txtç¬¬6åˆ—å¡«è‡ªå®šä¹‰å‡½æ•°å.
----@param LUA_att ï¼š [ItemStringAttachCallBack] é“å…·è£…å¤‡è§¦å‘,itemset.txtç¬¬7åˆ—å¡«è‡ªå®šä¹‰å‡½æ•°å.
----@param LUA_det ï¼š [ItemStringDetachCallBack] é“å…·å¸ä¸‹è§¦å‘,itemset.txtç¬¬8åˆ—å¡«è‡ªå®šä¹‰å‡½æ•°å.
----@param LUA_drop   [ItemStringDropCallBack]é“å…·ä¸¢ä¸‹æ—¶è§¦å‘,itemset.txtç¬¬9åˆ—å¡«è‡ªå®šä¹‰å‡½æ•°å.
----@param LUA_prepick   [ItemStringPrePickUpCallBack]é“å…·æ‹¾å–å‰è§¦å‘,itemset.txtç¬¬10åˆ—å¡«è‡ªå®šä¹‰å‡½æ•°å.
----@param LUA_pick  [ItemStringPickUpCallBack]é“å…·æ‹¾å–åè§¦å‘,itemset.txtç¬¬11åˆ—å¡«è‡ªå®šä¹‰å‡½æ•°å.
+---@param LUA_init£º [ItemStringInitCallBack] µÀ¾ß³õÊ¼»¯´¥·¢,itemset.txtµÚ4ÁĞÌî×Ô¶¨Òåº¯ÊıÃû.
+---@param LUA_use £º [ItemStringUseCallBack] µÀ¾ßÊ¹ÓÃ´¥·¢,itemset.txtµÚ6ÁĞÌî×Ô¶¨Òåº¯ÊıÃû.
+---@param LUA_att £º [ItemStringAttachCallBack] µÀ¾ß×°±¸´¥·¢,itemset.txtµÚ7ÁĞÌî×Ô¶¨Òåº¯ÊıÃû.
+---@param LUA_det £º [ItemStringDetachCallBack] µÀ¾ßĞ¶ÏÂ´¥·¢,itemset.txtµÚ8ÁĞÌî×Ô¶¨Òåº¯ÊıÃû.
+---@param LUA_drop   [ItemStringDropCallBack]µÀ¾ß¶ªÏÂÊ±´¥·¢,itemset.txtµÚ9ÁĞÌî×Ô¶¨Òåº¯ÊıÃû.
+---@param LUA_prepick   [ItemStringPrePickUpCallBack]µÀ¾ßÊ°È¡Ç°´¥·¢,itemset.txtµÚ10ÁĞÌî×Ô¶¨Òåº¯ÊıÃû.
+---@param LUA_pick  [ItemStringPickUpCallBack]µÀ¾ßÊ°È¡ºó´¥·¢,itemset.txtµÚ11ÁĞÌî×Ô¶¨Òåº¯ÊıÃû.
 ---@return any 
 function NL.RegItemString(Dofile, FuncName, ItemSigh) end
 
----ItemStringçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---ItemStringµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function ItemStringInitCallBack(CharIndex, ItemIndex) end
 
----ItemStringçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param TargetCharIndex  æ•°å€¼å‹ é“å…·ä½¿ç”¨ç›®æ ‡çš„å¯¹è±¡indexï¼Œå¯¹è‡ªèº«ä½¿ç”¨åˆ™ä¸CharIndexå€¼ç›¸åŒï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ItemSlot  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·æ‰€åœ¨çš„æ ä½ï¼ŒèŒƒå›´8-27ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›0å³å¯
+---ItemStringµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param TargetCharIndex  ÊıÖµĞÍ µÀ¾ßÊ¹ÓÃÄ¿±êµÄ¶ÔÏóindex£¬¶Ô×ÔÉíÊ¹ÓÃÔòÓëCharIndexÖµÏàÍ¬£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ItemSlot  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßËùÔÚµÄÀ¸Î»£¬·¶Î§8-27£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø0¼´¿É
 function ItemStringUseCallBack(CharIndex, TargetCharIndex, ItemSlot) end
 
----ItemStringçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param FromItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·Indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å°äº0åˆ™å–æ¶ˆé“å…·è£…å¤‡,è¿”å›å¤§äºç­‰äº0åˆ™æ­£å¸¸è£…å¤‡ã€‚
+---ItemStringµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param FromItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßIndex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµĞ¡ÓÚ0ÔòÈ¡ÏûµÀ¾ß×°±¸,·µ»Ø´óÓÚµÈÓÚ0ÔòÕı³£×°±¸¡£
 function ItemStringAttachCallBack(CharIndex, FromItemIndex) end
 
----ItemStringçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param FromItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·Indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---ItemStringµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param FromItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßIndex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function ItemStringDetachCallBack(CharIndex, FromItemIndex) end
 
----ItemStringçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·Indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---ItemStringµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßIndex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function ItemStringDropCallBack(CharIndex, ItemIndex) end
 
----ItemStringçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·Indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å°äº0åˆ™å–æ¶ˆé“å…·ä½¿ç”¨,è¿”å›å¤§äºç­‰äº0åˆ™æ­£å¸¸æ‹¾å–é“å…·ã€‚
+---ItemStringµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßIndex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµĞ¡ÓÚ0ÔòÈ¡ÏûµÀ¾ßÊ¹ÓÃ,·µ»Ø´óÓÚµÈÓÚ0ÔòÕı³£Ê°È¡µÀ¾ß¡£
 function ItemStringPrePickUpCallBack(CharIndex, ItemIndex) end
 
----ItemStringçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·Indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---ItemStringµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßIndex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function ItemStringPickUpCallBack(CharIndex, ItemIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶æ‰€æœ‰é“å…·åˆå§‹åŒ–æ—¶å°±ä¼šè§¦å‘çš„Luaå‡½æ•°,æ­¤å‡½æ•°ä¼šåŠ é‡å¼•æ“è´Ÿè½½,è¯·è°¨æ…ä½¿ç”¨!
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
----@param åªè¦æ³¨å†Œäº†æœ¬äº‹ä»¶,ä¸ç®¡é“å…·æ˜¯å¦å…·æœ‰Initå‡½æ•°,æœ¬å‡½æ•°éƒ½ä¼šè§¦å‘.
----@param è§¦å‘æ¡ä»¶å¦‚ä¸‹ 
----@param ç©å®¶ç™»é™†
----@param åˆ›å»ºæˆ–è·å–æ–°é“å…·,
----@param æ‰“å¼€é“¶è¡Œ
----@param æ‰“å¼€å…¬ä¼šä»“åº“ã€‚
+---´´½¨Ò»¸öËùÓĞÍæ¼ÒËùÓĞµÀ¾ß³õÊ¼»¯Ê±¾Í»á´¥·¢µÄLuaº¯Êı,´Ëº¯Êı»á¼ÓÖØÒıÇæ¸ºÔØ,Çë½÷É÷Ê¹ÓÃ!
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
+---@param Ö»Òª×¢²áÁË±¾ÊÂ¼ş,²»¹ÜµÀ¾ßÊÇ·ñ¾ßÓĞInitº¯Êı,±¾º¯Êı¶¼»á´¥·¢.
+---@param ´¥·¢Ìõ¼şÈçÏÂ 
+---@param Íæ¼ÒµÇÂ½
+---@param ´´½¨»ò»ñÈ¡ĞÂµÀ¾ß,
+---@param ´ò¿ªÒøĞĞ
+---@param ´ò¿ª¹«»á²Ö¿â¡£
 ---@return any 
 function NL.RegItemInitEvent(Dofile, FuncName) end
 
----ItemInitEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---ItemInitEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function ItemInitCallBack(CharIndex, ItemIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶ä½¿ç”¨é“å…·(åŒ…æ‹¬æˆ˜æ–—ä¸­)å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öËùÓĞÍæ¼ÒÊ¹ÓÃµÀ¾ß(°üÀ¨Õ½¶·ÖĞ)¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegItemUseEvent(Dofile, FuncName) end
 
----ItemUseEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param TargetCharIndex  æ•°å€¼å‹ é“å…·ä½¿ç”¨ç›®æ ‡çš„å¯¹è±¡indexï¼Œå¯¹è‡ªèº«ä½¿ç”¨åˆ™ä¸CharIndexå€¼ç›¸åŒï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ItemSlot  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·æ‰€åœ¨çš„æ ä½ï¼ŒèŒƒå›´8-27ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å°äº0åˆ™å–æ¶ˆé“å…·ä½¿ç”¨,è¿”å›å¤§äºç­‰äº0åˆ™æ­£å¸¸ä½¿ç”¨ã€‚
+---ItemUseEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param TargetCharIndex  ÊıÖµĞÍ µÀ¾ßÊ¹ÓÃÄ¿±êµÄ¶ÔÏóindex£¬¶Ô×ÔÉíÊ¹ÓÃÔòÓëCharIndexÖµÏàÍ¬£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ItemSlot  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßËùÔÚµÄÀ¸Î»£¬·¶Î§8-27£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµĞ¡ÓÚ0ÔòÈ¡ÏûµÀ¾ßÊ¹ÓÃ,·µ»Ø´óÓÚµÈÓÚ0ÔòÕı³£Ê¹ÓÃ¡£
 function ItemUseCallBack(CharIndex, TargetCharIndex, ItemSlot) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶è£…å¤‡é“å…·æ—¶å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öËùÓĞÍæ¼Ò×°±¸µÀ¾ßÊ±¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegItemAttachEvent(Dofile, FuncName) end
 
----ItemAttachEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param FromItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·Indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å°äº0åˆ™å–æ¶ˆé“å…·ä½¿ç”¨,è¿”å›å¤§äºç­‰äº0åˆ™æ­£å¸¸ä½¿ç”¨ã€‚
+---ItemAttachEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param FromItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßIndex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµĞ¡ÓÚ0ÔòÈ¡ÏûµÀ¾ßÊ¹ÓÃ,·µ»Ø´óÓÚµÈÓÚ0ÔòÕı³£Ê¹ÓÃ¡£
 function ItemAttachCallBack(CharIndex, FromItemIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶å¸ä¸‹è£…å¤‡é“å…·æ—¶å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öËùÓĞÍæ¼ÒĞ¶ÏÂ×°±¸µÀ¾ßÊ±¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegItemDetachEvent(Dofile, FuncName) end
 
----ItemDetachEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param FromItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·Indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---ItemDetachEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param FromItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßIndex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function ItemDetachCallBack(CharIndex, FromItemIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶ä¸¢å¼ƒé“å…·æ—¶å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öËùÓĞÍæ¼Ò¶ªÆúµÀ¾ßÊ±¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegItemDropEvent(Dofile, FuncName) end
 
----ItemDropEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·Indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å°äº0åˆ™æ‹¦æˆªä¸¢å¼ƒ,è¿”å›å¤§äºç­‰äº0åˆ™æ­£å¸¸ä¸¢å¼ƒã€‚
+---ItemDropEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßIndex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµĞ¡ÓÚ0ÔòÀ¹½Ø¶ªÆú,·µ»Ø´óÓÚµÈÓÚ0ÔòÕı³£¶ªÆú¡£
 function ItemDropCallBack(CharIndex, ItemIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶æˆåŠŸæ‹¾å–é“å…·ä¹‹åå°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öËùÓĞÍæ¼Ò³É¹¦Ê°È¡µÀ¾ßÖ®ºó¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegItemPickUpEvent(Dofile, FuncName) end
 
----ItemPickUpEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ é“å…·æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param ItemIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„é“å…·Indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å°äº0åˆ™æ‹¦æˆªæ‹¾å–,è¿”å›å¤§äºç­‰äº0åˆ™æ­£å¸¸æ‹¾å–ã€‚
+---ItemPickUpEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ µÀ¾ßËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param ItemIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄµÀ¾ßIndex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµĞ¡ÓÚ0ÔòÀ¹½ØÊ°È¡,·µ»Ø´óÓÚµÈÓÚ0ÔòÕı³£Ê°È¡¡£
 function ItemPickUpCallBack(CharIndex, ItemIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶å±•ç¤º(ä¼‘æ¯)å® ç‰©å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öËùÓĞÍæ¼ÒÕ¹Ê¾(ĞİÏ¢)³èÎï¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegPetFieldEvent(Dofile, FuncName) end
 
----PetFieldEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å® ç‰©æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param PetIndex  æ•°å€¼å‹ è¢«å±•ç¤º(ä¼‘æ¯)å® ç‰©çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param PetPos  æ•°å€¼å‹ è¢«å±•ç¤º(ä¼‘æ¯)çš„å® ç‰©æ‰€åœ¨æ ä½ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å°äº0åˆ™æ‹¦æˆªå±•ç¤º,è¿”å›å¤§äºç­‰äº0åˆ™æ­£å¸¸å±•ç¤º(ä¼‘æ¯)ã€‚
+---PetFieldEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ³èÎïËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param PetIndex  ÊıÖµĞÍ ±»Õ¹Ê¾(ĞİÏ¢)³èÎïµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param PetPos  ÊıÖµĞÍ ±»Õ¹Ê¾(ĞİÏ¢)µÄ³èÎïËùÔÚÀ¸Î»£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµĞ¡ÓÚ0ÔòÀ¹½ØÕ¹Ê¾,·µ»Ø´óÓÚµÈÓÚ0ÔòÕı³£Õ¹Ê¾(ĞİÏ¢)¡£
 function PetFieldCallBack(CharIndex, PetIndex, PetPos) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶ä¸¢å‡ºå® ç‰©å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öËùÓĞÍæ¼Ò¶ª³ö³èÎï¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegPetDropEvent(Dofile, FuncName) end
 
----PetDropEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å® ç‰©æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param PetPos  æ•°å€¼å‹ è¢«ä¸¢å‡ºçš„å® ç‰©æ‰€åœ¨æ ä½ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å°äº0åˆ™æ‹¦æˆªä¸¢å¼ƒ,è¿”å›å¤§äºç­‰äº0åˆ™æ­£å¸¸ä¸¢å¼ƒã€‚
+---PetDropEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ³èÎïËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param PetPos  ÊıÖµĞÍ ±»¶ª³öµÄ³èÎïËùÔÚÀ¸Î»£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµĞ¡ÓÚ0ÔòÀ¹½Ø¶ªÆú,·µ»Ø´óÓÚµÈÓÚ0ÔòÕı³£¶ªÆú¡£
 function PetDropCallBack(CharIndex, PetPos) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶æ¡èµ·å® ç‰©å°±ä¼šè§¦å‘çš„Luaå‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öËùÓĞÍæ¼Ò¼ñÆğ³èÎï¾Í»á´¥·¢µÄLuaº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegPetPickUpEvent(Dofile, FuncName) end
 
----PetPickUpEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å® ç‰©æ‰€æœ‰è€…çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param PetIndex  æ•°å€¼å‹ è¦æ¡èµ·å® ç‰©çš„å¯¹è±¡ç´¢å¼•ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å°äº0åˆ™æ‹¦æˆªæ‹¾å–,è¿”å›å¤§äºç­‰äº0åˆ™ç»§ç»­æ­£å¸¸æ‹¾å–æµç¨‹(ä¸æ˜¯å¼ºè¡Œæ‹¾å–)ã€‚
+---PetPickUpEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ³èÎïËùÓĞÕßµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param PetIndex  ÊıÖµĞÍ Òª¼ñÆğ³èÎïµÄ¶ÔÏóË÷Òı£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµĞ¡ÓÚ0ÔòÀ¹½ØÊ°È¡,·µ»Ø´óÓÚµÈÓÚ0Ôò¼ÌĞøÕı³£Ê°È¡Á÷³Ì(²»ÊÇÇ¿ĞĞÊ°È¡)¡£
 function PetPickUpCallBack(CharIndex, PetIndex) end
 
----æˆ˜æ–—ä¸­è®¡ç®—ä¼¤å®³æ—¶ä¼šè§¦å‘è¯¥å‡½æ•°
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[DamageCalculateCallBack]
+---Õ½¶·ÖĞ¼ÆËãÉËº¦Ê±»á´¥·¢¸Ãº¯Êı
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[DamageCalculateCallBack]
 ---@return any 
 function NL.RegDamageCalculateEvent(Dofile, FuncName) end
 
----DamageCalculateEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼ˆæ”»å‡»è€…ï¼‰ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param DefCharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼ˆé˜²å¾¡è€…ï¼‰ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param OriDamage  æ•°å€¼å‹ æœªä¿®æ­£ä¼¤å®³ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Damage  æ•°å€¼å‹ ä¿®æ­£ä¼¤å®³ï¼ˆçœŸå®ä¼¤å®³ï¼‰ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param BattleIndex  æ•°å€¼å‹ å½“å‰æˆ˜æ–—indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Com1  æ•°å€¼å‹ æ”»å‡»è€…ä½¿ç”¨çš„å‹•ä½œç·¨è™Ÿï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Com2  æ•°å€¼å‹ æ”»å‡»è€…æ”»å‡»å‹•ä½œçš„ç›®æ¨™å°è±¡çš„ä½ç½®ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Com3  æ•°å€¼å‹ æ”»å‡»è€…ä½¿ç”¨çš„æ‰€å°æ‡‰çš„techçš„IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param DefCom1  æ•°å€¼å‹ é˜²å¾¡è€…ä½¿ç”¨çš„å‹•ä½œç·¨è™Ÿï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param DefCom2  æ•°å€¼å‹ é˜²å¾¡è€…æ”»å‡»å‹•ä½œçš„ç›®æ¨™å°è±¡çš„ä½ç½®ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param DefCom3  æ•°å€¼å‹ é˜²å¾¡è€…ä½¿ç”¨çš„æ‰€å°æ‡‰çš„techçš„IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Flg  æ•°å€¼å‹ ä¼¤å®³æ¨¡å¼ï¼Œå…·ä½“æŸ¥çœ‹CONST.DamageFlags
----@return number ä¼¤å®³å€¼æ•°å€¼å‹
+---DamageCalculateEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¨¹¥»÷Õß£©£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param DefCharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¨·ÀÓùÕß£©£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param OriDamage  ÊıÖµĞÍ Î´ĞŞÕıÉËº¦£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Damage  ÊıÖµĞÍ ĞŞÕıÉËº¦£¨ÕæÊµÉËº¦£©£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param BattleIndex  ÊıÖµĞÍ µ±Ç°Õ½¶·index£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Com1  ÊıÖµĞÍ ¹¥»÷ÕßÊ¹ÓÃµÄ„Ó×÷¾Ì–£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Com2  ÊıÖµĞÍ ¹¥»÷Õß¹¥»÷„Ó×÷µÄÄ¿˜ËŒ¦ÏóµÄÎ»ÖÃ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Com3  ÊıÖµĞÍ ¹¥»÷ÕßÊ¹ÓÃµÄËùŒ¦‘ªµÄtechµÄID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param DefCom1  ÊıÖµĞÍ ·ÀÓùÕßÊ¹ÓÃµÄ„Ó×÷¾Ì–£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param DefCom2  ÊıÖµĞÍ ·ÀÓùÕß¹¥»÷„Ó×÷µÄÄ¿˜ËŒ¦ÏóµÄÎ»ÖÃ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param DefCom3  ÊıÖµĞÍ ·ÀÓùÕßÊ¹ÓÃµÄËùŒ¦‘ªµÄtechµÄID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Flg  ÊıÖµĞÍ ÉËº¦Ä£Ê½£¬¾ßÌå²é¿´CONST.DamageFlags
+---@return number ÉËº¦ÖµÊıÖµĞÍ
 function DamageCalculateCallBack(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg) end
 
----æŠ€èƒ½é™„åŠ å‚æ•°è·å–æ—¶è§¦å‘çš„å‡½æ•°
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[TechOptionCallBack]
+---¼¼ÄÜ¸½¼Ó²ÎÊı»ñÈ¡Ê±´¥·¢µÄº¯Êı
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[TechOptionCallBack]
 ---@return any 
 function NL.RegTechOptionEvent(Dofile, FuncName) end
 
----TechOptionEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Option  å­—ç¬¦å‹ å“åº”äº‹ä»¶çš„æŠ€èƒ½çš„Optionå­—æ®µï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param TechID  æ•°å€¼å‹ å½“å‰æŠ€èƒ½çš„Tech IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Val  æ•°å€¼å‹ å¯¹åº”å­—æ®µçš„å€¼ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number æ–°çš„å€¼æ•°å€¼å‹
+---TechOptionEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Option  ×Ö·ûĞÍ ÏìÓ¦ÊÂ¼şµÄ¼¼ÄÜµÄOption×Ö¶Î£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param TechID  ÊıÖµĞÍ µ±Ç°¼¼ÄÜµÄTech ID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Val  ÊıÖµĞÍ ¶ÔÓ¦×Ö¶ÎµÄÖµ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ĞÂµÄÖµÊıÖµĞÍ
 function TechOptionCallBack(CharIndex, Option, TechID, Val) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰è§’è‰²æ˜¾ç¤ºå¤´é¥°æ•ˆæœçš„æ—¶å€™è§¦å‘çš„å‡½æ•°ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[HeadCoverEventCallBack]
+---´´½¨Ò»¸öËùÓĞ½ÇÉ«ÏÔÊ¾Í·ÊÎĞ§¹ûµÄÊ±ºò´¥·¢µÄº¯Êı¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[HeadCoverEventCallBack]
 ---@return any 
 function NL.RegHeadCoverEvent(Dofile, FuncName) end
 
----HeadCoverEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param CurrentHeadCoverImage  æ•°å€¼å‹ è¯¥å¯¹è±¡å½“å‰çš„å¤´é¥°å›¾æ¡£idï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›æ–°çš„å¤´é¥°å›¾æ¡£idï¼Œå¦‚ä¸å˜æ›´ï¼Œåˆ™è¿”å›CurrentHeadCoverImageå³å¯
+---HeadCoverEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param CurrentHeadCoverImage  ÊıÖµĞÍ ¸Ã¶ÔÏóµ±Ç°µÄÍ·ÊÎÍ¼µµid£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»ØĞÂµÄÍ·ÊÎÍ¼µµid£¬Èç²»±ä¸ü£¬Ôò·µ»ØCurrentHeadCoverImage¼´¿É
 function HeadCoverEventCallBack(CharIndex, CurrentHeadCoverImage) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰ç©å®¶è§’è‰²èŒä¸šæ™‹çº§æ—¶è§¦å‘çš„Luaå‡½æ•°ï¼Œç©å®¶åœ¨æ¸¸æˆä¸­è§’è‰²èŒä¸šæ™‹çº§åå°±å¯è§¦å‘ï¼Œå¯ä»¥ç”¨æ¥åœ¨ç‰¹å®šèŒä¸šç­‰çº§ç»™äºˆç‰¹å®šå¥–åŠ±ï¼Œè®°å½•ç©å®¶å†²çº§é€Ÿåº¦æ’è¡Œç­‰ã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param InitFuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[RankUpCallBack]
+---´´½¨Ò»¸öËùÓĞÍæ¼Ò½ÇÉ«Ö°Òµ½ú¼¶Ê±´¥·¢µÄLuaº¯Êı£¬Íæ¼ÒÔÚÓÎÏ·ÖĞ½ÇÉ«Ö°Òµ½ú¼¶ºó¾Í¿É´¥·¢£¬¿ÉÒÔÓÃÀ´ÔÚÌØ¶¨Ö°ÒµµÈ¼¶¸øÓèÌØ¶¨½±Àø£¬¼ÇÂ¼Íæ¼Ò³å¼¶ËÙ¶ÈÅÅĞĞµÈ¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param InitFuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[RankUpCallBack]
 ---@return any 
 function NL.RegRankUpEvent(Dofile, FuncName) end
 
----RankUpEventçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param OldRank  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡å½“å‰èŒä¸šç­‰çº§ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param NewRank  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡èŒä¸šæ™‹çº§åçš„èŒä¸šç­‰çº§ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å¤§äºç­‰äº0å…è®¸æ™‹çº§,è¿”å›å€¼ä¸ºè´Ÿæ•°æ‹’ç»æ­¤æ¬¡æ™‹çº§ã€‚
+---RankUpEventµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param OldRank  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóµ±Ç°Ö°ÒµµÈ¼¶£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param NewRank  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóÖ°Òµ½ú¼¶ºóµÄÖ°ÒµµÈ¼¶£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµ´óÓÚµÈÓÚ0ÔÊĞí½ú¼¶,·µ»ØÖµÎª¸ºÊı¾Ü¾ø´Ë´Î½ú¼¶¡£
 function RankUpCallBack(CharIndex, OldRank, NewRank) end
 
----åˆ›å»ºä¸€ä¸ªå½“åœ°é¢çš„å® ç‰©è¢«ç³»ç»Ÿåˆ æ—¶ä¼šè§¦å‘çš„äº‹ä»¶ï¼Œåˆ©ç”¨æ­¤äº‹ä»¶å¯ä»¥è¿›è¡Œå»¶é•¿è¯¥å® ç‰©çš„åˆ é™¤æ—¶é—´ç­‰æ“ä½œã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öµ±µØÃæµÄ³èÎï±»ÏµÍ³É¾Ê±»á´¥·¢µÄÊÂ¼ş£¬ÀûÓÃ´ËÊÂ¼ş¿ÉÒÔ½øĞĞÑÓ³¤¸Ã³èÎïµÄÉ¾³ıÊ±¼äµÈ²Ù×÷¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegPetTimeDeleteEvent(Dofile, FuncName) end
 
----PetTimeDeleteEventçš„å›è°ƒå‡½æ•°
----@param PetIndex  æ•°å€¼å‹ è§¦å‘æ—¶é—´çš„å® ç‰©ç´¢å¼•ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return any è¿”å›å€¼å°äºç­‰äº0åˆ™ç»§ç»­æ­£å¸¸åˆ é™¤ã€‚ | è¿”å›å¤§äº0åˆ™è¯¥å® ç‰©çš„åˆ é™¤æ—¶é—´å°†ä¼šè¢«å»¶é•¿è‡³è¿”å›å€¼è®¾å®šçš„ç§’æ•°ååˆ é™¤ã€‚
+---PetTimeDeleteEventµÄ»Øµ÷º¯Êı
+---@param PetIndex  ÊıÖµĞÍ ´¥·¢Ê±¼äµÄ³èÎïË÷Òı£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return any ·µ»ØÖµĞ¡ÓÚµÈÓÚ0Ôò¼ÌĞøÕı³£É¾³ı¡£ | ·µ»Ø´óÓÚ0Ôò¸Ã³èÎïµÄÉ¾³ıÊ±¼ä½«»á±»ÑÓ³¤ÖÁ·µ»ØÖµÉè¶¨µÄÃëÊıºóÉ¾³ı¡£
 function PetTimeDeleteCallBack(PetIndex) end
 
----åˆ›å»ºä¸€ä¸ªæˆ˜æ–—å·è¢­ä¹‹å‰è§¦å‘çš„äº‹ä»¶ï¼Œåˆ©ç”¨æ­¤äº‹ä»¶å¯ä»¥æ”¹å˜æˆ˜æ–—çš„å·è¢­å½¢å¼
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÕ½¶·ÍµÏ®Ö®Ç°´¥·¢µÄÊÂ¼ş£¬ÀûÓÃ´ËÊÂ¼ş¿ÉÒÔ¸Ä±äÕ½¶·µÄÍµÏ®ĞÎÊ½
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return nil 
 function NL.RegBattleSurpriseEvent(Dofile, FuncName) end
 
----BattleSurpriseEventçš„å›è°ƒå‡½æ•°
----@param battle number æˆ˜æ–—çš„index
----@param result number æ­¤æ¬¡æˆ˜æ–—çš„å·è¢­å½¢å¼ 0ä¸å·è¢­ï¼Œ1å·è¢­ï¼Œ2è¢«å·è¢­
----@return number è¿”å›0ä¸å·è¢­ï¼Œè¿”å›1å·è¢­ï¼Œè¿”å›2è¢«å·è¢­
+---BattleSurpriseEventµÄ»Øµ÷º¯Êı
+---@param battle number Õ½¶·µÄindex
+---@param result number ´Ë´ÎÕ½¶·µÄÍµÏ®ĞÎÊ½ 0²»ÍµÏ®£¬1ÍµÏ®£¬2±»ÍµÏ®
+---@return number ·µ»Ø0²»ÍµÏ®£¬·µ»Ø1ÍµÏ®£¬·µ»Ø2±»ÍµÏ®
 function BattleSurpriseCallBack(battleIndex, result) end
 
----åˆ›å»ºä¸€ä¸ªæ€ªç‰©æ–½æ”¾å¬å”¤æ—¶è§¦å‘çš„äº‹ä»¶ï¼Œåˆ©ç”¨æ­¤äº‹ä»¶å¯ä»¥æ”¹å˜å¬å”¤ç‰©çš„ç§ç±»å’Œç­‰çº§
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö¹ÖÎïÊ©·ÅÕÙ»½Ê±´¥·¢µÄÊÂ¼ş£¬ÀûÓÃ´ËÊÂ¼ş¿ÉÒÔ¸Ä±äÕÙ»½ÎïµÄÖÖÀàºÍµÈ¼¶
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleSummonEnemyEvent(Dofile, FuncName) end
 
----BattleSummonEnemyEventçš„å›è°ƒå‡½æ•°
----@param battle number æˆ˜æ–—çš„index
----@param charIndex number æ–½æ”¾å¬å”¤è§’è‰²çš„index
----@param enemyId number å¬å”¤çš„enemyId
----@return number è¿”å›æ–°è¡¨æ ¼ {enemyIdï¼Œç­‰çº§ï¼Œç­‰çº§æ³¢åŠ¨}
+---BattleSummonEnemyEventµÄ»Øµ÷º¯Êı
+---@param battle number Õ½¶·µÄindex
+---@param charIndex number Ê©·ÅÕÙ»½½ÇÉ«µÄindex
+---@param enemyId number ÕÙ»½µÄenemyId
+---@return number ·µ»ØĞÂ±í¸ñ {enemyId£¬µÈ¼¶£¬µÈ¼¶²¨¶¯}
 function BattleSummonEnemyCallBack(battleIndex, charIndex, enemyId) end
 
----åˆ›å»ºä¸€ä¸ªå¬å”¤ç‰©ç”Ÿæˆå‰è§¦å‘çš„äº‹ä»¶ï¼Œåˆ©ç”¨æ­¤äº‹ä»¶å¯ä»¥æ”¹å˜å¬å”¤ç‰©çš„å±æ€§
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÕÙ»½ÎïÉú³ÉÇ°´¥·¢µÄÊÂ¼ş£¬ÀûÓÃ´ËÊÂ¼ş¿ÉÒÔ¸Ä±äÕÙ»½ÎïµÄÊôĞÔ
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleSummonedEnemyEvent(Dofile, FuncName) end
 
----BattleSummonedEnemyçš„å›è°ƒå‡½æ•°
----@param battle number æˆ˜æ–—çš„index
----@param charIndex number æ–½æ”¾å¬å”¤è§’è‰²çš„index
----@param charIndex number è¢«å¬å”¤è§’è‰²çš„index
+---BattleSummonedEnemyµÄ»Øµ÷º¯Êı
+---@param battle number Õ½¶·µÄindex
+---@param charIndex number Ê©·ÅÕÙ»½½ÇÉ«µÄindex
+---@param charIndex number ±»ÕÙ»½½ÇÉ«µÄindex
 ---@return any 
 function BattleSummonedEnemyCallBack(battleIndex, actionCharIndex, charIndex) end
 
----åˆ›å»ºä¸€ä¸ªè¿æˆ˜ç”Ÿæˆå‰è§¦å‘çš„äº‹ä»¶ï¼Œåˆ©ç”¨æ­¤äº‹ä»¶å¯ä»¥æ”¹å˜è¿æˆ˜çš„æ€ªç‰©å’Œç­‰çº§
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÁ¬Õ½Éú³ÉÇ°´¥·¢µÄÊÂ¼ş£¬ÀûÓÃ´ËÊÂ¼ş¿ÉÒÔ¸Ä±äÁ¬Õ½µÄ¹ÖÎïºÍµÈ¼¶
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return nil 
 function NL.RegBattleNextEnemyEvent(Dofile, FuncName) end
 
----BattleNextEnemyçš„å›è°ƒå‡½æ•°
----@param battle number æˆ˜æ–—çš„index
----@param flg number luaè¿æˆ˜å‚æ•°
----@return number è¿”å›æ–°è¡¨æ ¼{enmeyId,ç­‰çº§,...}æŒ‰10-19çš„ä½ç½®æ’åˆ—ï¼Œè¿”å›nilå–æ¶ˆè¿æˆ˜
+---BattleNextEnemyµÄ»Øµ÷º¯Êı
+---@param battle number Õ½¶·µÄindex
+---@param flg number luaÁ¬Õ½²ÎÊı
+---@return number ·µ»ØĞÂ±í¸ñ{enmeyId,µÈ¼¶,...}°´10-19µÄÎ»ÖÃÅÅÁĞ£¬·µ»ØnilÈ¡ÏûÁ¬Õ½
 function BattleNextEnemyCallBack(battleIndex, flg) end
 
----åˆ›å»ºä¸€ä¸ªè¿æˆ˜é­”ç‰©ç”Ÿæˆå‰è§¦å‘çš„äº‹ä»¶ï¼Œåˆ©ç”¨æ­¤äº‹ä»¶å¯ä»¥æ”¹å˜è¿æˆ˜é­”ç‰©çš„å±æ€§
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÁ¬Õ½Ä§ÎïÉú³ÉÇ°´¥·¢µÄÊÂ¼ş£¬ÀûÓÃ´ËÊÂ¼ş¿ÉÒÔ¸Ä±äÁ¬Õ½Ä§ÎïµÄÊôĞÔ
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleNextEnemyInitEvent(Dofile, FuncName) end
 
----BattleNextEnemyInitçš„å›è°ƒå‡½æ•°
----@param battle number æˆ˜æ–—çš„index
----@param flg number luaè¿æˆ˜å‚æ•°
+---BattleNextEnemyInitµÄ»Øµ÷º¯Êı
+---@param battle number Õ½¶·µÄindex
+---@param flg number luaÁ¬Õ½²ÎÊı
 ---@return any 
 function BattleNextEnemyInitCallBack(battleIndex, flg) end
 
----åˆ›å»ºä¸€ä¸ªæ€ªç‰©aiæ‰§è¡Œå‰è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö¹ÖÎïaiÖ´ĞĞÇ°´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBeforeBattleTurnEvent(Dofile, FuncName) end
 
----BeforeBattleTurnEventçš„å›è°ƒå‡½æ•°
----@param battleIndex number æˆ˜æ–—çš„index
+---BeforeBattleTurnEventµÄ»Øµ÷º¯Êı
+---@param battleIndex number Õ½¶·µÄindex
 ---@return any 
 function BeforeBattleTurnCallBack(battleIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ‰€æœ‰æŒ‡ä»¤å·²å°±ä½è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öËùÓĞÖ¸ÁîÒÑ¾ÍÎ»´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBeforeBattleTurnStartEvent(Dofile, FuncName) end
 
----BeforeBattleTurnStarteventçš„å›è°ƒå‡½æ•°
----@param battleIndex number æˆ˜æ–—çš„index
+---BeforeBattleTurnStarteventµÄ»Øµ÷º¯Êı
+---@param battleIndex number Õ½¶·µÄindex
 ---@return any 
 function BeforeBattleTurnStartCallBack(battleIndex) end
 
----åˆ›å»ºä¸€ä¸ªå›åˆç»“æŸè§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö»ØºÏ½áÊø´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegAfterBattleTurnEvent(Dofile, FuncName) end
 
----AfterBattleTurneventçš„å›è°ƒå‡½æ•°
----@param battleIndex number æˆ˜æ–—çš„index
+---AfterBattleTurneventµÄ»Øµ÷º¯Êı
+---@param battleIndex number Õ½¶·µÄindex
 ---@return any 
 function AfterBattleTurnCallBack(battleIndex) end
 
----åˆ›å»ºä¸€ä¸ªè§’è‰²å±æ€§è®¡ç®—è§¦å‘çš„äº‹ä»¶(åŒ…æ‹¬è£…å¤‡å±æ€§)
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö½ÇÉ«ÊôĞÔ¼ÆËã´¥·¢µÄÊÂ¼ş(°üÀ¨×°±¸ÊôĞÔ)
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegAfterCalcCharaBpEvent(Dofile, FuncName) end
 
----AfterCalcCharaBpeventçš„å›è°ƒå‡½æ•°
----@param charIndex number è§’è‰²çš„index
+---AfterCalcCharaBpeventµÄ»Øµ÷º¯Êı
+---@param charIndex number ½ÇÉ«µÄindex
 ---@return any 
 function AfterCalcCharaBpCallBack(charIndex) end
 
----åˆ›å»ºä¸€ä¸ªè§’è‰²è£…å¤‡è®¡ç®—è§¦å‘çš„äº‹ä»¶(åŒ…æ‹¬å—ä¼¤ï¼Œæ‰é­‚)
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö½ÇÉ«×°±¸¼ÆËã´¥·¢µÄÊÂ¼ş(°üÀ¨ÊÜÉË£¬µô»ê)
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegAfterCalcCharaStatusEvent(Dofile, FuncName) end
 
----AfterCalcCharaStatuseventçš„å›è°ƒå‡½æ•°
----@param charIndex number è§’è‰²çš„index
+---AfterCalcCharaStatuseventµÄ»Øµ÷º¯Êı
+---@param charIndex number ½ÇÉ«µÄindex
 ---@return any 
 function AfterCalcCharaStatusCallBack(charIndex) end
 
----åˆ›å»ºä¸€ä¸ªè§’è‰²è®¡ç®—å±æ€§çš„çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö½ÇÉ«¼ÆËãÊôĞÔµÄµÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegStatusCalcEvent end
 
----StatusCalcEventçš„å›è°ƒå‡½æ•°
----@param charIndex number è§’è‰²çš„index
+---StatusCalcEventµÄ»Øµ÷º¯Êı
+---@param charIndex number ½ÇÉ«µÄindex
 ---@return any 
 function StatusCalcCallBack(charIndex) end
 
----åˆ›å»ºä¸€ä¸ªæ€ªç‰©æ‰§è¡ŒAIè§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö¹ÖÎïÖ´ĞĞAI´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegEnemyCommandEvent(Dofile, FuncName) end
 
----EnemyCommandEventçš„å›è°ƒå‡½æ•°
----@param battleIndex number æˆ˜æ–—çš„index
----@param side number 0 ä¸ºä¸‹æ–¹ï¼Œ1ä½ä¸Šæ–¹
----@param slot number æˆ˜æ–—ä¸­ç«™ä½
----@param action number æœ¬å›åˆä¸­åŠ¨ä½œæ¬¡æ•°
+---EnemyCommandEventµÄ»Øµ÷º¯Êı
+---@param battleIndex number Õ½¶·µÄindex
+---@param side number 0 ÎªÏÂ·½£¬1Î»ÉÏ·½
+---@param slot number Õ½¶·ÖĞÕ¾Î»
+---@param action number ±¾»ØºÏÖĞ¶¯×÷´ÎÊı
 ---@return any 
 function EnemyCommandCallBack(battleIndex, side, slot, action) end
 
----åˆ›å»ºä¸€ä¸ªå¨ƒå¨ƒ(æ›¿èº«å¨ƒå¨ƒ A|Bå‹)ç»“ç®—å‰çš„è§¦å‘äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÍŞÍŞ(ÌæÉíÍŞÍŞ A|BĞÍ)½áËãÇ°µÄ´¥·¢ÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegCheckDummyDollEvent(Dofile, FuncName) end
 
----CheckDummyDollEventçš„å›è°ƒå‡½æ•°
----@param charIndex number è§’è‰²çš„index
----@param battleIndex number æˆ˜æ–—çš„index
----@param dmg number å—åˆ°çš„ä¼¤å®³
----@param type number ä¼¤å®³ç±»å‹
----@return number è¿”å›1å¯ä»¥ä½¿ç”¨å¨ƒå¨ƒï¼Œè¿”å›0ç¦ç”¨å¨ƒå¨ƒ
+---CheckDummyDollEventµÄ»Øµ÷º¯Êı
+---@param charIndex number ½ÇÉ«µÄindex
+---@param battleIndex number Õ½¶·µÄindex
+---@param dmg number ÊÜµ½µÄÉËº¦
+---@param type number ÉËº¦ÀàĞÍ
+---@return number ·µ»Ø1¿ÉÒÔÊ¹ÓÃÍŞÍŞ£¬·µ»Ø0½ûÓÃÍŞÍŞ
 function CheckDummyDoll(charIndex, battleIndex, dmg, type) end
 
----åˆ›å»ºä¸€ä¸ªå—ä¼¤æ—¶è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÊÜÉËÊ±´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleInjuryEvent(Dofile, FuncName) end
 
----BattleInjuryEventçš„å›è°ƒäº‹ä»¶
----@param fIndex number é˜²å¾¡è€…çš„index
----@param aIndex number æ”»å‡»è€…çš„index
----@param battleIndex number æˆ˜æ–—çš„index
----@param inject number å—ä¼¤ç¨‹åº¦
----@return any è¿”å›å—ä¼¤ç¨‹åº¦ï¼ŒèŒƒå›´0~100
+---BattleInjuryEventµÄ»Øµ÷ÊÂ¼ş
+---@param fIndex number ·ÀÓùÕßµÄindex
+---@param aIndex number ¹¥»÷ÕßµÄindex
+---@param battleIndex number Õ½¶·µÄindex
+---@param inject number ÊÜÉË³Ì¶È
+---@return any ·µ»ØÊÜÉË³Ì¶È£¬·¶Î§0~100
 function BattleInjuryCallBack(fIndex, aIndex, battleIndex, inject) end
 
----åˆ›å»ºä¸€ä¸ªæˆ˜æ–—ç»“ç®—ç”»é¢å‡ºç°æ—¶è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÕ½¶·½áËã»­Ãæ³öÏÖÊ±´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegResetCharaBattleStateEvent(Dofile, FuncName) end
 
----ResetCharaBattleStateEventçš„å›è°ƒå‡½æ•°
----@param battleIndex number æˆ˜æ–—çš„index
+---ResetCharaBattleStateEventµÄ»Øµ÷º¯Êı
+---@param battleIndex number Õ½¶·µÄindex
 ---@return any 
 function ResetCharaBattleStateCallBack(battleIndex) end
 
----åˆ›å»ºä¸€ä¸ªè§’è‰²ä¿å­˜åè§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö½ÇÉ«±£´æºó´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegCharaSavedEvent(Dofile, FuncName) end
 
----CharaSavedEventçš„å›è°ƒå‡½æ•°
----@param charIndex number è§’è‰²çš„index
+---CharaSavedEventµÄ»Øµ÷º¯Êı
+---@param charIndex number ½ÇÉ«µÄindex
 ---@return any 
 function CharaSavedCallBack(charIndex) end
 
----åˆ›å»ºä¸€ä¸ªè§’è‰²æ•°æ®ä¿å­˜å‰è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö½ÇÉ«Êı¾İ±£´æÇ°´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBeforeCharaSaveEvent(Dofile, FuncName) end
 
----BeforeCharaSaveçš„å›è°ƒå‡½æ•°
----@param charIndex number è§’è‰²çš„index
+---BeforeCharaSaveµÄ»Øµ÷º¯Êı
+---@param charIndex number ½ÇÉ«µÄindex
 ---@return any 
 function BeforeCharaSaveCallBack(charIndex) end
 
----åˆ›å»ºä¸€ä¸ªè§’è‰²åˆ é™¤æ—¶è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö½ÇÉ«É¾³ıÊ±´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegCharaDeletedEvent(Dofile, FuncName) end
 
----CharaDeletedçš„å›è°ƒå‡½æ•°
----@param charIndex number è§’è‰²çš„index
+---CharaDeletedµÄ»Øµ÷º¯Êı
+---@param charIndex number ½ÇÉ«µÄindex
 ---@return any 
 function CharaDeletedCallBack(charIndex) end
 
----åˆ›å»ºä¸€ä¸ªluacè§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öluac´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegScriptCallEvent(Dofile, FuncName) end
 
----ScriptCallEventçš„å›è°ƒå‡½æ•°
----@param npcIndex number è§¦å‘npcçš„index
----@param playerIndex number è§’è‰²çš„index
----@param text string ç”±luacä¼ å…¥çš„å­—ç¬¦ä¸²
----@param msg string æ‰“å­—è§¦å‘çš„å­—ç¬¦ä¸²ï¼Œå‚è€ƒå¤´ç›®ä¸‡å²
----@return any è¿”å›æ–°å€¼ï¼Œè¿”å›ç»™data
+---ScriptCallEventµÄ»Øµ÷º¯Êı
+---@param npcIndex number ´¥·¢npcµÄindex
+---@param playerIndex number ½ÇÉ«µÄindex
+---@param text string ÓÉluac´«ÈëµÄ×Ö·û´®
+---@param msg string ´ò×Ö´¥·¢µÄ×Ö·û´®£¬²Î¿¼Í·Ä¿ÍòËê
+---@return any ·µ»ØĞÂÖµ£¬·µ»Ø¸ødata
 function ScriptCallCallBack(npcIndex, playerIndex, text, msg) end
 
----åˆ›å»ºä¸€ä¸ªç‰©å“æ‰ç‡çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÎïÆ·µôÂÊµÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegDropRateEvent(Dofile, FuncName) end
 
----DropRateEventçš„å›è°ƒå‡½æ•°
----@param enemyIndex number é­”ç‰©index
+---DropRateEventµÄ»Øµ÷º¯Êı
+---@param enemyIndex number Ä§Îïindex
 ---@param itemId number
----@param rate number æ‰è½ç‡
+---@param rate number µôÂäÂÊ
 ---@return any 
 function DropRateCallBack(enemyIndex,itemId,rate) end
 
----åˆ›å»ºä¸€ä¸ªé€ƒè·‘æ—¶è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÌÓÅÜÊ±´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleEscapeEvent(Dofile, FuncName) end
 
----BattleEscapeEventçš„å›è°ƒå‡½æ•°
----@param battle number æˆ˜æ–—çš„index
----@param charIndex number æ–½æ”¾å¬å”¤è§’è‰²çš„index
----@param rate number é€ƒè·‘æˆåŠŸç‡
----@return any æˆåŠŸç‡
+---BattleEscapeEventµÄ»Øµ÷º¯Êı
+---@param battle number Õ½¶·µÄindex
+---@param charIndex number Ê©·ÅÕÙ»½½ÇÉ«µÄindex
+---@param rate number ÌÓÅÜ³É¹¦ÂÊ
+---@return any ³É¹¦ÂÊ
 function BattleEscape(battleIndex,charIndex,rate) end
 
----åˆ›å»ºä¸€ä¸ªå°å°æ—¶è§¦å‘çš„äº‹ä»¶ï¼Œè¯¥äº‹ä»¶ä¸èƒ½çªç ´æœåŠ¡å™¨çš„è®¾å®š
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö·âÓ¡Ê±´¥·¢µÄÊÂ¼ş£¬¸ÃÊÂ¼ş²»ÄÜÍ»ÆÆ·şÎñÆ÷µÄÉè¶¨
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleSealRateEvent(Dofile, FuncName) end
 
----BattleSealRateEventçš„å›è°ƒå‡½æ•°
----@param battle number æˆ˜æ–—çš„index
----@param charIndex number æ–½æ”¾å°å°è§’è‰²çš„index
----@param enemyIndex number å°å°çš„é­”ç‰©index
----@param rate number å°å°æˆåŠŸç‡
----@return any æˆåŠŸç‡
+---BattleSealRateEventµÄ»Øµ÷º¯Êı
+---@param battle number Õ½¶·µÄindex
+---@param charIndex number Ê©·Å·âÓ¡½ÇÉ«µÄindex
+---@param enemyIndex number ·âÓ¡µÄÄ§Îïindex
+---@param rate number ·âÓ¡³É¹¦ÂÊ
+---@return any ³É¹¦ÂÊ
 function BattleSealRateCallBack(battleIndex,charIndex,enemyIndex,rate) end
 
----åˆ›å»ºä¸€ä¸ªæš´å‡»æ—¶è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö±©»÷Ê±´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegCalcCriticalRateEvent(Dofile, FuncName) end
 
----CalcCriticalRateEventçš„å›è°ƒå‡½æ•°
----@param aIndex number æ”»å‡»è€…çš„index
----@param fIndex number é˜²å¾¡è€…çš„index
----@param rate number å¿…æ€ç‡
----@return any å¿…æ€ç‡
+---CalcCriticalRateEventµÄ»Øµ÷º¯Êı
+---@param aIndex number ¹¥»÷ÕßµÄindex
+---@param fIndex number ·ÀÓùÕßµÄindex
+---@param rate number ±ØÉ±ÂÊ
+---@return any ±ØÉ±ÂÊ
 function CalcCriticalRateCallBack(aIndex,fIndex,rate) end
 
----åˆ›å»ºä¸€ä¸ªé—ªèº²æ—¶è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÉÁ¶ãÊ±´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleDodgeRateEvent(Dofile, FuncName) end
 
----BattleDodgeRateEventçš„å›è°ƒå‡½æ•°
----@param battleIndex number æˆ˜æ–—çš„index
----@param aIndex number æ”»å‡»è€…çš„index
----@param fIndex number é˜²å¾¡è€…çš„index
----@param rate number é—ªèº²ç‡
----@return any é—ªèº²ç‡
+---BattleDodgeRateEventµÄ»Øµ÷º¯Êı
+---@param battleIndex number Õ½¶·µÄindex
+---@param aIndex number ¹¥»÷ÕßµÄindex
+---@param fIndex number ·ÀÓùÕßµÄindex
+---@param rate number ÉÁ¶ãÂÊ
+---@return any ÉÁ¶ãÂÊ
 function BattleDodgeRateCallBack(battleIndex,aIndex,fIndex,rate) end
 
----åˆ›å»ºä¸€ä¸ªåå‡»æ—¶è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö·´»÷Ê±´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleCounterRateEvent(Dofile, FuncName) end
 
----BattleCounterRateEventçš„å›è°ƒå‡½æ•°
----@param battleIndex number æˆ˜æ–—çš„index
----@param aIndex number æ”»å‡»è€…çš„index
----@param fIndex number é˜²å¾¡è€…çš„index
----@param rate number åå‡»ç‡
----@return any åå‡»ç‡
+---BattleCounterRateEventµÄ»Øµ÷º¯Êı
+---@param battleIndex number Õ½¶·µÄindex
+---@param aIndex number ¹¥»÷ÕßµÄindex
+---@param fIndex number ·ÀÓùÕßµÄindex
+---@param rate number ·´»÷ÂÊ
+---@return any ·´»÷ÂÊ
 function BattleCounterRateCallBack(battleIndex,aIndex,fIndex,rate) end
 
----åˆ›å»ºä¸€ä¸ªé€ æˆé­”æ³•ä¼¤å®³è§¦å‘çš„äº‹ä»¶ï¼Œç”¨äºæ”¹å˜é­”æ³•ä¼¤å®³ç³»æ•°
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÔì³ÉÄ§·¨ÉËº¦´¥·¢µÄÊÂ¼ş£¬ÓÃÓÚ¸Ä±äÄ§·¨ÉËº¦ÏµÊı
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleMagicDamageRateEvent(Dofile, FuncName) end
 
----BattleMagicDamageRateEventçš„å›è°ƒå‡½æ•°
----@param battleIndex number æˆ˜æ–—çš„index
----@param aIndex number æ”»å‡»è€…çš„index
----@param fIndex number é˜²å¾¡è€…çš„index
----@param rate number é­”æ³•ç³»æ•°
----@return any é­”æ³•ç³»æ•°
+---BattleMagicDamageRateEventµÄ»Øµ÷º¯Êı
+---@param battleIndex number Õ½¶·µÄindex
+---@param aIndex number ¹¥»÷ÕßµÄindex
+---@param fIndex number ·ÀÓùÕßµÄindex
+---@param rate number Ä§·¨ÏµÊı
+---@return any Ä§·¨ÏµÊı
 function BattleMagicDamageRateCallBack(battleIndex,aIndex,fIndex,rate) end
 
----åˆ›å»ºä¸€ä¸ªé€ æˆé­”æ³•ä¼¤å®³è§¦å‘çš„äº‹ä»¶ï¼Œç”¨äºæ”¹å˜é­”é˜²ç³»æ•°
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÔì³ÉÄ§·¨ÉËº¦´¥·¢µÄÊÂ¼ş£¬ÓÃÓÚ¸Ä±äÄ§·ÀÏµÊı
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleMagicRssRateEvent(Dofile, FuncName) end
 
----BattleMagicRssRateEventçš„å›è°ƒå‡½æ•°
----@param battleIndex number æˆ˜æ–—çš„index
----@param aIndex number æ”»å‡»è€…çš„index
----@param fIndex number é˜²å¾¡è€…çš„index
----@param rate number é­”é˜²ç³»æ•°
----@return any é­”é˜²ç³»æ•°
+---BattleMagicRssRateEventµÄ»Øµ÷º¯Êı
+---@param battleIndex number Õ½¶·µÄindex
+---@param aIndex number ¹¥»÷ÕßµÄindex
+---@param fIndex number ·ÀÓùÕßµÄindex
+---@param rate number Ä§·ÀÏµÊı
+---@return any Ä§·ÀÏµÊı
 function BattleMagicRssRateCallBack(battleIndex,aIndex,fIndex,rate) end
 
----åˆ›å»ºä¸€ä¸ªå®ç®±ç”Ÿæˆè§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö±¦ÏäÉú³É´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegItemBoxGenerateEvent(Dofile, FuncName) end
 
----ItemBoxGenerateEventçš„å›è°ƒå‡½æ•°
+---ItemBoxGenerateEventµÄ»Øµ÷º¯Êı
 ---@param mapId number
 ---@param floor number
----@param itemBoxType number å®ç®±ç¼–å·
----@param adm number å½±å“å‡ºäº§ç‰©å“ï¼Œä½œç”¨æœªçŸ¥
----@return any number[] è¿”å›å®ç®±å‚æ•° {itemBoxType, adm}
+---@param itemBoxType number ±¦Ïä±àºÅ
+---@param adm number Ó°Ïì³ö²úÎïÆ·£¬×÷ÓÃÎ´Öª
+---@return any number[] ·µ»Ø±¦Ïä²ÎÊı {itemBoxType, adm}
 function ItemBoxGenerateCallback(mapId, floor, itemBoxType, adm) end
 
----åˆ›å»ºä¸€ä¸ªå®ç®±è·å–ç‰©å“çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö±¦Ïä»ñÈ¡ÎïÆ·µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegItemBoxLootEvent(Dofile, FuncName) end
 
----ItemBoxLootEventçš„å›è°ƒå‡½æ•°
+---ItemBoxLootEventµÄ»Øµ÷º¯Êı
 ---@param charaIndex number
 ---@param mapId number
 ---@param floor number
@@ -976,126 +978,126 @@ function NL.RegItemBoxLootEvent(Dofile, FuncName) end
 ---@param Y number
 ---@param boxType number
 ---@param adm number
----@return number number è¿”å›1æ‹¦æˆªé»˜è®¤ç‰©å“
+---@return number number ·µ»Ø1À¹½ØÄ¬ÈÏÎïÆ·
 function ItemBoxLootCallback(charaIndex, mapId, floor, X, Y, boxType, adm) end
 
----åˆ›å»ºä¸€ä¸ªå®ç®±é‡æ•Œæ¦‚ç‡çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö±¦ÏäÓöµĞ¸ÅÂÊµÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegItemBoxEncountRateEvent(Dofile, FuncName) end
 
----ItemBoxEncountEventçš„å›è°ƒå‡½æ•°
+---ItemBoxEncountEventµÄ»Øµ÷º¯Êı
 ---@param charaIndex number
 ---@param mapId number
 ---@param floor number
 ---@param X number
 ---@param Y number
----@param itemIndex number ç®±å­ç‰©å“index
----@return number number[]|nil é‡æ•Œæ•°ç»„ æ¯ä¸ªæ€ªç‰©3ä¸ªå‚æ•°ï¼Œåˆ†åˆ«ä¸º idï¼Œç­‰çº§ï¼Œéšæœºç­‰çº§ï¼Œ è¿”å›nilä¸æ‹¦æˆªï¼Œ ä¾‹å­ï¼š {0, 100, 5, 1, 1, 0} ç”Ÿæˆ0å·æ€ªç‰©100-105çº§ï¼Œ1å·æ€ªç‰©1çº§
+---@param itemIndex number Ïä×ÓÎïÆ·index
+---@return number number[]|nil ÓöµĞÊı×é Ã¿¸ö¹ÖÎï3¸ö²ÎÊı£¬·Ö±ğÎª id£¬µÈ¼¶£¬Ëæ»úµÈ¼¶£¬ ·µ»Ønil²»À¹½Ø£¬ Àı×Ó£º {0, 100, 5, 1, 1, 0} Éú³É0ºÅ¹ÖÎï100-105¼¶£¬1ºÅ¹ÖÎï1¼¶
 function ItemBoxEncountCallback(charaIndex, mapId, floor, X, Y, itemIndex) end
 
----åˆ›å»ºä¸€ä¸ªç§æ—ä¼¤å®³æ¯”ç‡äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÖÖ×åÉËº¦±ÈÂÊÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegItemTribeRateEvent(Dofile, FuncName) end
 
----ItemTribeRateEventçš„å›è°ƒå‡½æ•°
----@param a number è¿›æ”»ç§æ—
----@param b number é˜²å®ˆç§æ—
----@param rate number å…‹åˆ¶æ¯”ç‡
----@return any number è¿”å›æ–°çš„å…‹åˆ¶æ¯”ç‡
+---ItemTribeRateEventµÄ»Øµ÷º¯Êı
+---@param a number ½ø¹¥ÖÖ×å
+---@param b number ·ÀÊØÖÖ×å
+---@param rate number ¿ËÖÆ±ÈÂÊ
+---@return any number ·µ»ØĞÂµÄ¿ËÖÆ±ÈÂÊ
 function ItemTribeRateCallback(a, b, rate) end
 
----åˆ›å»ºä¸€ä¸ªHttpè¯·æ±‚äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öHttpÇëÇóÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegHttpRequestEvent(Dofile, FuncName) end
 
----HttpRequestEventçš„å›è°ƒå‡½æ•°
+---HttpRequestEventµÄ»Øµ÷º¯Êı
 ---@param method string
----@param api string APIåå­—
----@param params ParamType å‚æ•°
----@param body string bodyå†…å®¹
----@return any string body è¿”å›å†…å®¹
+---@param api string APIÃû×Ö
+---@param params ParamType ²ÎÊı
+---@param body string bodyÄÚÈİ
+---@return any string body ·µ»ØÄÚÈİ
 function HttpRequestCallBack(method, api, params, body) end
 
----åˆ›å»ºä¸€ä¸ªæ²»ç–—æ—¶è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öÖÎÁÆÊ±´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegBattleHealCalculateEvent(Dofile, FuncName) end
 
----BattleHealCalculateçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼ˆæ”»å‡»è€…ï¼‰ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param DefCharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼ˆé˜²å¾¡è€…ï¼‰ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Oriheal  æ•°å€¼å‹ æœªä¿®æ­£æ²»ç–—ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param heal  æ•°å€¼å‹ ä¿®æ­£æ²»ç–—ï¼ˆçœŸå®æ²»ç–—ï¼‰ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param BattleIndex  æ•°å€¼å‹ å½“å‰æˆ˜æ–—indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Com1  æ•°å€¼å‹ æ”»å‡»è€…ä½¿ç”¨çš„å‹•ä½œç·¨è™Ÿï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Com2  æ•°å€¼å‹ æ”»å‡»è€…æ”»å‡»å‹•ä½œçš„ç›®æ¨™å°è±¡çš„ä½ç½®ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Com3  æ•°å€¼å‹ æ”»å‡»è€…ä½¿ç”¨çš„æ‰€å°æ‡‰çš„techçš„IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param DefCom1  æ•°å€¼å‹ é˜²å¾¡è€…ä½¿ç”¨çš„å‹•ä½œç·¨è™Ÿï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param DefCom2  æ•°å€¼å‹ é˜²å¾¡è€…æ”»å‡»å‹•ä½œçš„ç›®æ¨™å°è±¡çš„ä½ç½®ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param DefCom3  æ•°å€¼å‹ é˜²å¾¡è€…ä½¿ç”¨çš„æ‰€å°æ‡‰çš„techçš„IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Flg  æ•°å€¼å‹ ä¼¤å®³æ¨¡å¼ï¼Œå…·ä½“æŸ¥çœ‹CONST.HealDamageFlags
----@return any æ²»ç–—å€¼
+---BattleHealCalculateµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¨¹¥»÷Õß£©£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param DefCharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¨·ÀÓùÕß£©£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Oriheal  ÊıÖµĞÍ Î´ĞŞÕıÖÎÁÆ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param heal  ÊıÖµĞÍ ĞŞÕıÖÎÁÆ£¨ÕæÊµÖÎÁÆ£©£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param BattleIndex  ÊıÖµĞÍ µ±Ç°Õ½¶·index£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Com1  ÊıÖµĞÍ ¹¥»÷ÕßÊ¹ÓÃµÄ„Ó×÷¾Ì–£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Com2  ÊıÖµĞÍ ¹¥»÷Õß¹¥»÷„Ó×÷µÄÄ¿˜ËŒ¦ÏóµÄÎ»ÖÃ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Com3  ÊıÖµĞÍ ¹¥»÷ÕßÊ¹ÓÃµÄËùŒ¦‘ªµÄtechµÄID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param DefCom1  ÊıÖµĞÍ ·ÀÓùÕßÊ¹ÓÃµÄ„Ó×÷¾Ì–£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param DefCom2  ÊıÖµĞÍ ·ÀÓùÕß¹¥»÷„Ó×÷µÄÄ¿˜ËŒ¦ÏóµÄÎ»ÖÃ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param DefCom3  ÊıÖµĞÍ ·ÀÓùÕßÊ¹ÓÃµÄËùŒ¦‘ªµÄtechµÄID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Flg  ÊıÖµĞÍ ÉËº¦Ä£Ê½£¬¾ßÌå²é¿´CONST.HealDamageFlags
+---@return any ÖÎÁÆÖµ
 function BattleHealCalculateCallBack(charIndex, defCharIndex, oriheal, heal, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg) end
 
----åˆ›å»ºä¸€ä¸ªè€—é­”æ—¶è§¦å‘çš„äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸öºÄÄ§Ê±´¥·¢µÄÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegCalcFpConsumeEvent(Dofile, FuncName) end
 
----CalcFpConsumeçš„å›è°ƒå‡½æ•°
----@param charIndex number è§’è‰²çš„index
----@param techId number æŠ€èƒ½id
----@param Fp number è€—é­”æ•°å€¼
----@return any è€—é­”æ•°å€¼
+---CalcFpConsumeµÄ»Øµ÷º¯Êı
+---@param charIndex number ½ÇÉ«µÄindex
+---@param techId number ¼¼ÄÜid
+---@param Fp number ºÄÄ§ÊıÖµ
+---@return any ºÄÄ§ÊıÖµ
 function CalcFpConsumeCallBack(charIndex,techId,Fp) end
 
----åˆ›å»ºä¸€ä¸ªè£…å¤‡è¯´æ˜çš„äº‹ä»¶ï¼Œç”¨äºä¿®æ”¹ç‰©å“è¯´æ˜
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö×°±¸ËµÃ÷µÄÊÂ¼ş£¬ÓÃÓÚĞŞ¸ÄÎïÆ·ËµÃ÷
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegItemExpansionEvent(Dofile, FuncName) end
 
----ItemExpansionçš„å›è°ƒå‡½æ•°
+---ItemExpansionµÄ»Øµ÷º¯Êı
 ---@param itemIndex number
----@param type number 1ç‰©å“è¯´æ˜ï¼Œ2å³é”®è¯´æ˜
----@param msg string ç‰©å“è¯´æ˜å†…å®¹
+---@param type number 1ÎïÆ·ËµÃ÷£¬2ÓÒ¼üËµÃ÷
+---@param msg string ÎïÆ·ËµÃ÷ÄÚÈİ
 ---@param charIndex number
----@param slot number é“å…·ä½ç½®
----@return any string ç‰©å“è¯´æ˜
+---@param slot number µÀ¾ßÎ»ÖÃ
+---@return any string ÎïÆ·ËµÃ÷
 function ItemExpansionCallBack(itemIndex, type, msg, charIndex, slot) end
 
----åˆ›å»ºä¸€ä¸ªæ£€æŸ¥ç§°å·è§¦å‘çš„äº‹ä»¶ï¼Œç”¨äºé€šè¿‡luaè‡ªå®šä¹‰ç§°å·ï¼Œå®šä¹‰æ–¹å¼ï¼štitleconfig.txtä¸­å¢åŠ æ–°æ¡ä»¶è®¾ç½®ï¼Œä½¿ç”¨LUAä¸ºæ¡ä»¶å…³é”®å­—ï¼Œå¦‚LUA=50,=å¯¹åº”Flgä¸­çš„5,50å¯¹åº”Data
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö¼ì²é³ÆºÅ´¥·¢µÄÊÂ¼ş£¬ÓÃÓÚÍ¨¹ılua×Ô¶¨Òå³ÆºÅ£¬¶¨Òå·½Ê½£ºtitleconfig.txtÖĞÔö¼ÓĞÂÌõ¼şÉèÖÃ£¬Ê¹ÓÃLUAÎªÌõ¼ş¹Ø¼ü×Ö£¬ÈçLUA=50,=¶ÔÓ¦FlgÖĞµÄ5,50¶ÔÓ¦Data
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegTitleCheckCallEvent(Dofile, FuncName) end
 
----TitleCheckCallEventçš„å›è°ƒå‡½æ•°
----@param charIndex number è§’è‰²çš„index
----@param Data number æ¡ä»¶æ•°å€¼
----@param Flg number æ¡ä»¶åˆ¤å®šç¬¦ 0 <= 1 >= 2 <> 3 > 4 < 5 =
----@return number è¿”å›0ç§°å·æ¡ä»¶ä¸æ»¡è¶³ï¼Œè¿”å›1ç§°å·æ¡ä»¶æ»¡è¶³
+---TitleCheckCallEventµÄ»Øµ÷º¯Êı
+---@param charIndex number ½ÇÉ«µÄindex
+---@param Data number Ìõ¼şÊıÖµ
+---@param Flg number Ìõ¼şÅĞ¶¨·û 0 <= 1 >= 2 <> 3 > 4 < 5 =
+---@return number ·µ»Ø0³ÆºÅÌõ¼ş²»Âú×ã£¬·µ»Ø1³ÆºÅÌõ¼şÂú×ã
 function TitleCheckCallCallBack(charIndex, Data, Flg) end
 
----åˆ›å»ºä¸€ä¸ªé‡‡é›†æŠ€èƒ½äº‹ä»¶
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² æŒ‡å‘çš„Luaå‡½æ•°çš„åç§°
+---´´½¨Ò»¸ö²É¼¯¼¼ÄÜÊÂ¼ş
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® Ö¸ÏòµÄLuaº¯ÊıµÄÃû³Æ
 ---@return any 
 function NL.RegGatherItemEvent(Dofile, FuncName) end
 
----GatherItemEventçš„å›è°ƒå‡½æ•°
----@param charIndex number è§’è‰²çš„index
----@param skillId number æŠ€èƒ½id
----@param skillLv number æŠ€èƒ½ç­‰çº§
----@param itemNo number é‡‡é›†ç‰©Id,å‚è€ƒitemset.txt
----@return number è¿”å›é‡‡é›†ç‰©çš„Idï¼Œå‚è€ƒitemset.txt | ä¸å†™è¿”å›å€¼æ—¶é‡‡é›†ä¸ºé»˜è®¤ç»“æœ
+---GatherItemEventµÄ»Øµ÷º¯Êı
+---@param charIndex number ½ÇÉ«µÄindex
+---@param skillId number ¼¼ÄÜid
+---@param skillLv number ¼¼ÄÜµÈ¼¶
+---@param itemNo number ²É¼¯ÎïId,²Î¿¼itemset.txt
+---@return number ·µ»Ø²É¼¯ÎïµÄId£¬²Î¿¼itemset.txt | ²»Ğ´·µ»ØÖµÊ±²É¼¯ÎªÄ¬ÈÏ½á¹û
 function GatherItemEventCallback(charIndex, skillId, skillLv, itemNo)  end
 

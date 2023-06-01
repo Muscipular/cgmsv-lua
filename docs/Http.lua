@@ -1,34 +1,36 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----åˆå§‹åŒ–HttpæœåŠ¡å™¨
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---³õÊ¼»¯Http·şÎñÆ÷
 ---@param 
 ---@return any 
 function Http.Init() end
 
----å¼€å¯HttpæœåŠ¡
----@param addr string ç›‘å¬IP,ä¾‹å¦‚  "0.0.0.0"
----@param port integer ç«¯å£ å»ºè®®10000ä»¥ä¸Š
----@return any integer ret @1ï¼šæˆåŠŸï¼Œå…¶ä»–ä¸ºå¤±è´¥
+---¿ªÆôHttp·şÎñ
+---@param addr string ¼àÌıIP,ÀıÈç  "0.0.0.0"
+---@param port integer ¶Ë¿Ú ½¨Òé10000ÒÔÉÏ
+---@return any integer ret @1£º³É¹¦£¬ÆäËûÎªÊ§°Ü
 function Http.Start(addr, port) end
 
----å…³é—­HttpæœåŠ¡å™¨ï¼Œéœ€è¦æ³¨æ„ï¼Œåœ¨è¯·æ±‚ä¸­åœæ­¢ä¼šå¯¼è‡´è¯·æ±‚å“åº”502å¹¶ä¸”å¼ºåˆ¶å…³é—­æ‰€æœ‰æœªå¤„ç†çš„è¯·æ±‚
+---¹Ø±ÕHttp·şÎñÆ÷£¬ĞèÒª×¢Òâ£¬ÔÚÇëÇóÖĞÍ£Ö¹»áµ¼ÖÂÇëÇóÏìÓ¦502²¢ÇÒÇ¿ÖÆ¹Ø±ÕËùÓĞÎ´´¦ÀíµÄÇëÇó
 ---@param 
 ---@return any 
 function Http.Stop() end
 
----è·å–HttpæœåŠ¡å™¨çŠ¶æ€
+---»ñÈ¡Http·şÎñÆ÷×´Ì¬
 ---@param 
----@return any 0|1|2 status  @0=æœªåˆå§‹åŒ– 1=æœªå¯åŠ¨ 2=è¿è¡Œä¸­
+---@return any 0|1|2 status  @0=Î´³õÊ¼»¯ 1=Î´Æô¶¯ 2=ÔËĞĞÖĞ
 function Http.GetStatus() end
 
----ç»‘å®šé™æ€èµ„æº
----@param path string urlåœ°å€
----@param dir string æœ¬åœ°ç›®å½•
+---°ó¶¨¾²Ì¬×ÊÔ´
+---@param path string urlµØÖ·
+---@param dir string ±¾µØÄ¿Â¼
 ---@return any 
 function Http.AddMountPoint(path, dir) end
 
----ç§»é™¤é™æ€èµ„æº
----@param path string urlåœ°å€
+---ÒÆ³ı¾²Ì¬×ÊÔ´
+---@param path string urlµØÖ·
 ---@return any 
 function Http.RemoveMountPoint(path) end
 

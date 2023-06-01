@@ -1,28 +1,30 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----æ‰§è¡ŒæŒ‡å®šçš„MysqlæŸ¥è¯¢ã€‚
----@param QueryString  å­—ç¬¦ä¸² è¦æ‰§è¡Œçš„MysqlæŸ¥è¯¢è¯­å¥ã€‚
----@return number å¦‚æœæŸ¥è¯¢çš„è¯­å¥ä¸ºINSERT, DELETEç­‰ï¼Œåˆ™è¿”å›0ä¸ºæˆåŠŸï¼Œå…¶ä»–å¤±è´¥ | å¦‚æœæŸ¥è¯¢çš„è¯­å¥ä¸ºSELECT, åˆ™è¿”å›nilä¸ºæ— ç»“æœï¼Œè¿”å›Tableä¸ºæˆåŠŸ | Tableä¸­å³æŸ¥è¯¢çš„ç»“æœ table[a_b]aä¸ºè¡Œæ•°ï¼Œbä¸ºåˆ—æ•°
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---Ö´ĞĞÖ¸¶¨µÄMysql²éÑ¯¡£
+---@param QueryString  ×Ö·û´® ÒªÖ´ĞĞµÄMysql²éÑ¯Óï¾ä¡£
+---@return number Èç¹û²éÑ¯µÄÓï¾äÎªINSERT, DELETEµÈ£¬Ôò·µ»Ø0Îª³É¹¦£¬ÆäËûÊ§°Ü | Èç¹û²éÑ¯µÄÓï¾äÎªSELECT, Ôò·µ»ØnilÎªÎŞ½á¹û£¬·µ»ØTableÎª³É¹¦ | TableÖĞ¼´²éÑ¯µÄ½á¹û table[a_b]aÎªĞĞÊı£¬bÎªÁĞÊı
 function SQL.Run(QueryString) end
 
----æ‰§è¡ŒæŒ‡å®šçš„MysqlæŸ¥è¯¢ã€‚
----@param QueryString  å­—ç¬¦ä¸² è¦æ‰§è¡Œçš„MysqlæŸ¥è¯¢è¯­å¥ã€‚
----@return number å¦‚æœæŸ¥è¯¢çš„è¯­å¥ä¸ºINSERT, DELETEç­‰ï¼Œåˆ™è¿”å›0ä¸ºæˆåŠŸï¼Œå…¶ä»–å¤±è´¥ | å¦‚æœæŸ¥è¯¢çš„è¯­å¥ä¸ºSELECT, åˆ™è¿”å›nilä¸ºæ— ç»“æœï¼Œè¿”å›Tableä¸ºæˆåŠŸ | Tableä¸­å³æŸ¥è¯¢çš„ç»“æœ table[a_b]aä¸ºè¡Œæ•°ï¼Œbä¸ºåˆ—æ•°
+---Ö´ĞĞÖ¸¶¨µÄMysql²éÑ¯¡£
+---@param QueryString  ×Ö·û´® ÒªÖ´ĞĞµÄMysql²éÑ¯Óï¾ä¡£
+---@return number Èç¹û²éÑ¯µÄÓï¾äÎªINSERT, DELETEµÈ£¬Ôò·µ»Ø0Îª³É¹¦£¬ÆäËûÊ§°Ü | Èç¹û²éÑ¯µÄÓï¾äÎªSELECT, Ôò·µ»ØnilÎªÎŞ½á¹û£¬·µ»ØTableÎª³É¹¦ | TableÖĞ¼´²éÑ¯µÄ½á¹û table[a_b]aÎªĞĞÊı£¬bÎªÁĞÊı
 function SQL.Query(QueryString) end
 
----æ‰§è¡ŒæŒ‡å®šçš„MysqlæŸ¥è¯¢ã€‚
+---Ö´ĞĞÖ¸¶¨µÄMysql²éÑ¯¡£
 ---@param param sql string sql
----@param ...  string|number ç»‘å®šå‚æ•°ï¼Œæœ€å¤š40ä¸ª
----@return any {status:number, effectRows:number, rows: table} è¿”å›æŸ¥è¯¢å†…å®¹
+---@param ...  string|number °ó¶¨²ÎÊı£¬×î¶à40¸ö
+---@return any {status:number, effectRows:number, rows: table} ·µ»Ø²éÑ¯ÄÚÈİ
 function SQL.QueryEx(sql, ...) end
 
----å°†å†…å®¹è½¬æ¢æˆstringæ ¼å¼ï¼Œå¸¦è¯†åˆ«è½¬ä¹‰ç¬¦åŠŸèƒ½
+---½«ÄÚÈİ×ª»»³Éstring¸ñÊ½£¬´øÊ¶±ğ×ªÒå·û¹¦ÄÜ
 ---@param s string|number
----@return any stringæ ¼å¼å†…å®¹ å¤±è´¥è¿”å›'null'
+---@return any string¸ñÊ½ÄÚÈİ Ê§°Ü·µ»Ø'null'
 function SQL.sqlValue(s) end
 
----æ‰§è¡ŒæŒ‡å®šçš„MysqlæŸ¥è¯¢ã€‚
----@param sql  å­—ç¬¦ä¸² è¦æ‰§è¡Œçš„MysqlæŸ¥è¯¢è¯­å¥ã€‚
----@return any stringæ ¼å¼å†…å®¹ table[a][b]aä¸ºè¡Œæ•°ï¼Œbä¸ºåˆ—æ•°
+---Ö´ĞĞÖ¸¶¨µÄMysql²éÑ¯¡£
+---@param sql  ×Ö·û´® ÒªÖ´ĞĞµÄMysql²éÑ¯Óï¾ä¡£
+---@return any string¸ñÊ½ÄÚÈİ table[a][b]aÎªĞĞÊı£¬bÎªÁĞÊı
 function SQL.querySQL(sql, returnNil) end
 

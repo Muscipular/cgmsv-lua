@@ -1,299 +1,301 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----æ™®é€šè¯´è¯ï¼Œå¯ä»¥å¯¹å…¨æœåŠ¡å™¨äººè¯´ã€‚
----@param ToIndex  æ•°å€¼å‹ è¯´è¯ç›®æ ‡çš„ å¯¹è±¡indexï¼Œå¦‚æœä¸º-1ï¼Œåˆ™å¯¹å…¨æœåŠ¡å™¨ç©å®¶è¯´
----@param TalkerIndex  æ•°å€¼å‹ è¯´è¯è€…çš„ å¯¹è±¡indexï¼Œå¦‚æœä¸º-1ï¼Œåˆ™ä¸æ˜¾ç¤ºå¯¹è±¡å
----@param Msg  å­—ç¬¦å‹ è¯´è¯çš„å†…å®¹
----@param FontColor  æ•°å€¼å‹ é»˜è®¤ä¸º0ï¼Œå³ç™½è‰² [å¯ä¸ºç©º]
----@param FontSize  æ•°å€¼å‹ é»˜è®¤ä¸º0ï¼Œä¸ºæ˜¾ç¤ºçš„å­—ä½“å¤§å° [å¯ä¸ºç©º]
----@return number è¿”å›0è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---ÆÕÍ¨Ëµ»°£¬¿ÉÒÔ¶ÔÈ«·şÎñÆ÷ÈËËµ¡£
+---@param ToIndex  ÊıÖµĞÍ Ëµ»°Ä¿±êµÄ ¶ÔÏóindex£¬Èç¹ûÎª-1£¬Ôò¶ÔÈ«·şÎñÆ÷Íæ¼ÒËµ
+---@param TalkerIndex  ÊıÖµĞÍ Ëµ»°ÕßµÄ ¶ÔÏóindex£¬Èç¹ûÎª-1£¬Ôò²»ÏÔÊ¾¶ÔÏóÃû
+---@param Msg  ×Ö·ûĞÍ Ëµ»°µÄÄÚÈİ
+---@param FontColor  ÊıÖµĞÍ Ä¬ÈÏÎª0£¬¼´°×É« [¿ÉÎª¿Õ]
+---@param FontSize  ÊıÖµĞÍ Ä¬ÈÏÎª0£¬ÎªÏÔÊ¾µÄ×ÖÌå´óĞ¡ [¿ÉÎª¿Õ]
+---@return number ·µ»Ø0±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
 function NLG.Say(ToIndex,TalkerIndex,Msg,FontColor,FontSize) end
 
----æ™®é€šè¯´è¯ï¼Œå¯ä»¥å¯¹å…¨æœåŠ¡å™¨äººè¯´ã€‚
----@param ToIndex  æ•°å€¼å‹ è¯´è¯ç›®æ ‡çš„ å¯¹è±¡indexï¼Œå¦‚æœä¸º-1ï¼Œåˆ™å¯¹å…¨æœåŠ¡å™¨ç©å®¶è¯´
----@param TalkerIndex  æ•°å€¼å‹ è¯´è¯è€…çš„ å¯¹è±¡indexï¼Œå¦‚æœä¸º-1ï¼Œåˆ™ä¸æ˜¾ç¤ºå¯¹è±¡å
----@param Msg  å­—ç¬¦å‹ è¯´è¯çš„å†…å®¹
----@param FontColor  æ•°å€¼å‹ é»˜è®¤ä¸º0ï¼Œå³ç™½è‰² [å¯ä¸ºç©º]
----@param FontSize  æ•°å€¼å‹ é»˜è®¤ä¸º0ï¼Œä¸ºæ˜¾ç¤ºçš„å­—ä½“å¤§å° [å¯ä¸ºç©º]
----@return number è¿”å›0è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥
+---ÆÕÍ¨Ëµ»°£¬¿ÉÒÔ¶ÔÈ«·şÎñÆ÷ÈËËµ¡£
+---@param ToIndex  ÊıÖµĞÍ Ëµ»°Ä¿±êµÄ ¶ÔÏóindex£¬Èç¹ûÎª-1£¬Ôò¶ÔÈ«·şÎñÆ÷Íæ¼ÒËµ
+---@param TalkerIndex  ÊıÖµĞÍ Ëµ»°ÕßµÄ ¶ÔÏóindex£¬Èç¹ûÎª-1£¬Ôò²»ÏÔÊ¾¶ÔÏóÃû
+---@param Msg  ×Ö·ûĞÍ Ëµ»°µÄÄÚÈİ
+---@param FontColor  ÊıÖµĞÍ Ä¬ÈÏÎª0£¬¼´°×É« [¿ÉÎª¿Õ]
+---@param FontSize  ÊıÖµĞÍ Ä¬ÈÏÎª0£¬ÎªÏÔÊ¾µÄ×ÖÌå´óĞ¡ [¿ÉÎª¿Õ]
+---@return number ·µ»Ø0±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
 function NLG.TalkToCli(ToIndex,TalkerIndex,Msg,FontColor,FontSize) end
 
----å¯¹æŒ‡å®šåœ°å›¾çš„æ‰€æœ‰ç©å®¶è¯´è¯ã€‚
----@param Map  æ•°å€¼å‹ è¯´è¯ç›®æ ‡çš„åœ°å›¾ç±»å‹ï¼Œ0ä¸ºå›ºå®šåœ°å›¾ï¼Œ1ä¸ºéšæœºåœ°å›¾
----@param Floor  æ•°å€¼å‹ è¯´è¯ç›®æ ‡çš„åœ°å›¾ç¼–å·
----@param TalkerIndex  æ•°å€¼å‹ è¯´è¯è€…çš„ å¯¹è±¡indexï¼Œå¦‚æœä¸º-1ï¼Œåˆ™ä¸æ˜¾ç¤ºå¯¹è±¡å
----@param Msg  å­—ç¬¦å‹ è¯´è¯çš„å†…å®¹
----@param FontColor  æ•°å€¼å‹ é»˜è®¤ä¸º0ï¼Œå³ç™½è‰² [å¯ä¸ºç©º]
----@param FontSize  æ•°å€¼å‹ é»˜è®¤ä¸º0ï¼Œä¸ºæ˜¾ç¤ºçš„å­—ä½“å¤§å° [å¯ä¸ºç©º]
----@return number è¿”å›0è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥
+---¶ÔÖ¸¶¨µØÍ¼µÄËùÓĞÍæ¼ÒËµ»°¡£
+---@param Map  ÊıÖµĞÍ Ëµ»°Ä¿±êµÄµØÍ¼ÀàĞÍ£¬0Îª¹Ì¶¨µØÍ¼£¬1ÎªËæ»úµØÍ¼
+---@param Floor  ÊıÖµĞÍ Ëµ»°Ä¿±êµÄµØÍ¼±àºÅ
+---@param TalkerIndex  ÊıÖµĞÍ Ëµ»°ÕßµÄ ¶ÔÏóindex£¬Èç¹ûÎª-1£¬Ôò²»ÏÔÊ¾¶ÔÏóÃû
+---@param Msg  ×Ö·ûĞÍ Ëµ»°µÄÄÚÈİ
+---@param FontColor  ÊıÖµĞÍ Ä¬ÈÏÎª0£¬¼´°×É« [¿ÉÎª¿Õ]
+---@param FontSize  ÊıÖµĞÍ Ä¬ÈÏÎª0£¬ÎªÏÔÊ¾µÄ×ÖÌå´óĞ¡ [¿ÉÎª¿Õ]
+---@return number ·µ»Ø0±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
 function NLG.TalkToMap(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 
----å¯¹æŒ‡å®šåœ°å›¾çš„æ‰€æœ‰ç©å®¶è¯´è¯ã€‚
----@param Map  æ•°å€¼å‹ è¯´è¯ç›®æ ‡çš„åœ°å›¾ç±»å‹ï¼Œ0ä¸ºå›ºå®šåœ°å›¾ï¼Œ1ä¸ºéšæœºåœ°å›¾
----@param Floor  æ•°å€¼å‹ è¯´è¯ç›®æ ‡çš„åœ°å›¾ç¼–å·
----@param TalkerIndex  æ•°å€¼å‹ è¯´è¯è€…çš„ å¯¹è±¡indexï¼Œå¦‚æœä¸º-1ï¼Œåˆ™ä¸æ˜¾ç¤ºå¯¹è±¡å
----@param Msg  å­—ç¬¦å‹ è¯´è¯çš„å†…å®¹
----@param FontColor  æ•°å€¼å‹ é»˜è®¤ä¸º0ï¼Œå³ç™½è‰² [å¯ä¸ºç©º]
----@param FontSize  æ•°å€¼å‹ é»˜è®¤ä¸º0ï¼Œä¸ºæ˜¾ç¤ºçš„å­—ä½“å¤§å° [å¯ä¸ºç©º]
----@return number è¿”å›0è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥
+---¶ÔÖ¸¶¨µØÍ¼µÄËùÓĞÍæ¼ÒËµ»°¡£
+---@param Map  ÊıÖµĞÍ Ëµ»°Ä¿±êµÄµØÍ¼ÀàĞÍ£¬0Îª¹Ì¶¨µØÍ¼£¬1ÎªËæ»úµØÍ¼
+---@param Floor  ÊıÖµĞÍ Ëµ»°Ä¿±êµÄµØÍ¼±àºÅ
+---@param TalkerIndex  ÊıÖµĞÍ Ëµ»°ÕßµÄ ¶ÔÏóindex£¬Èç¹ûÎª-1£¬Ôò²»ÏÔÊ¾¶ÔÏóÃû
+---@param Msg  ×Ö·ûĞÍ Ëµ»°µÄÄÚÈİ
+---@param FontColor  ÊıÖµĞÍ Ä¬ÈÏÎª0£¬¼´°×É« [¿ÉÎª¿Õ]
+---@param FontSize  ÊıÖµĞÍ Ä¬ÈÏÎª0£¬ÎªÏÔÊ¾µÄ×ÖÌå´óĞ¡ [¿ÉÎª¿Õ]
+---@return number ·µ»Ø0±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
 function NLG.Say2Map(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 
----å¯¹æŒ‡å®šåœ°å›¾çš„æ‰€æœ‰ç©å®¶è¯´è¯ã€‚
----@param Map  æ•°å€¼å‹ è¯´è¯ç›®æ ‡çš„åœ°å›¾ç±»å‹ï¼Œ0ä¸ºå›ºå®šåœ°å›¾ï¼Œ1ä¸ºéšæœºåœ°å›¾
----@param Floor  æ•°å€¼å‹ è¯´è¯ç›®æ ‡çš„åœ°å›¾ç¼–å·
----@param TalkerIndex  æ•°å€¼å‹ è¯´è¯è€…çš„ å¯¹è±¡indexï¼Œå¦‚æœä¸º-1ï¼Œåˆ™ä¸æ˜¾ç¤ºå¯¹è±¡å
----@param Msg  å­—ç¬¦å‹ è¯´è¯çš„å†…å®¹
----@param FontColor  æ•°å€¼å‹ é»˜è®¤ä¸º0ï¼Œå³ç™½è‰² [å¯ä¸ºç©º]
----@param FontSize  æ•°å€¼å‹ é»˜è®¤ä¸º0ï¼Œä¸ºæ˜¾ç¤ºçš„å­—ä½“å¤§å° [å¯ä¸ºç©º]
----@return number è¿”å›0è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥
+---¶ÔÖ¸¶¨µØÍ¼µÄËùÓĞÍæ¼ÒËµ»°¡£
+---@param Map  ÊıÖµĞÍ Ëµ»°Ä¿±êµÄµØÍ¼ÀàĞÍ£¬0Îª¹Ì¶¨µØÍ¼£¬1ÎªËæ»úµØÍ¼
+---@param Floor  ÊıÖµĞÍ Ëµ»°Ä¿±êµÄµØÍ¼±àºÅ
+---@param TalkerIndex  ÊıÖµĞÍ Ëµ»°ÕßµÄ ¶ÔÏóindex£¬Èç¹ûÎª-1£¬Ôò²»ÏÔÊ¾¶ÔÏóÃû
+---@param Msg  ×Ö·ûĞÍ Ëµ»°µÄÄÚÈİ
+---@param FontColor  ÊıÖµĞÍ Ä¬ÈÏÎª0£¬¼´°×É« [¿ÉÎª¿Õ]
+---@param FontSize  ÊıÖµĞÍ Ä¬ÈÏÎª0£¬ÎªÏÔÊ¾µÄ×ÖÌå´óĞ¡ [¿ÉÎª¿Õ]
+---@return number ·µ»Ø0±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü
 function NLG.TalkToFloor(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 
----æ£€æŸ¥ å¯¹è±¡çš„æ”¹å˜å¹¶ä¸”å‘æ‰€æœ‰æœ‰å…³è”çš„ç©å®¶å‘é€è¯¥å¯¹è±¡çš„æ•°æ®æ›´æ–°å°åŒ…ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
+---¼ì²é ¶ÔÏóµÄ¸Ä±ä²¢ÇÒÏòËùÓĞÓĞ¹ØÁªµÄÍæ¼Ò·¢ËÍ¸Ã¶ÔÏóµÄÊı¾İ¸üĞÂ·â°ü¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
 ---@return any 
 function NLG.UpChar(CharIndex) end
 
----ç”Ÿæˆå¹¶å‘é€å¯¹è¯æ¡†
----@param ToIndex  æ•°å€¼å‹ æ¥æ”¶å¯¹è¯æ¡†çš„ç›®æ ‡çš„å¯¹è±¡indexã€‚
----@param WinTalkIndex  æ•°å€¼å‹ ç”Ÿæˆå¯¹è¯æ¡†çš„ç›®æ ‡çš„å¯¹è±¡indexï¼Œä¸€èˆ¬ä¸ºNPCã€‚
----@param WindowType  æ•°å€¼å‹ æŸ¥é˜…é™„å½•å¯¹è¯æ¡†ç±»å‹
----@param ButtonType  æ•°å€¼å‹ å¯¹è¯æ¡†åŒ…å«çš„æŒ‰é’®ï¼ŒæŸ¥é˜…é™„å½•å¯¹è¯æ¡†æŒ‰é’®
----@param SeqNo  æ•°å€¼å‹ è‡ªå®šä¹‰æ•°å€¼ï¼Œç”¨äºè¯†åˆ«ä¸åŒçš„å¯¹è¯æ¡†äº‹ä»¶å“åº”, å…·ä½“ä¼šåœ¨WindowTalkedCallBackä¸­è°ƒç”¨
----@param Data  å­—ç¬¦ä¸² å¯¹è¯æ¡†çš„å†…å®¹,æ ¹æ®ä¸åŒçš„å¯¹è¯æ¡†ç±»åˆ«,æœ‰ä¸åŒçš„æ ¼å¼,å…·ä½“ä¼šåœ¨é™„å½•ä¸­è¯´æ˜
----@return any 0è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥ã€‚
+---Éú³É²¢·¢ËÍ¶Ô»°¿ò
+---@param ToIndex  ÊıÖµĞÍ ½ÓÊÕ¶Ô»°¿òµÄÄ¿±êµÄ¶ÔÏóindex¡£
+---@param WinTalkIndex  ÊıÖµĞÍ Éú³É¶Ô»°¿òµÄÄ¿±êµÄ¶ÔÏóindex£¬Ò»°ãÎªNPC¡£
+---@param WindowType  ÊıÖµĞÍ ²éÔÄ¸½Â¼¶Ô»°¿òÀàĞÍ
+---@param ButtonType  ÊıÖµĞÍ ¶Ô»°¿ò°üº¬µÄ°´Å¥£¬²éÔÄ¸½Â¼¶Ô»°¿ò°´Å¥
+---@param SeqNo  ÊıÖµĞÍ ×Ô¶¨ÒåÊıÖµ£¬ÓÃÓÚÊ¶±ğ²»Í¬µÄ¶Ô»°¿òÊÂ¼şÏìÓ¦, ¾ßÌå»áÔÚWindowTalkedCallBackÖĞµ÷ÓÃ
+---@param Data  ×Ö·û´® ¶Ô»°¿òµÄÄÚÈİ,¸ù¾İ²»Í¬µÄ¶Ô»°¿òÀà±ğ,ÓĞ²»Í¬µÄ¸ñÊ½,¾ßÌå»áÔÚ¸½Â¼ÖĞËµÃ÷
+---@return any 0±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü¡£
 function NLG.ShowWindowTalked(ToIndex,WinTalkIndex,WindowType,ButtonType,SeqNo,Data) end
 
----ShowWindowTalkedçš„å›è°ƒå‡½æ•°
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡è‡ªèº«çš„indexï¼Œä¸€èˆ¬ä¸ºNPCå¯¹è±¡çš„æŒ‡é’ˆï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param TargetCharIndex  æ•°å€¼å‹ è§¦å‘äº‹ä»¶çš„å¯¹è±¡çš„indexï¼Œä¸€èˆ¬ä¸ºç©å®¶å¯¹è±¡çš„æŒ‡é’ˆï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param SeqNo  æ•°å€¼å‹ æ¥æºå¯¹è¯æ¡†çš„IDï¼Œè¯¥å€¼ä¸NLG.ShowWindowTalkedä¸­çš„å®šä¹‰åº”è¯¥å¯¹åº”ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Select  æ•°å€¼å‹ ç©å®¶æ‰€æŒ‰ä¸‹çš„æŒ‰é’®çš„å€¼æˆ–é€‰æ‹©æ¡†ä¸­çš„é€‰é¡¹çš„å€¼ï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param Data  å­—ç¬¦ä¸² å®¢æˆ·ç«¯æ‰€ä¼ é€’å›æ¥çš„å€¼ï¼Œè¿™ä¸ªå€¼å°†æ ¹æ®ä¸åŒçš„çª—å£ç±»å‹è€Œä¸åŒï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---ShowWindowTalkedµÄ»Øµ÷º¯Êı
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏó×ÔÉíµÄindex£¬Ò»°ãÎªNPC¶ÔÏóµÄÖ¸Õë£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param TargetCharIndex  ÊıÖµĞÍ ´¥·¢ÊÂ¼şµÄ¶ÔÏóµÄindex£¬Ò»°ãÎªÍæ¼Ò¶ÔÏóµÄÖ¸Õë£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param SeqNo  ÊıÖµĞÍ À´Ô´¶Ô»°¿òµÄID£¬¸ÃÖµÓëNLG.ShowWindowTalkedÖĞµÄ¶¨ÒåÓ¦¸Ã¶ÔÓ¦£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Select  ÊıÖµĞÍ Íæ¼ÒËù°´ÏÂµÄ°´Å¥µÄÖµ»òÑ¡Ôñ¿òÖĞµÄÑ¡ÏîµÄÖµ£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param Data  ×Ö·û´® ¿Í»§¶ËËù´«µİ»ØÀ´µÄÖµ£¬Õâ¸öÖµ½«¸ù¾İ²»Í¬µÄ´°¿ÚÀàĞÍ¶ø²»Í¬£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function WindowTalkedCallBack(CharIndex, TargetCharIndex, SeqNo, Select, Data) end
 
----è®¾ç½®å¯¹è±¡çš„åŠ¨ä½œ
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@param Action  æ•°å€¼å‹ åŠ¨ä½œç¼–å·ï¼Œæœ‰å…´è¶£çš„å¯ä»¥ä»0å¼€å§‹ä¸€ä¸ªä¸€ä¸ªå°è¯•ã€‚
----@return any 0è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥ã€‚
+---ÉèÖÃ¶ÔÏóµÄ¶¯×÷
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@param Action  ÊıÖµĞÍ ¶¯×÷±àºÅ£¬ÓĞĞËÈ¤µÄ¿ÉÒÔ´Ó0¿ªÊ¼Ò»¸öÒ»¸ö³¢ÊÔ¡£
+---@return any 0±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü¡£
 function NLG.SetAction(CharIndex, Action) end
 
----è®©å¯¹è±¡å‘æŒ‡å®šæ–¹å‘ç§»åŠ¨ä¸€æ ¼
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@param Action  æ•°å€¼å‹ èŒƒå›´0-7ï¼Œåˆ†åˆ«è¡¨ç¤ºæ¸¸æˆä¸­å¯¹åº”çš„å…«ä¸ªæ–¹å‘ã€‚
----@return any 0è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥ã€‚
+---ÈÃ¶ÔÏóÏòÖ¸¶¨·½ÏòÒÆ¶¯Ò»¸ñ
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@param Action  ÊıÖµĞÍ ·¶Î§0-7£¬·Ö±ğ±íÊ¾ÓÎÏ·ÖĞ¶ÔÓ¦µÄ°Ë¸ö·½Ïò¡£
+---@return any 0±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü¡£
 function NLG.WalkMove(CharIndex, Dir) end
 
----æ£€æŸ¥å¯¹è±¡æ˜¯å¦åœ¨æŒ‡å®šè·ç¦»ä¹‹å†…ï¼ˆä¸”é¢å‘ç›®æ ‡å¯¹è±¡ï¼‰
----@param CharIndex  æ•°å€¼å‹ è‡ªèº«å¯¹è±¡indexã€‚
----@param TargetCharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@param Distance  æ•°å€¼å‹ è·ç¦»
----@return any 0: ä¸åœ¨è·ç¦»å†… 1: åœ¨è·ç¦»å†…
+---¼ì²é¶ÔÏóÊÇ·ñÔÚÖ¸¶¨¾àÀëÖ®ÄÚ£¨ÇÒÃæÏòÄ¿±ê¶ÔÏó£©
+---@param CharIndex  ÊıÖµĞÍ ×ÔÉí¶ÔÏóindex¡£
+---@param TargetCharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@param Distance  ÊıÖµĞÍ ¾àÀë
+---@return any 0: ²»ÔÚ¾àÀëÄÚ 1: ÔÚ¾àÀëÄÚ
 function NLG.CheckInFront(CharIndex, TargetCharIndex, Distance) end
 
----æ£€æŸ¥å¯¹è±¡æ˜¯å¦é¢å¯¹é¢ä¸”åœ¨å¯¹è¯èŒƒå›´å†…ï¼ˆä¸¤æ ¼ï¼‰
----@param CharIndex  æ•°å€¼å‹ è‡ªèº«å¯¹è±¡indexã€‚
----@param TargetCharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@return any 0: ä¸åœ¨è·ç¦»å†… 1: åœ¨è·ç¦»å†…
+---¼ì²é¶ÔÏóÊÇ·ñÃæ¶ÔÃæÇÒÔÚ¶Ô»°·¶Î§ÄÚ£¨Á½¸ñ£©
+---@param CharIndex  ÊıÖµĞÍ ×ÔÉí¶ÔÏóindex¡£
+---@param TargetCharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@return any 0: ²»ÔÚ¾àÀëÄÚ 1: ÔÚ¾àÀëÄÚ
 function NLG.CanTalk(CharIndex, TargetCharIndex) end
 
----æ£€æŸ¥å¯¹è±¡æ˜¯å¦é¢å¯¹é¢ä¸”åœ¨å¯¹è¯èŒƒå›´å†…ï¼ˆä¸¤æ ¼ï¼‰
----@param CharIndex  æ•°å€¼å‹ è‡ªèº«å¯¹è±¡indexã€‚
----@param TargetCharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@return any 0: ä¸åœ¨è·ç¦»å†… 1: åœ¨è·ç¦»å†…
+---¼ì²é¶ÔÏóÊÇ·ñÃæ¶ÔÃæÇÒÔÚ¶Ô»°·¶Î§ÄÚ£¨Á½¸ñ£©
+---@param CharIndex  ÊıÖµĞÍ ×ÔÉí¶ÔÏóindex¡£
+---@param TargetCharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@return any 0: ²»ÔÚ¾àÀëÄÚ 1: ÔÚ¾àÀëÄÚ
 function NLG.CheckTalkRange(CharIndex, TargetCharIndex) end
 
----è·å–åœ¨çº¿ç©å®¶æ•°é‡
+---»ñÈ¡ÔÚÏßÍæ¼ÒÊıÁ¿
 ---@param 
----@return number è¿”å›åœ¨çº¿ç©å®¶æ•°ï¼Œå¤±è´¥è¿”å›-1ã€‚
+---@return number ·µ»ØÔÚÏßÍæ¼ÒÊı£¬Ê§°Ü·µ»Ø-1¡£
 function NLG.GetPlayerNum() end
 
----è·å–åœ¨çº¿ç©å®¶æ•°é‡
+---»ñÈ¡ÔÚÏßÍæ¼ÒÊıÁ¿
 ---@param 
----@return number è¿”å›åœ¨çº¿ç©å®¶æ•°ï¼Œå¤±è´¥è¿”å›-1ã€‚
+---@return number ·µ»ØÔÚÏßÍæ¼ÒÊı£¬Ê§°Ü·µ»Ø-1¡£
 function NLG.GetOnLinePlayer() end
 
----è·å–åœ°å›¾å†…ç©å®¶çš„æ•°é‡
----@param Map  æ•°å€¼å‹ åœ°å›¾ç±»å‹ï¼Œ0ä¸ºæ­£å¸¸åœ°å›¾ï¼Œ1ä¸ºè‡ªåŠ¨ç”Ÿæˆçš„åœ°å›¾ã€‚
----@param Floor  æ•°å€¼å‹ åœ°å›¾ç¼–å·ã€‚
----@return number è¿”å›åœ¨çº¿ç©å®¶æ•°ï¼Œå¤±è´¥è¿”å›-1ã€‚
+---»ñÈ¡µØÍ¼ÄÚÍæ¼ÒµÄÊıÁ¿
+---@param Map  ÊıÖµĞÍ µØÍ¼ÀàĞÍ£¬0ÎªÕı³£µØÍ¼£¬1Îª×Ô¶¯Éú³ÉµÄµØÍ¼¡£
+---@param Floor  ÊıÖµĞÍ µØÍ¼±àºÅ¡£
+---@return number ·µ»ØÔÚÏßÍæ¼ÒÊı£¬Ê§°Ü·µ»Ø-1¡£
 function NLG.GetMapPlayerNum(Map, Floor) end
 
----ç»™æŒ‡å®šå¯¹è±¡å‘é€é»„è‰²åŠ ç²—çš„å…¬å‘Šä¿¡æ¯ã€‚
----@param CharIndex  æ•°å€¼å‹ æ¥æ”¶å…¬å‘Šçš„å¯¹è±¡indexï¼Œå€¼ä¸º-1æ—¶ç»™å…¨æœåœ¨çº¿ç©å®¶å‘é€ã€‚
----@param Message  å­—ç¬¦ä¸² è¦å‘é€çš„æ–‡å­—
----@return number æˆåŠŸè¿”å›1ï¼Œå¦åˆ™è¿”å›0ã€‚
+---¸øÖ¸¶¨¶ÔÏó·¢ËÍ»ÆÉ«¼Ó´ÖµÄ¹«¸æĞÅÏ¢¡£
+---@param CharIndex  ÊıÖµĞÍ ½ÓÊÕ¹«¸æµÄ¶ÔÏóindex£¬ÖµÎª-1Ê±¸øÈ«·şÔÚÏßÍæ¼Ò·¢ËÍ¡£
+---@param Message  ×Ö·û´® Òª·¢ËÍµÄÎÄ×Ö
+---@return number ³É¹¦·µ»Ø1£¬·ñÔò·µ»Ø0¡£
 function NLG.SystemMessage(CharIndex, Message) end
 
----ç»™æŒ‡å®šå¯¹è±¡å‘é€é»„è‰²åŠ ç²—çš„å…¬å‘Šä¿¡æ¯ã€‚
----@param MapID  æ•°å€¼å‹ ç›®æ ‡åœ°å›¾çš„ç±»å‹ï¼Œ0ä¸ºå›ºå®šåœ°å›¾1ä¸ºéšæœºåœ°å›¾ã€‚
----@param FloorID  æ•°å€¼å‹ åœ°å›¾ç¼–å·
----@param Message  å­—ç¬¦ä¸² è¦å‘é€çš„æ–‡å­—
----@return number æˆåŠŸè¿”å›1ï¼Œå¦åˆ™è¿”å›0ã€‚
+---¸øÖ¸¶¨¶ÔÏó·¢ËÍ»ÆÉ«¼Ó´ÖµÄ¹«¸æĞÅÏ¢¡£
+---@param MapID  ÊıÖµĞÍ Ä¿±êµØÍ¼µÄÀàĞÍ£¬0Îª¹Ì¶¨µØÍ¼1ÎªËæ»úµØÍ¼¡£
+---@param FloorID  ÊıÖµĞÍ µØÍ¼±àºÅ
+---@param Message  ×Ö·û´® Òª·¢ËÍµÄÎÄ×Ö
+---@return number ³É¹¦·µ»Ø1£¬·ñÔò·µ»Ø0¡£
 function NLG.SystemMessageToMap(MapID, FloorID, Message) end
 
----æ£€æµ‹åœ°å›¾çš„xï¼Œyåæ ‡æ˜¯å¦å¯é€šè¡Œã€‚
----@param MapID  æ•°å€¼å‹ ç›®æ ‡åœ°å›¾çš„ç±»å‹ï¼Œ0ä¸ºå›ºå®šåœ°å›¾1ä¸ºéšæœºåœ°å›¾ã€‚
----@param FloorID  æ•°å€¼å‹ åœ°å›¾ç¼–å·
----@param X  æ•°å€¼å‹ Xåæ ‡
----@param Y  æ•°å€¼å‹ Yåæ ‡
----@return number è¿”å›1ä»£è¡¨å¯é€šè¡Œï¼Œè¿”å›0ä¸å¯é€šè¡Œã€‚
+---¼ì²âµØÍ¼µÄx£¬y×ø±êÊÇ·ñ¿ÉÍ¨ĞĞ¡£
+---@param MapID  ÊıÖµĞÍ Ä¿±êµØÍ¼µÄÀàĞÍ£¬0Îª¹Ì¶¨µØÍ¼1ÎªËæ»úµØÍ¼¡£
+---@param FloorID  ÊıÖµĞÍ µØÍ¼±àºÅ
+---@param X  ÊıÖµĞÍ X×ø±ê
+---@param Y  ÊıÖµĞÍ Y×ø±ê
+---@return number ·µ»Ø1´ú±í¿ÉÍ¨ĞĞ£¬·µ»Ø0²»¿ÉÍ¨ĞĞ¡£
 function NLG.Walkable(MapID, FloorID, X, Y) end
 
----è·å–ç›®æ ‡åœ°å›¾æ‰€æœ‰çš„ç©å®¶ï¼Œå¹¶ä»¥tableå½¢å¼è¿”å›ã€‚
----@param MapID  æ•°å€¼å‹ ç›®æ ‡åœ°å›¾çš„ç±»å‹ï¼Œ0ä¸ºå›ºå®šåœ°å›¾1ä¸ºéšæœºåœ°å›¾ã€‚
----@param FloorID  æ•°å€¼å‹ åœ°å›¾ç¼–å·
----@return number å¯¹è¿”å›å€¼ä½¿ç”¨Luaå‡½æ•°type()æ¥è¿›è¡Œåˆ¤æ–­ï¼Œå¦‚æœè¿”å›å€¼ä¸ºâ€tableâ€åˆ™ä¸ºç©å®¶çš„å¯¹è±¡indexçš„é›†åˆï¼Œå¦åˆ™è¡¨ç¤ºç›®æ ‡åœ°å›¾æ— ç©å®¶æˆ–è€…æ— ç›®æ ‡åœ°å›¾ã€‚
+---»ñÈ¡Ä¿±êµØÍ¼ËùÓĞµÄÍæ¼Ò£¬²¢ÒÔtableĞÎÊ½·µ»Ø¡£
+---@param MapID  ÊıÖµĞÍ Ä¿±êµØÍ¼µÄÀàĞÍ£¬0Îª¹Ì¶¨µØÍ¼1ÎªËæ»úµØÍ¼¡£
+---@param FloorID  ÊıÖµĞÍ µØÍ¼±àºÅ
+---@return number ¶Ô·µ»ØÖµÊ¹ÓÃLuaº¯Êıtype()À´½øĞĞÅĞ¶Ï£¬Èç¹û·µ»ØÖµÎª¡±table¡±ÔòÎªÍæ¼ÒµÄ¶ÔÏóindexµÄ¼¯ºÏ£¬·ñÔò±íÊ¾Ä¿±êµØÍ¼ÎŞÍæ¼Ò»òÕßÎŞÄ¿±êµØÍ¼¡£
 function NLG.GetMapPlayer(MapID, FloorID) end
 
----è®©ç›®æ ‡ç©å®¶æ–­å¼€è¿æ¥ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@return number è¿”å›1ä»£è¡¨æˆåŠŸï¼Œè¿”å›0å¤±è´¥ã€‚
+---ÈÃÄ¿±êÍæ¼Ò¶Ï¿ªÁ¬½Ó¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@return number ·µ»Ø1´ú±í³É¹¦£¬·µ»Ø0Ê§°Ü¡£
 function NLG.DropPlayer(CharIndex) end
 
----åœ¨æŒ‡å®šåœ°å›¾çš„æŒ‡å®šåæ ‡è®¾ç½®ä¸€ä¸ªåœ°å›¾ç‰©ä»¶ã€‚
----@param MapID  æ•°å€¼å‹ ç›®æ ‡åœ°å›¾çš„ç±»å‹ï¼Œ0ä¸ºå›ºå®šåœ°å›¾1ä¸ºéšæœºåœ°å›¾ã€‚
----@param FloorID  æ•°å€¼å‹ åœ°å›¾ç¼–å·
----@param X  æ•°å€¼å‹ Xåæ ‡
----@param Y  æ•°å€¼å‹ Yåæ ‡
----@param Obj  æ•°å€¼å‹ è¦æ˜¾ç¤ºçš„åœ°å›¾ç‰©ä»¶ï¼Œå¦‚æœä¸º0ï¼Œåˆ™åˆ é™¤ç›®æ ‡åæ ‡çš„åœ°å›¾ç‰©ä»¶ã€‚
----@return number è¿”å›1ä»£è¡¨æˆåŠŸï¼Œè¿”å›0å¤±è´¥ã€‚
+---ÔÚÖ¸¶¨µØÍ¼µÄÖ¸¶¨×ø±êÉèÖÃÒ»¸öµØÍ¼Îï¼ş¡£
+---@param MapID  ÊıÖµĞÍ Ä¿±êµØÍ¼µÄÀàĞÍ£¬0Îª¹Ì¶¨µØÍ¼1ÎªËæ»úµØÍ¼¡£
+---@param FloorID  ÊıÖµĞÍ µØÍ¼±àºÅ
+---@param X  ÊıÖµĞÍ X×ø±ê
+---@param Y  ÊıÖµĞÍ Y×ø±ê
+---@param Obj  ÊıÖµĞÍ ÒªÏÔÊ¾µÄµØÍ¼Îï¼ş£¬Èç¹ûÎª0£¬ÔòÉ¾³ıÄ¿±ê×ø±êµÄµØÍ¼Îï¼ş¡£
+---@return number ·µ»Ø1´ú±í³É¹¦£¬·µ»Ø0Ê§°Ü¡£
 function NLG.SetObj(MapID, FloorID, X, Y, Obj) end
 
----æ”¹å˜ç©å®¶ç›®å‰çš„åœ°å›¾è°ƒè‰²æ¿ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@param PalID  æ•°å€¼å‹ åœ°å›¾è°ƒè‰²æ¿ç¼–å·ã€‚
----@param Time  æ•°å€¼å‹ æŒç»­æ—¶é—´ï¼Œå•ä½ç§’ã€‚
----@return number è¿”å›1ä»£è¡¨æˆåŠŸï¼Œè¿”å›0å¤±è´¥ã€‚
+---¸Ä±äÍæ¼ÒÄ¿Ç°µÄµØÍ¼µ÷É«°å¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@param PalID  ÊıÖµĞÍ µØÍ¼µ÷É«°å±àºÅ¡£
+---@param Time  ÊıÖµĞÍ ³ÖĞøÊ±¼ä£¬µ¥Î»Ãë¡£
+---@return number ·µ»Ø1´ú±í³É¹¦£¬·µ»Ø0Ê§°Ü¡£
 function NLG.SetPal(CharIndex, PalID, Time) end
 
----æ”¹å˜ç©å®¶ç›®å‰çš„åœ°å›¾è°ƒè‰²æ¿ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@param PalID  æ•°å€¼å‹ åœ°å›¾è°ƒè‰²æ¿ç¼–å·ã€‚
----@param Time  æ•°å€¼å‹ æŒç»­æ—¶é—´ï¼Œå•ä½ç§’ã€‚
----@return number è¿”å›1ä»£è¡¨æˆåŠŸï¼Œè¿”å›0å¤±è´¥ã€‚
+---¸Ä±äÍæ¼ÒÄ¿Ç°µÄµØÍ¼µ÷É«°å¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@param PalID  ÊıÖµĞÍ µØÍ¼µ÷É«°å±àºÅ¡£
+---@param Time  ÊıÖµĞÍ ³ÖĞøÊ±¼ä£¬µ¥Î»Ãë¡£
+---@return number ·µ»Ø1´ú±í³É¹¦£¬·µ»Ø0Ê§°Ü¡£
 function NLG.ChangePal(CharIndex, PalID, Time) end
 
----ç„¶ç©å®¶CharIndexè§‚çœ‹TargetCharIndexçš„å½“å‰æˆ˜æ–—ï¼ˆè¿›å…¥è§‚æˆ˜ï¼‰ã€‚
----@param CharIndex  æ•°å€¼å‹ è‡ªèº«å¯¹è±¡indexã€‚
----@param TargetCharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@return any 1è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥ã€‚
+---È»Íæ¼ÒCharIndex¹Û¿´TargetCharIndexµÄµ±Ç°Õ½¶·£¨½øÈë¹ÛÕ½£©¡£
+---@param CharIndex  ÊıÖµĞÍ ×ÔÉí¶ÔÏóindex¡£
+---@param TargetCharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@return any 1±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü¡£
 function NLG.WatchBattle(CharIndex, TargetCharIndex) end
 
----ç„¶ç©å®¶CharIndexè§‚çœ‹TargetCharIndexçš„å½“å‰æˆ˜æ–—ï¼ˆè¿›å…¥è§‚æˆ˜ï¼‰ã€‚
----@param CharIndex  æ•°å€¼å‹ è‡ªèº«å¯¹è±¡indexã€‚
----@param TargetCharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@return any 1è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥ã€‚
+---È»Íæ¼ÒCharIndex¹Û¿´TargetCharIndexµÄµ±Ç°Õ½¶·£¨½øÈë¹ÛÕ½£©¡£
+---@param CharIndex  ÊıÖµĞÍ ×ÔÉí¶ÔÏóindex¡£
+---@param TargetCharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@return any 1±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü¡£
 function NLG.WatchEntry(CharIndex,TargetCharIndex) end
 
----è®¾ç½®NPCå¯¹è¯æ¡†æ–‡å­—å±…ä¸­ã€‚
----@param Message  å­—ç¬¦ä¸² è¦å±…ä¸­è®¾ç½®çš„æ–‡æœ¬
----@return any å±…ä¸­åçš„æ–‡æœ¬ã€‚
+---ÉèÖÃNPC¶Ô»°¿òÎÄ×Ö¾ÓÖĞ¡£
+---@param Message  ×Ö·û´® Òª¾ÓÖĞÉèÖÃµÄÎÄ±¾
+---@return any ¾ÓÖĞºóµÄÎÄ±¾¡£
 function NLG.c(Message) end
 
----è®¾ç½®æŒ‡å®šåœ°å›¾çš„åå­—ã€‚
----@param MapID  æ•°å€¼å‹ ç›®æ ‡åœ°å›¾çš„ç±»å‹ï¼Œ0ä¸ºå›ºå®šåœ°å›¾1ä¸ºéšæœºåœ°å›¾ã€‚
----@param FloorID  æ•°å€¼å‹ åœ°å›¾ç¼–å·
----@param Name  å­—ç¬¦ä¸² åœ°å›¾åå­—
----@return number æˆåŠŸè¿”å›1ï¼Œå¦åˆ™è¿”å›0ã€‚
+---ÉèÖÃÖ¸¶¨µØÍ¼µÄÃû×Ö¡£
+---@param MapID  ÊıÖµĞÍ Ä¿±êµØÍ¼µÄÀàĞÍ£¬0Îª¹Ì¶¨µØÍ¼1ÎªËæ»úµØÍ¼¡£
+---@param FloorID  ÊıÖµĞÍ µØÍ¼±àºÅ
+---@param Name  ×Ö·û´® µØÍ¼Ãû×Ö
+---@return number ³É¹¦·µ»Ø1£¬·ñÔò·µ»Ø0¡£
 function NLG.SetMapName(MapID, FloorID, Name) end
 
----è·å–æŒ‡å®šåœ°å›¾çš„åå­—ã€‚
----@param MapID  æ•°å€¼å‹ ç›®æ ‡åœ°å›¾çš„ç±»å‹ï¼Œ0ä¸ºå›ºå®šåœ°å›¾1ä¸ºéšæœºåœ°å›¾ã€‚
----@param FloorID  æ•°å€¼å‹ åœ°å›¾ç¼–å·
----@return string è¿”å›å€¼ä¸º0åˆ™è·å–å¤±è´¥ï¼Œè¿”å›å€¼ä¸º[å­—ç¬¦ä¸²]åˆ™ä¸ºåœ°å›¾åç§°ã€‚
+---»ñÈ¡Ö¸¶¨µØÍ¼µÄÃû×Ö¡£
+---@param MapID  ÊıÖµĞÍ Ä¿±êµØÍ¼µÄÀàĞÍ£¬0Îª¹Ì¶¨µØÍ¼1ÎªËæ»úµØÍ¼¡£
+---@param FloorID  ÊıÖµĞÍ µØÍ¼±àºÅ
+---@return string ·µ»ØÖµÎª0Ôò»ñÈ¡Ê§°Ü£¬·µ»ØÖµÎª[×Ö·û´®]ÔòÎªµØÍ¼Ãû³Æ¡£
 function NLG.GetMapName(MapID, FloorID) end
 
----é€šè¿‡ç©å®¶å¸å·æ‰¾ç©å®¶å¯¹è±¡indexã€‚
----@param CharIndex  å­—ç¬¦ä¸² æŒ‡å®šçš„å¸å·/Cdkeyã€‚
----@return number è¿”å›-1ä»£è¡¨å¤±è´¥ï¼Œå…¶ä»–ä¸ºæŒ‡å®šè´¦å·ç›®å‰åœ¨çº¿ç©å®¶çš„å¯¹è±¡indexã€‚
+---Í¨¹ıÍæ¼ÒÕÊºÅÕÒÍæ¼Ò¶ÔÏóindex¡£
+---@param CharIndex  ×Ö·û´® Ö¸¶¨µÄÕÊºÅ/Cdkey¡£
+---@return number ·µ»Ø-1´ú±íÊ§°Ü£¬ÆäËûÎªÖ¸¶¨ÕËºÅÄ¿Ç°ÔÚÏßÍæ¼ÒµÄ¶ÔÏóindex¡£
 function NLG.FindUser(CdKey) end
 
----æ›´æ–°ç©å®¶çš„å›¢é˜Ÿä¿¡æ¯ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
+---¸üĞÂÍæ¼ÒµÄÍÅ¶ÓĞÅÏ¢¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
 ---@return any 
 function NLG.UpdateParty(CharIndex) end
 
----é€šè¿‡Gmsvè‡ªèº«çš„éšæœºç§å­å–éšæœºæ•°ï¼Œä¸ç”¨è€ƒè™‘ç§å­çš„é—®é¢˜ï¼Œèƒ½å°½å¯èƒ½ç¡®ä¿éšæœºæ•°çš„éšæœºæ€§ã€‚
----@param min  æ•°å€¼å‹ éšæœºæ•°ä¸‹é™ã€‚
----@param max  æ•°å€¼å‹ éšæœºæ•°ä¸Šé™ã€‚
----@return any è¿”å›æ»¡è¶³å‚æ•°çš„éšæœºæ•°ã€‚
+---Í¨¹ıGmsv×ÔÉíµÄËæ»úÖÖ×ÓÈ¡Ëæ»úÊı£¬²»ÓÃ¿¼ÂÇÖÖ×ÓµÄÎÊÌâ£¬ÄÜ¾¡¿ÉÄÜÈ·±£Ëæ»úÊıµÄËæ»úĞÔ¡£
+---@param min  ÊıÖµĞÍ Ëæ»úÊıÏÂÏŞ¡£
+---@param max  ÊıÖµĞÍ Ëæ»úÊıÉÏÏŞ¡£
+---@return any ·µ»ØÂú×ã²ÎÊıµÄËæ»úÊı¡£
 function NLG.Rand(min, max) end
 
----ç»™æŒ‡å®šå¯¹è±¡ï¼ˆäººç‰©ã€NPCã€å® ç‰©ï¼‰å¤´é¡¶èµ‹äºˆå›¾æ¡£ï¼Œåªè¦æ˜¯æ¸¸æˆå®¢æˆ·ç«¯æ‹¥æœ‰çš„å›¾æ¡£å‡å¯è°ƒç”¨ã€‚
----@param CharIndex  æ•°å€¼å‹ æ¥æ”¶å…¬å‘Šçš„å¯¹è±¡indexï¼Œå€¼ä¸º-1æ—¶ç»™å…¨æœåœ¨çº¿ç©å®¶å‘é€ã€‚
----@param HeadGraNo  æ•°å€¼å‹ å¤´é¥°çš„å›¾æ¡£IDï¼Œå®¢æˆ·ç«¯çš„ä»»æ„å›¾æ¡£IDã€‚
----@return any 1è¡¨ç¤ºæˆåŠŸï¼Œå…¶ä»–è¡¨ç¤ºå¤±è´¥ã€‚
+---¸øÖ¸¶¨¶ÔÏó£¨ÈËÎï¡¢NPC¡¢³èÎï£©Í·¶¥¸³ÓèÍ¼µµ£¬Ö»ÒªÊÇÓÎÏ·¿Í»§¶ËÓµÓĞµÄÍ¼µµ¾ù¿Éµ÷ÓÃ¡£
+---@param CharIndex  ÊıÖµĞÍ ½ÓÊÕ¹«¸æµÄ¶ÔÏóindex£¬ÖµÎª-1Ê±¸øÈ«·şÔÚÏßÍæ¼Ò·¢ËÍ¡£
+---@param HeadGraNo  ÊıÖµĞÍ Í·ÊÎµÄÍ¼µµID£¬¿Í»§¶ËµÄÈÎÒâÍ¼µµID¡£
+---@return any 1±íÊ¾³É¹¦£¬ÆäËû±íÊ¾Ê§°Ü¡£
 function NLG.SetHeadIcon(CharIndex, HeadGraNo) end
 
----è·å–ç©å®¶çš„IPåœ°å€ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@return any å¯¹è±¡çš„IPåœ°å€ï¼Œä»…å¯¹ç©å®¶å¯¹è±¡æœ‰æ•ˆ
+---»ñÈ¡Íæ¼ÒµÄIPµØÖ·¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@return any ¶ÔÏóµÄIPµØÖ·£¬½ö¶ÔÍæ¼Ò¶ÔÏóÓĞĞ§
 function NLG.GetIp(CharIndex) end
 
----è·å–ç©å®¶çš„MACåœ°å€ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@return any å¯¹è±¡çš„MACåœ°å€ï¼Œä»…å¯¹ç©å®¶å¯¹è±¡æœ‰æ•ˆ
+---»ñÈ¡Íæ¼ÒµÄMACµØÖ·¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@return any ¶ÔÏóµÄMACµØÖ·£¬½ö¶ÔÍæ¼Ò¶ÔÏóÓĞĞ§
 function NLG.GetMAC(CharIndex) end
 
----è·å–æ¸¸æˆä¸­çš„å½“å‰æ—¶é—´ï¼Œå¦‚ä¸­åˆï¼Œé»„æ˜ï¼Œå¤œæ™šï¼Œæ¸…æ™¨ã€‚
+---»ñÈ¡ÓÎÏ·ÖĞµÄµ±Ç°Ê±¼ä£¬ÈçÖĞÎç£¬»Æ»è£¬Ò¹Íí£¬Çå³¿¡£
 ---@param 
----@return any 0 ï¼šç™½å¤© | 1 ï¼šé»„æ˜ | 2 ï¼šå¤œæ™š | 3 ï¼šæ¸…æ™¨
+---@return any 0 £º°×Ìì | 1 £º»Æ»è | 2 £ºÒ¹Íí | 3 £ºÇå³¿
 function NLG.GetGameTime() end
 
----æ•´ç†ç©å®¶èƒŒåŒ…ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡å¯¹è±¡indexã€‚
----@return any 0ä¸ºå¤±è´¥ï¼Œ1ä¸ºæˆåŠŸã€‚
+---ÕûÀíÍæ¼Ò±³°ü¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±ê¶ÔÏóindex¡£
+---@return any 0ÎªÊ§°Ü£¬1Îª³É¹¦¡£
 function NLG.SortItem(CharIndex) end
 
----è®¾ç½®ç§æ—ä¼¤å®³
----@param a number æ”»å‡»æ–¹ç§æ—
----@param b number é˜²å¾¡æ–¹ç§æ—
----@param rate number ä¼¤å®³æ¯”ç‡
----@return any number ä¼¤å®³æ¯”ç‡
+---ÉèÖÃÖÖ×åÉËº¦
+---@param a number ¹¥»÷·½ÖÖ×å
+---@param b number ·ÀÓù·½ÖÖ×å
+---@param rate number ÉËº¦±ÈÂÊ
+---@return any number ÉËº¦±ÈÂÊ
 function NLG.SetTribeRate(a, b, rate) end
 
----è·å–æ‰€æœ‰ç©å®¶ï¼Œå¹¶ä»¥tableå½¢å¼è¿”å›ã€‚
+---»ñÈ¡ËùÓĞÍæ¼Ò£¬²¢ÒÔtableĞÎÊ½·µ»Ø¡£
 ---@param 
----@return number table ç©å®¶index
+---@return number table Íæ¼Òindex
 function NLG.GetPlayer() end
 
----é™ä½cpuä½¿ç”¨
----@param ms number å°äº0æ—¶å…³é—­ï¼Œå¤§äºæˆ–ç­‰äº0æ—¶ä¸ºSleepæ—¶é—´ï¼Œä¸å»ºè®®å¤§äº2
+---½µµÍcpuÊ¹ÓÃ
+---@param ms number Ğ¡ÓÚ0Ê±¹Ø±Õ£¬´óÓÚ»òµÈÓÚ0Ê±ÎªSleepÊ±¼ä£¬²»½¨Òé´óÓÚ2
 ---@return any 
 function NLG.LowCpuUsage(ms) end
 
----æ‰“å¼€é“¶è¡Œ
----@param npcOrPlayer number npcæˆ–è€…ç©å®¶index
----@param player number ç©å®¶index
+---´ò¿ªÒøĞĞ
+---@param npcOrPlayer number npc»òÕßÍæ¼Òindex
+---@param player number Íæ¼Òindex
 ---@return any 
 function NLG.OpenBank(npcOrPlayer, player) end
 
----æ¨¡æ‹Ÿå´©ç«¯
+---Ä£Äâ±À¶Ë
 ---@param 
 ---@return any 
 function NLG.RaiseCrash() end
 
----å® ç‰©ä¹±å°„(å…¨å±€å¼€å¯)
----@param enable boolean å¯ç”¨ 1 ä¸å¯ç”¨ 0
+---³èÎïÂÒÉä(È«¾Ö¿ªÆô)
+---@param enable boolean ÆôÓÃ 1 ²»ÆôÓÃ 0
 ---@return any 
 function NLG.SetPetRandomShot(enable) end
 
----å® ç‰©ä¹±å°„(æŸç§å® ç‰©å¼€å¯)
----@param enable boolean å¯ç”¨ 1 ä¸å¯ç”¨ 0
----@param petId number å® ç‰©idï¼ˆEnemyBaseIdï¼‰
+---³èÎïÂÒÉä(Ä³ÖÖ³èÎï¿ªÆô)
+---@param enable boolean ÆôÓÃ 1 ²»ÆôÓÃ 0
+---@param petId number ³èÎïid£¨EnemyBaseId£©
 ---@return any 
 function NLG.SetPetRandomShot(petId, enable) end
 
----è®¾ç½®ä¹±æ•æ¦‚ç‡
+---ÉèÖÃÂÒÃô¸ÅÂÊ
 ---@param rate integer 0-100
 ---@param mode  nil|0|1|2 0 @0=PVE&PVP 1=PVE 2=PVP
 ---@return any 
 function NLG.SetDexRearrangeRate(rate, mode) end
 
----ä¿®æ”¹æš´å‡»æ—¶ä¼¤å®³è®¡ç®—
----@param mode number|boolean å–å€¼ï¼š 0 = æ™®é€šæ¨¡å¼ 1 = å€ç‡æ¨¡å¼ 2 = æ—  true = æ™®é€šæ¨¡å¼ false = æ— 
----@param val number å€ç‡ï¼Œé»˜è®¤1.5å€
+---ĞŞ¸Ä±©»÷Ê±ÉËº¦¼ÆËã
+---@param mode number|boolean È¡Öµ£º 0 = ÆÕÍ¨Ä£Ê½ 1 = ±¶ÂÊÄ£Ê½ 2 = ÎŞ true = ÆÕÍ¨Ä£Ê½ false = ÎŞ
+---@param val number ±¶ÂÊ£¬Ä¬ÈÏ1.5±¶
 ---@return any 
 function NLG.SetCriticalDamageAddition(mode, val) end
 

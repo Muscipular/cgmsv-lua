@@ -1,19 +1,21 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----è·å–TechæŒ‡å®šæ•°æ®
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---»ñÈ¡TechÖ¸¶¨Êı¾İ
 ---@param techIndex
----@param dataLine number æŒ‡å®šä¿¡æ¯æ CONST.TECH
----@return any TechæŒ‡å®šä¿¡æ¯æ æ•°æ®
+---@param dataLine number Ö¸¶¨ĞÅÏ¢À¸CONST.TECH
+---@return any TechÖ¸¶¨ĞÅÏ¢À¸Êı¾İ
 function Tech.GetData(techIndex, dataLine) end
 
----è®¾ç½®TechæŒ‡å®šæ•°æ®
+---ÉèÖÃTechÖ¸¶¨Êı¾İ
 ---@param techIndex
----@param dataLine number æŒ‡å®šä¿¡æ¯æ  CONST.TECH
----@param val æŒ‡å®šä¿¡æ¯
+---@param dataLine number Ö¸¶¨ĞÅÏ¢À¸ CONST.TECH
+---@param val Ö¸¶¨ĞÅÏ¢
 ---@return any 
 function Tech.SetData(techIndex, dataLine, val) end
 
----è·å–TechIndex
+---»ñÈ¡TechIndex
 ---@param techId
 ---@return number TechIndex
 function Tech.GetTechIndex(techId) end

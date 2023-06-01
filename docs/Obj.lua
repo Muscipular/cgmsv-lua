@@ -1,189 +1,191 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----è·å–æŒ‡å®šåœ°å›¾ä½ç½®çš„Object Indexåˆ—è¡¨ã€‚
----@param MapId  æ•°å€¼å‹ åæ ‡åœ°å›¾idã€‚
----@param FloorId  æ•°å€¼å‹ åæ ‡Floor idã€‚
----@param x  æ•°å€¼å‹ åæ ‡xã€‚
----@param y  æ•°å€¼å‹ åæ ‡yã€‚
----@return number è¿”å›å€¼ä¸º2ä¸ªï¼Œç¬¬ä¸€ä¸ªè¿”å›å€¼ä¸ºæ•°é‡ï¼Œç¬¬äºŒä¸ªè¿”å›å€¼æ˜¯luaçš„tableï¼ŒåŒ…å«æ‰€æœ‰å¯¹è±¡çš„å¯¹è±¡indexã€‚
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---»ñÈ¡Ö¸¶¨µØÍ¼Î»ÖÃµÄObject IndexÁĞ±í¡£
+---@param MapId  ÊıÖµĞÍ ×ø±êµØÍ¼id¡£
+---@param FloorId  ÊıÖµĞÍ ×ø±êFloor id¡£
+---@param x  ÊıÖµĞÍ ×ø±êx¡£
+---@param y  ÊıÖµĞÍ ×ø±êy¡£
+---@return number ·µ»ØÖµÎª2¸ö£¬µÚÒ»¸ö·µ»ØÖµÎªÊıÁ¿£¬µÚ¶ş¸ö·µ»ØÖµÊÇluaµÄtable£¬°üº¬ËùÓĞ¶ÔÏóµÄ¶ÔÏóindex¡£
 function Obj.GetObject(MapId, FloorId, X, Y) end
 
----æ ¹æ®ObjIndexè·å¾— äººç‰©/å® ç‰©/ç‰©å“ç­‰ çš„ç´¢å¼•ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@return number å¯¹è±¡index
+---¸ù¾İObjIndex»ñµÃ ÈËÎï/³èÎï/ÎïÆ·µÈ µÄË÷Òı¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@return number ¶ÔÏóindex
 function Obj.GetCharIndex(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Objectç±»å‹ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@return any -1ï¼šéæ³• | 0ï¼šæœªä½¿ç”¨ | 1ï¼šè§’è‰² | 2ï¼šé“å…· | 3ï¼šé‡‘å¸ | 4ï¼šä¼ é€ç‚¹ | 5ï¼šèˆ¹ | 6ï¼šè½½å…·
+---»ñÈ¡Ö¸¶¨Object IndexµÄObjectÀàĞÍ¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@return any -1£º·Ç·¨ | 0£ºÎ´Ê¹ÓÃ | 1£º½ÇÉ« | 2£ºµÀ¾ß | 3£º½ğ±Ò | 4£º´«ËÍµã | 5£º´¬ | 6£ºÔØ¾ß
 function Obj.GetType(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Xåæ ‡ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@return number xåæ ‡
+---»ñÈ¡Ö¸¶¨Object IndexµÄX×ø±ê¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@return number x×ø±ê
 function Obj.GetX(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Yåæ ‡ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@return number yåæ ‡
+---»ñÈ¡Ö¸¶¨Object IndexµÄY×ø±ê¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@return number y×ø±ê
 function Obj.GetY(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Floor IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
+---»ñÈ¡Ö¸¶¨Object IndexµÄFloor ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
 ---@return number Floor ID
 function Obj.GetFloor(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Map IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
+---»ñÈ¡Ö¸¶¨Object IndexµÄMap ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
 ---@return number Map ID
 function Obj.GetMap(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Map IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
+---»ñÈ¡Ö¸¶¨Object IndexµÄMap ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
 ---@return number Map ID
 function Obj.GetMapId(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Warp Xåæ ‡ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@return number xåæ ‡
+---»ñÈ¡Ö¸¶¨Object IndexµÄWarp X×ø±ê¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@return number x×ø±ê
 function Obj.GetWarpX(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Warp Yåæ ‡ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@return number yåæ ‡
+---»ñÈ¡Ö¸¶¨Object IndexµÄWarp Y×ø±ê¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@return number y×ø±ê
 function Obj.GetWarpY(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Warp Floor IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
+---»ñÈ¡Ö¸¶¨Object IndexµÄWarp Floor ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
 ---@return number Floor ID
 function Obj.GetWarpFloor(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Warp Map IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
+---»ñÈ¡Ö¸¶¨Object IndexµÄWarp Map ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
 ---@return number Map ID
 function Obj.GetWarpMap(ObjectIndex) end
 
----è·å–æŒ‡å®šObject Indexçš„Warp Map IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
+---»ñÈ¡Ö¸¶¨Object IndexµÄWarp Map ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
 ---@return number Map ID
 function Obj.GetWarpMapId(ObjectIndex) end
 
----è·å–æŒ‡å®šObjecå¯¹è±¡çš„å¼€å§‹æ—¶é—´(å® ç‰©å¼€å§‹ä¸¢åœ°çš„æ—¶é—´)ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@return any å¼€å§‹æ—¶é—´çš„timestampã€‚
+---»ñÈ¡Ö¸¶¨Objec¶ÔÏóµÄ¿ªÊ¼Ê±¼ä(³èÎï¿ªÊ¼¶ªµØµÄÊ±¼ä)¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@return any ¿ªÊ¼Ê±¼äµÄtimestamp¡£
 function Obj.GetDelTime(ObjectIndex) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Objectç±»å‹ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ å–å€¼0~6
----@param 0ï¼šæœªä½¿ç”¨
----@param 1ï¼šè§’è‰²
----@param 2ï¼šé“å…·
----@param 3ï¼šé‡‘å¸
----@param 4ï¼šä¼ é€ç‚¹
----@param 5ï¼šèˆ¹
----@param 6ï¼šè½½å…·
----@return any è®¾ç½®å‰çš„ç±»å‹
+---ÉèÖÃÖ¸¶¨Object IndexµÄObjectÀàĞÍ¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ È¡Öµ0~6
+---@param 0£ºÎ´Ê¹ÓÃ
+---@param 1£º½ÇÉ«
+---@param 2£ºµÀ¾ß
+---@param 3£º½ğ±Ò
+---@param 4£º´«ËÍµã
+---@param 5£º´¬
+---@param 6£ºÔØ¾ß
+---@return any ÉèÖÃÇ°µÄÀàĞÍ
 function Obj.SetType(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Xåæ ‡ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ–°çš„Xåæ ‡
----@return number è®¾ç½®å‰çš„xåæ ‡
+---ÉèÖÃÖ¸¶¨Object IndexµÄX×ø±ê¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ ĞÂµÄX×ø±ê
+---@return number ÉèÖÃÇ°µÄx×ø±ê
 function Obj.SetX(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Yåæ ‡ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ–°çš„Yåæ ‡
----@return number è®¾ç½®å‰çš„Yåæ ‡
+---ÉèÖÃÖ¸¶¨Object IndexµÄY×ø±ê¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ ĞÂµÄY×ø±ê
+---@return number ÉèÖÃÇ°µÄY×ø±ê
 function Obj.SetY(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Floor IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ–°çš„FloorID
----@return number è®¾ç½®å‰çš„Floor ID
+---ÉèÖÃÖ¸¶¨Object IndexµÄFloor ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ ĞÂµÄFloorID
+---@return number ÉèÖÃÇ°µÄFloor ID
 function Obj.SetFloor(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Map IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ–°çš„MapID
----@return number è®¾ç½®å‰çš„Map ID
+---ÉèÖÃÖ¸¶¨Object IndexµÄMap ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ ĞÂµÄMapID
+---@return number ÉèÖÃÇ°µÄMap ID
 function Obj.SetMap(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Map IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ–°çš„MapID
----@return number è®¾ç½®å‰çš„Map ID
+---ÉèÖÃÖ¸¶¨Object IndexµÄMap ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ ĞÂµÄMapID
+---@return number ÉèÖÃÇ°µÄMap ID
 function Obj.SetMapId(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Warp Xåæ ‡ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ–°çš„Xåæ ‡
----@return number è®¾ç½®å‰çš„xåæ ‡
+---ÉèÖÃÖ¸¶¨Object IndexµÄWarp X×ø±ê¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ ĞÂµÄX×ø±ê
+---@return number ÉèÖÃÇ°µÄx×ø±ê
 function Obj.SetWarpX(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Warp Yåæ ‡ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ–°çš„Yåæ ‡
----@return number è®¾ç½®å‰çš„Yåæ ‡
+---ÉèÖÃÖ¸¶¨Object IndexµÄWarp Y×ø±ê¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ ĞÂµÄY×ø±ê
+---@return number ÉèÖÃÇ°µÄY×ø±ê
 function Obj.SetWarpY(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Warp Floor IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ–°çš„FloorID
----@return number è®¾ç½®å‰çš„Floor ID
+---ÉèÖÃÖ¸¶¨Object IndexµÄWarp Floor ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ ĞÂµÄFloorID
+---@return number ÉèÖÃÇ°µÄFloor ID
 function Obj.SetWarpFloor(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Warp Map IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ–°çš„MapID
----@return number è®¾ç½®å‰çš„Map ID
+---ÉèÖÃÖ¸¶¨Object IndexµÄWarp Map ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ ĞÂµÄMapID
+---@return number ÉèÖÃÇ°µÄMap ID
 function Obj.SetWarpMap(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObject Indexçš„Warp Map IDã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ–°çš„MapID
----@return number è®¾ç½®å‰çš„Map ID
+---ÉèÖÃÖ¸¶¨Object IndexµÄWarp Map ID¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ ĞÂµÄMapID
+---@return number ÉèÖÃÇ°µÄMap ID
 function Obj.SetWarpMapId(ObjectIndex, Value) end
 
----è®¾ç½®æŒ‡å®šObjecå¯¹è±¡çš„å¼€å§‹æ—¶é—´(å® ç‰©å¼€å§‹ä¸¢åœ°çš„æ—¶é—´)ã€‚
----@param ObjectIndex  æ•°å€¼å‹ ç›®æ ‡çš„ ç‰©ä»¶indexã€‚
----@param Value  æ•°å€¼å‹ æ—¶é—´timestamp
----@return any è®¾ç½®å‰çš„æ—¶é—´
+---ÉèÖÃÖ¸¶¨Objec¶ÔÏóµÄ¿ªÊ¼Ê±¼ä(³èÎï¿ªÊ¼¶ªµØµÄÊ±¼ä)¡£
+---@param ObjectIndex  ÊıÖµĞÍ Ä¿±êµÄ Îï¼şindex¡£
+---@param Value  ÊıÖµĞÍ Ê±¼ätimestamp
+---@return any ÉèÖÃÇ°µÄÊ±¼ä
 function Obj.SetDelTime(ObjectIndex, Value) end
 
----ç§»é™¤æŒ‡å®šobj
----@param objectIndex number objectçš„index
+---ÒÆ³ıÖ¸¶¨obj
+---@param objectIndex number objectµÄindex
 ---@return any 
 function Obj.RemoveObject(objectIndex) end
 
----åœ¨æŒ‡å®šçš„åœ°å›¾åæ ‡ä¸Šè®¾ç½®ä¼ é€ç‚¹
----@param Map number ä¼ é€ç‚¹åœ°å›¾ç±»å‹
----@param Floor number ä¼ é€ç‚¹åœ°å›¾
----@param Xpos number ä¼ é€ç‚¹Xåæ ‡
----@param Ypos number ä¼ é€ç‚¹Yåæ ‡
----@param toMap number ä¼ é€ååœ°å›¾ç±»å‹
----@param toFloor number ä¼ é€ååœ°å›¾
----@param toXpos number ä¼ é€åXåæ ‡
----@param toYpos number ä¼ é€åYåæ ‡
+---ÔÚÖ¸¶¨µÄµØÍ¼×ø±êÉÏÉèÖÃ´«ËÍµã
+---@param Map number ´«ËÍµãµØÍ¼ÀàĞÍ
+---@param Floor number ´«ËÍµãµØÍ¼
+---@param Xpos number ´«ËÍµãX×ø±ê
+---@param Ypos number ´«ËÍµãY×ø±ê
+---@param toMap number ´«ËÍºóµØÍ¼ÀàĞÍ
+---@param toFloor number ´«ËÍºóµØÍ¼
+---@param toXpos number ´«ËÍºóX×ø±ê
+---@param toYpos number ´«ËÍºóY×ø±ê
 ---@return any 
 function Obj.AddWarp(Map,Floor,Xpos,Ypos,toMap,toFloor,toXpos,toYpos) end
 
----åœ¨æŒ‡å®šçš„åœ°å›¾åæ ‡ä¸Šæ”¾é‡‘å¸
----@param Map number åœ°å›¾ç±»å‹
----@param Floor number åœ°å›¾
----@param Xpos number Xåæ ‡
----@param Ypos number Yåæ ‡
----@param gold number é‡‘å¸æ•°é‡
+---ÔÚÖ¸¶¨µÄµØÍ¼×ø±êÉÏ·Å½ğ±Ò
+---@param Map number µØÍ¼ÀàĞÍ
+---@param Floor number µØÍ¼
+---@param Xpos number X×ø±ê
+---@param Ypos number Y×ø±ê
+---@param gold number ½ğ±ÒÊıÁ¿
 ---@return any 
 function Obj.AddGold(Map,Floor,Xpos,Ypos,gold) end
 
----åœ¨æŒ‡å®šçš„åœ°å›¾åæ ‡ä¸Šæ”¾ç‰©å“
----@param Map number åœ°å›¾ç±»å‹
----@param Floor number åœ°å›¾
----@param Xpos number Xåæ ‡
----@param Ypos number Yåæ ‡
----@param itemIndex number ç”±Item.MakeItem(itemId)è¿”å›å€¼
+---ÔÚÖ¸¶¨µÄµØÍ¼×ø±êÉÏ·ÅÎïÆ·
+---@param Map number µØÍ¼ÀàĞÍ
+---@param Floor number µØÍ¼
+---@param Xpos number X×ø±ê
+---@param Ypos number Y×ø±ê
+---@param itemIndex number ÓÉItem.MakeItem(itemId)·µ»ØÖµ
 ---@return any 
 function Obj.AddItem(Map,Floor,Xpos,Ypos,itemIndex) end
 

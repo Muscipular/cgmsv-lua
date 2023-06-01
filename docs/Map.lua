@@ -1,96 +1,98 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----è·å–è¿·å®«Id
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---»ñÈ¡ÃÔ¹¬Id
 ---@param floor integer
----@return number è¿·å®«id
+---@return number ÃÔ¹¬id
 function Map.GetDungeonId(floor) end
 
----è·å–è¿·å®«å…¥å£
----@param dungeonId è¿·å®«id
+---»ñÈ¡ÃÔ¹¬Èë¿Ú
+---@param dungeonId ÃÔ¹¬id
 ---@return any number mapType, number floor, number x, number y
 function Map.FindDungeonEntry(dungeonId) end
 
----è·å–è¿·å®«çš„è¿‡æœŸæ—¶é—´
----@param dungeonId è¿·å®«id
+---»ñÈ¡ÃÔ¹¬µÄ¹ıÆÚÊ±¼ä
+---@param dungeonId ÃÔ¹¬id
 ---@return any 
 function Map.GetDungeonExpireAtByDungeonId(dungeonId) end
 
----æ ¹æ®è¿·å®«Idè®¾ç½®è¿·å®«é‡ç½®æ—¶é—´ 
----@param dungeonId è¿·å®«id
+---¸ù¾İÃÔ¹¬IdÉèÖÃÃÔ¹¬ÖØÖÃÊ±¼ä 
+---@param dungeonId ÃÔ¹¬id
 ---@param time UnixTime
 ---@return any 
 function Map.SetDungeonExpireAtByDungeonId(dungeonId, time) end
 
----è·å¾—åœ°å›¾ä½ç½®çš„å›¾æ¡£
----@param Map number åœ°å›¾ç±»å‹
----@param Floor number åœ°å›¾
----@param Xpos number Xåæ ‡
----@param Ypos number Yåæ ‡
----@return any è¿”å›åœ°æ¿å›¾æ¡£ï¼Œå»ºç­‘ç‰©å›¾æ¡£
+---»ñµÃµØÍ¼Î»ÖÃµÄÍ¼µµ
+---@param Map number µØÍ¼ÀàĞÍ
+---@param Floor number µØÍ¼
+---@param Xpos number X×ø±ê
+---@param Ypos number Y×ø±ê
+---@return any ·µ»ØµØ°åÍ¼µµ£¬½¨ÖşÎïÍ¼µµ
 function Map.GetImage(Map,Floor,Xpos,Ypos) end
 
----è®¾å®šåœ°å›¾ä½ç½®çš„å›¾æ¡£
----@param Map number åœ°å›¾ç±»å‹
----@param Floor number åœ°å›¾
----@param Xpos number Xåæ ‡
----@param Ypos number Yåæ ‡
----@param Tile number åœ°æ¿å›¾æ¡£ å¯ä»¥ä¸ºnull
----@param Obj number å»ºç­‘ç‰©å›¾æ¡£ å¯ä»¥ä¸ºnull
+---Éè¶¨µØÍ¼Î»ÖÃµÄÍ¼µµ
+---@param Map number µØÍ¼ÀàĞÍ
+---@param Floor number µØÍ¼
+---@param Xpos number X×ø±ê
+---@param Ypos number Y×ø±ê
+---@param Tile number µØ°åÍ¼µµ ¿ÉÒÔÎªnull
+---@param Obj number ½¨ÖşÎïÍ¼µµ ¿ÉÒÔÎªnull
 ---@return any 
 function Map.SetImage(Map,Floor,Xpos,Ypos,Tile,Obj) end
 
----è·å¾—åœ°å›¾å¤§å°
----@param Map number åœ°å›¾ç±»å‹
----@param Floor number åœ°å›¾
----@return any è¿”å›åœ°å›¾å¤§å°  é•¿ï¼Œå®½
+---»ñµÃµØÍ¼´óĞ¡
+---@param Map number µØÍ¼ÀàĞÍ
+---@param Floor number µØÍ¼
+---@return any ·µ»ØµØÍ¼´óĞ¡  ³¤£¬¿í
 function Map.GetMapSize(Map,Floor) end
 
----åˆ›å»ºå¤åˆ¶åœ°å›¾ã€‚æ–°åœ°å›¾çš„mapidä¸ºCONST.åœ°å›¾ç±»å‹_LUAMAP
----@param mapid  æ•°å€¼å‹ è¦å¤åˆ¶çš„åœ°å›¾çš„Map IDã€‚
----@param floor  æ•°å€¼å‹ è¦å¤åˆ¶çš„åœ°å›¾çš„Floor IDã€‚
----@return number æˆåŠŸè¿”å›æ–°çš„FloorIDï¼Œå¤±è´¥è¿”å›-1ã€‚
+---´´½¨¸´ÖÆµØÍ¼¡£ĞÂµØÍ¼µÄmapidÎªCONST.µØÍ¼ÀàĞÍ_LUAMAP
+---@param mapid  ÊıÖµĞÍ Òª¸´ÖÆµÄµØÍ¼µÄMap ID¡£
+---@param floor  ÊıÖµĞÍ Òª¸´ÖÆµÄµØÍ¼µÄFloor ID¡£
+---@return number ³É¹¦·µ»ØĞÂµÄFloorID£¬Ê§°Ü·µ»Ø-1¡£
 function Map.MakeCopyMap(mapid, floor) end
 
----åˆ é™¤Luaç”Ÿæˆçš„åœ°å›¾ï¼Œé‡Šæ”¾åœ°å›¾ç¼–å·ã€‚
----@param floor  æ•°å€¼å‹ åœ°å›¾çš„Floor IDã€‚
----@return number æˆåŠŸè¿”å›0ï¼Œå¤±è´¥è¿”å›-1ã€‚
+---É¾³ıLuaÉú³ÉµÄµØÍ¼£¬ÊÍ·ÅµØÍ¼±àºÅ¡£
+---@param floor  ÊıÖµĞÍ µØÍ¼µÄFloor ID¡£
+---@return number ³É¹¦·µ»Ø0£¬Ê§°Ü·µ»Ø-1¡£
 function Map.DelLuaMap(floor) end
 
----åˆ›å»ºéšæœºåœ°å›¾ã€‚
----@param Dofile å›è°ƒå‡½æ•°æ‰€åœ¨æ–‡ä»¶ å­—ç¬¦ä¸²
----@param InitFuncName å›è°ƒå‡½æ•°åï¼Œå½“éšæœºåœ°å›¾ç”ŸæˆæˆåŠŸä»¥åï¼Œä¼šè§¦å‘å®šä¹‰çš„å›è°ƒå‡½æ•° MakeMazeMapCallBack å­—ç¬¦ä¸²
----@param Xsizeåœ°å›¾xåæ ‡æœ€å¤§å€¼ æ•°å€¼å‹
----@param Ysize åœ°å›¾yåæ ‡æœ€å¤§å€¼ æ•°å€¼å‹
----@param MapName åœ°å›¾å å­—ç¬¦ä¸²
----@return number æˆåŠŸè¿”å›æ–°çš„FloorIDï¼Œå¤±è´¥è¿”å›-1ã€‚
+---´´½¨Ëæ»úµØÍ¼¡£
+---@param Dofile »Øµ÷º¯ÊıËùÔÚÎÄ¼ş ×Ö·û´®
+---@param InitFuncName »Øµ÷º¯ÊıÃû£¬µ±Ëæ»úµØÍ¼Éú³É³É¹¦ÒÔºó£¬»á´¥·¢¶¨ÒåµÄ»Øµ÷º¯Êı MakeMazeMapCallBack ×Ö·û´®
+---@param XsizeµØÍ¼x×ø±ê×î´óÖµ ÊıÖµĞÍ
+---@param Ysize µØÍ¼y×ø±ê×î´óÖµ ÊıÖµĞÍ
+---@param MapName µØÍ¼Ãû ×Ö·û´®
+---@return number ³É¹¦·µ»ØĞÂµÄFloorID£¬Ê§°Ü·µ»Ø-1¡£
 function Map.MakeMazeMap(Dofile, InitFuncName,Xsize,Ysize,MapName) end
 
----è¿™ä¸ªæ˜¯Map.MakeMazeMapç”Ÿæˆéšæœºåœ°å›¾ç»“æœçš„å›è°ƒå‡½æ•°
----@param FloodID  æ•°å€¼å‹ ç”Ÿæˆçš„åœ°å›¾çš„ç¼–å·
----@param Doneflg  æ•°å€¼å‹ ç”Ÿæˆåœ°å›¾çš„ç»“æœï¼Œå¦‚æœè¯¥å€¼ä¸º1åˆ™ç”ŸæˆæˆåŠŸï¼Œå¦‚æœä¸º0åˆ™ç”Ÿæˆå¤±è´¥ã€‚
+---Õâ¸öÊÇMap.MakeMazeMapÉú³ÉËæ»úµØÍ¼½á¹ûµÄ»Øµ÷º¯Êı
+---@param FloodID  ÊıÖµĞÍ Éú³ÉµÄµØÍ¼µÄ±àºÅ
+---@param Doneflg  ÊıÖµĞÍ Éú³ÉµØÍ¼µÄ½á¹û£¬Èç¹û¸ÃÖµÎª1ÔòÉú³É³É¹¦£¬Èç¹ûÎª0ÔòÉú³ÉÊ§°Ü¡£
 ---@return any 
 function MapCallBack(FloorID, Doneflg) end
 
----è·å–éšæœºåœ°å›¾å¯ç”¨çš„åæ ‡ã€‚
----@param mapid number åœ°å›¾ç±»å‹
----@param floor number åœ°å›¾
----@return number è¿”å›xåæ ‡å’Œyåæ ‡ï¼Œå¦‚æœå¤±è´¥åˆ™xä¸yéƒ½ä¸º-1ã€‚
+---»ñÈ¡Ëæ»úµØÍ¼¿ÉÓÃµÄ×ø±ê¡£
+---@param mapid number µØÍ¼ÀàĞÍ
+---@param floor number µØÍ¼
+---@return number ·µ»Øx×ø±êºÍy×ø±ê£¬Èç¹ûÊ§°ÜÔòxÓëy¶¼Îª-1¡£
 function Map.GetAvailablePos(mapid, floor) end
 
----è®¾ç½®åœ°å›¾åæ ‡æ˜¯å¦å¯ä»¥é€šè¡Œ
----@param Map number åœ°å›¾ç±»å‹
----@param Floor number åœ°å›¾
----@param Xpos number Xåæ ‡
----@param Ypos number Yåæ ‡
----@param Able number æ˜¯å¦é€šè¡Œ
+---ÉèÖÃµØÍ¼×ø±êÊÇ·ñ¿ÉÒÔÍ¨ĞĞ
+---@param Map number µØÍ¼ÀàĞÍ
+---@param Floor number µØÍ¼
+---@param Xpos number X×ø±ê
+---@param Ypos number Y×ø±ê
+---@param Able number ÊÇ·ñÍ¨ĞĞ
 ---@return any 
 function Map.SetWalkable(Map,Floor,Xpos,Ypos,Able) end
 
----æŸ¥çœ‹åœ°å›¾åæ ‡æ˜¯å¦å¯ä»¥é€šè¡Œ
----@param Map number åœ°å›¾ç±»å‹
----@param Floor number åœ°å›¾
----@param Xpos number Xåæ ‡
----@param Ypos number Yåæ ‡
----@return number å¯é€šè¡Œè¿”å›1ï¼Œä¸å¯é€šè¡Œè¿”å›0
+---²é¿´µØÍ¼×ø±êÊÇ·ñ¿ÉÒÔÍ¨ĞĞ
+---@param Map number µØÍ¼ÀàĞÍ
+---@param Floor number µØÍ¼
+---@param Xpos number X×ø±ê
+---@param Ypos number Y×ø±ê
+---@return number ¿ÉÍ¨ĞĞ·µ»Ø1£¬²»¿ÉÍ¨ĞĞ·µ»Ø0
 function Map.IsWalkable(Map,Floor,Xpos,Ypos) end
 

@@ -1,649 +1,651 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----è·å–å¯¹è±¡indexçš„æŒ‡å®šä¿¡æ¯ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡index
----@param dataIndex number è¯´æŒ‡å®šçš„å¯¹è±¡å®ä¾‹ä¿¡æ¯æ ä½ï¼Œå…·ä½“æ ä½å¸¸é‡è¯·æŸ¥çœ‹é™„å½•
----@return any æŒ‡å®šä¿¡æ¯æ ä½çš„å€¼
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---»ñÈ¡¶ÔÏóindexµÄÖ¸¶¨ĞÅÏ¢¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex
+---@param dataIndex number ËµÖ¸¶¨µÄ¶ÔÏóÊµÀıĞÅÏ¢À¸Î»£¬¾ßÌåÀ¸Î»³£Á¿Çë²é¿´¸½Â¼
+---@return any Ö¸¶¨ĞÅÏ¢À¸Î»µÄÖµ
 function Char.GetData(charIndex, dataIndex) end
 
----è®¾ç½®å¯¹è±¡indexçš„æŒ‡å®šä¿¡æ¯ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡index
----@param dataIndex number è¯´æŒ‡å®šçš„å¯¹è±¡å®ä¾‹ä¿¡æ¯æ ä½ï¼Œå…·ä½“æ ä½å¸¸é‡è¯·æŸ¥çœ‹é™„å½•
----@param value string|number æ–°çš„å€¼
----@return any 0ä¸ºå¤±è´¥ï¼Œ1ä¸ºæˆåŠŸ
+---ÉèÖÃ¶ÔÏóindexµÄÖ¸¶¨ĞÅÏ¢¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex
+---@param dataIndex number ËµÖ¸¶¨µÄ¶ÔÏóÊµÀıĞÅÏ¢À¸Î»£¬¾ßÌåÀ¸Î»³£Á¿Çë²é¿´¸½Â¼
+---@param value string|number ĞÂµÄÖµ
+---@return any 0ÎªÊ§°Ü£¬1Îª³É¹¦
 function Char.SetData(charIndex, dataIndex, value) end
 
----è·å–/è®¾ç½®ç›®æ ‡å¯¹è±¡çš„NowEventä»»åŠ¡æ——æ ‡ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param flag number ä»»åŠ¡æ——æ ‡ã€‚
----@param value number '0' | '1' è®¾ç½®çš„ç›®æ ‡æ——æ ‡çŠ¶æ€[å¦‚æœä¸è®¾ç½®è¯¥å‚æ•°ï¼Œåˆ™è¿”å›ç›®æ ‡æ——æ ‡çŠ¶æ€ï¼Œå¦‚æœè¯¥å‚æ•°ä¸º0ï¼Œåˆ™æ¸…ç©ºç›®æ ‡çš„è¯¥æ——æ ‡çš„NowEventçŠ¶æ€ï¼Œå¦‚æœå‚æ•°ä¸º1ï¼Œåˆ™è®¾ç½®è¯¥æ——æ ‡ä¸ºNowEventçŠ¶æ€]
----@return any å¦‚æœæ— Valueå‚æ•°ï¼Œåˆ™è¿”å›æ——æ ‡çŠ¶æ€ã€‚
+---»ñÈ¡/ÉèÖÃÄ¿±ê¶ÔÏóµÄNowEventÈÎÎñÆì±ê¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param flag number ÈÎÎñÆì±ê¡£
+---@param value number '0' | '1' ÉèÖÃµÄÄ¿±êÆì±ê×´Ì¬[Èç¹û²»ÉèÖÃ¸Ã²ÎÊı£¬Ôò·µ»ØÄ¿±êÆì±ê×´Ì¬£¬Èç¹û¸Ã²ÎÊıÎª0£¬ÔòÇå¿ÕÄ¿±êµÄ¸ÃÆì±êµÄNowEvent×´Ì¬£¬Èç¹û²ÎÊıÎª1£¬ÔòÉèÖÃ¸ÃÆì±êÎªNowEvent×´Ì¬]
+---@return any Èç¹ûÎŞValue²ÎÊı£¬Ôò·µ»ØÆì±ê×´Ì¬¡£
 function Char.NowEvent(charIndex, flag, value) end
 
----è·å–/è®¾ç½®ç›®æ ‡å¯¹è±¡çš„EndEventä»»åŠ¡æ——æ ‡ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param flag number ä»»åŠ¡æ——æ ‡ã€‚
----@param value number '0' | '1' è®¾ç½®çš„ç›®æ ‡æ——æ ‡çŠ¶æ€[å¦‚æœä¸è®¾ç½®è¯¥å‚æ•°ï¼Œåˆ™è¿”å›ç›®æ ‡æ——æ ‡çŠ¶æ€ï¼Œå¦‚æœè¯¥å‚æ•°ä¸º0ï¼Œåˆ™æ¸…ç©ºç›®æ ‡çš„è¯¥æ——æ ‡çš„EndEventçŠ¶æ€ï¼Œå¦‚æœå‚æ•°ä¸º1ï¼Œåˆ™è®¾ç½®è¯¥æ——æ ‡ä¸ºEndEventçŠ¶æ€]
----@return any å¦‚æœæ— Valueå‚æ•°ï¼Œåˆ™è¿”å›æ——æ ‡çŠ¶æ€ã€‚
+---»ñÈ¡/ÉèÖÃÄ¿±ê¶ÔÏóµÄEndEventÈÎÎñÆì±ê¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param flag number ÈÎÎñÆì±ê¡£
+---@param value number '0' | '1' ÉèÖÃµÄÄ¿±êÆì±ê×´Ì¬[Èç¹û²»ÉèÖÃ¸Ã²ÎÊı£¬Ôò·µ»ØÄ¿±êÆì±ê×´Ì¬£¬Èç¹û¸Ã²ÎÊıÎª0£¬ÔòÇå¿ÕÄ¿±êµÄ¸ÃÆì±êµÄEndEvent×´Ì¬£¬Èç¹û²ÎÊıÎª1£¬ÔòÉèÖÃ¸ÃÆì±êÎªEndEvent×´Ì¬]
+---@return any Èç¹ûÎŞValue²ÎÊı£¬Ôò·µ»ØÆì±ê×´Ì¬¡£
 function Char.EndEvent(charIndex, flag, value) end
 
----æŸ¥æ‰¾è§’è‰²æ˜¯å¦æ‹¥æœ‰IDæ˜¯ItemIDçš„é“å…·ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param itemID number é“å…·ID
----@return number å¦‚æœæœ‰åˆ™è¿”å›ç¬¬ä¸€ä¸ªç»“æœçš„é“å…·æ ä½ç½®ï¼Œå¦‚æœæ²¡æœ‰åˆ™è¿”å›-1ã€‚
+---²éÕÒ½ÇÉ«ÊÇ·ñÓµÓĞIDÊÇItemIDµÄµÀ¾ß¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param itemID number µÀ¾ßID
+---@return number Èç¹ûÓĞÔò·µ»ØµÚÒ»¸ö½á¹ûµÄµÀ¾ßÀ¸Î»ÖÃ£¬Èç¹ûÃ»ÓĞÔò·µ»Ø-1¡£
 function Char.FindItemId(charIndex, itemID) end
 
----ä¸ºç›®æ ‡å¢åŠ é‡‘é’±ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param amount number å¢åŠ çš„æ•°é‡ï¼Œè´Ÿæ•°ä¸ºå‡å°‘ã€‚
+---ÎªÄ¿±êÔö¼Ó½ğÇ®¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param amount number Ôö¼ÓµÄÊıÁ¿£¬¸ºÊıÎª¼õÉÙ¡£
 ---@return any 
 function Char.AddGold(charIndex, amount) end
 
----åˆ é™¤ç›®æ ‡å¯¹è±¡é“å…·ã€‚
----@param CharIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param ItemID number é“å…·IDã€‚
----@param Amount number é“å…·çš„æ•°é‡ã€‚
----@param ShowMsg boolean æ˜¯å¦æ˜¾ç¤ºç³»ç»Ÿä¿¡æ¯
----@return number æˆåŠŸè¿”å›1ï¼Œå¤±è´¥åˆ™è¿”å›0ã€‚
+---É¾³ıÄ¿±ê¶ÔÏóµÀ¾ß¡£
+---@param CharIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param ItemID number µÀ¾ßID¡£
+---@param Amount number µÀ¾ßµÄÊıÁ¿¡£
+---@param ShowMsg boolean ÊÇ·ñÏÔÊ¾ÏµÍ³ĞÅÏ¢
+---@return number ³É¹¦·µ»Ø1£¬Ê§°ÜÔò·µ»Ø0¡£
 function Char.DelItem(CharIndex, ItemID, Amount, ShowMsg) end
 
----ç»™äºˆç›®æ ‡å¯¹è±¡é“å…·ã€‚
----@param CharIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param ItemID number é“å…·IDã€‚
----@param Amount number é“å…·çš„æ•°é‡ã€‚
----@param ShowMsg boolean æ˜¯å¦æ˜¾ç¤ºç³»ç»Ÿä¿¡æ¯
----@return number ç›®æ ‡é“å…·indexï¼Œå¤±è´¥åˆ™è¿”å›è´Ÿæ•°ã€‚
+---¸øÓèÄ¿±ê¶ÔÏóµÀ¾ß¡£
+---@param CharIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param ItemID number µÀ¾ßID¡£
+---@param Amount number µÀ¾ßµÄÊıÁ¿¡£
+---@param ShowMsg boolean ÊÇ·ñÏÔÊ¾ÏµÍ³ĞÅÏ¢
+---@return number Ä¿±êµÀ¾ßindex£¬Ê§°ÜÔò·µ»Ø¸ºÊı¡£
 function Char.GiveItem(CharIndex, ItemID, Amount, ShowMsg) end
 
----æ£€æµ‹å¯¹è±¡èº«ä¸Šæ˜¯å¦æœ‰ç›®æ ‡é“å…·ã€‚
----@param CharIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param ItemID number é“å…·IDã€‚
----@return number å¦‚æœç›®æ ‡æœ‰è¯¥é“å…·ï¼Œåˆ™è¿”å›è¯¥é“å…·indexï¼Œå¦åˆ™è¿”å›-1ã€‚
+---¼ì²â¶ÔÏóÉíÉÏÊÇ·ñÓĞÄ¿±êµÀ¾ß¡£
+---@param CharIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param ItemID number µÀ¾ßID¡£
+---@return number Èç¹ûÄ¿±êÓĞ¸ÃµÀ¾ß£¬Ôò·µ»Ø¸ÃµÀ¾ßindex£¬·ñÔò·µ»Ø-1¡£
 function Char.HaveItem(CharIndex,ItemID) end
 
----æ£€æµ‹å¯¹è±¡èº«ä¸Šçš„å·²ç»æœ‰é“å…·çš„é“å…·æ ä½æ•°é‡ã€‚
----@param CharIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number ç›®æ ‡é“å…·æ çš„å·²ç»ä½¿ç”¨çš„æ ä½æ•°é‡ï¼Œæ— ä»»ä½•é“å…·è¿”å›0ï¼Œå…¨éƒ¨éƒ½æœ‰é“å…·è¿”å›20ã€‚
+---¼ì²â¶ÔÏóÉíÉÏµÄÒÑ¾­ÓĞµÀ¾ßµÄµÀ¾ßÀ¸Î»ÊıÁ¿¡£
+---@param CharIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number Ä¿±êµÀ¾ßÀ¸µÄÒÑ¾­Ê¹ÓÃµÄÀ¸Î»ÊıÁ¿£¬ÎŞÈÎºÎµÀ¾ß·µ»Ø0£¬È«²¿¶¼ÓĞµÀ¾ß·µ»Ø20¡£
 function Char.ItemSlot(charIndex) end
 
----æ£€æµ‹å¯¹è±¡èº«ä¸Šç›®æ ‡é“å…·çš„æ•°é‡ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param ItemID number é“å…·IDã€‚
----@return number å¦‚æœç›®æ ‡æœ‰è¯¥é“å…·ï¼Œåˆ™è¿”å›æ‹¥æœ‰çš„è¯¥é“å…·çš„æ•°é‡ï¼Œå¦åˆ™è¿”å›0ã€‚
+---¼ì²â¶ÔÏóÉíÉÏÄ¿±êµÀ¾ßµÄÊıÁ¿¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param ItemID number µÀ¾ßID¡£
+---@return number Èç¹ûÄ¿±êÓĞ¸ÃµÀ¾ß£¬Ôò·µ»ØÓµÓĞµÄ¸ÃµÀ¾ßµÄÊıÁ¿£¬·ñÔò·µ»Ø0¡£
 function Char.ItemNum(charIndex, ItemID) end
 
----æ£€æµ‹å¯¹è±¡èº«ä¸Šæ˜¯å¦æœ‰ç›®æ ‡å® ç‰©ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param petId number å® ç‰©çš„ID
----@return number å¦‚æœç›®æ ‡æœ‰è¯¥å® ç‰©çš„å® ç‰©ä½ç½®(0-4)ï¼Œæ²¡æœ‰åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---¼ì²â¶ÔÏóÉíÉÏÊÇ·ñÓĞÄ¿±ê³èÎï¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param petId number ³èÎïµÄID
+---@return number Èç¹ûÄ¿±êÓĞ¸Ã³èÎïµÄ³èÎïÎ»ÖÃ(0-4)£¬Ã»ÓĞÔò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.HavePet(charIndex, petId) end
 
----ä¸ºå¯¹è±¡å¢åŠ ä¸€åªç­‰çº§ä¸º1æˆé•¿éšæœºçš„PetIDçš„å® ç‰©ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param petId number å® ç‰©çš„ID
----@return number åˆ¶ä½œæˆåŠŸåˆ™è¿”å›ç›®æ ‡å® ç‰©çš„å¯¹è±¡indexï¼Œå¦åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---Îª¶ÔÏóÔö¼ÓÒ»Ö»µÈ¼¶Îª1³É³¤Ëæ»úµÄPetIDµÄ³èÎï¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param petId number ³èÎïµÄID
+---@return number ÖÆ×÷³É¹¦Ôò·µ»ØÄ¿±ê³èÎïµÄ¶ÔÏóindex£¬·ñÔò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.AddPet(CharIndex, PetID) end
 
----ä¸ºå¯¹è±¡å¢åŠ ä¸€åªç­‰çº§ä¸º1çš„PetIDå® ç‰©ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param petId number å® ç‰©çš„ID
----@param FullBP number 1è¡¨ç¤ºåˆ¶ä½œæ»¡æ¡£å® ç‰©ï¼Œ0è¡¨ç¤ºæ¡£æ•°éšæœºï¼Œä¸å¡«å†™è¯¥å‚æ•°åˆ™æ¡£æ•°éšæœº
----@return number åˆ¶ä½œæˆåŠŸåˆ™è¿”å›ç›®æ ‡å® ç‰©çš„å¯¹è±¡indexï¼Œå¦åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---Îª¶ÔÏóÔö¼ÓÒ»Ö»µÈ¼¶Îª1µÄPetID³èÎï¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param petId number ³èÎïµÄID
+---@param FullBP number 1±íÊ¾ÖÆ×÷Âúµµ³èÎï£¬0±íÊ¾µµÊıËæ»ú£¬²»ÌîĞ´¸Ã²ÎÊıÔòµµÊıËæ»ú
+---@return number ÖÆ×÷³É¹¦Ôò·µ»ØÄ¿±ê³èÎïµÄ¶ÔÏóindex£¬·ñÔò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.GivePet(CharIndex,PetID,FullBP) end
 
----è·å–ç›®æ ‡ä½ç½®çš„å® ç‰©å¯¹è±¡indexã€‚
----@param CharIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot number å® ç‰©çš„ä½ç½®ï¼ŒèŒƒå›´0-4ã€‚
----@return number å¦‚æœç›®æ ‡æœ‰è¯¥å® ç‰©çš„å® ç‰©å¯¹è±¡indexï¼Œæ²¡æœ‰åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼Œä½ç½®è¶…å‡ºèŒƒå›´(0-4)è¿”å›-4ã€‚
+---»ñÈ¡Ä¿±êÎ»ÖÃµÄ³èÎï¶ÔÏóindex¡£
+---@param CharIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot number ³èÎïµÄÎ»ÖÃ£¬·¶Î§0-4¡£
+---@return number Èç¹ûÄ¿±êÓĞ¸Ã³èÎïµÄ³èÎï¶ÔÏóindex£¬Ã»ÓĞÔò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬Î»ÖÃ³¬³ö·¶Î§(0-4)·µ»Ø-4¡£
 function Char.GetPet(CharIndex, Slot) end
 
----åˆ é™¤å¯¹è±¡èº«ä¸Šæ»¡è¶³æ¡ä»¶çš„å® ç‰©ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param PetID number å® ç‰©çš„ID
----@param Level number å® ç‰©çš„ç­‰çº§ã€‚
----@param LevelSetting number 0ä¸ºåˆ é™¤ä¸€åªå°äºç­‰äºLevelçš„å® ç‰©ï¼Œ1ä¸ºåˆ é™¤ä¸€åªç­‰äºLevelçš„å® ç‰©ï¼Œ2ä¸ºåˆ é™¤ä¸€åªå¤§äºç­‰äºLevelçš„å® ç‰©ã€‚
----@return number åˆ¶ä½œåˆ é™¤è¿”å›0ï¼Œå¦åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---É¾³ı¶ÔÏóÉíÉÏÂú×ãÌõ¼şµÄ³èÎï¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param PetID number ³èÎïµÄID
+---@param Level number ³èÎïµÄµÈ¼¶¡£
+---@param LevelSetting number 0ÎªÉ¾³ıÒ»Ö»Ğ¡ÓÚµÈÓÚLevelµÄ³èÎï£¬1ÎªÉ¾³ıÒ»Ö»µÈÓÚLevelµÄ³èÎï£¬2ÎªÉ¾³ıÒ»Ö»´óÓÚµÈÓÚLevelµÄ³èÎï¡£
+---@return number ÖÆ×÷É¾³ı·µ»Ø0£¬·ñÔò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.DelPet(CharIndex, PetID, Level, LevelSetting) end
 
----åˆ é™¤ç›®æ ‡æŒ‡å®šæ ä½çš„å® ç‰©ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot number å® ç‰©çš„ä½ç½®ï¼ŒèŒƒå›´0-4ã€‚
----@return number æˆåŠŸåˆ é™¤è¿”å›1ï¼Œå¤±è´¥è¿”å›0ï¼Œå® ç‰©ä½ç½®è¶…å‡ºèŒƒå›´(0-4)è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---É¾³ıÄ¿±êÖ¸¶¨À¸Î»µÄ³èÎï¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot number ³èÎïµÄÎ»ÖÃ£¬·¶Î§0-4¡£
+---@return number ³É¹¦É¾³ı·µ»Ø1£¬Ê§°Ü·µ»Ø0£¬³èÎïÎ»ÖÃ³¬³ö·¶Î§(0-4)·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.DelSlotPet(CharIndex, Slot) end
 
----æ£€æµ‹å¯¹è±¡èº«çš„å® ç‰©æ•°é‡ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return any è¿”å›ç›®æ ‡çš„å® ç‰©æ•°é‡ï¼ŒèŒƒå›´0-5ã€‚
+---¼ì²â¶ÔÏóÉíµÄ³èÎïÊıÁ¿¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return any ·µ»ØÄ¿±êµÄ³èÎïÊıÁ¿£¬·¶Î§0-5¡£
 function Char.PetNum(charIndex) end
 
----ä¸¢å‡ºç›®æ ‡æŒ‡å®šæ ä½çš„å® ç‰©ã€‚
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot number å® ç‰©çš„ä½ç½®ï¼ŒèŒƒå›´0-4ã€‚
----@return number æˆåŠŸä¸¢å‡ºè¿”å›1ï¼Œå¤±è´¥è¿”å›0ï¼Œå® ç‰©çš„ä½ç½®èŒƒå›´é”™è¯¯(0-4)è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŒ‰ä½ç½®è·å–çš„å® ç‰©é”™è¯¯è¿”å›-4ã€‚
+---¶ª³öÄ¿±êÖ¸¶¨À¸Î»µÄ³èÎï¡£
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot number ³èÎïµÄÎ»ÖÃ£¬·¶Î§0-4¡£
+---@return number ³É¹¦¶ª³ö·µ»Ø1£¬Ê§°Ü·µ»Ø0£¬³èÎïµÄÎ»ÖÃ·¶Î§´íÎó(0-4)·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬°´Î»ÖÃ»ñÈ¡µÄ³èÎï´íÎó·µ»Ø-4¡£
 function Char.DropPet(charIndex, slot) end
 
----å°†å¯¹è±¡ä¼ é€åˆ°æŒ‡å®šåæ ‡å¤„ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param MapID  number MapIDã€‚
----@param FloorID  number FloorIDã€‚
----@param X  number Xåæ ‡
----@param Y  number Yåæ ‡
+---½«¶ÔÏó´«ËÍµ½Ö¸¶¨×ø±ê´¦¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param MapID  number MapID¡£
+---@param FloorID  number FloorID¡£
+---@param X  number X×ø±ê
+---@param Y  number Y×ø±ê
 ---@return any 
 function Char.Warp(CharIndex, MapType, FloorID, X, Y) end
 
----è·å–å¯¹è±¡çš„ç»„é˜Ÿä¸­çš„ç©å®¶äººæ•°ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number ç»„é˜Ÿä¸­çš„ç©å®¶äººæ•°ï¼Œæ— ç»„é˜Ÿè¿”å›-1ï¼Œå¦åˆ™è¿”å›ç©å®¶äººæ•°ï¼Œè·å–å¤±è´¥è¿”å›0ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---»ñÈ¡¶ÔÏóµÄ×é¶ÓÖĞµÄÍæ¼ÒÈËÊı¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number ×é¶ÓÖĞµÄÍæ¼ÒÈËÊı£¬ÎŞ×é¶Ó·µ»Ø-1£¬·ñÔò·µ»ØÍæ¼ÒÈËÊı£¬»ñÈ¡Ê§°Ü·µ»Ø0£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.PartyNum(CharIndex) end
 
----è·å–å¯¹è±¡çš„ç»„é˜Ÿä¸­çš„æŒ‡å®šå¯¹è±¡ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number å›¢é˜Ÿä¸­çš„ä½ç½®ï¼Œå–å€¼0-4
----@return number è¿”å›æŒ‡å®šä½ç½®çš„ç©å®¶çš„å¯¹è±¡indexï¼Œå¦‚æœæ²¡æœ‰ç©å®¶åˆ™è¿”å›-1ï¼Œè·å–å¤±è´¥è¿”å›0ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼Œå¦‚æœå›¢é˜Ÿä¸­çš„ä½ç½®è¶…è¿‡èŒƒå›´(0-4)è¿”å›-4ã€‚
+---»ñÈ¡¶ÔÏóµÄ×é¶ÓÖĞµÄÖ¸¶¨¶ÔÏó¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ÍÅ¶ÓÖĞµÄÎ»ÖÃ£¬È¡Öµ0-4
+---@return number ·µ»ØÖ¸¶¨Î»ÖÃµÄÍæ¼ÒµÄ¶ÔÏóindex£¬Èç¹ûÃ»ÓĞÍæ¼ÒÔò·µ»Ø-1£¬»ñÈ¡Ê§°Ü·µ»Ø0£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬Èç¹ûÍÅ¶ÓÖĞµÄÎ»ÖÃ³¬¹ı·¶Î§(0-4)·µ»Ø-4¡£
 function Char.GetPartyMember(CharIndex,Slot) end
 
----è§£æ•£ç©å®¶çš„å›¢é˜Ÿã€‚
----@param CharIndex  number ç›®æ ‡å¯¹è±¡indexã€‚
----@return number è¿”å›1ä»£è¡¨æˆåŠŸï¼Œè¿”å›0å¤±è´¥ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---½âÉ¢Íæ¼ÒµÄÍÅ¶Ó¡£
+---@param CharIndex  number Ä¿±ê¶ÔÏóindex¡£
+---@return number ·µ»Ø1´ú±í³É¹¦£¬·µ»Ø0Ê§°Ü£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.DischargeParty(CharIndex) end
 
----è·å–ç­‰çº§Level-1åˆ°ç­‰çº§Levelæ‰€éœ€çš„ç»éªŒã€‚
----@param Level  number ç­‰çº§Levelã€‚
----@return number Level-1åˆ°ç­‰çº§Levelæ‰€éœ€çš„ç»éªŒï¼Œä¼ å…¥çš„ç­‰çº§å‚æ•°å°äºç­‰äº0åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ã€‚
+---»ñÈ¡µÈ¼¶Level-1µ½µÈ¼¶LevelËùĞèµÄ¾­Ñé¡£
+---@param Level  number µÈ¼¶Level¡£
+---@return number Level-1µ½µÈ¼¶LevelËùĞèµÄ¾­Ñé£¬´«ÈëµÄµÈ¼¶²ÎÊıĞ¡ÓÚµÈÓÚ0Ôò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2¡£
 function Char.GetLevelExp(Level) end
 
----è·å–å¯¹è±¡çš„ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒï¼Œä¼ å…¥çš„ç­‰çº§å‚æ•°å°äºç­‰äº0åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---»ñÈ¡¶ÔÏóµÄÏÂÒ»¼¶ËùĞè¾­Ñé¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number ÏÂÒ»¼¶ËùĞè¾­Ñé£¬´«ÈëµÄµÈ¼¶²ÎÊıĞ¡ÓÚµÈÓÚ0Ôò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.LevelExp(CharIndex) end
 
----è·å–å¯¹è±¡çš„ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number ä¸‹ä¸€çº§æ‰€éœ€ç»éªŒï¼Œä¼ å…¥çš„ç­‰çº§å‚æ•°å°äºç­‰äº0åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---»ñÈ¡¶ÔÏóµÄÏÂÒ»¼¶ËùĞè¾­Ñé¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number ÏÂÒ»¼¶ËùĞè¾­Ñé£¬´«ÈëµÄµÈ¼¶²ÎÊıĞ¡ÓÚµÈÓÚ0Ôò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.GetNextExp(CharIndex) end
 
----ä¸ºç›®æ ‡ç©å®¶å¢åŠ æŒ‡å®šæŠ€èƒ½ï¼ˆæŒ‡å®šåˆå§‹ç»éªŒï¼‰ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param SkillID  number æŠ€èƒ½çš„IDï¼Œå¯¹åº”Skill.txtçš„idã€‚
----@param SkillExp  number æŠ€èƒ½çš„åˆå§‹ç»éªŒå€¼ï¼Œå¦‚æœä¸å†™åˆ™ä¸º0ã€‚
----@return number å¦‚æœæˆåŠŸåˆ™è¿”å›å¢åŠ çš„æŠ€èƒ½æ çš„ä½ç½®ï¼ŒèŒƒå›´0-14ï¼Œå¦‚æœå¤±è´¥åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŠ€èƒ½çš„IDé”™è¯¯è¿”å›-4ã€‚
+---ÎªÄ¿±êÍæ¼ÒÔö¼ÓÖ¸¶¨¼¼ÄÜ£¨Ö¸¶¨³õÊ¼¾­Ñé£©¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param SkillID  number ¼¼ÄÜµÄID£¬¶ÔÓ¦Skill.txtµÄid¡£
+---@param SkillExp  number ¼¼ÄÜµÄ³õÊ¼¾­ÑéÖµ£¬Èç¹û²»Ğ´ÔòÎª0¡£
+---@return number Èç¹û³É¹¦Ôò·µ»ØÔö¼ÓµÄ¼¼ÄÜÀ¸µÄÎ»ÖÃ£¬·¶Î§0-14£¬Èç¹ûÊ§°ÜÔò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬¼¼ÄÜµÄID´íÎó·µ»Ø-4¡£
 function Char.AddSkill(CharIndex,SkillID,SkillExp) end
 
----åˆ é™¤ç›®æ ‡ç©å®¶çš„æŒ‡å®šæŠ€èƒ½ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param SkillID  number æŠ€èƒ½çš„IDï¼Œå¯¹åº”Skill.txtçš„idã€‚
----@return number å¦‚æœæˆåŠŸåˆ é™¤æŠ€èƒ½åˆ™è¿”å›è¯¥æŠ€èƒ½åŸæœ¬çš„æŠ€èƒ½æ çš„ä½ç½®ï¼ŒèŒƒå›´0-14ï¼Œå¦‚æœå¤±è´¥åˆ™è¿”å›-1ã€‚ |  | å¦‚æœç©å®¶æ²¡æœ‰è¯¥æŠ€èƒ½ï¼Œä¹Ÿè¿”å›-1ã€‚ |  | å‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŠ€èƒ½çš„IDé”™è¯¯è¿”å›-4ã€‚
+---É¾³ıÄ¿±êÍæ¼ÒµÄÖ¸¶¨¼¼ÄÜ¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param SkillID  number ¼¼ÄÜµÄID£¬¶ÔÓ¦Skill.txtµÄid¡£
+---@return number Èç¹û³É¹¦É¾³ı¼¼ÄÜÔò·µ»Ø¸Ã¼¼ÄÜÔ­±¾µÄ¼¼ÄÜÀ¸µÄÎ»ÖÃ£¬·¶Î§0-14£¬Èç¹ûÊ§°ÜÔò·µ»Ø-1¡£ |  | Èç¹ûÍæ¼ÒÃ»ÓĞ¸Ã¼¼ÄÜ£¬Ò²·µ»Ø-1¡£ |  | ²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬¼¼ÄÜµÄID´íÎó·µ»Ø-4¡£
 function Char.DelSkill(CharIndex,SkillID) end
 
----è·å–æŒ‡å®šç©å®¶çš„æŒ‡å®šæŠ€èƒ½ä½ç½®çš„æŠ€èƒ½ç­‰çº§ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number æŠ€èƒ½ä½ç½®ï¼Œå¯ç”¨Char.HaveSkillæ¥è·å–ä½ç½®ã€‚
----@return number æˆåŠŸè¿”å›æŠ€èƒ½ç­‰çº§,å¤±è´¥è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŠ€èƒ½çš„ä½ç½®é”™è¯¯è¿”å›-4ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼ÒµÄÖ¸¶¨¼¼ÄÜÎ»ÖÃµÄ¼¼ÄÜµÈ¼¶¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ¼¼ÄÜÎ»ÖÃ£¬¿ÉÓÃChar.HaveSkillÀ´»ñÈ¡Î»ÖÃ¡£
+---@return number ³É¹¦·µ»Ø¼¼ÄÜµÈ¼¶,Ê§°Ü·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬¼¼ÄÜµÄÎ»ÖÃ´íÎó·µ»Ø-4¡£
 function Char.GetSkillLevel(CharIndex,Slot) end
 
----è·å–æŒ‡å®šç©å®¶çš„æŒ‡å®šæŠ€èƒ½ä½ç½®çš„æŠ€èƒ½ç­‰çº§ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number æŠ€èƒ½ä½ç½®ï¼Œå¯ç”¨Char.HaveSkillæ¥è·å–ä½ç½®ã€‚
----@return number æˆåŠŸè¿”å›æŠ€èƒ½ç­‰çº§,å¤±è´¥è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŠ€èƒ½çš„ä½ç½®é”™è¯¯è¿”å›-4ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼ÒµÄÖ¸¶¨¼¼ÄÜÎ»ÖÃµÄ¼¼ÄÜµÈ¼¶¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ¼¼ÄÜÎ»ÖÃ£¬¿ÉÓÃChar.HaveSkillÀ´»ñÈ¡Î»ÖÃ¡£
+---@return number ³É¹¦·µ»Ø¼¼ÄÜµÈ¼¶,Ê§°Ü·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬¼¼ÄÜµÄÎ»ÖÃ´íÎó·µ»Ø-4¡£
 function Char.GetSkillLv(CharIndex,Slot) end
 
----è·å–æŒ‡å®šç©å®¶çš„æŒ‡å®šæŠ€èƒ½çš„ä½ç½®ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number æŠ€èƒ½IDï¼Œä¸skill.txtå†…å®¹ç›¸å¯¹åº”ã€‚
----@return number è¿”å›-1ä»£è¡¨å¤±è´¥ï¼Œå…¶ä»–ä¸ºæŠ€èƒ½æ ä½ç½®ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŠ€èƒ½çš„IDé”™è¯¯è¿”å›-4ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼ÒµÄÖ¸¶¨¼¼ÄÜµÄÎ»ÖÃ¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ¼¼ÄÜID£¬Óëskill.txtÄÚÈİÏà¶ÔÓ¦¡£
+---@return number ·µ»Ø-1´ú±íÊ§°Ü£¬ÆäËûÎª¼¼ÄÜÀ¸Î»ÖÃ£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬¼¼ÄÜµÄID´íÎó·µ»Ø-4¡£
 function Char.HaveSkill(CharIndex,SkillID) end
 
----è·å–æŒ‡å®šç©å®¶çš„æŒ‡å®šä½ç½®çš„æŠ€èƒ½IDã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number æŠ€èƒ½ä½ç½®ï¼Œä¸èƒ½å¤§äºäººç‰©è‡ªèº«çš„æŠ€èƒ½æ ä½æ•°é‡ã€‚
----@return number è¿”å›-1ä»£è¡¨å¤±è´¥ï¼Œå…¶ä»–ä¸ºæŠ€èƒ½IDï¼Œä¸skill.txtå†…å®¹ç›¸å¯¹åº”ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŠ€èƒ½ä½ç½®è¶…å‡ºèŒƒå›´è¿”å›-4ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼ÒµÄÖ¸¶¨Î»ÖÃµÄ¼¼ÄÜID¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ¼¼ÄÜÎ»ÖÃ£¬²»ÄÜ´óÓÚÈËÎï×ÔÉíµÄ¼¼ÄÜÀ¸Î»ÊıÁ¿¡£
+---@return number ·µ»Ø-1´ú±íÊ§°Ü£¬ÆäËûÎª¼¼ÄÜID£¬Óëskill.txtÄÚÈİÏà¶ÔÓ¦£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬¼¼ÄÜÎ»ÖÃ³¬³ö·¶Î§·µ»Ø-4¡£
 function Char.GetSkillID(CharIndex,Slot) end
 
----è·å–æŒ‡å®šç©å®¶çš„æŒ‡å®šä½ç½®çš„æŠ€èƒ½IDã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number æŠ€èƒ½ä½ç½®ï¼Œä¸èƒ½å¤§äºäººç‰©è‡ªèº«çš„æŠ€èƒ½æ ä½æ•°é‡ã€‚
----@return number è¿”å›-1ä»£è¡¨å¤±è´¥ï¼Œå…¶ä»–ä¸ºæŠ€èƒ½IDï¼Œä¸skill.txtå†…å®¹ç›¸å¯¹åº”ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŠ€èƒ½ä½ç½®è¶…å‡ºèŒƒå›´è¿”å›-4ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼ÒµÄÖ¸¶¨Î»ÖÃµÄ¼¼ÄÜID¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ¼¼ÄÜÎ»ÖÃ£¬²»ÄÜ´óÓÚÈËÎï×ÔÉíµÄ¼¼ÄÜÀ¸Î»ÊıÁ¿¡£
+---@return number ·µ»Ø-1´ú±íÊ§°Ü£¬ÆäËûÎª¼¼ÄÜID£¬Óëskill.txtÄÚÈİÏà¶ÔÓ¦£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬¼¼ÄÜÎ»ÖÃ³¬³ö·¶Î§·µ»Ø-4¡£
 function Char.GetSkillId(CharIndex,Slot) end
 
----è·å–æŒ‡å®šç©å®¶çš„æŒ‡å®šæŠ€èƒ½ä½ç½®çš„æŠ€èƒ½ç»éªŒã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number æŠ€èƒ½ä½ç½®ï¼Œå¯ç”¨Char.HaveSkillæ¥è·å–ä½ç½®ã€‚
----@return number æˆåŠŸè¿”å›æŠ€èƒ½ç»éªŒ,å¤±è´¥è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŠ€èƒ½çš„ä½ç½®é”™è¯¯è¿”å›-4ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼ÒµÄÖ¸¶¨¼¼ÄÜÎ»ÖÃµÄ¼¼ÄÜ¾­Ñé¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ¼¼ÄÜÎ»ÖÃ£¬¿ÉÓÃChar.HaveSkillÀ´»ñÈ¡Î»ÖÃ¡£
+---@return number ³É¹¦·µ»Ø¼¼ÄÜ¾­Ñé,Ê§°Ü·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬¼¼ÄÜµÄÎ»ÖÃ´íÎó·µ»Ø-4¡£
 function Char.GetSkillExp(CharIndex,Slot) end
 
----è·å–æŒ‡å®šç©å®¶çš„æŒ‡å®šæŠ€èƒ½ä½ç½®çš„æŠ€èƒ½ç­‰çº§ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number æŠ€èƒ½ä½ç½®ï¼Œå¯ç”¨Char.HaveSkillæ¥è·å–ä½ç½®ã€‚
----@param Level  number æ–°çš„æŠ€èƒ½ç­‰çº§ã€‚
----@return number æˆåŠŸè¿”å›æ–°æŠ€èƒ½ç­‰çº§,å¤±è´¥è¿”å›-1ï¼Œä¼ å…¥çš„å‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŠ€èƒ½çš„ä½ç½®é”™è¯¯è¿”å›-4ï¼Œä¼ å…¥çš„æ–°ç­‰çº§å°äº1åˆ™è¿”å›-5ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼ÒµÄÖ¸¶¨¼¼ÄÜÎ»ÖÃµÄ¼¼ÄÜµÈ¼¶¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ¼¼ÄÜÎ»ÖÃ£¬¿ÉÓÃChar.HaveSkillÀ´»ñÈ¡Î»ÖÃ¡£
+---@param Level  number ĞÂµÄ¼¼ÄÜµÈ¼¶¡£
+---@return number ³É¹¦·µ»ØĞÂ¼¼ÄÜµÈ¼¶,Ê§°Ü·µ»Ø-1£¬´«ÈëµÄ²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬¼¼ÄÜµÄÎ»ÖÃ´íÎó·µ»Ø-4£¬´«ÈëµÄĞÂµÈ¼¶Ğ¡ÓÚ1Ôò·µ»Ø-5¡£
 function Char.SetSkillLevel(CharIndex,Slot,Level) end
 
----è·å–æŒ‡å®šç©å®¶çš„æŒ‡å®šæŠ€èƒ½ä½ç½®çš„æŠ€èƒ½ç»éªŒã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number æŠ€èƒ½ä½ç½®ï¼Œå¯ç”¨Char.HaveSkillæ¥è·å–ä½ç½®ã€‚
----@param Level  number æ–°çš„æŠ€èƒ½ç»éªŒã€‚
----@return number æˆåŠŸè¿”å›æ–°çš„æŠ€èƒ½ç»éªŒ,å¤±è´¥è¿”å›-1ï¼Œä¼ å…¥çš„å‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼ŒæŠ€èƒ½çš„ä½ç½®é”™è¯¯è¿”å›-4ï¼Œä¼ å…¥çš„æ–°ç»éªŒå°äº1åˆ™è¿”å›-5ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼ÒµÄÖ¸¶¨¼¼ÄÜÎ»ÖÃµÄ¼¼ÄÜ¾­Ñé¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ¼¼ÄÜÎ»ÖÃ£¬¿ÉÓÃChar.HaveSkillÀ´»ñÈ¡Î»ÖÃ¡£
+---@param Level  number ĞÂµÄ¼¼ÄÜ¾­Ñé¡£
+---@return number ³É¹¦·µ»ØĞÂµÄ¼¼ÄÜ¾­Ñé,Ê§°Ü·µ»Ø-1£¬´«ÈëµÄ²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬¼¼ÄÜµÄÎ»ÖÃ´íÎó·µ»Ø-4£¬´«ÈëµÄĞÂ¾­ÑéĞ¡ÓÚ1Ôò·µ»Ø-5¡£
 function Char.SetSkillExp(CharIndex,Slot,Level) end
 
----è·å–æŒ‡å®šç©å®¶çš„å®¶æ—IDã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number æˆåŠŸè¿”å›ç©å®¶å®¶æ—IDï¼Œè¿”å›-1ä»£è¡¨æ²¡æœ‰å®¶æ—ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼ÒµÄ¼Ò×åID¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number ³É¹¦·µ»ØÍæ¼Ò¼Ò×åID£¬·µ»Ø-1´ú±íÃ»ÓĞ¼Ò×å£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.GetGuildID(CharIndex) end
 
----è·å–æŒ‡å®šç©å®¶æ¿€æ´»çš„ç§°å·IDã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number æˆåŠŸè¿”å›ç©å®¶å¯¹è±¡æ¿€æ´»çš„ç§°å·IDï¼Œè¿”å›-1ä»£è¡¨å¤±è´¥ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼Ò¼¤»îµÄ³ÆºÅID¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number ³É¹¦·µ»ØÍæ¼Ò¶ÔÏó¼¤»îµÄ³ÆºÅID£¬·µ»Ø-1´ú±íÊ§°Ü£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.GetTitle(CharIndex) end
 
----è·å–æŒ‡å®šç©å®¶å½“å‰æˆ˜æ–—indexã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number æˆåŠŸè¿”å›å½“å‰æˆ˜æ–—indexï¼Œè¿”å›-1ä»£è¡¨æ²¡æœ‰æˆ˜æ–—ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---»ñÈ¡Ö¸¶¨Íæ¼Òµ±Ç°Õ½¶·index¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number ³É¹¦·µ»Øµ±Ç°Õ½¶·index£¬·µ»Ø-1´ú±íÃ»ÓĞÕ½¶·£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.GetBattleIndex(CharIndex) end
 
----è·å–æŒ‡å®šå¯¹è±¡çš„å¯¹è±¡æŒ‡é’ˆï¼ŒæŒ‡é’ˆä¸ºå†…å­˜åœ°å€ï¼Œå¦‚æœä¸æ¸…æ¥šå¦‚ä½•ä½¿ç”¨è¯·å‹¿ä½¿ç”¨ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number è¿”å›-1ä»£è¡¨å¤±è´¥ï¼Œå…¶ä»–ä¸ºå¯¹è±¡çš„å†…å­˜åœ°å€ã€‚
+---»ñÈ¡Ö¸¶¨¶ÔÏóµÄ¶ÔÏóÖ¸Õë£¬Ö¸ÕëÎªÄÚ´æµØÖ·£¬Èç¹û²»Çå³şÈçºÎÊ¹ÓÃÇëÎğÊ¹ÓÃ¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number ·µ»Ø-1´ú±íÊ§°Ü£¬ÆäËûÎª¶ÔÏóµÄÄÚ´æµØÖ·¡£
 function Char.GetCharPointer(CharIndex) end
 
----è·å–ç©å®¶å¯¹è±¡å‡ºç§Ÿå±‹ä¸­æŒ‡å®šä½ç½®çš„å® ç‰©å¯¹è±¡indexã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number å‡ºç§Ÿå±‹ä¸­çš„ä½ç½®ï¼ŒèŒƒå›´0-4ã€‚
----@return number å¦‚æœç›®æ ‡æœ‰è¯¥å® ç‰©çš„å® ç‰©å¯¹è±¡indexï¼Œæ²¡æœ‰åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼Œå® ç‰©çš„ä½ç½®èŒƒå›´é”™è¯¯è¿”å›-4ã€‚
+---»ñÈ¡Íæ¼Ò¶ÔÏó³ö×âÎİÖĞÖ¸¶¨Î»ÖÃµÄ³èÎï¶ÔÏóindex¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ³ö×âÎİÖĞµÄÎ»ÖÃ£¬·¶Î§0-4¡£
+---@return number Èç¹ûÄ¿±êÓĞ¸Ã³èÎïµÄ³èÎï¶ÔÏóindex£¬Ã»ÓĞÔò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬³èÎïµÄÎ»ÖÃ·¶Î§´íÎó·µ»Ø-4¡£
 function Char.GetHousePet(CharIndex,Slot) end
 
----è·å–ç©å®¶å¯¹è±¡é“¶è¡Œä¸­æŒ‡å®šä½ç½®çš„å® ç‰©å¯¹è±¡indexã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number é“¶è¡Œä¸­çš„ä½ç½®ï¼ŒèŒƒå›´0-4ã€‚
----@return number å¦‚æœç›®æ ‡æœ‰è¯¥å® ç‰©çš„å® ç‰©å¯¹è±¡indexï¼Œæ²¡æœ‰åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼Œå® ç‰©çš„ä½ç½®èŒƒå›´é”™è¯¯è¿”å›-4ã€‚
+---»ñÈ¡Íæ¼Ò¶ÔÏóÒøĞĞÖĞÖ¸¶¨Î»ÖÃµÄ³èÎï¶ÔÏóindex¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ÒøĞĞÖĞµÄÎ»ÖÃ£¬·¶Î§0-4¡£
+---@return number Èç¹ûÄ¿±êÓĞ¸Ã³èÎïµÄ³èÎï¶ÔÏóindex£¬Ã»ÓĞÔò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬³èÎïµÄÎ»ÖÃ·¶Î§´íÎó·µ»Ø-4¡£
 function Char.GetPoolPet(CharIndex,Slot) end
 
----è·å–ç©å®¶å¯¹è±¡å‡ºç§Ÿå±‹ä¸­æŒ‡å®šä½ç½®çš„é“å…·å¯¹è±¡indexã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number å‡ºç§Ÿå±‹ä¸­çš„ä½ç½®ï¼ŒèŒƒå›´0-19ã€‚
----@return number å¦‚æœç›®æ ‡æœ‰åˆ™è¿”å›é“å…·å¯¹è±¡indexï¼Œæ²¡æœ‰åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼Œé“å…·çš„ä½ç½®èŒƒå›´é”™è¯¯è¿”å›-4ã€‚
+---»ñÈ¡Íæ¼Ò¶ÔÏó³ö×âÎİÖĞÖ¸¶¨Î»ÖÃµÄµÀ¾ß¶ÔÏóindex¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ³ö×âÎİÖĞµÄÎ»ÖÃ£¬·¶Î§0-19¡£
+---@return number Èç¹ûÄ¿±êÓĞÔò·µ»ØµÀ¾ß¶ÔÏóindex£¬Ã»ÓĞÔò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬µÀ¾ßµÄÎ»ÖÃ·¶Î§´íÎó·µ»Ø-4¡£
 function Char.GetHouseItem(CharIndex,Slot) end
 
----è·å–ç©å®¶å¯¹è±¡å‡ºç§Ÿå±‹ä¸­æŒ‡å®šä½ç½®çš„é“å…·å¯¹è±¡indexã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param Slot  number é“¶è¡Œä¸­çš„ä½ç½®ï¼ŒéŸ©æœèŒƒå›´0-19ï¼Œå°æœèŒƒå›´0-39ï¼Œå›½æœèŒƒå›´0-79ã€‚
----@return number å¦‚æœç›®æ ‡æœ‰åˆ™è¿”å›é“å…·å¯¹è±¡indexï¼Œæ²¡æœ‰åˆ™è¿”å›-1ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ï¼Œé“¶è¡Œä¸­é“å…·ä½ç½®èŒƒå›´é”™è¯¯è¿”å›-4ã€‚
+---»ñÈ¡Íæ¼Ò¶ÔÏó³ö×âÎİÖĞÖ¸¶¨Î»ÖÃµÄµÀ¾ß¶ÔÏóindex¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param Slot  number ÒøĞĞÖĞµÄÎ»ÖÃ£¬º«·ş·¶Î§0-19£¬Ì¨·ş·¶Î§0-39£¬¹ú·ş·¶Î§0-79¡£
+---@return number Èç¹ûÄ¿±êÓĞÔò·µ»ØµÀ¾ß¶ÔÏóindex£¬Ã»ÓĞÔò·µ»Ø-1£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3£¬ÒøĞĞÖĞµÀ¾ßÎ»ÖÃ·¶Î§´íÎó·µ»Ø-4¡£
 function Char.GetPoolItem(CharIndex,Slot) end
 
----è·å–ç©å®¶å¯¹è±¡ç©å®¶æ˜¯å¦åœ¨æ‰“å¡çŠ¶æ€ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number 1åœ¨æ‰“å¡ï¼Œ0ä¸åœ¨æ‰“å¡ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---»ñÈ¡Íæ¼Ò¶ÔÏóÍæ¼ÒÊÇ·ñÔÚ´ò¿¨×´Ì¬¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number 1ÔÚ´ò¿¨£¬0²»ÔÚ´ò¿¨£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.IsFeverTime(CharIndex) end
 
----å¼€å§‹ç©å®¶æ‰“å¡çŠ¶æ€ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number 1æ‰“å¡æˆåŠŸï¼Œ0æ‰“å¡å¤±è´¥ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---¿ªÊ¼Íæ¼Ò´ò¿¨×´Ì¬¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number 1´ò¿¨³É¹¦£¬0´ò¿¨Ê§°Ü£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.FeverStart(CharIndex) end
 
----ç»“æŸç©å®¶æ‰“å¡çŠ¶æ€ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number 1ç»“æŸæ‰“å¡æˆåŠŸï¼Œ0ç»“æŸæ‰“å¡å¤±è´¥ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---½áÊøÍæ¼Ò´ò¿¨×´Ì¬¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number 1½áÊø´ò¿¨³É¹¦£¬0½áÊø´ò¿¨Ê§°Ü£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.FeverStop(CharIndex) end
 
----ä¸ºå¯¹è±¡indexè®¾ç½®è¡Œèµ°å‰äº‹ä»¶çš„å›è°ƒå‡½æ•°ï¼Œå¯¹è±¡åœ¨è¡Œèµ°å‰ä¼šè§¦å‘è¯¥å‡½æ•°ï¼Œç”±Luaå¼•æ“å°†Callbackçš„å‚æ•°ä¼ é€’ç»™æŒ‡å®šçš„Callbackå¹¶æ‰§è¡Œã€‚
----@param Dofile  string è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  string è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[CharWalkPreCallBack]
----@param CharIndex  number è®¾ç½®çš„å¯¹è±¡indexã€‚
+---Îª¶ÔÏóindexÉèÖÃĞĞ×ßÇ°ÊÂ¼şµÄ»Øµ÷º¯Êı£¬¶ÔÏóÔÚĞĞ×ßÇ°»á´¥·¢¸Ãº¯Êı£¬ÓÉLuaÒıÇæ½«CallbackµÄ²ÎÊı´«µİ¸øÖ¸¶¨µÄCallback²¢Ö´ĞĞ¡£
+---@param Dofile  string Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  string ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[CharWalkPreCallBack]
+---@param CharIndex  number ÉèÖÃµÄ¶ÔÏóindex¡£
 ---@return any 
 function Char.SetWalkPreEvent(Dofile,FuncName,CharIndex) end
 
----WalkPreEventå›è°ƒå‡½æ•°
----@param CharIndex  number å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@return number è¿”å›1æ‰§è¡Œè¡Œèµ°ï¼Œè¿”å›0è¡Œèµ°å–æ¶ˆã€‚
+---WalkPreEvent»Øµ÷º¯Êı
+---@param CharIndex  number ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@return number ·µ»Ø1Ö´ĞĞĞĞ×ß£¬·µ»Ø0ĞĞ×ßÈ¡Ïû¡£
 function CharWalkPreCallBack(CharIndex) end
 
----ä¸ºå¯¹è±¡indexè®¾ç½®è¡Œèµ°åäº‹ä»¶çš„å›è°ƒå‡½æ•°ï¼Œå¯¹è±¡åœ¨è¡Œèµ°åä¼šè§¦å‘è¯¥å‡½æ•°ï¼Œç”±Luaå¼•æ“å°†Callbackçš„å‚æ•°ä¼ é€’ç»™æŒ‡å®šçš„Callbackå¹¶æ‰§è¡Œã€‚
----@param Dofile  string è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  string è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[CharWalkPostCallBack]
----@param CharIndex  number è®¾ç½®çš„å¯¹è±¡indexã€‚
+---Îª¶ÔÏóindexÉèÖÃĞĞ×ßºóÊÂ¼şµÄ»Øµ÷º¯Êı£¬¶ÔÏóÔÚĞĞ×ßºó»á´¥·¢¸Ãº¯Êı£¬ÓÉLuaÒıÇæ½«CallbackµÄ²ÎÊı´«µİ¸øÖ¸¶¨µÄCallback²¢Ö´ĞĞ¡£
+---@param Dofile  string Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  string ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[CharWalkPostCallBack]
+---@param CharIndex  number ÉèÖÃµÄ¶ÔÏóindex¡£
 ---@return any 
 function Char.SetWalkPostEvent(Dofile,FuncName,CharIndex) end
 
----WalkPostEventå›è°ƒå‡½æ•°
----@param CharIndex  number å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---WalkPostEvent»Øµ÷º¯Êı
+---@param CharIndex  number ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function CharWalkPostCallBack(CharIndex) end
 
----ä¸ºå¯¹è±¡indexè®¾ç½®è¦†ç›–å…¶ä»–å¯¹è±¡åäº‹ä»¶çš„å›è°ƒå‡½æ•°ï¼Œå¯¹è±¡åœ¨è¦†ç›–å…¶ä»–å¯¹è±¡åä¼šè§¦å‘è¯¥å‡½æ•°ï¼Œç”±Luaå¼•æ“å°†Callbackçš„å‚æ•°ä¼ é€’ç»™æŒ‡å®šçš„Callbackå¹¶æ‰§è¡Œã€‚
----@param Dofile  string è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  string è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[PostOverEventCallBack]
----@param CharIndex  number è®¾ç½®çš„å¯¹è±¡indexã€‚
+---Îª¶ÔÏóindexÉèÖÃ¸²¸ÇÆäËû¶ÔÏóºóÊÂ¼şµÄ»Øµ÷º¯Êı£¬¶ÔÏóÔÚ¸²¸ÇÆäËû¶ÔÏóºó»á´¥·¢¸Ãº¯Êı£¬ÓÉLuaÒıÇæ½«CallbackµÄ²ÎÊı´«µİ¸øÖ¸¶¨µÄCallback²¢Ö´ĞĞ¡£
+---@param Dofile  string Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  string ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[PostOverEventCallBack]
+---@param CharIndex  number ÉèÖÃµÄ¶ÔÏóindex¡£
 ---@return any 
 function Char.SetPostOverEvent(Dofile,FuncName,CharIndex) end
 
----PostOverEventå›è°ƒå‡½æ•°
----@param CharIndex  number å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param TargetCharIndex  number å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---PostOverEvent»Øµ÷º¯Êı
+---@param CharIndex  number ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param TargetCharIndex  number ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function CharIndex, TargetCharIndex) end
 
----ä¸ºå¯¹è±¡indexè®¾ç½®å¾ªç¯äº‹ä»¶çš„å›è°ƒå‡½æ•°ï¼Œäº‹ä»¶ä¼šæ¯éš”Intervalæ—¶é—´å¾ªç¯è§¦å‘è¯¥å‡½æ•°ï¼Œç”±Luaå¼•æ“å°†Callbackçš„å‚æ•°ä¼ é€’ç»™æŒ‡å®šçš„Callbackå¹¶æ‰§è¡Œã€‚
----@param Dofile  string è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  string è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[CharLoopCallBack]
----@param CharIndex  number è®¾ç½®çš„å¯¹è±¡indexã€‚
----@param Interval  number å¾ªç¯é—´éš”ï¼Œå•ä½æ¯«ç§’ã€‚
+---Îª¶ÔÏóindexÉèÖÃÑ­»·ÊÂ¼şµÄ»Øµ÷º¯Êı£¬ÊÂ¼ş»áÃ¿¸ôIntervalÊ±¼äÑ­»·´¥·¢¸Ãº¯Êı£¬ÓÉLuaÒıÇæ½«CallbackµÄ²ÎÊı´«µİ¸øÖ¸¶¨µÄCallback²¢Ö´ĞĞ¡£
+---@param Dofile  string Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  string ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[CharLoopCallBack]
+---@param CharIndex  number ÉèÖÃµÄ¶ÔÏóindex¡£
+---@param Interval  number Ñ­»·¼ä¸ô£¬µ¥Î»ºÁÃë¡£
 ---@return any 
 function Char.SetLoopEvent(Dofile,FuncName,CharIndex,Interval) end
 
----LoopEventå›è°ƒå‡½æ•°
----@param CharIndex  number å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---LoopEvent»Øµ÷º¯Êı
+---@param CharIndex  number ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function CharLoopCallBack(CharIndex) end
 
----ä¸ºå¯¹è±¡indexè®¾ç½®å¯¹è¯å¼€å¯äº‹ä»¶çš„å›è°ƒå‡½æ•°ï¼Œå¯¹è±¡åœ¨å¼€å¯å¯¹è¯çš„æ—¶å€™ä¼šè§¦å‘è¯¥å‡½æ•°ï¼Œç”±Luaå¼•æ“å°†Callbackçš„å‚æ•°ä¼ é€’ç»™æŒ‡å®šçš„Callbackå¹¶æ‰§è¡Œã€‚
----@param Dofile  string è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  string è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[CharWalkPreCallBack]
----@param CharIndex  number è®¾ç½®çš„å¯¹è±¡indexã€‚
+---Îª¶ÔÏóindexÉèÖÃ¶Ô»°¿ªÆôÊÂ¼şµÄ»Øµ÷º¯Êı£¬¶ÔÏóÔÚ¿ªÆô¶Ô»°µÄÊ±ºò»á´¥·¢¸Ãº¯Êı£¬ÓÉLuaÒıÇæ½«CallbackµÄ²ÎÊı´«µİ¸øÖ¸¶¨µÄCallback²¢Ö´ĞĞ¡£
+---@param Dofile  string Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  string ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[CharWalkPreCallBack]
+---@param CharIndex  number ÉèÖÃµÄ¶ÔÏóindex¡£
 ---@return any 
 function Char.SetTalkedEvent(Dofile,FuncName,CharIndex) end
 
----TalkedEventå›è°ƒå‡½æ•°
----@param CharIndex  number å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆä¸€èˆ¬æ˜¯NPCï¼‰
----@param TalkerCharIndex  number è§¦å‘äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆä¸€èˆ¬æ˜¯ç©å®¶ï¼‰
+---TalkedEvent»Øµ÷º¯Êı
+---@param CharIndex  number ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨Ò»°ãÊÇNPC£©
+---@param TalkerCharIndex  number ´¥·¢ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨Ò»°ãÊÇÍæ¼Ò£©
 ---@return any 
 function CharTalkedCallBack(CharIndex, TalkerCharIndex) end
 
----ä¸ºå¯¹è±¡indexè®¾ç½®å¯¹è¯äº‹ä»¶çš„å›è°ƒå‡½æ•°ï¼Œå¯¹è±¡åœ¨è¿›è¡Œå¯¹è¯äº¤äº’çš„æ—¶å€™ä¼šè§¦å‘è¯¥å‡½æ•°ï¼Œç”±Luaå¼•æ“å°†Callbackçš„å‚æ•°ä¼ é€’ç»™æŒ‡å®šçš„Callbackå¹¶æ‰§è¡Œã€‚
----@param Dofile  string è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  string è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[CharWindowTalkedCallBack]
----@param CharIndex  number è®¾ç½®çš„å¯¹è±¡indexã€‚
+---Îª¶ÔÏóindexÉèÖÃ¶Ô»°ÊÂ¼şµÄ»Øµ÷º¯Êı£¬¶ÔÏóÔÚ½øĞĞ¶Ô»°½»»¥µÄÊ±ºò»á´¥·¢¸Ãº¯Êı£¬ÓÉLuaÒıÇæ½«CallbackµÄ²ÎÊı´«µİ¸øÖ¸¶¨µÄCallback²¢Ö´ĞĞ¡£
+---@param Dofile  string Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  string ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[CharWindowTalkedCallBack]
+---@param CharIndex  number ÉèÖÃµÄ¶ÔÏóindex¡£
 ---@return any 
 function Char.SetWindowTalkedEvent(Dofile,FuncName,CharIndex) end
 
----WindoxTalkedEventå›è°ƒå‡½æ•°
----@param CharIndex  number å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆä¸€èˆ¬æ˜¯NPCï¼‰
----@param TalkerCharIndex  number è§¦å‘äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆä¸€èˆ¬æ˜¯ç©å®¶ï¼‰
----@param SeqNo  number æ¥æºå¯¹è¯æ¡†çš„IDï¼Œè¯¥å€¼ä¸NLG.ShowWindowTalkedä¸­çš„å®šä¹‰åº”è¯¥å¯¹åº”ã€‚
----@param Select  number ç©å®¶æ‰€æŒ‰ä¸‹çš„æŒ‰é’®çš„å€¼æˆ–é€‰æ‹©æ¡†ä¸­çš„é€‰é¡¹çš„å€¼ã€‚
----@param Data  string å®¢æˆ·ç«¯æ‰€ä¼ é€’å›æ¥çš„å€¼ï¼Œè¿™ä¸ªå€¼å°†æ ¹æ®ä¸åŒçš„çª—å£ç±»å‹è€Œä¸åŒã€‚
+---WindoxTalkedEvent»Øµ÷º¯Êı
+---@param CharIndex  number ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨Ò»°ãÊÇNPC£©
+---@param TalkerCharIndex  number ´¥·¢ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨Ò»°ãÊÇÍæ¼Ò£©
+---@param SeqNo  number À´Ô´¶Ô»°¿òµÄID£¬¸ÃÖµÓëNLG.ShowWindowTalkedÖĞµÄ¶¨ÒåÓ¦¸Ã¶ÔÓ¦¡£
+---@param Select  number Íæ¼ÒËù°´ÏÂµÄ°´Å¥µÄÖµ»òÑ¡Ôñ¿òÖĞµÄÑ¡ÏîµÄÖµ¡£
+---@param Data  string ¿Í»§¶ËËù´«µİ»ØÀ´µÄÖµ£¬Õâ¸öÖµ½«¸ù¾İ²»Í¬µÄ´°¿ÚÀàĞÍ¶ø²»Í¬¡£
 ---@return any 
 function CharWindowTalkedCallBack(CharIndex, TalkerCharIndex,SeqNo,Select,Data) end
 
----ä¸ºå¯¹è±¡indexè®¾ç½®ä¸¢å¼ƒé“å…·äº‹ä»¶çš„å›è°ƒå‡½æ•°ï¼Œå¯¹è±¡åœ¨ä¸¢å¼ƒé“å…·çš„æ—¶å€™ä¼šè§¦å‘è¯¥å‡½æ•°ï¼Œç”±Luaå¼•æ“å°†Callbackçš„å‚æ•°ä¼ é€’ç»™æŒ‡å®šçš„Callbackå¹¶æ‰§è¡Œã€‚
----@param Dofile  string è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  string è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[CharItemPutCallBack]
----@param CharIndex  number è®¾ç½®çš„å¯¹è±¡indexã€‚
+---Îª¶ÔÏóindexÉèÖÃ¶ªÆúµÀ¾ßÊÂ¼şµÄ»Øµ÷º¯Êı£¬¶ÔÏóÔÚ¶ªÆúµÀ¾ßµÄÊ±ºò»á´¥·¢¸Ãº¯Êı£¬ÓÉLuaÒıÇæ½«CallbackµÄ²ÎÊı´«µİ¸øÖ¸¶¨µÄCallback²¢Ö´ĞĞ¡£
+---@param Dofile  string Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  string ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[CharItemPutCallBack]
+---@param CharIndex  number ÉèÖÃµÄ¶ÔÏóindex¡£
 ---@return any 
 function Char.SetItemPutEvent(Dofile,FuncName,CharIndex) end
 
----ItemPutEventå›è°ƒå‡½æ•°
----@param CharIndex  number å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆä¸€èˆ¬æ˜¯NPCï¼‰
----@param ItemIndex  number è¢«ä¸¢å¼ƒçš„é“å…·indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆä¸€èˆ¬æ˜¯ç©å®¶ï¼‰
+---ItemPutEvent»Øµ÷º¯Êı
+---@param CharIndex  number ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨Ò»°ãÊÇNPC£©
+---@param ItemIndex  number ±»¶ªÆúµÄµÀ¾ßindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨Ò»°ãÊÇÍæ¼Ò£©
 ---@return any 
 function CharItemPutCallBack(CharIndex, ItemIndex) end
 
----ç–‘ä¼¼é™æ—¶é“å…·
----@param Dofile  string è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  string è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[CharWatchCallBack]
----@param CharIndex  number è®¾ç½®çš„å¯¹è±¡indexã€‚
+---ÒÉËÆÏŞÊ±µÀ¾ß
+---@param Dofile  string Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  string ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[CharWatchCallBack]
+---@param CharIndex  number ÉèÖÃµÄ¶ÔÏóindex¡£
 ---@return any 
 function Char.SetWatchEvent(Dofile, FuncName, CharIndex) end
 
----WatchEventå›è°ƒå‡½æ•°
----@param CharIndex  number å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆä¸€èˆ¬æ˜¯NPCï¼‰
----@param ItemIndex  number è¢«ä¸¢å¼ƒçš„é“å…·indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚ï¼ˆä¸€èˆ¬æ˜¯ç©å®¶ï¼‰
+---WatchEvent»Øµ÷º¯Êı
+---@param CharIndex  number ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨Ò»°ãÊÇNPC£©
+---@param ItemIndex  number ±»¶ªÆúµÄµÀ¾ßindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡££¨Ò»°ãÊÇÍæ¼Ò£©
 ---@return any 
 function CharWatchCallBack(CharIndex, ItemIndex) end
 
----è§£é™¤walkpostevent
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---½â³ıwalkpostevent
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.UnsetWalkPostEvent(charIndex) end
 
----è§£é™¤WalkPreEvent
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---½â³ıWalkPreEvent
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.UnsetWalkPreEvent(charIndex) end
 
----è§£é™¤PostOverEvent
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---½â³ıPostOverEvent
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.UnsetPostOverEvent(charIndex) end
 
----è§£é™¤LoopEvent
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---½â³ıLoopEvent
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.UnsetLoopEvent(charIndex) end
 
----è§£é™¤TalkedEvent
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---½â³ıTalkedEvent
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.UnsetTalkedEvent(charIndex) end
 
----è§£é™¤WindowTalkedEvent
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---½â³ıWindowTalkedEvent
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.UnsetWindowTalkedEvent(charIndex) end
 
----è§£é™¤ItemPutEvent
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---½â³ıItemPutEvent
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.UnsetItemPutEvent(charIndex) end
 
----è§£é™¤WatchEvent
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---½â³ıWatchEvent
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.UnsetWatchEvent(charIndex) end
 
----æ£€æŸ¥è§’è‰²æ˜¯å¦åŠ å…¥å…¬ä¼š
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number å¦‚æœç›®æ ‡æœ‰å·¥ä¼šï¼Œåˆ™è¿”å›1ï¼Œæ²¡æœ‰åˆ™è¿”å›-1ã€‚
+---¼ì²é½ÇÉ«ÊÇ·ñ¼ÓÈë¹«»á
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number Èç¹ûÄ¿±êÓĞ¹¤»á£¬Ôò·µ»Ø1£¬Ã»ÓĞÔò·µ»Ø-1¡£
 function Char.HaveGuild(CharIndex) end
 
----åˆ·æ–°ç©å®¶çš„ç§°å·ï¼Œå¦‚é˜¿è’™ã€‚
----@param CharIndex  number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number åˆ·æ–°ç©å®¶ç§°å·ï¼Œè¿”å›-1å¤±è´¥ï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---Ë¢ĞÂÍæ¼ÒµÄ³ÆºÅ£¬Èç°¢ÃÉ¡£
+---@param CharIndex  number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number Ë¢ĞÂÍæ¼Ò³ÆºÅ£¬·µ»Ø-1Ê§°Ü£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.CheckTitle(CharIndex) end
 
----è·å–è‡ªå®šä¹‰æ•°æ®ï¼ˆä¿å­˜åˆ°æ•°æ®åº“ï¼‰
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param dataIndex string ä¿¡æ¯å‚¨å­˜çš„ä½ç½®ï¼Œè‡ªå®šä¹‰
----@return string è·å¾—æŒ‡å®šä½ç½®çš„å­—ç¬¦ä¸²
+---»ñÈ¡×Ô¶¨ÒåÊı¾İ£¨±£´æµ½Êı¾İ¿â£©
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param dataIndex string ĞÅÏ¢´¢´æµÄÎ»ÖÃ£¬×Ô¶¨Òå
+---@return string »ñµÃÖ¸¶¨Î»ÖÃµÄ×Ö·û´®
 function Char.GetExtData(charIndex, dataIndex) end
 
----è®¾ç½®è‡ªå®šä¹‰æ•°æ®ï¼ˆä¿å­˜åˆ°æ•°æ®åº“ï¼‰
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param dataIndex string ä¿¡æ¯å‚¨å­˜çš„ä½ç½®ï¼Œè‡ªå®šä¹‰
----@param value string å­˜å‚¨çš„ä¿¡æ¯
+---ÉèÖÃ×Ô¶¨ÒåÊı¾İ£¨±£´æµ½Êı¾İ¿â£©
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param dataIndex string ĞÅÏ¢´¢´æµÄÎ»ÖÃ£¬×Ô¶¨Òå
+---@param value string ´æ´¢µÄĞÅÏ¢
 ---@return any 
 function Char.SetExtData(charIndex, dataIndex, value) end
 
----è·å–è‡ªå®šä¹‰æ•°æ®ï¼ˆä¸ä¿å­˜åˆ°æ•°æ®åº“ï¼‰
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param dataIndex string ä¿¡æ¯å‚¨å­˜çš„ä½ç½®ï¼Œè‡ªå®šä¹‰
----@return string è·å¾—æŒ‡å®šä½ç½®çš„å­—ç¬¦ä¸²
+---»ñÈ¡×Ô¶¨ÒåÊı¾İ£¨²»±£´æµ½Êı¾İ¿â£©
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param dataIndex string ĞÅÏ¢´¢´æµÄÎ»ÖÃ£¬×Ô¶¨Òå
+---@return string »ñµÃÖ¸¶¨Î»ÖÃµÄ×Ö·û´®
 function Char.GetTempData(charIndex, dataIndex) end
 
----è®¾ç½®è‡ªå®šä¹‰æ•°æ®ï¼ˆä¸ä¿å­˜åˆ°æ•°æ®åº“ï¼‰
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param dataIndex string ä¿¡æ¯å‚¨å­˜çš„ä½ç½®ï¼Œè‡ªå®šä¹‰
----@param value string å­˜å‚¨çš„ä¿¡æ¯
+---ÉèÖÃ×Ô¶¨ÒåÊı¾İ£¨²»±£´æµ½Êı¾İ¿â£©
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param dataIndex string ĞÅÏ¢´¢´æµÄÎ»ÖÃ£¬×Ô¶¨Òå
+---@param value string ´æ´¢µÄĞÅÏ¢
 ---@return any 
 function Char.SetTempData(charIndex, dataIndex, value) end
 
----è§’è‰²æ˜¯å¦æœ‰ç¬¦åˆitemIdæ¡ä»¶çš„é“å…·
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param itemId number é“å…·ID
----@return number ç¬¬ä¸€ä¸ªç¬¦åˆæ¡ä»¶çš„itemIndex
+---½ÇÉ«ÊÇ·ñÓĞ·ûºÏitemIdÌõ¼şµÄµÀ¾ß
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param itemId number µÀ¾ßID
+---@return number µÚÒ»¸ö·ûºÏÌõ¼şµÄitemIndex
 function Char.HaveItemID(charIndex, itemId) end
 
----è§’è‰²æ˜¯å¦æœ‰ç¬¦åˆitemIdæ¡ä»¶çš„é“å…·ï¼Œå¹¶è¿”å›ä½ç½®
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param itemId number é“å…·ID
----@return any ç¬¬ä¸€ä¸ªç¬¦åˆæ¡ä»¶çš„é“å…·æ 
+---½ÇÉ«ÊÇ·ñÓĞ·ûºÏitemIdÌõ¼şµÄµÀ¾ß£¬²¢·µ»ØÎ»ÖÃ
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param itemId number µÀ¾ßID
+---@return any µÚÒ»¸ö·ûºÏÌõ¼şµÄµÀ¾ßÀ¸
 function Char.HaveItemPos(charIndex, itemId) end
 
----è·å¾—æŒ‡å®šé“å…·æ çš„itemIndex
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param slot number é“å…·æ ä½ç½®
----@return number å¦‚æœç›®æ ‡æ ä½æœ‰é“å…·ï¼Œåˆ™è¿”å›é“å…·indexï¼Œå¦åˆ™è¿”å› -1: å¯¹è±¡æŒ‡é’ˆé”™è¯¯ -2: é“å…·æ æ— é“å…· -3: è¶…å‡ºèŒƒå›´ã€‚
+---»ñµÃÖ¸¶¨µÀ¾ßÀ¸µÄitemIndex
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param slot number µÀ¾ßÀ¸Î»ÖÃ
+---@return number Èç¹ûÄ¿±êÀ¸Î»ÓĞµÀ¾ß£¬Ôò·µ»ØµÀ¾ßindex£¬·ñÔò·µ»Ø -1: ¶ÔÏóÖ¸Õë´íÎó -2: µÀ¾ßÀ¸ÎŞµÀ¾ß -3: ³¬³ö·¶Î§¡£
 function Char.GetItemIndex(charIndex, slot) end
 
----è®¾ç½®æŒ‡å®šé“å…·æ çš„é“å…·ä¸ºitemIndex,å¯ä¸Item.MakeItem(itemId)è”ç”¨
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param slot number é“å…·æ ä½ç½®
----@param itemIndex number é“å…·çš„ index
+---ÉèÖÃÖ¸¶¨µÀ¾ßÀ¸µÄµÀ¾ßÎªitemIndex,¿ÉÓëItem.MakeItem(itemId)ÁªÓÃ
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param slot number µÀ¾ßÀ¸Î»ÖÃ
+---@param itemIndex number µÀ¾ßµÄ index
 ---@return any 
 function Char.SetItemIndex(charIndex, slot, itemIndex) end
 
----è®¾ç½®é“¶è¡ŒæŒ‡å®šé“å…·æ çš„é“å…·ä¸ºitemIndexï¼Œå¯ä¸Item.MakeItem(itemId)è”ç”¨
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param slot number é“å…·æ ä½ç½®
----@param itemIndex number é“å…·çš„ index
+---ÉèÖÃÒøĞĞÖ¸¶¨µÀ¾ßÀ¸µÄµÀ¾ßÎªitemIndex£¬¿ÉÓëItem.MakeItem(itemId)ÁªÓÃ
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param slot number µÀ¾ßÀ¸Î»ÖÃ
+---@param itemIndex number µÀ¾ßµÄ index
 ---@return any 
 function Char.SetPoolItem(charIndex, slot, itemindex) end
 
----åˆ é™¤é“¶è¡ŒæŒ‡å®šé“å…·æ çš„é“å…·
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param slot number é“å…·æ ä½ç½®
+---É¾³ıÒøĞĞÖ¸¶¨µÀ¾ßÀ¸µÄµÀ¾ß
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param slot number µÀ¾ßÀ¸Î»ÖÃ
 ---@return any 
 function Char.RemovePoolItem(charIndex, slot) end
 
----æŠŠé“å…·äº¤æ˜“ç»™æŒ‡å®šç©å®¶
----@param fromChar number ä»è°èº«ä¸Šäº¤å‡ºå» å¯¹è±¡index
----@param slot integer é“å…·æ ä½ç½®ï¼ŒèŒƒå›´8-27
----@param toChar number äº¤æ˜“ç»™è° å¯¹è±¡index
+---°ÑµÀ¾ß½»Ò×¸øÖ¸¶¨Íæ¼Ò
+---@param fromChar number ´ÓË­ÉíÉÏ½»³öÈ¥ ¶ÔÏóindex
+---@param slot integer µÀ¾ßÀ¸Î»ÖÃ£¬·¶Î§8-27
+---@param toChar number ½»Ò×¸øË­ ¶ÔÏóindex
 ---@return any 
 function Char.TradeItem(fromChar, slot, toChar) end
 
----æ ¹æ®ä½ç½®åˆ é™¤ç‰©å“
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param slot number é“å…·æ ä½ç½®
+---¸ù¾İÎ»ÖÃÉ¾³ıÎïÆ·
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param slot number µÀ¾ßÀ¸Î»ÖÃ
 ---@return any 
 function Char.DelItemBySlot(CharIndex, Slot) end
 
----ç§»åŠ¨ç‰©å“
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param fromSlot number ç§»åŠ¨é‚£ä¸ªç‰©å“ï¼Œå–å€¼0-27
----@param toSlot number ç§»åŠ¨åˆ°é‚£ä¸ªä½ç½®, å–å€¼0-27
----@param amount number æ•°é‡ï¼Œæ•´ä½“ç§»åŠ¨å–å€¼å¯ä¸º-1
+---ÒÆ¶¯ÎïÆ·
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param fromSlot number ÒÆ¶¯ÄÇ¸öÎïÆ·£¬È¡Öµ0-27
+---@param toSlot number ÒÆ¶¯µ½ÄÇ¸öÎ»ÖÃ, È¡Öµ0-27
+---@param amount number ÊıÁ¿£¬ÕûÌåÒÆ¶¯È¡Öµ¿ÉÎª-1
 ---@return any 
 function Char.MoveItem(charIndex, fromSlot, toSlot, amount) end
 
----æŸ¥è¯¢è§’è‰²èº«ä¸Šé‡‘å¸æ•°é‡
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return any è§’è‰²èº«ä¸Šé‡‘å¸æ•°é‡
+---²éÑ¯½ÇÉ«ÉíÉÏ½ğ±ÒÊıÁ¿
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return any ½ÇÉ«ÉíÉÏ½ğ±ÒÊıÁ¿
 function Char.GetGold(charIndex) end
 
----æ›´æ–°è§’è‰²çŠ¶æ€ä¿¡æ¯
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---¸üĞÂ½ÇÉ«×´Ì¬ĞÅÏ¢
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.UpCharStatus(charIndex) end
 
----ç§»åŠ¨è§’è‰²ã€NPC
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param walkArray number[] ç§»åŠ¨åˆ—è¡¨ï¼Œå–å€¼0-7å¯¹åº” CONSTé‡Œé¢çš„æ–¹å‘ï¼Œä¸å»ºè®®è¶…è¿‡5æ¬¡ç§»åŠ¨
+---ÒÆ¶¯½ÇÉ«¡¢NPC
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param walkArray number[] ÒÆ¶¯ÁĞ±í£¬È¡Öµ0-7¶ÔÓ¦ CONSTÀïÃæµÄ·½Ïò£¬²»½¨Òé³¬¹ı5´ÎÒÆ¶¯
 ---@return any 
 function Char.MoveArray(charIndex, walkArray) end
 
----è·å–ä¸€ä¸ªå”¯ä¸€ID
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number è§’è‰²UUID
+---»ñÈ¡Ò»¸öÎ¨Ò»ID
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number ½ÇÉ«UUID
 function Char.GetUUID(charIndex) end
 
----è®¡ç®—æŠ€èƒ½æ‰€éœ€çš„é­”æ³•
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param techId number tech.txtä¸­çš„ID
----@return number techIdé‡Šæ”¾éœ€è¦çš„é­”æ³•å€¼
+---¼ÆËã¼¼ÄÜËùĞèµÄÄ§·¨
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param techId number tech.txtÖĞµÄID
+---@return number techIdÊÍ·ÅĞèÒªµÄÄ§·¨Öµ
 function Char.CalcConsumeFp(charIndex, techId) end
 
----ä¿å­˜è§’è‰²æ•°æ®åˆ°æ•°æ®åº“
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---±£´æ½ÇÉ«Êı¾İµ½Êı¾İ¿â
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.SaveToDb(charIndex) end
 
----æŸ¥è¯¢è§’è‰²å®¶æ—ä¸­çš„ç§°å·ID
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number è¿”å›-1ä»£è¡¨æ²¡æœ‰å®¶æ—ï¼Œå…¶ä»–ä¸ºç©å®¶å®¶æ—ä¸­çš„ç§°å·IDï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œå¯¹è±¡indexæ— æ•ˆè¿”å›-3ã€‚
+---²éÑ¯½ÇÉ«¼Ò×åÖĞµÄ³ÆºÅID
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number ·µ»Ø-1´ú±íÃ»ÓĞ¼Ò×å£¬ÆäËûÎªÍæ¼Ò¼Ò×åÖĞµÄ³ÆºÅID£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬¶ÔÏóindexÎŞĞ§·µ»Ø-3¡£
 function Char.GetGuildTitle(charIndex) end
 
----æŸ¥è¯¢ç©å®¶ç§°å·index
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number ç©å®¶ç§°å·index
+---²éÑ¯Íæ¼Ò³ÆºÅindex
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number Íæ¼Ò³ÆºÅindex
 function Char.GetTitleIndex(charIndex) end
 
----è·å¾—å® ç‰©enemyId
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param slot number å® ç‰©æ ä½ç½®
----@return number å® ç‰©enemyId
+---»ñµÃ³èÎïenemyId
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param slot number ³èÎïÀ¸Î»ÖÃ
+---@return number ³èÎïenemyId
 function Char.GetPetEnemyId(charIndex, slot) end
 
----è®¾ç½®å® ç‰©æˆ˜æ–—çŠ¶æ€
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param slot number å® ç‰©æ ä½ç½®
----@param state number å® ç‰©çŠ¶æ€ï¼Œå¯¹åº”CONST.PET_STATE_*
+---ÉèÖÃ³èÎïÕ½¶·×´Ì¬
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param slot number ³èÎïÀ¸Î»ÖÃ
+---@param state number ³èÎï×´Ì¬£¬¶ÔÓ¦CONST.PET_STATE_*
 ---@return any 
 function Char.SetPetDepartureState(charIndex, slot, state) end
 
----è®¾ç½®å® ç‰©æˆ˜æ–—çŠ¶æ€(æ‰¹é‡)
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param state1~5 number å® ç‰©çŠ¶æ€ï¼Œå¯¹åº”CONST.PET_STATE_*
+---ÉèÖÃ³èÎïÕ½¶·×´Ì¬(ÅúÁ¿)
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param state1~5 number ³èÎï×´Ì¬£¬¶ÔÓ¦CONST.PET_STATE_*
 ---@return any 
 function Char.SetPetDepartureStateAll(charIndex, pet1State, pet2State, pet3State, pet4State, pet5State) end
 
----ç›´æ¥äº¤æ˜“å® ç‰©
----@param fromChar integer ä»è°èº«ä¸Šäº¤å‡º CharIndex
----@param slot integer å® ç‰©æ ä½ç½®ï¼Œ0-4
----@param toChar integer äº¤æ˜“ç»™è° CharIndex
+---Ö±½Ó½»Ò×³èÎï
+---@param fromChar integer ´ÓË­ÉíÉÏ½»³ö CharIndex
+---@param slot integer ³èÎïÀ¸Î»ÖÃ£¬0-4
+---@param toChar integer ½»Ò×¸øË­ CharIndex
 ---@return any 
 function Char.TradePet(fromChar, slot, toChar) end
 
----ç§»åŠ¨å® ç‰©
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param frslot number ç§»åŠ¨å‰å® ç‰©æ ä½ç½®ï¼Œ0-4
----@param toslot number ç§»åŠ¨åå® ç‰©æ ä½ç½®ï¼Œ0-4
+---ÒÆ¶¯³èÎï
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param frslot number ÒÆ¶¯Ç°³èÎïÀ¸Î»ÖÃ£¬0-4
+---@param toslot number ÒÆ¶¯ºó³èÎïÀ¸Î»ÖÃ£¬0-4
 ---@return any 
 function Char.MovePet(charIndex, frslot, toslot) end
 
----åŠ å…¥ç»„é˜Ÿï¼Œæ— è§†è·ç¦»
----@param sourceIndex number é˜Ÿå‘˜index
----@param targetIndex number é˜Ÿé•¿index
----@param arg boolean æ˜¯å¦æ— è§†ç»„é˜Ÿå¼€å…³
+---¼ÓÈë×é¶Ó£¬ÎŞÊÓ¾àÀë
+---@param sourceIndex number ¶ÓÔ±index
+---@param targetIndex number ¶Ó³¤index
+---@param arg boolean ÊÇ·ñÎŞÊÓ×é¶Ó¿ª¹Ø
 ---@return any 
 function Char.JoinParty(sourceIndex, targetIndex, arg) end
 
----ç¦»å¼€é˜Ÿä¼
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---Àë¿ª¶ÓÎé
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.LeaveParty(charIndex) end
 
----è·å¾—è§’è‰²é“å…·æ å¥—è£…çš„ID
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param slot number é“å…·æ ä½ç½®
----@return number è§’è‰²é“å…·æ å¥—è£…çš„ID
+---»ñµÃ½ÇÉ«µÀ¾ßÀ¸Ì××°µÄID
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param slot number µÀ¾ßÀ¸Î»ÖÃ
+---@return number ½ÇÉ«µÀ¾ßÀ¸Ì××°µÄID
 function Char.GetSuitId(charIndex, slot) end
 
----è§’è‰²æ¿€æ´»å¥—è£…çš„æ•°é‡
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---½ÇÉ«¼¤»îÌ××°µÄÊıÁ¿
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.GetSuitCount(charIndex) end
 
----åˆ›å»ºå‡äºº
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return number å‡äººindex
+---´´½¨¼ÙÈË
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return number ¼ÙÈËindex
 function Char.CreateDummy(charIndex) end
 
----æ£€æµ‹æ˜¯å¦å‡äºº
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@return any trueï¼Œå‡äººï¼Œfalseï¼Œä¸æ˜¯å‡äºº
+---¼ì²âÊÇ·ñ¼ÙÈË
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
+---@return any true£¬¼ÙÈË£¬false£¬²»ÊÇ¼ÙÈË
 function Char.IsDummy(charIndex end
 
----æ ‡è®°ä¸ºå‡äºº
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---±ê¼ÇÎª¼ÙÈË
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.SetDummy(charIndex) end
 
----åˆ é™¤å‡äºº
----@param charIndex number ç›®æ ‡çš„ å¯¹è±¡indexã€‚
+---É¾³ı¼ÙÈË
+---@param charIndex number Ä¿±êµÄ ¶ÔÏóindex¡£
 ---@return any 
 function Char.DelDummy(charIndex) end
 
----æŸ¥çœ‹è§’è‰²çš„å‡ºç§Ÿæˆ¿floor
----@param charIndex number å¯¹è±¡çš„index
----@return number æˆåŠŸè¿”å›å‡ºç§Ÿæˆ¿floorï¼Œå¤±è´¥è¿”å›-1
+---²é¿´½ÇÉ«µÄ³ö×â·¿floor
+---@param charIndex number ¶ÔÏóµÄindex
+---@return number ³É¹¦·µ»Ø³ö×â·¿floor£¬Ê§°Ü·µ»Ø-1
 function Char.GetMyRoomFloor(charIndex) end
 

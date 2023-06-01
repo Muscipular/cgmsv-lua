@@ -1,70 +1,72 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----åˆ›å»ºä¸€ä¸ªæŒ‡å®šå°åŒ…æ¥å—åˆ°åè§¦å‘çš„å‡½æ•°
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[OnRecvCallBack]
----@param PacketID  æ•°å€¼å‹ å°åŒ…å¤´å®šä¹‰ï¼Œè¯·å‚è€ƒé™„å½•çš„[å¸¸é‡å®šä¹‰]ã€‚
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---´´½¨Ò»¸öÖ¸¶¨·â°ü½ÓÊÜµ½ºó´¥·¢µÄº¯Êı
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[OnRecvCallBack]
+---@param PacketID  ÊıÖµĞÍ ·â°üÍ·¶¨Òå£¬Çë²Î¿¼¸½Â¼µÄ[³£Á¿¶¨Òå]¡£
 ---@return any 
 function Protocol.OnRecv(Dofile, FuncName, PacketID) end
 
----OnRecvçš„å›è°ƒå‡½æ•°
----@param Fd  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡çš„ç½‘ç»œå¥—æ¥å­—IDï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ï¼Œå¯ä»¥é€šè¿‡Protocol.GetCharByFdè·å–å¯¹åº”çš„ç©å®¶å¯¹è±¡ã€‚
----@param Head  æ•°å€¼å‹ å°åŒ…å¤´å®šä¹‰ï¼Œè¯·å‚è€ƒ[å¸¸é‡å®šä¹‰]ã€‚
----@param Packet  å­—ç¬¦ä¸² å°åŒ…å†…å®¹ï¼Œç”¨â€ â€œé—´éš”å°åŒ…å†…å®¹ã€‚
----@return number è¿”å›0åˆ™ä¸æ‹¦æˆªè¯¥å°åŒ…ï¼Œè¿”å›1åˆ™æ‹¦æˆªè¯¥å°åŒ…ï¼ˆæœåŠ¡ç«¯å°†ä¸ä¼šè¿›ä¸€æ­¥å¤„ç†è¯¥å°åŒ…ï¼Œç­‰åŒäºä¸­è½¬å°åŒ…è¿‡æ»¤ï¼‰ã€‚
+---OnRecvµÄ»Øµ÷º¯Êı
+---@param Fd  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóµÄÍøÂçÌ×½Ó×ÖID£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı£¬¿ÉÒÔÍ¨¹ıProtocol.GetCharByFd»ñÈ¡¶ÔÓ¦µÄÍæ¼Ò¶ÔÏó¡£
+---@param Head  ÊıÖµĞÍ ·â°üÍ·¶¨Òå£¬Çë²Î¿¼[³£Á¿¶¨Òå]¡£
+---@param Packet  ×Ö·û´® ·â°üÄÚÈİ£¬ÓÃ¡± ¡°¼ä¸ô·â°üÄÚÈİ¡£
+---@return number ·µ»Ø0Ôò²»À¹½Ø¸Ã·â°ü£¬·µ»Ø1ÔòÀ¹½Ø¸Ã·â°ü£¨·şÎñ¶Ë½«²»»á½øÒ»²½´¦Àí¸Ã·â°ü£¬µÈÍ¬ÓÚÖĞ×ª·â°ü¹ıÂË£©¡£
 function OnRecvCallBack(Fd, Head, Packet) end
 
----æ ¹æ®ç©å®¶å®¢æˆ·ç«¯è¿æ¥å·è·å–ç©å®¶å¯¹è±¡
----@param Fd  æ•°å€¼å‹ ç½‘ç»œå¥—æ¥å­—IDã€‚
----@return number æˆåŠŸè¿”å›å¯¹è±¡indexï¼Œå¤±è´¥è¿”å›-1ã€‚
+---¸ù¾İÍæ¼Ò¿Í»§¶ËÁ¬½ÓºÅ»ñÈ¡Íæ¼Ò¶ÔÏó
+---@param Fd  ÊıÖµĞÍ ÍøÂçÌ×½Ó×ÖID¡£
+---@return number ³É¹¦·µ»Ø¶ÔÏóindex£¬Ê§°Ü·µ»Ø-1¡£
 function Protocol.GetCharByFd(Fd) end
 
----æ ¹æ®ç©å®¶å®¢æˆ·ç«¯è¿æ¥å·è·å–ç©å®¶å¯¹è±¡
----@param Fd  æ•°å€¼å‹ ç½‘ç»œå¥—æ¥å­—IDã€‚
----@return number æˆåŠŸè¿”å›å¯¹è±¡indexï¼Œå¤±è´¥è¿”å›-1ã€‚
+---¸ù¾İÍæ¼Ò¿Í»§¶ËÁ¬½ÓºÅ»ñÈ¡Íæ¼Ò¶ÔÏó
+---@param Fd  ÊıÖµĞÍ ÍøÂçÌ×½Ó×ÖID¡£
+---@return number ³É¹¦·µ»Ø¶ÔÏóindex£¬Ê§°Ü·µ»Ø-1¡£
 function Protocol.GetCharIndexFromFd(fd) end
 
----è‡ªå®šä¹‰å‘é€å°åŒ…ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param PacketID  æ•°å€¼å‹ å°åŒ…å¤´å®šä¹‰ï¼Œè¯·å‚è€ƒé™„å½•çš„[å¸¸é‡å®šä¹‰]ã€‚
----@param Packet  å­—ç¬¦ä¸² å°åŒ…å†…å®¹ã€‚
----@return number è¿”å›0å¤±è´¥ï¼Œè¿”å›1æˆåŠŸã€‚
+---×Ô¶¨Òå·¢ËÍ·â°ü¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param PacketID  ÊıÖµĞÍ ·â°üÍ·¶¨Òå£¬Çë²Î¿¼¸½Â¼µÄ[³£Á¿¶¨Òå]¡£
+---@param Packet  ×Ö·û´® ·â°üÄÚÈİ¡£
+---@return number ·µ»Ø0Ê§°Ü£¬·µ»Ø1³É¹¦¡£
 function Protocol.Send(CharIndex, PacketID, Packet) end
 
----è‡ªå®šä¹‰å‘é€å°åŒ…ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡çš„ å¯¹è±¡indexã€‚
----@param PacketID  æ•°å€¼å‹ å°åŒ…å¤´å®šä¹‰ï¼Œè¯·å‚è€ƒé™„å½•çš„[å¸¸é‡å®šä¹‰]ã€‚
----@param Packet  å­—ç¬¦ä¸² å°åŒ…å†…å®¹ã€‚
----@return number è¿”å›0å¤±è´¥ï¼Œè¿”å›1æˆåŠŸã€‚
+---×Ô¶¨Òå·¢ËÍ·â°ü¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±êµÄ ¶ÔÏóindex¡£
+---@param PacketID  ÊıÖµĞÍ ·â°üÍ·¶¨Òå£¬Çë²Î¿¼¸½Â¼µÄ[³£Á¿¶¨Òå]¡£
+---@param Packet  ×Ö·û´® ·â°üÄÚÈİ¡£
+---@return number ·µ»Ø0Ê§°Ü£¬·µ»Ø1³É¹¦¡£
 function Protocol.SendToFd(fd, header, ...) end
 
----è·å–å®¢æˆ·ç«¯IP
----@param Fd  æ•°å€¼å‹ ç½‘ç»œå¥—æ¥å­—IDã€‚
+---»ñÈ¡¿Í»§¶ËIP
+---@param Fd  ÊıÖµĞÍ ÍøÂçÌ×½Ó×ÖID¡£
 ---@return any ip
 function Protocol.GetIp(fd) end
 
----æ ¹æ®charIndexè·å–fd
+---¸ù¾İcharIndex»ñÈ¡fd
 ---@param charIndex number
----@return number Fd: æ•°å€¼å‹ ç½‘ç»œå¥—æ¥å­—IDã€‚
+---@return number Fd: ÊıÖµĞÍ ÍøÂçÌ×½Ó×ÖID¡£
 function Protocol.GetFdByCharIndex(charIndex) end
 
----ç¼–ç å†…å®¹å­—ç¬¦ä¸²ï¼Œå¦‚æ¶ˆæ¯å°åŒ…çš„å†…å®¹
----@param str å­—ç¬¦ä¸²
----@return string ç¼–ç åå­—ç¬¦ä¸²
+---±àÂëÄÚÈİ×Ö·û´®£¬ÈçÏûÏ¢·â°üµÄÄÚÈİ
+---@param str ×Ö·û´®
+---@return string ±àÂëºó×Ö·û´®
 function Protocol.makeEscapeString(str) end
 
----è§£ç å†…å®¹å­—ç¬¦ä¸²ï¼Œå¦‚æ¶ˆæ¯å°åŒ…çš„å†…å®¹
----@param str å­—ç¬¦ä¸²
----@return string è§£ç åå­—ç¬¦ä¸²
+---½âÂëÄÚÈİ×Ö·û´®£¬ÈçÏûÏ¢·â°üµÄÄÚÈİ
+---@param str ×Ö·û´®
+---@return string ½âÂëºó×Ö·û´®
 function Protocol.makeStringFromEscaped(str) end
 
----å°åŒ…å­—ç¬¦ä¸²ç¼–ç 
----@param str å­—ç¬¦ä¸²
----@return string ç¼–ç åå­—ç¬¦ä¸²
+---·â°ü×Ö·û´®±àÂë
+---@param str ×Ö·û´®
+---@return string ±àÂëºó×Ö·û´®
 function Protocol.nrprotoEscapeString(str) end
 
----å°åŒ…å­—ç¬¦ä¸²è§£å¯†
----@param str å­—ç¬¦ä¸²
----@return string è§£ç åå­—ç¬¦ä¸²
+---·â°ü×Ö·û´®½âÃÜ
+---@param str ×Ö·û´®
+---@return string ½âÂëºó×Ö·û´®
 function Protocol.nrprotoUnescapeString(str) end
 

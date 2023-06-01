@@ -1,243 +1,245 @@
----@alias å­—ç¬¦ä¸² string
----@alias æ•°å€¼å‹ number
----è·å–æˆ˜æ–—é˜Ÿåˆ—ä¸­å¯¹è±¡å®ä¾‹çš„å¯¹è±¡index
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œä¸ºEncountã€PVEæˆ–PVPå‡½æ•°çš„è¿”å›å€¼ã€‚
----@param Slot  æ•°å€¼å‹ æˆ˜æ–—é˜Ÿåˆ—ä¸­ç©å®¶ä½ç½®,èŒƒå›´0-19ï¼Œå…¶ä¸­0-9ä¸ºä¸‹æ–¹å®ä¾‹é˜Ÿåˆ—ï¼Œ10-19ä¸ºä¸Šæ–¹å®ä¾‹é˜Ÿåˆ—ã€‚
----@return number è¿”å›-1å¤±è´¥ï¼ŒæˆåŠŸè¿”å›å¯¹è±¡å®ä¾‹çš„ å¯¹è±¡indexï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œæˆ˜æ–—indexæ— æ•ˆè¿”å›-3ï¼Œæˆ˜æ–—é˜Ÿåˆ—ä¸­ç©å®¶ä½ç½®èŒƒå›´é”™è¯¯è¿”å›-4ã€‚
+---@alias ×Ö·û´® string
+---@alias ÊıÖµĞÍ number
+
+
+---»ñÈ¡Õ½¶·¶ÓÁĞÖĞ¶ÔÏóÊµÀıµÄ¶ÔÏóindex
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬ÎªEncount¡¢PVE»òPVPº¯ÊıµÄ·µ»ØÖµ¡£
+---@param Slot  ÊıÖµĞÍ Õ½¶·¶ÓÁĞÖĞÍæ¼ÒÎ»ÖÃ,·¶Î§0-19£¬ÆäÖĞ0-9ÎªÏÂ·½ÊµÀı¶ÓÁĞ£¬10-19ÎªÉÏ·½ÊµÀı¶ÓÁĞ¡£
+---@return number ·µ»Ø-1Ê§°Ü£¬³É¹¦·µ»Ø¶ÔÏóÊµÀıµÄ ¶ÔÏóindex£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬Õ½¶·indexÎŞĞ§·µ»Ø-3£¬Õ½¶·¶ÓÁĞÖĞÍæ¼ÒÎ»ÖÃ·¶Î§´íÎó·µ»Ø-4¡£
 function Battle.GetPlayer(BattleIndex, Slot) end
 
----è·å–æˆ˜æ–—é˜Ÿåˆ—ä¸­å¯¹è±¡å®ä¾‹çš„å¯¹è±¡index
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œä¸ºEncountã€PVEæˆ–PVPå‡½æ•°çš„è¿”å›å€¼ã€‚
----@param Slot  æ•°å€¼å‹ æˆ˜æ–—é˜Ÿåˆ—ä¸­ç©å®¶ä½ç½®,èŒƒå›´0-19ï¼Œå…¶ä¸­0-9ä¸ºä¸‹æ–¹å®ä¾‹é˜Ÿåˆ—ï¼Œ10-19ä¸ºä¸Šæ–¹å®ä¾‹é˜Ÿåˆ—ã€‚
----@return number è¿”å›-1å¤±è´¥ï¼ŒæˆåŠŸè¿”å›å¯¹è±¡å®ä¾‹çš„ å¯¹è±¡indexï¼Œå‚æ•°æ•°æ®ç±»å‹ä¸å¯¹è¿”å›-2ï¼Œæˆ˜æ–—indexæ— æ•ˆè¿”å›-3ï¼Œæˆ˜æ–—é˜Ÿåˆ—ä¸­ç©å®¶ä½ç½®èŒƒå›´é”™è¯¯è¿”å›-4ã€‚
+---»ñÈ¡Õ½¶·¶ÓÁĞÖĞ¶ÔÏóÊµÀıµÄ¶ÔÏóindex
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬ÎªEncount¡¢PVE»òPVPº¯ÊıµÄ·µ»ØÖµ¡£
+---@param Slot  ÊıÖµĞÍ Õ½¶·¶ÓÁĞÖĞÍæ¼ÒÎ»ÖÃ,·¶Î§0-19£¬ÆäÖĞ0-9ÎªÏÂ·½ÊµÀı¶ÓÁĞ£¬10-19ÎªÉÏ·½ÊµÀı¶ÓÁĞ¡£
+---@return number ·µ»Ø-1Ê§°Ü£¬³É¹¦·µ»Ø¶ÔÏóÊµÀıµÄ ¶ÔÏóindex£¬²ÎÊıÊı¾İÀàĞÍ²»¶Ô·µ»Ø-2£¬Õ½¶·indexÎŞĞ§·µ»Ø-3£¬Õ½¶·¶ÓÁĞÖĞÍæ¼ÒÎ»ÖÃ·¶Î§´íÎó·µ»Ø-4¡£
 function Battle.GetPlayIndex(BattleIndex, Slot) end
 
----è°ƒç”¨é­”åŠ›è„šæœ¬è¯­å¥encountåˆ›å»ºæˆ˜æ–—
----@param UpIndex  æ•°å€¼å‹ æˆ˜æ–—ä¸€æ–¹çš„ å¯¹è±¡index
----@param DownIndex  æ•°å€¼å‹ æˆ˜æ–—ä¸€æ–¹çš„ å¯¹è±¡index
----@param Data  å­—ç¬¦ä¸² è§¦å‘æˆ˜æ–—çš„ä¿¡æ¯ï¼ŒåŒ…æ‹¬æˆ˜æ–—æ•Œäººé˜Ÿåˆ—ç­‰ä¿¡æ¯ï¼Œç­‰åŒäºGMSVè‡ªèº«è„šæœ¬çš„encountå‚æ•°,å¯ä¸å¡«å†™
----@return any å‰ä¸¤ä¸ªå‚æ•°éƒ½æ˜¯åŒä¸€ä¸ªç©å®¶ç´¢å¼•ï¼Œç¬¬ä¸‰ä¸ªå‚æ•°ä¸å¡«çš„æ—¶å€™ï¼Œè¿›è¡ŒåŸåœ°é‡æ•Œï¼Œå¦‚æœè¯¥å¤„æ— æ³•é‡æ•Œï¼Œåˆ™è¿”å›è´Ÿæ•°ã€‚
+---µ÷ÓÃÄ§Á¦½Å±¾Óï¾äencount´´½¨Õ½¶·
+---@param UpIndex  ÊıÖµĞÍ Õ½¶·Ò»·½µÄ ¶ÔÏóindex
+---@param DownIndex  ÊıÖµĞÍ Õ½¶·Ò»·½µÄ ¶ÔÏóindex
+---@param Data  ×Ö·û´® ´¥·¢Õ½¶·µÄĞÅÏ¢£¬°üÀ¨Õ½¶·µĞÈË¶ÓÁĞµÈĞÅÏ¢£¬µÈÍ¬ÓÚGMSV×ÔÉí½Å±¾µÄencount²ÎÊı,¿É²»ÌîĞ´
+---@return any Ç°Á½¸ö²ÎÊı¶¼ÊÇÍ¬Ò»¸öÍæ¼ÒË÷Òı£¬µÚÈı¸ö²ÎÊı²»ÌîµÄÊ±ºò£¬½øĞĞÔ­µØÓöµĞ£¬Èç¹û¸Ã´¦ÎŞ·¨ÓöµĞ£¬Ôò·µ»Ø¸ºÊı¡£
 function Battle.Encount(UpIndex, DownIndex, Data) end
 
----ä½¿ç”¨Luaè„šæœ¬åˆ›å»ºä¸€ä¸ªæˆ˜æ–—ï¼Œæˆ˜æ–—åˆ›å»ºåå¯è‡ªåŠ¨è°ƒç”¨Luaçš„DoFuncå‡½æ•°ã€‚
----@param CharIndex  æ•°å€¼å‹ é‡æ•Œç©å®¶çš„å¯¹è±¡indexã€‚
----@param CreatePtr  æ•°å€¼å‹ è§¦å‘æˆ˜æ–—çš„å¯¹è±¡indexã€‚
----@param DoFunc  å­—ç¬¦ä¸² æˆ˜æ–—åˆå§‹åŒ–æ¥å—åè°ƒç”¨çš„Luaå‡½æ•°çš„åç§°ï¼Œç”³æ˜æ ¼å¼è¯·å‚è€ƒ[BattleInitCallBack]ï¼Œå¦‚æœä¸è°ƒç”¨åˆ™å¡«nil
----@param EnemyIdAr  æ•°å€¼å‹[æ•°ç»„] æˆ˜æ–—æ‰€å‡ºç°çš„æ€ªç‰©é˜Ÿåˆ—çš„æ€ªç‰©IDæ•°ç»„ï¼ˆæ€ªç‰©IDä¸ºenemy.txtä¸­çš„IDï¼‰ã€‚
----@param BaseLevelAr  æ•°å€¼å‹[æ•°ç»„] æˆ˜æ–—æ‰€å‡ºç°çš„æ€ªç‰©é˜Ÿåˆ—çš„æ€ªç‰©ç­‰çº§æ•°ç»„ï¼ˆæ•°ç»„ç»“æ„ä¸EnemyIdArç»“æ„åº”ä¸€ä¸€å¯¹åº”ï¼‰
----@param RandLv æ•°å€¼å‹[æ•°ç»„] æˆ˜æ–—æ‰€å‡ºç°çš„æ€ªç‰©é˜Ÿåˆ—çš„æ€ªç‰©ç­‰çº§æ³¢åŠ¨æ•°ç»„ï¼ˆæ•°ç»„ç»“æ„ä¸EnemyIdArç»“æ„åº”ä¸€ä¸€å¯¹åº”ï¼‰
----@return number è¿”å›è´Ÿæ•°è¡¨ç¤ºå¤±è´¥ï¼ŒæˆåŠŸè¿”å›æˆ˜æ–—indexã€‚
+---Ê¹ÓÃLua½Å±¾´´½¨Ò»¸öÕ½¶·£¬Õ½¶·´´½¨ºó¿É×Ô¶¯µ÷ÓÃLuaµÄDoFuncº¯Êı¡£
+---@param CharIndex  ÊıÖµĞÍ ÓöµĞÍæ¼ÒµÄ¶ÔÏóindex¡£
+---@param CreatePtr  ÊıÖµĞÍ ´¥·¢Õ½¶·µÄ¶ÔÏóindex¡£
+---@param DoFunc  ×Ö·û´® Õ½¶·³õÊ¼»¯½ÓÊÜºóµ÷ÓÃµÄLuaº¯ÊıµÄÃû³Æ£¬ÉêÃ÷¸ñÊ½Çë²Î¿¼[BattleInitCallBack]£¬Èç¹û²»µ÷ÓÃÔòÌînil
+---@param EnemyIdAr  ÊıÖµĞÍ[Êı×é] Õ½¶·Ëù³öÏÖµÄ¹ÖÎï¶ÓÁĞµÄ¹ÖÎïIDÊı×é£¨¹ÖÎïIDÎªenemy.txtÖĞµÄID£©¡£
+---@param BaseLevelAr  ÊıÖµĞÍ[Êı×é] Õ½¶·Ëù³öÏÖµÄ¹ÖÎï¶ÓÁĞµÄ¹ÖÎïµÈ¼¶Êı×é£¨Êı×é½á¹¹ÓëEnemyIdAr½á¹¹Ó¦Ò»Ò»¶ÔÓ¦£©
+---@param RandLv ÊıÖµĞÍ[Êı×é] Õ½¶·Ëù³öÏÖµÄ¹ÖÎï¶ÓÁĞµÄ¹ÖÎïµÈ¼¶²¨¶¯Êı×é£¨Êı×é½á¹¹ÓëEnemyIdAr½á¹¹Ó¦Ò»Ò»¶ÔÓ¦£©
+---@return number ·µ»Ø¸ºÊı±íÊ¾Ê§°Ü£¬³É¹¦·µ»ØÕ½¶·index¡£
 function Battle.PVE(CharIndex, CreatePtr, DoFunc, EnemyIdAr, BaseLevelAr, RandLv) end
 
----åˆ›å»ºPKæˆ˜æ–—
----@param UpIndex  æ•°å€¼å‹ æˆ˜æ–—ä¸€æ–¹çš„ å¯¹è±¡index
----@param DownIndex  æ•°å€¼å‹ æˆ˜æ–—ä¸€æ–¹çš„ å¯¹è±¡index
----@return number è¿”å›è´Ÿæ•°è¡¨ç¤ºå¤±è´¥ï¼ŒæˆåŠŸè¿”å›æˆ˜æ–—indexã€‚
+---´´½¨PKÕ½¶·
+---@param UpIndex  ÊıÖµĞÍ Õ½¶·Ò»·½µÄ ¶ÔÏóindex
+---@param DownIndex  ÊıÖµĞÍ Õ½¶·Ò»·½µÄ ¶ÔÏóindex
+---@return number ·µ»Ø¸ºÊı±íÊ¾Ê§°Ü£¬³É¹¦·µ»ØÕ½¶·index¡£
 function Battle.PVP(UpIndex, DownIndex) end
 
----è®¾ç½®æˆ˜æ–—ç±»å‹ï¼Œå¦‚æ™®é€šæˆ˜ã€PVPæˆ˜ç­‰ã€‚
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œä¸ºEncountã€PVEæˆ–PVPå‡½æ•°çš„è¿”å›å€¼ã€‚
----@param Type  æ•°å€¼å‹ æˆ˜æ–—ç±»å‹ï¼Œå…·ä½“å‚ç…§æˆ˜æ–—ç±»å‹å¸¸é‡ã€‚
----@return any 1ä¸ºæˆåŠŸ,å…¶ä»–å¤±è´¥ã€‚
+---ÉèÖÃÕ½¶·ÀàĞÍ£¬ÈçÆÕÍ¨Õ½¡¢PVPÕ½µÈ¡£
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬ÎªEncount¡¢PVE»òPVPº¯ÊıµÄ·µ»ØÖµ¡£
+---@param Type  ÊıÖµĞÍ Õ½¶·ÀàĞÍ£¬¾ßÌå²ÎÕÕÕ½¶·ÀàĞÍ³£Á¿¡£
+---@return any 1Îª³É¹¦,ÆäËûÊ§°Ü¡£
 function Battle.SetType(BattleIndex, Type) end
 
----è®¾ç½®æˆ˜æ–—å¥–åŠ±æ¨¡å¼ï¼Œå¦‚å¥–åŠ±ç»éªŒã€å¥–åŠ±DPã€‚
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œä¸ºEncountã€PVEæˆ–PVPå‡½æ•°çš„è¿”å›å€¼ã€‚
----@param Mod  æ•°å€¼å‹ æˆ˜æ–—å¥–åŠ±ç±»å‹ï¼Œå…·ä½“å‚ç…§æˆ˜æ–—ç±»å‹å¸¸é‡ã€‚
----@return any 1ä¸ºæˆåŠŸ,å…¶ä»–å¤±è´¥ã€‚
+---ÉèÖÃÕ½¶·½±ÀøÄ£Ê½£¬Èç½±Àø¾­Ñé¡¢½±ÀøDP¡£
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬ÎªEncount¡¢PVE»òPVPº¯ÊıµÄ·µ»ØÖµ¡£
+---@param Mod  ÊıÖµĞÍ Õ½¶·½±ÀøÀàĞÍ£¬¾ßÌå²ÎÕÕÕ½¶·ÀàĞÍ³£Á¿¡£
+---@return any 1Îª³É¹¦,ÆäËûÊ§°Ü¡£
 function Battle.SetGainMode(BattleIndex, Mod) end
 
----è·å–æˆ˜æ–—ç±»å‹ï¼Œå¦‚æ™®é€šæˆ˜ã€PVPæˆ˜ç­‰ã€‚
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œä¸ºEncountã€PVEæˆ–PVPå‡½æ•°çš„è¿”å›å€¼ã€‚
----@return any æˆ˜æ–—ç±»å‹ï¼Œå…·ä½“å‚ç…§æˆ˜æ–—ç±»å‹å¸¸é‡ã€‚
+---»ñÈ¡Õ½¶·ÀàĞÍ£¬ÈçÆÕÍ¨Õ½¡¢PVPÕ½µÈ¡£
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬ÎªEncount¡¢PVE»òPVPº¯ÊıµÄ·µ»ØÖµ¡£
+---@return any Õ½¶·ÀàĞÍ£¬¾ßÌå²ÎÕÕÕ½¶·ÀàĞÍ³£Á¿¡£
 function Battle.GetType(BattleIndex) end
 
----è·å–æˆ˜æ–—å¥–åŠ±æ¨¡å¼ï¼Œå¦‚å¥–åŠ±ç»éªŒã€å¥–åŠ±DPã€‚
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œä¸ºEncountã€PVEæˆ–PVPå‡½æ•°çš„è¿”å›å€¼ã€‚
----@return any æˆ˜æ–—å¥–åŠ±ç±»å‹ï¼Œå…·ä½“å‚ç…§æˆ˜æ–—ç±»å‹å¸¸é‡ã€‚
+---»ñÈ¡Õ½¶·½±ÀøÄ£Ê½£¬Èç½±Àø¾­Ñé¡¢½±ÀøDP¡£
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬ÎªEncount¡¢PVE»òPVPº¯ÊıµÄ·µ»ØÖµ¡£
+---@return any Õ½¶·½±ÀøÀàĞÍ£¬¾ßÌå²ÎÕÕÕ½¶·ÀàĞÍ³£Á¿¡£
 function Battle.GetGainMode(BattleIndex) end
 
----è·å–æˆ˜æ–—èƒœåˆ©æ–¹ã€‚
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œä¸ºEncountã€PVEæˆ–PVPå‡½æ•°çš„è¿”å›å€¼ã€‚
----@return any 0æˆ–è€…1ã€‚ 0è¡¨ç¤ºæˆ˜æ–—ä¸‹æ–¹ï¼Œå³0-9ä½ç½®çš„ç©å®¶ï¼›1è¡¨ç¤ºä¸Šæ–¹ï¼Œå³10-19ä½ç½®çš„ç©å®¶ã€‚
+---»ñÈ¡Õ½¶·Ê¤Àû·½¡£
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬ÎªEncount¡¢PVE»òPVPº¯ÊıµÄ·µ»ØÖµ¡£
+---@return any 0»òÕß1¡£ 0±íÊ¾Õ½¶·ÏÂ·½£¬¼´0-9Î»ÖÃµÄÍæ¼Ò£»1±íÊ¾ÉÏ·½£¬¼´10-19Î»ÖÃµÄÍæ¼Ò¡£
 function Battle.GetWinSide(BattleIndex) end
 
----è®©æŒ‡å®šç©å®¶å¯¹è±¡åŠ å…¥å¦ä¸€ä¸ªç©å®¶å¯¹è±¡çš„æˆ˜æ–—ä¸­ï¼Œä¹Ÿå°±æ˜¯è®©CharIndex2åŠ å…¥CharIndex1çš„æˆ˜æ–—ï¼ˆç±»ä¼¼çŸ³å™¨æ—¶ä»£æ±‚åŠ©å¸®åŠ©ï¼‰ã€‚ä½¿ç”¨å‰å…ˆç»„é˜Ÿ
----@param CharIndex1  æ•°å€¼å‹ ç›®æ ‡çš„å¯¹è±¡indexï¼Œåœ¨æˆ˜æ–—ä¸­çš„ç©å®¶ã€‚
----@param CharIndex2  æ•°å€¼å‹ ç›®æ ‡çš„ å¯¹è±¡indexï¼Œä¸åœ¨æˆ˜æ–—ä¸­çš„ç©å®¶ã€‚
----@return any 0ä¸ºæˆåŠŸï¼Œå…¶ä»–å¤±è´¥ã€‚
+---ÈÃÖ¸¶¨Íæ¼Ò¶ÔÏó¼ÓÈëÁíÒ»¸öÍæ¼Ò¶ÔÏóµÄÕ½¶·ÖĞ£¬Ò²¾ÍÊÇÈÃCharIndex2¼ÓÈëCharIndex1µÄÕ½¶·£¨ÀàËÆÊ¯Æ÷Ê±´úÇóÖú°ïÖú£©¡£Ê¹ÓÃÇ°ÏÈ×é¶Ó
+---@param CharIndex1  ÊıÖµĞÍ Ä¿±êµÄ¶ÔÏóindex£¬ÔÚÕ½¶·ÖĞµÄÍæ¼Ò¡£
+---@param CharIndex2  ÊıÖµĞÍ Ä¿±êµÄ ¶ÔÏóindex£¬²»ÔÚÕ½¶·ÖĞµÄÍæ¼Ò¡£
+---@return any 0Îª³É¹¦£¬ÆäËûÊ§°Ü¡£
 function Battle.JoinBattle(CharIndex1, CharIndex2) end
 
----è®©æŒ‡å®šç©å®¶é€€å‡ºå½“å‰æˆ˜æ–—ã€‚
----@param CharIndex  æ•°å€¼å‹ ç›®æ ‡çš„å¯¹è±¡indexï¼Œåœ¨æˆ˜æ–—ä¸­çš„ç©å®¶ã€‚
----@return any 0ä¸ºæˆåŠŸï¼Œå…¶ä»–å¤±è´¥ã€‚
+---ÈÃÖ¸¶¨Íæ¼ÒÍË³öµ±Ç°Õ½¶·¡£
+---@param CharIndex  ÊıÖµĞÍ Ä¿±êµÄ¶ÔÏóindex£¬ÔÚÕ½¶·ÖĞµÄÍæ¼Ò¡£
+---@return any 0Îª³É¹¦£¬ÆäËûÊ§°Ü¡£
 function Battle.ExitBattle(CharIndex) end
 
----ä¸ºéPVPçš„æˆ˜æ–—è®¾ç½®æˆ˜æ–—èƒœåˆ©äº‹ä»¶çš„å›è°ƒå‡½æ•°ï¼Œç”±Luaå¼•æ“å°†Callbackçš„å‚æ•°ä¼ é€’ç»™æŒ‡å®šçš„Callbackå¹¶æ‰§è¡Œã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[PVEWinCallBack]
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexã€‚
----@return number è¿”å›1æˆåŠŸï¼Œè¿”å›0å¤±è´¥ã€‚
+---Îª·ÇPVPµÄÕ½¶·ÉèÖÃÕ½¶·Ê¤ÀûÊÂ¼şµÄ»Øµ÷º¯Êı£¬ÓÉLuaÒıÇæ½«CallbackµÄ²ÎÊı´«µİ¸øÖ¸¶¨µÄCallback²¢Ö´ĞĞ¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[PVEWinCallBack]
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index¡£
+---@return number ·µ»Ø1³É¹¦£¬·µ»Ø0Ê§°Ü¡£
 function Battle.SetWinEvent(DoFile, FuncName, BattleIndex) end
 
----WinEventå›è°ƒå‡½æ•°
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
----@param CharIndex  æ•°å€¼å‹ å“åº”äº‹ä»¶çš„å¯¹è±¡indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---WinEvent»Øµ÷º¯Êı
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
+---@param CharIndex  ÊıÖµĞÍ ÏìÓ¦ÊÂ¼şµÄ¶ÔÏóindex£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function BattleIndex, CharIndex) end
 
----ä¸ºPVPçš„æˆ˜æ–—è®¾ç½®æˆ˜æ–—èƒœåˆ©äº‹ä»¶çš„å›è°ƒå‡½æ•°ï¼Œç”±Luaå¼•æ“å°†Callbackçš„å‚æ•°ä¼ é€’ç»™æŒ‡å®šçš„Callbackå¹¶æ‰§è¡Œã€‚
----@param Dofile  å­—ç¬¦ä¸² è¦åŠ è½½çš„è„šæœ¬æ–‡ä»¶åï¼Œå¦‚æœä¸ºå½“å‰æ–‡ä»¶ï¼Œåˆ™å®šä¹‰nilå³å¯
----@param FuncName  å­—ç¬¦ä¸² è§¦å‘çš„Luaå‡½æ•°çš„åç§°ï¼Œè¯¥å‡½æ•°çš„ç”³æ˜æ ¼å¼è¯·å‚è€ƒ[PVEWinCallBack]
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexã€‚
----@return number è¿”å›1æˆåŠŸï¼Œè¿”å›0å¤±è´¥ã€‚
+---ÎªPVPµÄÕ½¶·ÉèÖÃÕ½¶·Ê¤ÀûÊÂ¼şµÄ»Øµ÷º¯Êı£¬ÓÉLuaÒıÇæ½«CallbackµÄ²ÎÊı´«µİ¸øÖ¸¶¨µÄCallback²¢Ö´ĞĞ¡£
+---@param Dofile  ×Ö·û´® Òª¼ÓÔØµÄ½Å±¾ÎÄ¼şÃû£¬Èç¹ûÎªµ±Ç°ÎÄ¼ş£¬Ôò¶¨Òånil¼´¿É
+---@param FuncName  ×Ö·û´® ´¥·¢µÄLuaº¯ÊıµÄÃû³Æ£¬¸Ãº¯ÊıµÄÉêÃ÷¸ñÊ½Çë²Î¿¼[PVEWinCallBack]
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index¡£
+---@return number ·µ»Ø1³É¹¦£¬·µ»Ø0Ê§°Ü¡£
 function Battle.SetPVPWinEvent(DoFile, FuncName, BattleIndex) end
 
----PVPWinEventå›è°ƒå‡½æ•°
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œè¯¥å€¼ç”±Luaå¼•æ“ä¼ é€’ç»™æœ¬å‡½æ•°ã€‚
+---PVPWinEvent»Øµ÷º¯Êı
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬¸ÃÖµÓÉLuaÒıÇæ´«µİ¸ø±¾º¯Êı¡£
 ---@return any 
 function BattleIndex) end
 
----è·å–æˆ˜æ–—å½“å‰å›åˆæ•°ã€‚
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œä¸ºEncountã€PVEæˆ–PVPå‡½æ•°çš„è¿”å›å€¼ã€‚
----@return any æˆ˜æ–—å›åˆæ•°ã€‚
+---»ñÈ¡Õ½¶·µ±Ç°»ØºÏÊı¡£
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬ÎªEncount¡¢PVE»òPVPº¯ÊıµÄ·µ»ØÖµ¡£
+---@return any Õ½¶·»ØºÏÊı¡£
 function Battle.GetTurn(BattleIndex) end
 
----åˆ¤æ–­å½“å‰å¯¹è±¡æ˜¯å¦åœ¨æˆ˜æ–—ä¸­ä¸”å¤„äºç­‰å¾…è¾“å…¥æˆ˜æ–—æŒ‡ä»¤çš„çŠ¶æ€ã€‚
----@param CharIndex  æ•°å€¼å‹ å¯¹è±¡indexï¼Œå¯ä»¥ä¸ºç©å®¶ã€å® ç‰©ã€æ•Œäººã€‚
----@return any 0 ä¸ºå¦ï¼Œ 1ä¸ºæ˜¯
+---ÅĞ¶Ïµ±Ç°¶ÔÏóÊÇ·ñÔÚÕ½¶·ÖĞÇÒ´¦ÓÚµÈ´ıÊäÈëÕ½¶·Ö¸ÁîµÄ×´Ì¬¡£
+---@param CharIndex  ÊıÖµĞÍ ¶ÔÏóindex£¬¿ÉÒÔÎªÍæ¼Ò¡¢³èÎï¡¢µĞÈË¡£
+---@return any 0 Îª·ñ£¬ 1ÎªÊÇ
 function Battle.IsWaitingCommand(CharIndex) end
 
----è®©å¯¹è±¡æ‰§è¡ŒæŒ‡å®šçš„æˆ˜æ–—æ“ä½œï¼Œå¿…é¡»åœ¨å¯¹è±¡Battle.IsWaitingCommand(index)è¿”å›å€¼ä¸º1æ—¶æ‰å¯ä»¥æœ‰æ•ˆä½¿ç”¨ã€‚
----@param CharIndex  æ•°å€¼å‹ ç©å®¶å¯¹è±¡index
----@param com1  æ•°å€¼å‹ CONST.BATTLE_COM
----@param com2  æ•°å€¼å‹ CONST.BATTLE_COM_TARGET
----@param com3  æ•°å€¼å‹ techId
----@return any 0 å¤±è´¥ï¼Œ 1 æˆåŠŸ
+---ÈÃ¶ÔÏóÖ´ĞĞÖ¸¶¨µÄÕ½¶·²Ù×÷£¬±ØĞëÔÚ¶ÔÏóBattle.IsWaitingCommand(index)·µ»ØÖµÎª1Ê±²Å¿ÉÒÔÓĞĞ§Ê¹ÓÃ¡£
+---@param CharIndex  ÊıÖµĞÍ Íæ¼Ò¶ÔÏóindex
+---@param com1  ÊıÖµĞÍ CONST.BATTLE_COM
+---@param com2  ÊıÖµĞÍ CONST.BATTLE_COM_TARGET
+---@param com3  ÊıÖµĞÍ techId
+---@return any 0 Ê§°Ü£¬ 1 ³É¹¦
 function Battle.ActionSelect(CharIndex, com1, com2, com3) end
 
----è·å–å½“å‰æˆ˜æ–—çš„æˆ˜åœºé­”æ³•æ•ˆæœï¼Œå¦‚å±æ€§ç¿»è½¬ã€é­”æ³•å°å°
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—å¯¹è±¡index
----@return number å¤±è´¥è¿”å›0ï¼Œå¦åˆ™è¿”å›3ä¸ªå€¼ï¼Œåˆ†åˆ«æ˜¯æˆ˜åœºé­”æ³•çŠ¶æ€ï¼ˆå‚è€ƒçŠ¶æ€ç±»å‹è¯´æ˜ï¼‰ã€çŠ¶æ€æŒç»­å›åˆã€çŠ¶æ€å±æ€§ã€‚
+---»ñÈ¡µ±Ç°Õ½¶·µÄÕ½³¡Ä§·¨Ğ§¹û£¬ÈçÊôĞÔ·­×ª¡¢Ä§·¨·âÓ¡
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·¶ÔÏóindex
+---@return number Ê§°Ü·µ»Ø0£¬·ñÔò·µ»Ø3¸öÖµ£¬·Ö±ğÊÇÕ½³¡Ä§·¨×´Ì¬£¨²Î¿¼×´Ì¬ÀàĞÍËµÃ÷£©¡¢×´Ì¬³ÖĞø»ØºÏ¡¢×´Ì¬ÊôĞÔ¡£
 function Battle.GetBattleFieldAttribute(BattleIndex) end
 
----è®¾ç½®å½“å‰æˆ˜æ–—çš„æˆ˜åœºé­”æ³•æ•ˆæœï¼Œå¦‚å±æ€§ç¿»è½¬ã€é­”æ³•å°å°
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—å¯¹è±¡index
----@param Attribute  æ•°å€¼å‹ æˆ˜åœºçŠ¶æ€ CONST.BATTLE_FIELD_ATTR
----@param TurnCount  æ•°å€¼å‹ çŠ¶æ€æŒç»­å›åˆæ•°
----@param AttributePower  æ•°å€¼å‹ çŠ¶æ€å±æ€§
----@return number å¤±è´¥è¿”å›0ï¼Œå¦åˆ™è¿”å›3ä¸ªå€¼ï¼Œåˆ†åˆ«æ˜¯æ–°çš„æˆ˜åœºé­”æ³•çŠ¶æ€ï¼ˆå‚è€ƒçŠ¶æ€ç±»å‹è¯´æ˜ï¼‰ã€çŠ¶æ€æŒç»­å›åˆã€çŠ¶æ€å±æ€§ã€‚
+---ÉèÖÃµ±Ç°Õ½¶·µÄÕ½³¡Ä§·¨Ğ§¹û£¬ÈçÊôĞÔ·­×ª¡¢Ä§·¨·âÓ¡
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·¶ÔÏóindex
+---@param Attribute  ÊıÖµĞÍ Õ½³¡×´Ì¬ CONST.BATTLE_FIELD_ATTR
+---@param TurnCount  ÊıÖµĞÍ ×´Ì¬³ÖĞø»ØºÏÊı
+---@param AttributePower  ÊıÖµĞÍ ×´Ì¬ÊôĞÔ
+---@return number Ê§°Ü·µ»Ø0£¬·ñÔò·µ»Ø3¸öÖµ£¬·Ö±ğÊÇĞÂµÄÕ½³¡Ä§·¨×´Ì¬£¨²Î¿¼×´Ì¬ÀàĞÍËµÃ÷£©¡¢×´Ì¬³ÖĞø»ØºÏ¡¢×´Ì¬ÊôĞÔ¡£
 function Battle.SetBattleFieldAttribute(BattleIndex, Attribute, TurnCount, AttributePower) end
 
----è®¾ç½®è¿æˆ˜ã€‚
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—indexï¼Œä¸ºEncountã€PVEæˆ–PVPå‡½æ•°çš„è¿”å›å€¼ã€‚
----@param encountIndex æ•°å€¼å‹ -1=å–æ¶ˆè¿æˆ˜ï¼Œ  -2=luaç”Ÿæˆè¿æˆ˜
----@param Flg  æ•°å€¼å‹ luaè¿æˆ˜å‚æ•°
----@return any 0ä¸ºæˆåŠŸ,å…¶ä»–å¤±è´¥ã€‚
+---ÉèÖÃÁ¬Õ½¡£
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index£¬ÎªEncount¡¢PVE»òPVPº¯ÊıµÄ·µ»ØÖµ¡£
+---@param encountIndex ÊıÖµĞÍ -1=È¡ÏûÁ¬Õ½£¬  -2=luaÉú³ÉÁ¬Õ½
+---@param Flg  ÊıÖµĞÍ luaÁ¬Õ½²ÎÊı
+---@return any 0Îª³É¹¦,ÆäËûÊ§°Ü¡£
 function Battle.SetNextBattle(BattleIndex,encountIndex, Flg) end
 
----è·å¾—è§’è‰²æˆ˜æ–—ä¸­çœŸå®ä½ç½®
----@param battleIndex æ•°å€¼å‹ æˆ˜æ–—index
----@param charIndex æ•°å€¼å‹ è§’è‰²index
----@return any è§’è‰²æˆ˜æ–—ä¸­çœŸå®ä½ç½®ï¼ŒèŒƒå›´0-19
+---»ñµÃ½ÇÉ«Õ½¶·ÖĞÕæÊµÎ»ÖÃ
+---@param battleIndex ÊıÖµĞÍ Õ½¶·index
+---@param charIndex ÊıÖµĞÍ ½ÇÉ«index
+---@return any ½ÇÉ«Õ½¶·ÖĞÕæÊµÎ»ÖÃ£¬·¶Î§0-19
 function Battle.GetPos(battleIndex,charIndex) end
 
----è·å–è¿æˆ˜id
+---»ñÈ¡Á¬Õ½id
 ---@param battleIndex number
 ---@param 
 ---@return number encountIndex
 function Battle.GetNextBattle(battleIndex) end
 
----è®¡ç®—å±æ€§ä¼¤å®³æ¯”ç‡ï¼ˆ10å±æ€§=100ï¼‰
----@param ap number[] è¿›æ”»æ–¹ï¼Œ4å±æ€§ï¼Œåœ°ã€æ°´ã€ç«ã€é£
----@param dp number[] é˜²å®ˆæ–¹4å±æ€§ï¼Œåœ°ã€æ°´ã€ç«ã€é£
----@return any å±æ€§ä¼¤å®³æ¯”ç‡
+---¼ÆËãÊôĞÔÉËº¦±ÈÂÊ£¨10ÊôĞÔ=100£©
+---@param ap number[] ½ø¹¥·½£¬4ÊôĞÔ£¬µØ¡¢Ë®¡¢»ğ¡¢·ç
+---@param dp number[] ·ÀÊØ·½4ÊôĞÔ£¬µØ¡¢Ë®¡¢»ğ¡¢·ç
+---@return any ÊôĞÔÉËº¦±ÈÂÊ
 function Battle.CalcPropScore(ap, dp) end
 
----è·å–å½“å‰åŠ¨ä½œæŠ€èƒ½å‚æ•°
+---»ñÈ¡µ±Ç°¶¯×÷¼¼ÄÜ²ÎÊı
 ---@param charIndex number
----@param type string å–å€¼ DD  AR  ç­‰
----@return any å½“å‰åŠ¨ä½œæŠ€èƒ½å‚æ•°
+---@param type string È¡Öµ DD  AR  µÈ
+---@return any µ±Ç°¶¯×÷¼¼ÄÜ²ÎÊı
 function Battle.GetTechOption(charIndex, type) end
 
----è·å–ç§æ—å…‹åˆ¶å…³ç³»
+---»ñÈ¡ÖÖ×å¿ËÖÆ¹ØÏµ
 ---@param attackerIndex number
 ---@param defenceIndex number
----@return any å…‹åˆ¶æ¯”ç‡
+---@return any ¿ËÖÆ±ÈÂÊ
 function Battle.CalcAttributeDmgRate(attackerIndex, defenceIndex) end
 
----è®¡ç®—ç§æ—ä¼¤å®³
----@param a number æ”»å‡»æ–¹ç§æ—
----@param b number é˜²å¾¡æ–¹ç§æ—
----@return any ç§æ—ä¼¤å®³
+---¼ÆËãÖÖ×åÉËº¦
+---@param a number ¹¥»÷·½ÖÖ×å
+---@param b number ·ÀÓù·½ÖÖ×å
+---@return any ÖÖ×åÉËº¦
 function Battle.CalcTribeRate(a, b) end
 
----è®¡ç®—å½“å‰æˆ˜æ–—ç§æ—ä¼¤å®³
----@param aIndex number æ”»å‡»æ–¹index
----@param bIndex number é˜²å¾¡æ–¹index
----@return any å½“å‰æˆ˜æ–—ç§æ—ä¼¤å®³
+---¼ÆËãµ±Ç°Õ½¶·ÖÖ×åÉËº¦
+---@param aIndex number ¹¥»÷·½index
+---@param bIndex number ·ÀÓù·½index
+---@return any µ±Ç°Õ½¶·ÖÖ×åÉËº¦
 function Battle.CalcTribeDmgRate(aIndex, bIndex) end
 
----è§£é™¤WinEvent
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—å¯¹è±¡index
+---½â³ıWinEvent
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·¶ÔÏóindex
 ---@return any 
 function Battle.UnsetWinEvent(battleIndex) end
 
----è§£é™¤PVPWinEvent
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—å¯¹è±¡index
+---½â³ıPVPWinEvent
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·¶ÔÏóindex
 ---@return any 
 function Battle.UnsetPVPWinEvent(battleIndex) end
 
----è®¾ç½®å½“å‰å›åˆæ•°
+---ÉèÖÃµ±Ç°»ØºÏÊı
 ---@param battleIndex number 
----@param turn number å›åˆæ•°
+---@param turn number »ØºÏÊı
 ---@return any 
 function Battle.SetTurn(battleIndex, turn) end
 
----ä¸ºå½“å‰å¤„ç†çš„æˆ˜æ–—æ·»åŠ ä¿¡æ¯(å¦‚é‡Šæ”¾æŠ€èƒ½å–Šè¯)
+---Îªµ±Ç°´¦ÀíµÄÕ½¶·Ìí¼ÓĞÅÏ¢(ÈçÊÍ·Å¼¼ÄÜº°»°)
 ---@param msg string
 ---@return any 
 function Battle.AppendBattleMsg(msg) end
 
----è·å–æˆ˜æ–—ä¿¡æ¯
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—å¯¹è±¡index
+---»ñÈ¡Õ½¶·ĞÅÏ¢
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·¶ÔÏóindex
 ---@param charIndex number
----@param dataline  æ•°å€¼å‹ å¯¹åº”æ CONST.BATTLE_ENTRY_* 
----@return any æˆ˜æ–—ä¿¡æ¯
+---@param dataline  ÊıÖµĞÍ ¶ÔÓ¦À¸CONST.BATTLE_ENTRY_* 
+---@return any Õ½¶·ĞÅÏ¢
 function Battle.GetEntryData(battleIndex,charIndex,dataline) end
 
----è®¾ç½®æˆ˜æ–—ä¿¡æ¯
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—å¯¹è±¡index
+---ÉèÖÃÕ½¶·ĞÅÏ¢
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·¶ÔÏóindex
 ---@param charIndex number
----@param dataline  æ•°å€¼å‹ å¯¹åº”æ CONST.BATTLE_ENTRY_* 
----@param value  æ•°å€¼å‹ å¯¹åº”æ ä¿¡æ¯
+---@param dataline  ÊıÖµĞÍ ¶ÔÓ¦À¸CONST.BATTLE_ENTRY_* 
+---@param value  ÊıÖµĞÍ ¶ÔÓ¦À¸ĞÅÏ¢
 ---@return any 
 function Battle.SetEntryData(battleIndex,charIndex,dataline,value) end
 
----åˆ¤å®šæˆ˜æ–—æ˜¯å¦æ˜¯BOSSæˆ˜
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—index
----@return any 0 å¦ 1 æ˜¯
+---ÅĞ¶¨Õ½¶·ÊÇ·ñÊÇBOSSÕ½
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index
+---@return any 0 ·ñ 1 ÊÇ
 function Battle.IsBossBattle(BattleIndex) end
 
----è·å–æˆ˜æ–—ä¹±æ•ç‡
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—index
----@return any è¿”å›æ˜¯å¦å¯ç”¨ï¼Œæ¦‚ç‡
+---»ñÈ¡Õ½¶·ÂÒÃôÂÊ
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index
+---@return any ·µ»ØÊÇ·ñÆôÓÃ£¬¸ÅÂÊ
 function Battle.GetDexRearrangeRate(BattleIndex) end
 
----è®¾ç½®æˆ˜æ–—ä¹±æ•ç‡
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—index
----@param rate æ•°å€¼å‹ 0~100 ä¹±æ•æ¦‚ç‡
+---ÉèÖÃÕ½¶·ÂÒÃôÂÊ
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index
+---@param rate ÊıÖµĞÍ 0~100 ÂÒÃô¸ÅÂÊ
 ---@return any 
 function Battle.SetDexRearrangeRate(BattleIndex,rate) end
 
----è·å–æˆ˜æ–—æœ€å¤§åå‡»æ•°
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—index
----@return any è¿”å›æ˜¯å¦å¯ç”¨ï¼Œæ¦‚ç‡
+---»ñÈ¡Õ½¶·×î´ó·´»÷Êı
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index
+---@return any ·µ»ØÊÇ·ñÆôÓÃ£¬¸ÅÂÊ
 function Battle.GetMaxCounter(BattleIndex) end
 
----è®¾ç½®æˆ˜æ–—æœ€å¤§åå‡»æ•°
----@param BattleIndex  æ•°å€¼å‹ æˆ˜æ–—index
----@param rate æ•°å€¼å‹ æœ€å¤§åå‡»æ•°
+---ÉèÖÃÕ½¶·×î´ó·´»÷Êı
+---@param BattleIndex  ÊıÖµĞÍ Õ½¶·index
+---@param rate ÊıÖµĞÍ ×î´ó·´»÷Êı
 ---@return any 
 function Battle.SetMaxCounter (BattleIndex,rate) end
 
