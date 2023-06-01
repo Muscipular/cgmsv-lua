@@ -178,7 +178,7 @@ function NL.RegGetExpEvent(Dofile, InitFuncName) end
 ---GetExpEvent的回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 ---@param Exp  number 获取的经验值，该值由Lua引擎传递给本函数。
----@return any @返回对象要获取的经验值，如不对经验值操作，请不要写return语句或者写return Exp; 这个函数比道具对经验的加成优先，也就是说道具加成的经验值是在本函数返回值得基础上计算的。
+---@return number @返回对象要获取的经验值，如不对经验值操作，请不要写return语句或者写return Exp; 这个函数比道具对经验的加成优先，也就是说道具加成的经验值是在本函数返回值得基础上计算的。
 function GetExpEventCallBack(CharIndex, Exp) end
 
 ---创建一个对象获取战斗技能经验时触发的Lua函数。
@@ -265,7 +265,8 @@ function NL.RegSealEvent(Dofile, InitFuncName) end
 ---SealEvent的回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 ---@param EnemyIndex  number 被封印的怪物对象，该值由Lua引擎传递给本函数。
----@param Ret  number 封印的结果，具体请查看下面对RetFlg的值的解析，该值由Lua引擎传递给本函数。RetFlg为服务端对封印动作的判定结果，值可能为负数，也可能为正数，如果为负数则表示封印失败，如果为正数则表示封印成功。 
+---@param Ret  number 封印的结果，具体请查看下面对RetFlg的值的解析，该值由Lua引擎传递给本函数。
+---RetFlg为服务端对封印动作的判定结果，值可能为负数，也可能为正数，如果为负数则表示封印失败，如果为正数则表示封印成功。 <br/>
 ---封印失败返回值对应解析：<br/>
 --- -1 ：被封印对象的类型错误<br/>
 --- -2 ：被封印对象不能作为宠物<br/>
@@ -279,7 +280,7 @@ function NL.RegSealEvent(Dofile, InitFuncName) end
 --- -10 ：使用的封印卡种族不正确<br/>
 --- -11 ：不能封印邪魔系宠物<br/>
 --- -100 ：封印随机几率不足，还原封印随机几率的公式为 abs(rate/100)-1
----@return any @可以直接返回RetFlg参数，也可根据需求返回正数或者负数，返回值将影响玩家封印效果
+---@return number @可以直接返回RetFlg参数，也可根据需求返回正数或者负数，返回值将影响玩家封印效果
 function SealEventCallBack(CharIndex, EnemyIndex, Ret) end
 
 ---当玩家戰鬥中發出指令的时候会触发该事件

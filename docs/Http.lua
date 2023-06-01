@@ -4,7 +4,7 @@ function Http.Init() end
 
 ---开启Http服务
 ---@param addr string 监听IP,例如  "0.0.0.0"
----@param port integer 端口 建议10000以上
+---@param port number 端口 建议10000以上
 ---@return number @1：成功，其他为失败
 function Http.Start(addr, port) end
 
