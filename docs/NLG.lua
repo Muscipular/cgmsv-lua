@@ -266,24 +266,20 @@ function NLG.RaiseCrash() end
 
 ---宠物乱射(全局开启)
 ---@param enable boolean 启用 1 不启用 0
----@return any @
 function NLG.SetPetRandomShot(enable) end
 
 ---宠物乱射(某种宠物开启)
 ---@param enable boolean 启用 1 不启用 0
 ---@param petId number 宠物id（EnemyBaseId）
----@return any @
 function NLG.SetPetRandomShot(petId, enable) end
 
 ---设置乱敏概率
 ---@param rate integer 0-100
 ---@param mode  nil|0|1|2 0 @0=PVE&PVP 1=PVE 2=PVP
----@return any @
 function NLG.SetDexRearrangeRate(rate, mode) end
 
 ---修改暴击时伤害计算
 ---@param mode number|boolean 取值： 0 = 普通模式 1 = 倍率模式 2 = 无 true = 普通模式 false = 无
 ---@param val number 倍率，默认1.5倍
----@return any @
 function NLG.SetCriticalDamageAddition(mode, val) end
 
