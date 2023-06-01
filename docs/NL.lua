@@ -929,7 +929,7 @@ function NL.RegHttpRequestEvent(Dofile, InitFuncName) end
 ---HttpRequestEvent的回调函数
 ---@param method string
 ---@param api string API名字
----@param params ParamType 参数
+---@param params {string:string} 参数
 ---@param body string body内容
 ---@return string @返回内容
 function HttpRequestCallBack(method, api, params, body) end
