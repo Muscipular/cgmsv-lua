@@ -1,7 +1,3 @@
----@alias string string
----@alias number number
-
-
 ---普通说话，可以对全服务器人说。
 ---@param ToIndex  number 说话目标的 对象index，如果为-1，则对全服务器玩家说
 ---@param TalkerIndex  number 说话者的 对象index，如果为-1，则不显示对象名
@@ -52,7 +48,7 @@ function NLG.TalkToFloor(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 
 ---检查 对象的改变并且向所有有关联的玩家发送该对象的数据更新封包。
 ---@param CharIndex  number 目标对象index。
----@return any @
+---@return number @
 function NLG.UpChar(CharIndex) end
 
 ---生成并发送对话框
@@ -62,7 +58,7 @@ function NLG.UpChar(CharIndex) end
 ---@param ButtonType  number 对话框包含的按钮，查阅附录对话框按钮
 ---@param SeqNo  number 自定义数值，用于识别不同的对话框事件响应, 具体会在WindowTalkedCallBack中调用
 ---@param Data  string 对话框的内容,根据不同的对话框类别,有不同的格式,具体会在附录中说明
----@return any @0表示成功，其他表示失败。
+---@return number @0表示成功，其他表示失败。
 function NLG.ShowWindowTalked(ToIndex,WinTalkIndex,WindowType,ButtonType,SeqNo,Data) end
 
 ---ShowWindowTalked的回调函数
@@ -71,47 +67,44 @@ function NLG.ShowWindowTalked(ToIndex,WinTalkIndex,WindowType,ButtonType,SeqNo,D
 ---@param SeqNo  number 来源对话框的ID，该值与NLG.ShowWindowTalked中的定义应该对应，该值由Lua引擎传递给本函数。
 ---@param Select  number 玩家所按下的按钮的值或选择框中的选项的值，该值由Lua引擎传递给本函数。
 ---@param Data  string 客户端所传递回来的值，这个值将根据不同的窗口类型而不同，该值由Lua引擎传递给本函数。
----@return any @
 function WindowTalkedCallBack(CharIndex, TargetCharIndex, SeqNo, Select, Data) end
 
 ---设置对象的动作
 ---@param CharIndex  number 目标对象index。
 ---@param Action  number 动作编号，有兴趣的可以从0开始一个一个尝试。
----@return any @0表示成功，其他表示失败。
+---@return number @0表示成功，其他表示失败。
 function NLG.SetAction(CharIndex, Action) end
 
 ---让对象向指定方向移动一格
 ---@param CharIndex  number 目标对象index。
----@param Action  number 范围0-7，分别表示游戏中对应的八个方向。
----@return any @0表示成功，其他表示失败。
+---@param Dir  number 范围0-7，分别表示游戏中对应的八个方向。
+---@return number @0表示成功，其他表示失败。
 function NLG.WalkMove(CharIndex, Dir) end
 
 ---检查对象是否在指定距离之内（且面向目标对象）
 ---@param CharIndex  number 自身对象index。
 ---@param TargetCharIndex  number 目标对象index。
 ---@param Distance  number 距离
----@return any @0: 不在距离内 1: 在距离内
+---@return number @0: 不在距离内 1: 在距离内
 function NLG.CheckInFront(CharIndex, TargetCharIndex, Distance) end
 
 ---检查对象是否面对面且在对话范围内（两格）
 ---@param CharIndex  number 自身对象index。
 ---@param TargetCharIndex  number 目标对象index。
----@return any @0: 不在距离内 1: 在距离内
+---@return number @0: 不在距离内 1: 在距离内
 function NLG.CanTalk(CharIndex, TargetCharIndex) end
 
 ---检查对象是否面对面且在对话范围内（两格）
 ---@param CharIndex  number 自身对象index。
 ---@param TargetCharIndex  number 目标对象index。
----@return any @0: 不在距离内 1: 在距离内
+---@return number @0: 不在距离内 1: 在距离内
 function NLG.CheckTalkRange(CharIndex, TargetCharIndex) end
 
 ---获取在线玩家数量
----@param 
 ---@return number @返回在线玩家数，失败返回-1。
 function NLG.GetPlayerNum() end
 
 ---获取在线玩家数量
----@param 
 ---@return number @返回在线玩家数，失败返回-1。
 function NLG.GetOnLinePlayer() end
 
@@ -145,7 +138,7 @@ function NLG.Walkable(MapID, FloorID, X, Y) end
 ---获取目标地图所有的玩家，并以table形式返回。
 ---@param MapID  number 目标地图的类型，0为固定地图1为随机地图。
 ---@param FloorID  number 地图编号
----@return number @对返回值使用Lua函数type()来进行判断，如果返回值为”table”则为玩家的对象index的集合，否则表示目标地图无玩家或者无目标地图。
+---@return number[]|nil @对返回值使用Lua函数type()来进行判断，如果返回值为”table”则为玩家的对象index的集合，否则表示目标地图无玩家或者无目标地图。
 function NLG.GetMapPlayer(MapID, FloorID) end
 
 ---让目标玩家断开连接。
@@ -185,12 +178,12 @@ function NLG.WatchBattle(CharIndex, TargetCharIndex) end
 ---然玩家CharIndex观看TargetCharIndex的当前战斗（进入观战）。
 ---@param CharIndex  number 自身对象index。
 ---@param TargetCharIndex  number 目标对象index。
----@return any @1表示成功，其他表示失败。
+---@return number @1表示成功，其他表示失败。
 function NLG.WatchEntry(CharIndex,TargetCharIndex) end
 
 ---设置NPC对话框文字居中。
 ---@param Message  string 要居中设置的文本
----@return any @居中后的文本。
+---@return string @居中后的文本。
 function NLG.c(Message) end
 
 ---设置指定地图的名字。
@@ -207,7 +200,7 @@ function NLG.SetMapName(MapID, FloorID, Name) end
 function NLG.GetMapName(MapID, FloorID) end
 
 ---通过玩家帐号找玩家对象index。
----@param CharIndex  string 指定的帐号/Cdkey。
+---@param CdKey  string 指定的帐号/Cdkey。
 ---@return number @返回-1代表失败，其他为指定账号目前在线玩家的对象index。
 function NLG.FindUser(CdKey) end
 
@@ -219,61 +212,56 @@ function NLG.UpdateParty(CharIndex) end
 ---通过Gmsv自身的随机种子取随机数，不用考虑种子的问题，能尽可能确保随机数的随机性。
 ---@param min  number 随机数下限。
 ---@param max  number 随机数上限。
----@return any @返回满足参数的随机数。
+---@return number @返回满足参数的随机数。
 function NLG.Rand(min, max) end
 
 ---给指定对象（人物、NPC、宠物）头顶赋予图档，只要是游戏客户端拥有的图档均可调用。
 ---@param CharIndex  number 接收公告的对象index，值为-1时给全服在线玩家发送。
 ---@param HeadGraNo  number 头饰的图档ID，客户端的任意图档ID。
----@return any @1表示成功，其他表示失败。
+---@return number @1表示成功，其他表示失败。
 function NLG.SetHeadIcon(CharIndex, HeadGraNo) end
 
 ---获取玩家的IP地址。
 ---@param CharIndex  number 目标对象index。
----@return any @对象的IP地址，仅对玩家对象有效
+---@return string @对象的IP地址，仅对玩家对象有效
 function NLG.GetIp(CharIndex) end
 
 ---获取玩家的MAC地址。
 ---@param CharIndex  number 目标对象index。
----@return any @对象的MAC地址，仅对玩家对象有效
+---@return string @对象的MAC地址，仅对玩家对象有效
 function NLG.GetMAC(CharIndex) end
 
 ---获取游戏中的当前时间，如中午，黄昏，夜晚，清晨。
----@param 
----@return any @0 ：白天 | 1 ：黄昏 | 2 ：夜晚 | 3 ：清晨
+---@return number @0 ：白天 | 1 ：黄昏 | 2 ：夜晚 | 3 ：清晨
 function NLG.GetGameTime() end
 
 ---整理玩家背包。
 ---@param CharIndex  number 目标对象index。
----@return any @0为失败，1为成功。
+---@return number @0为失败，1为成功。
 function NLG.SortItem(CharIndex) end
 
 ---设置种族伤害
 ---@param a number 攻击方种族
 ---@param b number 防御方种族
 ---@param rate number 伤害比率
----@return any @number 伤害比率
+---@return number @number 伤害比率
 function NLG.SetTribeRate(a, b, rate) end
 
 ---获取所有玩家，并以table形式返回。
----@param 
 ---@return number @table 玩家index
 function NLG.GetPlayer() end
 
 ---降低cpu使用
 ---@param ms number 小于0时关闭，大于或等于0时为Sleep时间，不建议大于2
----@return any @
 function NLG.LowCpuUsage(ms) end
 
 ---打开银行
 ---@param npcOrPlayer number npc或者玩家index
 ---@param player number 玩家index
----@return any @
+---@return number @
 function NLG.OpenBank(npcOrPlayer, player) end
 
 ---模拟崩端
----@param 
----@return any @
 function NLG.RaiseCrash() end
 
 ---宠物乱射(全局开启)

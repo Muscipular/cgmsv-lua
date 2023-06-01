@@ -225,7 +225,6 @@ function RightClickCallBack(CharIndex, TargetCharIndex) end
 function NL.RegShutDownEvent(Dofile, InitFuncName) end
 
 ---ShutDownEvent的回调函数
----@param 
 ---@return number @返回0即可。
 function ShutDownCallBack() end
 
@@ -935,8 +934,9 @@ function NL.RegBattleHealCalculateEvent(Dofile, InitFuncName) end
 ---@param defCom2  number 防御者攻击動作的目標對象的位置，该值由Lua引擎传递给本函数。
 ---@param defCom3  number 防御者使用的所對應的tech的ID，该值由Lua引擎传递给本函数。
 ---@param flg  number 伤害模式，具体查看CONST.HealDamageFlags
+---@param ExFlg  number 伤害模式2，具体查看CONST.DamageFlagsEx
 ---@return number @治疗值
-function BattleHealCalculateCallBack(charIndex, defCharIndex, oriheal, heal, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg) end
+function BattleHealCalculateCallBack(charIndex, defCharIndex, oriheal, heal, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, ExFlg) end
 
 ---创建一个耗魔时触发的事件
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
