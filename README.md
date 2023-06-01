@@ -172,4 +172,4 @@ useModule('Welcome') --加载Welcome
 - `Recipe.RemoveRecipe` 删除配方
 - `regGlobalEvent` 注册全局事件，代替Delegate，Delegate也是包装这个方法
 - `removeGlobalEvent` 移除注册事件
-- 更多接口参考 [docs.lua](docs.lua)
+- 更多接口参考 [docs.lua](docs/docs.lua)
