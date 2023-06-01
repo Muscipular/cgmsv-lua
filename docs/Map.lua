@@ -1,5 +1,5 @@
 ---ªÒ»°√‘π¨Id
----@param floor integer
+---@param floor number
 ---@return number @√‘π¨id
 function Map.GetDungeonId(floor) end
 

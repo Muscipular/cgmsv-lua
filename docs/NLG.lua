@@ -274,7 +274,7 @@ function NLG.SetPetRandomShot(enable) end
 function NLG.SetPetRandomShot(petId, enable) end
 
 ---ÉèÖÃÂÒÃô¸ÅÂÊ
----@param rate integer 0-100
+---@param rate number 0-100
 ---@param mode  nil|0|1|2 0 @0=PVE&PVP 1=PVE 2=PVP
 function NLG.SetDexRearrangeRate(rate, mode) end
 
