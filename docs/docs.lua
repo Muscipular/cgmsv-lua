@@ -1,3 +1,4 @@
+--[[
 ---@since HOOK:v0.2.30
 ---@return string
 function getHookVer() end
@@ -975,3 +976,4 @@ function Http.RemoveMountPoint(path) end
 ---@param body string bodyÄÚÈİ
 ---@return string body ·µ»ØÄÚÈİ
 function Http.HttpRequestEventCallback(method, api, params, body) end
+--]]--

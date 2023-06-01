@@ -27,7 +27,7 @@ function Char.NowEvent(charIndex, flag, value) end
 ---@param charIndex number 目标的 对象index。
 ---@param flag number 任务旗标。
 ---@param value 0|1 设置的目标旗标状态[如果该参数为0，则清空目标的该旗标的EndEvent状态，如果参数为1，则设置该旗标为EndEvent状态]
-function Char.EndEvent(charIndex, flag[, value]) end
+function Char.EndEvent(charIndex, flag, value) end
 
 ---获取目标对象的EndEvent任务旗标。
 ---@param charIndex number 目标的 对象index。
@@ -491,7 +491,7 @@ function Char.RemovePoolItem(charIndex, slot) end
 
 ---把道具交易给指定玩家
 ---@param fromChar number 从谁身上交出去 对象index
----@param slot integer 道具栏位置，范围8-27
+---@param slot number 道具栏位置，范围8-27
 ---@param toChar number 交易给谁 对象index
 ---@return any @
 function Char.TradeItem(fromChar, slot, toChar) end
@@ -567,14 +567,18 @@ function Char.SetPetDepartureState(charIndex, slot, state) end
 
 ---设置宠物战斗状态(批量)
 ---@param charIndex number 目标的 对象index。
----@param state1~5 number 宠物状态，对应CONST.PET_STATE_*
+---@param pet1State number 宠物状态，对应CONST.PET_STATE_*
+---@param pet2State number 宠物状态，对应CONST.PET_STATE_*
+---@param pet3State number 宠物状态，对应CONST.PET_STATE_*
+---@param pet4State number 宠物状态，对应CONST.PET_STATE_*
+---@param pet5State number 宠物状态，对应CONST.PET_STATE_*
 ---@return number @
 function Char.SetPetDepartureStateAll(charIndex, pet1State, pet2State, pet3State, pet4State, pet5State) end
 
 ---直接交易宠物
----@param fromChar integer 从谁身上交出 CharIndex
----@param slot integer 宠物栏位置，0-4
----@param toChar integer 交易给谁 CharIndex
+---@param fromChar number 从谁身上交出 CharIndex
+---@param slot number 宠物栏位置，0-4
+---@param toChar number 交易给谁 CharIndex
 ---@return number @
 function Char.TradePet(fromChar, slot, toChar) end
 

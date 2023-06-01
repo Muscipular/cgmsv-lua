@@ -126,11 +126,11 @@ function Battle.GetBattleFieldAttribute(BattleIndex) end
 function Battle.SetBattleFieldAttribute(BattleIndex, Attribute, TurnCount, AttributePower) end
 
 ---设置连战。
----@param BattleIndex  number 战斗index，为Encount、PVE或PVP函数的返回值。
+---@param battleIndex  number 战斗index，为Encount、PVE或PVP函数的返回值。
 ---@param encountIndex number -1=取消连战，  -2=lua生成连战
----@param Flg  number lua连战参数
+---@param flg  number lua连战参数
 ---@return number @0为成功,其他失败。
-function Battle.SetNextBattle(BattleIndex,encountIndex, Flg) end
+function Battle.SetNextBattle(battleIndex,encountIndex, flg) end
 
 ---获得角色战斗中真实位置
 ---@param battleIndex number 战斗index
