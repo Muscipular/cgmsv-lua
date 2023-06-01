@@ -1,3 +1,7 @@
+---获取引擎版本
+---@return number @
+function NL.Version() end
+
 ---使用Lua脚本创建NPC，并执行Dofile文件中的InitFuncName函数。
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string Init函数的名称,NPC创建后执行的函数,申明格式请参考下面的[InitCallBack]
@@ -24,9 +28,22 @@ function NL.DelNpc(NpcIndex) end
 ---@param Xpos  number npc所在的x坐标
 ---@param Ypos  number npc所在的y坐标
 ---@param Dir  number npc面朝的方向
+---@return number @返回负数表示失败，大于0的正整数表示成功，并且该值为npc的对象索引值
+function NL.CreateArgNpc(Type, Arg, Name, Image, Map, Floor, Xpos, Ypos, Dir) end
+
+---直接创建data/npc.txt中支持的各种类型的npc，可以直接调用npc.txt支持的npc类型和相应的参数，并且可以获得创建的npc的对象。
+---@param Type  string npc的类型文本（大小写敏感），如”Itemshop2”
+---@param Arg  string 对应的npc类型的参数，即npc.txt中每个npc的最后一组参数
+---@param Name  string npc显示的名字
+---@param Image  number npc的图档编号
+---@param Map  number npc所在的MapID
+---@param Floor  number npc所在的FloorID
+---@param Xpos  number npc所在的x坐标
+---@param Ypos  number npc所在的y坐标
+---@param Dir  number npc面朝的方向
 ---@param ShowTime  number 可选参数,NPC的显示时间,具体设置参考灵堂入口士兵
 ---@return number @返回负数表示失败，大于0的正整数表示成功，并且该值为npc的对象索引值
-function NL.CreateArgNpc(Type, Arg, Name, Image, Map, Floor, Xpos, Ypos, Dir [, ShowTime]) end
+function NL.CreateArgNpc(Type, Arg, Name, Image, Map, Floor, Xpos, Ypos, Dir, ShowTime) end
 
 ---修改NL.CreateArgNpc创建的npc的参数
 ---@param NpcIndex  number npc的对象索引，一般为NL.CreateArgNpc的返回值
