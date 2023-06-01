@@ -1,33 +1,39 @@
----@alias string string
----@alias number number
-
-
 ---获取对象index的指定信息。
 ---@param charIndex number 目标的 对象index
 ---@param dataIndex number 说指定的对象实例信息栏位，具体栏位常量请查看附录
----@return any @指定信息栏位的值
+---@return number @指定信息栏位的值
 function Char.GetData(charIndex, dataIndex) end
 
 ---设置对象index的指定信息。
 ---@param charIndex number 目标的 对象index
 ---@param dataIndex number 说指定的对象实例信息栏位，具体栏位常量请查看附录
 ---@param value string|number 新的值
----@return any @0为失败，1为成功
+---@return number @0为失败，1为成功
 function Char.SetData(charIndex, dataIndex, value) end
 
----获取/设置目标对象的NowEvent任务旗标。
+---获取目标对象的NowEvent任务旗标。
 ---@param charIndex number 目标的 对象index。
 ---@param flag number 任务旗标。
----@param value number '0' | '1' 设置的目标旗标状态[如果不设置该参数，则返回目标旗标状态，如果该参数为0，则清空目标的该旗标的NowEvent状态，如果参数为1，则设置该旗标为NowEvent状态]
----@return any @如果无Value参数，则返回旗标状态。
+---@return number @则返回旗标状态。
 function Char.NowEvent(charIndex, flag, value) end
 
----获取/设置目标对象的EndEvent任务旗标。
+---设置目标对象的NowEvent任务旗标。
 ---@param charIndex number 目标的 对象index。
 ---@param flag number 任务旗标。
----@param value number '0' | '1' 设置的目标旗标状态[如果不设置该参数，则返回目标旗标状态，如果该参数为0，则清空目标的该旗标的EndEvent状态，如果参数为1，则设置该旗标为EndEvent状态]
----@return any @如果无Value参数，则返回旗标状态。
-function Char.EndEvent(charIndex, flag, value) end
+---@param value number 0|1 设置的目标旗标状态[如果该参数为0，则清空目标的该旗标的NowEvent状态，如果参数为1，则设置该旗标为NowEvent状态]
+function Char.NowEvent(charIndex, flag, value) end
+
+---设置目标对象的EndEvent任务旗标。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@param value 0|1 设置的目标旗标状态[如果该参数为0，则清空目标的该旗标的EndEvent状态，如果参数为1，则设置该旗标为EndEvent状态]
+function Char.EndEvent(charIndex, flag[, value]) end
+
+---获取目标对象的EndEvent任务旗标。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@return number @返回旗标状态。
+function Char.EndEvent(charIndex, flag) end
 
 ---查找角色是否拥有ID是ItemID的道具。
 ---@param charIndex number 目标的 对象index。
@@ -38,7 +44,7 @@ function Char.FindItemId(charIndex, itemID) end
 ---为目标增加金钱。
 ---@param charIndex number 目标的 对象index。
 ---@param amount number 增加的数量，负数为减少。
----@return any @
+---@return number @
 function Char.AddGold(charIndex, amount) end
 
 ---删除目标对象道具。
@@ -66,7 +72,7 @@ function Char.HaveItem(CharIndex,ItemID) end
 ---检测对象身上的已经有道具的道具栏位数量。
 ---@param CharIndex number 目标的 对象index。
 ---@return number @目标道具栏的已经使用的栏位数量，无任何道具返回0，全部都有道具返回20。
-function Char.ItemSlot(charIndex) end
+function Char.ItemSlot(CharIndex) end
 
 ---检测对象身上目标道具的数量。
 ---@param charIndex number 目标的 对象index。
@@ -81,14 +87,14 @@ function Char.ItemNum(charIndex, ItemID) end
 function Char.HavePet(charIndex, petId) end
 
 ---为对象增加一只等级为1成长随机的PetID的宠物。
----@param charIndex number 目标的 对象index。
----@param petId number 宠物的ID
+---@param CharIndex number 目标的 对象index。
+---@param PetID number 宠物的ID
 ---@return number @制作成功则返回目标宠物的对象index，否则返回-1，参数数据类型不对返回-2，对象index无效返回-3。
 function Char.AddPet(CharIndex, PetID) end
 
 ---为对象增加一只等级为1的PetID宠物。
----@param charIndex number 目标的 对象index。
----@param petId number 宠物的ID
+---@param CharIndex number 目标的 对象index。
+---@param PetID number 宠物的ID
 ---@param FullBP number 1表示制作满档宠物，0表示档数随机，不填写该参数则档数随机
 ---@return number @制作成功则返回目标宠物的对象index，否则返回-1，参数数据类型不对返回-2，对象index无效返回-3。
 function Char.GivePet(CharIndex,PetID,FullBP) end
@@ -100,7 +106,7 @@ function Char.GivePet(CharIndex,PetID,FullBP) end
 function Char.GetPet(CharIndex, Slot) end
 
 ---删除对象身上满足条件的宠物。
----@param charIndex number 目标的 对象index。
+---@param CharIndex number 目标的 对象index。
 ---@param PetID number 宠物的ID
 ---@param Level number 宠物的等级。
 ---@param LevelSetting number 0为删除一只小于等于Level的宠物，1为删除一只等于Level的宠物，2为删除一只大于等于Level的宠物。
@@ -108,7 +114,7 @@ function Char.GetPet(CharIndex, Slot) end
 function Char.DelPet(CharIndex, PetID, Level, LevelSetting) end
 
 ---删除目标指定栏位的宠物。
----@param charIndex number 目标的 对象index。
+---@param CharIndex number 目标的 对象index。
 ---@param Slot number 宠物的位置，范围0-4。
 ---@return number @成功删除返回1，失败返回0，宠物位置超出范围(0-4)返回-1，参数数据类型不对返回-2，对象index无效返回-3。
 function Char.DelSlotPet(CharIndex, Slot) end
@@ -120,13 +126,13 @@ function Char.PetNum(charIndex) end
 
 ---丢出目标指定栏位的宠物。
 ---@param charIndex number 目标的 对象index。
----@param Slot number 宠物的位置，范围0-4。
+---@param slot number 宠物的位置，范围0-4。
 ---@return number @成功丢出返回1，失败返回0，宠物的位置范围错误(0-4)返回-1，参数数据类型不对返回-2，对象index无效返回-3，按位置获取的宠物错误返回-4。
 function Char.DropPet(charIndex, slot) end
 
 ---将对象传送到指定坐标处。
 ---@param CharIndex  number 目标的 对象index。
----@param MapID  number MapID。
+---@param MapType  number MapID。
 ---@param FloorID  number FloorID。
 ---@param X  number X坐标
 ---@param Y  number Y坐标
@@ -191,7 +197,7 @@ function Char.GetSkillLv(CharIndex,Slot) end
 
 ---获取指定玩家的指定技能的位置。
 ---@param CharIndex  number 目标的 对象index。
----@param Slot  number 技能ID，与skill.txt内容相对应。
+---@param SkillID  number 技能ID，与skill.txt内容相对应。
 ---@return number @返回-1代表失败，其他为技能栏位置，参数数据类型不对返回-2，对象index无效返回-3，技能的ID错误返回-4。
 function Char.HaveSkill(CharIndex,SkillID) end
 
@@ -290,7 +296,6 @@ function Char.FeverStop(CharIndex) end
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPreCallBack]
 ---@param CharIndex  number 设置的对象index。
----@return any @
 function Char.SetWalkPreEvent(Dofile,FuncName,CharIndex) end
 
 ---WalkPreEvent回调函数
@@ -307,53 +312,45 @@ function Char.SetWalkPostEvent(Dofile,FuncName,CharIndex) end
 
 ---WalkPostEvent回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
----@return any @
 function CharWalkPostCallBack(CharIndex) end
 
 ---为对象index设置覆盖其他对象后事件的回调函数，对象在覆盖其他对象后会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[PostOverEventCallBack]
 ---@param CharIndex  number 设置的对象index。
----@return any @
 function Char.SetPostOverEvent(Dofile,FuncName,CharIndex) end
 
 ---PostOverEvent回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 ---@param TargetCharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
----@return any @
-function CharIndex, TargetCharIndex) end
+function PostOverEventCallBack(CharIndex, TargetCharIndex) end
 
 ---为对象index设置循环事件的回调函数，事件会每隔Interval时间循环触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharLoopCallBack]
 ---@param CharIndex  number 设置的对象index。
 ---@param Interval  number 循环间隔，单位毫秒。
----@return any @
 function Char.SetLoopEvent(Dofile,FuncName,CharIndex,Interval) end
 
 ---LoopEvent回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
----@return any @
 function CharLoopCallBack(CharIndex) end
 
 ---为对象index设置对话开启事件的回调函数，对象在开启对话的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPreCallBack]
 ---@param CharIndex  number 设置的对象index。
----@return any @
 function Char.SetTalkedEvent(Dofile,FuncName,CharIndex) end
 
 ---TalkedEvent回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。（一般是NPC）
 ---@param TalkerCharIndex  number 触发事件的对象index，该值由Lua引擎传递给本函数。（一般是玩家）
----@return any @
 function CharTalkedCallBack(CharIndex, TalkerCharIndex) end
 
 ---为对象index设置对话事件的回调函数，对象在进行对话交互的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWindowTalkedCallBack]
 ---@param CharIndex  number 设置的对象index。
----@return any @
 function Char.SetWindowTalkedEvent(Dofile,FuncName,CharIndex) end
 
 ---WindoxTalkedEvent回调函数
@@ -362,73 +359,60 @@ function Char.SetWindowTalkedEvent(Dofile,FuncName,CharIndex) end
 ---@param SeqNo  number 来源对话框的ID，该值与NLG.ShowWindowTalked中的定义应该对应。
 ---@param Select  number 玩家所按下的按钮的值或选择框中的选项的值。
 ---@param Data  string 客户端所传递回来的值，这个值将根据不同的窗口类型而不同。
----@return any @
 function CharWindowTalkedCallBack(CharIndex, TalkerCharIndex,SeqNo,Select,Data) end
 
 ---为对象index设置丢弃道具事件的回调函数，对象在丢弃道具的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharItemPutCallBack]
 ---@param CharIndex  number 设置的对象index。
----@return any @
 function Char.SetItemPutEvent(Dofile,FuncName,CharIndex) end
 
 ---ItemPutEvent回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。（一般是NPC）
 ---@param ItemIndex  number 被丢弃的道具index，该值由Lua引擎传递给本函数。（一般是玩家）
----@return any @
 function CharItemPutCallBack(CharIndex, ItemIndex) end
 
 ---疑似限时道具
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWatchCallBack]
 ---@param CharIndex  number 设置的对象index。
----@return any @
 function Char.SetWatchEvent(Dofile, FuncName, CharIndex) end
 
 ---WatchEvent回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。（一般是NPC）
 ---@param ItemIndex  number 被丢弃的道具index，该值由Lua引擎传递给本函数。（一般是玩家）
----@return any @
 function CharWatchCallBack(CharIndex, ItemIndex) end
 
 ---解除walkpostevent
----@param CharIndex  number 目标的 对象index。
----@return any @
+---@param charIndex  number 目标的 对象index。
 function Char.UnsetWalkPostEvent(charIndex) end
 
 ---解除WalkPreEvent
----@param CharIndex  number 目标的 对象index。
----@return any @
+---@param charIndex  number 目标的 对象index。
 function Char.UnsetWalkPreEvent(charIndex) end
 
 ---解除PostOverEvent
----@param CharIndex  number 目标的 对象index。
----@return any @
+---@param charIndex  number 目标的 对象index。
 function Char.UnsetPostOverEvent(charIndex) end
 
 ---解除LoopEvent
----@param CharIndex  number 目标的 对象index。
----@return any @
+---@param charIndex  number 目标的 对象index。
 function Char.UnsetLoopEvent(charIndex) end
 
 ---解除TalkedEvent
----@param CharIndex  number 目标的 对象index。
----@return any @
+---@param charIndex  number 目标的 对象index。
 function Char.UnsetTalkedEvent(charIndex) end
 
 ---解除WindowTalkedEvent
----@param CharIndex  number 目标的 对象index。
----@return any @
+---@param charIndex  number 目标的 对象index。
 function Char.UnsetWindowTalkedEvent(charIndex) end
 
 ---解除ItemPutEvent
----@param CharIndex  number 目标的 对象index。
----@return any @
+---@param charIndex  number 目标的 对象index。
 function Char.UnsetItemPutEvent(charIndex) end
 
 ---解除WatchEvent
----@param CharIndex  number 目标的 对象index。
----@return any @
+---@param charIndex  number 目标的 对象index。
 function Char.UnsetWatchEvent(charIndex) end
 
 ---检查角色是否加入公会
@@ -444,27 +428,27 @@ function Char.CheckTitle(CharIndex) end
 ---获取自定义数据（保存到数据库）
 ---@param charIndex number 目标的 对象index。
 ---@param dataIndex string 信息储存的位置，自定义
----@return string @获得指定位置的字符串
+---@return string|number @获得指定位置的字符串
 function Char.GetExtData(charIndex, dataIndex) end
 
 ---设置自定义数据（保存到数据库）
 ---@param charIndex number 目标的 对象index。
 ---@param dataIndex string 信息储存的位置，自定义
----@param value string 存储的信息
----@return any @
+---@param value string|number 存储的信息
+---@return number @
 function Char.SetExtData(charIndex, dataIndex, value) end
 
 ---获取自定义数据（不保存到数据库）
 ---@param charIndex number 目标的 对象index。
 ---@param dataIndex string 信息储存的位置，自定义
----@return string @获得指定位置的字符串
+---@return string|number @获得指定位置的字符串
 function Char.GetTempData(charIndex, dataIndex) end
 
 ---设置自定义数据（不保存到数据库）
 ---@param charIndex number 目标的 对象index。
 ---@param dataIndex string 信息储存的位置，自定义
----@param value string 存储的信息
----@return any @
+---@param value string|number 存储的信息
+---@return number @
 function Char.SetTempData(charIndex, dataIndex, value) end
 
 ---角色是否有符合itemId条件的道具
@@ -476,7 +460,7 @@ function Char.HaveItemID(charIndex, itemId) end
 ---角色是否有符合itemId条件的道具，并返回位置
 ---@param charIndex number 目标的 对象index。
 ---@param itemId number 道具ID
----@return any @第一个符合条件的道具栏
+---@return number @第一个符合条件的道具栏
 function Char.HaveItemPos(charIndex, itemId) end
 
 ---获得指定道具栏的itemIndex
@@ -489,20 +473,20 @@ function Char.GetItemIndex(charIndex, slot) end
 ---@param charIndex number 目标的 对象index。
 ---@param slot number 道具栏位置
 ---@param itemIndex number 道具的 index
----@return any @
+---@return number @
 function Char.SetItemIndex(charIndex, slot, itemIndex) end
 
 ---设置银行指定道具栏的道具为itemIndex，可与Item.MakeItem(itemId)联用
 ---@param charIndex number 目标的 对象index。
 ---@param slot number 道具栏位置
 ---@param itemIndex number 道具的 index
----@return any @
-function Char.SetPoolItem(charIndex, slot, itemindex) end
+---@return number @
+function Char.SetPoolItem(charIndex, slot, itemIndex) end
 
 ---删除银行指定道具栏的道具
 ---@param charIndex number 目标的 对象index。
 ---@param slot number 道具栏位置
----@return any @
+---@return number @
 function Char.RemovePoolItem(charIndex, slot) end
 
 ---把道具交易给指定玩家
@@ -515,8 +499,8 @@ function Char.TradeItem(fromChar, slot, toChar) end
 ---根据位置删除物品
 ---@param charIndex number 目标的 对象index。
 ---@param slot number 道具栏位置
----@return any @
-function Char.DelItemBySlot(CharIndex, Slot) end
+---@return number @
+function Char.DelItemBySlot(charIndex, slot) end
 
 ---移动物品
 ---@param charIndex number 目标的 对象index。
@@ -555,7 +539,7 @@ function Char.CalcConsumeFp(charIndex, techId) end
 
 ---保存角色数据到数据库
 ---@param charIndex number 目标的 对象index。
----@return any @
+---@return number @
 function Char.SaveToDb(charIndex) end
 
 ---查询角色家族中的称号ID
@@ -578,39 +562,39 @@ function Char.GetPetEnemyId(charIndex, slot) end
 ---@param charIndex number 目标的 对象index。
 ---@param slot number 宠物栏位置
 ---@param state number 宠物状态，对应CONST.PET_STATE_*
----@return any @
+---@return number @
 function Char.SetPetDepartureState(charIndex, slot, state) end
 
 ---设置宠物战斗状态(批量)
 ---@param charIndex number 目标的 对象index。
 ---@param state1~5 number 宠物状态，对应CONST.PET_STATE_*
----@return any @
+---@return number @
 function Char.SetPetDepartureStateAll(charIndex, pet1State, pet2State, pet3State, pet4State, pet5State) end
 
 ---直接交易宠物
 ---@param fromChar integer 从谁身上交出 CharIndex
 ---@param slot integer 宠物栏位置，0-4
 ---@param toChar integer 交易给谁 CharIndex
----@return any @
+---@return number @
 function Char.TradePet(fromChar, slot, toChar) end
 
 ---移动宠物
 ---@param charIndex number 目标的 对象index。
 ---@param frslot number 移动前宠物栏位置，0-4
 ---@param toslot number 移动后宠物栏位置，0-4
----@return any @
+---@return number @
 function Char.MovePet(charIndex, frslot, toslot) end
 
 ---加入组队，无视距离
 ---@param sourceIndex number 队员index
 ---@param targetIndex number 队长index
 ---@param arg boolean 是否无视组队开关
----@return any @
+---@return number @
 function Char.JoinParty(sourceIndex, targetIndex, arg) end
 
 ---离开队伍
 ---@param charIndex number 目标的 对象index。
----@return any @
+---@return number @
 function Char.LeaveParty(charIndex) end
 
 ---获得角色道具栏套装的ID
@@ -621,7 +605,7 @@ function Char.GetSuitId(charIndex, slot) end
 
 ---角色激活套装的数量
 ---@param charIndex number 目标的 对象index。
----@return any @
+---@return number @
 function Char.GetSuitCount(charIndex) end
 
 ---创建假人
@@ -631,17 +615,17 @@ function Char.CreateDummy(charIndex) end
 
 ---检测是否假人
 ---@param charIndex number 目标的 对象index。
----@return any @true，假人，false，不是假人
-function Char.IsDummy(charIndex end
+---@return number @true，假人，false，不是假人
+function Char.IsDummy(charIndex) end
 
 ---标记为假人
 ---@param charIndex number 目标的 对象index。
----@return any @
+---@return number @
 function Char.SetDummy(charIndex) end
 
 ---删除假人
 ---@param charIndex number 目标的 对象index。
----@return any @
+---@return number @
 function Char.DelDummy(charIndex) end
 
 ---查看角色的出租房floor
