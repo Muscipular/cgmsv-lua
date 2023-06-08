@@ -89,12 +89,7 @@ function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName) end
 ---@param wallVX number 墙纵向反向图档编号  [定义地图墙面，如果全部写0，则会自动生成洞窟墙面]  
 ---@param wallcross number 墙相交反向图档编号  [定义地图墙面，如果全部写0，则会自动生成洞窟墙面]  
 ---@return number @成功返回新的FloorID，失败返回-1。
-function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName,
-                         pal, roomSize, roomSizeMinX, roomSizeMinY,
-                         roomSizeMaxX, roomSizeMaxY, tile, obj, other,
-                         wallH,wallHX,wallV,wallVX,wallcross
-)
-end
+function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName, pal, roomSize, roomSizeMinX, roomSizeMinY, roomSizeMaxX, roomSizeMaxY, tile, obj, other, wallH, wallHX, wallV, wallVX, wallcross) end
 
 ---创建随机地图。
 ---@param Dofile string 回调函数所在文件 字符串
@@ -118,12 +113,7 @@ end
 ---@param wallcross number 墙相交反向图档编号  [定义地图墙面，如果全部写0，则会自动生成洞窟墙面]  
 ---@param bgm number 背景音乐
 ---@return number @成功返回新的FloorID，失败返回-1。
-function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName,
-                         pal, roomSize, roomSizeMinX, roomSizeMinY,
-                         roomSizeMaxX, roomSizeMaxY, tile, obj, other,
-                         wallH,wallHX,wallV,wallVX,wallcross,bgm
-)
-end
+function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName, pal, roomSize, roomSizeMinX, roomSizeMinY, roomSizeMaxX, roomSizeMaxY, tile, obj, other, wallH, wallHX, wallV, wallVX, wallcross, bgm) end
 
 ---这个是Map.MakeMazeMap生成随机地图结果的回调函数
 ---@param FloorID  number 生成的地图的编号
