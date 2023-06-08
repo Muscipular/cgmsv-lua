@@ -283,3 +283,22 @@ function NLG.SetDexRearrangeRate(rate, mode) end
 ---@param val number 倍率，默认1.5倍
 function NLG.SetCriticalDamageAddition(mode, val) end
 
+---删除角色，异步方法
+---@param cdkey number CdKey
+---@param dataPlaceNum number 角色位置 0 左 1 右
+---@return number ret @返回0为成功，其他失败
+function NLG.DeleteCharacter(cdkey, dataPlaceNum) end
+
+---删除角色，异步方法
+---@param cdkey number CdKey
+---@param dataPlaceNum number 角色位置 0 左 1 右
+---@param callback string 回调函数，参考[DeleteCharacterCallback]
+---@return number ret @返回0为成功，其他失败
+function NLG.DeleteCharacter(cdkey, dataPlaceNum, callback) end
+
+---删除角色回调函数
+---@param cdkey number CdKey
+---@param dataPlaceNum number 角色位置 0 左 1 右
+---@param registerNumber number registerNumber
+---@param result number 返回1代表成功，0代表失败
+function DeleteCharacterCallback(cdkey, dataPlaceNum, registerNumber, result) end
