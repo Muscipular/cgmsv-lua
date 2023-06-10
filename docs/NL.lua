@@ -749,8 +749,10 @@ function BeforeCharaSaveCallBack(charIndex) end
 function NL.RegCharaDeletedEvent(Dofile, InitFuncName) end
 
 ---CharaDeleted的回调函数
----@param charIndex number 角色的index
-function CharaDeletedCallBack(charIndex) end
+---@param cdkey string 角色的cdkey
+---@param registnumber number 角色的注册号
+---@param unknow number 位置，等于1
+function CharaDeletedCallBack(cdkey, registnumber,unknow) end
 
 ---创建一个luac触发的事件
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
