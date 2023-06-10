@@ -751,7 +751,7 @@ function NL.RegCharaDeletedEvent(Dofile, InitFuncName) end
 ---CharaDeleted的回调函数
 ---@param cdkey string 角色的cdkey
 ---@param registnumber number 角色的注册号
----@param unknow number 位置，等于1
+---@param unknow number 未知，等于1
 function CharaDeletedCallBack(cdkey, registnumber,unknow) end
 
 ---创建一个luac触发的事件
