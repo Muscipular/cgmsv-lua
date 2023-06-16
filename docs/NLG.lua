@@ -302,3 +302,8 @@ function NLG.DeleteCharacter(cdkey, dataPlaceNum, callback) end
 ---@param registerNumber number registerNumber
 ---@param result number 返回1代表成功，0代表失败
 function DeleteCharacterCallback(cdkey, dataPlaceNum, registerNumber, result) end
+
+---获取NPC参数
+---@param charIndex number npc的对象索引，一般为NL.CreateArgNpc的返回值
+---@return string @返回NPC参数
+function NLG.GetArgNpc(charIndex) end
