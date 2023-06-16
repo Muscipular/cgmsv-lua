@@ -234,6 +234,7 @@ function NL.RegRightClickEvent(Dofile, InitFuncName) end
 ---RightClickEvent的回调函数
 ---@param CharIndex  number 响应事件（发起事件）的对象index，该值由Lua引擎传递给本函数。(触发事件的玩家)
 ---@param TargetCharIndex  number 响应事件（被响应事件）的对象index，该值由Lua引擎传递给本函数。(被右键点击的玩家)
+---@return number @返回1拦截该事件，其他不拦截
 function RightClickCallBack(CharIndex, TargetCharIndex) end
 
 ---创建一个服务器程序关闭触发的事件
