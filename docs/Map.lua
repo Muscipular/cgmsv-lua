@@ -124,7 +124,8 @@ function MapCallBack(FloorID, Doneflg) end
 ---获取随机地图可用的坐标。
 ---@param mapid number 地图类型
 ---@param floor number 地图
----@return number @返回x坐标和y坐标，如果失败则x与y都为-1。
+---@return number @x坐标，如果失败则x与y都为-1。
+---@return number @y坐标，如果失败则x与y都为-1。
 function Map.GetAvailablePos(mapid, floor) end
 
 ---设置地图坐标是否可以通行
