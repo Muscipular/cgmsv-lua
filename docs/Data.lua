@@ -1,19 +1,18 @@
 ---获取Msg
----@param msgId number
----@return string @msg
+---@param msgId number @消息id
+---@return string @消息内容
 function Data.GetMessage(msgId) end
 
 ---设置Msg
----@param msgId number
----@param val string
----@return string @
+---@param msgId number 消息id
+---@param val string 消息内容
 function Data.SetMessage(msgId, val) end
 
 ---设置种族伤害比率
 ---@param a number 进攻种族 支持 0 ~ 19
 ---@param b number 防守种族 支持 0 ~ 19
 ---@param rate number 克制比率支持 -128 ~ 127
----@return number @
+---@return number @伤害比率
 function Data.SetTribeMapValue(a, b, rate) end
 
 ---获取EnemyDataIndex
@@ -31,7 +30,7 @@ function Data.EnemyGetData(enemyIndex, DataPos) end
 ---@param enemyIndex number
 ---@param DataPos number CONST.DATA_ENEMY
 ---@param val string|number 指定信息
----@return number @
+---@return number @成功返回0
 function Data.EnemySetData(enemyIndex, DataPos, val) end
 
 ---获取EnemyBaseDataIndex
@@ -49,7 +48,7 @@ function Data.EnemyBaseGetData(enemyBaseIndex, DataPos) end
 ---@param enemyBaseIndex number
 ---@param DataPos number CONST.DATA_ENEMYBASE
 ---@param val number|string 指定信息
----@return number @
+---@return number @成功返回0
 function Data.EnemyBaseSetData(enemyBaseIndex, DataPos, val) end
 
 ---获取ItemsetIndex
@@ -67,7 +66,7 @@ function Data.ItemsetGetData(ItemsetIndex, DataPos) end
 ---@param ItemsetIndex number
 ---@param DataPos number CONST.ITEMSET
 ---@param val number|string 指定信息
----@return number @
+---@return number @成功返回0
 function Data.ItemsetSetData(ItemsetIndex, DataPos, val) end
 
 ---获取encountIndex
@@ -85,6 +84,6 @@ function Data.GetEncountData(encountIndex,DataPos) end
 ---@param encountIndex number
 ---@param DataPos number CONST.ENCOUNT_* 
 ---@param val number|string 指定信息
----@return number @
+---@return number @成功返回0
 function Data.SetEncountData(encountIndex,DataPos,val) end
 
