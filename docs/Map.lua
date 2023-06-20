@@ -7,19 +7,19 @@ function Map.GetDungeonId(floor) end
 ---@param dungeonId number 迷宫id
 ---@return number mapType
 ---@return number floor
----@return number x
----@return number y
+---@return number @x
+---@return number @y
 function Map.FindDungeonEntry(dungeonId) end
 
 ---获取迷宫的过期时间
 ---@param dungeonId number 迷宫id
----@return number @
+---@return number @过期时间，单位秒
 function Map.GetDungeonExpireAtByDungeonId(dungeonId) end
 
 ---根据迷宫Id设置迷宫重置时间
 ---@param dungeonId number 迷宫id
 ---@param time number UnixTime
----@return number @
+---@return number @过期时间，单位秒
 function Map.SetDungeonExpireAtByDungeonId(dungeonId, time) end
 
 ---获得地图位置的图档
@@ -38,7 +38,7 @@ function Map.GetImage(Map, Floor, Xpos, Ypos) end
 ---@param Ypos number Y坐标
 ---@param Tile number 地板图档 可以为null
 ---@param Obj number 建筑物图档 可以为null
----@return number @
+---@return number @成功返回0
 function Map.SetImage(Map, Floor, Xpos, Ypos, Tile, Obj) end
 
 ---获得地图大小
