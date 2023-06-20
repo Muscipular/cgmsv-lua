@@ -14,7 +14,6 @@ function Item.SetData(ItemIndex,Dataline,Data) end
 ---发送更新道具的封包给关联的玩家。
 ---@param CharIndex  number 目标对象index。
 ---@param Slot  number 指定背包的位置，如果为-1则遍历所有的道具。
----@return number @
 function Item.UpItem(CharIndex, Slot) end
 
 ---删除道具并且发送封包通知玩家。
@@ -30,7 +29,7 @@ function Item.Kill(CharIndex, ItemIndex, Slot) end
 ---@param defaultImage number 未鉴定时图档
 ---@param place number 装备位置
 ---@param flags number 武器类型。1-普通武器，2-弓，4-小刀，8-回力镖，255-所有武器，投掷类武器=2+4+8=14
----@return number @
+---@return number @成功返回1
 function Item.CreateNewItemType(type, name, defaultImage, place, flags) end
 
 ---获得新得道具类型信息
@@ -52,7 +51,7 @@ function Item.GetItemTypeEquipLevelForJob(job, type) end
 ---@param job number 职业ID
 ---@param type number 道具类型
 ---@param level number 职业装备等级
----@return number @
+---@return boolean @成功返回true
 function Item.SetItemTypeEquipLevelForJob(job, type, level) end
 
 ---获取道具的userdata
@@ -63,7 +62,7 @@ function Item.GetCharPointer(ItemIndex) end
 ---定义道具的userdata
 ---@param ItemIndex number 道具index
 ---@param val userdata 
----@return number @
+---@return number @成功返回0
 function Item.SetCharPointer(ItemIndex, val) end
 
 ---移除道具的userdata
@@ -78,12 +77,12 @@ function Item.GetNameFromNumber(ItemId) end
 
 ---删除道具
 ---@param ItemIndex number 道具index
----@return number @
+---@return number @成功返回0
 function Item.UnlinkItem(ItemIndex) end
 
 ---判断道具是否是武器
 ---@param ItemIndex number 道具index
----@return number @
+---@return number @是武器时返回1
 function Item.IsWeaponType(ItemIndex) end
 
 ---制作新物品，新物品是无主物品
