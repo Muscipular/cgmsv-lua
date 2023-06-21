@@ -1,20 +1,20 @@
 ---获取战斗队列中对象实例的对象index
 ---@param BattleIndex  number 战斗index，为Encount、PVE或PVP函数的返回值。
 ---@param Slot  number 战斗队列中玩家位置,范围0-19，其中0-9为下方实例队列，10-19为上方实例队列。
----@return number @返回-1失败，成功返回对象实例的 对象index，参数数据类型不对返回-2，战斗index无效返回-3，战斗队列中玩家位置范围错误返回-4。
+---@return number @返回-1失败，成功返回对象实例的对象index，参数数据类型不对返回-2，战斗index无效返回-3，战斗队列中玩家位置范围错误返回-4。
 function Battle.GetPlayer(BattleIndex, Slot) end
 
 ---获取战斗队列中对象实例的对象index
 ---@param BattleIndex  number 战斗index，为Encount、PVE或PVP函数的返回值。
 ---@param Slot  number 战斗队列中玩家位置,范围0-19，其中0-9为下方实例队列，10-19为上方实例队列。
----@return number @返回-1失败，成功返回对象实例的 对象index，参数数据类型不对返回-2，战斗index无效返回-3，战斗队列中玩家位置范围错误返回-4。
+---@return number @返回-1失败，成功返回对象实例的对象index，参数数据类型不对返回-2，战斗index无效返回-3，战斗队列中玩家位置范围错误返回-4。
 function Battle.GetPlayIndex(BattleIndex, Slot) end
 
 ---调用魔力脚本语句encount创建战斗
 ---@param UpIndex  number 战斗一方的 对象index
 ---@param DownIndex  number 战斗一方的 对象index
 ---@param Data  string 触发战斗的信息，包括战斗敌人队列等信息，等同于GMSV自身脚本的encount参数,可不填写
----@return any @前两个参数都是同一个玩家索引，第三个参数不填的时候，进行原地遇敌，如果该处无法遇敌，则返回负数。
+---@return number @前两个参数都是同一个玩家索引，第三个参数不填的时候，进行原地遇敌，如果该处无法遇敌，则返回负数。
 function Battle.Encount(UpIndex, DownIndex, Data) end
 
 ---使用Lua脚本创建一个战斗，战斗创建后可自动调用Lua的DoFunc函数。
@@ -36,7 +36,7 @@ function Battle.PVP(UpIndex, DownIndex) end
 ---设置战斗类型，如普通战、PVP战等。
 ---@param BattleIndex  number 战斗index，为Encount、PVE或PVP函数的返回值。
 ---@param Type  number 战斗类型，具体参照战斗类型常量。
----@return any @1为成功,其他失败。
+---@return number @1为成功,其他失败。
 function Battle.SetType(BattleIndex, Type) end
 
 ---设置战斗奖励模式，如奖励经验、奖励DP。
@@ -101,7 +101,7 @@ function Battle.GetTurn(BattleIndex) end
 
 ---判断当前对象是否在战斗中且处于等待输入战斗指令的状态。
 ---@param CharIndex  number 对象index，可以为玩家、宠物、敌人。
----@return number @0 为否， 1为是
+---@return number @0为否，1为是
 function Battle.IsWaitingCommand(CharIndex) end
 
 ---让对象执行指定的战斗操作，必须在对象Battle.IsWaitingCommand(index)返回值为1时才可以有效使用。
@@ -109,7 +109,7 @@ function Battle.IsWaitingCommand(CharIndex) end
 ---@param com1  number CONST.BATTLE_COM
 ---@param com2  number CONST.BATTLE_COM_TARGET
 ---@param com3  number techId
----@return number @0 失败， 1 成功
+---@return number @0失败，1成功
 function Battle.ActionSelect(CharIndex, com1, com2, com3) end
 
 ---获取当前战斗的战场魔法效果，如属性翻转、魔法封印
@@ -175,18 +175,16 @@ function Battle.CalcTribeDmgRate(aIndex, bIndex) end
 
 ---解除WinEvent
 ---@param battleIndex  number 战斗对象index
----@return number @
 function Battle.UnsetWinEvent(battleIndex) end
 
 ---解除PVPWinEvent
 ---@param battleIndex  number 战斗对象index
----@return number @
 function Battle.UnsetPVPWinEvent(battleIndex) end
 
 ---设置当前回合数
 ---@param battleIndex number 
 ---@param turn number 回合数
----@return number @
+---@return number @返回1成功
 function Battle.SetTurn(battleIndex, turn) end
 
 ---为当前处理的战斗添加信息(如释放技能喊话)
@@ -209,7 +207,7 @@ function Battle.SetEntryData(battleIndex,charIndex,dataline,value) end
 
 ---判定战斗是否是BOSS战
 ---@param BattleIndex  number 战斗index
----@return number @0 否 1 是
+---@return number @0=否，1=是，其他失败
 function Battle.IsBossBattle(BattleIndex) end
 
 ---获取战斗乱敏率
