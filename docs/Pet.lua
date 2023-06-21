@@ -4,6 +4,12 @@
 ---@return number @指定属性的成长值，数值型。
 function Pet.GetArtRank(PetIndex, ArtType) end
 
+---获取指定宠物的指定属性的成长值，使用该函数减去FullArtRank函数的结果，就是宠物的档数信息。
+---@param PetIndex  number 目标宠物对象index。
+---@param ArtType  number 要查看的属性，具体请参考附录的宠物常量。
+---@return number @指定属性的成长值，数值型。
+function Pet.ArtRank(PetIndex, ArtType) end
+
 ---设置指定宠物的指定属性的成长值，但是宠物的bp分布不会根据这个修改而改变。
 ---@param PetIndex  number 目标宠物对象index。
 ---@param ArtType  number 要查看的属性，具体请参考附录的宠物常量。
