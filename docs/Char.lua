@@ -121,7 +121,7 @@ function Char.DelSlotPet(CharIndex, Slot) end
 
 ---检测对象身的宠物数量。
 ---@param charIndex number 目标的 对象index。
----@return any @返回目标的宠物数量，范围0-5。
+---@return number @返回目标的宠物数量，范围0-5。
 function Char.PetNum(charIndex) end
 
 ---丢出目标指定栏位的宠物。
@@ -136,7 +136,7 @@ function Char.DropPet(charIndex, slot) end
 ---@param FloorID  number FloorID。
 ---@param X  number X坐标
 ---@param Y  number Y坐标
----@return any @
+---@return boolean @成功返回true
 function Char.Warp(CharIndex, MapType, FloorID, X, Y) end
 
 ---获取对象的组队中的玩家人数。
@@ -307,7 +307,7 @@ function CharWalkPreCallBack(CharIndex) end
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPostCallBack]
 ---@param CharIndex  number 设置的对象index。
----@return any @
+---@return number @成功返回0
 function Char.SetWalkPostEvent(Dofile,FuncName,CharIndex) end
 
 ---WalkPostEvent回调函数
@@ -473,33 +473,33 @@ function Char.GetItemIndex(charIndex, slot) end
 ---@param charIndex number 目标的 对象index。
 ---@param slot number 道具栏位置
 ---@param itemIndex number 道具的 index
----@return number @
+---@return number @成功所在栏位
 function Char.SetItemIndex(charIndex, slot, itemIndex) end
 
 ---设置银行指定道具栏的道具为itemIndex，可与Item.MakeItem(itemId)联用
 ---@param charIndex number 目标的 对象index。
 ---@param slot number 道具栏位置
 ---@param itemIndex number 道具的 index
----@return number @
+---@return number @成功返回0
 function Char.SetPoolItem(charIndex, slot, itemIndex) end
 
 ---删除银行指定道具栏的道具
 ---@param charIndex number 目标的 对象index。
 ---@param slot number 道具栏位置
----@return number @
+---@return number @成功返回0
 function Char.RemovePoolItem(charIndex, slot) end
 
 ---把道具交易给指定玩家
 ---@param fromChar number 从谁身上交出去 对象index
 ---@param slot number 道具栏位置，范围8-27
 ---@param toChar number 交易给谁 对象index
----@return any @
+---@return number @接收者所在的栏位，少于0时失败
 function Char.TradeItem(fromChar, slot, toChar) end
 
 ---根据位置删除物品
 ---@param charIndex number 目标的 对象index。
 ---@param slot number 道具栏位置
----@return number @
+---@return number @成功返回0
 function Char.DelItemBySlot(charIndex, slot) end
 
 ---移动物品
@@ -507,23 +507,23 @@ function Char.DelItemBySlot(charIndex, slot) end
 ---@param fromSlot number 移动那个物品，取值0-27
 ---@param toSlot number 移动到那个位置, 取值0-27
 ---@param amount number 数量，整体移动取值可为-1
----@return any @
+---@return number @成功返回0
 function Char.MoveItem(charIndex, fromSlot, toSlot, amount) end
 
 ---查询角色身上金币数量
 ---@param charIndex number 目标的 对象index。
----@return any @角色身上金币数量
+---@return number @角色身上金币数量
 function Char.GetGold(charIndex) end
 
 ---更新角色状态信息
 ---@param charIndex number 目标的 对象index。
----@return any @
+---@return number @成功返回0
 function Char.UpCharStatus(charIndex) end
 
 ---移动角色、NPC
 ---@param charIndex number 目标的 对象index。
 ---@param walkArray number[] 移动列表，取值0-7对应 CONST里面的方向，不建议超过5次移动
----@return any @
+---@return number @成功返回1
 function Char.MoveArray(charIndex, walkArray) end
 
 ---获取一个唯一ID
@@ -539,7 +539,7 @@ function Char.CalcConsumeFp(charIndex, techId) end
 
 ---保存角色数据到数据库
 ---@param charIndex number 目标的 对象index。
----@return number @
+---@return number @成功返回0
 function Char.SaveToDb(charIndex) end
 
 ---查询角色家族中的称号ID
@@ -562,7 +562,7 @@ function Char.GetPetEnemyId(charIndex, slot) end
 ---@param charIndex number 目标的 对象index。
 ---@param slot number 宠物栏位置
 ---@param state number 宠物状态，对应CONST.PET_STATE_*
----@return number @
+---@return number @成功返回1
 function Char.SetPetDepartureState(charIndex, slot, state) end
 
 ---设置宠物战斗状态(批量)
@@ -572,33 +572,33 @@ function Char.SetPetDepartureState(charIndex, slot, state) end
 ---@param pet3State number 宠物状态，对应CONST.PET_STATE_*
 ---@param pet4State number 宠物状态，对应CONST.PET_STATE_*
 ---@param pet5State number 宠物状态，对应CONST.PET_STATE_*
----@return number @
+---@return number @成功返回1
 function Char.SetPetDepartureStateAll(charIndex, pet1State, pet2State, pet3State, pet4State, pet5State) end
 
 ---直接交易宠物
 ---@param fromChar number 从谁身上交出 CharIndex
 ---@param slot number 宠物栏位置，0-4
 ---@param toChar number 交易给谁 CharIndex
----@return number @
+---@return number @成功所在的新栏位
 function Char.TradePet(fromChar, slot, toChar) end
 
 ---移动宠物
 ---@param charIndex number 目标的 对象index。
 ---@param frslot number 移动前宠物栏位置，0-4
 ---@param toslot number 移动后宠物栏位置，0-4
----@return number @
+---@return number @成功返回1
 function Char.MovePet(charIndex, frslot, toslot) end
 
 ---加入组队，无视距离
 ---@param sourceIndex number 队员index
 ---@param targetIndex number 队长index
 ---@param arg boolean 是否无视组队开关
----@return number @
+---@return number @成功返回0
 function Char.JoinParty(sourceIndex, targetIndex, arg) end
 
 ---离开队伍
 ---@param charIndex number 目标的 对象index。
----@return number @
+---@return number @成功返回1
 function Char.LeaveParty(charIndex) end
 
 ---获得角色道具栏套装的ID
@@ -609,7 +609,7 @@ function Char.GetSuitId(charIndex, slot) end
 
 ---角色激活套装的数量
 ---@param charIndex number 目标的 对象index。
----@return number @
+---@return number @套装数量
 function Char.GetSuitCount(charIndex) end
 
 ---创建假人
@@ -624,12 +624,12 @@ function Char.IsDummy(charIndex) end
 
 ---标记为假人
 ---@param charIndex number 目标的 对象index。
----@return number @
+---@return number @成功返回0
 function Char.SetDummy(charIndex) end
 
 ---删除假人
 ---@param charIndex number 目标的 对象index。
----@return number @
+---@return number @成功返回0
 function Char.DelDummy(charIndex) end
 
 ---查看角色的出租房floor

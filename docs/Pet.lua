@@ -8,25 +8,24 @@ function Pet.GetArtRank(PetIndex, ArtType) end
 ---@param PetIndex  number 目标宠物对象index。
 ---@param ArtType  number 要查看的属性，具体请参考附录的宠物常量。
 ---@param Value  number 要设置为的成长值。
----@return any @0成功，其他失败。
+---@return number @0成功，其他失败。
 function Pet.SetArtRank(PetIndex, ArtType, Value) end
 
 ---获取指定宠物的指定属性的满档成长值。
 ---@param PetIndex  number 目标宠物对象index。
 ---@param ArtType  number 要查看的属性，具体请参考附录的宠物常量。
----@return any @指定属性的成长值。
+---@return number @指定属性的成长值。
 function Pet.FullArtRank(PetIndex, ArtType) end
 
 ---回炉指定宠物，让宠物回到1级状态(属性、升级点)，但是成长档数不变。 该函数配合SetArtRank一起使用可以自定义宠物的档数，并且重新分配bp。
 ---@param PlayerIndex  number 目标对象index。
 ---@param PetIndex  number 目标宠物对象index。
----@return any @
+---@return number @成功返回0
 function Pet.ReBirth(PlayerIndex, PetIndex) end
 
 ---发送宠物状态封包给客户端，并且能重新计算宠物等级等信息。
 ---@param PlayerIndex  number 目标对象index。
 ---@param PetIndex  number 目标宠物对象index。
----@return any @
 function Pet.UpPet(PlayerIndex, PetIndex) end
 
 ---获取宠物的拥有者对象index。 注意:如果宠物丢在地上,或者主人已经下线返回值为-1

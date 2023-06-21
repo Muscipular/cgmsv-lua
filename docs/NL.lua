@@ -377,7 +377,7 @@ function ItemStringUseCallBack(CharIndex, TargetCharIndex, ItemSlot) end
 ---ItemString的回调函数
 ---@param CharIndex  number 道具所有者的对象index，该值由Lua引擎传递给本函数。
 ---@param FromItemIndex  number 响应事件的道具Index，该值由Lua引擎传递给本函数。
----@return any @返回值小于0则取消道具装备,返回大于等于0则正常装备。
+---@return number @返回值小于0则取消道具装备,返回大于等于0则正常装备。
 function ItemStringAttachCallBack(CharIndex, FromItemIndex) end
 
 ---ItemString的回调函数

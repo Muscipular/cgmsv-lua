@@ -10,7 +10,7 @@ function SQL.Query(QueryString) end
 
 ---执行指定的Mysql查询。
 ---@param sql string sql
----@param ...string|number 绑定参数，最多40个
----@return {status:number, effectRows:number, rows: table} @返回查询内容
+---@vararg string|number 绑定参数，最多40个
+---@return {status:number,effectRows:number,rows:table} @返回查询内容
 function SQL.QueryEx(sql, ...) end
 

@@ -1,14 +1,14 @@
 ---获取配方指定信息栏数据
 ---@param recipeNo number 配方id
 ---@param dataLine number CONST.ITEM_RECIPE
----@return any @指定信息栏信息
+---@return string|number @指定信息栏信息
 function Recipe.GetData(recipeNo, dataLine) end
 
 ---指定配方指定信息栏数据
 ---@param recipeNo number 配方id
 ---@param dataLine number CONST.ITEM_RECIPE
 ---@param val string|number 指定值
----@return any @
+---@return number @成功返回0
 function Recipe.SetData(recipeNo, dataLine,val) end
 
 ---习得配方

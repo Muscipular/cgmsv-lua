@@ -48,7 +48,6 @@ function NLG.TalkToFloor(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 
 ---检查 对象的改变并且向所有有关联的玩家发送该对象的数据更新封包。
 ---@param CharIndex  number 目标对象index。
----@return number @
 function NLG.UpChar(CharIndex) end
 
 ---生成并发送对话框

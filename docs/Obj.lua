@@ -68,7 +68,7 @@ function Obj.GetWarpMapId(ObjectIndex) end
 
 ---获取指定Objec对象的开始时间(宠物开始丢地的时间)。
 ---@param ObjectIndex  number 目标的 物件index。
----@return any @开始时间的timestamp。
+---@return number @开始时间的timestamp。
 function Obj.GetDelTime(ObjectIndex) end
 
 ---设置指定Object Index的Object类型。
@@ -81,7 +81,7 @@ function Obj.GetDelTime(ObjectIndex) end
 --- 4：传送点 <br>
 --- 5：船 <br>
 --- 6：载具
----@return any @设置前的类型
+---@return number @设置前的类型
 function Obj.SetType(ObjectIndex, Value) end
 
 ---设置指定Object Index的X坐标。
@@ -152,7 +152,7 @@ function Obj.SetDelTime(ObjectIndex, Value) end
 
 ---移除指定obj
 ---@param objectIndex number object的index
----@return number @
+---@return number @成功返回0
 function Obj.RemoveObject(objectIndex) end
 
 ---在指定的地图坐标上设置传送点
@@ -164,7 +164,7 @@ function Obj.RemoveObject(objectIndex) end
 ---@param toFloor number 传送后地图
 ---@param toXpos number 传送后X坐标
 ---@param toYpos number 传送后Y坐标
----@return number @
+---@return number @成功返回ObjectIndex
 function Obj.AddWarp(Map,Floor,Xpos,Ypos,toMap,toFloor,toXpos,toYpos) end
 
 ---在指定的地图坐标上放金币
@@ -173,7 +173,7 @@ function Obj.AddWarp(Map,Floor,Xpos,Ypos,toMap,toFloor,toXpos,toYpos) end
 ---@param Xpos number X坐标
 ---@param Ypos number Y坐标
 ---@param gold number 金币数量
----@return number @
+---@return number @成功返回ObjectIndex
 function Obj.AddGold(Map,Floor,Xpos,Ypos,gold) end
 
 ---在指定的地图坐标上放物品
@@ -182,6 +182,6 @@ function Obj.AddGold(Map,Floor,Xpos,Ypos,gold) end
 ---@param Xpos number X坐标
 ---@param Ypos number Y坐标
 ---@param itemIndex number 由Item.MakeItem(itemId)返回值
----@return number @
+---@return number @成功返回ObjectIndex
 function Obj.AddItem(Map,Floor,Xpos,Ypos,itemIndex) end
 

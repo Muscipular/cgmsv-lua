@@ -8,7 +8,7 @@ function Tech.GetData(techIndex, dataLine) end
 ---@param techIndex number
 ---@param dataLine number 指定信息栏 CONST.TECH
 ---@param val string|number 指定信息
----@return number @
+---@return number @成功返回0
 function Tech.SetData(techIndex, dataLine, val) end
 
 ---获取TechIndex

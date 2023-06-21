@@ -8,7 +8,7 @@ function Skill.GetData(skillIndex, dataLine) end
 ---@param skillIndex number
 ---@param dataLine number CONST.SKILL
 ---@param val string|number 指定信息
----@return number @
+---@return number @成功返回0
 function Skill.SetData(skillIndex, dataLine, val) end
 
 ---获取skillIndex
