@@ -221,7 +221,7 @@ function Battle.GetDexRearrangeRate(BattleIndex) end
 ---设置战斗乱敏率
 ---@param BattleIndex  number 战斗index
 ---@param rate number 0~100 乱敏概率
----@return number @
+---@return number @成功返回1
 function Battle.SetDexRearrangeRate(BattleIndex,rate) end
 
 ---获取战斗最大反击数
@@ -233,6 +233,6 @@ function Battle.GetMaxCounter(BattleIndex) end
 ---设置战斗最大反击数
 ---@param BattleIndex  number 战斗index
 ---@param rate number 最大反击数
----@return number @
+---@return number @成功返回1
 function Battle.SetMaxCounter (BattleIndex,rate) end
 

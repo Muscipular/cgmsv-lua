@@ -257,7 +257,7 @@ function NLG.LowCpuUsage(ms) end
 ---打开银行
 ---@param npcOrPlayer number npc或者玩家index
 ---@param player number 玩家index
----@return number @
+---@return number @成功返回0
 function NLG.OpenBank(npcOrPlayer, player) end
 
 ---模拟崩端
@@ -275,6 +275,7 @@ function NLG.SetPetRandomShot(petId, enable) end
 ---设置乱敏概率
 ---@param rate number 0-100
 ---@param mode  nil|0|1|2 0 @0=PVE&PVP 1=PVE 2=PVP
+---@return number @成功返回1
 function NLG.SetDexRearrangeRate(rate, mode) end
 
 ---修改暴击时伤害计算
@@ -285,14 +286,14 @@ function NLG.SetCriticalDamageAddition(mode, val) end
 ---删除角色，异步方法
 ---@param cdkey number CdKey
 ---@param dataPlaceNum number 角色位置 0 左 1 右
----@return number ret @返回0为成功，其他失败
+---@return number @返回0为成功，其他失败
 function NLG.DeleteCharacter(cdkey, dataPlaceNum) end
 
 ---删除角色，异步方法
 ---@param cdkey number CdKey
 ---@param dataPlaceNum number 角色位置 0 左 1 右
 ---@param callback string 回调函数，参考[DeleteCharacterCallback]
----@return number ret @返回0为成功，其他失败
+---@return number @返回0为成功，其他失败
 function NLG.DeleteCharacter(cdkey, dataPlaceNum, callback) end
 
 ---删除角色回调函数
