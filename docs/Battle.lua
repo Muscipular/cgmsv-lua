@@ -57,7 +57,7 @@ function Battle.GetGainMode(BattleIndex) end
 
 ---获取战斗胜利方。
 ---@param BattleIndex  number 战斗index，为Encount、PVE或PVP函数的返回值。
----@return number @0或者1。 0表示战斗下方，即0-9位置的玩家；1表示上方，即10-19位置的玩家。
+---@return number @0或者1，0表示战斗下方，即0-9位置的玩家；1表示上方，即10-19位置的玩家。
 function Battle.GetWinSide(BattleIndex) end
 
 ---让指定玩家对象加入另一个玩家对象的战斗中，也就是让CharIndex2加入CharIndex1的战斗（类似石器时代求助帮助）。使用前先组队

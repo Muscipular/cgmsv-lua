@@ -999,7 +999,7 @@ function TitleCheckCallCallBack(charIndex, Data, Flg) end
 
 ---创建一个采集技能事件
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
----@param InitFuncName  string 指向的Lua函数的名称
+---@param InitFuncName  string 指向的Lua函数的名称,参考[GatherItemEventCallback]
 function NL.RegGatherItemEvent(Dofile, InitFuncName) end
 
 ---GatherItemEvent的回调函数
@@ -1009,4 +1009,17 @@ function NL.RegGatherItemEvent(Dofile, InitFuncName) end
 ---@param itemNo number 采集物Id,参考itemset.txt
 ---@return number @返回采集物的Id，参考itemset.txt | 不写返回值时采集为默认结果
 function GatherItemEventCallback(charIndex, skillId, skillLv, itemNo)  end
+
+---在玩家遇敌的时候触发，可以通过这个接口来修改遇敌的队列和数量。
+---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称,参考[VSEnemyCreateEventCallback]
+function NL.RegVSEnemyCreateEvent(Dofile, InitFuncName) end
+
+---VSEnemyCreateEvent的回调函数
+---@param CharIndex number 响应事件的对象index，该值由Lua引擎传递给本函数
+---@param GroupIndex number 响应事件的战斗遇敌group ID，该值由Lua引擎传递给本函数。
+---@param EnemyNum number 响应事件的战斗遇敌数量，该值由Lua引擎传递给本函数。
+---@param EnemyList number[] 响应事件的战斗遇敌队列，该值由Lua引擎传递给本函数。
+---@return number[] @返回新的遇敌队列即可，如无修改返回EnemyList或其他非Table类值即可。
+function VSEnemyCreateEventCallback(CharIndex, GroupIndex, EnemyNum, EnemyList)  end
 
