@@ -87,3 +87,39 @@ function Data.GetEncountData(encountIndex,DataPos) end
 ---@return number @成功返回0
 function Data.SetEncountData(encountIndex,DataPos,val) end
 
+---获取JobIndex
+---@param jobId number 职业Id
+---@return number @JobIndex
+function Data.GetJobIndex(jobId) end
+
+---获取Job数据
+---@param jobIndex number JobIndex 
+---@param dataPos number CONST.JOBS_*
+---@return number|string @数据 
+function Data.GetJobData(jobIndex, dataPos) end
+
+---设置Job数据
+---@param jobIndex number JobIndex 
+---@param dataPos number CONST.JOBS_*
+---@param data number|string @数据 
+---@return number @成功返回0
+function Data.SetJobData(jobIndex, dataPos, data) end
+
+---获取职系Index
+---@param jobAncestryId number 职系Id
+---@return number @JobAncestryIndex
+function Data.GetJobAncestryIndex(jobAncestryId) end
+
+---获取职系数据
+---@param jobAncestryIndex number JobAncestryIndex 
+---@param dataPos number CONST.JOBS_Ancestry_*
+---@return number|string @数据 
+function Data.GetJobAncestryData(jobAncestryIndex, dataPos) end
+
+---设置职系数据
+---@param jobAncestryIndex number JobAncestryIndex 
+---@param dataPos number CONST.JOBS_Ancestry_*
+---@param data number|string @数据 
+---@return number @成功返回0
+function Data.SetJobAncestryData(jobAncestryIndex, dataPos, data) end
+
