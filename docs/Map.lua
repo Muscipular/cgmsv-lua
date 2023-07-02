@@ -97,23 +97,8 @@ function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName, pal, roomS
 ---@param Xsize number 地图x坐标最大值
 ---@param Ysize number 地图y坐标最大值
 ---@param MapName string 地图名
----@param pal number 调色板ID [定义地图调色板号]
----@param roomSize number 随机地图块大小 [定义随机生成地图的一些变量]
----@param roomSizeMinX number 随机地图块x坐标最小值 [定义随机生成地图的一些变量]
----@param roomSizeMinY number 随机地图块y坐标最小值 [定义随机生成地图的一些变量]
----@param roomSizeMaxX number 随机地图块x坐标最大值 [定义随机生成地图的一些变量]
----@param roomSizeMaxY number 随机地图块y坐标最大值 [定义随机生成地图的一些变量]
----@param tile number 地图地板图档编号 [定义地图图档信息]
----@param obj number 地图其他图档编号[定义地图图档信息]
----@param other number 地图其他物件编号[定义地图图档信息] 
----@param wallH number 墙横向图档编号 [定义地图墙面，如果全部写0，则会自动生成洞窟墙面]  
----@param wallHX number 墙横向反向图档编号  [定义地图墙面，如果全部写0，则会自动生成洞窟墙面] 
----@param wallV number 墙纵向图档编号 [定义地图墙面，如果全部写0，则会自动生成洞窟墙面]  
----@param wallVX number 墙纵向反向图档编号  [定义地图墙面，如果全部写0，则会自动生成洞窟墙面]  
----@param wallcross number 墙相交反向图档编号  [定义地图墙面，如果全部写0，则会自动生成洞窟墙面]  
----@param bgm number 背景音乐
 ---@return number @成功返回新的FloorID，失败返回-1。
-function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName, pal, roomSize, roomSizeMinX, roomSizeMinY, roomSizeMaxX, roomSizeMaxY, tile, obj, other, wallH, wallHX, wallV, wallVX, wallcross, bgm) end
+function Map.MakeMazeMap(Dofile, InitFuncName,Xsize,Ysize,MapName) end
 
 ---这个是Map.MakeMazeMap生成随机地图结果的回调函数
 ---@param FloorID  number 生成的地图的编号

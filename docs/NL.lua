@@ -291,12 +291,11 @@ function NL.RegBattleActionEvent(Dofile, InitFuncName) end
 
 ---BattleActionEvent的回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
----@param BattleIndex  number 响应事件的战斗index，该值由Lua引擎传递给本函数。
 ---@param Com1  number 戰鬥使用的動作編號，该值由Lua引擎传递给本函数。
 ---@param Com2  number 動作的目標對象的位置，该值由Lua引擎传递给本函数。
 ---@param Com3  number 所對應的tech的ID，该值由Lua引擎传递给本函数。
 ---@param ActionNum  number 是對象的第幾動作，通常不帶寵物可以有2次有效動作，该值由Lua引擎传递给本函数。
-function BattleActionEventCallBack(CharIndex, BattleIndex, Com1, Com2, Com3, ActionNum) end
+function BattleActionEventCallBack(CharIndex, Com1, Com2, Com3, ActionNum) end
 
 ---玩家所有的Action事件都會觸發本函數，如使用暈倒，攻擊，剪刀，石頭，布等。
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
