@@ -1023,3 +1023,18 @@ function NL.RegVSEnemyCreateEvent(Dofile, InitFuncName) end
 ---@return number[] @返回新的遇敌队列即可，如无修改返回EnemyList或其他非Table类值即可。
 function VSEnemyCreateEventCallback(CharIndex, GroupIndex, EnemyNum, EnemyList)  end
 
+---玩家攻击时触发，可以修改攻击目标（乱射、连击等）。
+---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称,参考[BattleActionTargetEventCallback]
+function NL.RegBattleActionTargetEvent(Dofile, InitFuncName) end
+
+---BattleActionTargetEvent的回调函数
+---@param charIndex number 对象index
+---@param battleIndex number 战斗Index
+---@param com1 number COM1。技能类别
+---@param com2 number COM2。点选目标
+---@param com3 number COM3。一般是TechId
+---@param targetList number[] 响应事件的目标位置队列
+---@return number[] @返回新的目标位置，如无修改返回targetList或其他非Table类值即可。
+function BattleActionTargetEventCallback(charIndex, battleIndex, com1, com2, com3, targetList)  end
+

@@ -234,3 +234,9 @@ function Battle.GetMaxCounter(BattleIndex) end
 ---@return number @成功返回1
 function Battle.SetMaxCounter (BattleIndex,rate) end
 
+---检查能否攻击对应位置
+---@param charIndex number CharIndex
+---@param pos number 位置，0-19
+---@return number @可以攻击返回1，其他返回0
+function Battle.PositionCheck (charIndex, pos) end
+
