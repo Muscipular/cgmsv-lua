@@ -786,7 +786,7 @@ function NL.RegBattleEscapeEvent(Dofile, InitFuncName) end
 ---BattleEscapeEvent的回调函数
 ---@param battleIndex number 战斗的index
 ---@param charIndex number 施放召唤角色的index
----@param rate number 逃跑成功率
+---@param rate number 逃跑成功率, 成功为1, 0为失败
 ---@return any @成功率
 function BattleEscape(battleIndex, charIndex,rate) end
 
@@ -873,9 +873,9 @@ function BattleMagicRssRateCallBack(battleIndex,aIndex,fIndex,rate) end
 function NL.RegItemBoxGenerateEvent(Dofile, InitFuncName) end
 
 ---ItemBoxGenerateEvent的回调函数
----@param mapId number
----@param floor number
----@param itemBoxType number 宝箱编号
+---@param mapId number 宝箱所在地图类型
+---@param floor number 宝箱所在地图
+---@param itemBoxType number 宝箱itemId
 ---@param adm number 影响出产物品，作用未知
 ---@return number[] @返回宝箱参数 {itemBoxType, adm}
 function ItemBoxGenerateCallback(mapId, floor, itemBoxType, adm) end
@@ -886,14 +886,14 @@ function ItemBoxGenerateCallback(mapId, floor, itemBoxType, adm) end
 function NL.RegItemBoxLootEvent(Dofile, InitFuncName) end
 
 ---ItemBoxLootEvent的回调函数
----@param charaIndex number
----@param mapId number
----@param floor number
----@param X number
----@param Y number
----@param boxType number
+---@param charaIndex number 获得物品的角色
+---@param mapId number charaIndex地图类型
+---@param floor number charaIndex地图
+---@param X number charaIndex X坐标
+---@param Y number charaIndex Y坐标
+---@param boxType number 宝箱itemId
 ---@param adm number
----@return number @number 返回1拦截默认物品
+---@return number @number 返回1拦截默认物品, 返回0不拦截
 function ItemBoxLootCallback(charaIndex, mapId, floor, X, Y, boxType, adm) end
 
 ---创建一个宝箱遇敌概率的事件
@@ -902,12 +902,12 @@ function ItemBoxLootCallback(charaIndex, mapId, floor, X, Y, boxType, adm) end
 function NL.RegItemBoxEncountRateEvent(Dofile, InitFuncName) end
 
 ---ItemBoxEncountEvent的回调函数
----@param charaIndex number
----@param mapId number
----@param floor number
----@param X number
----@param Y number
----@param itemIndex number 箱子物品index
+---@param charaIndex number 开宝箱的角色
+---@param mapId number charaIndex地图类型
+---@param floor number charaIndex地图
+---@param X number charaIndex X坐标
+---@param Y number charaIndex Y坐标
+---@param itemIndex number 箱子index
 ---@return number[]|nil @遇敌数组 每个怪物3个参数，分别为 id，等级，随机等级， 返回nil不拦截， 例子： {0, 100, 5, 1, 1, 0} 生成0号怪物100-105级，1号怪物1级
 function ItemBoxEncountCallback(charaIndex, mapId, floor, X, Y, itemIndex) end
 

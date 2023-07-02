@@ -140,7 +140,7 @@ function Battle.GetPos(battleIndex,charIndex) end
 
 ---获取连战id
 ---@param battleIndex number
----@return number @encountIndex
+---@return number @返回两个值，encountIndex, flg
 function Battle.GetNextBattle(battleIndex) end
 
 ---计算属性伤害比率（10属性=100）
