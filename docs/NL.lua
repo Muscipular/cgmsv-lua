@@ -786,8 +786,8 @@ function NL.RegBattleEscapeEvent(Dofile, InitFuncName) end
 ---BattleEscapeEvent的回调函数
 ---@param battleIndex number 战斗的index
 ---@param charIndex number 施放召唤角色的index
----@param rate number 逃跑成功率, 成功为1, 0为失败
----@return any @成功率
+---@param rate number 逃跑结构, 成功为1, 0为失败
+---@return number @逃跑结构, 成功为1, 0为失败
 function BattleEscape(battleIndex, charIndex,rate) end
 
 ---创建一个封印时触发的事件，该事件不能突破服务器的设定
