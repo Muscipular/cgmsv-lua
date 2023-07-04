@@ -901,6 +901,21 @@ function ItemBoxLootCallback(charaIndex, mapId, floor, X, Y, boxType, adm) end
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemBoxEncountRateEvent(Dofile, InitFuncName) end
 
+---ItemBoxEncountRateEvent的回调函数
+---@param charaIndex number
+---@param mapId number
+---@param floor number
+---@param X number
+---@param Y number
+---@param itemIndex number 箱子物品index
+---@return number @遇敌概率
+function ItemBoxEncountRateEventCallback(charaIndex, mapId, floor, X, Y, itemIndex) end
+
+---创建一个宝箱遇敌的事件
+---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegItemBoxEncountEvent(Dofile, InitFuncName) end
+
 ---ItemBoxEncountEvent的回调函数
 ---@param charaIndex number 开宝箱的角色
 ---@param mapId number charaIndex地图类型

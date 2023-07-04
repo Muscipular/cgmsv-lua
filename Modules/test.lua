@@ -5,7 +5,11 @@ local Welcome = ModuleBase:createModule('test')
 function Welcome:onLoad()
     _G.__test_i = (_G.__test_i or 0) + 1
     self:logInfo('load', _G.__test_i)
-    self:testTech();
+    --self:testTech();
+  self:regCallback("VSEnemyCreateEvent", function(...)
+    self:logDebug("VSEnemyCreateEvent", ...);
+    return {-1,0,-1,0,-1,0,-1,0,-1,0}
+  end)
 end
 
 function Welcome:testTech()
