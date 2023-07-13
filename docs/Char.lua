@@ -218,9 +218,8 @@ function Char.GetSkillId(CharIndex,Slot) end
 ---获取指定玩家的指定技能位置的技能经验。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，可用Char.HaveSkill来获取位置。
----@param ShowMsg  boolean 是否显示系统信息。
 ---@return number @成功返回技能经验,失败返回-1，参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4。
-function Char.GetSkillExp(CharIndex,Slot,ShowMsg) end
+function Char.GetSkillExp(CharIndex,Slot) end
 
 ---获取指定玩家的指定技能位置的技能等级。
 ---@param CharIndex  number 目标的 对象index。
@@ -233,9 +232,10 @@ function Char.SetSkillLevel(CharIndex,Slot,Level,ShowMsg) end
 ---获取指定玩家的指定技能位置的技能经验。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，可用Char.HaveSkill来获取位置。
----@param Level  number 新的技能经验。
+---@param EXP  number 新的技能经验。
+---@param ShowMsg  boolean 是否显示系统信息。
 ---@return number @成功返回新的技能经验,失败返回-1，传入的参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4，传入的新经验小于1则返回-5。
-function Char.SetSkillExp(CharIndex,Slot,Level) end
+function Char.SetSkillExp(CharIndex,Slot,EXP,ShowMsg) end
 
 ---获取指定玩家的家族ID。
 ---@param CharIndex  number 目标的 对象index。
