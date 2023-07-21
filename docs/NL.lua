@@ -1083,6 +1083,18 @@ function BattleLuaSkillEventCallback(battleIndex, charIndex, SKLFunc, DMGFunc) e
 ---@param AttackerPos number 攻击者战斗位置
 function SKLFunc(TechId, WeaponType, AttackerPos) end
 
+---发送SKL技能封包，支持0-3个参数
+---@param TechId number 技能编号
+---@param WeaponType number 道具类型
+function SKLFunc(TechId, WeaponType) end
+
+---发送SKL技能封包，支持0-3个参数
+---@param TechId number 技能编号
+function SKLFunc(TechId) end
+
+---发送SKL技能封包，支持0-3个参数
+function SKLFunc() end
+
 ---发送伤害封包
 ---@param pos number 目标位置
 ---@param flg number 标记
