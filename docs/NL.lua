@@ -776,7 +776,7 @@ function NL.RegDropRateEvent(Dofile, InitFuncName) end
 ---@param enemyIndex number 魔物index
 ---@param itemId number
 ---@param rate number 掉落率
-function DropRateCallBack(enemyIndex,itemId,rate) end
+function DropRateCallBack(enemyIndex, itemId, rate) end
 
 ---创建一个逃跑时触发的事件
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -788,7 +788,7 @@ function NL.RegBattleEscapeEvent(Dofile, InitFuncName) end
 ---@param charIndex number 施放召唤角色的index
 ---@param rate number 逃跑结构, 成功为1, 0为失败
 ---@return number @逃跑结构, 成功为1, 0为失败
-function BattleEscape(battleIndex, charIndex,rate) end
+function BattleEscape(battleIndex, charIndex, rate) end
 
 ---创建一个封印时触发的事件，该事件不能突破服务器的设定
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -801,7 +801,7 @@ function NL.RegBattleSealRateEvent(Dofile, InitFuncName) end
 ---@param enemyIndex number 封印的魔物index
 ---@param rate number 封印成功率
 ---@return number @成功率
-function BattleSealRateCallBack(battleIndex,charIndex,enemyIndex,rate) end
+function BattleSealRateCallBack(battleIndex, charIndex, enemyIndex, rate) end
 
 ---创建一个暴击时触发的事件
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -813,7 +813,7 @@ function NL.RegCalcCriticalRateEvent(Dofile, InitFuncName) end
 ---@param fIndex number 防御者的index
 ---@param rate number 必杀率
 ---@return number @必杀率
-function CalcCriticalRateCallBack(aIndex,fIndex,rate) end
+function CalcCriticalRateCallBack(aIndex, fIndex, rate) end
 
 ---创建一个闪躲时触发的事件
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -826,7 +826,7 @@ function NL.RegBattleDodgeRateEvent(Dofile, InitFuncName) end
 ---@param fIndex number 防御者的index
 ---@param rate number 闪躲率
 ---@return number @闪躲率
-function BattleDodgeRateCallBack(battleIndex,aIndex,fIndex,rate) end
+function BattleDodgeRateCallBack(battleIndex, aIndex, fIndex, rate) end
 
 ---创建一个反击时触发的事件
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -839,7 +839,7 @@ function NL.RegBattleCounterRateEvent(Dofile, InitFuncName) end
 ---@param fIndex number 防御者的index
 ---@param rate number 反击率
 ---@return number @反击率
-function BattleCounterRateCallBack(battleIndex,aIndex,fIndex,rate) end
+function BattleCounterRateCallBack(battleIndex, aIndex, fIndex, rate) end
 
 ---创建一个造成魔法伤害触发的事件，用于改变魔法伤害系数
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -852,7 +852,7 @@ function NL.RegBattleMagicDamageRateEvent(Dofile, InitFuncName) end
 ---@param fIndex number 防御者的index
 ---@param rate number 魔法系数
 ---@return number @魔法系数
-function BattleMagicDamageRateCallBack(battleIndex,aIndex,fIndex,rate) end
+function BattleMagicDamageRateCallBack(battleIndex, aIndex, fIndex, rate) end
 
 ---创建一个造成魔法伤害触发的事件，用于改变魔防系数
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -865,7 +865,7 @@ function NL.RegBattleMagicRssRateEvent(Dofile, InitFuncName) end
 ---@param fIndex number 防御者的index
 ---@param rate number 魔防系数
 ---@return number @魔防系数
-function BattleMagicRssRateCallBack(battleIndex,aIndex,fIndex,rate) end
+function BattleMagicRssRateCallBack(battleIndex, aIndex, fIndex, rate) end
 
 ---创建一个宝箱生成触发的事件
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -983,7 +983,7 @@ function NL.RegCalcFpConsumeEvent(Dofile, InitFuncName) end
 ---@param techId number 技能id
 ---@param Fp number 耗魔数值
 ---@return number @耗魔数值
-function CalcFpConsumeCallBack(charIndex,techId,Fp) end
+function CalcFpConsumeCallBack(charIndex, techId, Fp) end
 
 ---创建一个装备说明的事件，用于修改物品说明
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -1022,7 +1022,7 @@ function NL.RegGatherItemEvent(Dofile, InitFuncName) end
 ---@param skillLv number 技能等级
 ---@param itemNo number 采集物Id,参考itemset.txt
 ---@return number @返回采集物的Id，参考itemset.txt | 不写返回值时采集为默认结果
-function GatherItemEventCallback(charIndex, skillId, skillLv, itemNo)  end
+function GatherItemEventCallback(charIndex, skillId, skillLv, itemNo) end
 
 ---在玩家遇敌的时候触发，可以通过这个接口来修改遇敌的队列和数量。
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -1035,7 +1035,7 @@ function NL.RegVSEnemyCreateEvent(Dofile, InitFuncName) end
 ---@param EnemyNum number 响应事件的战斗遇敌数量，该值由Lua引擎传递给本函数。
 ---@param EnemyList number[] 响应事件的战斗遇敌队列，该值由Lua引擎传递给本函数。
 ---@return number[] @返回新的遇敌队列即可，如无修改返回EnemyList或其他非Table类值即可。
-function VSEnemyCreateEventCallback(CharIndex, GroupIndex, EnemyNum, EnemyList)  end
+function VSEnemyCreateEventCallback(CharIndex, GroupIndex, EnemyNum, EnemyList) end
 
 ---玩家攻击时触发，可以修改攻击目标（乱射、连击等）。
 ---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -1050,5 +1050,41 @@ function NL.RegBattleActionTargetEvent(Dofile, InitFuncName) end
 ---@param com3 number COM3。一般是TechId
 ---@param targetList number[] 响应事件的目标位置队列
 ---@return number[] @返回新的目标位置，如无修改返回targetList或其他非Table类值即可。
-function BattleActionTargetEventCallback(charIndex, battleIndex, com1, com2, com3, targetList)  end
+function BattleActionTargetEventCallback(charIndex, battleIndex, com1, com2, com3, targetList) end
 
+---控制技能是否可以使用事件
+---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称,参考[BattleSkillCheckEventCallback]
+function NL.RegBattleSkillCheckEvent(Dofile, InitFuncName) end
+
+---BattleSkillCheckEvent的回调函数
+---@param charIndex number 对象index
+---@param battleIndex number 战斗Index
+---@param arrayOfSkillEnable number[] 对应的技能是否可用，1为可用，0为不可用
+---@return number[] @返回对应的技能是否可用，1为可用，0为不可用
+function BattleSkillCheckEventCallback(charIndex, battleIndex, arrayOfSkillEnable) end
+
+---自定义lua技能回调事件
+---@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称,参考[BattleLuaSkillEventCallback]
+function NL.RegBattleLuaSkillEvent(Dofile, InitFuncName) end
+
+---BattleLuaSkillEvent的回调函数
+---@param charIndex number 对象index
+---@param battleIndex number 战斗Index
+---@param SKLFunc function 发送SKL技能封包，所有参数可选,参考[SKLFunc]
+---@param DMGFunc function 发送伤害封包，参考[DMGFunc]
+---@return number[] @返回对应的技能是否可用，1为可用，0为不可用
+function BattleLuaSkillEventCallback(battleIndex, charIndex, SKLFunc, DMGFunc) end
+
+---发送SKL技能封包，支持0-3个参数
+---@param TechId number 技能编号
+---@param WeaponType number 道具类型
+---@param AttackerPos number 攻击者战斗位置
+function SKLFunc(TechId, WeaponType, AttackerPos) end
+
+---发送伤害封包
+---@param pos number 目标位置
+---@param flg number 标记
+---@param dmg number 伤害/治疗数值
+function DMGFunc(pos, flg, dmg) end
