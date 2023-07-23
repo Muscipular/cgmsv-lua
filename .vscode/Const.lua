@@ -9,7 +9,7 @@
 function OnSetText(uri, text)
     local diffs = {}
 -- print(text);
-    for start, a, finish in text:gmatch("()(%%[^%% ]*_[^%% ]*%%)()") do
+    for start, a, finish in text:gmatch("()(%%[^%% %s%.]*_[^%% %s%.]*%%)()") do
         print(start, a, finish);
         diffs[#diffs+1] = {
             start  = start,
