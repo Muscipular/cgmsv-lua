@@ -13,7 +13,7 @@ function Battle.GetPlayIndex(BattleIndex, Slot) end
 ---调用魔力脚本语句encount创建战斗
 ---@param UpIndex  number 战斗一方的 对象index
 ---@param DownIndex  number 战斗一方的 对象index
----@param Data  string 触发战斗的信息，包括战斗敌人队列等信息，等同于GMSV自身脚本的encount参数,可不填写
+---@param Data?  string 触发战斗的信息，包括战斗敌人队列等信息，等同于GMSV自身脚本的encount参数,可不填写
 ---@return number @前两个参数都是同一个玩家索引，第三个参数不填的时候，进行原地遇敌，如果该处无法遇敌，则返回负数。
 function Battle.Encount(UpIndex, DownIndex, Data) end
 
@@ -23,7 +23,7 @@ function Battle.Encount(UpIndex, DownIndex, Data) end
 ---@param DoFunc  string 战斗初始化接受后调用的Lua函数的名称，申明格式请参考[BattleInitCallBack]，如果不调用则填nil
 ---@param EnemyIdAr  number[] 战斗所出现的怪物队列的怪物ID数组（怪物ID为enemy.txt中的ID）。
 ---@param BaseLevelAr  number[] 战斗所出现的怪物队列的怪物等级数组（数组结构与EnemyIdAr结构应一一对应）
----@param RandLv number[] 战斗所出现的怪物队列的怪物等级波动数组（数组结构与EnemyIdAr结构应一一对应）
+---@param RandLv? number[] 战斗所出现的怪物队列的怪物等级波动数组（数组结构与EnemyIdAr结构应一一对应）
 ---@return number @返回负数表示失败，成功返回战斗index。
 function Battle.PVE(CharIndex, CreatePtr, DoFunc, EnemyIdAr, BaseLevelAr, RandLv) end
 
@@ -72,7 +72,7 @@ function Battle.JoinBattle(CharIndex1, CharIndex2) end
 function Battle.ExitBattle(CharIndex) end
 
 ---为非PVP的战斗设置战斗胜利事件的回调函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
----@param DoFile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param DoFile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[PVEWinCallBack]
 ---@param BattleIndex  number 战斗index。
 ---@return number @返回1成功，返回0失败。
@@ -84,7 +84,7 @@ function Battle.SetWinEvent(DoFile, FuncName, BattleIndex) end
 function PVEWinCallBack(BattleIndex, CharIndex) end
 
 ---为PVP的战斗设置战斗胜利事件的回调函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
----@param DoFile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param DoFile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[PVPWinCallBack]
 ---@param BattleIndex  number 战斗index。
 ---@return number @返回1成功，返回0失败。
@@ -240,4 +240,16 @@ function Battle.SetMaxCounter (BattleIndex,rate) end
 ---@param pos number 位置，0-19
 ---@return number @可以攻击返回1，其他返回0
 function Battle.PositionCheck (charIndex, pos) end
+
+---获取自定义数据
+---@param battleIndex number 目标的 对象index。
+---@param dataIndex string 信息储存的位置，自定义
+---@return string|number|nil @获得指定位置的字符串
+function Battle.GetExtData(battleIndex, dataIndex) end
+
+---设置自定义数据
+---@param battleIndex number 目标的 对象index。
+---@param dataIndex string 信息储存的位置，自定义
+---@param val string|number|nil @获得指定位置的字符串
+function Battle.GetExtData(battleIndex, dataIndex, val) end
 

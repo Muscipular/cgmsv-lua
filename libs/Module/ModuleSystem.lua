@@ -134,7 +134,7 @@ function _G.getModule(moduleName)
   return Modules[moduleName];
 end
 
----@return string
+---@return string|nil
 function _G.findLegacyModuleName(path)
   if path then
     local moduleName;

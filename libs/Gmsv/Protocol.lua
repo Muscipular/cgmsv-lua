@@ -95,7 +95,7 @@ function Protocol.GetCharIndexFromFd(fd)
 end
 
 -----拦截封包回调
------@param Dofile string 加载文件
+-----@param Dofile? string 加载文件
 -----@param FuncName string 回调名字
 -----@param PacketID string 封包头
 --function Protocol.OnRecv(Dofile, FuncName, PacketID)

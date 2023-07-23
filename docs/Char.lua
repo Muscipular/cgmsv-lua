@@ -51,7 +51,7 @@ function Char.AddGold(charIndex, amount) end
 ---@param CharIndex number 目标的 对象index。
 ---@param ItemID number 道具ID。
 ---@param Amount number 道具的数量。
----@param ShowMsg boolean 是否显示系统信息
+---@param ShowMsg? boolean 是否显示系统信息
 ---@return number @成功返回1，失败则返回0。
 function Char.DelItem(CharIndex, ItemID, Amount, ShowMsg) end
 
@@ -59,7 +59,7 @@ function Char.DelItem(CharIndex, ItemID, Amount, ShowMsg) end
 ---@param CharIndex number 目标的 对象index。
 ---@param ItemID number 道具ID。
 ---@param Amount number 道具的数量。
----@param ShowMsg boolean 是否显示系统信息
+---@param ShowMsg? boolean 是否显示系统信息
 ---@return number @目标道具index，失败则返回负数。
 function Char.GiveItem(CharIndex, ItemID, Amount, ShowMsg) end
 
@@ -95,7 +95,7 @@ function Char.AddPet(CharIndex, PetID) end
 ---为对象增加一只等级为1的PetID宠物。
 ---@param CharIndex number 目标的 对象index。
 ---@param PetID number 宠物的ID
----@param FullBP number 1表示制作满档宠物，0表示档数随机，不填写该参数则档数随机
+---@param FullBP? number 1表示制作满档宠物，0表示档数随机，不填写该参数则档数随机
 ---@return number @制作成功则返回目标宠物的对象index，否则返回-1，参数数据类型不对返回-2，对象index无效返回-3。
 function Char.GivePet(CharIndex,PetID,FullBP) end
 
@@ -173,15 +173,15 @@ function Char.GetNextExp(CharIndex) end
 ---为目标玩家增加指定技能（指定初始经验）。
 ---@param CharIndex  number 目标的 对象index。
 ---@param SkillID  number 技能的ID，对应Skill.txt的id。
----@param SkillExp  number 技能的初始经验值，如果不写则为0。
----@param ShowMsg  boolean 是否显示系统信息。
+---@param SkillExp?  number 技能的初始经验值，如果不写则为0。
+---@param ShowMsg?  boolean 是否显示系统信息。
 ---@return number @如果成功则返回增加的技能栏的位置，范围0-14，如果失败则返回-1，参数数据类型不对返回-2，对象index无效返回-3，技能的ID错误返回-4。
 function Char.AddSkill(CharIndex,SkillID,SkillExp,ShowMsg) end
 
 ---删除目标玩家的指定技能。
 ---@param CharIndex  number 目标的 对象index。
 ---@param SkillID  number 技能的ID，对应Skill.txt的id。
----@param ShowMsg  boolean 是否显示系统信息。
+---@param ShowMsg?  boolean 是否显示系统信息。
 ---@return number @如果成功删除技能则返回该技能原本的技能栏的位置，范围0-14，如果失败则返回-1。 |  | 如果玩家没有该技能，也返回-1。 |  | 参数数据类型不对返回-2，对象index无效返回-3，技能的ID错误返回-4。
 function Char.DelSkill(CharIndex,SkillID,ShowMsg) end
 
@@ -225,7 +225,7 @@ function Char.GetSkillExp(CharIndex,Slot) end
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，可用Char.HaveSkill来获取位置。
 ---@param Level  number 新的技能等级。
----@param ShowMsg  boolean 是否显示系统信息。
+---@param ShowMsg?  boolean 是否显示系统信息。
 ---@return number @成功返回新技能等级,失败返回-1，传入的参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4，传入的新等级小于1则返回-5。
 function Char.SetSkillLevel(CharIndex,Slot,Level,ShowMsg) end
 
@@ -233,7 +233,7 @@ function Char.SetSkillLevel(CharIndex,Slot,Level,ShowMsg) end
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，可用Char.HaveSkill来获取位置。
 ---@param EXP  number 新的技能经验。
----@param ShowMsg  boolean 是否显示系统信息。
+---@param ShowMsg?  boolean 是否显示系统信息。
 ---@return number @成功返回新的技能经验,失败返回-1，传入的参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4，传入的新经验小于1则返回-5。
 function Char.SetSkillExp(CharIndex,Slot,EXP,ShowMsg) end
 
@@ -297,7 +297,7 @@ function Char.FeverStart(CharIndex) end
 function Char.FeverStop(CharIndex) end
 
 ---为对象index设置行走前事件的回调函数，对象在行走前会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPreCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetWalkPreEvent(Dofile,FuncName,CharIndex) end
@@ -308,7 +308,7 @@ function Char.SetWalkPreEvent(Dofile,FuncName,CharIndex) end
 function CharWalkPreCallBack(CharIndex) end
 
 ---为对象index设置行走后事件的回调函数，对象在行走后会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPostCallBack]
 ---@param CharIndex  number 设置的对象index。
 ---@return number @成功返回0
@@ -319,7 +319,7 @@ function Char.SetWalkPostEvent(Dofile,FuncName,CharIndex) end
 function CharWalkPostCallBack(CharIndex) end
 
 ---为对象index设置覆盖其他对象后事件的回调函数，对象在覆盖其他对象后会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[PostOverEventCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetPostOverEvent(Dofile,FuncName,CharIndex) end
@@ -330,7 +330,7 @@ function Char.SetPostOverEvent(Dofile,FuncName,CharIndex) end
 function PostOverEventCallBack(CharIndex, TargetCharIndex) end
 
 ---为对象index设置循环事件的回调函数，事件会每隔Interval时间循环触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharLoopCallBack]
 ---@param CharIndex  number 设置的对象index。
 ---@param Interval  number 循环间隔，单位毫秒。
@@ -341,7 +341,7 @@ function Char.SetLoopEvent(Dofile,FuncName,CharIndex,Interval) end
 function CharLoopCallBack(CharIndex) end
 
 ---为对象index设置对话开启事件的回调函数，对象在开启对话的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPreCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetTalkedEvent(Dofile,FuncName,CharIndex) end
@@ -352,7 +352,7 @@ function Char.SetTalkedEvent(Dofile,FuncName,CharIndex) end
 function CharTalkedCallBack(CharIndex, TalkerCharIndex) end
 
 ---为对象index设置对话事件的回调函数，对象在进行对话交互的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWindowTalkedCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetWindowTalkedEvent(Dofile,FuncName,CharIndex) end
@@ -366,7 +366,7 @@ function Char.SetWindowTalkedEvent(Dofile,FuncName,CharIndex) end
 function CharWindowTalkedCallBack(CharIndex, TalkerCharIndex,SeqNo,Select,Data) end
 
 ---为对象index设置丢弃道具事件的回调函数，对象在丢弃道具的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharItemPutCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetItemPutEvent(Dofile,FuncName,CharIndex) end
@@ -377,7 +377,7 @@ function Char.SetItemPutEvent(Dofile,FuncName,CharIndex) end
 function CharItemPutCallBack(CharIndex, ItemIndex) end
 
 ---疑似限时道具
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWatchCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetWatchEvent(Dofile, FuncName, CharIndex) end
@@ -432,7 +432,7 @@ function Char.CheckTitle(CharIndex) end
 ---获取自定义数据（保存到数据库）
 ---@param charIndex number 目标的 对象index。
 ---@param dataIndex string 信息储存的位置，自定义
----@return string|number @获得指定位置的字符串
+---@return string|number|nil @获得指定位置的字符串
 function Char.GetExtData(charIndex, dataIndex) end
 
 ---设置自定义数据（保存到数据库）
@@ -445,7 +445,7 @@ function Char.SetExtData(charIndex, dataIndex, value) end
 ---获取自定义数据（不保存到数据库）
 ---@param charIndex number 目标的 对象index。
 ---@param dataIndex string 信息储存的位置，自定义
----@return string|number @获得指定位置的字符串
+---@return string|number|nil @获得指定位置的字符串
 function Char.GetTempData(charIndex, dataIndex) end
 
 ---设置自定义数据（不保存到数据库）
@@ -596,9 +596,9 @@ function Char.MovePet(charIndex, frslot, toslot) end
 ---加入组队，无视距离
 ---@param sourceIndex number 队员index
 ---@param targetIndex number 队长index
----@param arg boolean 是否无视组队开关
+---@param flag? boolean 是否无视组队开关
 ---@return number @成功返回0
-function Char.JoinParty(sourceIndex, targetIndex, arg) end
+function Char.JoinParty(sourceIndex, targetIndex, flag) end
 
 ---离开队伍
 ---@param charIndex number 目标的 对象index。
@@ -616,10 +616,18 @@ function Char.GetSuitId(charIndex, slot) end
 ---@return number @套装数量
 function Char.GetSuitCount(charIndex) end
 
+---@class DummyCreateOptions
+---@field mapType number 
+---@field floor number 
+---@field x number
+---@field y number
+---@field image number
+---@field name string
+
 ---创建假人
----@param charIndex number 目标的 对象index。
+---@param opt? DummyCreateOptions @
 ---@return number @假人index
-function Char.CreateDummy(charIndex) end
+function Char.CreateDummy(opt) end
 
 ---检测是否假人
 ---@param charIndex number 目标的 对象index。

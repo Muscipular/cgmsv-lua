@@ -3,7 +3,7 @@
 function NL.Version() end
 
 ---使用Lua脚本创建NPC，并执行Dofile文件中的InitFuncName函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string Init函数的名称,NPC创建后执行的函数,申明格式请参考下面的[InitCallBack]
 ---@return number @创建成功则返回 对象index, 失败则返回负数
 function NL.CreateNPC(Dofile, InitFuncName) end
@@ -52,7 +52,7 @@ function NL.CreateArgNpc(Type, Arg, Name, Image, Map, Floor, Xpos, Ypos, Dir, Sh
 function NL.SetArgNpc(NpcIndex, NewArg) end
 
 ---创建一个所有玩家登陆游戏时候自动触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，玩家登陆会自动触发FuncName的Lua函数，该函数的申明格式请参考[LoginEventCallBack]
 function NL.RegLoginEvent(Dofile, InitFuncName) end
 
@@ -62,7 +62,7 @@ function NL.RegLoginEvent(Dofile, InitFuncName) end
 function LoginEventCallBack(CharIndex) end
 
 ---创建一个所有玩家登出回记录点就会触发的Lua函数，玩家只有点击客户端”登出回记录点”按钮时才可触发该函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[LoginGateEventCallBack]
 function NL.RegLoginGateEvent(Dofile, InitFuncName) end
 
@@ -72,7 +72,7 @@ function NL.RegLoginGateEvent(Dofile, InitFuncName) end
 function LoginGateEventCallBack(CharIndex) end
 
 ---创建一个所有玩家登出游戏就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[LogoutEventCallBack]
 function NL.RegLogoutEvent(Dofile, InitFuncName) end
 
@@ -82,7 +82,7 @@ function NL.RegLogoutEvent(Dofile, InitFuncName) end
 function LogoutEventCallBack(CharIndex) end
 
 ---创建一个所有玩家说话就会触发的Lua函数，玩家在游戏中说话即可触发该事件，可以用来新建指令，GM命令等，同时可以对GM命令进行分级授权。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[TalkEventCallBack]
 function NL.RegTalkEvent(Dofile, InitFuncName) end
 
@@ -96,7 +96,7 @@ function NL.RegTalkEvent(Dofile, InitFuncName) end
 function TalkEventCallBack(CharIndex, Msg, Color, Range, Size) end
 
 ---创建一个所有玩家角色升级触发的Lua函数，玩家在游戏中角色升级后就可触发，可以用来在特定等级给予特定奖励，记录玩家冲级速度排行等。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[LevelUpCallBack]
 function NL.RegLevelUpEvent(Dofile, InitFuncName) end
 
@@ -106,7 +106,7 @@ function NL.RegLevelUpEvent(Dofile, InitFuncName) end
 function LevelUpCallBack(CharIndex) end
 
 ---创建一个角色进入战斗即可触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[BattleStartEventCallBack]
 function NL.RegBattleStartEvent(Dofile, InitFuncName) end
 
@@ -116,7 +116,7 @@ function NL.RegBattleStartEvent(Dofile, InitFuncName) end
 function BattleStartEventCallBack(BattleIndex) end
 
 ---创建一个战斗结束即可触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[BattleOverEventCallBack]
 function NL.RegBattleOverEvent(Dofile, InitFuncName) end
 
@@ -126,12 +126,12 @@ function NL.RegBattleOverEvent(Dofile, InitFuncName) end
 function BattleOverEventCallBack(BattleIndex) end
 
 ---创建一个玩家通过传送点时触发的Lua函数，可以用来记录玩家的传送轨迹。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[WarpEventCallBack]
 function NL.RegWarpEvent(Dofile, InitFuncName) end
 
 ---创建一个玩家通过传送点时触发的Lua函数，可以用来记录玩家的传送轨迹。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[WarpEventCallBack]
 function NL.RegAfterWarpEvent(Dofile, InitFuncName) end
 
@@ -149,7 +149,7 @@ function NL.RegAfterWarpEvent(Dofile, InitFuncName) end
 function WarpEventCallBack(CharIndex, Ori_MapId, Ori_FloorId, Ori_X, Ori_Y, Target_MapId, Target_FloorId, Target_X, Target_Y) end
 
 ---创建一个所有玩家掉线就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[DropEventCallBack]
 function NL.RegDropEvent(Dofile, InitFuncName) end
 
@@ -159,7 +159,7 @@ function NL.RegDropEvent(Dofile, InitFuncName) end
 function DropEventCallBack(CharIndex) end
 
 ---创建一个所有玩家角色更换称号即可触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[TitleChangedCallBack]
 function NL.RegTitleChangedEvent(Dofile, InitFuncName) end
 
@@ -171,7 +171,7 @@ function NL.RegTitleChangedEvent(Dofile, InitFuncName) end
 function TitleChangedCallBack(CharIndex, Ori_Title, New_Title) end
 
 ---创建一个对象获取战斗经验时触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[GetExpEventCallBack]
 function NL.RegGetExpEvent(Dofile, InitFuncName) end
 
@@ -182,7 +182,7 @@ function NL.RegGetExpEvent(Dofile, InitFuncName) end
 function GetExpEventCallBack(CharIndex, Exp) end
 
 ---创建一个对象获取战斗技能经验时触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[GetBattleSkillExpEventCallBack]
 function NL.RegBattleSkillExpEvent(Dofile, InitFuncName) end
 
@@ -194,7 +194,7 @@ function NL.RegBattleSkillExpEvent(Dofile, InitFuncName) end
 function GetBattleSkillExpEventCallBack(CharIndex, SkillID, Exp) end
 
 ---创建一个对象获取生产技能经验时触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[GetProductSkillExpEventCallBack]
 function NL.RegProductSkillExpEvent(Dofile, InitFuncName) end
 
@@ -206,7 +206,7 @@ function NL.RegProductSkillExpEvent(Dofile, InitFuncName) end
 function GetProductSkillExpEventCallBack(CharIndex, SkillID, Exp) end
 
 ---创建一个宠物升级触发的Lua函数，玩家宠物在游戏中升级后就可触发，可以用来在特定等级给予特定奖励，记录玩家宠物冲级速度排行等。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[LevelUpCallBack]
 function NL.RegPetLevelUpEvent(Dofile, InitFuncName) end
 
@@ -216,7 +216,7 @@ function NL.RegPetLevelUpEvent(Dofile, InitFuncName) end
 function LevelUpCallBack(CharIndex) end
 
 ---创建一个所有玩家离开战斗就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[BattleExitCallBack]
 function NL.RegBattleExitEvent(Dofile, InitFuncName) end
 
@@ -227,7 +227,7 @@ function NL.RegBattleExitEvent(Dofile, InitFuncName) end
 function BattleExitCallBack(CharIndex, BattleIndex, Type) end
 
 ---创建一个玩家右键点击其他玩家就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[RightClickCallBack]
 function NL.RegRightClickEvent(Dofile, InitFuncName) end
 
@@ -238,7 +238,7 @@ function NL.RegRightClickEvent(Dofile, InitFuncName) end
 function RightClickCallBack(CharIndex, TargetCharIndex) end
 
 ---创建一个服务器程序关闭触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[ShutDownCallBack]
 function NL.RegShutDownEvent(Dofile, InitFuncName) end
 
@@ -247,7 +247,7 @@ function NL.RegShutDownEvent(Dofile, InitFuncName) end
 function ShutDownCallBack() end
 
 ---创建一个玩家组队触发的事件。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[PartyEventCallBack]
 function NL.RegPartyEvent(Dofile, InitFuncName) end
 
@@ -259,7 +259,7 @@ function NL.RegPartyEvent(Dofile, InitFuncName) end
 function PartyEventCallBack(CharIndex, TargetCharIndex, Type) end
 
 ---当玩家进行宠物封印的时候会触发该事件，并且返回封印的结果，同时Lua也可以对封印结果进行修改。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[SealEventCallBack]
 function NL.RegSealEvent(Dofile, InitFuncName) end
 
@@ -285,7 +285,7 @@ function NL.RegSealEvent(Dofile, InitFuncName) end
 function SealEventCallBack(CharIndex, EnemyIndex, Ret) end
 
 ---当玩家戰鬥中發出指令的时候会触发该事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[BattleActionEventCallBack]
 function NL.RegBattleActionEvent(Dofile, InitFuncName) end
 
@@ -298,7 +298,7 @@ function NL.RegBattleActionEvent(Dofile, InitFuncName) end
 function BattleActionEventCallBack(CharIndex, Com1, Com2, Com3, ActionNum) end
 
 ---玩家所有的Action事件都會觸發本函數，如使用暈倒，攻擊，剪刀，石頭，布等。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharActionEventCallBack]
 function NL.RegCharActionEvent(Dofile, InitFuncName) end
 
@@ -308,7 +308,7 @@ function NL.RegCharActionEvent(Dofile, InitFuncName) end
 function CharActionEventCallBack(CharIndex, ActionID) end
 
 ---當玩家使用生產技能製作道具的時候會觸發，可以通過該事件獲取玩家對象，技能的ID、等級和生成的道具對象。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[MergeItemEventCallBack]
 function NL.RegMergeItemEvent(Dofile, InitFuncName) end
 
@@ -320,7 +320,7 @@ function NL.RegMergeItemEvent(Dofile, InitFuncName) end
 function MergeItemEventCallBack(CharIndex, SkillID, SkillLv, ItemIndex) end
 
 ---创建一个道具重叠触发的事件，这个道具重叠的意思是，在道具栏把一个道具拖向另一个道具会触发的事件。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[ItemOverLapEventCallBack]
 function NL.RegItemOverLapEvent(Dofile, InitFuncName) end
 
@@ -333,7 +333,7 @@ function NL.RegItemOverLapEvent(Dofile, InitFuncName) end
 function ItemOverLapEventCallBack(CharIndex, FromItemIndex, TargetItemIndex, Num) end
 
 ---创建一个用户登录的时候获取登陆点信息触发的事件，这个事件可以替代Login事件中的原地登陆功能，只需要在Callback中直接设置对象的坐标等信息即可，无需warp。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[GetLoginPointEventCallBack]
 function NL.RegGetLoginPointEvent(Dofile, InitFuncName) end
 
@@ -346,7 +346,7 @@ function NL.RegGetLoginPointEvent(Dofile, InitFuncName) end
 function GetLoginPointEventCallBack(CharIndex, MapID, FloorID, X, Y) end
 
 ---创建一个可以在itemset中使用的道具效果字段，当道具触发该字段时，将会自动调用定义的lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 ---@param ItemSigh  string Itemset中对应的功能字段，初始化触发的函数用LUA_init开头、使用触发的函数用LUA_use开头、装备道具触发的函数用LUA_att开头、卸除装备触发的函数用LUA_det开头、道具丢下时触发的函数用LUA_drop开头、道具拾取前触发的函数用LUA_prepick开头、道具拾取后触发的函数用LUA_pick开头
 --- itemset.txt中的自定义函数名所对应的列不同.<br/>
@@ -401,7 +401,7 @@ function ItemStringPrePickUpCallBack(CharIndex, ItemIndex) end
 function ItemStringPickUpCallBack(CharIndex, ItemIndex) end
 
 ---创建一个所有玩家所有道具初始化时就会触发的Lua函数,此函数会加重引擎负载,请谨慎使用!
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称 
 ---只要注册了本事件,不管道具是否具有Init函数,本函数都会触发.
 ---触发条件如下:  玩家登陆, 创建或获取新道具, 打开银行, 打开公会仓库。
@@ -413,7 +413,7 @@ function NL.RegItemInitEvent(Dofile, InitFuncName) end
 function ItemInitCallBack(CharIndex, ItemIndex) end
 
 ---创建一个所有玩家使用道具(包括战斗中)就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemUseEvent(Dofile, InitFuncName) end
 
@@ -425,7 +425,7 @@ function NL.RegItemUseEvent(Dofile, InitFuncName) end
 function ItemUseCallBack(CharIndex, TargetCharIndex, ItemSlot) end
 
 ---创建一个所有玩家装备道具时就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemAttachEvent(Dofile, InitFuncName) end
 
@@ -436,7 +436,7 @@ function NL.RegItemAttachEvent(Dofile, InitFuncName) end
 function ItemAttachCallBack(CharIndex, FromItemIndex) end
 
 ---创建一个所有玩家卸下装备道具时就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemDetachEvent(Dofile, InitFuncName) end
 
@@ -446,7 +446,7 @@ function NL.RegItemDetachEvent(Dofile, InitFuncName) end
 function ItemDetachCallBack(CharIndex, FromItemIndex) end
 
 ---创建一个所有玩家丢弃道具时就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemDropEvent(Dofile, InitFuncName) end
 
@@ -457,7 +457,7 @@ function NL.RegItemDropEvent(Dofile, InitFuncName) end
 function ItemDropCallBack(CharIndex, ItemIndex) end
 
 ---创建一个所有玩家成功拾取道具之后就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemPickUpEvent(Dofile, InitFuncName) end
 
@@ -468,7 +468,7 @@ function NL.RegItemPickUpEvent(Dofile, InitFuncName) end
 function ItemPickUpCallBack(CharIndex, ItemIndex) end
 
 ---创建一个所有玩家展示(休息)宠物就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegPetFieldEvent(Dofile, InitFuncName) end
 
@@ -480,7 +480,7 @@ function NL.RegPetFieldEvent(Dofile, InitFuncName) end
 function PetFieldCallBack(CharIndex, PetIndex, PetPos) end
 
 ---创建一个所有玩家丢出宠物就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegPetDropEvent(Dofile, InitFuncName) end
 
@@ -491,7 +491,7 @@ function NL.RegPetDropEvent(Dofile, InitFuncName) end
 function PetDropCallBack(CharIndex, PetPos) end
 
 ---创建一个所有玩家捡起宠物就会触发的Lua函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegPetPickUpEvent(Dofile, InitFuncName) end
 
@@ -502,7 +502,7 @@ function NL.RegPetPickUpEvent(Dofile, InitFuncName) end
 function PetPickUpCallBack(CharIndex, PetIndex) end
 
 ---战斗中计算伤害时会触发该函数
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[DamageCalculateCallBack]
 function NL.RegDamageCalculateEvent(Dofile, InitFuncName) end
 
@@ -524,7 +524,7 @@ function NL.RegDamageCalculateEvent(Dofile, InitFuncName) end
 function DamageCalculateCallBack(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlg) end
 
 ---技能附加参数获取时触发的函数
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[TechOptionCallBack]
 function NL.RegTechOptionEvent(Dofile, InitFuncName) end
 
@@ -537,7 +537,7 @@ function NL.RegTechOptionEvent(Dofile, InitFuncName) end
 function TechOptionCallBack(CharIndex, Option, TechID, Val) end
 
 ---创建一个所有角色显示头饰效果的时候触发的函数。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[HeadCoverEventCallBack]
 function NL.RegHeadCoverEvent(Dofile, InitFuncName) end
 
@@ -548,7 +548,7 @@ function NL.RegHeadCoverEvent(Dofile, InitFuncName) end
 function HeadCoverEventCallBack(CharIndex, CurrentHeadCoverImage) end
 
 ---创建一个所有玩家角色职业晋级时触发的Lua函数，玩家在游戏中角色职业晋级后就可触发，可以用来在特定职业等级给予特定奖励，记录玩家冲级速度排行等。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[RankUpCallBack]
 function NL.RegRankUpEvent(Dofile, InitFuncName) end
 
@@ -560,7 +560,7 @@ function NL.RegRankUpEvent(Dofile, InitFuncName) end
 function RankUpCallBack(CharIndex, OldRank, NewRank) end
 
 ---创建一个当地面的宠物被系统删时会触发的事件，利用此事件可以进行延长该宠物的删除时间等操作。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegPetTimeDeleteEvent(Dofile, InitFuncName) end
 
@@ -570,7 +570,7 @@ function NL.RegPetTimeDeleteEvent(Dofile, InitFuncName) end
 function PetTimeDeleteCallBack(PetIndex) end
 
 ---创建一个战斗偷袭之前触发的事件，利用此事件可以改变战斗的偷袭形式
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleSurpriseEvent(Dofile, InitFuncName) end
 
@@ -581,7 +581,7 @@ function NL.RegBattleSurpriseEvent(Dofile, InitFuncName) end
 function BattleSurpriseCallBack(battleIndex, result) end
 
 ---创建一个怪物施放召唤时触发的事件，利用此事件可以改变召唤物的种类和等级
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleSummonEnemyEvent(Dofile, InitFuncName) end
 
@@ -593,7 +593,7 @@ function NL.RegBattleSummonEnemyEvent(Dofile, InitFuncName) end
 function BattleSummonEnemyCallBack(battleIndex, charIndex, enemyId) end
 
 ---创建一个召唤物生成前触发的事件，利用此事件可以改变召唤物的属性
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleSummonedEnemyEvent(Dofile, InitFuncName) end
 
@@ -604,7 +604,7 @@ function NL.RegBattleSummonedEnemyEvent(Dofile, InitFuncName) end
 function BattleSummonedEnemyCallBack(battleIndex, actionCharIndex, charIndex) end
 
 ---创建一个连战生成前触发的事件，利用此事件可以改变连战的怪物和等级
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleNextEnemyEvent(Dofile, InitFuncName) end
 
@@ -615,7 +615,7 @@ function NL.RegBattleNextEnemyEvent(Dofile, InitFuncName) end
 function BattleNextEnemyCallBack(battleIndex, flg) end
 
 ---创建一个连战魔物生成前触发的事件，利用此事件可以改变连战魔物的属性
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleNextEnemyInitEvent(Dofile, InitFuncName) end
 
@@ -625,7 +625,7 @@ function NL.RegBattleNextEnemyInitEvent(Dofile, InitFuncName) end
 function BattleNextEnemyInitCallBack(battleIndex, flg) end
 
 ---创建一个怪物ai执行前触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBeforeBattleTurnEvent(Dofile, InitFuncName) end
 
@@ -634,7 +634,7 @@ function NL.RegBeforeBattleTurnEvent(Dofile, InitFuncName) end
 function BeforeBattleTurnCallBack(battleIndex) end
 
 ---创建一个所有指令已就位触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBeforeBattleTurnStartEvent(Dofile, InitFuncName) end
 
@@ -643,7 +643,7 @@ function NL.RegBeforeBattleTurnStartEvent(Dofile, InitFuncName) end
 function BeforeBattleTurnStartCallBack(battleIndex) end
 
 ---创建一个回合结束触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegAfterBattleTurnEvent(Dofile, InitFuncName) end
 
@@ -652,7 +652,7 @@ function NL.RegAfterBattleTurnEvent(Dofile, InitFuncName) end
 function AfterBattleTurnCallBack(battleIndex) end
 
 ---创建一个角色属性计算触发的事件(包括装备属性)
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegAfterCalcCharaBpEvent(Dofile, InitFuncName) end
 
@@ -661,7 +661,7 @@ function NL.RegAfterCalcCharaBpEvent(Dofile, InitFuncName) end
 function AfterCalcCharaBpCallBack(charIndex) end
 
 ---创建一个角色装备计算触发的事件(包括受伤，掉魂)
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegAfterCalcCharaStatusEvent(Dofile, InitFuncName) end
 
@@ -670,7 +670,7 @@ function NL.RegAfterCalcCharaStatusEvent(Dofile, InitFuncName) end
 function AfterCalcCharaStatusCallBack(charIndex) end
 
 ---创建一个角色计算属性的的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegStatusCalcEvent(Dofile, InitFuncName) end
 
@@ -679,7 +679,7 @@ function NL.RegStatusCalcEvent(Dofile, InitFuncName) end
 function StatusCalcCallBack(charIndex) end
 
 ---创建一个怪物执行AI触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegEnemyCommandEvent(Dofile, InitFuncName) end
 
@@ -691,7 +691,7 @@ function NL.RegEnemyCommandEvent(Dofile, InitFuncName) end
 function EnemyCommandCallBack(battleIndex, side, slot, action) end
 
 ---创建一个娃娃(替身娃娃 A|B型)结算前的触发事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegCheckDummyDollEvent(Dofile, InitFuncName) end
 
@@ -704,7 +704,7 @@ function NL.RegCheckDummyDollEvent(Dofile, InitFuncName) end
 function CheckDummyDoll(charIndex, battleIndex, dmg, type) end
 
 ---创建一个受伤时触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleInjuryEvent(Dofile, InitFuncName) end
 
@@ -717,7 +717,7 @@ function NL.RegBattleInjuryEvent(Dofile, InitFuncName) end
 function BattleInjuryCallBack(fIndex, aIndex, battleIndex, inject) end
 
 ---创建一个战斗结算画面出现时触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegResetCharaBattleStateEvent(Dofile, InitFuncName) end
 
@@ -726,7 +726,7 @@ function NL.RegResetCharaBattleStateEvent(Dofile, InitFuncName) end
 function ResetCharaBattleStateCallBack(battleIndex) end
 
 ---创建一个角色保存后触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegCharaSavedEvent(Dofile, InitFuncName) end
 
@@ -735,7 +735,7 @@ function NL.RegCharaSavedEvent(Dofile, InitFuncName) end
 function CharaSavedCallBack(charIndex) end
 
 ---创建一个角色数据保存前触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBeforeCharaSaveEvent(Dofile, InitFuncName) end
 
@@ -744,7 +744,7 @@ function NL.RegBeforeCharaSaveEvent(Dofile, InitFuncName) end
 function BeforeCharaSaveCallBack(charIndex) end
 
 ---创建一个角色删除时触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegCharaDeletedEvent(Dofile, InitFuncName) end
 
@@ -755,7 +755,7 @@ function NL.RegCharaDeletedEvent(Dofile, InitFuncName) end
 function CharaDeletedCallBack(cdkey, registnumber, result) end
 
 ---创建一个luac触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称，参考[ScriptCallCallBack]
 function NL.RegScriptCallEvent(Dofile, InitFuncName) end
 
@@ -768,7 +768,7 @@ function NL.RegScriptCallEvent(Dofile, InitFuncName) end
 function ScriptCallCallBack(npcIndex, playerIndex, text, msg) end
 
 ---创建一个物品掉率的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegDropRateEvent(Dofile, InitFuncName) end
 
@@ -779,7 +779,7 @@ function NL.RegDropRateEvent(Dofile, InitFuncName) end
 function DropRateCallBack(enemyIndex, itemId, rate) end
 
 ---创建一个逃跑时触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleEscapeEvent(Dofile, InitFuncName) end
 
@@ -791,7 +791,7 @@ function NL.RegBattleEscapeEvent(Dofile, InitFuncName) end
 function BattleEscape(battleIndex, charIndex, rate) end
 
 ---创建一个封印时触发的事件，该事件不能突破服务器的设定
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleSealRateEvent(Dofile, InitFuncName) end
 
@@ -804,7 +804,7 @@ function NL.RegBattleSealRateEvent(Dofile, InitFuncName) end
 function BattleSealRateCallBack(battleIndex, charIndex, enemyIndex, rate) end
 
 ---创建一个暴击时触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegCalcCriticalRateEvent(Dofile, InitFuncName) end
 
@@ -816,7 +816,7 @@ function NL.RegCalcCriticalRateEvent(Dofile, InitFuncName) end
 function CalcCriticalRateCallBack(aIndex, fIndex, rate) end
 
 ---创建一个闪躲时触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleDodgeRateEvent(Dofile, InitFuncName) end
 
@@ -829,7 +829,7 @@ function NL.RegBattleDodgeRateEvent(Dofile, InitFuncName) end
 function BattleDodgeRateCallBack(battleIndex, aIndex, fIndex, rate) end
 
 ---创建一个反击时触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleCounterRateEvent(Dofile, InitFuncName) end
 
@@ -842,7 +842,7 @@ function NL.RegBattleCounterRateEvent(Dofile, InitFuncName) end
 function BattleCounterRateCallBack(battleIndex, aIndex, fIndex, rate) end
 
 ---创建一个造成魔法伤害触发的事件，用于改变魔法伤害系数
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleMagicDamageRateEvent(Dofile, InitFuncName) end
 
@@ -855,7 +855,7 @@ function NL.RegBattleMagicDamageRateEvent(Dofile, InitFuncName) end
 function BattleMagicDamageRateCallBack(battleIndex, aIndex, fIndex, rate) end
 
 ---创建一个造成魔法伤害触发的事件，用于改变魔防系数
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleMagicRssRateEvent(Dofile, InitFuncName) end
 
@@ -868,7 +868,7 @@ function NL.RegBattleMagicRssRateEvent(Dofile, InitFuncName) end
 function BattleMagicRssRateCallBack(battleIndex, aIndex, fIndex, rate) end
 
 ---创建一个宝箱生成触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemBoxGenerateEvent(Dofile, InitFuncName) end
 
@@ -881,7 +881,7 @@ function NL.RegItemBoxGenerateEvent(Dofile, InitFuncName) end
 function ItemBoxGenerateCallback(mapId, floor, itemBoxType, adm) end
 
 ---创建一个宝箱获取物品的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemBoxLootEvent(Dofile, InitFuncName) end
 
@@ -897,7 +897,7 @@ function NL.RegItemBoxLootEvent(Dofile, InitFuncName) end
 function ItemBoxLootCallback(charaIndex, mapId, floor, X, Y, boxType, adm) end
 
 ---创建一个宝箱遇敌概率的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemBoxEncountRateEvent(Dofile, InitFuncName) end
 
@@ -912,7 +912,7 @@ function NL.RegItemBoxEncountRateEvent(Dofile, InitFuncName) end
 function ItemBoxEncountRateEventCallback(charaIndex, mapId, floor, X, Y, itemIndex) end
 
 ---创建一个宝箱遇敌的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemBoxEncountEvent(Dofile, InitFuncName) end
 
@@ -927,7 +927,7 @@ function NL.RegItemBoxEncountEvent(Dofile, InitFuncName) end
 function ItemBoxEncountCallback(charaIndex, mapId, floor, X, Y, itemIndex) end
 
 ---创建一个种族伤害比率事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemTribeRateEvent(Dofile, InitFuncName) end
 
@@ -939,7 +939,7 @@ function NL.RegItemTribeRateEvent(Dofile, InitFuncName) end
 function ItemTribeRateCallback(a, b, rate) end
 
 ---创建一个Http请求事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegHttpRequestEvent(Dofile, InitFuncName) end
 
@@ -952,7 +952,7 @@ function NL.RegHttpRequestEvent(Dofile, InitFuncName) end
 function HttpRequestCallBack(method, api, params, body) end
 
 ---创建一个治疗时触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegBattleHealCalculateEvent(Dofile, InitFuncName) end
 
@@ -974,7 +974,7 @@ function NL.RegBattleHealCalculateEvent(Dofile, InitFuncName) end
 function BattleHealCalculateCallBack(charIndex, defCharIndex, oriheal, heal, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, ExFlg) end
 
 ---创建一个耗魔时触发的事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegCalcFpConsumeEvent(Dofile, InitFuncName) end
 
@@ -986,7 +986,7 @@ function NL.RegCalcFpConsumeEvent(Dofile, InitFuncName) end
 function CalcFpConsumeCallBack(charIndex, techId, Fp) end
 
 ---创建一个装备说明的事件，用于修改物品说明
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegItemExpansionEvent(Dofile, InitFuncName) end
 
@@ -1000,7 +1000,7 @@ function NL.RegItemExpansionEvent(Dofile, InitFuncName) end
 function ItemExpansionCallBack(itemIndex, type, msg, charIndex, slot) end
 
 ---创建一个检查称号触发的事件，用于通过lua自定义称号，定义方式：titleconfig.txt中增加新条件设置，使用LUA为条件关键字，如LUA=50,=对应Flg中的5,50对应Data
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
 function NL.RegTitleCheckCallEvent(Dofile, InitFuncName) end
 
@@ -1012,7 +1012,7 @@ function NL.RegTitleCheckCallEvent(Dofile, InitFuncName) end
 function TitleCheckCallCallBack(charIndex, Data, Flg) end
 
 ---创建一个采集技能事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称,参考[GatherItemEventCallback]
 function NL.RegGatherItemEvent(Dofile, InitFuncName) end
 
@@ -1025,7 +1025,7 @@ function NL.RegGatherItemEvent(Dofile, InitFuncName) end
 function GatherItemEventCallback(charIndex, skillId, skillLv, itemNo) end
 
 ---在玩家遇敌的时候触发，可以通过这个接口来修改遇敌的队列和数量。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称,参考[VSEnemyCreateEventCallback]
 function NL.RegVSEnemyCreateEvent(Dofile, InitFuncName) end
 
@@ -1038,7 +1038,7 @@ function NL.RegVSEnemyCreateEvent(Dofile, InitFuncName) end
 function VSEnemyCreateEventCallback(CharIndex, GroupIndex, EnemyNum, EnemyList) end
 
 ---玩家攻击时触发，可以修改攻击目标（乱射、连击等）。
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称,参考[BattleActionTargetEventCallback]
 function NL.RegBattleActionTargetEvent(Dofile, InitFuncName) end
 
@@ -1053,7 +1053,7 @@ function NL.RegBattleActionTargetEvent(Dofile, InitFuncName) end
 function BattleActionTargetEventCallback(charIndex, battleIndex, com1, com2, com3, targetList) end
 
 ---控制技能是否可以使用事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称,参考[BattleSkillCheckEventCallback]
 function NL.RegBattleSkillCheckEvent(Dofile, InitFuncName) end
 
@@ -1065,7 +1065,7 @@ function NL.RegBattleSkillCheckEvent(Dofile, InitFuncName) end
 function BattleSkillCheckEventCallback(charIndex, battleIndex, arrayOfSkillEnable) end
 
 ---自定义lua技能回调事件
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称,参考[BattleLuaSkillEventCallback]
 function NL.RegBattleLuaSkillEvent(Dofile, InitFuncName) end
 

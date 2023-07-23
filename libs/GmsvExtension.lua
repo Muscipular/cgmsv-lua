@@ -25,6 +25,7 @@ dofile('lua/libs/Gmsv/BATTLE_PVE_PATCH.lua')
 dofile('lua/libs/Gmsv/TechOptionEventPatch.lua')
 dofile('lua/libs/Gmsv/Map.lua')
 
+---@diagnostic disable-next-line: undefined-global
 Addresses.load();
 
 end

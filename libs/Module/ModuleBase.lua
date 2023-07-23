@@ -1,10 +1,4 @@
 ---@class ModuleBase
----@field name string
----@field protected ___aPath string
----@field lastIx number
----@field parts ModulePart[]
----@field migrations {version:number,name:string,value:string|function}[]|nil
----@field callbacks {fn: function, fnIndex: number, key: string, extSign?:string}[]
 local ModuleBase = { name = '', callbacks = {}, lastIx = 0, migrations = nil };
 
 _G.ModuleBase = ModuleBase;

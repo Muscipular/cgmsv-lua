@@ -3,7 +3,15 @@
 ---@alias BattleIndex integer
 ---@alias void nil
 
+---@alias MigrationData {version:number,name:string,value:string|function}
+
 ---@class ModuleBase
+---@field name string
+---@field protected ___aPath string
+---@field lastIx number
+---@field parts ModulePart[]
+---@field migrations MigrationData[]|nil
+---@field callbacks {fn: function, fnIndex: number, key: string, extSign?:string}[]
 ModuleBase = ModuleBase or {}
 
 ---@alias DamageCalculateEventCallback fun(charIndex:CharIndex, defCharIndex:CharIndex, oriDamage:integer, damage:integer, battleIndex:BattleIndex, com1:integer, com2:integer, com3:integer, defCom1:integer, defCom2:integer, defCom3:integer, flg:integer):integer|void
@@ -33,28 +41,24 @@ function ModuleBase:regCallback(callbackKey, fn) end
 ---@return string fnKey, number cbIndex, number fnIndex
 function ModuleBase:regCallback(fn) end
 
----@class ModuleBase
 ---@param callbackKey string
 ---@param fn function
 ---@return string fnKey, number cbIndex, number fnIndex
 function ModuleBase:regCallback(callbackKey, fn) end
 
----@class ModuleBase
 ---@param name string
 ---@return ModuleBase|NPCPart|AssetsPart
 function ModuleBase:createModule(name) end
 
----@class NPCPart
+---@class NPCPart: ModulePart
+---@field npcList number[]
 NPCPart = NPCPart or {};
 
----@class NPCPart
 ---@param name string
 ---@param image number
 ---@param positionInfo NpcPosition
 ---@return CharIndex
 function NPCPart:NPC_createNormal(name, image, positionInfo) end
-
-JSON = JSON or {};
 
 ---@generic T
 ---@param s string

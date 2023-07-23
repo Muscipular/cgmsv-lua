@@ -1,5 +1,5 @@
 ---创建一个指定封包接受到后触发的函数
----@param Dofile  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[OnRecvCallBack]
 ---@param PacketID  string 封包头
 ---@return any @

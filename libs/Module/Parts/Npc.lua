@@ -1,5 +1,4 @@
 ---@class NPCPart: ModulePart
----@field npcList number[]
 local NPCPart = ModuleBase:createPart('NpcPart');
 
 ---@alias NpcPosition {x:number,y:number,map:number,mapType:number,direction:number}
@@ -96,9 +95,11 @@ function NPCPart:NPC_regTalkedEvent(npc, fn)
   return talkedFn, lastIndex, fnIndex
 end
 
+---@alias WindowTalkedCallback fun(npc: number, player: number, seqno: number, select: number, data: string):void
+
 ---×¢²ánpc WindowTalkedÊÂ¼þ
 ---@param npc number
----@param fn fun(npc: number, player: number, seqno: number, select: number, data: string):void
+---@param fn  WindowTalkedCallback
 ---@return string fnKey
 ---@return number lastIndex
 ---@return number fnIndex

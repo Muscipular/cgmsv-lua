@@ -60,7 +60,7 @@ function Map.MakeCopyMap(mapid, floor) end
 function Map.DelLuaMap(floor) end
 
 ---创建随机地图。
----@param Dofile string 回调函数所在文件 字符串
+---@param Dofile? string 回调函数所在文件 字符串
 ---@param InitFuncName string 回调函数名，当随机地图生成成功以后，会触发定义的回调函数 MakeMazeMapCallBack 字符串
 ---@param Xsize number 地图x坐标最大值
 ---@param Ysize number 地图y坐标最大值
@@ -69,7 +69,7 @@ function Map.DelLuaMap(floor) end
 function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName) end
 
 ---创建随机地图。
----@param Dofile string 回调函数所在文件 字符串
+---@param Dofile? string 回调函数所在文件 字符串
 ---@param InitFuncName string 回调函数名，当随机地图生成成功以后，会触发定义的回调函数 MakeMazeMapCallBack 字符串
 ---@param Xsize number 地图x坐标最大值
 ---@param Ysize number 地图y坐标最大值
@@ -92,7 +92,7 @@ function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName) end
 function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName, pal, roomSize, roomSizeMinX, roomSizeMinY, roomSizeMaxX, roomSizeMaxY, tile, obj, other, wallH, wallHX, wallV, wallVX, wallcross) end
 
 ---创建随机地图。
----@param Dofile string 回调函数所在文件 字符串
+---@param Dofile? string 回调函数所在文件 字符串
 ---@param InitFuncName string 回调函数名，当随机地图生成成功以后，会触发定义的回调函数 MakeMazeMapCallBack 字符串
 ---@param Xsize number 地图x坐标最大值
 ---@param Ysize number 地图y坐标最大值

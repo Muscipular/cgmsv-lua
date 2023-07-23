@@ -51,13 +51,6 @@ hookedQueueSave2 = ffi.hook.new('int (__cdecl*)(uint32_t charAddr)', hookQueueSa
 
 local initCharaFn1 = ffi.cast('int (__cdecl*)(uint32_t a1, int a3)', 0x00432FE0);
 
----@class DummyCreateOptions
----@field mapType number
----@field floor number
----@field x number
----@field y number
----@field image number
----@field name string
 ---@param options DummyCreateOptions|nil
 function Char.CreateDummy(options)
   local charPtr = takeBufferedChar(0)

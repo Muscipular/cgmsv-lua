@@ -2,8 +2,8 @@
 ---@param ToIndex  number 说话目标的 对象index，如果为-1，则对全服务器玩家说
 ---@param TalkerIndex  number 说话者的 对象index，如果为-1，则不显示对象名
 ---@param Msg  string 说话的内容
----@param FontColor  number 默认为0，即白色 [可为空]
----@param FontSize  number 默认为0，为显示的字体大小 [可为空]
+---@param FontColor?  number 默认为0，即白色 [可为空]
+---@param FontSize?  number 默认为0，为显示的字体大小 [可为空]
 ---@return number @返回0表示成功，其他表示失败
 function NLG.Say(ToIndex,TalkerIndex,Msg,FontColor,FontSize) end
 
@@ -11,8 +11,8 @@ function NLG.Say(ToIndex,TalkerIndex,Msg,FontColor,FontSize) end
 ---@param ToIndex  number 说话目标的 对象index，如果为-1，则对全服务器玩家说
 ---@param TalkerIndex  number 说话者的 对象index，如果为-1，则不显示对象名
 ---@param Msg  string 说话的内容
----@param FontColor  number 默认为0，即白色 [可为空]
----@param FontSize  number 默认为0，为显示的字体大小 [可为空]
+---@param FontColor?  number 默认为0，即白色 [可为空]
+---@param FontSize?  number 默认为0，为显示的字体大小 [可为空]
 ---@return number @返回0表示成功，其他表示失败
 function NLG.TalkToCli(ToIndex,TalkerIndex,Msg,FontColor,FontSize) end
 
@@ -21,8 +21,8 @@ function NLG.TalkToCli(ToIndex,TalkerIndex,Msg,FontColor,FontSize) end
 ---@param Floor  number 说话目标的地图编号
 ---@param TalkerIndex  number 说话者的 对象index，如果为-1，则不显示对象名
 ---@param Msg  string 说话的内容
----@param FontColor  number 默认为0，即白色 [可为空]
----@param FontSize  number 默认为0，为显示的字体大小 [可为空]
+---@param FontColor?  number 默认为0，即白色 [可为空]
+---@param FontSize?  number 默认为0，为显示的字体大小 [可为空]
 ---@return number @返回0表示成功，其他表示失败
 function NLG.TalkToMap(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 
@@ -31,8 +31,8 @@ function NLG.TalkToMap(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 ---@param Floor  number 说话目标的地图编号
 ---@param TalkerIndex  number 说话者的 对象index，如果为-1，则不显示对象名
 ---@param Msg  string 说话的内容
----@param FontColor  number 默认为0，即白色 [可为空]
----@param FontSize  number 默认为0，为显示的字体大小 [可为空]
+---@param FontColor?  number 默认为0，即白色 [可为空]
+---@param FontSize?  number 默认为0，为显示的字体大小 [可为空]
 ---@return number @返回0表示成功，其他表示失败
 function NLG.Say2Map(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 
@@ -41,8 +41,8 @@ function NLG.Say2Map(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 ---@param Floor  number 说话目标的地图编号
 ---@param TalkerIndex  number 说话者的 对象index，如果为-1，则不显示对象名
 ---@param Msg  string 说话的内容
----@param FontColor  number 默认为0，即白色 [可为空]
----@param FontSize  number 默认为0，为显示的字体大小 [可为空]
+---@param FontColor?  number 默认为0，即白色 [可为空]
+---@param FontSize?  number 默认为0，为显示的字体大小 [可为空]
 ---@return number @返回0表示成功，其他表示失败
 function NLG.TalkToFloor(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 
