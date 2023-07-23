@@ -49,4 +49,5 @@
     "Lua.hover.previewFields": 30,
     "Lua.hover.expandAlias": false,
     "Lua.hint.semicolon": "Disable"
+    ,"Lua.runtime.plugin": ".vscode/Const.lua"
 }
