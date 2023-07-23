@@ -17,6 +17,14 @@ function OnSetText(uri, text)
             text   = "0",
         }
     end
+    for start, a, finish in text:gmatch("()(%%[A-Za-z0-9_]+%%)()") do
+        print(start, a, finish);
+        diffs[#diffs+1] = {
+            start  = start,
+            finish = finish - 1,
+            text   = "0",
+        }
+    end
 
     if #diffs == 0 then
         return nil
