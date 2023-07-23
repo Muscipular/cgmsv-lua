@@ -10,7 +10,7 @@ function useModule(string) end
 
 ---获取模块
 ---@param name string 模块ID
----@return ModuleBase
+---@return ModuleBase|any
 function getModule(name) end
 
 ---重载模块

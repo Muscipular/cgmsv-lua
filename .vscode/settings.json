@@ -43,7 +43,8 @@
         "unknown-symbol",
         "undefined-global",
         "need-check-nil",
-        "return-type-mismatch"
+        "return-type-mismatch",
+        "lowercase-global"
     ],
     "Lua.hint.await": false,
     "Lua.hover.previewFields": 30,
