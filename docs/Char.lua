@@ -438,7 +438,7 @@ function Char.GetExtData(charIndex, dataIndex) end
 ---设置自定义数据（保存到数据库）
 ---@param charIndex number 目标的 对象index。
 ---@param dataIndex string 信息储存的位置，自定义
----@param value string|number 存储的信息
+---@param value string|number|nil 存储的信息
 ---@return number @
 function Char.SetExtData(charIndex, dataIndex, value) end
 
@@ -451,7 +451,7 @@ function Char.GetTempData(charIndex, dataIndex) end
 ---设置自定义数据（不保存到数据库）
 ---@param charIndex number 目标的 对象index。
 ---@param dataIndex string 信息储存的位置，自定义
----@param value string|number 存储的信息
+---@param value string|number|nil 存储的信息
 ---@return number @
 function Char.SetTempData(charIndex, dataIndex, value) end
 

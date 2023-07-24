@@ -1,4 +1,4 @@
----@class Admin:ModuleBase|NPCPart|AssetsPart
+---@class Admin:ModuleBase|ModuleType
 local Admin = ModuleBase:createModule('admin')
 -- gm√¸¡Ó
 local commands = {}

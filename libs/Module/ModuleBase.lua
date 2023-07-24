@@ -26,9 +26,11 @@ function ModuleBase:new(name)
   return o;
 end
 
+---@alias ModuleType ModuleBase|NPCPart|AssetsPart|CharPart
+
 ---@param name string
 ---@param depParts? string[]
----@return ModuleBase|NPCPart|AssetsPart
+---@return ModuleType
 function ModuleBase:createModule(name, depParts)
   local SubModule = ModuleBase:new(name)
   SubModule.parts = table.slice(ModuleBase.parts);
@@ -221,4 +223,5 @@ end
 ModuleBase.parts = {
   dofile('lua/libs/Module/Parts/Npc.lua'),
   dofile('lua/libs/Module/Parts/Assets.lua'),
+  dofile('lua/libs/Module/Parts/Char.lua'),
 }
