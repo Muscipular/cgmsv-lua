@@ -47,7 +47,7 @@ function ModuleBase:regCallback(fn) end
 function ModuleBase:regCallback(callbackKey, fn) end
 
 ---@param name string
----@return ModuleBase|NPCPart|AssetsPart
+---@return ModuleType
 function ModuleBase:createModule(name) end
 
 ---@class NPCPart: ModulePart

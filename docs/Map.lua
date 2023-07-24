@@ -144,3 +144,18 @@ function Map.SetWalkable(Map, Floor, Xpos, Ypos, Able) end
 ---@param Ypos number Y坐标
 ---@return number @可通行返回1，不可通行返回0
 function Map.IsWalkable(Map, Floor, Xpos, Ypos) end
+
+---获取地图扩展信息
+---@param mapId number 地图类型
+---@param floor number 地图
+---@param field string field
+---@return number|string|nil
+function Map.GetExtData(mapId, floor, field) end
+
+---设置地图扩展信息
+---@param mapId number 地图类型
+---@param floor number 地图
+---@param field string field
+---@param val number|string|nil 内容
+---@return number @返回0为成功，其他失败
+function Map.SetExtData(mapId, floor, field, val) end

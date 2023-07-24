@@ -129,7 +129,7 @@ function _G.reloadModule(moduleName)
   return nil;
 end
 
----@return ModuleBase
+---@return ModuleBase|any
 function _G.getModule(moduleName)
   return Modules[moduleName];
 end
