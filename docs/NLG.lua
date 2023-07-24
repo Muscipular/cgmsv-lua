@@ -264,11 +264,11 @@ function NLG.OpenBank(npcOrPlayer, player) end
 function NLG.RaiseCrash() end
 
 ---宠物乱射(全局开启)
----@param enable boolean 启用 1 不启用 0
+---@param enable boolean|number 启用 1或true 不启用 0或false
 function NLG.SetPetRandomShot(enable) end
 
 ---宠物乱射(某种宠物开启)
----@param enable boolean 启用 1 不启用 0
+---@param enable boolean|number 启用 1或true 不启用 0或false
 ---@param petId number 宠物id（EnemyBaseId）
 function NLG.SetPetRandomShot(petId, enable) end
 
