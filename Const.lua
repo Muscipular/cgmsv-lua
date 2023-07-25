@@ -1,3 +1,4 @@
+---@type {[string]: number}
 CONST = CONST or {}
 CONST.BATTLE_SurpriseFlag = {
   ---²»ÍµÏ®
