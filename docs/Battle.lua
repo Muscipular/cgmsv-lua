@@ -20,7 +20,7 @@ function Battle.Encount(UpIndex, DownIndex, Data) end
 ---使用Lua脚本创建一个战斗，战斗创建后可自动调用Lua的DoFunc函数。
 ---@param CharIndex  number 遇敌玩家的对象index。
 ---@param CreatePtr  number 触发战斗的对象index。
----@param DoFunc  string 战斗初始化接受后调用的Lua函数的名称，申明格式请参考[BattleInitCallBack]，如果不调用则填nil
+---@param DoFunc  string|nil 战斗初始化接受后调用的Lua函数的名称，申明格式请参考[BattleInitCallBack]，如果不调用则填nil
 ---@param EnemyIdAr  number[] 战斗所出现的怪物队列的怪物ID数组（怪物ID为enemy.txt中的ID）。
 ---@param BaseLevelAr  number[] 战斗所出现的怪物队列的怪物等级数组（数组结构与EnemyIdAr结构应一一对应）
 ---@param RandLv? number[] 战斗所出现的怪物队列的怪物等级波动数组（数组结构与EnemyIdAr结构应一一对应）
