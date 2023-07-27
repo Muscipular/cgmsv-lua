@@ -251,5 +251,5 @@ function Battle.GetExtData(battleIndex, dataIndex) end
 ---@param battleIndex number 目标的 对象index。
 ---@param dataIndex string 信息储存的位置，自定义
 ---@param val string|number|nil @获得指定位置的字符串
-function Battle.GetExtData(battleIndex, dataIndex, val) end
+function Battle.SetExtData(battleIndex, dataIndex, val) end
 
