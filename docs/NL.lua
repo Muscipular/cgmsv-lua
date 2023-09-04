@@ -101,9 +101,10 @@ function TalkEventCallBack(CharIndex, Msg, Color, Range, Size) end
 function NL.RegLevelUpEvent(Dofile, InitFuncName) end
 
 ---LevelUpEvent的回调函数
----@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
+---@param CharIndex  number 宠物主人的index，该值由Lua引擎传递给本函数。
+---@param PetIndex  number 宠物的index，该值由Lua引擎传递给本函数。
 ---@return number @返回0即可
-function LevelUpCallBack(CharIndex) end
+function LevelUpCallBack(CharIndex, PetIndex) end
 
 ---创建一个角色进入战斗即可触发的Lua函数。
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -337,7 +338,7 @@ function ItemOverLapEventCallBack(CharIndex, FromItemIndex, TargetItemIndex, Num
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[GetLoginPointEventCallBack]
 function NL.RegGetLoginPointEvent(Dofile, InitFuncName) end
 
----GetLOginPointEvent的回调函数
+---GetLoginPointEvent的回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 ---@param MapID  number 登陆的Map ID，该值由Lua引擎传递给本函数。
 ---@param FloorID  number 登陆的Floor ID，该值由Lua引擎传递给本函数。
