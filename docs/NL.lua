@@ -1075,18 +1075,17 @@ function NL.RegBattleLuaSkillEvent(Dofile, InitFuncName) end
 ---@param battleIndex number 战斗Index
 ---@param SKLFunc function 发送SKL技能封包，所有参数可选,参考[SKLFunc]
 ---@param DMGFunc function 发送伤害封包，参考[DMGFunc]
----@return number[] @返回对应的技能是否可用，1为可用，0为不可用
 function BattleLuaSkillEventCallback(battleIndex, charIndex, SKLFunc, DMGFunc) end
 
 ---发送SKL技能封包，支持0-3个参数
 ---@param TechId number 技能编号
----@param WeaponType number 道具类型
+---@param WeaponType number 攻击武器类型
 ---@param AttackerPos number 攻击者战斗位置
 function SKLFunc(TechId, WeaponType, AttackerPos) end
 
 ---发送SKL技能封包，支持0-3个参数
 ---@param TechId number 技能编号
----@param WeaponType number 道具类型
+---@param WeaponType number 攻击武器类型
 function SKLFunc(TechId, WeaponType) end
 
 ---发送SKL技能封包，支持0-3个参数
@@ -1098,6 +1097,6 @@ function SKLFunc() end
 
 ---发送伤害封包
 ---@param pos number 目标位置
----@param flg number 标记
+---@param flg number 攻击效果旗标
 ---@param dmg number 伤害/治疗数值
 function DMGFunc(pos, flg, dmg) end

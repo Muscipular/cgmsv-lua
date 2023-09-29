@@ -649,3 +649,8 @@ function Char.DelDummy(charIndex) end
 ---@return number @成功返回出租房floor，失败返回-1
 function Char.GetMyRoomFloor(charIndex) end
 
+---设置头顶技能图标
+---@param charIndex number 对象的index
+---@param skillNo number 图标旗标，取值0~15
+---@return number @成功返回0
+function Char.SetSkillAction(charIndex,?skillNo) end
