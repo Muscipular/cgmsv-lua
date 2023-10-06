@@ -213,8 +213,9 @@ function NL.RegPetLevelUpEvent(Dofile, InitFuncName) end
 
 ---PetLevelUpEvent的回调函数
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
+---@param PetIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 ---@return number @返回0即可。
-function LevelUpCallBack(CharIndex) end
+function LevelUpCallBack(CharIndex, PetIndex) end
 
 ---创建一个所有玩家离开战斗就会触发的Lua函数。
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
