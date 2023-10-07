@@ -207,7 +207,7 @@ function ModuleBase:unload()
   end
   self:onUnload()
   for i, fnCb in pairs(self.callbacks) do
-    removeGlobalEvent(fnCb.key, fnCb.fnIndex, self.name);
+    removeGlobalEvent(fnCb.key, fnCb.fnIndex, self.name, fnCb.extSign);
   end
   self.callbacks = {};
 end
