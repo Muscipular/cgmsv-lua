@@ -1,3 +1,5 @@
+---@meta _
+
 ---获取引擎版本
 ---@return number @
 function NL.Version() end
@@ -1101,3 +1103,17 @@ function SKLFunc() end
 ---@param flg number 攻击效果旗标
 ---@param dmg number 伤害/治疗数值
 function DMGFunc(pos, flg, dmg) end
+
+
+---物品耐久变化事件
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称,参考[ItemDurabilityChangedEventCallback]
+function NL.ItemDurabilityChangedEvent(Dofile, InitFuncName) end
+
+---ItemDurabilityChangedEvent的回调函数
+---@param itemIndex number ItemIndex
+---@param oldDurability number 原来的耐久
+---@param newDurability number 变化后的耐久
+---@param value number 变化值
+---@param mode number 0正常战斗损耗（1-2耐久），1致死打击（-50%当前耐久），2沉重打击（-10%最大耐久），3装备破坏技能
+function ItemDurabilityChangedEventCallback(itemIndex, oldDurability, newDurability, value, mode) end

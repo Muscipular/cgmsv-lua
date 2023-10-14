@@ -1,3 +1,5 @@
+---@meta _
+
 ---获取对象index的指定信息。
 ---@param charIndex number 目标的 对象index
 ---@param dataIndex number 说指定的对象实例信息栏位，具体栏位常量请查看附录

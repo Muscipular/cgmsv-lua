@@ -1,3 +1,5 @@
+---@meta _
+
 ---获取技能指定信息
 ---@param skillIndex number
 ---@param dataLine number CONST.SKILL

@@ -1,3 +1,5 @@
+---@meta _
+
 ---获取Msg
 ---@param msgId number @消息id
 ---@return string @消息内容

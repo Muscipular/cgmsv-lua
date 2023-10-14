@@ -1,3 +1,5 @@
+---@meta _
+
 ---获取Tech指定数据
 ---@param techIndex number
 ---@param dataLine number 指定信息栏CONST.TECH

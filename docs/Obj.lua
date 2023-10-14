@@ -1,3 +1,5 @@
+---@meta _
+
 ---获取指定地图位置的Object Index列表。
 ---@param MapId  number 坐标地图id。
 ---@param FloorId  number 坐标Floor id。

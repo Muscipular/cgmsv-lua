@@ -1,3 +1,5 @@
+---@meta _
+
 ---ªÒ»°√‘π¨Id
 ---@param floor number
 ---@return number @√‘π¨id

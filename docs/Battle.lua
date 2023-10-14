@@ -1,3 +1,5 @@
+---@meta _
+
 ---获取战斗队列中对象实例的对象index
 ---@param BattleIndex  number 战斗index，为Encount、PVE或PVP函数的返回值。
 ---@param Slot  number 战斗队列中玩家位置,范围0-19，其中0-9为下方实例队列，10-19为上方实例队列。

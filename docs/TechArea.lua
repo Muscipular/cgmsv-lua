@@ -1,3 +1,5 @@
+---@meta _
+
 ---创建采集区域
 ---@param mapId number 地图类型
 ---@param floor number 地图floor

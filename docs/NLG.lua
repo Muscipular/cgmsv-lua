@@ -1,3 +1,5 @@
+---@meta _
+
 ---普通说话，可以对全服务器人说。
 ---@param ToIndex  number 说话目标的 对象index，如果为-1，则对全服务器玩家说
 ---@param TalkerIndex  number 说话者的 对象index，如果为-1，则不显示对象名

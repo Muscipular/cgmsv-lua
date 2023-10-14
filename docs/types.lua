@@ -1,3 +1,6 @@
+---@meta _
+
+
 ---@alias CharIndex integer
 ---@alias ItemIndex integer
 ---@alias BattleIndex integer

@@ -1,3 +1,5 @@
+---@meta _
+
 ---读取目标玩家的 对象index 指定Field的值。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Field  string 数据栏名称。

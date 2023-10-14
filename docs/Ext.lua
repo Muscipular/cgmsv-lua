@@ -1,3 +1,5 @@
+---@meta _
+
 ---@since HOOK:v0.2.30
 ---@return string
 function getHookVer() end

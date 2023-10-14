@@ -1,3 +1,5 @@
+---@meta _
+
 ---获取道具对象index的指定信息。
 ---@param ItemIndex  number 目标的 道具index。
 ---@param Dataline  number 说指定的对象实例信息栏位，具体栏位常量请查看附录。

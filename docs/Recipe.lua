@@ -1,3 +1,5 @@
+---@meta _
+
 ---获取配方指定信息栏数据
 ---@param recipeNo number 配方id
 ---@param dataLine number CONST.ITEM_RECIPE

@@ -1,3 +1,5 @@
+---@meta _
+
 ---初始化Http服务器
 function Http.Init() end
 
