@@ -1107,7 +1107,7 @@ function DMGFunc(pos, flg, dmg) end
 ---物品耐久变化事件
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称,参考[ItemDurabilityChangedEventCallback]
-function NL.ItemDurabilityChangedEvent(Dofile, InitFuncName) end
+function NL.RegItemDurabilityChangedEvent(Dofile, InitFuncName) end
 
 ---ItemDurabilityChangedEvent的回调函数
 ---@param itemIndex number ItemIndex
