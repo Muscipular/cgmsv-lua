@@ -1117,3 +1117,20 @@ function NL.RegItemDurabilityChangedEvent(Dofile, InitFuncName) end
 ---@param mode number 0正常战斗损耗（1-2耐久），1致死打击（-50%当前耐久），2沉重打击（-10%最大耐久），3装备破坏技能
 ---@return number @新的mode，用于mode为1、2时返回0取消对应提示
 function ItemDurabilityChangedEventCallback(itemIndex, oldDurability, newDurability, value, mode) end
+
+---战斗获得战利品（物品）事件
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称,参考[BattleGetProfitEventCallback]
+function NL.RegBattleGetProfitEvent(Dofile, InitFuncName) end
+
+
+---BattleGetProfitEvent的回调函数
+---@param battleIndex number 战斗Index
+---@param side number 队伍0或1
+---@param pos number 队伍内位置0-9
+---@param charaIndex number 角色Index
+---@param type number EXP = -1,DP = -2,ITEM1 = 0,ITEM2 = 1,ITEM3 = 2,
+---@param reward number EXP/DP时为对应经验/DP，ITEM1/ITEM2/ITEM3为itemIndex
+---@return number @返回修改后的经验/DP/ItemIndex
+function BattleGetProfitEventCallback(battleIndex, side, pos, charaIndex, type, reward) end
+
