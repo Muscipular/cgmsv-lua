@@ -9,7 +9,15 @@ function commands.addGold(charIndex, args)
 end
 
 function commands.giveItem(charIndex, args)
-  Char.GiveItem(charIndex, tonumber(args[1]), tonumber(args[2]), args[3] ~= '0')
+  local itemIndex = Char.GiveItem(charIndex, tonumber(args[1]), tonumber(args[2]), args[3] ~= '0')
+  if args[4] ~= nil and itemIndex >= 0 then
+    if tonumber(args[4]) > 0 then
+      Item.SetData(itemIndex, CONST.道具_已鉴定, 1);
+    else
+      Item.SetData(itemIndex, CONST.道具_已鉴定, 0);
+    end
+    Item.UpItem(charIndex, Char.GetItemSlot(charIndex, itemIndex));
+  end
 end
 
 function commands.delItem(charIndex, args)
