@@ -573,6 +573,7 @@ CONST.地图类型_普通 = 0;
 CONST.地图类型_迷宫 = 0;
 CONST.地图类型_家族 = 0;
 CONST.地图类型_房屋 = 0;
+CONST.地图类型_LUAMAP = 0;
 CONST.种族_人型 = 0;
 CONST.种族_龙 = 0;
 CONST.种族_不死 = 0;
