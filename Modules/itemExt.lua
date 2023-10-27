@@ -24,6 +24,8 @@ end);
 ---@param itemIndex number
 ---@param value table
 function ItemExt:setItemData(itemIndex, value)
+  error("请使用Item.SetExtData");
+  return nil;
   local type = Item.GetData(itemIndex, CONST.道具_类型)
   local field = CONST.道具_自用参数;
   if type >= 0 and type <= 21 then
@@ -49,6 +51,8 @@ end
 ---@return table
 ---@param noCache boolean|nil 是否缓存
 function ItemExt:getItemData(itemIndex, noCache)
+  error("请使用Item.GetExtData");
+  return nil;
   local itemType = Item.GetData(itemIndex, CONST.道具_类型)
   local field = CONST.道具_自用参数;
   if itemType >= 0 and itemType <= 21 then

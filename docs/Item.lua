@@ -13,6 +13,19 @@ function Item.GetData(ItemIndex,Dataline) end
 ---@return number @0为失败，1为成功。
 function Item.SetData(ItemIndex,Dataline,Data) end
 
+---获取道具对象index的指定信息。
+---@param ItemIndex  number 目标的 道具index。
+---@param Dataline  string 说指定的对象实例信息栏位
+---@return number|string @指定信息栏位的值
+function Item.GetExtData(ItemIndex,Dataline) end
+
+---设置道具对象index的指定信息。
+---@param ItemIndex  number 目标的 道具对象index。
+---@param Dataline  string 说指定的对象实例信息栏位
+---@param Data  number|string 新的值
+---@return number @0为失败，1为成功。
+function Item.SetExtData(ItemIndex,Dataline,Data) end
+
 ---发送更新道具的封包给关联的玩家。
 ---@param CharIndex  number 目标对象index。
 ---@param Slot  number 指定背包的位置，如果为-1则遍历所有的道具。
