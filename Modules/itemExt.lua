@@ -26,26 +26,26 @@ end);
 function ItemExt:setItemData(itemIndex, value)
   error("请使用Item.SetExtData");
   return nil;
-  local type = Item.GetData(itemIndex, CONST.道具_类型)
-  local field = CONST.道具_自用参数;
-  if type >= 0 and type <= 21 then
-    field = CONST.道具_自用参数;
-  else
-    field = CONST.道具_Func_AttachFunc;
-  end
-  local args = Item.GetData(itemIndex, field) or ''
-  if not string.match(args, '^luaData_') then
-    local t = string.formatNumber(os.time(), 36) .. string.formatNumber(math.random(1, 36 * 36 * 36), 36);
-    args = 'luaData_' .. t;
-    Item.SetData(itemIndex, field, args);
-  end
-  local sql = 'replace into lua_itemData (id, data, create_time) VALUES ('
-    .. SQL.sqlValue(args) .. ','
-    .. SQL.sqlValue(JSON.encode(value)) .. ','
-    .. SQL.sqlValue(os.time()) .. ')';
-  local r = SQL.querySQL(sql)
-  --print(r, sql);
-  self.cache:set(args, value);
+  -- local type = Item.GetData(itemIndex, CONST.道具_类型)
+  -- local field = CONST.道具_自用参数;
+  -- if type >= 0 and type <= 21 then
+  --   field = CONST.道具_自用参数;
+  -- else
+  --   field = CONST.道具_Func_AttachFunc;
+  -- end
+  -- local args = Item.GetData(itemIndex, field) or ''
+  -- if not string.match(args, '^luaData_') then
+  --   local t = string.formatNumber(os.time(), 36) .. string.formatNumber(math.random(1, 36 * 36 * 36), 36);
+  --   args = 'luaData_' .. t;
+  --   Item.SetData(itemIndex, field, args);
+  -- end
+  -- local sql = 'replace into lua_itemData (id, data, create_time) VALUES ('
+  --   .. SQL.sqlValue(args) .. ','
+  --   .. SQL.sqlValue(JSON.encode(value)) .. ','
+  --   .. SQL.sqlValue(os.time()) .. ')';
+  -- local r = SQL.querySQL(sql)
+  -- --print(r, sql);
+  -- self.cache:set(args, value);
 end
 
 ---@return table
@@ -53,32 +53,32 @@ end
 function ItemExt:getItemData(itemIndex, noCache)
   error("请使用Item.GetExtData");
   return nil;
-  local itemType = Item.GetData(itemIndex, CONST.道具_类型)
-  local field = CONST.道具_自用参数;
-  if itemType >= 0 and itemType <= 21 then
-    field = CONST.道具_自用参数;
-  else
-    field = CONST.道具_Func_AttachFunc;
-  end
-  local args = Item.GetData(itemIndex, field)
-  local data;
-  if string.match(args, '^luaData_') then
-    data = self.cache:get(args)
-    if not data then
-      data = SQL.querySQL('select data from lua_itemdata where id = ' .. SQL.sqlValue(args))
-      if type(data) == 'table' and data[1] then
-        data = data[1][1]
-        data = JSON.decode(data)
-      else
-        data = nil;
-      end
-    end
-  end
-  data = data or {}
-  if not noCache then
-    self.cache:set(args, data);
-  end
-  return data;
+  -- local itemType = Item.GetData(itemIndex, CONST.道具_类型)
+  -- local field = CONST.道具_自用参数;
+  -- if itemType >= 0 and itemType <= 21 then
+  --   field = CONST.道具_自用参数;
+  -- else
+  --   field = CONST.道具_Func_AttachFunc;
+  -- end
+  -- local args = Item.GetData(itemIndex, field)
+  -- local data;
+  -- if string.match(args, '^luaData_') then
+  --   data = self.cache:get(args)
+  --   if not data then
+  --     data = SQL.querySQL('select data from lua_itemdata where id = ' .. SQL.sqlValue(args))
+  --     if type(data) == 'table' and data[1] then
+  --       data = data[1][1]
+  --       data = JSON.decode(data)
+  --     else
+  --       data = nil;
+  --     end
+  --   end
+  -- end
+  -- data = data or {}
+  -- if not noCache then
+  --   self.cache:set(args, data);
+  -- end
+  -- return data;
 end
 --- 加载模块钩子
 function ItemExt:onLoad()

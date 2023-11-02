@@ -16,3 +16,28 @@ function SQL.Query(QueryString) end
 ---@return {status:number,effectRows:number,rows:table} @返回查询内容
 function SQL.QueryEx(sql, ...) end
 
+---获取Mysql连接对象，PS：用完必须释放，否则Mysql连接已经用完
+---@return MysqlConn @Mysql连接对象
+function SQL.GetConn(sql, ...) end
+
+---@class MysqlConn
+MysqlConn = {}
+
+---执行指定的Mysql查询。
+---@param sql string sql
+---@vararg string|number 绑定参数，最多40个
+---@return {status:number,effectRows:number,rows:table} @返回查询内容
+function MysqlConn:Query(sql, ...) end
+
+---释放连接
+function MysqlConn:Release() end
+
+---开启事务
+function MysqlConn:BeginTrans() end
+
+---回滚事务
+function MysqlConn:Rollback() end
+
+---提交事务
+function MysqlConn:Commit() end
+

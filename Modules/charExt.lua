@@ -2,39 +2,39 @@
 local CharExt = ModuleBase:createModule('charExt')
 local MAX_CACHE_SIZE = 1000;
 
----迁移定义
-CharExt:addMigration(1, 'init lua_charData', function()
-  SQL.querySQL([[
-create table if not exists lua_charData
-(
-	id int not null,
-	data text null,
-	create_time int default 0 not null,
-	constraint lua_charData_pk
-		primary key (id)
-) engine innodb;
-]])
-end);
-CharExt:addMigration(2, 'extend key', function()
-  SQL.querySQL([[
-alter table lua_chardata
-	add cdkey char(32) default '' null after id;
-]]);
-  SQL.querySQL([[
-alter table lua_chardata drop primary key;
-]]);
-  SQL.querySQL([[
-alter table lua_chardata
-	add constraint lua_chardata_pk
-		primary key (id, cdkey);
-]]);
-end);
-CharExt:addMigration(3, 'extend value', function() end)
-CharExt:addMigration(4, 'extend data', function()
-  SQL.querySQL([[
-  alter table lua_chardata modify data longtext null;
-]]);
-end)
+-- ---迁移定义
+-- CharExt:addMigration(1, 'init lua_charData', function()
+--   SQL.querySQL([[
+-- create table if not exists lua_charData
+-- (
+-- 	id int not null,
+-- 	data text null,
+-- 	create_time int default 0 not null,
+-- 	constraint lua_charData_pk
+-- 		primary key (id)
+-- ) engine innodb;
+-- ]])
+-- end);
+-- CharExt:addMigration(2, 'extend key', function()
+--   SQL.querySQL([[
+-- alter table lua_chardata
+-- 	add cdkey char(32) default '' null after id;
+-- ]]);
+--   SQL.querySQL([[
+-- alter table lua_chardata drop primary key;
+-- ]]);
+--   SQL.querySQL([[
+-- alter table lua_chardata
+-- 	add constraint lua_chardata_pk
+-- 		primary key (id, cdkey);
+-- ]]);
+-- end);
+-- CharExt:addMigration(3, 'extend value', function() end)
+-- CharExt:addMigration(4, 'extend data', function()
+--   SQL.querySQL([[
+--   alter table lua_chardata modify data longtext null;
+-- ]]);
+-- end)
 
 function CharExt:setData(charIndex, value)
   error("使用Char.SetExtData代替")
