@@ -1,4 +1,4 @@
----@meta
+---@meta _
 
 ---×ªÎªutf8±àÂë
 ---@param str string
