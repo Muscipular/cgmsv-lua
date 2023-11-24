@@ -105,3 +105,18 @@ function Item.IsWeaponType(ItemIndex) end
 ---@return number @number 返回道具itemindex
 function Item.MakeItem(itemId) end
 
+---获取道具类型宠物装备位置
+---@param type number 道具类型
+---@param place number 位置，0-4，参考CONST.宠道栏_*
+---@return number @能装备为返回1
+function Item.GetPetEquipPlace(type, place) end
+
+
+---获取道具类型宠物装备位置
+---@param type number 道具类型
+---@param place number 位置，0-4，参考CONST.宠道栏_*
+---@param enable number|boolean 能否装备
+---@return number @成功返回1
+function Item.SetPetEquipPlace(type, place, enable) end
+
+
