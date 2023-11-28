@@ -1134,3 +1134,19 @@ function NL.RegBattleGetProfitEvent(Dofile, InitFuncName) end
 ---@return number @返回修改后的经验/DP/ItemIndex
 function BattleGetProfitEventCallback(battleIndex, side, pos, charaIndex, type, reward) end
 
+
+---战斗计算行动优先级事件
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称,参考[BattleCalcDexEventCallback]
+function NL.RegBattleCalcDexEvent(Dofile, InitFuncName) end
+
+
+---BattleCalcDexEvent的回调函数
+---@param battleIndex number 战斗Index
+---@param action number 0为1动，1为2动
+---@param charaIndex number 角色Index
+---@param flg number 标旗
+---@param dex number 行动优先级
+---@return number @返回修改后的dex
+function BattleCalcDexEventCallback(battleIndex, charaIndex, action, flg, dex) end
+
