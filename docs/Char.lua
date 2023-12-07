@@ -327,8 +327,8 @@ function CharWalkPostCallBack(CharIndex) end
 function Char.SetPostOverEvent(Dofile,FuncName,CharIndex) end
 
 ---PostOverEvent回调函数
----@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
----@param TargetCharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
+---@param CharIndex  number 下层的对象index，该值由Lua引擎传递给本函数。
+---@param TargetCharIndex  number 上层的对象index，该值由Lua引擎传递给本函数。
 function PostOverEventCallBack(CharIndex, TargetCharIndex) end
 
 ---为对象index设置循环事件的回调函数，事件会每隔Interval时间循环触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
