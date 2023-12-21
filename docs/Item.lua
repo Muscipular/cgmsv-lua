@@ -119,4 +119,7 @@ function Item.GetPetEquipPlace(type, place) end
 ---@return number @成功返回1
 function Item.SetPetEquipPlace(type, place, enable) end
 
-
+---获取道具所有者的CharIndex
+---@param itemIndex number ItemIndex
+---@return number @道具所有者的CharIndex
+function Item.GetOwner(itemIndex) end
