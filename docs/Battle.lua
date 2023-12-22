@@ -140,6 +140,17 @@ function Battle.SetNextBattle(battleIndex,encountIndex, flg) end
 ---@return number @角色战斗中真实位置，范围0-19
 function Battle.GetPos(battleIndex,charIndex) end
 
+---获得角色战斗中真实位置
+---@param battleIndex number 战斗index
+---@param charIndex number 角色index
+---@return number @角色战斗中真实位置，范围0-19
+function Battle.GetEntryPosition(battleIndex,charIndex) end
+
+---获取战斗Index
+---@param charIndex number 角色index
+---@return number @战斗index
+function Battle.GetCurrentBattle(charIndex) end
+
 ---获取连战id
 ---@param battleIndex number
 ---@return number @encountIndex

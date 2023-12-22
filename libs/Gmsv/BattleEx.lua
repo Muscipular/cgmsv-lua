@@ -55,10 +55,12 @@ function Battle.GetSlot(battleIndex, charIndex)
   return -1;
 end 
 
------ @return number BatteIndex
-function Battle.GetCurrentBattle(CharIndex)
-  if Char.GetData(CharIndex, CONST.CHAR_Õ½¶·×´Ì¬) == 0 then
-    return -1;
+if Battle.GetCurrentBattle == nil then
+  ----- @return number BatteIndex
+  Battle.GetCurrentBattle = function (CharIndex)
+    if Char.GetData(CharIndex, CONST.CHAR_Õ½¶·×´Ì¬) == 0 then
+      return -1;
+    end
+    return Char.GetData(CharIndex, CONST.CHAR_BattleIndex)
   end
-  return Char.GetData(CharIndex, CONST.CHAR_BattleIndex)
 end
