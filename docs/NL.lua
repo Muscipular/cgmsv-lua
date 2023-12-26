@@ -4,6 +4,10 @@
 ---@return number @
 function NL.Version() end
 
+---打印错误信息
+---@param s string 错误文本
+function NL.PrintError(s) end
+
 ---使用Lua脚本创建NPC，并执行Dofile文件中的InitFuncName函数。
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string Init函数的名称,NPC创建后执行的函数,申明格式请参考下面的[InitCallBack]
