@@ -2,24 +2,24 @@
 local ItemExt = ModuleBase:createModule('itemExt')
 local MAX_CACHE_SIZE = 5000;
 
-ItemExt:addMigration(1, 'add item_LuaData', function()
-  SQL.querySQL([[create table if not exists lua_itemData
-(
-    id varchar(50) not null
-        primary key,
-    data text null
-) engine innodb;
-]])
-end);
-ItemExt:addMigration(2, 'add item_LuaData_create_time', function()
-  SQL.querySQL([[alter table lua_itemData add create_time int default 0 not null;]])
-end);
+-- ItemExt:addMigration(1, 'add item_LuaData', function()
+--   SQL.querySQL([[create table if not exists lua_itemData
+-- (
+--     id varchar(50) not null
+--         primary key,
+--     data text null
+-- ) engine innodb;
+-- ]])
+-- end);
+-- ItemExt:addMigration(2, 'add item_LuaData_create_time', function()
+--   SQL.querySQL([[alter table lua_itemData add create_time int default 0 not null;]])
+-- end);
 
-ItemExt:addMigration(3, 'extend data', function()
-  SQL.querySQL([[
-  alter table lua_itemData modify data longtext null;
-  ]]);
-end);
+-- ItemExt:addMigration(3, 'extend data', function()
+--   SQL.querySQL([[
+--   alter table lua_itemData modify data longtext null;
+--   ]]);
+-- end);
 
 ---@param itemIndex number
 ---@param value table

@@ -18,7 +18,7 @@ function SQL.QueryEx(sql, ...) end
 
 ---获取Mysql连接对象，PS：用完必须释放，否则Mysql连接已经用完
 ---@return MysqlConn @Mysql连接对象
-function SQL.GetConn(sql, ...) end
+function SQL.GetConn() end
 
 ---@class MysqlConn
 MysqlConn = {}

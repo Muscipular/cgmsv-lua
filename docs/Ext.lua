@@ -105,3 +105,24 @@ function Char.IsEnemy(charIndex) end
 ---@param charIndex number
 ---@return boolean
 function Char.IsNpc(charIndex) end
+
+---生成新Migration
+---@param type string 类型标识
+---@param version number 版本号
+---@param name string 名字
+---@return Migration @Migration对象
+function newMigration(type, version, name) end
+
+---@class Migration
+Migration = {}
+
+---添加Migration步骤
+---@param sql string sql
+---@param paramList (number|string)[] 参数列表
+---@param opt {ignoreCheck:boolean,checkFn:fun(res):boolean} opt
+function Migration:AddStep(sql, paramList, opt) end
+
+---执行
+---@param useTrans boolean 是否开启事务
+---@return number @成功返回1 失败返回0
+function Migration:Execute(useTrans) end
