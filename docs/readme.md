@@ -19,5 +19,5 @@
 [Tech](Tech.lua) 
 [TechArea](TechArea.lua)
 
-# ¿ò¼ÜLua API
+# æ¡†æž¶Lua API
 [Ext](Ext.lua) 
