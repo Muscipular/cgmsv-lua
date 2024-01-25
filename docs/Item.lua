@@ -43,7 +43,7 @@ function Item.Kill(CharIndex, ItemIndex, Slot) end
 ---@param name string 道具类型名称
 ---@param defaultImage number 未鉴定时图档
 ---@param place number 装备位置
----@param flags number 武器类型。1-普通武器，2-弓，4-小刀，8-回力镖，255-所有武器，投掷类武器=2+4+8=14
+---@param flags number 武器类型。1-剑，2-斧，4-枪，8-杖，16-弓，32-小刀，64-回力镖，128-空手，255-所有武器，投掷类武器=16+32+64=112
 ---@return number @成功返回1
 function Item.CreateNewItemType(type, name, defaultImage, place, flags) end
 
