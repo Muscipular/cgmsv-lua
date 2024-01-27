@@ -2,7 +2,7 @@ local Modules = {};
 local _initialed = false
 
 function _G.moduleInitial()
-  if _initialed then
+  if _initialed or _HookFunc == false then
     return
   end
   _initialed = true;
