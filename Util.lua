@@ -4,7 +4,9 @@ _G.JSON = dofile('lua/libs/three_parts/json.lua');
 --_G.MT19937 = dofile('lua/libs/three_parts/mt19937ar.lua');
 _G.MT19937 = _G.MT or dofile('lua/libs/three_parts/mt19937ar.lua');
 -- Base Extensions
-dofile('lua/libs/ffi.lua')
+if _HookFunc then
+dofile('lua/libs/ffi.lua')    
+end
 dofile('lua/libs/logger.lua')
 dofile('lua/libs/table.lua')
 dofile('lua/libs/file.lua')
