@@ -1,5 +1,7 @@
 ---原地登陆
 local LoginModule = ModuleBase:createModule('loginGate')
+---是否启用lua自定义登陆点
+local customLoginPoints = false;
 local LoginPoints = {};
 -- 出生点
 LoginPoints[-1] = {
@@ -36,17 +38,21 @@ function LoginModule:GetLoginPointEvent(charIndex, mapID, floorID, x, y)
   if Char.EndEvent(charIndex, 0) ~= 1 then
     return
   end
-  local json = Field.Get(charIndex, 'LastLogoutPoint');
-  local ret, lastPoint = nil, nil;
-  if json and json ~= 'null' then
-    ret, lastPoint = pcall(JSON.decode, json)
+  ---@type number|string|number[]|nil
+  local lastPoint = Char.GetExtData(charIndex, "LastLogoutPoint");
+  if type(lastPoint) == "string" then
+    local ret;
+    ret, lastPoint = pcall(JSON.decode, lastPoint);
     if ret and lastPoint then
-      if lastPoint[1] == 1 then
-        local expire = Map.GetDungeonExpireAt(lastPoint[2])
-        if expire ~= lastPoint[5] then
-          mapID, floorID, x, y = Map.FindDungeonEntry(lastPoint[6])
-          if mapID >= 0 then
-            lastPoint = { mapID, floorID, x, y }
+      if (lastPoint[1] == 1) then
+        local expire = Map.GetDungeonExpireAt(lastPoint[2]);
+        local dungeonId = Map.GetDungeonId(lastPoint[2]);
+        if expire ~= lastPoint[5] or lastPoint[6] ~= dungeonId then
+          mapID, floorID, x, y = Map.FindDungeonEntry(lastPoint[6]);
+          if mapID >= 0 and floorID > 0 then
+            lastPoint = { mapID, floorID, x, y };
+          else
+            lastPoint = nil;
           end
         end
       end
@@ -55,12 +61,15 @@ function LoginModule:GetLoginPointEvent(charIndex, mapID, floorID, x, y)
       lastPoint = nil;
     end
   end
+  Char.SetExtData(charIndex, 'LastLogoutPoint', nil);
   --self:logDebug('LoginPoint', Char.GetData(charIndex, CONST.CHAR_登陆点), table.unpack(lastPoint or {}))
-  if lastPoint == nil then
+  if lastPoint == nil or lastPoint[1] == 0 and lastPoint[2] == 0 then
+    if customLoginPoints == false then
+      return
+    end
     lastPoint = LoginPoints[Char.GetData(charIndex, CONST.CHAR_登陆点)] or LoginPoints[0];
     lastPoint = lastPoint[math.random(1, #lastPoint)]
   end
-  Field.Set(charIndex, 'LastLogoutPoint', 'null');
   Char.SetData(charIndex, CONST.CHAR_地图类型, lastPoint[1]);
   Char.SetData(charIndex, CONST.CHAR_地图, lastPoint[2]);
   Char.SetData(charIndex, CONST.CHAR_X, lastPoint[3]);
@@ -75,18 +84,25 @@ function LoginModule:LogoutEvent(charIndex)
     Char.GetData(charIndex, CONST.CHAR_Y),
   };
   if lastPoint[1] == 0 and lastPoint[2] == 0 then
-    Field.Set(charIndex, 'LastLogoutPoint', 'null');
-    return 0;
+    lastPoint = nil;
+    goto END;
   end
   if lastPoint[1] == 1 then
     local expire = Map.GetDungeonExpireAt(lastPoint[2])
     lastPoint[5] = expire;
     lastPoint[6] = Map.GetDungeonId(lastPoint[2]);
+    goto END;
   end
   if lastPoint[1] > 1 then
     lastPoint = nil
+    goto END;
   end
-  Field.Set(charIndex, 'LastLogoutPoint', JSON.encode(lastPoint));
+  ::END::
+  if lastPoint then
+    Char.SetExtData(charIndex, 'LastLogoutPoint', JSON.encode(lastPoint));
+  else
+    Char.SetExtData(charIndex, 'LastLogoutPoint', nil);
+  end
   return 0;
 end
 
