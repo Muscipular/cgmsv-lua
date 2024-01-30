@@ -28,3 +28,13 @@ function Http.AddMountPoint(path, dir) end
 ---@return number @成功返回1
 function Http.RemoveMountPoint(path) end
 
+---注册API接口，不注册的接口不会通过事件给到Lua执行
+---@param api string url地址
+---@return number @成功返回1
+function Http.RegApi(api) end
+
+---反注册API接口，反注册后的接口不会通过事件给到Lua执行
+---@param api string url地址
+---@return number @成功返回1
+function Http.UnregApi(api) end
+

@@ -101,7 +101,7 @@ end
 ---@param api string ∂‘”¶http://127.0.0.1:10086/api/******
 ---@param fn HttpApiFn
 function Module:regApi(method, api, fn)
-    if (Http.RegApi(api) == 0) then
+    if (Http.RegApi(api) == 1) then
         self._Apis[string.lower(method .. '::' .. api)] = fn;
     end
 end
