@@ -91,8 +91,8 @@ end
 ---@return string body 返回内容
 function Module:onHttpRequest(method, api, params, body)
     if self._Apis[string.lower(method .. api)] then
-        self:logInfo(string.lower(method .. api), self._Apis[string.lower(method .. api)]);
-        return self._Apis[string.lower(method .. api)](params, body);
+        self:logInfo(string.lower(method .. '::' .. api), self._Apis[string.lower(method .. '::' .. api)]);
+        return self._Apis[string.lower(method .. '::' .. api)](params, body);
     end
     return "";
 end
@@ -101,11 +101,16 @@ end
 ---@param api string 对应http://127.0.0.1:10086/api/******
 ---@param fn HttpApiFn
 function Module:regApi(method, api, fn)
-    self._Apis[string.lower(method .. api)] = fn;
+    if (Http.RegApi(api) == 0) then
+        self._Apis[string.lower(method .. '::' .. api)] = fn;
+    end
 end
 
 --- 卸载模块钩子
 function Module:onUnload()
+    for api, value in pairs(self._Apis) do
+        Http.UnregApi(string.split(api, '::')[2]);
+    end
     self:logInfo('unload')
     if Http.GetStatus() == 2 then
         Http.Stop();
