@@ -22,6 +22,9 @@ function CharStatusExtend:addCharStatus(charIndex, t, val)
   end
   Char.SetTempData(charIndex, 'CSE:Enable', 1);
   Char.SetTempData(charIndex, "CSE:" .. t, tonumber(val));
+  if (t == CONST.CHAR_最大血 or t == CONST.CHAR_最大魔) then
+    Char.SetTempData(charIndex, "CSE:L" .. t, Char.GetData(charIndex, t));
+  end
   return true;
 end
 
@@ -29,6 +32,9 @@ function CharStatusExtend:clearCharStatus(charIndex)
   Char.SetTempData(charIndex, 'CSE:Enable', nil);
   for i, v in pairs(Allow) do
     Char.SetTempData(charIndex, 'CSE:' .. i, nil);
+    if (tonumber(i) == CONST.CHAR_最大血 or tonumber(i) == CONST.CHAR_最大魔) then
+      Char.SetTempData(charIndex, "CSE:L" .. i, nil);
+    end
   end
 end
 
@@ -45,11 +51,13 @@ function CharStatusExtend:onStatusUpdate(charIndex)
     for i, v in ipairs(t2) do
       local vx = tonumber(Char.GetTempData(charIndex, "CSE:" .. v[1])) or 0;
       if (vx ~= 0 and vx ~= nil) then
-        local full = Char.GetData(charIndex, v[1]) == Char.GetData(charIndex, v[2]);
-        local val = Char.GetData(charIndex, v[1]) + vx;
-        Char.SetData(charIndex, v[1], val);
+        local vxL = tonumber(Char.GetTempData(charIndex, "CSE:L" .. v[1])) or -1;
+        Char.SetTempData(charIndex, "CSE:L" .. v[1], nil);
+        local vo = Char.GetData(charIndex, v[1]);
+        local full = vo == Char.GetData(charIndex, v[2]) and vo == vxL;
+        Char.SetData(charIndex, v[1], vo + vx);
         if full then
-          Char.GetData(charIndex, v[2], val);
+          Char.GetData(charIndex, v[2], vo + vx);
         end
       end
     end
