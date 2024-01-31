@@ -34,7 +34,6 @@ end
 
 function CharStatusExtend:onStatusUpdate(charIndex)
   if (Char.GetTempData(charIndex, "CSE:Enable") == 1) then
-    local fullFp = Char.GetData(charIndex, CONST.CHAR_最大魔) == Char.GetData(charIndex, CONST.CHAR_魔);
     local t = { CONST.CHAR_攻击力, CONST.Char_防御力, CONST.Char_敏捷, CONST.CHAR_精神, CONST.CHAR_回复 };
     for i, v in ipairs(t) do
       local vx = tonumber(Char.GetTempData(charIndex, "CSE:" .. v)) or 0;
