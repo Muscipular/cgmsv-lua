@@ -2,6 +2,11 @@ local Modules = {};
 local _initialed = false
 
 function _G.moduleInitial()
+  regGlobalEvent("ShutdownEvent", OrderedCallback(function()
+    for i, v in pairs(Modules) do
+      pcall(function () v:unload() end);
+    end
+  end, -9999999999), 'System');
   if _initialed or _HookFunc == false then
     return
   end
