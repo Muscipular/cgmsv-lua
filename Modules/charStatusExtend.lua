@@ -5,10 +5,20 @@ local Allow = {
   ['' .. CONST.CHAR_最大血] = 1,
   ['' .. CONST.CHAR_最大魔] = 1,
   ['' .. CONST.CHAR_攻击力] = 1,
-  ['' .. CONST.Char_防御力] = 1,
-  ['' .. CONST.Char_敏捷] = 1,
+  ['' .. CONST.CHAR_防御力] = 1,
+  ['' .. CONST.CHAR_敏捷] = 1,
   ['' .. CONST.CHAR_精神] = 1,
   ['' .. CONST.CHAR_回复] = 1,
+  ['' .. CONST.CHAR_反击] = 1,
+  ['' .. CONST.CHAR_必杀] = 1,
+  ['' .. CONST.CHAR_命中] = 1,
+  ['' .. CONST.CHAR_闪躲] = 1,
+  ['' .. CONST.CHAR_抗毒] = 1,
+  ['' .. CONST.CHAR_抗乱] = 1,
+  ['' .. CONST.CHAR_抗忘] = 1,
+  ['' .. CONST.CHAR_抗睡] = 1,
+  ['' .. CONST.CHAR_抗石] = 1,
+  ['' .. CONST.CHAR_抗醉] = 1,
 };
 
 function CharStatusExtend:onLoad()
@@ -40,7 +50,9 @@ end
 
 function CharStatusExtend:onStatusUpdate(charIndex)
   if (Char.GetTempData(charIndex, "CSE:Enable") == 1) then
-    local t = { CONST.CHAR_攻击力, CONST.Char_防御力, CONST.Char_敏捷, CONST.CHAR_精神, CONST.CHAR_回复 };
+    local t = { CONST.CHAR_攻击力, CONST.CHAR_防御力, CONST.CHAR_敏捷, CONST.CHAR_精神, CONST.CHAR_回复,
+      CONST.CHAR_反击, CONST.CHAR_必杀, CONST.CHAR_命中, CONST.CHAR_闪躲, CONST.CHAR_抗毒, CONST.CHAR_抗乱,
+      CONST.CHAR_抗忘, CONST.CHAR_抗睡, CONST.CHAR_抗石, CONST.CHAR_抗醉 };
     for i, v in ipairs(t) do
       local vx = tonumber(Char.GetTempData(charIndex, "CSE:" .. v)) or 0;
       if (vx ~= 0 and vx ~= nil) then
