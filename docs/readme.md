@@ -1,4 +1,4 @@
-# CGMSV Lua API
+﻿# CGMSV Lua API
 - [Battle](Battle.lua) 
 - [Char](Char.lua) 
 - [Data](Data.lua) 
@@ -21,7 +21,8 @@
 
 # 框架Lua API
 - [Ext](Ext.lua) 
+- [ModuleSystem](Module.lua)
 
 # 常量表
 - [常量表](Const.md)
-- [常量参考](CONST.lua)
+- [常量参参考](CONST.lua)
