@@ -1,4 +1,4 @@
----@class GmsvData: ModuleBase
+---@class GmsvData: ModuleType
 local GmsvData = ModuleBase:createModule('gmsvData')
 
 GmsvData.CONST = {};

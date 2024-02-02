@@ -3,7 +3,6 @@ local CharPart = ModuleBase:createPart('CharPart');
 
 
 ---@class CharaWrapper
----@field charaIndex CharIndex
 local CharaWrapper = {};
 
 local CharaWrapperM = {

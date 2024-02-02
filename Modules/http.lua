@@ -1,4 +1,5 @@
----httpÄ£¿é
+---httpÄ£¿é 
+---@class HttpModule : ModuleType
 local Module = ModuleBase:createModule('http')
 
 ---@alias ParamType {string:string}

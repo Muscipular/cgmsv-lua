@@ -2,10 +2,9 @@ Func = {}
 _G.Func = Func
 
 ---°ó¶¨²ÎÊý
----@generic T : function
----@param fn T
+---@param fn any
 ---@vararg any
----@return T
+---@return any
 function Func.bind(fn, ...)
   local args = { ... }
   return function(...)

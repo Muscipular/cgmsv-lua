@@ -1,4 +1,4 @@
----@class LegacyModule: ModuleBase
+---@class LegacyModule: ModuleType
 local LegacyModule = ModuleBase:createModule('Legacy');
 LegacyModule.sharedContext = {
   string = {},
@@ -91,9 +91,9 @@ setmetatable(sharedContext, { __index = _G })
 
 ---@return LegacyModule
 function LegacyModule:new(name)
-  ---@type LegacyModule
+  ---@class LegacyModule
   local o = {};
-  setmetatable(o, LegacyModule)
+  o = setmetatable(o, LegacyModule)
   o.name = LegacyModule.name .. ':' .. name;
   o.rawName = name;
   o.callbacks = {};

@@ -26,8 +26,6 @@ function ModuleBase:new(name)
   return o;
 end
 
----@alias ModuleType ModuleBase|NPCPart|AssetsPart|CharPart
-
 ---@param name string
 ---@param depParts? string[]
 ---@return ModuleType
@@ -58,12 +56,6 @@ function ModuleBase:createModule(name, depParts)
 
   return SubModule;
 end
-
----@class ModulePart: ModuleBase
----@field name string
----@field onLoad function
----@field onUnload function
----@field ___isPart boolean
 
 ---@param name string
 ---@return ModulePart
@@ -128,6 +120,8 @@ function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrCbIndex)
   self.callbacks[cbIndex] = nil;
 end
 
+
+---@private
 function ModuleBase:migrate()
   if self.migrations then
     local ret = SQL.querySQL('select ifnull(max(id), 0) version from lua_migration where module = \'' .. self.name .. '\';');

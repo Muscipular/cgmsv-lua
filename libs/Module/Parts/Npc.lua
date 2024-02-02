@@ -1,9 +1,6 @@
 ---@class NPCPart: ModulePart
 local NPCPart = ModuleBase:createPart('NpcPart');
 
----@alias NpcPosition {x:number,y:number,map:number,mapType:number,direction:number}
----@alias ShopBaseInfo {buyRate:number,sellRate:number,shopType:number,msgBuySell:number,msgBuy:number,msgMoneyNotEnough:number,msgBagFull:number,msgSell:number,msgAfterSell:number,sellTypes:table|'all'}
-
 local function fillShopSellType(tb)
   local all = tb == 'all';
   local ret = {}
@@ -94,8 +91,6 @@ function NPCPart:NPC_regTalkedEvent(npc, fn)
   Char.SetTalkedEvent(nil, talkedFn, npc);
   return talkedFn, lastIndex, fnIndex
 end
-
----@alias WindowTalkedCallback fun(npc: number, player: number, seqno: number, select: number, data: string):void
 
 ---×¢²ánpc WindowTalkedÊÂ¼þ
 ---@param npc number

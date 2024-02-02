@@ -1,4 +1,5 @@
 ---模块类
+---@class AdminDamage: ModuleType
 local Module = ModuleBase:createModule('adminDamage')
 --- 加载模块钩子
 function Module:onLoad()

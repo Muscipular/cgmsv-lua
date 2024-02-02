@@ -1,4 +1,5 @@
 ---Ä£¿éÀà
+---@class BankExpand : ModuleType
 local BankExpand = ModuleBase:createModule('bankExpand')
 
 BankExpand:addMigration(1, 'migrate1', function()
