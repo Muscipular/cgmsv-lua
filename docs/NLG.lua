@@ -283,8 +283,8 @@ function NLG.SetPetRandomShot(petId, enable) end
 function NLG.SetDexRearrangeRate(rate, mode) end
 
 ---修改暴击时伤害计算
----@param mode number|boolean 取值： 0 = 普通模式 1 = 倍率模式 2 = 无 true = 普通模式 false = 无
----@param val number 倍率，默认1.5倍
+---@param mode number|boolean 取值： 0 = 普通模式 1 = 倍率模式 2 = 无 3 = 破防模式 true = 普通模式 false = 无
+---@param val number 倍率，默认1.5倍，当mode为3时，该倍率为破防率，如0.7表示暴击时防御按70%计算
 function NLG.SetCriticalDamageAddition(mode, val) end
 
 ---删除角色，异步方法

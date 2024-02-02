@@ -1,0 +1,136 @@
+[+] 64位原生编译，不依赖再cygwin，地图上限调整为0x4000
+[+] 大量Lua接口
+[#] 调整关服处理，崩端不触发ShutdownEvent 
+[+] 治疗/战斗治疗 Tech添加 R[P|D|N][1|2|3|4]: 参数，指定成功率，P=医生高成功率，D=医生成功率，N=普通职业成功率，1-4分别对应受伤状态 如：RP1:[白伤医生高成功率]
+[+] 治疗/战斗治疗 Tech添加 AR: 参数，指定成功时效果，0-100，100为完全恢复伤势，0为恢复，25为恢复1级
+[+] 急救/战斗急救 Tech添加 R[P|D|N]: 参数，指定成功率，P=护士高成功率，D=护士成功率，N=普通职业成功率，如：RP:[护士高成功率]
+[+] 急救/战斗急救 Tech添加 AR: 参数，指定成功时恢复HP基数
+[#] 治疗/战斗治疗/急救/战斗急救 支持套装及TechOptionEvent，支持11+级
+[#] 限制战斗目标不能超过40
+[#] 修复调教、骑宠对套装及TechOptionEvent无效的问题
+[#] 修复CharSuit可能未初始化的问题
+[#] 修复flagEx未被初始化的问题 
+[#] 修复非法学习骑乘的漏洞 
+[#] Item.SetCharPointer 调整支持宠物 
+[#] Tech.txt 魔法属性可以通过参数设置 M1: 地 M2: 水 M3: 火 M4: 风
+[#] Tech.txt 连击可以通关参数设置攻击模式 MD:
+[#] 防止部分封包复制
+[+] data/petStyle.yml 自定义宠物攻击模式
+[+] data/loginPoints.yml 自定义登录点
+[+] 支持宠物装备
+[+] 非GBK语言翻译支持: 多语言文本通过msg.yml读取,可通过cgmsv.exe -e msg.yml导出
+[#] 屏蔽迷宫的恢复功能
+[#] 没有mlsv情况下防止双登 
+[#] 通过charaExt支持recipeId超过2048 
+[#] 调整启动时随机数种子 
+[#] 调整lua NPC类型为CHAR_TYPEEVENT 
+[#] 解锁道具获取声望上限，按cgmsvcf最大声望为准 
+[#] 物品耐久扣减优化 
+[+] 添加神族 10 精灵 11种族
+[+] 支持自定义扩展种族
+[#] 装备自定封顶属性支持自定义 
+[#] 扩展NowEvent、EndEvent、LocalFlag、GlobalFlag、GlobalFlagT、localCounter 到21亿 
+[#] 套装支持混搭 
+[#] 套装支持数量调整为16 
+[#] 套装支持增加玩家属性 
+[#] 修复套装技能问题 
+[+] 头饰支持NPC、宠物、怪物
+[+] 多页银行
+[#] 制造支持宠物帮助 
+[#] 删除角色时同步删除对应的Field库数据 
+[#] 修复部分伤害溢出 
+[#] 修复自定义魔法属性无效问题，通过参数设置 M1: 地 M2: 水 M3: 火 M4: 风 
+[#] 修复暗杀概率，PVE战斗添加技能套装参数读取 SR: 对怪物概率 PVP战斗添加PR: 对玩家概率 
+[#] 修复制作道具附加宝石回删除整组宝石的问题 
+[#] 修复出租屋崩端 
+[#] 修复shapenext崩端 
+[#] 修复Obj.GetObject对于同时叠加超过10个的时候崩端问题 
+[#] 修复NLG_ShowWindowTalked内容过长导致崩端问题，拓展到64kb 
+[#] 修复LoginPointEvent无效  
+[#] 修复JoinParty问题 
+[#] 修复Field库可能sql注入 
+[#] 修复Char.SetPostOverEvent报错 
+[#] 修复大部分技能11级及以上的问题
+[+] jobmaster支持5转+ 
+[#] gaglobalflag指令修复 
+[#] LUA luac 支持block里面嵌套if 
+[#] LUA 修复Battle.CreateBattle 最后一个怪物等级无效的bug
+[+] cgmsv.cf 添加loginpointfile 自定义登陆点
+[+] cgmsv.cf 添加petstylefile 宠物攻击模式
+[+] cgmsv.cf 添加itemmaterialextfile 自定义道具类别的宝石配置 
+[+] cgmsv.cf 添加maxrebirthlevel 自定义最大精灵变身等级 
+[+] cgmsv.cf 添加doctorjobs 医生职业，默认值：440
+[+] cgmsv.cf 添加nursejobs 护士职业，默认值：430
+[+] cgmsv.cf 添加trainRate 调教效能，默认10
+[+] cgmsv.cf 添加trainJobRate 调教特长职业效能比率，默认1
+[+] cgmsv.cf 添加enemyvitrate 怪物体力系数, 默认值: "8,1,0.1,0.1,0.1,-0.3,0.8"
+[+] cgmsv.cf 添加enemystrrate 怪物力量系数, 默认值: "2,2,2,0.2,0.2,-0.1,-0.1"
+[+] cgmsv.cf 添加enemydefrate 怪物防御系数, 默认值: "3,2,0.2,2,0.2,0.2,-0.1"
+[+] cgmsv.cf 添加enemyagirate 怪物敏捷系数, 默认值: "3,2,0.2,0.2,2,-0.1,0.2"
+[+] cgmsv.cf 添加enemymagrate 怪物魔法系数, 默认值: "1,10,0.1,0.1,0.1,0.8,-0.3"
+[+] cgmsv.cf 添加charvitrate 人物体力系数, 默认值: "8,1,0.1,0.1,0.1,-0.3,0.8" 
+[+] cgmsv.cf 添加charstrrate 人物力量系数, 默认值: "2,2,2,0.2,0.2,-0.1,-0.1" 
+[+] cgmsv.cf 添加chardefrate 人物防御系数, 默认值: "3,2,0.2,2,0.2,0.2,-0.1" 
+[+] cgmsv.cf 添加charagirate 人物敏捷系数, 默认值: "3,2,0.2,0.2,2,-0.1,0.2" 
+[+] cgmsv.cf 添加charmagrate 人物魔法系数, 默认值: "1,10,0.1,0.1,0.1,0.8,-0.3" 
+[+] cgmsv.cf 添加petvitrate 宠物体力系数, 默认值: "8,1,0.2,0.2,0.1,-0.3,0.8" 
+[+] cgmsv.cf 添加petstrrate 宠物力量系数, 默认值: "2,2,2.7,0.3,0.2,-0.1,-0.1" 
+[+] cgmsv.cf 添加petdefrate 宠物防御系数, 默认值: "3,2,0.3,3,0.2,0.2,-0.1" 
+[+] cgmsv.cf 添加petagirate 宠物敏捷系数, 默认值: "3,2,0.3,0.3,2,-0.1,0.2" 
+[+] cgmsv.cf 添加petmagrate 宠物魔法系数, 默认值: "1,10,0.2,0.2,0.1,0.8,-0.3" 
+[+] cgmsv.cf 添加stallmaps 支持自定义允许摆摊的地图，默认：1000,1500
+[#] cgmsv.cf 添加maxtechlevel maxcraftskilllevel maxskilllevel 调整最大支持的值为30 
+[+] cgmsv.cf 添加maxskillnum 自定义人物技能数量，最大30，需要cg支持，默认：15 
+[+] setup.cf 添加dummynum参数假人数量
+[+] setup.cf 添加dbport 指定mysql端口
+[+] cmgsv.cf 添加equipmax_luck 默认值:5 
+[+] cmgsv.cf 添加equipmax_charisma 默认值:100 
+[+] cmgsv.cf 添加equipmax_charm 默认值:100 
+[+] cmgsv.cf 添加equipmax_poison 默认值:100 
+[+] cmgsv.cf 添加equipmax_sleep 默认值:100 
+[+] cmgsv.cf 添加equipmax_stone 默认值:100 
+[+] cmgsv.cf 添加equipmax_drunk 默认值:100 
+[+] cmgsv.cf 添加equipmax_confusion 默认值:100 
+[+] cmgsv.cf 添加equipmax_amnesia 默认值:100 
+[+] cmgsv.cf 添加equipmax_critical 默认值:100 
+[+] cmgsv.cf 添加equipmax_counter 默认值:100 
+[+] cmgsv.cf 添加equipmax_hitrate 默认值:100 
+[+] cmgsv.cf 添加equipmax_avoid 默认值:100 
+[+] cmgsv.cf 添加equipmax_stamina 默认值:100 
+[+] cmgsv.cf 添加equipmax_dex 默认值:100 
+[+] cmgsv.cf 添加equipmax_intelligence 默认值:100 
+[+] cmgsv.cf 添加equipmax_adm 默认值:500 
+[+] cmgsv.cf 添加equipmax_rss 默认值:500 
+[+] cgmsv.cf 添加sealjobs 封印职业，默认 90 
+[+] cgmsv.cf 添加sealrarerate 封印普卡/银卡/金卡难度系数， 默认：0,35,100 
+[+] cgmsv.cf 添加sealjobrate 封印普通职业难度系数。默认：2,35,100 
+[+] cgmsv.cf 添加sealmaxnormaljobrate 普通职业封印1级怪最高概率，默认：4 
+[+] cgmsv.cf 添加参数criticaldmgmode 暴击模式 0 = 普通模式 1 = 倍率模式 2 = 无 3 = 破防模式
+[+] cgmsv.cf 添加参数criticalrate 暴击倍率，默认1.5倍，当mode为3时，该倍率为破防率，如0.7表示暴击时无视30%防御
+[+] cgmsv.cf 添加参数globaldexrearrangeratepve PVE乱敏概率
+[+] cgmsv.cf 添加参数globaldexrearrangeratepvp PVP乱敏概率
+[+] cgmsv.cf 添加sleepms 减少cpu使用率，默认: -1(开启建议使用1-2，太大影响loop) 
+[+] cgmsv.cf 添加poisonDamageRate 中毒伤害系数，默认0.2 
+[+] cgmsv.cf 添加magicmaxmagicpowerrate 设置精神最高系数，默认0.8 
+[+] cgmsv.cf 添加magicmaxmagicadmrate 设置魔攻最高系数，默认0.4 
+[+] cgmsv.cf 添加magicmaxmagicpowerratepet 设置宠物精神最高系数，默认0.8 
+[+] cgmsv.cf 添加magicmaxmagicadmratepet 设置宠物魔攻最高系数，默认0.2 
+[+] cgmsv.cf 添加drunkDamageRate 中毒伤害系数，默认0
+[+] cgmsv.cf 添加checkTohelosLevel 深蓝九号等级检查配置， 1=原版设定，0=关闭，2=按怪物等级与玩家等级比值调整，默认：1 
+[+] cgmsv.cf 添加cap241 属性到达多少后按cap241rate折算，默认 241 
+[+] cgmsv.cf 添加cap241rate 折算率， 默认 0.3 
+[+] cgmsv.cf 添加assassinnormalrate 暗杀-非特长职业的暗杀概率系数，默认0.7 
+[+] cgmsv.cf 添加magicbasedesired 魔法基础精神要求，默认123 
+[+] cgmsv.cf 添加magicdesiredperlv 每级魔法递增精神要求，默认20 
+[+] cgmsv.cf 添加magicbasedesiredpet 宠物魔法基础精神要求，默认123 
+[+] cgmsv.cf 添加magicdesiredperlvpet 宠物每级魔法递增精神要求，默认20 
+[+] cgmsv.cf 添加magicbaseadm 魔攻基础要求，默认10 
+[+] cgmsv.cf 添加magicadmperlv 魔攻每级递增要求，默认30 
+[+] cgmsv.cf 添加maxcounter，最大反击次数，默认值10 
+[+] cgmsv.cf 添加maxallocpoint，最多档位，默认63 
+[+] cgmsv.cf 添加assassinjobs参数，配置可以使用暗杀的职业,默认:150,50 
+[+] cgmsv.cf 添加maxcraftskilllevel配置最高制作技能上限，默认11 
+[+] cgmsv.cf 添加maxskilllevel配置最高人物技能上限，默认10 
+[+] cgmsv.cf 添加maxtechlevel配置最高技能上限，默认11 
+[+] cgmsv.cf 添加comborate，合击伤害系数，默认: 0.1 
+[+] cgmsv.cf rank_up_lv 进阶等级限制默认20,50,70,95,95,95,95 

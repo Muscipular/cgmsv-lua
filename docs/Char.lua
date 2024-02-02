@@ -28,7 +28,7 @@ function Char.NowEvent(charIndex, flag, value) end
 ---设置目标对象的EndEvent任务旗标。
 ---@param charIndex number 目标的 对象index。
 ---@param flag number 任务旗标。
----@param value 0|1 设置的目标旗标状态[如果该参数为0，则清空目标的该旗标的EndEvent状态，如果参数为1，则设置该旗标为EndEvent状态]
+---@param value number 0|1 设置的目标旗标状态[如果该参数为0，则清空目标的该旗标的EndEvent状态，如果参数为1，则设置该旗标为EndEvent状态]
 function Char.EndEvent(charIndex, flag, value) end
 
 ---获取目标对象的EndEvent任务旗标。
