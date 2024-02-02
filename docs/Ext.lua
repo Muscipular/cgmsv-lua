@@ -49,6 +49,17 @@ function removeGlobalEvent(eventName, fnIndex, moduleName, extraSign) end
 ---@param fnIndex number 全局注册Index
 function removeGlobalEvent(eventName, fnIndex) end
 
+---@class OrderedCallback
+---@field order number
+---@field fn function
+---@field type string
+---@field index number
+
+---@return OrderedCallback|function
+---@param fn function
+---@param order number 越大越优先执行
+function OrderedCallback(fn, order) end
+
 ---将内容转换成string格式，带识别转义符功能
 ---@param s string|number
 ---@return string|nil @string格式内容 失败返回'null'

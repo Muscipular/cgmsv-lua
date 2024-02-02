@@ -1,4 +1,5 @@
 ---原地登陆
+---@class LoginModule: ModuleType
 local LoginModule = ModuleBase:createModule('loginGate')
 ---是否启用lua自定义登陆点
 local customLoginPoints = false;

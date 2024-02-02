@@ -34,29 +34,6 @@ function ModuleBase:createModule(name) end
 ---@field migrations MigrationData[]|nil
 ---@field callbacks {fn: function, fnIndex: number, key: string, extSign?:string}[]
 
-
----@alias DamageCalculateEventCallback fun(charIndex:CharIndex, defCharIndex:CharIndex, oriDamage:integer, damage:integer, battleIndex:BattleIndex, com1:integer, com2:integer, com3:integer, defCom1:integer, defCom2:integer, defCom3:integer, flg:integer):integer|void
----@class ModuleBase
----@param callbackKey 'DamageCalculateEvent'
----@param fn DamageCalculateEventCallback
----@return string fnKey, number cbIndex, number fnIndex
-function ModuleBase:regCallback(callbackKey, fn) end
-
----@alias ProtocalCallback fun(fd, head, data):integer|void
----@class ModuleBase
----@param callbackKey 'ProtocolOnRecv'
----@param fn ProtocalCallback
----@param head string
----@return string fnKey, number cbIndex, number fnIndex
-function ModuleBase:regCallback(callbackKey, fn, head) end
-
----@alias EnemyCommandEventCallback fun(battleIndex: BattleIndex, side: integer, slot: integer, action: 0|1):integer|void
----@class ModuleBase
----@param callbackKey 'EnemyCommandEvent'
----@param fn EnemyCommandEventCallback
----@return string fnKey, number cbIndex, number fnIndex
-function ModuleBase:regCallback(callbackKey, fn) end
-
 ---@param fn function
 ---@return string fnKey, number cbIndex, number fnIndex
 function ModuleBase:regCallback(fn) end
@@ -65,6 +42,12 @@ function ModuleBase:regCallback(fn) end
 ---@param fn function
 ---@return string fnKey, number cbIndex, number fnIndex
 function ModuleBase:regCallback(callbackKey, fn) end
+
+---@param callbackKey string
+---@param extSign string
+---@param fn function
+---@return string fnKey, number cbIndex, number fnIndex
+function ModuleBase:regCallback(callbackKey, fn, extSign) end
 
 ---@param name string
 ---@return ModulePart

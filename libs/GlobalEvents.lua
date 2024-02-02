@@ -278,12 +278,6 @@ local function takeCallbacks(eventName, extraSign, shouldInit)
   return nil;
 end
 
----@class OrderedCallback
----@field order number
----@field fn function
----@field type string
----@field index number
-
 ---@return OrderedCallback|function
 ---@param fn function
 ---@param order number 越大越优先执行

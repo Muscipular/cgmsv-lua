@@ -299,17 +299,20 @@ function Char.FeverStart(CharIndex) end
 function Char.FeverStop(CharIndex) end
 
 ---为对象index设置行走前事件的回调函数，对象在行走前会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
+---[@group Char.SetWalkPreEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPreCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetWalkPreEvent(Dofile,FuncName,CharIndex) end
 
 ---WalkPreEvent回调函数
+---[@group Char.SetWalkPreEvent]
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 ---@return number @返回1执行行走，返回0行走取消。
 function CharWalkPreCallBack(CharIndex) end
 
 ---为对象index设置行走后事件的回调函数，对象在行走后会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
+---[@group Char.SetWalkPostEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPostCallBack]
 ---@param CharIndex  number 设置的对象index。
@@ -317,21 +320,25 @@ function CharWalkPreCallBack(CharIndex) end
 function Char.SetWalkPostEvent(Dofile,FuncName,CharIndex) end
 
 ---WalkPostEvent回调函数
+---[@group Char.SetWalkPostEvent]
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 function CharWalkPostCallBack(CharIndex) end
 
 ---为对象index设置覆盖其他对象后事件的回调函数，对象在覆盖其他对象后会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
+---[@group Char.SetPostOverEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[PostOverEventCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetPostOverEvent(Dofile,FuncName,CharIndex) end
 
 ---PostOverEvent回调函数
+---[@group Char.SetPostOverEvent]
 ---@param CharIndex  number 下层的对象index，该值由Lua引擎传递给本函数。
 ---@param TargetCharIndex  number 上层的对象index，该值由Lua引擎传递给本函数。
 function PostOverEventCallBack(CharIndex, TargetCharIndex) end
 
 ---为对象index设置循环事件的回调函数，事件会每隔Interval时间循环触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
+---[@group Char.SetLoopEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharLoopCallBack]
 ---@param CharIndex  number 设置的对象index。
@@ -339,27 +346,32 @@ function PostOverEventCallBack(CharIndex, TargetCharIndex) end
 function Char.SetLoopEvent(Dofile,FuncName,CharIndex,Interval) end
 
 ---LoopEvent回调函数
+---[@group Char.SetLoopEvent]
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 function CharLoopCallBack(CharIndex) end
 
 ---为对象index设置对话开启事件的回调函数，对象在开启对话的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
+---[@group Char.SetTalkedEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPreCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetTalkedEvent(Dofile,FuncName,CharIndex) end
 
 ---TalkedEvent回调函数
+---[@group Char.SetTalkedEvent]
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。（一般是NPC）
 ---@param TalkerCharIndex  number 触发事件的对象index，该值由Lua引擎传递给本函数。（一般是玩家）
 function CharTalkedCallBack(CharIndex, TalkerCharIndex) end
 
 ---为对象index设置对话事件的回调函数，对象在进行对话交互的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
+---[@group Char.SetWindowTalkedEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWindowTalkedCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetWindowTalkedEvent(Dofile,FuncName,CharIndex) end
 
 ---WindoxTalkedEvent回调函数
+---[@group Char.SetWindowTalkedEvent]
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。（一般是NPC）
 ---@param TalkerCharIndex  number 触发事件的对象index，该值由Lua引擎传递给本函数。（一般是玩家）
 ---@param SeqNo  number 来源对话框的ID，该值与NLG.ShowWindowTalked中的定义应该对应。
@@ -368,23 +380,27 @@ function Char.SetWindowTalkedEvent(Dofile,FuncName,CharIndex) end
 function CharWindowTalkedCallBack(CharIndex, TalkerCharIndex,SeqNo,Select,Data) end
 
 ---为对象index设置丢弃道具事件的回调函数，对象在丢弃道具的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
+---[@group Char.SetItemPutEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharItemPutCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetItemPutEvent(Dofile,FuncName,CharIndex) end
 
 ---ItemPutEvent回调函数
+---[@group Char.SetItemPutEvent]
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。（一般是NPC）
 ---@param ItemIndex  number 被丢弃的道具index，该值由Lua引擎传递给本函数。（一般是玩家）
 function CharItemPutCallBack(CharIndex, ItemIndex) end
 
 ---疑似限时道具
+---[@group Char.SetWatchEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWatchCallBack]
 ---@param CharIndex  number 设置的对象index。
 function Char.SetWatchEvent(Dofile, FuncName, CharIndex) end
 
 ---WatchEvent回调函数
+---[@group Char.SetWatchEvent]
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。（一般是NPC）
 ---@param ItemIndex  number 被丢弃的道具index，该值由Lua引擎传递给本函数。（一般是玩家）
 function CharWatchCallBack(CharIndex, ItemIndex) end

@@ -53,6 +53,7 @@ function NLG.TalkToFloor(Map,Floor,TalkerIndex,Msg,FontColor,FontSize) end
 function NLG.UpChar(CharIndex) end
 
 ---生成并发送对话框
+---[@group NLG.ShowWindowTalked]
 ---@param ToIndex  number 接收对话框的目标的对象index。
 ---@param WinTalkIndex  number 生成对话框的目标的对象index，一般为NPC。
 ---@param WindowType  number 查阅附录对话框类型
@@ -68,6 +69,7 @@ function NLG.ShowWindowTalked(ToIndex,WinTalkIndex,WindowType,ButtonType,SeqNo,D
 ---@param SeqNo  number 来源对话框的ID，该值与NLG.ShowWindowTalked中的定义应该对应，该值由Lua引擎传递给本函数。
 ---@param Select  number 玩家所按下的按钮的值或选择框中的选项的值，该值由Lua引擎传递给本函数。
 ---@param Data  string 客户端所传递回来的值，这个值将根据不同的窗口类型而不同，该值由Lua引擎传递给本函数。
+---[@group NLG.ShowWindowTalked]
 function WindowTalkedCallBack(CharIndex, TargetCharIndex, SeqNo, Select, Data) end
 
 ---设置对象的动作
@@ -292,6 +294,7 @@ function NLG.SetCriticalDamageAddition(mode, val) end
 function NLG.DeleteCharacter(cdkey, dataPlaceNum) end
 
 ---删除角色，异步方法
+---[@group NLG.DeleteCharacter]
 ---@param cdkey number CdKey
 ---@param dataPlaceNum number 角色位置 0 左 1 右
 ---@param callback string 回调函数，参考[DeleteCharacterCallback]
@@ -299,6 +302,7 @@ function NLG.DeleteCharacter(cdkey, dataPlaceNum) end
 function NLG.DeleteCharacter(cdkey, dataPlaceNum, callback) end
 
 ---删除角色回调函数
+---[@group NLG.DeleteCharacter]
 ---@param cdkey number CdKey
 ---@param dataPlaceNum number 角色位置 0 左 1 右
 ---@param registerNumber number registerNumber

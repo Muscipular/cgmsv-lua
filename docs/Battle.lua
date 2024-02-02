@@ -20,6 +20,7 @@ function Battle.GetPlayIndex(BattleIndex, Slot) end
 function Battle.Encount(UpIndex, DownIndex, Data) end
 
 ---使用Lua脚本创建一个战斗，战斗创建后可自动调用Lua的DoFunc函数。
+---[@group Battle.PVE]
 ---@param CharIndex  number 遇敌玩家的对象index。
 ---@param CreatePtr  number 触发战斗的对象index。
 ---@param DoFunc  string|nil 战斗初始化接受后调用的Lua函数的名称，申明格式请参考[BattleInitCallBack]，如果不调用则填nil
@@ -28,6 +29,11 @@ function Battle.Encount(UpIndex, DownIndex, Data) end
 ---@param RandLv? number[] 战斗所出现的怪物队列的怪物等级波动数组（数组结构与EnemyIdAr结构应一一对应）
 ---@return number @返回负数表示失败，成功返回战斗index。
 function Battle.PVE(CharIndex, CreatePtr, DoFunc, EnemyIdAr, BaseLevelAr, RandLv) end
+
+---战斗初始化回调
+---[@group Battle.PVE]
+---@param BattleIndex number
+function BattleInitCallBack(BattleIndex) end
 
 ---创建PK战斗
 ---@param UpIndex  number 战斗一方的 对象index
@@ -74,6 +80,7 @@ function Battle.JoinBattle(CharIndex1, CharIndex2) end
 function Battle.ExitBattle(CharIndex) end
 
 ---为非PVP的战斗设置战斗胜利事件的回调函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
+---[@group Battle.SetWinEvent]
 ---@param DoFile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[PVEWinCallBack]
 ---@param BattleIndex  number 战斗index。
@@ -81,11 +88,13 @@ function Battle.ExitBattle(CharIndex) end
 function Battle.SetWinEvent(DoFile, FuncName, BattleIndex) end
 
 ---WinEvent回调函数
+---[@group Battle.SetWinEvent]
 ---@param BattleIndex  number 战斗index，该值由Lua引擎传递给本函数。
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 function PVEWinCallBack(BattleIndex, CharIndex) end
 
 ---为PVP的战斗设置战斗胜利事件的回调函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
+---[@group Battle.SetPVPWinEvent]
 ---@param DoFile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[PVPWinCallBack]
 ---@param BattleIndex  number 战斗index。
@@ -93,6 +102,7 @@ function PVEWinCallBack(BattleIndex, CharIndex) end
 function Battle.SetPVPWinEvent(DoFile, FuncName, BattleIndex) end
 
 ---PVPWinEvent回调函数
+---[@group Battle.SetPVPWinEvent]
 ---@param BattleIndex  number 战斗index，该值由Lua引擎传递给本函数。
 function PVPWinCallBack(BattleIndex) end
 

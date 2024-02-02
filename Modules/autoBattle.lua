@@ -1,3 +1,4 @@
+---@class AutoBattle: ModuleType
 local Module = ModuleBase:createModule('autoBattle')
 
 --local disCacheCom = {}

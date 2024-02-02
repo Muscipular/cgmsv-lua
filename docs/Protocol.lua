@@ -1,6 +1,7 @@
 ---@meta _
 
 ---创建一个指定封包接受到后触发的函数
+---[@group Protocol.OnRecv]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[OnRecvCallBack]
 ---@param PacketID  string 封包头
@@ -8,6 +9,7 @@
 function Protocol.OnRecv(Dofile, FuncName, PacketID) end
 
 ---OnRecv的回调函数
+---[@group Protocol.OnRecv]
 ---@param Fd  number 响应事件的对象的网络套接字ID，该值由Lua引擎传递给本函数，可以通过Protocol.GetCharByFd获取对应的玩家对象。
 ---@param Head  string 封包头
 ---@param Packet  string[] 封包内容。
