@@ -20,13 +20,13 @@
 14. charStatusExtend 动态附加属性
 
 ## 扩展事件/接口
-接口参考 [docs.lua](docs/docs.lua)
+接口参考 [接口参考](docs/readme.md)
 
 ## 版本&下载
-版本说明:
+### 版本说明:
 - 0.3.x: 适配cgmsv24.x, 稳定性较高
 - 0.2.x: 适配cgmsv21.2b, 稳定性一般
 - 0.1.x: 纯lua版，稳定性极低
 
-下载地址:
-[releases](releases)
+### 下载地址:
+[releases](https://github.com/Muscipular/cgmsv-lua/releases)
