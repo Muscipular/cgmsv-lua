@@ -372,7 +372,8 @@ function NL.RegMergeItemEvent(Dofile, InitFuncName) end
 ---@param SkillID  number 生產道具所用的技能ID，该值由Lua引擎传递给本函数。
 ---@param SkillLv  number 生產道具所用的技能等級，该值由Lua引擎传递给本函数。
 ---@param ItemIndex  number 生成出的道具的對象，如果為-1，則表示生成道具失敗，该值由Lua引擎传递给本函数。
-function MergeItemEventCallBack(CharIndex, SkillID, SkillLv, ItemIndex) end
+---@param jewelNo  number 宝石物品Id
+function MergeItemEventCallBack(CharIndex, SkillID, SkillLv, ItemIndex, jewelNo) end
 
 ---创建一个道具重叠触发的事件，这个道具重叠的意思是，在道具栏把一个道具拖向另一个道具会触发的事件。
 ---[@group NL.RegItemOverLapEvent]
