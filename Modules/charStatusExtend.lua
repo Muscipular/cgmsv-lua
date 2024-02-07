@@ -79,3 +79,5 @@ end
 function CharStatusExtend:onUnload()
   self:logInfo('unload');
 end
+
+return CharStatusExtend;
