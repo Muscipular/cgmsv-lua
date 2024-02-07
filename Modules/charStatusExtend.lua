@@ -1,4 +1,5 @@
----@class CharStatusExtend:ModuleType
+---@class CharStatusExtend : ModuleType
+
 local CharStatusExtend = ModuleBase:createModule('charStatusExtend')
 
 local Allow = {
