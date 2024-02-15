@@ -15,14 +15,34 @@ function Map.FindDungeonEntry(dungeonId) end
 
 ---获取迷宫的过期时间
 ---@param dungeonId number 迷宫id
----@return number @过期时间，单位秒
+---@return number @过期时间
 function Map.GetDungeonExpireAtByDungeonId(dungeonId) end
 
 ---根据迷宫Id设置迷宫重置时间
 ---@param dungeonId number 迷宫id
 ---@param time number UnixTime
----@return number @过期时间，单位秒
+---@return number @过期时间
 function Map.SetDungeonExpireAtByDungeonId(dungeonId, time) end
+
+---获取迷宫的过期时间
+---@param dungeonId number 迷宫id
+---@return number @过期时间，单位秒
+function Map.GetDungeonExpireTimeByDungeonId(dungeonId) end
+
+---获取迷宫的过期时间
+---@param floor number floor
+---@return number @过期时间，单位秒
+function Map.GetDungeonExpireTime(floor) end
+
+---设置迷宫的过期时间
+---@param floor number floor
+---@param time number 时间
+function Map.SetDungeonExpireAt(floor, time) end
+
+---获取迷宫的过期时间
+---@param floor number floor
+---@return number @过期时间
+function Map.GetDungeonExpireAt(floor) end
 
 ---获得地图位置的图档
 ---@param Map number 地图类型
