@@ -13,3 +13,4 @@ charset = gbk
 
 [*.lua]
 ij_lua_keep_simple_blocks_in_one_line = true
+indent_size = 2
