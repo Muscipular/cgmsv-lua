@@ -21,15 +21,15 @@ function Module:onBattleReset(charIndex)
   if Char.IsDummy(charIndex) then
     return
   end
-  local lpPool = tonumber(Field.Get(charIndex, 'LpPool')) or 0;
-  local fpPool = tonumber(Field.Get(charIndex, 'FpPool')) or 0;
+  local lpPool = tonumber(Char.GetExtData(charIndex, 'LpPool')) or 0;
+  local fpPool = tonumber(Char.GetExtData(charIndex, 'FpPool')) or 0;
   if lpPool <= 0 and fpPool <= 0 then
     return
   end
-  local lp = Char.GetData(charIndex, CONST.CHAR_血)
-  local maxLp = Char.GetData(charIndex, CONST.CHAR_最大血)
-  local fp = Char.GetData(charIndex, CONST.CHAR_魔)
-  local maxFp = Char.GetData(charIndex, CONST.CHAR_最大魔)
+  local lp = Char.GetData(charIndex, CONST.CHAR_血)  --[[@as number]]
+  local maxLp = Char.GetData(charIndex, CONST.CHAR_最大血)  --[[@as number]]
+  local fp = Char.GetData(charIndex, CONST.CHAR_魔)  --[[@as number]]
+  local maxFp = Char.GetData(charIndex, CONST.CHAR_最大魔) --[[@as number]]
   if lpPool > 0 and lp < maxLp then
     lpPool = lpPool - maxLp + lp;
     if lpPool < 0 then
@@ -56,10 +56,10 @@ function Module:onBattleReset(charIndex)
   local petIndex = Char.GetData(charIndex, CONST.CHAR_战宠);
   if petIndex >= 0 then
     petIndex = Char.GetPet(charIndex, petIndex);
-    lp = Char.GetData(petIndex, CONST.CHAR_血)
-    maxLp = Char.GetData(petIndex, CONST.CHAR_最大血)
-    fp = Char.GetData(petIndex, CONST.CHAR_魔)
-    maxFp = Char.GetData(petIndex, CONST.CHAR_最大魔)
+    lp = Char.GetData(petIndex, CONST.CHAR_血)  --[[@as number]]
+    maxLp = Char.GetData(petIndex, CONST.CHAR_最大血)  --[[@as number]]
+    fp = Char.GetData(petIndex, CONST.CHAR_魔)  --[[@as number]]
+    maxFp = Char.GetData(petIndex, CONST.CHAR_最大魔)  --[[@as number]]
     if lpPool > 0 and lp < maxLp then
       lpPool = lpPool - maxLp + lp;
       if lpPool < 0 then
@@ -84,8 +84,8 @@ function Module:onBattleReset(charIndex)
     Char.SetData(petIndex, CONST.CHAR_魔, maxFp)
     NLG.UpChar(petIndex);
   end
-  Field.Set(charIndex, 'LpPool', tostring(lpPool));
-  Field.Set(charIndex, 'FpPool', tostring(fpPool));
+  Char.SetExtData(charIndex, 'LpPool', lpPool);
+  Char.SetExtData(charIndex, 'FpPool', fpPool);
 end
 
 function Module:onSellerTalked(npc, player)
@@ -97,8 +97,8 @@ end
 
 function Module:onSellerSelected(npc, player, seqNo, select, data)
   local items = string.split(data, '|');
-  local lpPool = tonumber(Field.Get(player, 'LpPool')) or 0;
-  local fpPool = tonumber(Field.Get(player, 'FpPool')) or 0;
+  local lpPool = tonumber(Char.GetExtData(player, 'LpPool')) or 0;
+  local fpPool = tonumber(Char.GetExtData(player, 'FpPool')) or 0;
   local gold = Char.GetData(player, CONST.CHAR_金币)
   local totalGold = 0;
   local totalLp = 0;
@@ -120,8 +120,8 @@ function Module:onSellerSelected(npc, player, seqNo, select, data)
     return
   end
   Char.AddGold(player, -totalGold);
-  Field.Set(player, 'LpPool', tostring(lpPool + totalLp));
-  Field.Set(player, 'FpPool', tostring(fpPool + totalFp));
+  Char.SetExtData(player, 'LpPool', lpPool + totalLp);
+  Char.SetExtData(player, 'FpPool', fpPool + totalFp);
   NLG.UpChar(player);
   if totalLp > 0 then
     NLG.SystemMessage(player, '[血魔池] 补充血池: ' .. totalLp .. ', 共: ' .. (lpPool + totalLp));
