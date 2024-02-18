@@ -103,7 +103,7 @@ if Item.GetTimeLimit == nil then
   ---@param CharIndex number
   ---@param ItemIndex number
   function Item.GetTimeLimit(CharIndex, ItemIndex)
-    local mode = Item.SetData(ItemIndex, CONST.道具_TIMELIMIT);
+    local mode = Item.GetData(ItemIndex, CONST.道具_TIMELIMIT);
     local slot = Item.GetSlot(CharIndex, ItemIndex)
     if slot < 0 then
       return nil;
@@ -113,7 +113,7 @@ if Item.GetTimeLimit == nil then
       mode = Item.GetData(ItemIndex, CONST.道具_TIMELIMIT);
     end
     if mode == 1 then
-      local Time = Item.SetData(ItemIndex, CONST.道具_ENDTIME);
+      local Time = Item.GetData(ItemIndex, CONST.道具_ENDTIME);
       return Time - os.time();
     end
     return nil;
