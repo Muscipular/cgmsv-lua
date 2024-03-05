@@ -276,3 +276,15 @@ function Battle.GetExtData(battleIndex, dataIndex) end
 ---@param val string|number|nil @获得指定位置的字符串
 function Battle.SetExtData(battleIndex, dataIndex, val) end
 
+---设置当前对象的战斗状态
+---@param CharIndex number 目标的 对象index。
+---@param Status number 状态类型 详见战属常量
+---@param Val number 设定指定位置的属性
+---@return number @失败返回-1，否则返回对应的值
+function Battle.SetBattleCharacterStatus(CharIndex, Status, Val) end
+
+---获取当前对象的战斗状态
+---@param CharIndex number 目标的 对象index。
+---@param Status number 状态类型 详见战属常量
+---@return number @失败返回-1，否则返回对应的值
+function Battle.GetBattleCharacterStatus(CharIndex, Status) end

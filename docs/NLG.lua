@@ -313,3 +313,13 @@ function DeleteCharacterCallback(cdkey, dataPlaceNum, registerNumber, result) en
 ---@param charIndex number npc的对象索引，一般为NL.CreateArgNpc的返回值
 ---@return string @返回NPC参数
 function NLG.GetArgNpc(charIndex) end
+
+---获取迷宫的剩余时间
+---@param dungeonId number 迷宫id
+---@return number @剩余时间
+function NLG.GetDungeonLimit(dungeonId) end
+
+---调整角色面，可以激活npc
+---@param charIndex number 目标的 对象index
+---@param dir number 面向0~7
+function NLG.CharLook(charIndex, dir) end

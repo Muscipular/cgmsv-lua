@@ -1085,18 +1085,18 @@ function NL.RegItemBoxEncountEvent(Dofile, InitFuncName) end
 function ItemBoxEncountCallback(charaIndex, mapId, floor, X, Y, itemIndex) end
 
 ---创建一个种族伤害比率事件
----[@group NL.RegItemTribeRateEvent]
+---[@group NL.RegTribeRateEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
-function NL.RegItemTribeRateEvent(Dofile, InitFuncName) end
+function NL.RegTribeRateEvent(Dofile, InitFuncName) end
 
 ---ItemTribeRateEvent的回调函数
----[@group NL.RegItemTribeRateEvent]
+---[@group NL.RegTribeRateEvent]
 ---@param a number 进攻种族
 ---@param b number 防守种族
 ---@param rate number 克制比率
 ---@return number @返回新的克制比率
-function ItemTribeRateCallback(a, b, rate) end
+function TribeRateCallback(a, b, rate) end
 
 ---创建一个Http请求事件
 ---[@group NL.RegHttpRequestEvent]
@@ -1336,4 +1336,44 @@ function NL.RegBattleCalcDexEvent(Dofile, InitFuncName) end
 ---@param dex number 行动优先级
 ---@return number @返回修改后的dex
 function BattleCalcDexEventCallback(battleIndex, charaIndex, action, flg, dex) end
+
+
+---创建一个所有玩家丢弃道具之前就会触发的Lua函数。
+---[@group NL.RegPreItemDropEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegPreItemDropEvent(Dofile, InitFuncName) end
+
+---PreItemDropEvent的回调函数
+---[@group NL.RegPreItemDropEvent]
+---@param CharIndex  number 道具所有者的对象index，该值由Lua引擎传递给本函数。
+---@param ItemIndex  number 响应事件的道具Index，该值由Lua引擎传递给本函数。
+---@return any @返回值小于0则拦截丢弃,返回大于等于0则正常丢弃。
+function PreItemDropCallBack(CharIndex, ItemIndex) end
+
+
+---创建一个所有玩家成功拾取道具之前就会触发的Lua函数。
+---[@group NL.RegPreItemPickUpEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegPreItemPickUpEvent(Dofile, InitFuncName) end
+
+---PreItemPickUpEvent的回调函数
+---[@group NL.RegPreItemPickUpEvent]
+---@param CharIndex  number 道具所有者的对象index，该值由Lua引擎传递给本函数。
+---@param ItemIndex  number 响应事件的道具Index，该值由Lua引擎传递给本函数。
+---@return any @返回值小于0则拦截拾取,返回大于等于0则正常拾取。
+function PreItemPickUpCallBack(CharIndex, ItemIndex) end
+
+
+---删除用Lua创建的NPC，需要注意的是，删除NPC后本函数不会将NpcIndex的值设置为nil，请在函数后自行处理NpcIndex的值。
+---@param NpcIndex  number 要删除的Npc的对象指针
+---@return number @创建成功则返回 1, 失败则返回 0
+function NL.DelArgNpc(NpcIndex) end
+
+
+---获取引擎版本
+---@return string @cgmsv
+function NL.Ver() end
+
 
