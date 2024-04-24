@@ -85,7 +85,9 @@ function ModuleBase:addMigration(version, name, value)
   table.insert(migrations, { version = version, name = name, value = value });
 end
 
----@param eventName string
+---@alias EventName string|"ProtocolOnRecv"|"EnemyCommandEvent"|"BattleCalcDexEvent"|"ItemInitEvent"|"CheckDummyDollEvent"|"ItemUseEvent"|"ItemAttachEvent"|"ItemDetachEvent"|"ResetCharaBattleStateEvent"|"CharaSavedEvent"|"PetFieldEvent"|"BeforeCharaSaveEvent"|"CharaDeletedEvent"|"DamageCalculateEvent"|"ScriptCallEvent"|"DropRateEvent"|"LoginEvent"|"BattleEscapeEvent"|"LoginGateEvent"|"BattleSealRateEvent"|"LogoutEvent"|"CalcCriticalRateEvent"|"TalkEvent"|"BattleDodgeRateEvent"|"BattleCounterRateEvent"|"BattleMagicDamageRateEvent"|"BattleMagicRssRateEvent"|"ItemBoxGenerateEvent"|"LevelUpEvent"|"BattleStartEvent"|"ItemBoxLootEvent"|"BattleOverEvent"|"WarpEvent"|"AfterWarpEvent"|"ItemBoxEncountRateEvent"|"ItemBoxEncountEvent"|"TribeRateEvent"|"HttpRequestEvent"|"DropEvent"|"TitleChangedEvent"|"BattleHealCalculateEvent"|"GetExpEvent"|"BattleSkillExpEvent"|"ProductSkillExpEvent"|"PetLevelUpEvent"|"BattleExitEvent"|"PreItemPickUpEvent"|"RightClickEvent"|"PreItemDropEvent"|"BattleInjuryEvent"|"ShutDownEvent"|"ItemExpansionEvent"|"PartyEvent"|"TitleCheckCallEvent"|"SealEvent"|"RankUpEvent"|"TechOptionEvent"|"GatherItemEvent"|"BattleActionEvent"|"PetTimeDeleteEvent"|"ItemDropEvent"|"BattleSurpriseEvent"|"VSEnemyCreateEvent"|"ItemOverLapEvent"|"CharActionEvent"|"BattleSummonEnemyEvent"|"CalcFpConsumeEvent"|"MergeItemEvent"|"BattleActionTargetEvent"|"BattleSummonedEnemyEvent"|"BattleSkillCheckEvent"|"BattleNextEnemyEvent"|"ItemString"|"BattleLuaSkillEvent"|"BattleNextEnemyInitEvent"|"ItemPickUpEvent"|"BeforeBattleTurnEvent"|"GetLoginPointEvent"|"BeforeBattleTurnStartEvent"|"PetPickUpEvent"|"AfterBattleTurnEvent"|"ItemDurabilityChangedEvent"|"AfterCalcCharaBpEvent"|"HeadCoverEvent"|"AfterCalcCharaStatusEvent"|"PetDropEvent"|"StatusCalcEvent"|"BattleGetProfitEvent"
+
+---@param eventName EventName
 ---@param fn function
 ---@param extSign string
 ---@return string fnKey, number cbIndex, number fnIndex

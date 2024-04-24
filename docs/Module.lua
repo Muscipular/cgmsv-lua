@@ -38,12 +38,12 @@ function ModuleBase:createModule(name) end
 ---@return string fnKey, number cbIndex, number fnIndex
 function ModuleBase:regCallback(fn) end
 
----@param callbackKey string
+---@param callbackKey EventName
 ---@param fn function
 ---@return string fnKey, number cbIndex, number fnIndex
 function ModuleBase:regCallback(callbackKey, fn) end
 
----@param callbackKey string
+---@param callbackKey EventName
 ---@param extSign string
 ---@param fn function
 ---@return string fnKey, number cbIndex, number fnIndex
