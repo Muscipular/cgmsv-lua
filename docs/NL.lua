@@ -1365,6 +1365,21 @@ function NL.RegPreItemPickUpEvent(Dofile, InitFuncName) end
 ---@return any @返回值小于0则拦截拾取,返回大于等于0则正常拾取。
 function PreItemPickUpCallBack(CharIndex, ItemIndex) end
 
+---创建一个所有玩家成功拾取道具之前就会触发的Lua函数。
+---[@group NL.RegItemConsumeEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegItemConsumeEvent(Dofile, InitFuncName) end
+
+---ItemConsumeEvent的回调函数
+---[@group NL.RegItemConsumeEvent]
+---@param charIndex  number 道具所有者的对象index，该值由Lua引擎传递给本函数。
+---@param itemIndex  number 响应事件的道具Index，该值由Lua引擎传递给本函数。
+---@param slot  number 响应事件的道具的位置，该值由Lua引擎传递给本函数。
+---@param amount  number 响应事件的道具的消费数量，该值由Lua引擎传递给本函数。
+---@return number @消费数量
+function ItemConsumeEventCallback(charIndex, itemIndex, slot, amount) end
+
 
 ---删除用Lua创建的NPC，需要注意的是，删除NPC后本函数不会将NpcIndex的值设置为nil，请在函数后自行处理NpcIndex的值。
 ---@param NpcIndex  number 要删除的Npc的对象指针
