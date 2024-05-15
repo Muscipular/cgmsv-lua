@@ -1365,7 +1365,7 @@ function NL.RegPreItemPickUpEvent(Dofile, InitFuncName) end
 ---@return any @返回值小于0则拦截拾取,返回大于等于0则正常拾取。
 function PreItemPickUpCallBack(CharIndex, ItemIndex) end
 
----创建一个所有玩家成功拾取道具之前就会触发的Lua函数。
+---创建一个玩家在战斗中使用物品时会触发的Lua函数。
 ---[@group NL.RegItemConsumeEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
