@@ -1064,8 +1064,10 @@ function NL.RegItemBoxEncountRateEvent(Dofile, InitFuncName) end
 ---@param X number
 ---@param Y number
 ---@param itemIndex number 箱子物品index
+---@param rate number 遇敌率
+---@param boxType number 箱子id
 ---@return number @遇敌概率
-function ItemBoxEncountRateEventCallback(charaIndex, mapId, floor, X, Y, itemIndex) end
+function ItemBoxEncountRateEventCallback(charaIndex, mapId, floor, X, Y, itemIndex, rate, boxType) end
 
 ---创建一个宝箱遇敌的事件
 ---[@group NL.RegItemBoxEncountEvent]
