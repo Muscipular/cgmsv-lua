@@ -848,8 +848,8 @@ function NL.RegResetCharaBattleStateEvent(Dofile, InitFuncName) end
 
 ---ResetCharaBattleStateEvent的回调函数
 ---[@group NL.RegResetCharaBattleStateEvent]
----@param battleIndex number 战斗的index
-function ResetCharaBattleStateCallBack(battleIndex) end
+---@param charIndex number 角色的index
+function ResetCharaBattleStateCallBack(charIndex) end
 
 ---创建一个角色保存后触发的事件
 ---[@group NL.RegCharaSavedEvent]
