@@ -529,7 +529,7 @@ function Char.DelItemBySlot(charIndex, slot) end
 ---@param fromSlot number 移动那个物品，取值0-27
 ---@param toSlot number 移动到那个位置, 取值0-27
 ---@param amount number 数量，整体移动取值可为-1
----@return number @成功返回0
+---@return number @成功返回1
 function Char.MoveItem(charIndex, fromSlot, toSlot, amount) end
 
 ---查询角色身上金币数量
