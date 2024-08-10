@@ -53,7 +53,7 @@ function Char.AddGold(charIndex, amount) end
 ---@param CharIndex number 目标的 对象index。
 ---@param ItemID number 道具ID。
 ---@param Amount number 道具的数量。
----@param ShowMsg? boolean 是否显示系统信息
+---@param ShowMsg? number 是否显示系统信息
 ---@return number @成功返回1，失败则返回0。
 function Char.DelItem(CharIndex, ItemID, Amount, ShowMsg) end
 
@@ -61,7 +61,7 @@ function Char.DelItem(CharIndex, ItemID, Amount, ShowMsg) end
 ---@param CharIndex number 目标的 对象index。
 ---@param ItemID number 道具ID。
 ---@param Amount number 道具的数量。
----@param ShowMsg? boolean 是否显示系统信息
+---@param ShowMsg? number 是否显示系统信息
 ---@return number @目标道具index，失败则返回负数。
 function Char.GiveItem(CharIndex, ItemID, Amount, ShowMsg) end
 
@@ -176,14 +176,14 @@ function Char.GetNextExp(CharIndex) end
 ---@param CharIndex  number 目标的 对象index。
 ---@param SkillID  number 技能的ID，对应Skill.txt的id。
 ---@param SkillExp?  number 技能的初始经验值，如果不写则为0。
----@param ShowMsg?  boolean 是否显示系统信息。
+---@param ShowMsg?  number 是否显示系统信息。
 ---@return number @如果成功则返回增加的技能栏的位置，范围0-14，如果失败则返回-1，参数数据类型不对返回-2，对象index无效返回-3，技能的ID错误返回-4。
 function Char.AddSkill(CharIndex,SkillID,SkillExp,ShowMsg) end
 
 ---删除目标玩家的指定技能。
 ---@param CharIndex  number 目标的 对象index。
 ---@param SkillID  number 技能的ID，对应Skill.txt的id。
----@param ShowMsg?  boolean 是否显示系统信息。
+---@param ShowMsg?  number 是否显示系统信息。
 ---@return number @如果成功删除技能则返回该技能原本的技能栏的位置，范围0-14，如果失败则返回-1。 |  | 如果玩家没有该技能，也返回-1。 |  | 参数数据类型不对返回-2，对象index无效返回-3，技能的ID错误返回-4。
 function Char.DelSkill(CharIndex,SkillID,ShowMsg) end
 
@@ -227,7 +227,7 @@ function Char.GetSkillExp(CharIndex,Slot) end
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，可用Char.HaveSkill来获取位置。
 ---@param Level  number 新的技能等级。
----@param ShowMsg?  boolean 是否显示系统信息。
+---@param ShowMsg?  number 是否显示系统信息。
 ---@return number @成功返回新技能等级,失败返回-1，传入的参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4，传入的新等级小于1则返回-5。
 function Char.SetSkillLevel(CharIndex,Slot,Level,ShowMsg) end
 
@@ -235,7 +235,7 @@ function Char.SetSkillLevel(CharIndex,Slot,Level,ShowMsg) end
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，可用Char.HaveSkill来获取位置。
 ---@param EXP  number 新的技能经验。
----@param ShowMsg?  boolean 是否显示系统信息。
+---@param ShowMsg?  number 是否显示系统信息。
 ---@return number @成功返回新的技能经验,失败返回-1，传入的参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4，传入的新经验小于1则返回-5。
 function Char.SetSkillExp(CharIndex,Slot,EXP,ShowMsg) end
 
