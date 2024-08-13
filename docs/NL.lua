@@ -1194,9 +1194,9 @@ function NL.RegGatherItemEvent(Dofile, InitFuncName) end
 ---@param charIndex number 角色的index
 ---@param skillId number 技能id
 ---@param skillLv number 技能等级
----@param itemNo number 采集物Id,参考itemset.txt
+---@param itemId number 采集物Id,参考itemset.txt
 ---@return number @返回采集物的Id，参考itemset.txt | 不写返回值时采集为默认结果
-function GatherItemEventCallback(charIndex, skillId, skillLv, itemNo) end
+function GatherItemEventCallback(charIndex, skillId, skillLv, itemId) end
 
 ---在玩家遇敌的时候触发，可以通过这个接口来修改遇敌的队列和数量。
 ---[@group NL.RegVSEnemyCreateEvent]
@@ -1207,11 +1207,11 @@ function NL.RegVSEnemyCreateEvent(Dofile, InitFuncName) end
 ---VSEnemyCreateEvent的回调函数
 ---[@group NL.RegVSEnemyCreateEvent]
 ---@param CharIndex number 响应事件的对象index，该值由Lua引擎传递给本函数
----@param GroupIndex number 响应事件的战斗遇敌group ID，该值由Lua引擎传递给本函数。
+---@param GroupId number 响应事件的战斗遇敌group ID，对应group.txt。
 ---@param EnemyNum number 响应事件的战斗遇敌数量，该值由Lua引擎传递给本函数。
 ---@param EnemyList number[] 响应事件的战斗遇敌队列，该值由Lua引擎传递给本函数。
 ---@return number[] @返回新的遇敌队列即可，如无修改返回EnemyList或其他非Table类值即可。
-function VSEnemyCreateEventCallback(CharIndex, GroupIndex, EnemyNum, EnemyList) end
+function VSEnemyCreateEventCallback(CharIndex, GroupId, EnemyNum, EnemyList) end
 
 ---玩家攻击时触发，可以修改攻击目标（乱射、连击等）。
 ---[@group NL.RegBattleActionTargetEvent]
