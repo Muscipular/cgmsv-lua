@@ -125,3 +125,24 @@ function Data.GetJobAncestryData(jobAncestryIndex, dataPos) end
 ---@return number @成功返回0
 function Data.SetJobAncestryData(jobAncestryIndex, dataPos, data) end
 
+
+---获得groupIndex
+---@param groupId number group.txt中的id
+---@return number @groupIndex
+function Data.GetEncountGroupIndex(groupId) end
+
+
+---获得group数据
+---@param groupIndex number groupIndex
+---@param dataline number CONST.ENCOUNT_GROUP_*
+---@return number|string @数据 
+function Data.GetEncountGroupData(groupIndex, dataline) end
+
+
+---设置group数据
+---@param groupIndex number groupIndex
+---@param dataline number CONST.ENCOUNT_GROUP_*
+---@param val number|string 数据
+---@return number @成功返回0
+function Data.SetEncountGroupData(groupIndex, dataline, val) end
+
