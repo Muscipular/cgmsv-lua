@@ -1394,3 +1394,54 @@ function NL.DelArgNpc(NpcIndex) end
 function NL.Ver() end
 
 
+---摆摊有物品交易成功时触发的事件。
+---[@group NL.RegCharaStallSoldEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegCharaStallSoldEvent(Dofile, InitFuncName) end
+
+---CharaStallSoldEvent的回调函数
+---[@group NL.RegCharaStallSoldEvent]
+---@param buyer  number 购买者的对象index，该值由Lua引擎传递给本函数。
+---@param seller  number 售卖者的对象index，该值由Lua引擎传递给本函数。
+---@param itemIndex  number 售出道具Index，该值由Lua引擎传递给本函数。
+---@param petIndex  number 售出宠物Index，该值由Lua引擎传递给本函数。
+---@param price  number 响应事件的道具的消费数量，该值由Lua引擎传递给本函数。
+function CharaStallSoldEventCallback(buyer, seller, itemIndex, petIndex, price) end
+
+
+---摆摊开始事件
+---[@group NL.RegCharaStallStartEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegCharaStallStartEvent(Dofile, InitFuncName) end
+
+---CharaStallStartEvent的回调函数
+---[@group NL.RegCharaStallStartEvent]
+---@param seller  number 售卖者的对象index，该值由Lua引擎传递给本函数。
+function CharaStallStartEventCallback(seller) end
+
+
+---摆摊结束事件
+---[@group NL.RegCharaStallEndEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegCharaStallEndEvent(Dofile, InitFuncName) end
+
+---CharaStallEndEvent的回调函数
+---[@group NL.RegCharaStallEndEvent]
+---@param seller  number 售卖者的对象index，该值由Lua引擎传递给本函数。
+function CharaStallEndEventCallback(seller) end
+
+
+---摆摊浏览事件
+---[@group NL.RegCharaStallBrowseEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegCharaStallBrowseEvent(Dofile, InitFuncName) end
+
+---CharaStallBrowseEvent的回调函数
+---[@group NL.RegCharaStallBrowseEvent]
+---@param buyer  number 购买者的对象index，该值由Lua引擎传递给本函数。
+---@param seller  number 售卖者的对象index，该值由Lua引擎传递给本函数。
+function CharaStallBrowseEventCallback(buyer,seller) end
