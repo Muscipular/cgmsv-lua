@@ -387,7 +387,7 @@ function NL.RegItemOverLapEvent(Dofile, InitFuncName) end
 ---@param FromItemIndex  number 被选中的道具的对象，该值由Lua引擎传递给本函数。
 ---@param TargetItemIndex  number 被覆盖的道具的对象，该值由Lua引擎传递给本函数。
 ---@param Num  number 被选中的道具的数量，该值由Lua引擎传递给本函数
----@return number @如果有操作则返回非0值，否则返回0（执行移动道具的操作）
+---@return number @返回1或少于0时拦截，返回0时正常移动
 function ItemOverLapEventCallBack(CharIndex, FromItemIndex, TargetItemIndex, Num) end
 
 ---创建一个用户登录的时候获取登陆点信息触发的事件，这个事件可以替代Login事件中的原地登陆功能，只需要在Callback中直接设置对象的坐标等信息即可，无需warp。

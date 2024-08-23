@@ -58,3 +58,12 @@ function Pet.GetSkill(PetIndex, SkillSlot) end
 ---@return string @返回的结果是字符串 | 返回"-1"表示非宠物或无法获取，否则为宠物全局唯一标识。
 function Pet.GetUUID(PetIndex) end
 
+
+---移动宠物装备
+---@param charIndex number 目标对象index。
+---@param fromPetSlot number 0=玩家,1-5为宠物栏位
+---@param fromItemSlot number 道具栏位置
+---@param toPetSlot number  0=玩家,1-5为宠物栏位
+---@param toItemSlot number 道具栏位置
+function Pet.MoveItem(charIndex, fromPetSlot, fromItemSlot, toPetSlot, toItemSlot) end
+
