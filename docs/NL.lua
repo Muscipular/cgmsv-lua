@@ -1283,7 +1283,7 @@ function SKLFunc() end
 ---发送伤害封包
 ---[@group NL.RegBattleLuaSkillEvent]
 ---@param pos number 目标位置
----@param flg number 攻击效果旗标
+---@param flg number 攻击效果旗标，参考CONST.TECH_CONST.BM_FLAG_XXX
 ---@param dmg number 伤害/治疗数值
 function DMGFunc(pos, flg, dmg) end
 
