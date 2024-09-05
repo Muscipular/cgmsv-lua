@@ -672,3 +672,17 @@ function Char.GetMyRoomFloor(charIndex) end
 ---@param skillNo number 图标旗标，取值0~15
 ---@return number @成功返回0
 function Char.SetSkillAction(charIndex,?skillNo) end
+
+---获取技能显示顺序
+---@param charIndex number 对象的index
+---@param slot number 技能实际位置，范围0-14
+---@return @seq 技能显示位置，范围1-15
+function Char.GetSkillSeqNo(charIndex, slot) end
+
+---设置技能显示顺序
+---@param charIndex number 对象的index
+---@param slot number 技能实际位置，范围0-14
+---@param seq number 技能显示位置，范围1-15
+---@param msg number 是否显示系统信息
+---@return @seq 技能显示位置，范围1-15
+function Char.SetSkillSeqNo(charIndex, slot, seq, msg) end
