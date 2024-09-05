@@ -68,7 +68,7 @@ function AssetsPart:parseFile(name, mode) end
 function AssetsPart:parseFile(name) end
 
 ---@class CharaWrapper: {[number]: string|number|nil}
----@field charaIndex number
+---@field public charaIndex number
 CharaWrapper = {};
 
 ---@class CharPart: ModulePart
