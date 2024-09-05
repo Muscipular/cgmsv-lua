@@ -55,6 +55,33 @@ function CharaWrapper:setExtData(field, value)
     return Char.SetExtData(charaIndex, field, value);
 end
 
+---@param npc number
+---@param data string
+---@param opt? {type?:number, button?:number, seqNo?: number, windowBuffer1?:number, windowBuffer2?:number, windowBuffer3?:number}
+---@return number
+function CharaWrapper:ShowWindowTalked(npc, data, opt)
+    local charaIndex = self.charaIndex;
+    if type(opt) ~= 'table' then
+        opt = {
+            type = CONST.窗口_信息框,
+            button = CONST.BUTTON_确认,
+            seqNo = 0,
+            windowBuffer1 = 0,
+            windowBuffer2 = 0,
+            windowBuffer3 = 0,
+        }
+    end
+    self[CONST.对象_WindowBuffer1] = opt.windowBuffer1 or 0;
+    self[CONST.对象_WindowBuffer2] = opt.windowBuffer2 or 0;
+    self[CONST.对象_WindowBuffer3] = opt.windowBuffer3 or 0;
+    return NLG.ShowWindowTalked(charaIndex,
+        npc,
+        opt.type or CONST.窗口_信息框,
+        opt.button or CONST.BUTTON_确认,
+        opt.seqNo or 0,
+        data or "");
+end
+
 ---包装CharaIndex
 ---@param charaIndex CharIndex
 ---@return CharaWrapper|{[number]:string|number|nil}
