@@ -52,5 +52,6 @@
     "Lua.hint.semicolon": "Disable",
     "Lua.runtime.plugin": ".vscode/Const.lua",
     "Lua.completion.showParams": true,
-    "Lua.hint.setType": false
+    "Lua.hint.setType": false,
+    "editor.codeLens": false
 }

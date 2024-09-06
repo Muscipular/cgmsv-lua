@@ -6,6 +6,10 @@ local BagSwitch = ModuleBase:createModule('bagSwitch');
 local MENU = 0;
 local BAG_LIST = 1;
 local ITEM_MOVE = 1000;
+local SHOW_ITEM_LIST = 10;
+local ITEM_PAGE_SIZE = 20;
+local EQUIP_NUM = 8;
+local IPAGE_NUM = 8;
 
 --- 加载模块钩子
 function BagSwitch:onLoad()
@@ -38,7 +42,7 @@ end
 function BagSwitch:OpenMenu(charIndex)
     local ch = self:Chara(charIndex);
     ch[CONST.对象_WindowBuffer2] = 1;
-    local menu = self:NPC_buildSelectionText("背包管理 ", {
+    local menu = self:NPC_buildSelectionText("背包管理", {
         "切换背包",
         "移动物品"
     })
@@ -57,6 +61,12 @@ function BagSwitch:onWindowTalked(npc, player, seqNo, btnClick, line)
     if seqNo == BAG_LIST then
         self:onSwitchBag(ch, line, btnClick);
     end
+    if seqNo == ITEM_MOVE then
+        self:onSwitchBag(ch, line, btnClick);
+    end
+    if seqNo == BAG_LIST2 then
+        self:onSelectedMoveBag(ch, line, btnClick);
+    end
 end
 
 ---@param ch CharaWrapper
@@ -65,7 +75,13 @@ end
 function BagSwitch:onMenu(ch, selection, buttonClick)
     if selection == 1 then
         ch:ShowWindowTalked(self.dummyNPC,
-            self:NPC_buildSelectionText("选择背包", { "1", "2", "3", "4" }),
+            self:NPC_buildSelectionText(NLG.c("选择背包"),
+                {
+                    NLG.c("1号背包"),
+                    NLG.c("2号背包"),
+                    NLG.c("3号背包"),
+                    NLG.c("4号背包"),
+                }),
             {
                 button = CONST.BUTTON_关闭,
                 type = CONST.窗口_选择框,
@@ -103,6 +119,84 @@ end
 ---@param selection number
 ---@param buttonClick number
 function BagSwitch:onMoveItem(ch, selection, buttonClick)
+    local iPage = ch[CONST.对象_WindowBuffer2] --[[@as number]];
+    if buttonClick == CONST.BUTTON_上一页 then
+        iPage = math.max(0, iPage - 1);
+        selection = SHOW_ITEM_LIST;
+    elseif buttonClick == CONST.BUTTON_下一页 then
+        iPage = math.min(2, iPage + 1);
+        selection = SHOW_ITEM_LIST;
+    elseif buttonClick == -1 then
+        -- ignore this
+    else
+        return
+    end
+
+    if selection > 0 and selection ~= SHOW_ITEM_LIST then
+        selection = selection - 1;
+    end
+    if selection < 0 then
+        return
+    end
+
+    local cur = Char.GetBagPage(ch.charaIndex);
+
+    if selection == SHOW_ITEM_LIST then
+        local pageSlotMap = {
+            { 1,  2,  3,  4,  5,  6,  7,  8, },
+            { 9,  10, 11, 12, 13, 14, 15, 16, },
+            { 17, 18, 19, 20, },
+        }
+        local buttonMap = {
+            CONST.BUTTON_下取消,
+            CONST.BUTTON_上下取消,
+            CONST.BUTTON_上取消,
+        }
+        local menuList = {};
+        for _, value in ipairs(pageSlotMap[iPage + 1]) do
+            local itemIndex = Char.GetItemIndex(ch.charaIndex, cur * ITEM_PAGE_SIZE + EQUIP_NUM + value - 1);
+            local itemName = "- [空] -"
+            if itemIndex >= 0 then
+                itemName = string.format("%s x %d",
+                    Item.GetData(itemIndex, CONST.道具_名字),
+                    Item.GetData(itemIndex, CONST.道具_堆叠数)
+                );
+            end
+            table.insert(menuList, NLG.c(itemName));
+        end
+        ch:ShowWindowTalked(self.dummyNPC, self:NPC_buildSelectionText(
+            NLG.c("选择物品"),
+            menuList), {
+            type = CONST.窗口_选择框,
+            seqNo = ITEM_MOVE,
+            windowBuffer2 = 0,
+            button = buttonMap[iPage + 1],
+        })
+        return
+    end
+    if selection >= 0 then
+        ch:ShowWindowTalked(self.dummyNPC,
+            self:NPC_buildSelectionText(NLG.c("选择背包"),
+                {
+                    NLG.c("1号背包"),
+                    NLG.c("2号背包"),
+                    NLG.c("3号背包"),
+                    NLG.c("4号背包"),
+                }),
+            {
+                button = CONST.BUTTON_关闭,
+                type = CONST.窗口_选择框,
+                seqNo = BAG_LIST2,
+                windowBuffer2 = selection + iPage * IPAGE_NUM,
+            })
+        return
+    end
+end
+
+---@param ch CharaWrapper
+---@param selection number
+---@param buttonClick number
+function BagSwitch:onSelectedMoveBag(ch, selection, buttonClick)
     if buttonClick == CONST.BUTTON_关闭 or buttonClick == CONST.BUTTON_否 then
         return
     end
@@ -110,10 +204,13 @@ function BagSwitch:onMoveItem(ch, selection, buttonClick)
     if selection < 0 then
         return
     end
-    
-    if selection == 10 then
-        local iPage = ch[CONST.对象_WindowBuffer2];
-        Char.GetItemIndex()
+    local cur = Char.GetBagPage(ch.charaIndex);
+    local itemSelection = ch[CONST.对象_WindowBuffer2];
+    selection = selection - 1;
+
+    local ret = Char.ItemMoveBag(ch.charaIndex, EQUIP_NUM + itemSelection, selection, -1);
+    if ret ~= 0 then
+        NLG.SystemMessage(ch.charaIndex, "移动物品失败");
     end
 end
 

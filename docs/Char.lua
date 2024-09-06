@@ -676,13 +676,31 @@ function Char.SetSkillAction(charIndex,?skillNo) end
 ---获取技能显示顺序
 ---@param charIndex number 对象的index
 ---@param slot number 技能实际位置，范围0-14
----@return @seq 技能显示位置，范围1-15
+---@return number @seq 技能显示位置，范围1-15
 function Char.GetSkillSeqNo(charIndex, slot) end
 
 ---设置技能显示顺序
 ---@param charIndex number 对象的index
 ---@param slot number 技能实际位置，范围0-14
 ---@param seq number 技能显示位置，范围1-15
----@param msg number 是否显示系统信息
----@return @seq 技能显示位置，范围1-15
+---@param msg number|boolean 是否显示系统信息
+---@return number @seq 技能显示位置，范围1-15
 function Char.SetSkillSeqNo(charIndex, slot, seq, msg) end
+
+---获取当前背包编号
+---@param charIndex number 对象的index
+---@return number @当前背包编号 0~3
+function Char.GetBagPage(charIndex) end
+
+---切换背包
+---@param charIndex number 对象的index
+---@param page number 背包编号0~3
+---@return number @1为成功，其他均为失败
+function Char.SwitchBag(charIndex, page) end
+
+---@param charIndex number 对象的index
+---@param slot number 道具位置0~27
+---@param page number 背包编号0~3
+---@param toSlot number 道具位置0~19, -1为自动找空位
+---@return number @1为成功，其他均为失败
+function Char.ItemMoveBag(charIndex, slot, page, toSlot) end
