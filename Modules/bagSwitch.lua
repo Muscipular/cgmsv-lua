@@ -5,6 +5,7 @@ local BagSwitch = ModuleBase:createModule('bagSwitch');
 
 local MENU = 0;
 local BAG_LIST = 1;
+local BAG_LIST2 = 2;
 local ITEM_MOVE = 1000;
 local SHOW_ITEM_LIST = 10;
 local ITEM_PAGE_SIZE = 20;
@@ -62,7 +63,7 @@ function BagSwitch:onWindowTalked(npc, player, seqNo, btnClick, line)
         self:onSwitchBag(ch, line, btnClick);
     end
     if seqNo == ITEM_MOVE then
-        self:onSwitchBag(ch, line, btnClick);
+        self:onMoveItem(ch, line, btnClick);
     end
     if seqNo == BAG_LIST2 then
         self:onSelectedMoveBag(ch, line, btnClick);
@@ -126,7 +127,7 @@ function BagSwitch:onMoveItem(ch, selection, buttonClick)
     elseif buttonClick == CONST.BUTTON_下一页 then
         iPage = math.min(2, iPage + 1);
         selection = SHOW_ITEM_LIST;
-    elseif buttonClick == -1 then
+    elseif buttonClick == -1 or selection > 0 then
         -- ignore this
     else
         return
@@ -169,7 +170,7 @@ function BagSwitch:onMoveItem(ch, selection, buttonClick)
             menuList), {
             type = CONST.窗口_选择框,
             seqNo = ITEM_MOVE,
-            windowBuffer2 = 0,
+            windowBuffer2 = iPage,
             button = buttonMap[iPage + 1],
         })
         return
@@ -206,10 +207,9 @@ function BagSwitch:onSelectedMoveBag(ch, selection, buttonClick)
     end
     local cur = Char.GetBagPage(ch.charaIndex);
     local itemSelection = ch[CONST.对象_WindowBuffer2];
-    selection = selection - 1;
 
     local ret = Char.ItemMoveBag(ch.charaIndex, EQUIP_NUM + itemSelection, selection, -1);
-    if ret ~= 0 then
+    if ret ~= 1 then
         NLG.SystemMessage(ch.charaIndex, "移动物品失败");
     end
 end

@@ -3,6 +3,7 @@ local CharPart = ModuleBase:createPart('CharPart');
 
 
 ---@class CharaWrapper
+---@field public charaIndex number
 local CharaWrapper = {};
 
 local CharaWrapperM = {
@@ -11,6 +12,9 @@ local CharaWrapperM = {
             return CharaWrapper[key];
         end
         local charaIndex = rawget(self, 'charaIndex');
+        if key == 'charaIndex' then
+            return charaIndex;
+        end
         if type(key) == "number" then
             return Char.GetData(charaIndex, key);
         end
@@ -83,8 +87,8 @@ function CharaWrapper:ShowWindowTalked(npc, data, opt)
 end
 
 ---°ü×°CharaIndex
----@param charaIndex CharIndex
----@return CharaWrapper|{[number]:string|number|nil}
+---@param charaIndex number
+---@return CharaWrapper
 function CharPart:Chara(charaIndex)
     return setmetatable({ charaIndex = charaIndex }, CharaWrapperM);
 end
