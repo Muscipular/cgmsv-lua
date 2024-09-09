@@ -24,7 +24,7 @@ function Char.GetEmptyItemSlot(charIndex)
   if Char.GetData(charIndex, CONST.CHAR_类型) ~= CONST.对象类型_人 then
     return -1;
   end
-  for i = 8, 27 do
+  for i = 8, CONST.EXTITEMMAX - 1 do
     if Char.GetItemIndex(charIndex, i) == -2 then
       return i;
     end
@@ -33,7 +33,7 @@ function Char.GetEmptyItemSlot(charIndex)
 end
 
 function Char.GetItemSlot(charIndex, itemIndex)
-  for i = 0, 27 do
+  for i = 0, CONST.EXTITEMMAX - 1 do
     if Char.GetItemIndex(charIndex, i) == itemIndex then
       return i;
     end

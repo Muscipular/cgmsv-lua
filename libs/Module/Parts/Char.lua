@@ -3,7 +3,6 @@ local CharPart = ModuleBase:createPart('CharPart');
 
 
 ---@class CharaWrapper
----@field public charaIndex number
 local CharaWrapper = {};
 
 local CharaWrapperM = {
@@ -84,6 +83,12 @@ function CharaWrapper:ShowWindowTalked(npc, data, opt)
         opt.button or CONST.BUTTON_确认,
         opt.seqNo or 0,
         data or "");
+end
+
+---@param msg string
+---@param ... string|number
+function CharaWrapper:SystemMessage(msg, ...)
+    return NLG.SystemMessage(self.charaIndex, string.format(msg, ...));
 end
 
 ---包装CharaIndex
