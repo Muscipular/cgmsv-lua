@@ -12,6 +12,8 @@ local ITEM_PAGE_SIZE = 20;
 local EQUIP_NUM = 8;
 local IPAGE_NUM = 8;
 
+local BAG_PAGE_LIST = {};
+
 --- 加载模块钩子
 function BagSwitch:onLoad()
     self:logInfo('load')
@@ -19,6 +21,10 @@ function BagSwitch:onLoad()
     self:regCallback('ProtocolOnRecv', Func.bind(self.onProtoHook, self), 'SWITMM');
     self:regCallback('TalkEvent', Func.bind(self.handleTalkEvent, self))
     self:NPC_regWindowTalkedEvent(self.dummyNPC, Func.bind(self.onWindowTalked, self));
+
+    for i = 1, CONST.EXTBAGPAGE + 1 do
+        table.insert(BAG_PAGE_LIST, NLG.c(string.format("%d号背包", i)));
+    end
 end
 
 --- 卸载模块钩子
@@ -76,13 +82,10 @@ end
 function BagSwitch:onMenu(ch, selection, buttonClick)
     if selection == 1 then
         ch:ShowWindowTalked(self.dummyNPC,
-            self:NPC_buildSelectionText(NLG.c("选择背包"),
-                {
-                    NLG.c("1号背包"),
-                    NLG.c("2号背包"),
-                    NLG.c("3号背包"),
-                    NLG.c("4号背包"),
-                }),
+            self:NPC_buildSelectionText(
+                NLG.c("选择背包"),
+                BAG_PAGE_LIST
+            ),
             {
                 button = CONST.BUTTON_关闭,
                 type = CONST.窗口_选择框,
@@ -177,13 +180,10 @@ function BagSwitch:onMoveItem(ch, selection, buttonClick)
     end
     if selection >= 0 then
         ch:ShowWindowTalked(self.dummyNPC,
-            self:NPC_buildSelectionText(NLG.c("选择背包"),
-                {
-                    NLG.c("1号背包"),
-                    NLG.c("2号背包"),
-                    NLG.c("3号背包"),
-                    NLG.c("4号背包"),
-                }),
+            self:NPC_buildSelectionText(
+                NLG.c("选择背包"),
+                BAG_PAGE_LIST
+            ),
             {
                 button = CONST.BUTTON_关闭,
                 type = CONST.窗口_选择框,
