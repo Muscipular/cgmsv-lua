@@ -44,3 +44,13 @@ function Func.bind(fn, ...) end
 ---@param filePath string
 ---@return string[][]
 function fs.parseFile(filePath) end;
+
+---@param a number
+---@param b number
+---@return number
+function math.div(a,b) end
+
+---@param a number
+---@param b number
+---@return number
+function math.mod(a,b) end
