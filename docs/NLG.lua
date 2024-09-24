@@ -323,3 +323,10 @@ function NLG.GetDungeonLimit(dungeonId) end
 ---@param charIndex number 目标的 对象index
 ---@param dir number 面向0~7
 function NLG.CharLook(charIndex, dir) end
+
+---播放音效
+---@param charIndex number 目标的 对象index
+---@param tone number 音效id
+---@param x number 横坐标
+---@param y number 纵坐标
+function NLG.PlaySe(charIndex, tone, x, y) end
