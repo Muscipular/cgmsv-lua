@@ -5,7 +5,11 @@
     "Lua.semantic.keyword": true,
     "Lua.hint.enable": true,
     "Lua.runtime.nonstandardSymbol": [
-        "continue"
+        "continue",
+        "!",
+        "!=",
+        "||",
+        "&&"
     ],
     "Lua.runtime.unicodeName": true,
     "Lua.workspace.checkThirdParty": false,
