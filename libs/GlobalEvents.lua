@@ -264,7 +264,7 @@ local function takeCallbacks(eventName, extraSign, shouldInit)
     _G[name] = fn1;
     eventCallbacks[name] = list;
     if NL['Reg' .. eventName] then
-      logInfo('GlobalEvent', 'NL.Reg' .. eventName, extraSign)
+      logDebug('GlobalEvent', 'NL.Reg' .. eventName, extraSign)
       if extraSign == '' then
         NL['Reg' .. eventName](nil, name);
       else
@@ -299,7 +299,7 @@ end
 ---@return number È«¾Ö×¢²áIndex
 function _G.regGlobalEvent(eventName, fn, moduleName, extraSign)
   extraSign = extraSign or ''
-  logInfo('GlobalEvent', 'regGlobalEvent', eventName, moduleName, ix + 1)
+  logDebug('GlobalEvent', 'regGlobalEvent', eventName, moduleName, ix + 1)
   local callbacks, name, fn1 = takeCallbacks(eventName, extraSign, true)
   --logInfo('GlobalEvent', 'callbacks', #callbacks)
   ix = ix + 1;
@@ -334,7 +334,7 @@ end
 ---@param extraSign string|nil
 function _G.removeGlobalEvent(eventName, fnIndex, moduleName, extraSign)
   extraSign = extraSign or ''
-  logInfo('GlobalEvent', 'removeGlobalEvent', eventName .. extraSign, moduleName, fnIndex)
+  logDebug('GlobalEvent', 'removeGlobalEvent', eventName .. extraSign, moduleName, fnIndex)
   local callbacks, name, fn1 = takeCallbacks(eventName, extraSign)
   if not callbacks then
     return true;

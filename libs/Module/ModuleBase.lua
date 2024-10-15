@@ -112,7 +112,7 @@ function ModuleBase:regCallback(eventName, fn, extSign)
     eventName = '_' .. self.name .. '_cb_' .. self.lastIx;
   end
   local fnIndex = regGlobalEvent(eventName, fn, self.name, extSign);
-  logDebug(self.name, 'regCallback', eventName, self.lastIx, fnIndex, fn);
+  self:logDebug('regCallback', eventName, self.lastIx, fnIndex, fn);
   self.callbacks[self.lastIx] = { key = eventName, fnIndex = fnIndex, fn = fn, extSign = extSign };
   return eventName, self.lastIx, fnIndex;
 end
@@ -128,10 +128,10 @@ function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrCbIndex)
   end
   local fnCb = self.callbacks[cbIndex];
   if not fnCb then
-    logWarn(self.name, 'cannot find callback of ' .. eventNameOrCallbackKey, fnOrCbIndex)
+    self:logWarn('cannot find callback of ' .. eventNameOrCallbackKey, fnOrCbIndex)
     return
   end
-  logDebug(self.name, 'removeGlobalEvent', fnCb.key, fnCb.fnIndex, fnCb.fn);
+  self:logDebug('removeGlobalEvent', fnCb.key, fnCb.fnIndex, fnCb.fn);
   removeGlobalEvent(fnCb.key, fnCb.fnIndex, self.name, fnCb.extSign);
   self.callbacks[cbIndex] = nil;
 end

@@ -1,3 +1,5 @@
+_G.loggerLevel = 3;
+ModuleBase:SetLogLevel(_G.loggerLevel);
 moduleInitial();
 
 --loadModule('welcome', 'welcome.lua')

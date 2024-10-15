@@ -1,6 +1,7 @@
 ---@class LegacyModule: ModuleType
 local LegacyModule = ModuleBase:createModule('Legacy');
 LegacyModule.sharedContext = {
+  math = {},
   string = {},
   table = {},
   VaildChar = Char.IsValidCharIndex,
@@ -80,6 +81,7 @@ for i, v in pairs(NL) do
   end
 end
 
+sharedContext.math = setmetatable(sharedContext.math, { __index = math });
 sharedContext.string = setmetatable(sharedContext.string, { __index = string });
 sharedContext.table = setmetatable(sharedContext.table, { __index = table });
 sharedContext.NL = setmetatable(sharedContext.NL, { __index = NL });
