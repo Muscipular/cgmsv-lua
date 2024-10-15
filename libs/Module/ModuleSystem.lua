@@ -9,14 +9,9 @@ regGlobalEvent("ShutDownEvent", OrderedCallback(function()
   logInfo("System", "Unload all module done.");
 end, -9999999999), 'System');
 
-local _logLevel = 1;
-
-function _G.moduleInitial(logLevel)
+function _G.moduleInitial()
   if _initialed or _HookFunc == false then
     return
-  end
-  if type(logLevel) == "number" then
-    _logLevel = logLevel;    
   end
   _initialed = true;
   local sql = [[
