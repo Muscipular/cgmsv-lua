@@ -1,5 +1,6 @@
 local mName = 'warp2'
-local Warp = ModuleBase:createModule(mName)
+---@class Warp2:ModuleType
+local Warp2 = ModuleBase:createModule(mName)
 
 --坐标可以在下面自行添加
 local warpPoints = {
@@ -27,7 +28,7 @@ local function calcWarp()
   return page, remainder
 end
 
-function Warp:onLoad()
+function Warp2:onLoad()
   self:logInfo('load');
   local warpNPC = self:NPC_createNormal('传送门', 103010, { x = 242, y = 86, mapType = 0, map = 1000, direction = 6 });
   self:NPC_regWindowTalkedEvent(warpNPC, function(npc, player, _seqno, _select, _data)
@@ -86,8 +87,8 @@ function Warp:onLoad()
   end)
 end
 
-function Warp:onUnload()
+function Warp2:onUnload()
   self:logInfo('unload')
 end
 
-return Warp;
+return Warp2;

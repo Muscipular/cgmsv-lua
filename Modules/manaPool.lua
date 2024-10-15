@@ -1,4 +1,5 @@
-local Module = ModuleBase:createModule('manaPool')
+---@class ManaPool: ModuleType
+local ManaPool = ModuleBase:createModule('manaPool')
 local itemList = {
   { name = '血池补充（1000LP）', image = 27243, price = 1500, desc = '补充血池使用量1000点', count = 1, maxCount = 999, value = 1000, type = 'lp' },
   { name = '血池补充（10000LP）', image = 27243, price = 14500, desc = '补充血池使用量10000点', count = 1, maxCount = 999, value = 1000, type = 'lp' },
@@ -9,7 +10,7 @@ local itemList = {
 }
 
 --- 加载模块钩子
-function Module:onLoad()
+function ManaPool:onLoad()
   self:logInfo('load')
   local npc = self:NPC_createNormal('血魔加油站', 101024, { map = 1000, x = 225, y = 81, direction = 4, mapType = 0 })
   self:NPC_regTalkedEvent(npc, Func.bind(self.onSellerTalked, self))
@@ -17,7 +18,7 @@ function Module:onLoad()
   self:regCallback('ResetCharaBattleStateEvent', Func.bind(self.onBattleReset, self))
 end
 
-function Module:onBattleReset(charIndex)
+function ManaPool:onBattleReset(charIndex)
   if Char.IsDummy(charIndex) then
     return
   end
@@ -88,14 +89,14 @@ function Module:onBattleReset(charIndex)
   Char.SetExtData(charIndex, 'FpPool', fpPool);
 end
 
-function Module:onSellerTalked(npc, player)
+function ManaPool:onSellerTalked(npc, player)
   if NLG.CanTalk(npc, player) then
     NLG.ShowWindowTalked(player, npc, CONST.窗口_商店买, CONST.BUTTON_是, 0,
       self:NPC_buildBuyWindowData(101024, '血魔加油站', '充值血魔池', '金钱不足', '背包已满', itemList))
   end
 end
 
-function Module:onSellerSelected(npc, player, seqNo, select, data)
+function ManaPool:onSellerSelected(npc, player, seqNo, select, data)
   local items = string.split(data, '|');
   local lpPool = tonumber(Char.GetExtData(player, 'LpPool')) or 0;
   local fpPool = tonumber(Char.GetExtData(player, 'FpPool')) or 0;
@@ -132,8 +133,8 @@ function Module:onSellerSelected(npc, player, seqNo, select, data)
 end
 
 --- 卸载模块钩子
-function Module:onUnload()
+function ManaPool:onUnload()
   self:logInfo('unload')
 end
 
-return Module;
+return ManaPool;

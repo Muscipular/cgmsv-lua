@@ -1,7 +1,8 @@
 ---模块类
-local Module = ModuleBase:createModule('autoUnlock')
+---@class AutoUnlockModule : ModuleType
+local AutoUnlockModule = ModuleBase:createModule('autoUnlock')
 
-function Module:onLogin(fd, head, data)
+function AutoUnlockModule:onLogin(fd, head, data)
   local user = SQL.querySQL('select RegistNumber from tbl_lock where CdKey = ' .. SQL.sqlValue(data[3]), true);
   if user then
     local charIndex = NLG.FindUser(data[3], tonumber(user[1][1]));
@@ -14,7 +15,7 @@ function Module:onLogin(fd, head, data)
   end
 end
 
-function Module:onTalked(charIndex, msg, color, range, size)
+function AutoUnlockModule:onTalked(charIndex, msg, color, range, size)
   local command = msg:match('^/([%w]+)')
   if command and string.lower(command) == 'selfkickout' then
     local arg = msg:match('^/[%w]+ +(.+)$')
@@ -48,15 +49,15 @@ function Module:onTalked(charIndex, msg, color, range, size)
 end
 
 --- 加载模块钩子
-function Module:onLoad()
+function AutoUnlockModule:onLoad()
   self:logInfo('load')
   self:regCallback('ProtocolOnRecv', Func.bind(self.onLogin, self), 'JFVf');
   self:regCallback('TalkEvent', Func.bind(self.onTalked, self));
 end
 
 --- 卸载模块钩子
-function Module:onUnload()
+function AutoUnlockModule:onUnload()
   self:logInfo('unload')
 end
 
-return Module;
+return AutoUnlockModule;

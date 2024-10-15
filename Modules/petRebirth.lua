@@ -1,5 +1,6 @@
 ---宠物转生，全bp+3，技能栏+1
 local moduleName = 'petRebirth'
+---@class PetRebirth: ModuleType
 local PetRebirth = ModuleBase:createModule(moduleName)
 
 function PetRebirth:onTalked(npc, player)

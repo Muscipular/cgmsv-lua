@@ -1,4 +1,5 @@
 ---模块类
+---@class NoBattleInjury : ModuleType
 local NoBattleInjury = ModuleBase:createModule('noBattleInjury.lua')
 
 --- 加载模块钩子

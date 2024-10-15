@@ -1,4 +1,5 @@
 ---模块类
+---@class Luac:ModuleType
 local Luac = ModuleBase:createModule('luac')
 
 --- 加载模块钩子

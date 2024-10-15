@@ -1,8 +1,9 @@
 ---宝箱模块
-local Module = ModuleBase:createModule('itembox')
+---@class ItemBoxModule: ModuleType
+local ItemBoxModule = ModuleBase:createModule('itembox')
 
 --- 加载模块钩子
-function Module:onLoad()
+function ItemBoxModule:onLoad()
   self:logInfo('load')
   self:regCallback('ItemBoxGenerateEvent', function(mapType, floor, boxId, adm)
     local n = NLG.Rand(1, 100);
@@ -21,8 +22,8 @@ function Module:onLoad()
 end
 
 --- 卸载模块钩子
-function Module:onUnload()
+function ItemBoxModule:onUnload()
   self:logInfo('unload')
 end
 
-return Module;
+return ItemBoxModule;

@@ -16,6 +16,20 @@ local function loadPart(self, path)
   return module;
 end
 
+
+ModuleBase._logLevel = 3;
+
+function ModuleBase.SetLogLevel(self, level)
+  if type(self) == 'number' then
+    level = self;
+    self = ModuleBase;
+  end
+  if type(level) ~= "number" then
+    error('error argument');
+  end
+  rawset(self, '_logLevel', level);
+end
+
 ModuleBase.__index = ModuleBase;
 function ModuleBase:new(name)
   local o = {};
@@ -98,7 +112,7 @@ function ModuleBase:regCallback(eventName, fn, extSign)
     eventName = '_' .. self.name .. '_cb_' .. self.lastIx;
   end
   local fnIndex = regGlobalEvent(eventName, fn, self.name, extSign);
-  logInfo(self.name, 'regCallback', eventName, self.lastIx, fnIndex, fn);
+  logDebug(self.name, 'regCallback', eventName, self.lastIx, fnIndex, fn);
   self.callbacks[self.lastIx] = { key = eventName, fnIndex = fnIndex, fn = fn, extSign = extSign };
   return eventName, self.lastIx, fnIndex;
 end
@@ -106,7 +120,7 @@ end
 ---@param eventNameOrCallbackKey string
 ---@param fnOrCbIndex function|number
 function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrCbIndex)
-  local cbIndex = fnOrCbIndex--[[@as number]];
+  local cbIndex = fnOrCbIndex --[[@as number]];
   if type(fnOrCbIndex) == 'function' then
     cbIndex = table.findIndex(self.callbacks, function(e)
       return fnOrCbIndex == e.fn
@@ -117,16 +131,16 @@ function ModuleBase:unRegCallback(eventNameOrCallbackKey, fnOrCbIndex)
     logWarn(self.name, 'cannot find callback of ' .. eventNameOrCallbackKey, fnOrCbIndex)
     return
   end
-  logInfo(self.name, 'removeGlobalEvent', fnCb.key, fnCb.fnIndex, fnCb.fn);
+  logDebug(self.name, 'removeGlobalEvent', fnCb.key, fnCb.fnIndex, fnCb.fn);
   removeGlobalEvent(fnCb.key, fnCb.fnIndex, self.name, fnCb.extSign);
   self.callbacks[cbIndex] = nil;
 end
 
-
 ---@private
 function ModuleBase:migrate()
   if self.migrations then
-    local ret = SQL.querySQL('select ifnull(max(id), 0) version from lua_migration where module = \'' .. self.name .. '\';');
+    local ret = SQL.querySQL('select ifnull(max(id), 0) version from lua_migration where module = \'' ..
+      self.name .. '\';');
     local version = tonumber(ret[1][1]);
     table.sort(self.migrations, function(a, b)
       return b.version - a.version > 0
@@ -150,43 +164,63 @@ function ModuleBase:migrate()
 end
 
 function ModuleBase:log(level, msg, ...)
-  log(self.name, level, msg, ...)
+  if self._logLevel >= 1 then
+    log(self.name, level, msg, ...)
+  end
 end
 
 function ModuleBase:logInfo(msg, ...)
-  logInfo(self.name, msg, ...)
+  if self._logLevel >= 3 then
+    logInfo(self.name, msg, ...);
+  end
 end
 
 function ModuleBase:logDebug(msg, ...)
-  logDebug(self.name, msg, ...)
+  if self._logLevel >= 4 then
+    logDebug(self.name, msg, ...)
+  end
 end
 
 function ModuleBase:logWarn(msg, ...)
-  logWarn(self.name, msg, ...)
+  if self._logLevel >= 2 then
+    logWarn(self.name, msg, ...)
+  end
 end
 
 function ModuleBase:logError(msg, ...)
-  logError(self.name, msg, ...)
+  if self._logLevel >= 1 then
+    logError(self.name, msg, ...)
+  end
 end
 
 function ModuleBase:logF(level, msg, ...)
-  log(self.name, level, string.format(msg, ...))
+  if self._logLevel >= 1 then
+    log(self.name, level, string.format(msg, ...))
+  end
 end
 
 function ModuleBase:logInfoF(msg, ...)
-  logInfo(self.name, string.format(msg, ...))
+  if self._logLevel >= 3 then
+    logInfo(self.name, string.format(msg, ...))
+  end
 end
 
 function ModuleBase:logDebugF(msg, ...)
-  logDebug(self.name, string.format(msg, ...))
+  if self._logLevel >= 4 then
+    logDebug(self.name, string.format(msg, ...))
+  end
 end
 
 function ModuleBase:logWarnF(msg, ...)
-  logWarn(self.name, string.format(msg, ...))
+  if self._logLevel >= 2 then
+    logWarn(self.name, string.format(msg, ...))
+  end
 end
 
 function ModuleBase:logErrorF(msg, ...)
-  logError(self.name, string.format(msg, ...))
+  if self._logLevel >= 1 then
+    logError(self.name, string.format(msg, ...))
+  end
 end
 
 function ModuleBase:load()

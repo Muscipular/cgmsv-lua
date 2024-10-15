@@ -1,4 +1,5 @@
 ---模块类
+---@class Welcome: ModuleType
 local Welcome = ModuleBase:createModule('welcome')
 ---迁移定义
 Welcome:addMigration(1, 'initial module', function()

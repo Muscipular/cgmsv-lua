@@ -1,4 +1,5 @@
 ---模块类
+---@class ngModule: ModuleType
 local ngModule = ModuleBase:createModule('ng')
 
 -- 普通玩家命令

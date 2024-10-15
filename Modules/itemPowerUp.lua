@@ -1,21 +1,10 @@
+---@class ItemPowerUP: ModuleType
 local ItemPowerUP = ModuleBase:createModule('itemPowerUp')
 
 local MAX_LEVEL = 20;
 local SAVE_LEVEL2 = 10;
 local SAVE_LEVEL = 7;
 local LevelRate = { 0, 0, 0, 10, 20, 30, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 93, 93, 96, 96, 97, 97, 98, 98, 99, 99, 99, 99, 99, 99, 99, 99 }
-
-function ItemPowerUP:setItemData(itemIndex, value)
-  ---@type ItemExt
-  local itemExt = getModule('itemExt')
-  return itemExt:setItemData(itemIndex, value)
-end
-
-function ItemPowerUP:getItemData(itemIndex)
-  ---@type ItemExt
-  local itemExt = getModule('itemExt')
-  return itemExt:getItemData(itemIndex)
-end
 
 --CharIndex: 数值型 响应事件的对象index（攻击者），该值由Lua引擎传递给本函数。
 --DefCharIndex: 数值型 响应事件的对象index（防御者），该值由Lua引擎传递给本函数。

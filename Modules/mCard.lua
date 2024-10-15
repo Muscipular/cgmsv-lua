@@ -1,4 +1,5 @@
 ---装备插卡模块
+---@class ModuleCard : ModuleType
 local ModuleCard = ModuleBase:createModule('mCard')
 
 local NormalRate = 2;
@@ -39,86 +40,12 @@ function ModuleCard:onBattleStartEvent(battleIndex)
           Item.SetData(itemIndex, CONST.道具_Explanation2, -1);
           Item.UpItem(charIndex, itemIndex);
         end
-        --if enemyId and enemyId > 0 then
-        --  enemyDataList[tostring(i)] = {
-        --    EnemyBaseId = Char.GetData(charIndex, CONST.CHAR_EnemyBaseId),
-        --    EnemyId = enemyId,
-        --    Level = Char.GetData(charIndex, CONST.CHAR_等级),
-        --    Name = Char.GetData(charIndex, CONST.CHAR_名字),
-        --    Ethnicity = Char.GetData(charIndex, CONST.CHAR_种族),
-        --  };
-        --end
       end
       :: continue ::
     end
   end
 end
 
---[[
-function ModuleCard:onBattleOverEvent(battleIndex)
-  local type = Battle.GetType(battleIndex)
-  self:logDebug('battle over', battleIndex, type, CONST.战斗_普通)
-  if type == CONST.战斗_普通 then
-    local enemyDataList = self.cache[tostring(battleIndex)];
-    self.cache[tostring(battleIndex)] = nil;
-    local winSide = Battle.GetWinSide(battleIndex);
-    --self:logDebug('enemyDataList', battleIndex, enemyDataList, winSide);
-    if enemyDataList == nil then
-      return
-    end
-    --for i, v in pairs(enemyDataList) do
-    --  print(i, v);
-    --end
-    local chars = {}
-    for i = 0, 9 do
-      local charIndex = Battle.GetPlayer(battleIndex, i);
-      if charIndex >= 0 and Char.GetData(charIndex, CONST.CHAR_类型) == CONST.对象类型_人 and Char.ItemSlot(charIndex) < 20 then
-        table.insert(chars, charIndex)
-      end
-    end
-    --self:logDebug('chars', #chars);
-    ---@type GmsvData
-    local gmsvData = getModule('gmsvData');
-    -- ---@type ItemExt
-    --local itemExt = getModule('itemExt');
-    if winSide == 0 then
-      for i, enemy in pairs(enemyDataList) do
-        local enemyData = gmsvData.enemy[tostring(enemy.EnemyId)];
-        if enemyData == nil then
-          self:logDebug('enemy data not found', enemy.EnemyId);
-          goto continue;
-        end
-        local rate = NormalRate;
-        if enemyData[gmsvData.CONST.Enemy.IsBoss] then
-          rate = BossRate;
-        end
-        --if Char.GetData(charIndex, CONST.CHAR_CDK) == 'u01' then
-        rate = 1000;
-        --end
-        if #chars > 0 and math.random(0, 100) < rate then
-          local n = math.random(1, #chars);
-          --print(n, chars[n])
-          local charIndex = chars[n];
-          local itemIndex = Char.GiveItem(charIndex, 606627, 1, false);
-          if itemIndex >= 0 then
-            Item.SetData(itemIndex, CONST.道具_名字, string.format("装备卡片(%s)", gmsvData:getEnemyName(enemy.EnemyId)));
-            Item.SetData(itemIndex, CONST.道具_Func_UseFunc, 'LUA_useMCard');
-            Item.SetData(itemIndex, CONST.道具_Func_AttachFunc, '');
-            Item.SetData(itemIndex, CONST.道具_自用参数, tostring(enemy.EnemyId));
-            Item.SetData(itemIndex, CONST.道具_Explanation1, -1);
-            Item.SetData(itemIndex, CONST.道具_Explanation2, -1);
-            Item.UpItem(charIndex, itemIndex);
-          end
-          if Char.ItemSlot(charIndex) >= 20 then
-            table.remove(chars, n)
-          end
-        end
-        :: continue ::
-      end
-    end
-  end
-end
-]]
 
 ---@param CharIndex number
 ---@param TargetCharIndex number
@@ -145,7 +72,9 @@ function ModuleCard:onItemExpansionEvent(itemIndex, type, msg)
   --self:logDebug('onItemExpansionEvent', itemIndex, type, msg);
   if Item.GetData(itemIndex, CONST.道具_Func_UseFunc) == 'LUA_useMCard' then
     local enemyId = tonumber(Item.GetData(itemIndex, CONST.道具_自用参数));
-    local name = Data.EnemyBaseGetData(Data.EnemyBaseGetDataIndex(Data.EnemyGetData(Data.EnemyGetDataIndex(enemyId), CONST.DATA_ENEMY_TEMPNO)), CONST.DATA_ENEMYBASE_NAME) or 'nil';
+    local name = Data.EnemyBaseGetData(
+    Data.EnemyBaseGetDataIndex(Data.EnemyGetData(Data.EnemyGetDataIndex(enemyId), CONST.DATA_ENEMY_TEMPNO)),
+      CONST.DATA_ENEMYBASE_NAME) or 'nil';
     if type == 1 then
       return '$0封印着$5' .. name .. '$0的灵魂的卡片\n$7双击可以为装备附魔';
     end
@@ -154,12 +83,12 @@ function ModuleCard:onItemExpansionEvent(itemIndex, type, msg)
     end
   else
     if type == 2 then
-      ---@type ItemExt
-      local itemExt = getModule('itemExt');
-      local data = itemExt:getItemData(itemIndex, true);
-      if data.mcard then
-        local enemyId = tonumber(data.mcard);
-        local name = Data.EnemyBaseGetData(Data.EnemyBaseGetDataIndex(Data.EnemyGetData(Data.EnemyGetDataIndex(enemyId), CONST.DATA_ENEMY_TEMPNO)), CONST.DATA_ENEMYBASE_NAME) or 'nil';
+      local data = Item.GetExtData(itemIndex, 'mcard');
+      if data then
+        local enemyId = tonumber(data);
+        local name = Data.EnemyBaseGetData(
+        Data.EnemyBaseGetDataIndex(Data.EnemyGetData(Data.EnemyGetDataIndex(enemyId), CONST.DATA_ENEMY_TEMPNO)),
+          CONST.DATA_ENEMYBASE_NAME) or 'nil';
         return msg .. '\n' .. string.format('寄宿着$3%s$0的灵魂', name);
       end
     end
@@ -169,25 +98,23 @@ end
 
 function ModuleCard:onWindowTalked(npc, player, seqno, select, data)
   if select == CONST.BUTTON_关闭 then
-    return ;
+    return;
   end
   data = tonumber(data) - 1;
   local itemIndex = Char.GetItemIndex(player, data);
   local cardIndex = Char.GetItemIndex(player, Char.GetData(player, CONST.CHAR_WindowBuffer1));
   if Char.GetData(player, CONST.CHAR_WindowBuffer2) ~= cardIndex then
-    return ;
+    return;
   end
   local enemyId = tonumber(Item.GetData(cardIndex, CONST.道具_自用参数));
-  ---@type ItemExt
-  local itemExt = getModule('itemExt');
-  local itemExtData = itemExt:getItemData(itemIndex);
-  if itemExtData.mcard then
+  local mcard = Item.GetExtData(itemIndex, 'mcard');
+  if mcard then
     NLG.SystemMessage(player, '该物品已经附魔')
-    return ;
+    return;
   end
-  itemExtData.mcard = enemyId;
+  mcard = enemyId;
   Item.SetData(itemIndex, CONST.道具_攻击, Item.GetData(itemIndex, CONST.道具_攻击) + 10);
-  itemExt:setItemData(itemIndex, itemExtData);
+  Item.SetItemData(itemIndex, 'mcard', mcard);
   NLG.SystemMessage(player, '附魔成功');
   Char.DelItemBySlot(player, Char.GetData(player, CONST.CHAR_WindowBuffer1));
   Item.UpItem(player, Char.GetData(player, CONST.CHAR_WindowBuffer1));

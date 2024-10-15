@@ -16,6 +16,14 @@ LegacyModule.sharedContext = {
   Protocol = {},
   Obj = {},
   SQL = {},
+  Map = {},
+  Http = {},
+  Iconv = {},
+  Setup = {},
+  Skill = {},
+  Stall = {},
+  Tech = {},
+  TechArea = {},
 };
 local sharedContext = LegacyModule.sharedContext;
 
@@ -86,6 +94,14 @@ sharedContext.NLG = setmetatable(sharedContext.NLG, { __index = NLG });
 sharedContext.Protocol = setmetatable(sharedContext.Protocol, { __index = Protocol });
 sharedContext.Obj = setmetatable(sharedContext.Obj, { __index = Obj });
 sharedContext.SQL = setmetatable(sharedContext.SQL, { __index = SQL });
+sharedContext.Map = setmetatable(sharedContext.Map, { __index = Map });
+sharedContext.Http = setmetatable(sharedContext.Http, { __index = Http });
+sharedContext.Iconv = setmetatable(sharedContext.Iconv, { __index = Iconv });
+sharedContext.Setup = setmetatable(sharedContext.Setup, { __index = Setup });
+sharedContext.Skill = setmetatable(sharedContext.Skill, { __index = Skill });
+sharedContext.Stall = setmetatable(sharedContext.Stall, { __index = Stall });
+sharedContext.Tech = setmetatable(sharedContext.Tech, { __index = Tech });
+sharedContext.TechArea = setmetatable(sharedContext.TechArea, { __index = TechArea });
 
 setmetatable(sharedContext, { __index = _G })
 

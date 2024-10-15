@@ -1,3 +1,4 @@
+---@class Warp:ModuleType
 local Warp = ModuleBase:createModule('warp')
 
 --坐标可以在下面自行添加

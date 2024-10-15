@@ -1,5 +1,5 @@
 function Item.GetSlot(charIndex, itemIndex)
-  for i = 8, 27 do
+  for i = 8, Char.GetData(charIndex, CONST.对象_道具栏) - 1 do
     if Char.GetItemIndex(charIndex, i) == itemIndex then
       return i;
     end

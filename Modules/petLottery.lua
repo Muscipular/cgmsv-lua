@@ -1,6 +1,7 @@
 --模块名称
 local moduleName = 'petLottery'
 --模块类
+---@class PetLottery: ModuleType
 local PetLottery = ModuleBase:createModule(moduleName)
 
 local pets = {

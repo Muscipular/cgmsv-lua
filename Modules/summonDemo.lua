@@ -1,8 +1,9 @@
 ---模块类
-local Module = ModuleBase:createModule('summonDemo')
+---@class summonDemo:ModuleType
+local summonDemo = ModuleBase:createModule('summonDemo')
 
 --- 加载模块钩子
-function Module:onLoad()
+function summonDemo:onLoad()
   self:logInfo('load')
   getModule('adminCommands'):regCommand('testNextBattle', function(charIndex)
     local battleIndex = Battle.PVE(charIndex, charIndex, nil, { 1 }, { 1 });
@@ -37,8 +38,8 @@ function Module:onLoad()
 end
 
 --- 卸载模块钩子
-function Module:onUnload()
+function summonDemo:onUnload()
   self:logInfo('unload')
 end
 
-return Module;
+return summonDemo;

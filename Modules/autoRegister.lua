@@ -1,4 +1,5 @@
 ---模块类
+---@class AutoRegister: ModuleType
 local AutoRegister = ModuleBase:createModule('autoRegister')
 
 --- 加载模块钩子

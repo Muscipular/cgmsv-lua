@@ -24,21 +24,23 @@ function tonumberEx(n, base, trueValue, falseValue)
   return trueValue;
 end
 
---- return n ^ q
----@param n number
----@param q number
----@return number
-function math.pow(n, q)
-  if q < 1 then
-    return 1;
+if math.pow == nil then
+  --- return n ^ q
+  ---@param n number
+  ---@param q number
+  ---@return number
+  function math.pow(n, q)
+    if q < 1 then
+      return 1;
+    end
+    if q == 1 then
+      return n;
+    end
+    local ret = 1
+    while (q > 0) do
+      ret = ret * n;
+      q = q - 1;
+    end
+    return ret;
   end
-  if q == 1 then
-    return n;
-  end
-  local ret = 1
-  while (q > 0) do
-    ret = ret * n;
-    q = q - 1;
-  end
-  return ret;
 end

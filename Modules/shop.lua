@@ -1,3 +1,4 @@
+---@class Shop:ModuleType
 local Shop = ModuleBase:createModule('shop')
 
 function Shop:onLoad()
