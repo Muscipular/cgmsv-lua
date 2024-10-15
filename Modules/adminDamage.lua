@@ -65,7 +65,7 @@ function Module:onLoad()
     end
     return 1
   end)
-  self:regCallback('DamageCalculateEvent', function(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
+  self:regCallback('DamageCalculateEvent', OrderedCallback(function(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
     local admin = getModule('admin')--[[@as Admin]]
     if admin:isAdmin(charIndex) and self.dmg ~= nil then
       return self.dmg
@@ -77,7 +77,7 @@ function Module:onLoad()
       end
     end
     return damage
-  end)
+  end, -1))
 end
 
 --- Ð¶ÔØÄ£¿é¹³×Ó
