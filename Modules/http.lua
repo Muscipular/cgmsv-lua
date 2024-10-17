@@ -1,9 +1,9 @@
----http模块 
+---http模块
 ---@class HttpModule : ModuleType
 local Module = ModuleBase:createModule('http')
 
 ---@alias ParamType {string:string}
----@alias HttpApiFn {string:fun(params:ParamType, body:string):string}
+---@alias HttpApiFn fun(params:ParamType, body:string):string
 ---@alias HttpMethods 'get'|'post'|'put'|'delete'|'patch'
 
 --- 加载模块钩子
@@ -23,7 +23,7 @@ function Module:onLoad()
         Http.Start("0.0.0.0", 10086);
         self:logInfo('Http.Start');
     end
-    self._Apis = {} --[[@type {string: HttpApiFn}]];
+    self._Apis = {} --[[@as {[string]: HttpApiFn}]];
     self:regCallback('HttpRequestEvent', Func.bind(self.onHttpRequest, self));
     self:regApi('post', "register", Func.bind(self.ApiRegister, self));
     self:regApi('post', "doLua", Func.bind(self.doLua, self));
@@ -91,9 +91,15 @@ end
 ---@param body string body内容
 ---@return string body 返回内容
 function Module:onHttpRequest(method, api, params, body)
-    if self._Apis[string.lower(method .. api)] then
-        self:logInfo(string.lower(method .. '::' .. api), self._Apis[string.lower(method .. '::' .. api)]);
-        return self._Apis[string.lower(method .. '::' .. api)](params, body);
+    local fn = self._Apis[string.lower(method .. '::' .. api)];
+    if fn ~= nil then
+        self:logDebug(string.lower(method .. '::' .. api), fn);
+        local r, f = pcall(fn, params, body);
+        if r ~= true then
+            self:logErrorF("%s::%s run failed: %s", method, api, f);
+        else
+            return f;
+        end
     end
     return "";
 end
