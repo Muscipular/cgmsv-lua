@@ -901,19 +901,6 @@ function NL.RegScriptCallEvent(Dofile, InitFuncName) end
 ---@return number @返回新值，返回给data
 function ScriptCallCallBack(npcIndex, playerIndex, text, msg) end
 
----创建一个物品掉率的事件
----[@group NL.RegDropRateEvent]
----@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
----@param InitFuncName  string 指向的Lua函数的名称
-function NL.RegDropRateEvent(Dofile, InitFuncName) end
-
----DropRateEvent的回调函数
----[@group NL.RegDropRateEvent]
----@param enemyIndex number 魔物index
----@param itemId number
----@param rate number 掉落率
-function DropRateCallBack(enemyIndex, itemId, rate) end
-
 ---创建一个逃跑时触发的事件
 ---[@group NL.RegBattleEscapeEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -943,7 +930,7 @@ function NL.RegBattleSealRateEvent(Dofile, InitFuncName) end
 ---@return number @成功率
 function BattleSealRateCallBack(battleIndex, charIndex, enemyIndex, rate) end
 
----创建一个暴击时触发的事件
+---暴击率计算的事件
 ---[@group NL.RegCalcCriticalRateEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
@@ -957,7 +944,7 @@ function NL.RegCalcCriticalRateEvent(Dofile, InitFuncName) end
 ---@return number @必杀率
 function CalcCriticalRateCallBack(aIndex, fIndex, rate) end
 
----创建一个闪躲时触发的事件
+---闪躲率计算的事件
 ---[@group NL.RegBattleDodgeRateEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
@@ -972,7 +959,7 @@ function NL.RegBattleDodgeRateEvent(Dofile, InitFuncName) end
 ---@return number @闪躲率
 function BattleDodgeRateCallBack(battleIndex, aIndex, fIndex, rate) end
 
----创建一个反击时触发的事件
+---反击率计算的事件
 ---[@group NL.RegBattleCounterRateEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称
@@ -1445,3 +1432,35 @@ function NL.RegCharaStallBrowseEvent(Dofile, InitFuncName) end
 ---@param buyer  number 购买者的对象index，该值由Lua引擎传递给本函数。
 ---@param seller  number 售卖者的对象index，该值由Lua引擎传递给本函数。
 function CharaStallBrowseEventCallback(buyer,seller) end
+
+---盗窃物品出现概率事件
+---[@group NL.RegStealItemEmitRateEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegStealItemEmitRateEvent(Dofile, InitFuncName) end
+
+---StealItemEmitRateEvent的回调函数
+---[@group NL.RegStealItemEmitRateEvent]
+---@param battleIndex  number BattleIndex
+---@param enemyIndex  number EnemyIndex
+---@param charaIndex  number CharIndex
+---@param itemId  number ItemId
+---@param rate  number 掉率，百万分率，1000000=100%
+function StealItemEmitRateEventCallback(battleIndex, enemyIndex, charaIndex, itemId, rate) end
+
+
+---物品掉率事件
+---[@group NL.RegItemDropRateEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegItemDropRateEvent(Dofile, InitFuncName) end
+
+---ItemDropRateEvent的回调函数
+---[@group NL.RegItemDropRateEvent]
+---@param battleIndex  number BattleIndex
+---@param enemyIndex  number EnemyIndex
+---@param charaIndex  number CharIndex
+---@param itemId  number ItemId
+---@param rate  number 掉率，百万分率，1000000=100%
+function ItemDropRateEventCallback(battleIndex, enemyIndex, charaIndex, itemId, rate) end
+
