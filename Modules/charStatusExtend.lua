@@ -71,12 +71,22 @@ end
 function CharStatusExtend:onStatusUpdate(charIndex)
   if (Char.GetTempData(charIndex, "CSE:Enable") == 1) then
     local t = { CONST.CHAR_攻击力, CONST.CHAR_防御力, CONST.CHAR_敏捷, CONST.CHAR_精神, CONST.CHAR_回复,
-      CONST.CHAR_实际反击, CONST.CHAR_实际必杀, CONST.CHAR_实际命中, CONST.CHAR_实际闪躲, CONST.CHAR_实际抗毒, CONST.CHAR_实际抗乱,
-      CONST.CHAR_实际抗忘, CONST.CHAR_实际抗睡, CONST.CHAR_实际抗石, CONST.CHAR_实际抗醉, CONST.对象_魔攻, CONST.对象_魔抗,  };
+      CONST.CHAR_实际反击, CONST.CHAR_实际必杀, CONST.CHAR_实际命中, CONST.CHAR_实际闪躲,
+      CONST.CHAR_实际抗毒, CONST.CHAR_实际抗乱, CONST.CHAR_实际抗忘, CONST.CHAR_实际抗睡,
+      CONST.CHAR_实际抗石, CONST.CHAR_实际抗醉, };
     for i, v in ipairs(t) do
       local vx = tonumber(Char.GetTempData(charIndex, "CSE:" .. v)) or 0;
       if (vx ~= 0 and vx ~= nil) then
         Char.SetData(charIndex, v, Char.GetData(charIndex, v) + vx);
+      end
+    end
+    if (Char.GetData(charIndex, CONST.CHAR_类型) == CONST.对象类型_人) then
+      local t3 = { CONST.对象_魔攻, CONST.对象_魔抗, };
+      for i, v in ipairs(t3) do
+        local vx = tonumber(Char.GetTempData(charIndex, "CSE:" .. v)) or 0;
+        if (vx ~= 0 and vx ~= nil) then
+          Char.SetData(charIndex, v, Char.GetData(charIndex, v) + vx);
+        end
       end
     end
     local t2 = { { CONST.CHAR_最大血, CONST.CHAR_血 }, { CONST.CHAR_最大魔, CONST.CHAR_魔 } }
