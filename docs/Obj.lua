@@ -187,3 +187,6 @@ function Obj.AddGold(Map,Floor,Xpos,Ypos,gold) end
 ---@return number @成功返回ObjectIndex
 function Obj.AddItem(Map,Floor,Xpos,Ypos,itemIndex) end
 
+---更新物件信息
+---@param objIndex number index。
+function Obj.UpObject(objIndex) end

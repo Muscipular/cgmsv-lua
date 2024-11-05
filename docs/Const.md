@@ -225,7 +225,7 @@
 | %EnemyBase_力量% | 5 |
 | %EnemyBase_强度% | 6 |
 | %EnemyBase_速度% | 7 |
-| %EnemyBase_魔法% | 7 |
+| %EnemyBase_魔法% | 8 |
 | %EnemyBase_捕捉难度% | 9 |
 | %EnemyBase_图鉴等级% | 10 |
 | %EnemyBase_魅力要求% | 11 |
