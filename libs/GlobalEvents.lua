@@ -30,10 +30,10 @@ local chained = {
     end
     return res
   end,
-  BattleDamageEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
+  BattleDamageEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlag)
     local dmg = Damage;
     for i, v in ipairs(list) do
-      dmg = v(CharIndex, DefCharIndex, OriDamage, dmg, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
+      dmg = v(CharIndex, DefCharIndex, OriDamage, dmg, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlag)
       if type(dmg) ~= 'number' or dmg <= 0 then
         if Flg == CONST.DamageFlags.Miss or Flg == CONST.DamageFlags.Dodge or Damage == 0 then
           dmg = 0
@@ -84,9 +84,9 @@ local chained = {
     --print('dmg', OriDamage, Damage);
     return Damage;
   end,
-  BattleHealCalculateEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg)
+  BattleHealCalculateEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlag)
     for i, v in ipairs(list) do
-      local m = v(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg);
+      local m = v(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlag);
       if type(m) == 'number' then
         m = math.floor(m);
         if m <= 0 then
