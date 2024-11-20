@@ -31,9 +31,13 @@ CONST.DamageFlags = {
   ComboFinal = 10,
   ---战栗
   FpDamage = 11,
-  --ComboFinal = 10,
+  ---ComboFinal = 10,
   Boom = 12,
   EarthQuake = 13,
+  ---魔法暴击
+  MagicCritical = 14,
+  ---魔反结算伤害
+  MagicReflection = 15,
 }
 CONST.HealDamageFlags = {
   ---治疗
