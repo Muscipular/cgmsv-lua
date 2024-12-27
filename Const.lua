@@ -345,13 +345,13 @@ CONST.BATTLE_FIELD_ATTR_SEALED_MAGIC = 0x10;
 
 -- 特殊相关
 CONST.道具_Func_InitFunc = CONST.道具_INITFUNC or 2005;
-CONST.道具_Func_WatchFunc = CONST.道具_FIRSTFUNCTION or 2006;
-CONST.道具_Func_UseFunc = CONST.道具_WATCHFUNC or 2007;
-CONST.道具_Func_AttachFunc = CONST.道具_USEFUNC or 2008;
-CONST.道具_Func_DetachFunc = CONST.道具_ATTACHFUNC or 2009;
-CONST.道具_Func_DropFunc = CONST.道具_DETACHFUNC or 2010;
-CONST.道具_Func_PrePickUpFunc = CONST.道具_DROPFUNC or 2011;
-CONST.道具_Func_PickUpFunc = CONST.道具_PREPICKUPFUNC or 2012;
+CONST.道具_Func_WatchFunc = CONST.道具_WATCHFUNC or 2006;
+CONST.道具_Func_UseFunc = CONST.道具_USEFUNC or 2007;
+CONST.道具_Func_AttachFunc = CONST.道具_ATTACHFUNC or 2008;
+CONST.道具_Func_DetachFunc = CONST.道具_DETACHFUNC or 2009;
+CONST.道具_Func_DropFunc = CONST.道具_DROPFUNC or 2010;
+CONST.道具_Func_PrePickUpFunc = CONST.道具_PREPICKUPFUNC or 2011;
+CONST.道具_Func_PickUpFunc = CONST.道具_PICKUPFUNC or 2012;
 CONST.道具_所有者 = CONST.道具_所有者 or (0x000002E4 / 4);
 -- CONST.CHAR_ENEMY_AI = 499;
 CONST.PET_DepartureBattleStatus = CONST.对象_PET_DepartureBattleStatus or (0xCC / 4 + 0x58 / 4);
