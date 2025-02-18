@@ -1,0 +1,59 @@
+{
+  "runtime.fileEncoding": "utf-8",
+  "runtime.version": "LuaJIT",
+  "semantic.keyword": true,
+  "hint.enable": true,
+  "runtime.nonstandardSymbol": [
+    "continue",
+    "!",
+    "!=",
+    "||",
+    "&&"
+  ],
+  "runtime.unicodeName": true,
+  "workspace.checkThirdParty": false,
+  "diagnostics.globals": [
+    "Obj",
+    "ModuleBase",
+    "NL",
+    "NLG",
+    "Map",
+    "Battle",
+    "Char",
+    "Field",
+    "SQL",
+    "Tech",
+    "Data",
+    "Http",
+    "TechArea",
+    "Pet",
+    "Recipe",
+    "Protocol",
+    "Item",
+    "Skill",
+    "getModule"
+  ],
+  "workspace.ignoreDir": [
+    ".vscode",
+    "libs/Gmsv"
+  ],
+  "type.weakUnionCheck": true,
+  "type.weakNilCheck": true,
+  "diagnostics.disable": [
+    "missing-return",
+    "missing-return-value",
+    "duplicate-set-field",
+    "unknown-symbol",
+    "undefined-global",
+    "need-check-nil",
+    "return-type-mismatch",
+    "lowercase-global"
+  ],
+  "hint.await": false,
+  "hover.previewFields": 30,
+  "hover.expandAlias": false,
+  "hint.semicolon": "Disable",
+  "runtime.plugin": ".vscode/Const.lua",
+  "completion.showParams": true,
+  "hint.setType": false
+}

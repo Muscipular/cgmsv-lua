@@ -144,6 +144,11 @@ function Battle.SetBattleFieldAttribute(BattleIndex, Attribute, TurnCount, Attri
 ---@return number @0为成功,其他失败。
 function Battle.SetNextBattle(battleIndex,encountIndex, flg) end
 
+---获取lua连战flg
+---@param battleIndex number
+---@return number flg
+function Battle.GetNextBattleFlg(battleIndex) end
+
 ---获得角色战斗中真实位置
 ---@param battleIndex number 战斗index
 ---@param charIndex number 角色index

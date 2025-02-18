@@ -18,6 +18,7 @@ String.prototype.color = function (c) {
 }
 
 let fileMap = defineArray
+  .filter(e => e.defines[0] && /docs[\\/].+\.lua$/i.test(e.defines[0].file))
   .groupBy(el => (el.defines[0].file.match(/[a-z\.]+$/i) + '').match(/^[^\.]+/))
   .filter(e => !/(CONST|types|docs|Ext|Module)/i.test(e[0]));
 
