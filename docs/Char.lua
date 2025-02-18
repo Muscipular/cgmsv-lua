@@ -53,7 +53,7 @@ function Char.AddGold(charIndex, amount) end
 ---@param CharIndex number 目标的 对象index。
 ---@param ItemID number 道具ID。
 ---@param Amount number 道具的数量。
----@param ShowMsg? number 是否显示系统信息
+---@param ShowMsg? boolean 是否显示系统信息
 ---@return number @成功返回1，失败则返回0。
 function Char.DelItem(CharIndex, ItemID, Amount, ShowMsg) end
 
@@ -61,7 +61,7 @@ function Char.DelItem(CharIndex, ItemID, Amount, ShowMsg) end
 ---@param CharIndex number 目标的 对象index。
 ---@param ItemID number 道具ID。
 ---@param Amount number 道具的数量。
----@param ShowMsg? number 是否显示系统信息
+---@param ShowMsg? boolean 是否显示系统信息
 ---@return number @目标道具index，失败则返回负数。
 function Char.GiveItem(CharIndex, ItemID, Amount, ShowMsg) end
 
