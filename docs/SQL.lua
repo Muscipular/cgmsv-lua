@@ -13,7 +13,7 @@ function SQL.Query(QueryString) end
 ---执行指定的Mysql查询。
 ---@param sql string sql
 ---@vararg string|number 绑定参数，最多40个
----@return {status:number,effectRows:number,rows:table} @返回查询内容
+---@return {status:number,effectRows:number,rows:any[]|nil} @返回查询内容
 function SQL.QueryEx(sql, ...) end
 
 ---获取Mysql连接对象，PS：用完必须释放，否则Mysql连接已经用完
@@ -26,7 +26,7 @@ MysqlConn = {}
 ---执行指定的Mysql查询。
 ---@param sql string sql
 ---@vararg string|number 绑定参数，最多40个
----@return {status:number,effectRows:number,rows:table} @返回查询内容
+---@return {status:number,effectRows:number,rows:any[]|nil} @返回查询内容
 function MysqlConn:Query(sql, ...) end
 
 ---释放连接

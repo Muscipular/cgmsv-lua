@@ -704,3 +704,24 @@ function Char.SwitchBag(charIndex, page) end
 ---@param toSlot number 道具位置0~19, -1为自动找空位
 ---@return number @1为成功，其他均为失败
 function Char.ItemMoveBag(charIndex, slot, page, toSlot) end
+
+---获取称号通过序号
+---@param charIndex number CharIndex
+---@param slot number 序号
+---@return string @称号名字
+function Char.GetTitleNameBySlot(charIndex, slot) end
+
+---获取玩家TitleId
+---@param charIndex CharIndex
+---@param slot number 序号
+---@return number @titleId
+function Char.GetTitleBySlot(charIndex, slot) end
+
+---登出
+---@param charIndex CharIndex
+function Char.SimpleLogout(charIndex) end
+
+---封号
+---@param charIndex CharIndex
+function Char.Ban(charIndex) end
+

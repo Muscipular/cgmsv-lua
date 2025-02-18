@@ -58,6 +58,10 @@ function Pet.GetSkill(PetIndex, SkillSlot) end
 ---@return string @返回的结果是字符串 | 返回"-1"表示非宠物或无法获取，否则为宠物全局唯一标识。
 function Pet.GetUUID(PetIndex) end
 
+---设置宠物对象的唯一标识。
+---@param PetIndex  number 目标宠物对象index。
+---@param uuid string 宠物全局唯一标识
+function Pet.SetUUID(PetIndex, uuid) end
 
 ---移动宠物装备
 ---@param charIndex number 目标对象index。
