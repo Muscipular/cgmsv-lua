@@ -82,6 +82,7 @@ function Map.MakeCopyMap(mapid, floor) end
 function Map.DelLuaMap(floor) end
 
 ---创建随机地图。
+---[@group Map.MakeMazeMap]
 ---@param Dofile? string 回调函数所在文件 字符串
 ---@param InitFuncName? string 回调函数名，当随机地图生成成功以后，会触发定义的回调函数 MakeMazeMapCallBack 字符串
 ---@param Xsize number 地图x坐标最大值
@@ -91,6 +92,7 @@ function Map.DelLuaMap(floor) end
 function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName) end
 
 ---创建随机地图。
+---[@group Map.MakeMazeMap]
 ---@param Dofile? string 回调函数所在文件 字符串
 ---@param InitFuncName? string 回调函数名，当随机地图生成成功以后，会触发定义的回调函数 MakeMazeMapCallBack 字符串
 ---@param Xsize number 地图x坐标最大值
@@ -114,6 +116,7 @@ function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName) end
 function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName, pal, roomSize, roomSizeMinX, roomSizeMinY, roomSizeMaxX, roomSizeMaxY, tile, obj, other, wallH, wallHX, wallV, wallVX, wallcross) end
 
 ---创建随机地图。
+---[@group Map.MakeMazeMap]
 ---@param Dofile? string 回调函数所在文件 字符串
 ---@param InitFuncName? string 回调函数名，当随机地图生成成功以后，会触发定义的回调函数 MakeMazeMapCallBack 字符串
 ---@param Xsize number 地图x坐标最大值
@@ -138,6 +141,7 @@ function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName, pal, roomS
 function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName, pal, roomSize, roomSizeMinX, roomSizeMinY, roomSizeMaxX, roomSizeMaxY, tile, obj, other, wallH, wallHX, wallV, wallVX, wallcross, bgm) end
 
 ---这个是Map.MakeMazeMap生成随机地图结果的回调函数
+---[@group Map.MakeMazeMap]
 ---@param FloorID  number 生成的地图的编号
 ---@param Doneflg  number 生成地图的结果，如果该值为1则生成成功，如果为0则生成失败。
 ---@return any @
