@@ -148,17 +148,11 @@ function NL.RegBattleOverEvent(Dofile, InitFuncName) end
 ---@return number @返回0即可
 function BattleOverEventCallBack(BattleIndex) end
 
----创建一个玩家通过传送点时触发的Lua函数，可以用来记录玩家的传送轨迹。
+---创建一个玩家通过传送点时触发的Lua函数，可以用来记录玩家的传送轨迹并修改。
 ---[@group NL.RegWarpEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[WarpEventCallBack]
 function NL.RegWarpEvent(Dofile, InitFuncName) end
-
----创建一个玩家通过传送点时触发的Lua函数，可以用来记录玩家的传送轨迹。
----[@group NL.RegWarpEvent]
----@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
----@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[WarpEventCallBack]
-function NL.RegAfterWarpEvent(Dofile, InitFuncName) end
 
 ---WarpEvent的回调函数
 ---[@group NL.RegWarpEvent]
@@ -171,8 +165,28 @@ function NL.RegAfterWarpEvent(Dofile, InitFuncName) end
 ---@param Target_FloorId  number 传送后的floor id，该值由Lua引擎传递给本函数。
 ---@param Target_X  number 传送后的x，该值由Lua引擎传递给本函数。
 ---@param Target_Y  number 传送后的y，该值由Lua引擎传递给本函数。
----@return number @返回0即可
+---@return number[]|nil @返回修改的{mapId,floor,x,y}，不修改返回nil
 function WarpEventCallBack(CharIndex, Ori_MapId, Ori_FloorId, Ori_X, Ori_Y, Target_MapId, Target_FloorId, Target_X, Target_Y) end
+
+---创建一个玩家通过传送点时触发的Lua函数，可以用来记录玩家的传送轨迹。
+---[@group NL.RegAfterWarpEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[AfterWarpEventCallBack]
+function NL.RegAfterWarpEvent(Dofile, InitFuncName) end
+
+---WarpEvent的回调函数
+---[@group NL.RegAfterWarpEvent]
+---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
+---@param Ori_MapId  number 传送前的mapid，该值由Lua引擎传递给本函数。
+---@param Ori_FloorId  number 传送前的floor id，该值由Lua引擎传递给本函数。
+---@param Ori_X  number 传送前的x，该值由Lua引擎传递给本函数。
+---@param Ori_Y  number 传送前的y，该值由Lua引擎传递给本函数。
+---@param Target_MapId  number 传送后的mapid，该值由Lua引擎传递给本函数。
+---@param Target_FloorId  number 传送后的floor id，该值由Lua引擎传递给本函数。
+---@param Target_X  number 传送后的x，该值由Lua引擎传递给本函数。
+---@param Target_Y  number 传送后的y，该值由Lua引擎传递给本函数。
+---@return number @返回0即可
+function AfterWarpEventCallBack(CharIndex, Ori_MapId, Ori_FloorId, Ori_X, Ori_Y, Target_MapId, Target_FloorId, Target_X, Target_Y) end
 
 ---创建一个所有玩家掉线就会触发的Lua函数。
 ---[@group NL.RegDropEvent]

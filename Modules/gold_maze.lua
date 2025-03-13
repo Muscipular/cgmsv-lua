@@ -3,51 +3,52 @@
 local GoldMazeModule = ModuleBase:createModule('gold_maze')
 
 local MAX_LEVEL = 99;
-local ENCOUNT_RATE = 8;
-local MIN_SIZE = 50;
-local MAX_SIZE = 80;
+local ENCOUNT_RATE = 6.66;
+local MIN_SIZE = 40;
+local MAX_SIZE = 70;
 local BOSS_MAP = CONST.地图类型_普通;
 local BOSS_FLOOR = 592;
 local BOSS_FLOOR_X = 592;
 local BOSS_FLOOR_Y = 592;
 local ENTRY_MAPID = CONST.地图类型_普通;
 local ENTRY_FLOOR = 11015;
-local ENTRY_X = 0;
-local ENTRY_Y = 0;
+local ENTRY_X = 9;
+local ENTRY_Y = 21;
 local ENTRY_NPC = 10000;
 local ENTRY_DIR = 0;
-local ENTRY_ITEMID = 88888;
+local ENTRY_ITEMID = 1;
 local BOSS = 880048;
 local ENEMY = { 880014, 880015, 880016, 880017, 880018 };
 
 function GoldMazeModule:onLoad()
+    -- self:SetLogLevel(888);
+    -- _G.loggerLevel = 888;
     self:logInfo('加载黄金迷宫模块')
     self.MapList = {} -- 存储所有生成的地图floor
     -- 创建入口NPC
     self:createEntranceNPC()
-
     -- 注册事件
     self:regCallback("ItemBoxLootEvent", Func.bind(self.onItemBoxLoot, self))
     self:regCallback("ItemBoxEncountRateEvent", Func.bind(self.onItemBoxEncountRate, self))
     self:regCallback("WarpEvent", Func.bind(self.onWarpEvent, self))
 
     -- 创建地图清理循环
-    local loopFnIndex = self:regCallback(Func.bind(self.onMapCleanLoop, self))
     local onEliteWin = self:regCallback(Func.bind(self.onEliteWin, self))
-    Char.SetLoopEvent(nil, loopFnIndex, 0, 1000) -- 全局循环
     self.onEliteWinKey = onEliteWin;
 end
 
 function GoldMazeModule:onUnload()
     self:logInfo('unload')
+    -- NL.DelNpc(self.npc);
     for floor, _ in pairs(self.MapList) do
+        self:logDebug("clear up", floor)
         local players = NLG.GetMapPlayer(CONST.地图类型_LUAMAP, floor)
-        if players then
+        if type(players) == "table" then
             for _, charIndex in pairs(players) do
-                Char.Warp(charaIndex, ENTRY_MAPID, ENTRY_FLOOR, ENTRY_X, ENTRY_Y);
+                Char.Warp(charIndex, ENTRY_MAPID, ENTRY_FLOOR, ENTRY_X, ENTRY_Y);
             end
         end
-        Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVar", nil)
+        -- Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVar", nil)
         Map.DelLuaMap(floor)
     end
 end
@@ -67,6 +68,8 @@ function GoldMazeModule:createEntranceNPC()
         self:startAdventure(player)
     end)
     self.npc = charIndex;
+    local loopFnIndex = self:regCallback(Func.bind(self.onMapCleanLoop, self))
+    Char.SetLoopEvent(nil, loopFnIndex, charIndex, 1000) -- 全局循环
 end
 
 function GoldMazeModule:createMap(level)
@@ -78,18 +81,21 @@ function GoldMazeModule:createMap(level)
         floor = Map.MakeMazeMap(nil, nil,
             w, h,
             "黄金迷宫" .. level .. "层",
+            -- 307
             10,
             10,
             10, 20,
             10, 20,
-            9682, 0, 0,
-            0, 0, 0, 0, 0, 215
+            9682, 100, 0,
+            0, 0, 0, 0, 0,
+            215
         )
         if floor >= 0 then
             break;
         end
     end
     if floor == -1 then return -1 end
+    self:logDebug("create floor", floor)
 
     -- 设置地图变量
     Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVar", 1)
@@ -99,7 +105,9 @@ function GoldMazeModule:createMap(level)
     -- 创建传送点
     local tx, ty = Map.GetAvailablePos(CONST.地图类型_LUAMAP, floor)
     Obj.AddWarp(CONST.地图类型_LUAMAP, floor, tx, ty,
-        CONST.地图类型_普通, BOSS_FLOOR, BOSS_FLOOR_X, BOSS_FLOOR_Y)
+        CONST.地图类型_LUAMAP, floor, tx, ty)
+    --    local tile = Map.GetImage(CONST.地图类型_LUAMAP, floor, tx, ty)
+    Map.SetImage(CONST.地图类型_LUAMAP, floor, tx, ty, nil, 17990)
 
     -- 随机放置宝箱
     local max = NLG.Rand(0, 5);
@@ -108,6 +116,7 @@ function GoldMazeModule:createMap(level)
         local itemIndex = Item.MakeItem(type)
         local x, y = Map.GetAvailablePos(CONST.地图类型_LUAMAP, floor)
         Obj.AddItem(CONST.地图类型_LUAMAP, floor, x, y, itemIndex)
+        self:logInfo("BOX", floor, x, y, itemIndex)
     end
     return floor;
 end
@@ -119,7 +128,9 @@ function GoldMazeModule:startAdventure(leaderIndex)
     for _, member in ipairs(partyMembers) do
         local lastDate = Char.GetExtData(member, "GoldMapDate") or 0
         if tonumber(lastDate) >= tonumber(os.date("%Y%m%d")) then
-            NLG.SystemMessage(charIndex, "今天已经挑战过黄金迷宫！")
+            self:logInfo(lastDate, os.date("%Y%m%d"))
+            -- Char.SetExtData(member, "GoldMapDate", nil)
+            NLG.SystemMessage(member, "今天已经挑战过黄金迷宫！")
             return
         end
     end
@@ -175,9 +186,9 @@ end
 function GoldMazeModule:onWarpEvent(charIndex, sMapId, sFloor, sX, sY, targetMap, targetFloor, tX, tY)
     local mapVar = Map.GetExtData(sMapId, sFloor, "GoldMapVar")
     if mapVar ~= 1 then return end
-    local mapVar = Map.GetExtData(targetMap, targetFloor, "GoldMapVar")
-    if mapVar == 1 then return end
-    if targetFloor ~= BOSS_FLOOR and targetMap ~= BOSS_MAP then return end
+    local mapVar2 = Map.GetExtData(targetMap, targetFloor, "GoldMapVar")
+    if mapVar2 ~= 1 then return end
+    if sFloor ~= targetFloor then return end
     local partyMode = Char.GetData(charIndex, CONST.对象_组队模式)
     if partyMode == CONST.组队模式_队长 or partyMode == CONST.组队模式_无 then
         local allPresent = self:validateParty(charIndex);
@@ -185,7 +196,11 @@ function GoldMazeModule:onWarpEvent(charIndex, sMapId, sFloor, sX, sY, targetMap
         if allPresent then
             local level = tonumber(Char.GetTempData(charIndex, "GoldMapLevel")) or 1
             if level < MAX_LEVEL then
-                self:startNextMap(charIndex)
+                local ret = { targetMap, targetFloor, tX, tY }
+                self:startNextMap(charIndex, function(c, ...)
+                    ret = { ... }
+                end)
+                return ret;
             end
         else
             NLG.SystemMessage(charIndex, "等等你可怜的队友吧");
@@ -197,8 +212,9 @@ end
 function GoldMazeModule:onMapCleanLoop()
     for floor, _ in pairs(table.copy(self.MapList)) do
         local players = NLG.GetMapPlayer(CONST.地图类型_LUAMAP, floor)
-        if not players or #players == 0 then
+        if type(players) ~= "table" or #players == 0 then
             -- 地图无人则删除
+            self:logDebug("delete", floor)
             Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVar", nil)
             Map.DelLuaMap(floor)
             self.MapList[floor] = nil
@@ -318,22 +334,23 @@ function GoldMazeModule:nextLevel(charIndex)
     if currentMapId == CONST.地图类型_LUAMAP and self.MapList[currentFloor] then
         local allPresent = self:validateParty(charIndex);
         if allPresent then
-            self:startNextMap(charIndex)
+            self:startNextMap(charIndex, Char.Warp)
         else
             NLG.SystemMessage(charIndex, "等等你可怜的队友吧");
         end
     end
 end
 
-function GoldMazeModule:startNextMap(leaderIndex)
+function GoldMazeModule:startNextMap(leaderIndex, warpFn)
     local level = tonumber(Char.GetTempData(leaderIndex, "GoldMapLevel")) + 1;
     local newFloor = self:createMap(level)
     local partyMembers = self:getPartyMembers(leaderIndex)
+    local x, y = Map.GetAvailablePos(CONST.地图类型_LUAMAP, newFloor)
     for _, member in ipairs(partyMembers) do
         Char.SetTempData(member, "GoldMapLevel", level);
     end
-    local x, y = Map.GetAvailablePos(CONST.地图类型_LUAMAP, newFloor)
-    Char.Warp(partyMembers[1], CONST.地图类型_LUAMAP, newFloor, x, y)
+    -- self:logDebug("warp to ", CONST.地图类型_LUAMAP, newFloor, x, y)
+    warpFn(partyMembers[1], CONST.地图类型_LUAMAP, newFloor, x, y)
 end
 
 function GoldMazeModule:onEliteWin(battleIndex, charIndex)

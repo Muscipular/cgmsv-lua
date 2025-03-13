@@ -125,6 +125,9 @@ end
 
 function NPCPart:onUnload()
   for i, v in pairs(self.npcList) do
+    Char.UnsetLoopEvent(v);
+    Char.UnsetWindowTalkedEvent(v);
+    Char.UnsetTalkedEvent(v);
     NL.DelNpc(v);
   end
 end
