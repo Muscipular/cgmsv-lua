@@ -3,20 +3,20 @@
 local GoldMazeModule = ModuleBase:createModule('gold_maze')
 
 local MAX_LEVEL = 99;
-local ENCOUNT_RATE = 6.66;
+local ENCOUNT_RATE = 1.88;
 local MIN_SIZE = 40;
 local MAX_SIZE = 70;
 local BOSS_MAP = CONST.地图类型_普通;
 local BOSS_FLOOR = 592;
-local BOSS_FLOOR_X = 592;
-local BOSS_FLOOR_Y = 592;
+local BOSS_FLOOR_X = 2;
+local BOSS_FLOOR_Y = 7;
 local ENTRY_MAPID = CONST.地图类型_普通;
 local ENTRY_FLOOR = 11015;
-local ENTRY_X = 9;
-local ENTRY_Y = 21;
+local ENTRY_X = 53;
+local ENTRY_Y = 50;
 local ENTRY_NPC = 10000;
 local ENTRY_DIR = 0;
-local ENTRY_ITEMID = 1;
+local ENTRY_ITEMID = 20212095;
 local BOSS = 880048;
 local ENEMY = { 880014, 880015, 880016, 880017, 880018 };
 
@@ -30,7 +30,8 @@ function GoldMazeModule:onLoad()
     -- 注册事件
     self:regCallback("ItemBoxLootEvent", Func.bind(self.onItemBoxLoot, self))
     self:regCallback("ItemBoxEncountRateEvent", Func.bind(self.onItemBoxEncountRate, self))
-    self:regCallback("WarpEvent", Func.bind(self.onWarpEvent, self))
+    -- self:regCallback("WarpEvent", Func.bind(self.onWarpEvent, self))
+    self:regCallback("ItemDropRateEvent", Func.bind(self.ItemDropRateEvent, self));
 
     -- 创建地图清理循环
     local onEliteWin = self:regCallback(Func.bind(self.onEliteWin, self))
@@ -120,13 +121,32 @@ function GoldMazeModule:createMap(level)
     Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVar", 1)
     self.MapList[floor] = true
 
+    for i = 1, 100 do
+        -- 创建传送点
+        local tx, ty = Map.GetAvailablePos(CONST.地图类型_LUAMAP, floor)
+        if Map.IsWalkable(CONST.地图类型_LUAMAP, floor, tx - 2, ty + 2) == 1 or i == 100 then
+            -- Obj.AddWarp(CONST.地图类型_LUAMAP, floor, tx, ty,
+            --     CONST.地图类型_LUAMAP, floor, tx, ty)
+            --    local tile = Map.GetImage(CONST.地图类型_LUAMAP, floor, tx, ty)
+            self:logInfo(tx, ty);
+            Map.SetImage(CONST.地图类型_LUAMAP, floor, tx, ty, nil, 17990)
+            Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarX", tx)
+            Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarY", ty)
+            break
+        end
+        if Map.IsWalkable(CONST.地图类型_LUAMAP, floor, tx + 2, ty - 2) == 1 then
+            -- Obj.AddWarp(CONST.地图类型_LUAMAP, floor, tx, ty,
+            --     CONST.地图类型_LUAMAP, floor, tx, ty)
+            --    local tile = Map.GetImage(CONST.地图类型_LUAMAP, floor, tx, ty)
+            tx, ty = tx + 2, ty -2;
+            self:logInfo(tx, ty);
+            Map.SetImage(CONST.地图类型_LUAMAP, floor, tx, ty, nil, 17990)
+            Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarX", tx)
+            Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarY", ty)
+            break
+        end
+    end
 
-    -- 创建传送点
-    local tx, ty = Map.GetAvailablePos(CONST.地图类型_LUAMAP, floor)
-    Obj.AddWarp(CONST.地图类型_LUAMAP, floor, tx, ty,
-        CONST.地图类型_LUAMAP, floor, tx, ty)
-    --    local tile = Map.GetImage(CONST.地图类型_LUAMAP, floor, tx, ty)
-    Map.SetImage(CONST.地图类型_LUAMAP, floor, tx, ty, nil, 17990)
 
     -- 随机放置宝箱
     local max = NLG.Rand(0, 5);
@@ -148,7 +168,7 @@ function GoldMazeModule:startAdventure(leaderIndex)
         local lastDate = Char.GetExtData(member, "GoldMapDate") or 0
         if tonumber(lastDate) >= tonumber(os.date("%Y%m%d")) then
             self:logInfo(lastDate, os.date("%Y%m%d"))
-            -- Char.SetExtData(member, "GoldMapDate", nil)
+            Char.SetExtData(member, "GoldMapDate", nil)
             NLG.SystemMessage(member, "今天已经挑战过黄金迷宫！")
             return
         end
@@ -186,7 +206,7 @@ function GoldMazeModule:onItemBoxLoot(charIndex, mapId, floor, x, y, boxType)
         if lootType == "encounter" then
             self:startEncounter(charIndex, level, "normal")
         elseif lootType == "elite" then
-            self:startEncounter(charIndex, level + 50, "elite")
+            self:startEncounter(charIndex, level, "elite")
         elseif lootType == "next" then
             self:nextLevel(charIndex)
         end
@@ -202,30 +222,35 @@ function GoldMazeModule:onItemBoxEncountRate(charIndex, mapId, floor, X, Y, rate
     return rate
 end
 
-function GoldMazeModule:onWarpEvent(charIndex, sMapId, sFloor, sX, sY, targetMap, targetFloor, tX, tY)
+function GoldMazeModule:onWarpEvent(charIndex)
+    local members = self:getPartyMembers(charIndex);
+    charIndex = members[1];
+    local sMapId, sFloor, sX, sY;
+    sMapId = Char.GetData(charIndex, CONST.对象_地图类型);
+    sFloor = Char.GetData(charIndex, CONST.对象_地图);
+    sX = Char.GetData(charIndex, CONST.对象_X);
+    sY = Char.GetData(charIndex, CONST.对象_Y);
     local mapVar = Map.GetExtData(sMapId, sFloor, "GoldMapVar")
-    if mapVar ~= 1 then return end
-    local mapVar2 = Map.GetExtData(targetMap, targetFloor, "GoldMapVar")
-    if mapVar2 ~= 1 then return end
-    if sFloor ~= targetFloor then return end
-    local partyMode = Char.GetData(charIndex, CONST.对象_组队模式)
-    if partyMode == CONST.组队模式_队长 or partyMode == CONST.组队模式_无 then
-        local allPresent = self:validateParty(charIndex);
+    if mapVar ~= 1 then return false end
+    local x = Map.GetExtData(sMapId, sFloor, "GoldMapVarX")
+    local y = Map.GetExtData(sMapId, sFloor, "GoldMapVarY")
 
-        if allPresent then
-            local level = tonumber(Char.GetTempData(charIndex, "GoldMapLevel")) or 1
-            if level < MAX_LEVEL then
-                local ret = { targetMap, targetFloor, tX, tY }
-                self:startNextMap(charIndex, function(c, ...)
-                    ret = { ... }
-                end)
-                return ret;
-            end
-        else
-            NLG.SystemMessage(charIndex, "等等你可怜的队友吧");
-            Char.Warp(charIndex, sMapId, sFloor, sX, sY);
-        end
+    if x ~= sX or y ~= sY then
+        return false
     end
+    local allPresent = self:validateParty(charIndex);
+
+    if allPresent then
+        local level = tonumber(Char.GetTempData(charIndex, "GoldMapLevel")) or 1
+        if level < MAX_LEVEL then
+            self:startNextMap(charIndex)
+            return true;
+        end
+    else
+        NLG.SystemMessage(charIndex, "等等你可怜的队友吧");
+        -- Char.Warp(charIndex, sMapId, sFloor, sX, sY);
+    end
+    return false
 end
 
 function GoldMazeModule:onMapCleanLoop()
@@ -255,6 +280,10 @@ function GoldMazeModule:onMapCleanLoop()
             local totalDistance = dx + dy
 
             if totalDistance >= 1 then
+                if self:onWarpEvent(players[1]) then
+                    goto continue
+                end
+
                 local partyMode = Char.GetData(charIndex, CONST.对象_组队模式)
                 if partyMode == CONST.组队模式_队长 or partyMode == CONST.组队模式_无 then
                     local chance = totalDistance * ENCOUNT_RATE -- 每格10%概率
@@ -273,7 +302,7 @@ end
 function GoldMazeModule:getPartyMembers(leaderIndex)
     local members = {}
     local partyMode = Char.GetData(leaderIndex, CONST.对象_组队模式)
-    if partyMode == CONST.组队模式_队长 then
+    if partyMode == CONST.组队模式_队长 or partyMode == CONST.组队模式_队员 then
         for i = 0, 4 do
             local member = Char.GetPartyMember(leaderIndex, i)
             if member ~= -1 then table.insert(members, member) end
@@ -293,8 +322,8 @@ end
 function GoldMazeModule:getBoxType()
     local rand = NLG.Rand(1, 100)
     if rand <= 60 then return 18002 end -- 普通宝箱
-    if rand <= 90 then return 18003 end -- 黑宝箱
-    return 18004                        -- 白宝箱
+    if rand <= 90 then return 18004 end -- 黑宝箱
+    return 18003                        -- 白宝箱
 end
 
 function GoldMazeModule:getBoxLootType(boxType)
@@ -303,7 +332,7 @@ function GoldMazeModule:getBoxLootType(boxType)
         if rand <= 80 then return "encounter" end
         if rand <= 95 then return "elite" end
         return "next"
-    elseif boxType == 18003 then -- 黑
+    elseif boxType == 18004 then -- 黑
         if rand <= 50 then return "encounter" end
         if rand <= 90 then return "elite" end
         return "next"
@@ -323,24 +352,26 @@ function GoldMazeModule:startEncounter(charIndex, level, type)
             break
         end
     end
-    local enemies, lvList = {}, {}
+    local enemies, lvList, avg = {}, {}, {}
     if not hasItem or type == "boss" then
         for i = 1, 10 do
             table.insert(enemies, BOSS)
             table.insert(lvList, 999)
+            table.insert(avg, 0)
         end
     else
         if type == "elite" then
-            level = math.floor((level + 50) * (1 + level / 100));
+            level = math.floor(level + 50);
         end
         local count = NLG.Rand(1, 10)
         for i = 1, count do
             table.insert(enemies, ENEMY[math.random(#ENEMY)])
             table.insert(lvList, level)
+            table.insert(avg, 0)
         end
     end
 
-    local battleIndex = Battle.PVE(charIndex, charIndex, nil, enemies, lvList)
+    local battleIndex = Battle.PVE(charIndex, charIndex, nil, enemies, lvList, avg)
 
     if type == "elite" or type == "精英" then
         Battle.SetWinEvent(nil, self.onEliteWinKey, battleIndex)
@@ -353,14 +384,14 @@ function GoldMazeModule:nextLevel(charIndex)
     if currentMapId == CONST.地图类型_LUAMAP and self.MapList[currentFloor] then
         local allPresent = self:validateParty(charIndex);
         if allPresent then
-            self:startNextMap(charIndex, Char.Warp)
+            self:startNextMap(charIndex)
         else
             NLG.SystemMessage(charIndex, "等等你可怜的队友吧");
         end
     end
 end
 
-function GoldMazeModule:startNextMap(leaderIndex, warpFn)
+function GoldMazeModule:startNextMap(leaderIndex)
     local level = tonumber(Char.GetTempData(leaderIndex, "GoldMapLevel")) + 1;
     local newFloor = self:createMap(level)
     local partyMembers = self:getPartyMembers(leaderIndex)
@@ -369,10 +400,10 @@ function GoldMazeModule:startNextMap(leaderIndex, warpFn)
         Char.SetTempData(member, "GoldMapLevel", level);
     end
     if level > MAX_LEVEL then
-        warpFn(partyMembers[1], BOSS_MAP, BOSS_FLOOR, BOSS_FLOOR_X, BOSS_FLOOR_Y)
+        Char.Warp(partyMembers[1], BOSS_MAP, BOSS_FLOOR, BOSS_FLOOR_X, BOSS_FLOOR_Y)
     else
         -- self:logDebug("warp to ", CONST.地图类型_LUAMAP, newFloor, x, y)
-        warpFn(partyMembers[1], CONST.地图类型_LUAMAP, newFloor, x, y)
+        Char.Warp(partyMembers[1], CONST.地图类型_LUAMAP, newFloor, x, y)
     end
 end
 
@@ -384,6 +415,16 @@ function GoldMazeModule:onEliteWin(battleIndex, charIndex)
     end
 
     self:nextLevel(charIndex);
+end
+
+function GoldMazeModule:ItemDropRateEvent(battleIndex, enemyIndex, charaIndex, itemId, rate)
+    if itemId == 20212093 then
+        local lv = Char.GetData(charaIndex, CONST.对象_等级) or 20
+        local rate = math.max((lv - 20), 1) * 10000
+        -- 限制rate在10000到1000000以内
+        rate = math.min(math.max(rate, 10000), 1000000)
+        return rate
+    end
 end
 
 return GoldMazeModule
