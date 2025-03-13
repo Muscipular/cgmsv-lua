@@ -45,6 +45,8 @@ function GoldMazeModule:onLoad()
                 MAX_SIZE = tonumber(args[2])
             elseif args[1] == 'min_size' then
                 MIN_SIZE = tonumber(args[2])
+            elseif args[1] == 'level' then
+                MAX_LEVEL = tonumber(args[2])
             end
         end)
     end
@@ -366,7 +368,7 @@ function GoldMazeModule:startNextMap(leaderIndex, warpFn)
     for _, member in ipairs(partyMembers) do
         Char.SetTempData(member, "GoldMapLevel", level);
     end
-    if level >= 100 then
+    if level > MAX_LEVEL then
         warpFn(partyMembers[1], BOSS_MAP, BOSS_FLOOR, BOSS_FLOOR_X, BOSS_FLOOR_Y)
     else
         -- self:logDebug("warp to ", CONST.µÿÕº¿‡–Õ_LUAMAP, newFloor, x, y)
