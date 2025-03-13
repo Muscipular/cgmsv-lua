@@ -71,7 +71,7 @@ function NL.RegLoginEvent(Dofile, InitFuncName) end
 ---@return number @返回0即可
 function LoginEventCallBack(CharIndex) end
 
----创建一个所有玩家登出回记录点就会触发的Lua函数，玩家只有点击客户端”登出回记录点”按钮时才可触发该函数。
+---创建一个玩家登出回记录点就会触发的Lua函数，玩家只有点击客户端”登出回记录点”按钮时才可触发该函数。
 ---[@group NL.RegLoginGateEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[LoginGateEventCallBack]
@@ -83,7 +83,7 @@ function NL.RegLoginGateEvent(Dofile, InitFuncName) end
 ---@return number @返回0即可
 function LoginGateEventCallBack(CharIndex) end
 
----创建一个所有玩家登出游戏就会触发的Lua函数。
+---创建一个玩家登出游戏就会触发的Lua函数。
 ---[@group NL.RegLogoutEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[LogoutEventCallBack]

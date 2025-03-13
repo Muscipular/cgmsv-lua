@@ -112,7 +112,7 @@ function NLG.GetPlayerNum() end
 function NLG.GetOnLinePlayer() end
 
 ---获取地图内玩家的数量
----@param Map  number 地图类型，0为正常地图，1为自动生成的地图。
+---@param Map  number 地图类型。 CONST.地图类型_*
 ---@param Floor  number 地图编号。
 ---@return number @返回在线玩家数，失败返回-1。
 function NLG.GetMapPlayerNum(Map, Floor) end
@@ -190,14 +190,14 @@ function NLG.WatchEntry(CharIndex,TargetCharIndex) end
 function NLG.c(Message) end
 
 ---设置指定地图的名字。
----@param MapID  number 目标地图的类型，0为固定地图1为随机地图。
+---@param MapID  number 目标地图的类型。
 ---@param FloorID  number 地图编号
 ---@param Name  string 地图名字
 ---@return number @成功返回1，否则返回0。
 function NLG.SetMapName(MapID, FloorID, Name) end
 
 ---获取指定地图的名字。
----@param MapID  number 目标地图的类型，0为固定地图1为随机地图。
+---@param MapID  number 目标地图的类型。
 ---@param FloorID  number 地图编号
 ---@return string @返回值为0则获取失败，返回值为[字符串]则为地图名称。
 function NLG.GetMapName(MapID, FloorID) end

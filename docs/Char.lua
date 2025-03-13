@@ -2,13 +2,13 @@
 
 ---获取对象index的指定信息。
 ---@param charIndex number 目标的 对象index
----@param dataIndex number 说指定的对象实例信息栏位，具体栏位常量请查看附录
+---@param dataIndex number 指定的对象实例信息栏位，具体参考CONST.对象_***
 ---@return number|string @指定信息栏位的值
 function Char.GetData(charIndex, dataIndex) end
 
 ---设置对象index的指定信息。
 ---@param charIndex number 目标的 对象index
----@param dataIndex number 说指定的对象实例信息栏位，具体栏位常量请查看附录
+---@param dataIndex number 指定的对象实例信息栏位，具体参考CONST.对象_***
 ---@param value string|number 新的值
 ---@return number @0为失败，1为成功
 function Char.SetData(charIndex, dataIndex, value) end
@@ -73,7 +73,7 @@ function Char.HaveItem(CharIndex,ItemID) end
 
 ---检测对象身上的已经有道具的道具栏位数量。
 ---@param CharIndex number 目标的 对象index。
----@return number @目标道具栏的已经使用的栏位数量，无任何道具返回0，全部都有道具返回20。
+---@return number @目标道具栏的已经使用的栏位数量，无任何道具返回0。
 function Char.ItemSlot(CharIndex) end
 
 ---检测对象身上目标道具的数量。

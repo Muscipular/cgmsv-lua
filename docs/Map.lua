@@ -49,8 +49,8 @@ function Map.GetDungeonExpireAt(floor) end
 ---@param Floor number 地图
 ---@param Xpos number X坐标
 ---@param Ypos number Y坐标
----@return number @地板图档
----@return number @建筑物图档
+---@return number @地板图档(tileId)
+---@return number @建筑物图档(objId)
 function Map.GetImage(Map, Floor, Xpos, Ypos) end
 
 ---设定地图位置的图档
@@ -58,8 +58,8 @@ function Map.GetImage(Map, Floor, Xpos, Ypos) end
 ---@param Floor number 地图
 ---@param Xpos number X坐标
 ---@param Ypos number Y坐标
----@param Tile number 地板图档 可以为null
----@param Obj number 建筑物图档 可以为null
+---@param Tile? number 地板图档(tileId) 可以为null
+---@param Obj? number 建筑物图档(objId) 可以为null
 ---@return number @成功返回0
 function Map.SetImage(Map, Floor, Xpos, Ypos, Tile, Obj) end
 
@@ -144,8 +144,7 @@ function Map.MakeMazeMap(Dofile, InitFuncName, Xsize, Ysize, MapName, pal, roomS
 ---[@group Map.MakeMazeMap]
 ---@param FloorID  number 生成的地图的编号
 ---@param Doneflg  number 生成地图的结果，如果该值为1则生成成功，如果为0则生成失败。
----@return any @
-function MapCallBack(FloorID, Doneflg) end
+function MakeMazeMapCallBack(FloorID, Doneflg) end
 
 ---获取随机地图可用的坐标。
 ---@param mapid number 地图类型
