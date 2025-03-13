@@ -35,10 +35,27 @@ function GoldMazeModule:onLoad()
     -- 创建地图清理循环
     local onEliteWin = self:regCallback(Func.bind(self.onEliteWin, self))
     self.onEliteWinKey = onEliteWin;
+
+    local adminCommands = getModule("adminCommands") ---@type AdminCommands
+    if adminCommands then
+        adminCommands:regCommand("gold_maze", function(charIndex, args)
+            if args[1] == 'encount_rate' then
+                ENCOUNT_RATE = tonumber(args[2])
+            elseif args[1] == 'max_size' then
+                MAX_SIZE = tonumber(args[2])
+            elseif args[1] == 'min_size' then
+                MIN_SIZE = tonumber(args[2])
+            end
+        end)
+    end
 end
 
 function GoldMazeModule:onUnload()
     self:logInfo('unload')
+    local adminCommands = getModule("adminCommands") ---@type AdminCommands
+    if adminCommands then
+        adminCommands:unloadCommand("gold_maze");
+    end
     -- NL.DelNpc(self.npc);
     for floor, _ in pairs(self.MapList) do
         self:logDebug("clear up", floor)
