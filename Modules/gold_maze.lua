@@ -349,8 +349,12 @@ function GoldMazeModule:startNextMap(leaderIndex, warpFn)
     for _, member in ipairs(partyMembers) do
         Char.SetTempData(member, "GoldMapLevel", level);
     end
-    -- self:logDebug("warp to ", CONST.地图类型_LUAMAP, newFloor, x, y)
-    warpFn(partyMembers[1], CONST.地图类型_LUAMAP, newFloor, x, y)
+    if level == 100 then
+        warpFn(partyMembers[1], BOSS_MAP, BOSS_FLOOR, BOSS_FLOOR_X, BOSS_FLOOR_Y)
+    else
+        -- self:logDebug("warp to ", CONST.地图类型_LUAMAP, newFloor, x, y)
+        warpFn(partyMembers[1], CONST.地图类型_LUAMAP, newFloor, x, y)
+    end
 end
 
 function GoldMazeModule:onEliteWin(battleIndex, charIndex)
