@@ -19,6 +19,9 @@ local ENTRY_DIR = 0;
 local ENTRY_ITEMID = 20212095;
 local BOSS = 880048;
 local ENEMY = { 880014, 880015, 880016, 880017, 880018 };
+local WHITE_LIST = {
+    ['账号'] = true,
+};
 
 function GoldMazeModule:onLoad()
     -- self:SetLogLevel(888);
@@ -128,7 +131,7 @@ function GoldMazeModule:createMap(level)
             -- Obj.AddWarp(CONST.地图类型_LUAMAP, floor, tx, ty,
             --     CONST.地图类型_LUAMAP, floor, tx, ty)
             --    local tile = Map.GetImage(CONST.地图类型_LUAMAP, floor, tx, ty)
-            self:logInfo(tx, ty);
+            -- self:logInfo(tx, ty);
             Map.SetImage(CONST.地图类型_LUAMAP, floor, tx, ty, nil, 17990)
             Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarX", tx)
             Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarY", ty)
@@ -138,8 +141,8 @@ function GoldMazeModule:createMap(level)
             -- Obj.AddWarp(CONST.地图类型_LUAMAP, floor, tx, ty,
             --     CONST.地图类型_LUAMAP, floor, tx, ty)
             --    local tile = Map.GetImage(CONST.地图类型_LUAMAP, floor, tx, ty)
-            tx, ty = tx + 2, ty -2;
-            self:logInfo(tx, ty);
+            tx, ty = tx + 2, ty - 2;
+            -- self:logInfo(tx, ty);
             Map.SetImage(CONST.地图类型_LUAMAP, floor, tx, ty, nil, 17990)
             Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarX", tx)
             Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarY", ty)
@@ -155,7 +158,7 @@ function GoldMazeModule:createMap(level)
         local itemIndex = Item.MakeItem(type)
         local x, y = Map.GetAvailablePos(CONST.地图类型_LUAMAP, floor)
         Obj.AddItem(CONST.地图类型_LUAMAP, floor, x, y, itemIndex)
-        self:logInfo("BOX", floor, x, y, itemIndex)
+        self:logDebug("Create ItemBox", floor, x, y, itemIndex, type)
     end
     return floor;
 end
@@ -164,13 +167,24 @@ function GoldMazeModule:startAdventure(leaderIndex)
     -- 检查队伍是否已挑战
     local partyMembers = self:getPartyMembers(leaderIndex)
 
+    local whitelist = false;
     for _, member in ipairs(partyMembers) do
-        local lastDate = Char.GetExtData(member, "GoldMapDate") or 0
-        if tonumber(lastDate) >= tonumber(os.date("%Y%m%d")) then
-            self:logInfo(lastDate, os.date("%Y%m%d"))
-            Char.SetExtData(member, "GoldMapDate", nil)
-            NLG.SystemMessage(member, "今天已经挑战过黄金迷宫！")
-            return
+        local cdk = Char.GetData(member, CONST.对象_CDK);
+        if WHITE_LIST[cdk] == true then
+            whitelist = true
+            break;
+        end
+    end
+
+    if not whitelist then
+        for _, member in ipairs(partyMembers) do
+            local lastDate = Char.GetExtData(member, "GoldMapDate") or 0
+            if tonumber(lastDate) >= tonumber(os.date("%Y%m%d")) then
+                self:logInfo(lastDate, os.date("%Y%m%d"))
+                -- Char.SetExtData(member, "GoldMapDate", nil)
+                NLG.SystemMessage(member, "今天已经挑战过黄金迷宫！")
+                return
+            end
         end
     end
 
