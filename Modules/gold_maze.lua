@@ -24,8 +24,8 @@ local WHITE_LIST = {
 };
 
 function GoldMazeModule:onLoad()
-    -- self:SetLogLevel(888);
-    -- _G.loggerLevel = 888;
+    self:SetLogLevel(5);
+    _G.loggerLevel = 5;
     self:logInfo('加载黄金迷宫模块')
     self.MapList = {} -- 存储所有生成的地图floor
     -- 创建入口NPC
@@ -120,36 +120,36 @@ function GoldMazeModule:createMap(level)
     if floor == -1 then return -1 end
     self:logDebug("create floor", floor)
 
-    -- 设置地图变量
-    Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVar", 1)
-    self.MapList[floor] = true
-
+    local wx, wy = -1, -1
     for i = 1, 100 do
         -- 创建传送点
         local tx, ty = Map.GetAvailablePos(CONST.地图类型_LUAMAP, floor)
-        if Map.IsWalkable(CONST.地图类型_LUAMAP, floor, tx - 2, ty + 2) == 1 or i == 100 then
-            -- Obj.AddWarp(CONST.地图类型_LUAMAP, floor, tx, ty,
-            --     CONST.地图类型_LUAMAP, floor, tx, ty)
-            --    local tile = Map.GetImage(CONST.地图类型_LUAMAP, floor, tx, ty)
-            -- self:logInfo(tx, ty);
-            Map.SetImage(CONST.地图类型_LUAMAP, floor, tx, ty, nil, 17990)
-            Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarX", tx)
-            Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarY", ty)
-            break
-        end
-        if Map.IsWalkable(CONST.地图类型_LUAMAP, floor, tx + 2, ty - 2) == 1 then
-            -- Obj.AddWarp(CONST.地图类型_LUAMAP, floor, tx, ty,
-            --     CONST.地图类型_LUAMAP, floor, tx, ty)
-            --    local tile = Map.GetImage(CONST.地图类型_LUAMAP, floor, tx, ty)
-            tx, ty = tx + 2, ty - 2;
-            -- self:logInfo(tx, ty);
-            Map.SetImage(CONST.地图类型_LUAMAP, floor, tx, ty, nil, 17990)
-            Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarX", tx)
-            Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarY", ty)
-            break
+        if tx >= 0 or ty >= 0 then
+            self:logDebug("create warp", i, tx, ty);
+            if Map.IsWalkable(CONST.地图类型_LUAMAP, floor, tx - 2, ty + 2) == 1 or i == 100 then
+                wx, wy = tx, ty
+                break
+            end
+            if Map.IsWalkable(CONST.地图类型_LUAMAP, floor, tx + 2, ty - 2) == 1 then
+                tx, ty = tx + 2, ty - 2;
+                wx, wy = tx + 2, ty - 2;
+                break
+            end
         end
     end
 
+    if wx < 0 or wy < 0 then
+        Map.DelLuaMap(floor);
+        self:logInfo("create warp failed");
+        return -1;
+    end
+
+    -- 设置地图变量
+    Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVar", 1)
+    self.MapList[floor] = true
+    Map.SetImage(CONST.地图类型_LUAMAP, floor, wx, wy, nil, 17990)
+    Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarX", wx)
+    Map.SetExtData(CONST.地图类型_LUAMAP, floor, "GoldMapVarY", wy)
 
     -- 随机放置宝箱
     local max = NLG.Rand(0, 5);
@@ -158,7 +158,7 @@ function GoldMazeModule:createMap(level)
         local itemIndex = Item.MakeItem(type)
         local x, y = Map.GetAvailablePos(CONST.地图类型_LUAMAP, floor)
         Obj.AddItem(CONST.地图类型_LUAMAP, floor, x, y, itemIndex)
-        self:logDebug("Create ItemBox", floor, x, y, itemIndex, type)
+        self:logDebug("Create Itembox", floor, x, y, itemIndex, type)
     end
     return floor;
 end
@@ -407,8 +407,20 @@ end
 
 function GoldMazeModule:startNextMap(leaderIndex)
     local level = tonumber(Char.GetTempData(leaderIndex, "GoldMapLevel")) + 1;
-    local newFloor = self:createMap(level)
+    local newFloor = -1
+    for _ = 1, 3 do
+        newFloor = self:createMap(level)
+        if newFloor >= 0 then
+            break
+        end
+    end
     local partyMembers = self:getPartyMembers(leaderIndex)
+    if newFloor < 0 then
+        for _, member in ipairs(partyMembers) do
+            NLG.SystemMessage(member, "创建地图失败");
+        end
+        return
+    end
     local x, y = Map.GetAvailablePos(CONST.地图类型_LUAMAP, newFloor)
     for _, member in ipairs(partyMembers) do
         Char.SetTempData(member, "GoldMapLevel", level);
