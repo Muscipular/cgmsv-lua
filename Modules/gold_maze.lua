@@ -424,6 +424,8 @@ function GoldMazeModule:startNextMap(leaderIndex)
     local x, y = Map.GetAvailablePos(CONST.µØÍ¼ÀàÐÍ_LUAMAP, newFloor)
     for _, member in ipairs(partyMembers) do
         Char.SetTempData(member, "GoldMapLevel", level);
+        Char.SetTempData(charIndex, "GoldMapLastX", nil)
+        Char.SetTempData(charIndex, "GoldMapLastY", nil)
     end
     if level > MAX_LEVEL then
         Char.Warp(partyMembers[1], BOSS_MAP, BOSS_FLOOR, BOSS_FLOOR_X, BOSS_FLOOR_Y)
