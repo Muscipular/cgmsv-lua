@@ -121,8 +121,9 @@ function NL.RegLevelUpEvent(Dofile, InitFuncName) end
 ---[@group NL.RegLevelUpEvent]
 ---@param CharIndex  number 宠物主人的index，该值由Lua引擎传递给本函数。
 ---@param PetIndex  number 宠物的index，该值由Lua引擎传递给本函数。
+---@param UpLevel  number 升级数量
 ---@return number @返回0即可
-function LevelUpCallBack(CharIndex, PetIndex) end
+function LevelUpCallBack(CharIndex, PetIndex, UpLevel) end
 
 ---创建一个角色进入战斗即可触发的Lua函数。
 ---[@group NL.RegBattleStartEvent]
@@ -258,15 +259,29 @@ function GetProductSkillExpEventCallBack(CharIndex, SkillID, Exp) end
 ---创建一个宠物升级触发的Lua函数，玩家宠物在游戏中升级后就可触发，可以用来在特定等级给予特定奖励，记录玩家宠物冲级速度排行等。
 ---[@group NL.RegPetLevelUpEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
----@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[LevelUpCallBack]
+---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[PetLevelUpCallBack]
 function NL.RegPetLevelUpEvent(Dofile, InitFuncName) end
 
 ---PetLevelUpEvent的回调函数
 ---[@group NL.RegPetLevelUpEvent]
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 ---@param PetIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
+---@param UpLevel  number 升级数量
 ---@return number @返回0即可。
-function LevelUpCallBack(CharIndex, PetIndex) end
+function PetLevelUpCallBack(CharIndex, PetIndex, UpLevel) end
+
+---创建一个宠物升级触发的Lua函数，玩家宠物在游戏中升级后就可触发，可以用来在特定等级给予特定奖励，记录玩家宠物冲级速度排行等。
+---[@group NL.RegCharaAfterUpLevelEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharaAfterUpLevelEvent]
+function NL.RegCharaAfterUpLevelEvent(Dofile, InitFuncName) end
+
+---PetLevelUpEvent的回调函数
+---[@group NL.RegCharaAfterUpLevelEvent]
+---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
+---@param UpLevel  number 升级数量
+---@return number @返回0即可。
+function CharaAfterUpLevelEvent(CharIndex, UpLevel) end
 
 ---创建一个所有玩家离开战斗就会触发的Lua函数。
 ---[@group NL.RegBattleExitEvent]
