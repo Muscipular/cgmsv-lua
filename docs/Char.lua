@@ -361,7 +361,10 @@ function Char.SetTalkedEvent(Dofile,FuncName,CharIndex) end
 ---[@group Char.SetTalkedEvent]
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。（一般是NPC）
 ---@param TalkerCharIndex  number 触发事件的对象index，该值由Lua引擎传递给本函数。（一般是玩家）
-function CharTalkedCallBack(CharIndex, TalkerCharIndex) end
+---@param msg string 玩家消息
+---@param color number 颜色
+---@param size number 大小范围
+function CharTalkedCallBack(CharIndex, TalkerCharIndex, msg, color, size) end
 
 ---为对象index设置对话事件的回调函数，对象在进行对话交互的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
 ---[@group Char.SetWindowTalkedEvent]

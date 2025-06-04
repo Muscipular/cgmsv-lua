@@ -32,13 +32,13 @@ function NPCPart:NPC_createShop(name, image, positionInfo, shopBaseInfo, items)
     shopBaseInfo.msgAfterSell or '10151',
     table.unpack(fillShopSellType(shopBaseInfo.sellTypes or {})),
   }, '|');
-  local ret = NL.CreateArgNpc("Itemshop2", shopNpcPrefix .. '|' .. table.join(items or {}, '|'), name, image, positionInfo.mapType, positionInfo.map, positionInfo.x, positionInfo.y, positionInfo.direction);
+  local ret = NL.CreateArgNpc("Itemshop2", shopNpcPrefix .. '|' .. table.join(items or {}, '|'), name, image,
+    positionInfo.mapType, positionInfo.map, positionInfo.x, positionInfo.y, positionInfo.direction);
   if ret >= 0 then
     table.insert(self.npcList, ret);
   end
   return ret;
 end
-
 
 ---@param name string
 ---@param image number
@@ -82,7 +82,7 @@ end
 
 ---注册npc Talked事件
 ---@param npc number
----@param fn fun(npc: number, player: number):void
+---@param fn fun(npc: number, player: number, msg: string, color:number, size:number):void
 ---@return string fnKey
 ---@return number lastIndex
 ---@return number fnIndex
@@ -117,6 +117,68 @@ function NPCPart:NPC_buildSelectionText(title, options)
     msg = msg .. options[i] .. '\\n'
   end
   return msg;
+end
+
+---@class CO
+---@field fun function
+---@field module string
+---@field ctx {[number]:thread}
+local CO = {
+  ctx = {}
+}
+
+regGlobalEvent("LogoutEvent", function(player)
+  CO.ctx[player] = nil;
+end)
+
+function CO:onTalk(npc, player, msg, color, size)
+  self.ctx[player] = coroutine.create(self.fun)
+  -- print(self.ctx[player], coroutine.status(self.ctx[player]))
+  coroutine.resume(self.ctx[player], self, npc, player, msg, color, size);
+  if coroutine.status(self.ctx[player]) == "dead" then
+    self.ctx[player] = nil;
+  end
+end
+
+function CO:onWindowTalk(npc, player, seqno, select, data)
+  if coroutine.status(self.ctx[player]) == "dead" then
+    logError(self.module, "coroutine is dead!");
+    return
+  end
+  coroutine.resume(self.ctx[player], npc, player, seqno, select, data);
+  if coroutine.status(self.ctx[player]) == "dead" then
+    self.ctx[player] = nil;
+  end
+end
+
+---生成并发送对话框
+---@param ToIndex  number 接收对话框的目标的对象index。
+---@param WinTalkIndex  number 生成对话框的目标的对象index，一般为NPC。
+---@param WindowType  number 查阅附录对话框类型
+---@param ButtonType  number 对话框包含的按钮，查阅附录对话框按钮
+---@param SeqNo  number 自定义数值，用于识别不同的对话框事件响应, 具体会在WindowTalkedCallBack中调用
+---@param Data  string 对话框的内容,根据不同的对话框类别,有不同的格式,具体会在附录中说明
+---@return number CharIndex
+---@return number TargetCharIndex 
+---@return number SeqNo 
+---@return number Select 
+---@return string Data 
+function CO:next(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data)
+  NLG.ShowWindowTalked(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data);
+  return coroutine.yield()
+end
+
+function NPCPart:NPC_CreateCo(name, image, posistionInfo, fun)
+  local co = {
+    npc = self:NPC_createNormal(name, image, posistionInfo),
+    fun = fun,
+    module = self.name,
+  };
+
+  setmetatable(co, { __index = CO });
+  self:NPC_regTalkedEvent(co.npc, Func.bind(CO.onTalk, co));
+  self:NPC_regWindowTalkedEvent(co.npc, Func.bind(CO.onWindowTalk, co));
+  return co;
 end
 
 function NPCPart:onLoad()
