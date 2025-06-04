@@ -168,6 +168,12 @@ function CO:next(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data)
   return coroutine.yield()
 end
 
+---创建NPC_CO对象
+---@param name string
+---@param image number
+---@param posistionInfo NpcPosition
+---@param fun fun(co:CO, npc: number, player: number, msg: string, color: number, size: number)
+---@return CO
 function NPCPart:NPC_CreateCo(name, image, posistionInfo, fun)
   local co = {
     npc = self:NPC_createNormal(name, image, posistionInfo),
