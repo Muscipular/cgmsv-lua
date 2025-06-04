@@ -669,9 +669,9 @@ function Char.GetMyRoomFloor(charIndex) end
 
 ---设置头顶技能图标
 ---@param charIndex number 对象的index
----@param skillNo number 图标旗标，取值0~15
+---@param skillNo? number 图标旗标，取值0~15
 ---@return number @成功返回0
-function Char.SetSkillAction(charIndex,?skillNo) end
+function Char.SetSkillAction(charIndex,skillNo) end
 
 ---获取技能显示顺序
 ---@param charIndex number 对象的index

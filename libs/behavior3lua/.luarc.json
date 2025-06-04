@@ -1,0 +1,9 @@
+{
+    "workspace.library": [],
+    "runtime.version": "Lua 5.4",
+    "diagnostics.globals": ["olua"],
+    "workspace.ignoreDir": [],
+    "format.defaultConfig": {
+        "align_continuous_assign_statement": "false"
+    }
+}

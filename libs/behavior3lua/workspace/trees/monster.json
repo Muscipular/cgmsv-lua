@@ -1,0 +1,74 @@
+{
+  "name": "monster",
+  "root": {
+    "id": 1,
+    "name": "Sequence",
+    "desc": "怪物测试AI",
+    "args": {},
+    "children": [
+      {
+        "id": 2,
+        "name": "Selector",
+        "args": {},
+        "children": [
+          {
+            "id": 3,
+            "name": "Sequence",
+            "args": {},
+            "children": [
+              {
+                "id": 4,
+                "name": "GetHp",
+                "args": {},
+                "output": [
+                  "hp"
+                ]
+              },
+              {
+                "id": 5,
+                "name": "Check",
+                "args": {
+                  "value": "hp > 50"
+                }
+              },
+              {
+                "id": 6,
+                "name": "Log",
+                "desc": "攻击",
+                "args": {
+                  "message": "Attack!"
+                }
+              },
+              {
+                "id": 7,
+                "name": "Wait",
+                "args": {
+                  "time": 5
+                }
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "name": "Log",
+            "desc": "逃跑",
+            "args": {
+              "message": "Run!"
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Log",
+        "desc": "test",
+        "args": {
+          "message": "if true"
+        },
+        "children": []
+      }
+    ]
+  },
+  "desc": "怪物测试AI"
+}
