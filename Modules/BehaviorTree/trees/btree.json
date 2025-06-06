@@ -1,0 +1,86 @@
+{
+  "version": "1.8.1",
+  "name": "btree",
+  "prefix": "",
+  "group": [],
+  "import": [],
+  "vars": [],
+  "root": {
+    "id": "1",
+    "name": "Sequence",
+    "children": [
+      {
+        "id": "2",
+        "name": "Talk",
+        "input": [],
+        "output": [],
+        "args": {
+          "msg": "这是一个行为树范例"
+        }
+      },
+      {
+        "id": "3",
+        "name": "Random",
+        "output": [
+          "direction"
+        ],
+        "args": {
+          "min": 0,
+          "max": 7
+        }
+      },
+      {
+        "id": "4",
+        "name": "MoveToDirection",
+        "input": [
+          "direction"
+        ]
+      },
+      {
+        "id": "5",
+        "name": "AlwaysSuccess",
+        "input": [],
+        "output": [],
+        "args": {},
+        "children": [
+          {
+            "id": "6",
+            "name": "Sequence",
+            "children": [
+              {
+                "id": "7",
+                "name": "OutRange",
+                "args": {
+                  "x": 5,
+                  "y": 5
+                }
+              },
+              {
+                "id": "8",
+                "name": "WarpToPos",
+                "input": [],
+                "output": [],
+                "args": {
+                  "map": 0,
+                  "floor": 1000,
+                  "x": 240,
+                  "y": 88
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "9",
+        "name": "WaitCount",
+        "input": [],
+        "output": [],
+        "args": {
+          "count": 20
+        },
+        "children": []
+      }
+    ]
+  }
+}

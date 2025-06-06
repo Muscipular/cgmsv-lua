@@ -1,54 +1,54 @@
 [
   {
-    "desc": "ʼ�շ���ʧ��",
-    "doc": "+ ֻ����һ���ӽڵ�,�����ִ�е�һ��\n+ �����ӽڵ��Ƿ�ɹ�������ʧ��\n",
+    "desc": "始终返回失败",
+    "doc": "+ 只能有一个子节点,多个仅执行第一个\n+ 不管子节点是否成功都返回失败\n",
     "name": "AlwaysFail",
     "type": "Decorator"
   },
   {
-    "desc": "ʼ�շ��سɹ�",
-    "doc": "+ ֻ����һ���ӽڵ�,�����ִ�е�һ��\n+ �����ӽڵ��Ƿ�ɹ������سɹ�\n",
+    "desc": "始终返回成功",
+    "doc": "+ 只能有一个子节点,多个仅执行第一个\n+ 不管子节点是否成功都返回成功\n",
     "name": "AlwaysSuccess",
     "type": "Decorator"
   },
   {
     "args": [
       {
-        "desc": "��ʽ",
+        "desc": "公式",
         "name": "value",
         "type": "code?"
       }
     ],
-    "desc": "���㹫ʽ",
-    "doc": "+ ������ֵ��ʽ����\n",
+    "desc": "计算公式",
+    "doc": "+ 做简单数值公式计算\n",
     "name": "Calculate",
     "type": "Action"
   },
   {
     "args": [
       {
-        "desc": "ֵ",
+        "desc": "值",
         "name": "value",
         "type": "code?"
       }
     ],
-    "desc": "���True��False",
-    "doc": "+ ������ֵ��ʽ�ж������سɹ���ʧ��\n",
+    "desc": "检查True或False",
+    "doc": "+ 做简单数值公式判定，返回成功或失败\n",
     "name": "Check",
     "type": "Condition"
   },
   {
-    "desc": "�������",
+    "desc": "清除变量",
     "name": "Clear",
     "output": [
-      "����ı�����"
+      "清除的变量名"
     ],
     "type": "Action"
   },
   {
     "args": [
       {
-        "desc": "ֵ",
+        "desc": "值",
         "name": "value",
         "type": "code?"
       },
@@ -78,79 +78,79 @@
         "type": "int?"
       }
     ],
-    "desc": "�Ƚ�ֵ��С",
-    "doc": "+ ��ֵΪ�գ�����ʧ��\n+ ���������Ϳ��ܻᱨ��\n",
+    "desc": "比较值大小",
+    "doc": "+ 若值为空，返回失败\n+ 非整数类型可能会报错\n",
     "input": [
-      "ֵ(int)"
+      "值(int)"
     ],
     "name": "Cmp",
     "type": "Condition"
   },
   {
-    "desc": "����������ϲ�Ϊһ�����飬������������",
+    "desc": "将两个输入合并为一个数组，并返回新数组",
     "input": [
-      "����1",
-      "����2"
+      "数组1",
+      "数组2"
     ],
     "name": "Concat",
     "output": [
-      "������"
+      "新数组"
     ],
     "type": "Action"
   },
   {
-    "desc": "��������������Ԫ��",
-    "doc": "+ ֻ����һ���ӽڵ㣬�����ִ�е�һ��\n+ ���ӽڵ㷵�ء������С�ʱ�����ء������С�״̬\n+ �����������飬������������Ԫ�ط���������\n+ ��������Ϊ��ʱ�����ء�ʧ�ܡ�\n",
+    "desc": "返回满足条件的元素",
+    "doc": "+ 只能有一个子节点，多个仅执行第一个\n+ 当子节点返回「运行中」时，返回「运行中」状态\n+ 遍历输入数组，将满足条件的元素放入新数组\n+ 当新数组为空时，返回「失败」\n",
     "input": [
-      "����"
+      "数组"
     ],
     "name": "Filter",
     "output": [
-      "����",
-      "������"
+      "变量",
+      "新数组"
     ],
     "type": "Action"
   },
   {
     "args": [
       {
-        "desc": "׷�پ���",
+        "desc": "追踪距离",
         "name": "distance",
         "type": "int"
       }
     ],
-    "desc": "���ҵ���",
-    "doc": "+ �ҵ�����Ŀ��CharIndex\n+ û�ҵ�����ʧ��\n",
+    "desc": "查找敌人",
+    "doc": "+ 找到返回目标CharIndex\n+ 没找到返回失败\n",
     "name": "FindEnemy",
     "output": [
-      "Ŀ��"
+      "目标"
     ],
     "type": "Condition"
   },
   {
-    "desc": "��������",
-    "doc": "+ ֻ����һ���ӽڵ㣬�����ִ�е�һ��\n+ ÿ��ִ���ӽڵ�ǰ�����õ�ǰ�������ı���\n+ ���ӽڵ㷵��ʧ��ʱ���˳�����������ʧ��״̬\n+ ����������سɹ�/��������\n",
+    "desc": "遍历数组",
+    "doc": "+ 只能有一个子节点，多个仅执行第一个\n+ 每次执行子节点前会设置当前遍历到的变量\n+ 当子节点返回失败时，退出遍历并返回失败状态\n+ 其它情况返回成功/正在运行\n",
     "input": [
-      "[{����}]"
+      "[{数组}]"
     ],
     "name": "ForEach",
     "output": [
-      "{����}"
+      "{变量}"
     ],
     "type": "Action"
   },
   {
-    "desc": "If�ж�",
-    "doc": "+ ӵ�������ӽڵ�(��������)\n+ ����һ���ӽڵ㷵��SUCCESS��ʱ��ִ�еڶ����ӽڵ㲢���ش��ӽڵ�ķ���ֵ\n+ ����ִ�е������ӽڵ㲢��������ڵ�ķ���ֵ,���޵������ӽڵ�,�򷵻�FAIL\n",
+    "desc": "If判断",
+    "doc": "+ 拥有三个子节点(至少两个)\n+ 当第一个子节点返回SUCCESS的时候执行第二个子节点并返回此子节点的返回值\n+ 否则执行第三个子节点并返回这个节点的返回值,若无第三个子节点,则返回FAIL\n",
     "name": "IfElse",
     "type": "Composite"
   },
   {
-    "desc": "�ж�Ԫ���Ƿ���������",
-    "doc": "+ �������Ԫ�ز��Ϸ������ء�ʧ�ܡ�\n+ ֻ���������Ԫ��ʱ���ء��ɹ��������򷵻ء�ʧ�ܡ�\n",
+    "desc": "判断元素是否在数组中",
+    "doc": "+ 若输入的元素不合法，返回「失败」\n+ 只有数组包含元素时返回「成功」，否则返回「失败」\n",
     "input": [
-      "����",
-      "Ԫ��"
+      "数组",
+      "元素"
     ],
     "name": "Includes",
     "type": "Condition"
@@ -158,34 +158,34 @@
   {
     "args": [
       {
-        "desc": "����",
+        "desc": "索引",
         "name": "index",
         "type": "string"
       }
     ],
     "children": 0,
-    "desc": "�������������",
-    "doc": "+ �Ϸ�Ԫ�ز����� undefined �� null\n+ ֻ���������кϷ�Ԫ��ʱ��Ż᷵�ء��ɹ��������򷵻ء�ʧ�ܡ�\n",
+    "desc": "索引输入的数组",
+    "doc": "+ 合法元素不包括 undefined 和 null\n+ 只有索引到有合法元素时候才会返回「成功」，否则返回「失败」\n",
     "input": [
-      "����",
-      "����?"
+      "数组",
+      "索引?"
     ],
     "name": "Index",
     "output": [
-      "Ԫ��"
+      "元素"
     ],
     "type": "Action"
   },
   {
-    "desc": "ȡ��",
-    "doc": "+ ���ӽڵ�ķ���ֵȡ��\n+ ֻ����һ���ӽڵ㣬�����ִ�е�һ��\n",
+    "desc": "取反",
+    "doc": "+ 将子节点的返回值取反\n+ 只能有一个子节点，多个仅执行第一个\n",
     "name": "Invert",
     "type": "Decorator"
   },
   {
-    "desc": "�жϱ����Ƿ񲻴���",
+    "desc": "判断变量是否不存在",
     "input": [
-      "�жϵı���"
+      "判断的变量"
     ],
     "name": "IsNull",
     "type": "Condition"
@@ -193,78 +193,96 @@
   {
     "args": [
       {
-        "desc": "ֵ(value)",
+        "desc": "值(value)",
         "name": "value",
-        "oneof": "�Ѵ��ڱ�����",
+        "oneof": "已存在变量名",
         "type": "json?"
       }
     ],
-    "desc": "�����µı�����",
-    "doc": "+ ��������������������б������¶���һ������\n+  ���`ֵ(value)`Ϊ `null`�����������\n",
+    "desc": "定义新的变量名",
+    "doc": "+ 如果有输入变量，则给已有变量重新定义一个名字\n+  如果`值(value)`为 `null`，则清除变量\n",
     "input": [
-      "�Ѵ��ڱ�����?"
+      "已存在变量名?"
     ],
     "name": "Let",
     "output": [
-      "�±�����"
+      "新变量名"
     ],
     "type": "Action"
   },
   {
     "args": [
       {
-        "desc": "��־",
+        "desc": "日志",
         "name": "message",
         "type": "string"
       }
     ],
-    "desc": "��ӡ��־",
+    "desc": "打印日志",
     "name": "Log",
     "type": "Action"
   },
   {
-    "desc": "�ƶ���Ŀ��",
-    "doc": "+ ��Ŀ���ƶ�\n",
+    "desc": "向指定方向移动一格",
+    "doc": "+ 向指定方向移动一格\n",
     "input": [
-      "Ŀ��"
+      "direction"
     ],
-    "name": "MoveToTarget",
+    "name": "MoveToDirection",
     "type": "Action"
   },
   {
-    "desc": "�жϱ����Ƿ����",
+    "desc": "判断变量是否存在",
     "input": [
-      "�жϵı���"
+      "判断的变量"
     ],
     "name": "NotNull",
     "type": "Condition"
   },
   {
-    "desc": "��ȡ��ǰʱ��",
+    "desc": "获取当前时间",
     "name": "Now",
     "output": [
-      "��ǰʱ��"
+      "当前时间"
     ],
     "type": "Action"
   },
   {
-    "desc": "ִֻ��һ��",
-    "doc": "+ ֻ����һ���ӽڵ�,�����ִ�е�һ��\n+ ����Ϻ�ýڵ����ӽڵ����ɲ���ִ��\n+ �ýڵ�ִ�к���Զ���سɹ�\n",
+    "desc": "只执行一次",
+    "doc": "+ 只能有一个子节点,多个仅执行第一个\n+ 被打断后该节点后的子节点依旧不会执行\n+ 该节点执行后永远返回成功\n",
     "name": "Once",
     "type": "Decorator"
   },
   {
-    "desc": "����ִ��",
-    "doc": "ִ�������ӽڵ㲢���سɹ�\n",
+    "args": [
+      {
+        "desc": "x半径",
+        "name": "x",
+        "type": "int"
+      },
+      {
+        "desc": "y半径",
+        "name": "y",
+        "type": "int"
+      }
+    ],
+    "desc": "超过移动范围",
+    "doc": "+ 超过移动范围返回SUCCESS\n+ 在移动范围内返回FAIL\n",
+    "name": "OutRange",
+    "type": "Condition"
+  },
+  {
+    "desc": "并行执行",
+    "doc": "执行所有子节点并返回成功\n",
     "name": "Parallel",
     "type": "Composite"
   },
   {
-    "desc": "������������Ԫ��",
-    "doc": "+ ������ġ����顱������������ʱ���ء�ʧ�ܡ�\n+ ���෵�ء��ɹ�����\n",
+    "desc": "向数组中添加元素",
+    "doc": "+ 当输入的“数组”不是数组类型时返回「失败」\n+ 其余返回「成功」。\n",
     "input": [
-      "����",
-      "Ԫ��"
+      "数组",
+      "元素"
     ],
     "name": "Push",
     "type": "Action"
@@ -272,56 +290,48 @@
   {
     "args": [
       {
-        "desc": "最小�?",
+        "desc": "最小值",
         "name": "min",
-        "type": "float?"
+        "type": "int"
       },
       {
-        "desc": "最大�?",
+        "desc": "最大值",
         "name": "max",
-        "type": "float?"
-      },
-      {
-        "desc": "是否向下取整",
-        "name": "floor",
-        "type": "bool?"
+        "type": "int"
       }
     ],
     "desc": "返回一个随机数",
-    "input": [
-      "最小�??",
-      "最大�??"
-    ],
+    "doc": "+ 返回一个随机数\n",
     "name": "Random",
     "output": [
-      "随机�?"
+      "随机数"
     ],
     "type": "Action"
   },
   {
-    "desc": "����������������һ��",
-    "doc": "+ �Ϸ�Ԫ�ز����� nil\n+ �����������У������������һ��\n+ ����������Ϊ��ʱ������û�кϷ�Ԫ�أ����ء�ʧ�ܡ�\n",
+    "desc": "随机返回输入的其中一个",
+    "doc": "+ 合法元素不包括 nil\n+ 在输入数组中，随机返回其中一个\n+ 当输入数组为空时，或者没有合法元素，返回「失败」\n",
     "input": [
-      "����"
+      "数组"
     ],
     "name": "RandomIndex",
     "output": [
-      "���Ŀ��"
+      "随机目标"
     ],
     "type": "Action"
   },
   {
     "args": [
       {
-        "desc": "����",
+        "desc": "次数",
         "name": "count",
         "type": "int?"
       }
     ],
-    "desc": "ѭ��ִ��",
-    "doc": "+ ֻ����һ���ӽڵ㣬�����ִ�е�һ��\n+ ���ӽڵ㷵�ء�ʧ�ܡ�ʱ���˳����������ء�ʧ�ܡ�״̬\n+ ����������سɹ�/��������\n",
+    "desc": "循环执行",
+    "doc": "+ 只能有一个子节点，多个仅执行第一个\n+ 当子节点返回「失败」时，退出遍历并返回「失败」状态\n+ 其它情况返回成功/正在运行\n",
     "input": [
-      "����(int)?"
+      "次数(int)?"
     ],
     "name": "Repeat",
     "type": "Action"
@@ -329,15 +339,15 @@
   {
     "args": [
       {
-        "desc": "���ѭ������",
+        "desc": "最大循环次数",
         "name": "maxLoop",
         "type": "int?"
       }
     ],
-    "desc": "һֱ����ֱ���ӽڵ㷵��ʧ��",
-    "doc": "+ ֻ����һ���ӽڵ㣬�����ִ�е�һ��\n+ ֻ�е��ӽڵ㷵��ʧ��ʱ���ŷ��سɹ��������������������״̬\n+ ����趨�˳��Դ���������ָ�������򷵻�ʧ��\n",
+    "desc": "一直尝试直到子节点返回失败",
+    "doc": "+ 只能有一个子节点，多个仅执行第一个\n+ 只有当子节点返回失败时，才返回成功，其它情况返回运行中状态\n+ 如果设定了尝试次数，超过指定次数则返回失败\n",
     "input": [
-      "���ѭ������?"
+      "最大循环次数?"
     ],
     "name": "RepeatUntilFailure",
     "type": "Decorator"
@@ -345,69 +355,94 @@
   {
     "args": [
       {
-        "desc": "���ѭ������",
+        "desc": "最大循环次数",
         "name": "maxLoop",
         "type": "int?"
       }
     ],
-    "desc": "һֱ����ֱ���ӽڵ㷵�سɹ�",
-    "doc": "+ ֻ����һ���ӽڵ㣬�����ִ�е�һ��\n+ ֻ�е��ӽڵ㷵�سɹ�ʱ���ŷ��سɹ��������������������״̬\n+ ����趨�˳��Դ���������ָ�������򷵻�ʧ��\n",
+    "desc": "一直尝试直到子节点返回成功",
+    "doc": "+ 只能有一个子节点，多个仅执行第一个\n+ 只有当子节点返回成功时，才返回成功，其它情况返回运行中状态\n+ 如果设定了尝试次数，超过指定次数则返回失败\n",
     "input": [
-      "���ѭ������?"
+      "最大循环次数?"
     ],
     "name": "RepeatUntilSuccess",
     "type": "Decorator"
   },
   {
-    "desc": "ѡ��ִ��",
-    "doc": "+ һֱ����ִ�У����ӽڵ㷵�سɹ��򷵻سɹ�����ȫ���ڵ㷵��ʧ���򷵻�ʧ��\n+ �ӽڵ��ǻ� (OR) �Ĺ�ϵ\n",
+    "desc": "选择执行",
+    "doc": "+ 一直往下执行，有子节点返回成功则返回成功，若全部节点返回失败则返回失败\n+ 子节点是或 (OR) 的关系\n",
     "name": "Selector",
     "type": "Composite"
   },
   {
-    "desc": "˳��ִ��",
-    "doc": "+ һֱ����ִ�У�ֻ�е������ӽڵ㶼���سɹ�, �ŷ��سɹ�\n+ �ӽڵ����루AND���Ĺ�ϵ\n",
+    "desc": "顺序执行",
+    "doc": "+ 一直往下执行，只有当所有子节点都返回成功, 才返回成功\n+ 子节点是与（AND）的关系\n",
     "name": "Sequence",
     "type": "Composite"
   },
   {
     "args": [
       {
-        "desc": "����",
+        "desc": "信息内容",
+        "name": "msg",
+        "type": "string"
+      }
+    ],
+    "desc": "发送系统信息",
+    "doc": "+ 发送系统信息\n",
+    "name": "Talk",
+    "type": "Action"
+  },
+  {
+    "args": [
+      {
+        "desc": "次数",
         "name": "count",
         "type": "int"
       }
     ],
-    "desc": "�ȴ�����",
-    "doc": "+ �ȴ�count��\n",
+    "desc": "等待次数",
+    "doc": "+ 等待count次\n",
     "name": "WaitCount",
     "type": "Action"
   },
   {
     "args": [
       {
-        "desc": "��ͼ����",
+        "desc": "tick",
+        "name": "tick",
+        "type": "int"
+      }
+    ],
+    "desc": "等待特定次数",
+    "name": "WaitForCount",
+    "type": "Action"
+  },
+  {
+    "args": [
+      {
+        "desc": "地图类型",
         "name": "map",
         "type": "int"
       },
       {
-        "desc": "��ͼ",
+        "desc": "地图",
         "name": "floor",
         "type": "int"
       },
       {
-        "desc": "x����",
+        "desc": "x坐标",
         "name": "x",
         "type": "int"
       },
       {
-        "desc": "y����",
+        "desc": "y坐标",
         "name": "y",
         "type": "int"
       }
     ],
-    "desc": "���͵�����",
-    "doc": "+ ���ﴫ�͵�ָ��λ��\n",
+    "desc": "传送到坐标",
+    "doc": "+ 怪物传送到指定位置\n",
     "name": "WarpToPos",
     "type": "Action"
   }

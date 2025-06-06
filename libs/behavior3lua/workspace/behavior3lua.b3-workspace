@@ -1,7 +1,31 @@
 {
   "files": [
     {
-      "path": "trees/YunoGasai.json",
+      "path": "trees/btree.json",
+      "desc": ""
+    },
+    {
+      "path": "trees/hero.json",
+      "desc": "英雄测试AI"
+    },
+    {
+      "path": "trees/monster.json",
+      "desc": "怪物测试AI"
+    },
+    {
+      "path": "trees/test-parallel-with-wait.json",
+      "desc": ""
+    },
+    {
+      "path": "trees/test-parallel.json",
+      "desc": ""
+    },
+    {
+      "path": "trees/test-repeat-until-failure.json",
+      "desc": ""
+    },
+    {
+      "path": "trees/test-repeat-until-success.json",
       "desc": ""
     }
   ],

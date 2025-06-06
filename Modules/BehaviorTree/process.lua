@@ -22,6 +22,7 @@ return {
   NotNull            = require "lua.libs.behavior3lua.behavior3.nodes.conditions.not_null",
 
   FindEnemy          = require "lua.Modules.BehaviorTree.conditions.find_enemy",
+  OutRange           = require "lua.Modules.BehaviorTree.conditions.out_range",
 
   -- 行为节点
   Calculate          = require "lua.libs.behavior3lua.behavior3.nodes.actions.calculate",
@@ -33,11 +34,13 @@ return {
   Log                = require "lua.libs.behavior3lua.behavior3.nodes.actions.log",
   Now                = require "lua.libs.behavior3lua.behavior3.nodes.actions.now",
   Push               = require "lua.libs.behavior3lua.behavior3.nodes.actions.push",
-  Random             = require "lua.libs.behavior3lua.behavior3.nodes.actions.random",
   RandomIndex        = require "lua.libs.behavior3lua.behavior3.nodes.actions.random_index",
   Concat             = require "lua.libs.behavior3lua.behavior3.nodes.actions.concat",
   WaitForCount       = require "lua.libs.behavior3lua.behavior3.nodes.actions.wait_for_count",
 
   WarpToPos          = require "lua.Modules.BehaviorTree.actions.warp_to_pos",
   WaitCount          = require "lua.Modules.BehaviorTree.actions.wait_count",
+  Random             = require "lua.Modules.BehaviorTree.actions.random",
+  Talk               = require "lua.Modules.BehaviorTree.actions.talk",
+  MoveToDirection    = require "lua.Modules.BehaviorTree.actions.move_to_direction",
 }

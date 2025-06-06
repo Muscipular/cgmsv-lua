@@ -4,24 +4,24 @@ local bret = require "lua.libs.behavior3lua.behavior3.behavior_ret"
 local M = {
     name = "Random",
     type = "Action",
-    desc = "è¿”å›žä¸€ä¸ªéšæœºæ•°",
-    input = { "æœ€å°å€??", "æœ€å¤§å€??" },
-    output = { "éšæœºæ•?" },
+    desc = "·µ»ØÒ»¸öËæ»úÊý",
+    input = { "×îÐ¡Öµ?", "×î´óÖµ?" },
+    output = { "Ëæ»úÊý" },
     args = {
         {
             name = "min",
             type = "float?",
-            desc = "æœ€å°å€?"
+            desc = "×îÐ¡Öµ"
         },
         {
             name = "max",
             type = "float?",
-            desc = "æœ€å¤§å€?"
+            desc = "×î´óÖµ"
         },
         {
             name = "floor",
             type = "bool?",
-            desc = "æ˜¯å¦å‘ä¸‹å–æ•´"
+            desc = "ÊÇ·ñÏòÏÂÈ¡Õû"
         }
     },
     run = function(node, env, min, max)
