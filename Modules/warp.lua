@@ -26,7 +26,7 @@ local warpPoints = {
 }
 
 local function calcWarp()
-  local page = math.modf(#warpPoints / 8) + 1
+  local page = math.modf((#warpPoints + 7) / 8)
   local remainder = math.fmod(#warpPoints, 8)
   return page, remainder
 end
@@ -34,60 +34,45 @@ end
 function Warp:onLoad()
   self:logInfo('load');
   local warpNPC = self:NPC_createNormal('传送门', 103010, { x = 242, y = 88, mapType = 0, map = 1000, direction = 6 });
-  self:NPC_regWindowTalkedEvent(warpNPC, function(npc, player, _seqno, _select, _data)
-    local column = tonumber(_data)
-    local page = tonumber(_seqno)
-    local warpPage = page;
-    local winMsg = "1\\n请问你想去哪里\\n"
-    local winButton = CONST.BUTTON_关闭;
-    local totalPage, remainder = calcWarp()
-    --上页16 下页32 关闭/取消2
-    if _select > 0 then
-      if _select == CONST.BUTTON_下一页 then
-        warpPage = warpPage + 1
-        if (warpPage == totalPage) or ((warpPage == (totalPage - 1) and remainder == 0)) then
-          winButton = CONST.BUTTON_上取消
+  local list = {};
+  local totalPage, remainder = calcWarp()
+  self:NPC_CreateCo('传送门', 103010, { x = 242, y = 88, mapType = 0, map = 1000, direction = 6 },
+    function(co, npc, player, msg, color, size)
+      page = 1;
+      repeat
+        buttons = CONST.BUTTON_上下取消;
+        if page == 1 then
+          buttons = CONST.BUTTON_下取消
+        elseif page == totalPage then
+          buttons = CONST.BUTTON_上取消;
+        end
+
+        list = {};
+        for i = 1, 8 do
+          list[i] = warpPoints[i + (page - 1) * 8][1];
+        end
+        local _seqno, _select, _data;
+        npc, player, _seqno, _select, _data = co:next(player, npc, CONST.窗口_选择框, CONST.BUTTON_下取消, 0,
+          self:NPC_buildSelectionText("请问你想去哪里", list));
+        local column = tonumber(_data)
+        _select = tonumber(_select)
+        --上页16 下页32 关闭/取消2
+        if _select > 0 then
+          if _select == CONST.BUTTON_下一页 then
+            page = page + 1;
+          elseif _select == CONST.BUTTON_上一页 then
+            page = page - 1;
+          else
+            return
+          end
         else
-          winButton = CONST.BUTTON_上下取消
+          local count = 8 * (page - 1) + column
+          local short = warpPoints[count]
+          Char.Warp(player, short[2], short[3], short[4], short[5])
+          return
         end
-      elseif _select == CONST.BUTTON_上一页 then
-        warpPage = warpPage - 1
-        if warpPage == 1 then
-          winButton = CONST.BUTTON_下取消
-        else
-          winButton = CONST.BUTTON_下取消
-        end
-      elseif _select == 2 then
-        warpPage = 1
-        return
-      end
-      local count = 8 * (warpPage - 1)
-      if warpPage == totalPage then
-        for i = 1 + count, remainder + count do
-          winMsg = winMsg .. warpPoints[i][1] .. "\\n"
-        end
-      else
-        for i = 1 + count, 8 + count do
-          winMsg = winMsg .. warpPoints[i][1] .. "\\n"
-        end
-      end
-      NLG.ShowWindowTalked(player, npc, CONST.窗口_选择框, winButton, warpPage, winMsg);
-    else
-      local count = 8 * (warpPage - 1) + column
-      local short = warpPoints[count]
-      Char.Warp(player, short[2], short[3], short[4], short[5])
-    end
-  end)
-  self:NPC_regTalkedEvent(warpNPC, function(npc, player)
-    if (NLG.CanTalk(npc, player) == true) then
-      local msg = "1\\n请问你想去哪里\\n";
-      for i = 1, 8 do
-        msg = msg .. warpPoints[i][1] .. "\\n"
-      end
-      NLG.ShowWindowTalked(player, npc, CONST.窗口_选择框, CONST.BUTTON_下取消, 1, msg);
-    end
-    return
-  end)
+      until true
+    end)
 end
 
 function Warp:onUnload()
