@@ -33,7 +33,6 @@ end
 
 function Warp:onLoad()
   self:logInfo('load');
-  local warpNPC = self:NPC_createNormal('传送门', 103010, { x = 242, y = 88, mapType = 0, map = 1000, direction = 6 });
   local list = {};
   local totalPage, remainder = calcWarp()
   self:NPC_CreateCo('传送门', 103010, { x = 242, y = 88, mapType = 0, map = 1000, direction = 6 },
