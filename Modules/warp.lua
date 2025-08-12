@@ -45,14 +45,18 @@ function Warp:onLoad()
         elseif page == totalPage then
           buttons = CONST.BUTTON_上取消;
         end
-
+        print(page, totalPage);
         list = {};
         for i = 1, 8 do
-          list[i] = warpPoints[i + (page - 1) * 8][1];
+          local s = warpPoints[i + (page - 1) * 8];
+          if s then
+            list[i] = s[1];
+          end
         end
         local _seqno, _select, _data;
-        npc, player, _seqno, _select, _data = co:next(player, npc, CONST.窗口_选择框, CONST.BUTTON_下取消, 0,
+        npc, player, _seqno, _select, _data = co:next(player, npc, CONST.窗口_选择框, buttons, 0,
           self:NPC_buildSelectionText("请问你想去哪里", list));
+        print(npc, player, _seqno, _select, CONST.BUTTON_下一页);
         local column = tonumber(_data)
         _select = tonumber(_select)
         --上页16 下页32 关闭/取消2
@@ -70,7 +74,7 @@ function Warp:onLoad()
           Char.Warp(player, short[2], short[3], short[4], short[5])
           return
         end
-      until true
+      until false
     end)
 end
 
