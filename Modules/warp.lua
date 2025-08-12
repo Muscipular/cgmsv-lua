@@ -45,7 +45,6 @@ function Warp:onLoad()
         elseif page == totalPage then
           buttons = CONST.BUTTON_上取消;
         end
-        print(page, totalPage);
         list = {};
         for i = 1, 8 do
           local s = warpPoints[i + (page - 1) * 8];
@@ -56,7 +55,6 @@ function Warp:onLoad()
         local _seqno, _select, _data;
         npc, player, _seqno, _select, _data = co:next(player, npc, CONST.窗口_选择框, buttons, 0,
           self:NPC_buildSelectionText("请问你想去哪里", list));
-        print(npc, player, _seqno, _select, CONST.BUTTON_下一页);
         local column = tonumber(_data)
         _select = tonumber(_select)
         --上页16 下页32 关闭/取消2
