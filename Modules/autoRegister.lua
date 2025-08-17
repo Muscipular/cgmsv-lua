@@ -9,18 +9,17 @@ function AutoRegister:onLoad()
 end
 
 function AutoRegister:OnRecv(fd, head, data)
-  local user = SQL.querySQL('select * from tbl_user where CdKey = ' .. SQL.sqlValue(data[3]));
-  if user == SQL.CONST_RET_NO_ROW then
-    local seq = SQL.querySQL('select max(SequenceNumber) + 1 from tbl_user');
-    if seq == SQL.CONST_RET_NO_ROW then
-      seq = { { 0 } };
+  local user = SQL.QueryEx('select 1 from tbl_user where CdKey = ?', data[3]);
+  if !user.rows || #user.rows <= 0 then
+    local seq = SQL.QueryEx('select max(SequenceNumber) + 1 as Seq from tbl_user');
+    if !seq.rows || #seq.rows <= 0 then
+      seq = 0;
+    else
+      seq = seq.rows[1].Seq or 0;
     end
     local sql = 'insert into tbl_user (CdKey, SequenceNumber, AccountID, AccountPassWord, '
-        .. ' EnableFlg, UseFlg, BadMsg, TrialFlg, DownFlg, ExpFlg) values ('
-        .. SQL.sqlValue(data[3]) .. ', ' .. SQL.sqlValue(seq[1][1] or 0) .. ', '
-        .. SQL.sqlValue(data[3]) .. ', '
-        .. SQL.sqlValue(data[2]) .. ',1,1,0,8,0,0);'
-    local r = SQL.querySQL(sql)
+        .. ' EnableFlg, UseFlg, BadMsg, TrialFlg, DownFlg, ExpFlg) values (?, ?, ?, ?,1,1,0,8,0,0);'
+    local r = SQL.QueryEx(sql, data[3], seq, data[3], data[2])
     --print(r, sql);
   end
   return 0
