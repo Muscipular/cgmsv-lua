@@ -835,7 +835,12 @@ CONST.对象_原登MAP = 12000;
 CONST.对象_原登地图 = 12001;
 CONST.对象_原登X = 12002;
 CONST.对象_原登Y = 12003;
-
+CONST.对象_RebirthSkill = 0;
+CONST.对象_RebirthFlag = 0;
+CONST.对象_RebirthView = 0;
+CONST.对象_RebirthLevel = 0;
+CONST.对象_RebirthAttr = 0;
+CONST.对象_RebirthBaseImage = 0;
 
 --[[
 道具属性 用于 Item.GetData

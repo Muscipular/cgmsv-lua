@@ -37,6 +37,66 @@ function Char.EndEvent(charIndex, flag, value) end
 ---@return number @返回旗标状态。
 function Char.EndEvent(charIndex, flag) end
 
+---获取目标对象的LocalCount变量。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@return number @返回旗标状态。
+function Char.LocalCount(charIndex, flag) end
+
+---设置目标对象的LocalCount变量。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@param value number 数值
+function Char.LocalCount(charIndex, flag, value) end
+
+---获取目标对象的LocalEvent任务旗标。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@return number @返回旗标状态。
+function Char.LocalEvent(charIndex, flag) end
+
+---设置目标对象的LocalEvent任务旗标。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@param value number 0|1 设置的目标旗标状态[如果该参数为0，则清空目标的该旗标的LocalEvent状态，如果参数为1，则设置该旗标为LocalEvent状态]
+function Char.LocalEvent(charIndex, flag, value) end
+
+---获取目标对象整队的GlobalEvent任务旗标。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@return number @返回旗标状态。
+function Char.GlobalGAEvent(charIndex, flag) end
+
+---设置目标对象整队的GlobalEvent任务旗标。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@param value number 0|1 设置的目标旗标状态[如果该参数为0，则清空目标的该旗标的GlobalEvent状态，如果参数为1，则设置该旗标为GlobalEvent状态]
+function Char.GlobalGAEvent(charIndex, flag, value) end
+
+---获取目标对象的GlobalTEvent任务旗标。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@return number @返回旗标状态。
+function Char.GlobalTEvent(charIndex, flag) end
+
+---设置目标对象的GlobalTEvent任务旗标。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@param value number 0|1 设置的目标旗标状态[如果该参数为0，则清空目标的该旗标的GlobalTEvent状态，如果参数为1，则设置该旗标为GlobalTEvent状态]
+function Char.GlobalTEvent(charIndex, flag, value) end
+
+---获取目标对象的GlobalEvent任务旗标。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@return number @返回旗标状态。
+function Char.GlobalEvent(charIndex, flag) end
+
+---设置目标对象的GlobalEvent任务旗标。
+---@param charIndex number 目标的 对象index。
+---@param flag number 任务旗标。
+---@param value number 0|1 设置的目标旗标状态[如果该参数为0，则清空目标的该旗标的GlobalEvent状态，如果参数为1，则设置该旗标为GlobalEvent状态]
+function Char.GlobalEvent(charIndex, flag, value) end
+
 ---查找角色是否拥有ID是ItemID的道具。
 ---@param charIndex number 目标的 对象index。
 ---@param itemID number 道具ID
@@ -69,7 +129,7 @@ function Char.GiveItem(CharIndex, ItemID, Amount, ShowMsg) end
 ---@param CharIndex number 目标的 对象index。
 ---@param ItemID number 道具ID。
 ---@return number @如果目标有该道具，则返回该道具index，否则返回-1。
-function Char.HaveItem(CharIndex,ItemID) end
+function Char.HaveItem(CharIndex, ItemID) end
 
 ---检测对象身上的已经有道具的道具栏位数量。
 ---@param CharIndex number 目标的 对象index。
@@ -99,7 +159,7 @@ function Char.AddPet(CharIndex, PetID) end
 ---@param PetID number 宠物的ID
 ---@param FullBP? number 1表示制作满档宠物，0表示档数随机，不填写该参数则档数随机
 ---@return number @制作成功则返回目标宠物的对象index，否则返回-1，参数数据类型不对返回-2，对象index无效返回-3。
-function Char.GivePet(CharIndex,PetID,FullBP) end
+function Char.GivePet(CharIndex, PetID, FullBP) end
 
 ---获取目标位置的宠物对象index。
 ---@param CharIndex number 目标的 对象index。
@@ -150,7 +210,7 @@ function Char.PartyNum(CharIndex) end
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 团队中的位置，取值0-4
 ---@return number @返回指定位置的玩家的对象index，如果没有玩家则返回-1，获取失败返回0，参数数据类型不对返回-2，对象index无效返回-3，如果团队中的位置超过范围(0-4)返回-4。
-function Char.GetPartyMember(CharIndex,Slot) end
+function Char.GetPartyMember(CharIndex, Slot) end
 
 ---解散玩家的团队。
 ---@param CharIndex  number 目标对象index。
@@ -178,50 +238,50 @@ function Char.GetNextExp(CharIndex) end
 ---@param SkillExp?  number 技能的初始经验值，如果不写则为0。
 ---@param ShowMsg?  number 是否显示系统信息。
 ---@return number @如果成功则返回增加的技能栏的位置，范围0-14，如果失败则返回-1，参数数据类型不对返回-2，对象index无效返回-3，技能的ID错误返回-4。
-function Char.AddSkill(CharIndex,SkillID,SkillExp,ShowMsg) end
+function Char.AddSkill(CharIndex, SkillID, SkillExp, ShowMsg) end
 
 ---删除目标玩家的指定技能。
 ---@param CharIndex  number 目标的 对象index。
 ---@param SkillID  number 技能的ID，对应Skill.txt的id。
 ---@param ShowMsg?  number 是否显示系统信息。
 ---@return number @如果成功删除技能则返回该技能原本的技能栏的位置，范围0-14，如果失败则返回-1。 |  | 如果玩家没有该技能，也返回-1。 |  | 参数数据类型不对返回-2，对象index无效返回-3，技能的ID错误返回-4。
-function Char.DelSkill(CharIndex,SkillID,ShowMsg) end
+function Char.DelSkill(CharIndex, SkillID, ShowMsg) end
 
 ---获取指定玩家的指定技能位置的技能等级。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，可用Char.HaveSkill来获取位置。
 ---@return number @成功返回技能等级,失败返回-1，参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4。
-function Char.GetSkillLevel(CharIndex,Slot) end
+function Char.GetSkillLevel(CharIndex, Slot) end
 
 ---获取指定玩家的指定技能位置的技能等级。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，可用Char.HaveSkill来获取位置。
 ---@return number @成功返回技能等级,失败返回-1，参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4。
-function Char.GetSkillLv(CharIndex,Slot) end
+function Char.GetSkillLv(CharIndex, Slot) end
 
 ---获取指定玩家的指定技能的位置。
 ---@param CharIndex  number 目标的 对象index。
 ---@param SkillID  number 技能ID，与skill.txt内容相对应。
 ---@return number @返回-1代表失败，其他为技能栏位置，参数数据类型不对返回-2，对象index无效返回-3，技能的ID错误返回-4。
-function Char.HaveSkill(CharIndex,SkillID) end
+function Char.HaveSkill(CharIndex, SkillID) end
 
 ---获取指定玩家的指定位置的技能ID。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，不能大于人物自身的技能栏位数量。
 ---@return number @返回-1代表失败，其他为技能ID，与skill.txt内容相对应，参数数据类型不对返回-2，对象index无效返回-3，技能位置超出范围返回-4。
-function Char.GetSkillID(CharIndex,Slot) end
+function Char.GetSkillID(CharIndex, Slot) end
 
 ---获取指定玩家的指定位置的技能ID。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，不能大于人物自身的技能栏位数量。
 ---@return number @返回-1代表失败，其他为技能ID，与skill.txt内容相对应，参数数据类型不对返回-2，对象index无效返回-3，技能位置超出范围返回-4。
-function Char.GetSkillId(CharIndex,Slot) end
+function Char.GetSkillId(CharIndex, Slot) end
 
 ---获取指定玩家的指定技能位置的技能经验。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，可用Char.HaveSkill来获取位置。
 ---@return number @成功返回技能经验,失败返回-1，参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4。
-function Char.GetSkillExp(CharIndex,Slot) end
+function Char.GetSkillExp(CharIndex, Slot) end
 
 ---获取指定玩家的指定技能位置的技能等级。
 ---@param CharIndex  number 目标的 对象index。
@@ -229,7 +289,7 @@ function Char.GetSkillExp(CharIndex,Slot) end
 ---@param Level  number 新的技能等级。
 ---@param ShowMsg?  number 是否显示系统信息。
 ---@return number @成功返回新技能等级,失败返回-1，传入的参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4，传入的新等级小于1则返回-5。
-function Char.SetSkillLevel(CharIndex,Slot,Level,ShowMsg) end
+function Char.SetSkillLevel(CharIndex, Slot, Level, ShowMsg) end
 
 ---获取指定玩家的指定技能位置的技能经验。
 ---@param CharIndex  number 目标的 对象index。
@@ -237,7 +297,7 @@ function Char.SetSkillLevel(CharIndex,Slot,Level,ShowMsg) end
 ---@param EXP  number 新的技能经验。
 ---@param ShowMsg?  number 是否显示系统信息。
 ---@return number @成功返回新的技能经验,失败返回-1，传入的参数数据类型不对返回-2，对象index无效返回-3，技能的位置错误返回-4，传入的新经验小于1则返回-5。
-function Char.SetSkillExp(CharIndex,Slot,EXP,ShowMsg) end
+function Char.SetSkillExp(CharIndex, Slot, EXP, ShowMsg) end
 
 ---获取指定玩家的家族ID。
 ---@param CharIndex  number 目标的 对象index。
@@ -263,25 +323,25 @@ function Char.GetCharPointer(CharIndex) end
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 出租屋中的位置，范围0-4。
 ---@return number @如果目标有该宠物的宠物对象index，没有则返回-1，参数数据类型不对返回-2，对象index无效返回-3，宠物的位置范围错误返回-4。
-function Char.GetHousePet(CharIndex,Slot) end
+function Char.GetHousePet(CharIndex, Slot) end
 
 ---获取玩家对象银行中指定位置的宠物对象index。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 银行中的位置，范围0-4。
 ---@return number @如果目标有该宠物的宠物对象index，没有则返回-1，参数数据类型不对返回-2，对象index无效返回-3，宠物的位置范围错误返回-4。
-function Char.GetPoolPet(CharIndex,Slot) end
+function Char.GetPoolPet(CharIndex, Slot) end
 
 ---获取玩家对象出租屋中指定位置的道具对象index。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 出租屋中的位置，范围0-19。
 ---@return number @如果目标有则返回道具对象index，没有则返回-1，参数数据类型不对返回-2，对象index无效返回-3，道具的位置范围错误返回-4。
-function Char.GetHouseItem(CharIndex,Slot) end
+function Char.GetHouseItem(CharIndex, Slot) end
 
 ---获取玩家对象出租屋中指定位置的道具对象index。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 银行中的位置，韩服范围0-19，台服范围0-39，国服范围0-79。
 ---@return number @如果目标有则返回道具对象index，没有则返回-1，参数数据类型不对返回-2，对象index无效返回-3，银行中道具位置范围错误返回-4。
-function Char.GetPoolItem(CharIndex,Slot) end
+function Char.GetPoolItem(CharIndex, Slot) end
 
 ---获取玩家对象玩家是否在打卡状态。
 ---@param CharIndex  number 目标的 对象index。
@@ -303,7 +363,7 @@ function Char.FeverStop(CharIndex) end
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPreCallBack]
 ---@param CharIndex  number 设置的对象index。
-function Char.SetWalkPreEvent(Dofile,FuncName,CharIndex) end
+function Char.SetWalkPreEvent(Dofile, FuncName, CharIndex) end
 
 ---WalkPreEvent回调函数
 ---[@group Char.SetWalkPreEvent]
@@ -317,7 +377,7 @@ function CharWalkPreCallBack(CharIndex) end
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPostCallBack]
 ---@param CharIndex  number 设置的对象index。
 ---@return number @成功返回0
-function Char.SetWalkPostEvent(Dofile,FuncName,CharIndex) end
+function Char.SetWalkPostEvent(Dofile, FuncName, CharIndex) end
 
 ---WalkPostEvent回调函数
 ---[@group Char.SetWalkPostEvent]
@@ -329,7 +389,7 @@ function CharWalkPostCallBack(CharIndex) end
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[PostOverEventCallBack]
 ---@param CharIndex  number 设置的对象index。
-function Char.SetPostOverEvent(Dofile,FuncName,CharIndex) end
+function Char.SetPostOverEvent(Dofile, FuncName, CharIndex) end
 
 ---PostOverEvent回调函数
 ---[@group Char.SetPostOverEvent]
@@ -343,7 +403,7 @@ function PostOverEventCallBack(CharIndex, TargetCharIndex) end
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharLoopCallBack]
 ---@param CharIndex  number 设置的对象index。
 ---@param Interval  number 循环间隔，单位毫秒。
-function Char.SetLoopEvent(Dofile,FuncName,CharIndex,Interval) end
+function Char.SetLoopEvent(Dofile, FuncName, CharIndex, Interval) end
 
 ---LoopEvent回调函数
 ---[@group Char.SetLoopEvent]
@@ -355,7 +415,7 @@ function CharLoopCallBack(CharIndex) end
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWalkPreCallBack]
 ---@param CharIndex  number 设置的对象index。
-function Char.SetTalkedEvent(Dofile,FuncName,CharIndex) end
+function Char.SetTalkedEvent(Dofile, FuncName, CharIndex) end
 
 ---TalkedEvent回调函数
 ---[@group Char.SetTalkedEvent]
@@ -371,7 +431,7 @@ function CharTalkedCallBack(CharIndex, TalkerCharIndex, msg, color, size) end
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharWindowTalkedCallBack]
 ---@param CharIndex  number 设置的对象index。
-function Char.SetWindowTalkedEvent(Dofile,FuncName,CharIndex) end
+function Char.SetWindowTalkedEvent(Dofile, FuncName, CharIndex) end
 
 ---WindoxTalkedEvent回调函数
 ---[@group Char.SetWindowTalkedEvent]
@@ -380,14 +440,14 @@ function Char.SetWindowTalkedEvent(Dofile,FuncName,CharIndex) end
 ---@param SeqNo  number 来源对话框的ID，该值与NLG.ShowWindowTalked中的定义应该对应。
 ---@param Select  number 玩家所按下的按钮的值或选择框中的选项的值。
 ---@param Data  string 客户端所传递回来的值，这个值将根据不同的窗口类型而不同。
-function CharWindowTalkedCallBack(CharIndex, TalkerCharIndex,SeqNo,Select,Data) end
+function CharWindowTalkedCallBack(CharIndex, TalkerCharIndex, SeqNo, Select, Data) end
 
 ---为对象index设置丢弃道具事件的回调函数，对象在丢弃道具的时候会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
 ---[@group Char.SetItemPutEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param FuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[CharItemPutCallBack]
 ---@param CharIndex  number 设置的对象index。
-function Char.SetItemPutEvent(Dofile,FuncName,CharIndex) end
+function Char.SetItemPutEvent(Dofile, FuncName, CharIndex) end
 
 ---ItemPutEvent回调函数
 ---[@group Char.SetItemPutEvent]
@@ -638,8 +698,8 @@ function Char.GetSuitId(charIndex, slot) end
 function Char.GetSuitCount(charIndex) end
 
 ---@class DummyCreateOptions
----@field mapType number 
----@field floor number 
+---@field mapType number
+---@field floor number
 ---@field x number
 ---@field y number
 ---@field image number
@@ -674,7 +734,7 @@ function Char.GetMyRoomFloor(charIndex) end
 ---@param charIndex number 对象的index
 ---@param skillNo? number 图标旗标，取值0~15
 ---@return number @成功返回0
-function Char.SetSkillAction(charIndex,skillNo) end
+function Char.SetSkillAction(charIndex, skillNo) end
 
 ---获取技能显示顺序
 ---@param charIndex number 对象的index
@@ -727,4 +787,3 @@ function Char.SimpleLogout(charIndex) end
 ---封号
 ---@param charIndex CharIndex
 function Char.Ban(charIndex) end
-
