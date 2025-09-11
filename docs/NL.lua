@@ -389,6 +389,7 @@ function NL.RegAutoBattleCommandEvent(Dofile, InitFuncName) end
 ---[@group NL.RegAutoBattleCommandEvent]
 ---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
 ---@param battleIndex  number 战斗Index，该值由Lua引擎传递给本函数。
+---@return number @必须返回1，否则原地不动
 function AutoBattleCommandEvent(battleIndex, CharIndex) end
 
 ---玩家所有的Action事件都會觸發本函數，如使用暈倒，攻擊，剪刀，石頭，布等。

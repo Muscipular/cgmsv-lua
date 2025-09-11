@@ -9,15 +9,17 @@ function Module:talked(player, _msg)
     return 0;
   elseif _msg == '/autobattle off' then
     Char.SetData(player, CONST.对象_自动战斗开关, 0);
+    Char.SetTempData(player, "LastAction", nil);
     NLG.SystemMessage(player, "自动战斗关闭");
     return 0;
   end
 end
 
 function DoAction(charIndex, actionNum)
-  if (Battle.IsWaitingCommand(ch) == 1) then
-    local last = Char.GetTempData(CharIndex, "LastAction") or "";
-    local actions = table.map(string.split(last, ","), tonumber);
+  print(charIndex, actionNum, Battle.IsWaitingCommand(charIndex), Char.GetTempData(charIndex, "LastAction"));
+  if (Battle.IsWaitingCommand(charIndex) == 1) then
+    local last = Char.GetTempData(charIndex, "LastAction") or "";
+    local actions = table.map(string.split(last, ","), function(v) return tonumber(v) end);
     Battle.ActionSelect(charIndex, actions[actionNum * 3 + 1] or CONST.BATTLE_COM.BATTLE_COM_ATTACK,
       actions[actionNum * 3 + 2] or 15, actions[actionNum * 3 + 3] or -1);
   end
@@ -33,8 +35,10 @@ function Module:battleAction(battleIndex, ch)
   if ridePet >= 0 && ridePet < 5 && ridePet == petSlot then
     ch = ch2;
   end
+  self:logInfo(ch, ch2, ridePet, petSlot, Battle.GetTurn(battleIndex));
   DoAction(ch, 1);
   DoAction(ch2, 2);
+  return 1;
 end
 
 function Module:BattleActionEventCallBack(charIndex, Com1, Com2, Com3, actionNum)
