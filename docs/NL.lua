@@ -167,7 +167,8 @@ function NL.RegWarpEvent(Dofile, InitFuncName) end
 ---@param Target_X  number 传送后的x，该值由Lua引擎传递给本函数。
 ---@param Target_Y  number 传送后的y，该值由Lua引擎传递给本函数。
 ---@return number[]|nil @返回修改的{mapId,floor,x,y}，不修改返回nil
-function WarpEventCallBack(CharIndex, Ori_MapId, Ori_FloorId, Ori_X, Ori_Y, Target_MapId, Target_FloorId, Target_X, Target_Y) end
+function WarpEventCallBack(CharIndex, Ori_MapId, Ori_FloorId, Ori_X, Ori_Y, Target_MapId, Target_FloorId, Target_X,
+                           Target_Y) end
 
 ---创建一个玩家通过传送点时触发的Lua函数，可以用来记录玩家的传送轨迹。
 ---[@group NL.RegAfterWarpEvent]
@@ -187,7 +188,8 @@ function NL.RegAfterWarpEvent(Dofile, InitFuncName) end
 ---@param Target_X  number 传送后的x，该值由Lua引擎传递给本函数。
 ---@param Target_Y  number 传送后的y，该值由Lua引擎传递给本函数。
 ---@return number @返回0即可
-function AfterWarpEventCallBack(CharIndex, Ori_MapId, Ori_FloorId, Ori_X, Ori_Y, Target_MapId, Target_FloorId, Target_X, Target_Y) end
+function AfterWarpEventCallBack(CharIndex, Ori_MapId, Ori_FloorId, Ori_X, Ori_Y, Target_MapId, Target_FloorId, Target_X,
+                                Target_Y) end
 
 ---创建一个所有玩家掉线就会触发的Lua函数。
 ---[@group NL.RegDropEvent]
@@ -377,6 +379,18 @@ function NL.RegBattleActionEvent(Dofile, InitFuncName) end
 ---@param ActionNum  number 是對象的第幾動作，通常不帶寵物可以有2次有效動作，该值由Lua引擎传递给本函数。
 function BattleActionEventCallBack(CharIndex, Com1, Com2, Com3, ActionNum) end
 
+---当玩家启用自动战斗会触发该事件
+---[@group NL.RegAutoBattleCommandEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 触发的Lua函数的名称，该函数的申明格式请参考[AutoBattleCommandEvent]
+function NL.RegAutoBattleCommandEvent(Dofile, InitFuncName) end
+
+---AutoBattleCommandEvent的回调函数
+---[@group NL.RegAutoBattleCommandEvent]
+---@param CharIndex  number 响应事件的对象index，该值由Lua引擎传递给本函数。
+---@param battleIndex  number 战斗Index，该值由Lua引擎传递给本函数。
+function AutoBattleCommandEvent(battleIndex, CharIndex) end
+
 ---玩家所有的Action事件都會觸發本函數，如使用暈倒，攻擊，剪刀，石頭，布等。
 ---[@group NL.RegCharActionEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -448,7 +462,7 @@ function GetLoginPointEventCallBack(CharIndex, MapID, FloorID, X, Y) end
 --- LUA_det ： [ItemStringDetachCallBack] 道具卸下触发,itemset.txt第8列填自定义函数名. <br/>
 --- LUA_drop   [ItemStringDropCallBack]道具丢下时触发,itemset.txt第9列填自定义函数名. <br/>
 --- LUA_prepick   [ItemStringPrePickUpCallBack]道具拾取前触发,itemset.txt第10列填自定义函数名. <br/>
---- LUA_pick  [ItemStringPickUpCallBack]道具拾取后触发,itemset.txt第11列填自定义函数名. 
+--- LUA_pick  [ItemStringPickUpCallBack]道具拾取后触发,itemset.txt第11列填自定义函数名.
 function NL.RegItemString(Dofile, InitFuncName, ItemSigh) end
 
 ---ItemString的回调函数
@@ -500,7 +514,7 @@ function ItemStringPickUpCallBack(CharIndex, ItemIndex) end
 ---创建一个所有玩家所有道具初始化时就会触发的Lua函数,此函数会加重引擎负载,请谨慎使用!
 ---[@group NL.RegItemInitEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
----@param InitFuncName  string 指向的Lua函数的名称 
+---@param InitFuncName  string 指向的Lua函数的名称
 ---只要注册了本事件,不管道具是否具有Init函数,本函数都会触发.
 ---触发条件如下:  玩家登陆, 创建或获取新道具, 打开银行, 打开公会仓库。
 function NL.RegItemInitEvent(Dofile, InitFuncName) end
@@ -638,7 +652,8 @@ function NL.RegDamageCalculateEvent(Dofile, InitFuncName) end
 ---@param Flg  number 伤害模式，具体查看CONST.DamageFlags
 ---@param ExFlg  number 伤害模式2，具体查看CONST.DamageFlagsEx
 ---@return number @伤害值
-function DamageCalculateCallBack(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlg) end
+function DamageCalculateCallBack(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1,
+                                 DefCom2, DefCom3, Flg, ExFlg) end
 
 ---技能附加参数获取时触发的函数
 ---[@group NL.RegTechOptionEvent]
@@ -1153,7 +1168,8 @@ function NL.RegBattleHealCalculateEvent(Dofile, InitFuncName) end
 ---@param flg  number 伤害模式，具体查看CONST.HealDamageFlags
 ---@param ExFlg  number 伤害模式2，具体查看CONST.DamageFlagsEx
 ---@return number @治疗值
-function BattleHealCalculateCallBack(charIndex, defCharIndex, oriheal, heal, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, ExFlg) end
+function BattleHealCalculateCallBack(charIndex, defCharIndex, oriheal, heal, battleIndex, com1, com2, com3, defCom1,
+                                     defCom2, defCom3, flg, ExFlg) end
 
 ---创建一个耗魔时触发的事件
 ---[@group NL.RegCalcFpConsumeEvent]
@@ -1325,7 +1341,6 @@ function ItemDurabilityChangedEventCallback(itemIndex, oldDurability, newDurabil
 ---@param InitFuncName  string 指向的Lua函数的名称,参考[BattleGetProfitEventCallback]
 function NL.RegBattleGetProfitEvent(Dofile, InitFuncName) end
 
-
 ---BattleGetProfitEvent的回调函数
 ---[@group NL.RegBattleGetProfitEvent]
 ---@param battleIndex number 战斗Index
@@ -1337,13 +1352,11 @@ function NL.RegBattleGetProfitEvent(Dofile, InitFuncName) end
 ---@return number @返回修改后的经验/DP/ItemIndex
 function BattleGetProfitEventCallback(battleIndex, side, pos, charaIndex, type, reward) end
 
-
 ---战斗计算行动优先级事件
 ---[@group NL.RegBattleCalcDexEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
 ---@param InitFuncName  string 指向的Lua函数的名称,参考[BattleCalcDexEventCallback]
 function NL.RegBattleCalcDexEvent(Dofile, InitFuncName) end
-
 
 ---BattleCalcDexEvent的回调函数
 ---[@group NL.RegBattleCalcDexEvent]
@@ -1354,7 +1367,6 @@ function NL.RegBattleCalcDexEvent(Dofile, InitFuncName) end
 ---@param dex number 行动优先级
 ---@return number @返回修改后的dex
 function BattleCalcDexEventCallback(battleIndex, charaIndex, action, flg, dex) end
-
 
 ---创建一个所有玩家丢弃道具之前就会触发的Lua函数。
 ---[@group NL.RegPreItemDropEvent]
@@ -1368,7 +1380,6 @@ function NL.RegPreItemDropEvent(Dofile, InitFuncName) end
 ---@param ItemIndex  number 响应事件的道具Index，该值由Lua引擎传递给本函数。
 ---@return any @返回值小于0则拦截丢弃,返回大于等于0则正常丢弃。
 function PreItemDropCallBack(CharIndex, ItemIndex) end
-
 
 ---创建一个所有玩家成功拾取道具之前就会触发的Lua函数。
 ---[@group NL.RegPreItemPickUpEvent]
@@ -1398,17 +1409,14 @@ function NL.RegItemConsumeEvent(Dofile, InitFuncName) end
 ---@return number @消费数量
 function ItemConsumeEventCallback(charIndex, itemIndex, slot, amount) end
 
-
 ---删除用Lua创建的NPC，需要注意的是，删除NPC后本函数不会将NpcIndex的值设置为nil，请在函数后自行处理NpcIndex的值。
 ---@param NpcIndex  number 要删除的Npc的对象指针
 ---@return number @创建成功则返回 1, 失败则返回 0
 function NL.DelArgNpc(NpcIndex) end
 
-
 ---获取引擎版本
 ---@return string @cgmsv
 function NL.Ver() end
-
 
 ---摆摊有物品交易成功时触发的事件。
 ---[@group NL.RegCharaStallSoldEvent]
@@ -1425,7 +1433,6 @@ function NL.RegCharaStallSoldEvent(Dofile, InitFuncName) end
 ---@param price  number 响应事件的道具的消费数量，该值由Lua引擎传递给本函数。
 function CharaStallSoldEventCallback(buyer, seller, itemIndex, petIndex, price) end
 
-
 ---摆摊开始事件
 ---[@group NL.RegCharaStallStartEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -1436,7 +1443,6 @@ function NL.RegCharaStallStartEvent(Dofile, InitFuncName) end
 ---[@group NL.RegCharaStallStartEvent]
 ---@param seller  number 售卖者的对象index，该值由Lua引擎传递给本函数。
 function CharaStallStartEventCallback(seller) end
-
 
 ---摆摊结束事件
 ---[@group NL.RegCharaStallEndEvent]
@@ -1449,7 +1455,6 @@ function NL.RegCharaStallEndEvent(Dofile, InitFuncName) end
 ---@param seller  number 售卖者的对象index，该值由Lua引擎传递给本函数。
 function CharaStallEndEventCallback(seller) end
 
-
 ---摆摊浏览事件
 ---[@group NL.RegCharaStallBrowseEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
@@ -1460,7 +1465,7 @@ function NL.RegCharaStallBrowseEvent(Dofile, InitFuncName) end
 ---[@group NL.RegCharaStallBrowseEvent]
 ---@param buyer  number 购买者的对象index，该值由Lua引擎传递给本函数。
 ---@param seller  number 售卖者的对象index，该值由Lua引擎传递给本函数。
-function CharaStallBrowseEventCallback(buyer,seller) end
+function CharaStallBrowseEventCallback(buyer, seller) end
 
 ---盗窃物品出现概率事件
 ---[@group NL.RegStealItemEmitRateEvent]
@@ -1477,7 +1482,6 @@ function NL.RegStealItemEmitRateEvent(Dofile, InitFuncName) end
 ---@param rate  number 掉率，百万分率，1000000=100%
 ---@return number @掉率
 function StealItemEmitRateEventCallback(battleIndex, enemyIndex, charaIndex, itemId, rate) end
-
 
 ---物品掉率事件
 ---[@group NL.RegItemDropRateEvent]
@@ -1511,4 +1515,3 @@ function NL.RegBattlePetLeaveCheckEvent(Dofile, InitFuncName) end
 ---@param com3 number TechId
 ---@return number @新的type
 function BattlePetLeaveCheckEventCallback(battleIndex, charIndex, type, com1, com2, com3) end
-

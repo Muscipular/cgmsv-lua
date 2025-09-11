@@ -831,6 +831,8 @@ CONST.对象_DEBUG开关 = 8000;
 CONST.对象_使用MIC = 8001;
 CONST.对象_已保存 = 8002;
 CONST.对象_不遇敌开关 = 8003;
+CONST.对象_自动战斗开关 = 0;
+CONST.对象_自动战斗准备状态 = 0;
 CONST.对象_原登MAP = 12000;
 CONST.对象_原登地图 = 12001;
 CONST.对象_原登X = 12002;
@@ -841,6 +843,7 @@ CONST.对象_RebirthView = 0;
 CONST.对象_RebirthLevel = 0;
 CONST.对象_RebirthAttr = 0;
 CONST.对象_RebirthBaseImage = 0;
+CONST.对象_骑宠 = 0;
 
 --[[
 道具属性 用于 Item.GetData
