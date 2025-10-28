@@ -787,3 +787,15 @@ function Char.SimpleLogout(charIndex) end
 ---封号
 ---@param charIndex CharIndex
 function Char.Ban(charIndex) end
+
+---设置对象自动移动
+---@param charaIndex number
+---@param iMovable boolean 开启移动
+---@param distance number 移动距离0~10
+---@param interval number 间隔毫秒
+---@param fromX number 最小X
+---@param toX number 最大X
+---@param fromY number 最小Y
+---@param toY number 最大Y
+---@return number @1为成功，其他均为失败
+function Char.SetAutoWalk(charaIndex, iMovable, distance, interval, fromX, toX, fromY, toY) end
