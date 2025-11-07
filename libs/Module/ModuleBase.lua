@@ -254,4 +254,5 @@ ModuleBase.parts = {
   dofile('lua/libs/Module/Parts/Npc.lua'),
   dofile('lua/libs/Module/Parts/Assets.lua'),
   dofile('lua/libs/Module/Parts/Char.lua'),
+  dofile('lua/libs/Module/Parts/Cron.lua'),
 }
