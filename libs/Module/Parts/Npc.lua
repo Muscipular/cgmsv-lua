@@ -43,6 +43,21 @@ end
 ---@param name string
 ---@param image number
 ---@param positionInfo NpcPosition
+---@param args string
+---@param type string
+---@return CharIndex
+function NPCPart:NPC_createArgNpc(type, name, image, positionInfo, args)
+  local ret = NL.CreateArgNpc(type, args, name, image,
+    positionInfo.mapType, positionInfo.map, positionInfo.x, positionInfo.y, positionInfo.direction);
+  if ret >= 0 then
+    table.insert(self.npcList, ret);
+  end
+  return ret;
+end
+
+---@param name string
+---@param image number
+---@param positionInfo NpcPosition
 ---@param initCallback fun(charIndex:number):boolean
 ---@return CharIndex
 function NPCPart:NPC_createNormal(name, image, positionInfo, initCallback)
