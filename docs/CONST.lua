@@ -1,7 +1,7 @@
 ---@meta _
 
 --[[
-SKILL Ïà¹Ø³£Á¿ÓÃÓÚ Skill.GetData
+SKILL ç›¸å…³å¸¸é‡ç”¨äºŽ Skill.GetData
 ]]
 CONST.SKILL_ID = 0;
 CONST.SKILL_COMMENT = 1;
@@ -24,7 +24,7 @@ CONST.SKILL_RATE = 17;
 CONST.SKILL_NAME = 4000;
 
 --[[
-TECH Ïà¹Ø³£Á¿ÓÃÓÚ Tech.GetData
+TECH ç›¸å…³å¸¸é‡ç”¨äºŽ Tech.GetData
 ]]
 CONST.TECH_ID = 0;
 CONST.TECH_AREA_USE = 0;
@@ -80,104 +80,131 @@ CONST.TECH_OPTION = 4002;
 
 
 --[[
-ITEMSET Ïà¹Ø³£Á¿ÓÃÓÚ Item.GetData »ò Data.ItemsetGetData
+ITEMSET ç›¸å…³å¸¸é‡ç”¨äºŽ Item.GetData æˆ– Data.ItemsetGetData
 ]]
-CONST.ITEMSET_ID = 0;
-CONST.ITEMSET_BASEIMAGENUMBER = 1;
-CONST.ITEMSET_COST = 2;
-CONST.ITEMSET_TYPE = 3;
-CONST.ITEMSET_OTHERFLG = 4;
-CONST.ITEMSET_EQUIPBOTHHAND = 5;
-CONST.ITEMSET_ABLEUSEFIELD = 6;
-CONST.ITEMSET_ABLEUSEBATTLE = 7;
-CONST.ITEMSET_TARGET = 8;
-CONST.ITEMSET_REMAIN = 9;
-CONST.ITEMSET_MAXREMAIN = 10;
-CONST.ITEMSET_LEVEL = 11;
-CONST.ITEMSET_BASEFAILEDPROB = 12;
-CONST.ITEMSET_MAXDURABILITY = 13;
-CONST.ITEMSET_ATTACKNUM_MIN = 14;
-CONST.ITEMSET_ATTACKNUM_MAX = 15;
-CONST.ITEMSET_ABLEEFFECTBETWEENHAVE = 16;
-CONST.ITEMSET_MODIFYMODFLG = 17;
-CONST.ITEMSET_MODIFYATTACK = 18;
-CONST.ITEMSET_MODIFYDEFENCE = 19;
-CONST.ITEMSET_MODIFYAGILITY = 20;
-CONST.ITEMSET_MODIFYMAGIC = 21;
-CONST.ITEMSET_MODIFYRECOVERY = 22;
-CONST.ITEMSET_MODIFYCRITICAL = 23;
-CONST.ITEMSET_MODIFYCOUNTER = 24;
-CONST.ITEMSET_MODIFYHITRATE = 25;
-CONST.ITEMSET_MODIFYAVOID = 26;
-CONST.ITEMSET_MODIFYHP = 27;
-CONST.ITEMSET_MODIFYFORCEPOINT = 28;
-CONST.ITEMSET_MODIFYLUCK = 29;
-CONST.ITEMSET_MODIFYCHARISMA = 30;
-CONST.ITEMSET_MODIFYCHARM = 31;
-CONST.ITEMSET_MODIFYATTRIB = 32;
-CONST.ITEMSET_MODIFYATTRIB2 = 33;
-CONST.ITEMSET_MODIFYATTRIBVALUE = 34;
-CONST.ITEMSET_MODIFYATTRIBVALUE2 = 35;
-CONST.ITEMSET_MODIFYSTAMINA = 36;
-CONST.ITEMSET_MODIFYDEX = 37;
-CONST.ITEMSET_MODIFYINTELLIGENCE = 38;
-CONST.ITEMSET_POISON = 39;
-CONST.ITEMSET_SLEEP = 40;
-CONST.ITEMSET_STONE = 41;
-CONST.ITEMSET_DRUNK = 42;
-CONST.ITEMSET_CONFUSION = 43;
-CONST.ITEMSET_AMNESIA = 44;
-CONST.ITEMSET_SPECIALEFFECT = 45;
-CONST.ITEMSET_SPECIALEFFECTVALUE = 46;
-CONST.ITEMSET_SPECIALEFFECTVALUE2 = 47;
-CONST.ITEMSET_MATERIAL_WEAPON = 48;
-CONST.ITEMSET_MATERIAL_ARMOUR = 49;
-CONST.ITEMSET_MATERIAL_ACCESSORY = 50;
-CONST.ITEMSET_USEACTION = 51;
-CONST.ITEMSET_DROPATLOGOUT = 52;
-CONST.ITEMSET_VANISHATDROP = 53;
-CONST.ITEMSET_CANPETMAIL = 54;
-CONST.ITEMSET_RSS = 55;
-CONST.ITEMSET_CANSELL = 56;
-CONST.ITEMSET_EXPLANATION1 = 57;
-CONST.ITEMSET_EXPLANATION2 = 58;
-CONST.ITEMSET_LEAKEDPROB = 59;
-CONST.ITEMSET_RARE_FLG = 60;
-CONST.ITEMSET_INBOX_FLG = 61;
-CONST.ITEMSET_PUTTIME = 62;
-CONST.ITEMSET_LEAKLEVEL = 63;
-CONST.ITEMSET_MERGEFLG = 64;
-CONST.ITEMSET_DURABILITY = 65;
-CONST.ITEMSET_SELLUNIT = 66;
-CONST.ITEMSET_CREATETIME = 67;
-CONST.ITEMSET_TIMELIMIT = 68;
-CONST.ITEMSET_ENDTIME = 69;
-CONST.ITEMSET_VAR1 = 70;
-CONST.ITEMSET_VAR2 = 71;
-CONST.ITEMSET_VAR3 = 72;
-CONST.ITEMSET_VAR4 = 73;
-CONST.ITEMSET_ADM = 74;
-CONST.ITEMSET_HOUSE_X = 75;
-CONST.ITEMSET_HOUSE_Y = 76;
-CONST.ITEMSET_MONSTERATTRIB = 77;
-CONST.ITEMSET_WEIGHT = 78;
-CONST.ITEMSET_FIRSTNAME = 4000;
-CONST.ITEMSET_TRUENAME = 4001;
-CONST.ITEMSET_MEMO = 4002;
-CONST.ITEMSET_ARGUMENT = 4003;
-CONST.ITEMSET_RENAMECDKEY = 4004;
-CONST.ITEMSET_INITFUNC = 4005;
-CONST.ITEMSET_WATCHFUNC = 4006;
-CONST.ITEMSET_USEFUNC = 4007;
-CONST.ITEMSET_ATTACHFUNC = 4008;
-CONST.ITEMSET_DETACHFUNC = 4009;
-CONST.ITEMSET_DROPFUNC = 4010;
-CONST.ITEMSET_PREPICKUPFUNC = 4011;
-CONST.ITEMSET_PICKUPFUNC = 4012;
+CONST.ITEMSET_ID = 0 --ç‰©å“ID;
+CONST.ITEMSET_BASEIMAGENUMBER = 1 --å›¾æ¡£ID;
+CONST.ITEMSET_COST = 2 --ä»·æ ¼;
+CONST.ITEMSET_TYPE = 3 --ç±»åž‹;
+CONST.ITEMSET_OTHERFLG = 4 --å…¶ä»–æ ‡å¿—;
+CONST.ITEMSET_EQUIPBOTHHAND = 5 --åŒæ‰‹è£…å¤‡;
+CONST.ITEMSET_ABLEUSEFIELD = 6 --å¯åŒå‡»;
+CONST.ITEMSET_ABLEUSEBATTLE = 7 --æˆ˜æ–—å¯ç”¨;
+CONST.ITEMSET_TARGET = 8 --æˆ˜æ–—ä½¿ç”¨ç›®æ ‡;
+CONST.ITEMSET_REMAIN = 9 --æœ€å°é‡‡é›†æ•°;
+CONST.ITEMSET_MAXREMAIN = 10 --æœ€å¤§å †å æ•°;
+CONST.ITEMSET_LEVEL = 11 --ç­‰çº§;
+CONST.ITEMSET_BASEFAILEDPROB = 12 --åŸºç¡€å¤±è´¥çŽ‡ï¼ˆç›®æµ‹æ— ç”¨ï¼‰;
+CONST.ITEMSET_MAXDURABILITY = 13 --æœ€å°è€ä¹…;
+CONST.ITEMSET_ATTACKNUM_MIN = 14 --æœ€å°æ”»å‡»æ¬¡æ•°;
+CONST.ITEMSET_ATTACKNUM_MAX = 15 --æœ€å¤§æ”»å‡»æ¬¡æ•°;
+CONST.ITEMSET_ABLEEFFECTBETWEENHAVE = 16 --æ— éœ€è£…å¤‡åŠ èƒ½åŠ›;
+CONST.ITEMSET_MODIFYMODFLG = 17 --ç™¾åˆ†æ¯”è£…å¤‡;
+CONST.ITEMSET_MODIFYATTACK = 18 --æœ€å°æ”»å‡»;
+CONST.ITEMSET_MODIFYDEFENCE = 19 --æœ€å°é˜²å¾¡;
+CONST.ITEMSET_MODIFYAGILITY = 20 --æœ€å°æ•æ·;
+CONST.ITEMSET_MODIFYMAGIC = 21 --æœ€å°ç²¾ç¥ž;
+CONST.ITEMSET_MODIFYRECOVERY = 22 --æœ€å°å›žå¤;
+CONST.ITEMSET_MODIFYCRITICAL = 23 --æœ€å°å¿…æ€;
+CONST.ITEMSET_MODIFYCOUNTER = 24 --æœ€å°åå‡»;
+CONST.ITEMSET_MODIFYHITRATE = 25 --æœ€å°å‘½ä¸­;
+CONST.ITEMSET_MODIFYAVOID = 26 --æœ€å°é—ªèº²;
+CONST.ITEMSET_MODIFYHP = 27 --æœ€å°ç”Ÿå‘½;
+CONST.ITEMSET_MODIFYFORCEPOINT = 28 --æœ€å°é­”åŠ›;
+CONST.ITEMSET_MODIFYLUCK = 29 --æœ€å°å¹¸è¿;
+CONST.ITEMSET_MODIFYCHARISMA = 30 --æœ€å°é­…åŠ›ï¼ˆç›®æµ‹æ— ç”¨ï¼‰;
+CONST.ITEMSET_MODIFYCHARM = 31 --æœ€å°é­…åŠ›å€¼;
+CONST.ITEMSET_MODIFYATTRIB = 32 --æ°´æ™¶å±žæ€§1;
+CONST.ITEMSET_MODIFYATTRIB2 = 33 --æ°´æ™¶å±žæ€§2;
+CONST.ITEMSET_MODIFYATTRIBVALUE = 34 --æ°´æ™¶å±žæ€§1å€¼;
+CONST.ITEMSET_MODIFYATTRIBVALUE2 = 35 --æ°´æ™¶å±žæ€§2å€¼;
+CONST.ITEMSET_MODIFYSTAMINA = 36 --æœ€å°è€åŠ›;
+CONST.ITEMSET_MODIFYDEX = 37 --æœ€å°çµå·§;
+CONST.ITEMSET_MODIFYINTELLIGENCE = 38 --æœ€å°æ™ºåŠ›;
+CONST.ITEMSET_POISON = 39 --æœ€å°æŠ—æ¯’;
+CONST.ITEMSET_SLEEP = 40 --æœ€å°æŠ—ç¡;
+CONST.ITEMSET_STONE = 41 --æœ€å°æŠ—çŸ³;
+CONST.ITEMSET_DRUNK = 42 --æœ€å°æŠ—é†‰;
+CONST.ITEMSET_CONFUSION = 43 --æœ€å°æŠ—ä¹±;
+CONST.ITEMSET_AMNESIA = 44 --æœ€å°æŠ—å¿˜;
+CONST.ITEMSET_SPECIALEFFECT = 45 --ç‰¹æ®ŠåŠŸèƒ½;
+CONST.ITEMSET_SPECIALEFFECTVALUE = 46 --åŠŸèƒ½å‚æ•°1;
+CONST.ITEMSET_SPECIALEFFECTVALUE2 = 47 --åŠŸèƒ½å‚æ•°2;
+CONST.ITEMSET_MATERIAL_WEAPON = 48 --å®çŸ³_æ­¦å™¨;
+CONST.ITEMSET_MATERIAL_ARMOUR = 49 --å®çŸ³_é˜²å…·;
+CONST.ITEMSET_MATERIAL_ACCESSORY = 50 --å®çŸ³_é¥°å“;
+CONST.ITEMSET_USEACTION = 51 --ä½¿ç”¨åŠ¨ä½œï¼ˆç›®æµ‹æ— ç”¨ï¼‰;
+CONST.ITEMSET_DROPATLOGOUT = 52 --ç™»å‡ºæ¶ˆå¤±;
+CONST.ITEMSET_VANISHATDROP = 53 --ä¸¢å‡ºæ¶ˆå¤±;
+CONST.ITEMSET_CANPETMAIL = 54 --å¯äº¤æ˜“é‚®ä»¶;
+CONST.ITEMSET_RSS = 55 --æœ€å°é­”æŠ—;
+CONST.ITEMSET_CANSELL = 56 --å¯å‡ºå”®;
+CONST.ITEMSET_EXPLANATION1 = 57 --ç‰©å“è¯´æ˜Ž;
+CONST.ITEMSET_EXPLANATION2 = 58 --å³é”®è¯´æ˜Ž;
+CONST.ITEMSET_LEAKEDPROB = 59 --é‰´å®šæ¦‚çŽ‡;
+CONST.ITEMSET_RARE_FLG = 60 --é»‘ç™½å®ç®±èƒ½å¦å¼€å‡º;
+CONST.ITEMSET_INBOX_FLG = 61 --æ™®é€šå®ç®±èƒ½å¦å¼€å‡º;
+CONST.ITEMSET_PUTTIME = 62 --æ”¾ç½®æ—¶é—´;
+CONST.ITEMSET_LEAKLEVEL = 63 --é‰´å®šç­‰çº§ï¼ˆç›®æµ‹æ— ç”¨ï¼‰;
+CONST.ITEMSET_MERGEFLG = 64 --èƒ½å¦åˆæˆï¼ˆçŠç‘šå·¥å…·ä¹‹å‰æœ‰ï¼Œç›®æµ‹æ— ç”¨ï¼‰;
+CONST.ITEMSET_DURABILITY = 65 --è€ä¹…åº¦ï¼ˆç›®æµ‹æ— ç”¨ï¼‰;
+CONST.ITEMSET_SELLUNIT = 66 --æ˜¯å¦å¯å‡ºå”®;
+CONST.ITEMSET_CREATETIME = 67 --åˆ›å»ºæ—¶é—´;
+CONST.ITEMSET_TIMELIMIT = 68 --é™æ—¶æœ‰æ•ˆæœŸ;
+CONST.ITEMSET_ENDTIME = 69 --åˆ°æœŸæ—¶é—´;
+CONST.ITEMSET_VAR1 = 70 --å˜é‡1;
+CONST.ITEMSET_VAR2 = 71 --å˜é‡2;
+CONST.ITEMSET_VAR3 = 72 --å˜é‡3;
+CONST.ITEMSET_VAR4 = 73 --å˜é‡4;
+CONST.ITEMSET_ADM = 74 --æœ€å°é­”æ”»;
+CONST.ITEMSET_HOUSE_X = 75 --æˆ¿å±‹_X;
+CONST.ITEMSET_HOUSE_Y = 76 --æˆ¿å±‹_Y;
+CONST.ITEMSET_MONSTERATTRIB = 77 --æ€ªç‰©ç§æ—ï¼ˆç›®æµ‹æ— ç”¨ï¼‰;
+CONST.ITEMSET_WEIGHT = 78 --æœ€å°è´Ÿé‡;
+CONST.ITEMSET_FIRSTNAME = 4000 --æœªé‰´å®šå;
+CONST.ITEMSET_TRUENAME = 4001 --é“å…·åç§°;
+CONST.ITEMSET_MEMO = 4002 --åˆ»å°;
+CONST.ITEMSET_ARGUMENT = 4003 --ä½¿ç”¨æ•ˆæžœ;
+CONST.ITEMSET_RENAMECDKEY = 4004 --åˆ»å°çŽ©å®¶;
+CONST.ITEMSET_INITFUNC = 4005 --é“å…·å®šä¹‰;
+CONST.ITEMSET_WATCHFUNC = 4006 --è§‚å¯Ÿå‡½æ•°;
+CONST.ITEMSET_USEFUNC = 4007 --é“å…·åŠŸèƒ½;
+CONST.ITEMSET_ATTACHFUNC = 4008 --è£…å¤‡å‡½æ•°;
+CONST.ITEMSET_DETACHFUNC = 4009 --å¸ä¸‹å‡½æ•°;
+CONST.ITEMSET_DROPFUNC = 4010 --ä¸¢å¼ƒå‡½æ•°;
+CONST.ITEMSET_PREPICKUPFUNC = 4011 --æ‹¾å–å‰å‡½æ•°;
+CONST.ITEMSET_PICKUPFUNC = 4012 --æ‹¾å–å‡½æ•°;
+CONST.ITEMSET_MAXHIT = 88 --æœ€å¤§é‡‡é›†æ•°;
+CONST.ITEMSET_MAXITEMDURABILITY = 92 --æœ€å¤§è€ä¹…;
+CONST.ITEMSET_MAXMODIFYATTACK = 97 --æœ€å¤§æ”»å‡»;
+CONST.ITEMSET_MAXMODIFYDEFENCE = 98 --æœ€å¤§é˜²å¾¡;
+CONST.ITEMSET_MAXMODIFYAGILITY = 99 --æœ€å¤§æ•æ·;
+CONST.ITEMSET_MAXMODIFYMAGIC = 100 --æœ€å¤§ç²¾ç¥ž;
+CONST.ITEMSET_MAXMODIFYRECOVERY = 101 --æœ€å¤§å›žå¤;
+CONST.ITEMSET_MAXMODIFYCRITICAL = 102 --æœ€å¤§å¿…æ€;
+CONST.ITEMSET_MAXMODIFYCOUNTER = 103 --æœ€å¤§åå‡»;
+CONST.ITEMSET_MAXMODIFYHITRATE = 104 --æœ€å¤§å‘½ä¸­;
+CONST.ITEMSET_MAXMODIFYAVOID = 105 --æœ€å¤§é—ªèº²;
+CONST.ITEMSET_MAXMODIFYHP = 106 --æœ€å¤§ç”Ÿå‘½;
+CONST.ITEMSET_MAXMODIFYFORCEPOINT = 107 --æœ€å¤§é­”åŠ›;
+CONST.ITEMSET_MAXMODIFYLUCK = 108 --æœ€å¤§å¹¸è¿;
+CONST.ITEMSET_MAXMODIFYCHARM = 110 --æœ€å¤§é­…åŠ›å€¼;
+CONST.ITEMSET_MAXMODIFYSTAMINA = 115 --æœ€å¤§è€åŠ›;
+CONST.ITEMSET_MAXMODIFYDEX = 116 --æœ€å¤§çµå·§;
+CONST.ITEMSET_MAXMODIFYINTELLIGENCE = 117 --æœ€å¤§æ™ºåŠ›;
+CONST.ITEMSET_MAXPOISON = 118 --æœ€å¤§æŠ—æ¯’;
+CONST.ITEMSET_MAXSLEEP = 119 --æœ€å¤§æŠ—ç¡;
+CONST.ITEMSET_MAXSTONE = 120 --æœ€å¤§æŠ—çŸ³;
+CONST.ITEMSET_MAXDRUNK = 121 --æœ€å¤§æŠ—é†‰;
+CONST.ITEMSET_MAXCONFUSION = 122 --æœ€å¤§æŠ—ä¹±;
+CONST.ITEMSET_MAXAMNESIA = 123 --æœ€å¤§æŠ—å¿˜;
+CONST.ITEMSET_MAXRSS = 134 --æœ€å¤§é­”æŠ—;
+CONST.ITEMSET_MAXADM = 153 --æœ€å¤§é­”æ”»;
+CONST.ITEMSET_MAXWEIGHT = 157 --æœ€å¤§è´Ÿé‡;
 
 
 --[[
-ENCOUNT Ïà¹Ø³£Á¿ÓÃÓÚ Data.GetEncountData
+ENCOUNT ç›¸å…³å¸¸é‡ç”¨äºŽ Data.GetEncountData
 ]]
 CONST.ENCOUNT_USE = 0;
 CONST.ENCOUNT_GROUP_ID = 0;
@@ -252,23 +279,23 @@ CONST.ENCOUNT_HEIGHT = 36;
 CONST.ENCOUNT_GROUP_NAME = 4000;
 CONST.ENCOUNT_GROUP_FORMATION = 4001;
 
---- ±³°ü×ÜÒ³Êý
+--- èƒŒåŒ…æ€»é¡µæ•°
 CONST.EXTBAGPAGE = 0;
 
---- È«¾Ö×î´óµÀ¾ßÀ¸
+--- å…¨å±€æœ€å¤§é“å…·æ 
 CONST.EXTITEMMAX = 28;
 
 --[[
-·½Ïò³£Á¿
+æ–¹å‘å¸¸é‡
 ]]
-CONST.×óÉÏ = 0;
-CONST.ÉÏ = 1;
-CONST.ÓÒÉÏ = 2;
-CONST.ÓÒ = 3;
-CONST.ÓÒÏÂ = 4;
-CONST.ÏÂ = 5;
-CONST.×óÏÂ = 6;
-CONST.×ó = 7;
+CONST.å·¦ä¸Š = 0;
+CONST.ä¸Š = 1;
+CONST.å³ä¸Š = 2;
+CONST.å³ = 3;
+CONST.å³ä¸‹ = 4;
+CONST.ä¸‹ = 5;
+CONST.å·¦ä¸‹ = 6;
+CONST.å·¦ = 7;
 
 CONST.ENDEVENT1 = 85;
 CONST.ENDEVENT2 = 86;
@@ -357,7 +384,7 @@ CONST.TIMEOUTDUNGEONID = 262;
 CONST.TIMEOUTSERVERNUMBER = 263;
 
 --[[
-ITEM_RECIPE ÓÃÓÚ  Recipe.GetData
+ITEM_RECIPE ç”¨äºŽ  Recipe.GetData
 ]]
 CONST.ITEM_RECIPE_ID = 0;
 CONST.ITEM_RECIPE_ITEMID = 1;
@@ -383,24 +410,24 @@ CONST.ITEM_RECIPE_NAME = 4000;
 CONST.ITEM_OTHERFLG_DISABLE = 1073741824;
 
 --[[
-´°¿ÚÀàÐÍ
+çª—å£ç±»åž‹
 ]]
-CONST.´°¿Ú_ÐÅÏ¢¿ò = 0;
-CONST.´°¿Ú_ÊäÈë¿ò = 1;
-CONST.´°¿Ú_Ñ¡Ôñ¿ò = 2;
-CONST.´°¿Ú_³èÎïÑ¡Ôñ¿ò = 3;
-CONST.´°¿Ú_×é¶ÓÑ¡Ôñ¿ò = 4;
-CONST.´°¿Ú_ÂòÂô¿ò = 5;
-CONST.´°¿Ú_Âò¿ò = 6;
-CONST.´°¿Ú_ÉÌµêÂò = 6;
-CONST.´°¿Ú_Âô¿ò = 7;
-CONST.´°¿Ú_ÉÌµêÂô = 7;
-CONST.´°¿Ú_¾ÞÐÅÏ¢¿ò = 10;
-CONST.´°¿Ú_¾ÞÊäÈë¿ò = 11;
-CONST.´°¿Ú_Í¼¿ò = 37;
+CONST.çª—å£_ä¿¡æ¯æ¡† = 0;
+CONST.çª—å£_è¾“å…¥æ¡† = 1;
+CONST.çª—å£_é€‰æ‹©æ¡† = 2;
+CONST.çª—å£_å® ç‰©é€‰æ‹©æ¡† = 3;
+CONST.çª—å£_ç»„é˜Ÿé€‰æ‹©æ¡† = 4;
+CONST.çª—å£_ä¹°å–æ¡† = 5;
+CONST.çª—å£_ä¹°æ¡† = 6;
+CONST.çª—å£_å•†åº—ä¹° = 6;
+CONST.çª—å£_å–æ¡† = 7;
+CONST.çª—å£_å•†åº—å– = 7;
+CONST.çª—å£_å·¨ä¿¡æ¯æ¡† = 10;
+CONST.çª—å£_å·¨è¾“å…¥æ¡† = 11;
+CONST.çª—å£_å›¾æ¡† = 37;
 
 --[[
-NPC_EVENT_TYPE ÓÃÓÚ CONST.¶ÔÏó_NPC_EVENT_TYPE ½âÎö
+NPC_EVENT_TYPE ç”¨äºŽ CONST.å¯¹è±¡_NPC_EVENT_TYPE è§£æž
 ]]
 CONST.NPC_EVENT_TYPE_NONE = 0;
 CONST.NPC_EVENT_TYPE_NPC = 1;
@@ -409,535 +436,535 @@ CONST.NPC_EVENT_TYPE_WARP = 3;
 CONST.NPC_EVENT_TYPE_WARP_OBJECT = 10;
 
 --[[
-Õ½¶·ÀàÐÍ
+æˆ˜æ–—ç±»åž‹
 ]]
-CONST.Õ½¶·_ÆÕÍ¨ = 1;
-CONST.Õ½¶·_PVP = 2;
-CONST.Õ½¶·_¹ÛÕ½ = 3;
-CONST.Õ½¶·_BOSSÕ½ = 5;
+CONST.æˆ˜æ–—_æ™®é€š = 1;
+CONST.æˆ˜æ–—_PVP = 2;
+CONST.æˆ˜æ–—_è§‚æˆ˜ = 3;
+CONST.æˆ˜æ–—_BOSSæˆ˜ = 5;
 
 --[[
-Õ½¶·½±ÀøÀàÐÍ
+æˆ˜æ–—å¥–åŠ±ç±»åž‹
 ]]
-CONST.Õ½½±_ÆÕÍ¨ = 0;
-CONST.Õ½½±_PVP = 1;
+CONST.æˆ˜å¥–_æ™®é€š = 0;
+CONST.æˆ˜å¥–_PVP = 1;
 
 --[[
-³èÎï³É³¤µµÀàÐÍ
+å® ç‰©æˆé•¿æ¡£ç±»åž‹
 ]]
-CONST.³èµµ_Ìå³É = 1;
-CONST.³èµµ_Á¦³É = 2;
-CONST.³èµµ_Ç¿³É = 3;
-CONST.³èµµ_Ãô³É = 4;
-CONST.³èµµ_Ä§³É = 5;
+CONST.å® æ¡£_ä½“æˆ = 1;
+CONST.å® æ¡£_åŠ›æˆ = 2;
+CONST.å® æ¡£_å¼ºæˆ = 3;
+CONST.å® æ¡£_æ•æˆ = 4;
+CONST.å® æ¡£_é­”æˆ = 5;
 
-CONST.ÑÕÉ«_°×É« = 0;
-CONST.ÑÕÉ«_ÇàÉ« = 1;
-CONST.ÑÕÉ«_×ÏÉ« = 2;
-CONST.ÑÕÉ«_À¶É« = 3;
-CONST.ÑÕÉ«_»ÆÉ« = 4;
-CONST.ÑÕÉ«_ÂÌÉ« = 5;
-CONST.ÑÕÉ«_ºìÉ« = 6;
-CONST.ÑÕÉ«_»ÒÉ« = 7;
-CONST.ÑÕÉ«_»ÒÀ¶É« = 8;
-CONST.ÑÕÉ«_»ÒÂÌÉ« = 9;
+CONST.é¢œè‰²_ç™½è‰² = 0;
+CONST.é¢œè‰²_é’è‰² = 1;
+CONST.é¢œè‰²_ç´«è‰² = 2;
+CONST.é¢œè‰²_è“è‰² = 3;
+CONST.é¢œè‰²_é»„è‰² = 4;
+CONST.é¢œè‰²_ç»¿è‰² = 5;
+CONST.é¢œè‰²_çº¢è‰² = 6;
+CONST.é¢œè‰²_ç°è‰² = 7;
+CONST.é¢œè‰²_ç°è“è‰² = 8;
+CONST.é¢œè‰²_ç°ç»¿è‰² = 9;
 
-CONST.×ÖÌå_ÖÐ = 0;
-CONST.×ÖÌå_Ð¡ = 1;
-CONST.×ÖÌå_´ó = 2;
+CONST.å­—ä½“_ä¸­ = 0;
+CONST.å­—ä½“_å° = 1;
+CONST.å­—ä½“_å¤§ = 2;
 
 --[[
-¶ÔÏóµÄ¶¯×÷ÀàÐÍ ÓÃÓÚ NLG.SetAction
+å¯¹è±¡çš„åŠ¨ä½œç±»åž‹ ç”¨äºŽ NLG.SetAction
 ]]
-CONST.¶¯×÷_Õ¾Á¢ = 0;
-CONST.¶¯×÷_×ßÂ· = 1;
-CONST.¶¯×÷_ÅÜ²½ = 3;
-CONST.¶¯×÷_¹¥»÷ = 5;
-CONST.¶¯×÷_Ä§·¨ = 6;
-CONST.¶¯×÷_Í¶ÖÀ = 7;
-CONST.¶¯×÷_ÊÜÉË = 8;
-CONST.¶¯×÷_·ÀÓù = 9;
-CONST.¶¯×÷_µ¹ÏÂ = 10;
-CONST.¶¯×÷_×øÏÂ = 11;
-CONST.¶¯×÷_ÕÐÊÖ = 12;
-CONST.¶¯×÷_¸ßÐË = 13;
-CONST.¶¯×÷_ÉúÆø = 14;
-CONST.¶¯×÷_±¯ÉË = 15;
-CONST.¶¯×÷_µãÍ· = 16;
-CONST.¶¯×÷_Ê¯Í· = 17;
-CONST.¶¯×÷_¼ôµ¶ = 18;
-CONST.¶¯×÷_²¼ = 19;
+CONST.åŠ¨ä½œ_ç«™ç«‹ = 0;
+CONST.åŠ¨ä½œ_èµ°è·¯ = 1;
+CONST.åŠ¨ä½œ_è·‘æ­¥ = 3;
+CONST.åŠ¨ä½œ_æ”»å‡» = 5;
+CONST.åŠ¨ä½œ_é­”æ³• = 6;
+CONST.åŠ¨ä½œ_æŠ•æŽ· = 7;
+CONST.åŠ¨ä½œ_å—ä¼¤ = 8;
+CONST.åŠ¨ä½œ_é˜²å¾¡ = 9;
+CONST.åŠ¨ä½œ_å€’ä¸‹ = 10;
+CONST.åŠ¨ä½œ_åä¸‹ = 11;
+CONST.åŠ¨ä½œ_æ‹›æ‰‹ = 12;
+CONST.åŠ¨ä½œ_é«˜å…´ = 13;
+CONST.åŠ¨ä½œ_ç”Ÿæ°” = 14;
+CONST.åŠ¨ä½œ_æ‚²ä¼¤ = 15;
+CONST.åŠ¨ä½œ_ç‚¹å¤´ = 16;
+CONST.åŠ¨ä½œ_çŸ³å¤´ = 17;
+CONST.åŠ¨ä½œ_å‰ªåˆ€ = 18;
+CONST.åŠ¨ä½œ_å¸ƒ = 19;
 
-CONST.Õ½Êô_¹¥Îü = 0;
-CONST.Õ½Êô_¹¥·´ = 1;
-CONST.Õ½Êô_¹¥ÎÞ = 2;
-CONST.Õ½Êô_Ä§Îü = 3;
-CONST.Õ½Êô_Ä§·´ = 4;
-CONST.Õ½Êô_Ä§ÎÞ = 5;
-CONST.Õ½Êô_¶¾ = 6;
-CONST.Õ½Êô_Ë¯ = 7;
-CONST.Õ½Êô_Ê¯ = 8;
-CONST.Õ½Êô_×í = 9;
-CONST.Õ½Êô_Íü = 10;
-CONST.Õ½Êô_ÂÒ = 11;
-CONST.Õ½Êô_·ÀÔö = 12;
-CONST.Õ½Êô_¹¥Ôö = 13;
-CONST.Õ½Êô_ÃôÔö = 14;
-CONST.Õ½Êô_»ÖÔö = 15;
-CONST.Õ½Êô_»Ö¸´Ä§·¨ = 16;
-CONST.Õ½Êô_»Ö¸´»ØºÏ = 17;
-CONST.Õ½Êô_Êô×ª = 18;
-CONST.Õ½Êô_ÂýÎè»ØºÏ = 19;
-CONST.Õ½Êô_ÂýÎèÖµ = 20;
-CONST.Õ½Êô_Îè»ØºÏ = 21;
-CONST.Õ½Êô_µÈ»ØºÏ = 22;
-CONST.Õ½Êô_²ÎÊý = 23;
+CONST.æˆ˜å±ž_æ”»å¸ = 0;
+CONST.æˆ˜å±ž_æ”»å = 1;
+CONST.æˆ˜å±ž_æ”»æ—  = 2;
+CONST.æˆ˜å±ž_é­”å¸ = 3;
+CONST.æˆ˜å±ž_é­”å = 4;
+CONST.æˆ˜å±ž_é­”æ—  = 5;
+CONST.æˆ˜å±ž_æ¯’ = 6;
+CONST.æˆ˜å±ž_ç¡ = 7;
+CONST.æˆ˜å±ž_çŸ³ = 8;
+CONST.æˆ˜å±ž_é†‰ = 9;
+CONST.æˆ˜å±ž_å¿˜ = 10;
+CONST.æˆ˜å±ž_ä¹± = 11;
+CONST.æˆ˜å±ž_é˜²å¢ž = 12;
+CONST.æˆ˜å±ž_æ”»å¢ž = 13;
+CONST.æˆ˜å±ž_æ•å¢ž = 14;
+CONST.æˆ˜å±ž_æ¢å¢ž = 15;
+CONST.æˆ˜å±ž_æ¢å¤é­”æ³• = 16;
+CONST.æˆ˜å±ž_æ¢å¤å›žåˆ = 17;
+CONST.æˆ˜å±ž_å±žè½¬ = 18;
+CONST.æˆ˜å±ž_æ…¢èˆžå›žåˆ = 19;
+CONST.æˆ˜å±ž_æ…¢èˆžå€¼ = 20;
+CONST.æˆ˜å±ž_èˆžå›žåˆ = 21;
+CONST.æˆ˜å±ž_ç­‰å›žåˆ = 22;
+CONST.æˆ˜å±ž_å‚æ•° = 23;
 
 
 --[[
-Íæ¼ÒµÀ¾ßÀ¸Î»
+çŽ©å®¶é“å…·æ ä½
 ]]
-CONST.µÀÀ¸_Í·Î» = 0;
-CONST.µÀÀ¸_ÉíÎ» = 1;
-CONST.µÀÀ¸_×óÊÖ = 2;
-CONST.µÀÀ¸_ÓÒÊÖ = 3;
-CONST.µÀÀ¸_½ÅÎ» = 4;
-CONST.µÀÀ¸_Ê×ÊÎ1 = 5;
-CONST.µÀÀ¸_Ê×ÊÎ2 = 6;
-CONST.µÀÀ¸_Ë®¾§ = 7;
-CONST.µÀÀ¸_1 = 8;
-CONST.µÀÀ¸_2 = 9;
-CONST.µÀÀ¸_3 = 10;
-CONST.µÀÀ¸_4 = 11;
-CONST.µÀÀ¸_5 = 12;
-CONST.µÀÀ¸_6 = 13;
-CONST.µÀÀ¸_7 = 14;
-CONST.µÀÀ¸_8 = 15;
-CONST.µÀÀ¸_9 = 16;
-CONST.µÀÀ¸_10 = 17;
-CONST.µÀÀ¸_11 = 18;
-CONST.µÀÀ¸_12 = 19;
-CONST.µÀÀ¸_13 = 20;
-CONST.µÀÀ¸_14 = 21;
-CONST.µÀÀ¸_15 = 22;
-CONST.µÀÀ¸_16 = 23;
-CONST.µÀÀ¸_17 = 24;
-CONST.µÀÀ¸_18 = 25;
-CONST.µÀÀ¸_19 = 26;
-CONST.µÀÀ¸_20 = 27;
+CONST.é“æ _å¤´ä½ = 0;
+CONST.é“æ _èº«ä½ = 1;
+CONST.é“æ _å·¦æ‰‹ = 2;
+CONST.é“æ _å³æ‰‹ = 3;
+CONST.é“æ _è„šä½ = 4;
+CONST.é“æ _é¦–é¥°1 = 5;
+CONST.é“æ _é¦–é¥°2 = 6;
+CONST.é“æ _æ°´æ™¶ = 7;
+CONST.é“æ _1 = 8;
+CONST.é“æ _2 = 9;
+CONST.é“æ _3 = 10;
+CONST.é“æ _4 = 11;
+CONST.é“æ _5 = 12;
+CONST.é“æ _6 = 13;
+CONST.é“æ _7 = 14;
+CONST.é“æ _8 = 15;
+CONST.é“æ _9 = 16;
+CONST.é“æ _10 = 17;
+CONST.é“æ _11 = 18;
+CONST.é“æ _12 = 19;
+CONST.é“æ _13 = 20;
+CONST.é“æ _14 = 21;
+CONST.é“æ _15 = 22;
+CONST.é“æ _16 = 23;
+CONST.é“æ _17 = 24;
+CONST.é“æ _18 = 25;
+CONST.é“æ _19 = 26;
+CONST.é“æ _20 = 27;
 
 --[[
-³èÎïµÀ¾ßÀ¸Î»
+å® ç‰©é“å…·æ ä½
 ]]
-CONST.³èµÀÀ¸_Ë®¾§ = 0;
-CONST.³èµÀÀ¸_ÉíÌå = 1;
-CONST.³èµÀÀ¸_¾±È¦ = 2;
-CONST.³èµÀÀ¸_ÊÎÆ·1 = 3;
-CONST.³èµÀÀ¸_ÊÎÆ·2 = 4;
+CONST.å® é“æ _æ°´æ™¶ = 0;
+CONST.å® é“æ _èº«ä½“ = 1;
+CONST.å® é“æ _é¢ˆåœˆ = 2;
+CONST.å® é“æ _é¥°å“1 = 3;
+CONST.å® é“æ _é¥°å“2 = 4;
 
 --[[
-Íæ¼Ò³èÎïÀ¸Î»
+çŽ©å®¶å® ç‰©æ ä½
 ]]
-CONST.³èÎïÀ¸_1 = 0;
-CONST.³èÎïÀ¸_2 = 1;
-CONST.³èÎïÀ¸_3 = 1;
-CONST.³èÎïÀ¸_4 = 3;
-CONST.³èÎïÀ¸_5 = 4;
+CONST.å® ç‰©æ _1 = 0;
+CONST.å® ç‰©æ _2 = 1;
+CONST.å® ç‰©æ _3 = 1;
+CONST.å® ç‰©æ _4 = 3;
+CONST.å® ç‰©æ _5 = 4;
 
 --[[
-¶ÓÎéÀ¸Î»
+é˜Ÿä¼æ ä½
 ]]
-CONST.¶ÓÔ±_¶Ó³¤ = 0;
-CONST.¶ÓÔ±_1 = 1;
-CONST.¶ÓÔ±_2 = 2;
-CONST.¶ÓÔ±_3 = 3;
-CONST.¶ÓÔ±_4 = 4;
+CONST.é˜Ÿå‘˜_é˜Ÿé•¿ = 0;
+CONST.é˜Ÿå‘˜_1 = 1;
+CONST.é˜Ÿå‘˜_2 = 2;
+CONST.é˜Ÿå‘˜_3 = 3;
+CONST.é˜Ÿå‘˜_4 = 4;
 
 --[[
-µÀ¾ßÀàÐÍ
+é“å…·ç±»åž‹
 ]]
-CONST.µÀ¾ßÀàÐÍ_½£ = 0;
-CONST.µÀ¾ßÀàÐÍ_¸« = 1;
-CONST.µÀ¾ßÀàÐÍ_Ç¹ = 2;
-CONST.µÀ¾ßÀàÐÍ_ÕÈ = 3;
-CONST.µÀ¾ßÀàÐÍ_¹­ = 4;
-CONST.µÀ¾ßÀàÐÍ_Ð¡µ¶ = 5;
-CONST.µÀ¾ßÀàÐÍ_»ØÁ¦ïÚ = 6;
-CONST.µÀ¾ßÀàÐÍ_¶Ü = 7;
-CONST.µÀ¾ßÀàÐÍ_¿ø = 8;
-CONST.µÀ¾ßÀàÐÍ_Ã± = 9;
-CONST.µÀ¾ßÀàÐÍ_îø = 10;
-CONST.µÀ¾ßÀàÐÍ_ÒÂ = 11;
-CONST.µÀ¾ßÀàÐÍ_ÅÛ = 12;
-CONST.µÀ¾ßÀàÐÍ_Ñ¥ = 13;
-CONST.µÀ¾ßÀàÐÍ_Ð¬ = 14;
-CONST.µÀ¾ßÀàÐÍ_ÊÖ»· = 15;
-CONST.µÀ¾ßÀàÐÍ_ÀÖÆ÷ = 16;
-CONST.µÀ¾ßÀàÐÍ_ÏîÁ´ = 17;
-CONST.µÀ¾ßÀàÐÍ_½äÖ¸ = 18;
-CONST.µÀ¾ßÀàÐÍ_Í·´ø = 19;
-CONST.µÀ¾ßÀàÐÍ_¶ú»· = 20;
-CONST.µÀ¾ßÀàÐÍ_»¤Éí·û = 21;
-CONST.µÀ¾ßÀàÐÍ_Ë®¾§ = 22;
-CONST.µÀ¾ßÀàÐÍ_ÁÏÀí = 23;
-CONST.µÀ¾ßÀàÐÍ_¼Ò¾ß = 24;
-CONST.µÀ¾ßÀàÐÍ_¹ûÆ¤ = 25;
-CONST.µÀ¾ßÀàÐÍ_²»Ã÷ = 26;
-CONST.µÀ¾ßÀàÐÍ_±¦Ïä = 27;
-CONST.µÀ¾ßÀàÐÍ_Ô¿³× = 28;
-CONST.µÀ¾ßÀàÐÍ_¿óÊ¯ = 29;
-CONST.µÀ¾ßÀàÐÍ_Ä¾²Ä = 30;
-CONST.µÀ¾ßÀàÐÍ_²¼¾í = 31;
-CONST.µÀ¾ßÀàÐÍ_ÈâÀà = 32;
-CONST.µÀ¾ßÀàÐÍ_º£ÏÊ = 33;
-CONST.µÀ¾ßÀàÐÍ_Êß²Ë = 34;
-CONST.µÀ¾ßÀàÐÍ_ÆäËûÊ³²Ä = 35;
-CONST.µÀ¾ßÀàÐÍ_Ïã²Ý = 36;
-CONST.µÀ¾ßÀàÐÍ_Ò©²Ý = 37;
-CONST.µÀ¾ßÀàÐÍ_±¦Ê¯ = 38;
-CONST.µÀ¾ßÀàÐÍ_BÀà²ÄÁÏ = 39;
-CONST.µÀ¾ßÀàÐÍ_·âÓ¡¿¨ = 40;
-CONST.µÀ¾ßÀàÐÍ_ÆäËû¿¨Æ¬ = 41;
-CONST.µÀ¾ßÀàÐÍ_µãÐÄ = 42;
-CONST.µÀ¾ßÀàÐÍ_Ò©Æ· = 43;
-CONST.µÀ¾ßÀàÐÍ_Êé¼® = 44;
-CONST.µÀ¾ßÀàÐÍ_µØÍ¼ = 45;
-CONST.µÀ¾ßÀàÐÍ_·ÉÐÐ = 46;
-CONST.µÀ¾ßÀàÐÍ_²ÊÆ± = 47;
-CONST.µÀ¾ßÀàÐÍ_ÆäËû = 48;
-CONST.µÀ¾ßÀàÐÍ_ÓÊÆ± = 48;
-CONST.µÀ¾ßÀàÐÍ_¸ÄÔì²ÄÁÏ = 49;
-CONST.µÀ¾ßÀàÐÍ_Í¼¼ø = 50;
-CONST.µÀ¾ßÀàÐÍ_Õ¨Ò© = 51;
-CONST.µÀ¾ßÀàÐÍ_·à±ã = 52;
-CONST.µÀ¾ßÀàÐÍ_Ð¡³Ô = 53;
-CONST.µÀ¾ßÀàÐÍ_¸÷ÖÖ = 54;
-CONST.µÀ¾ßÀàÐÍ_Í·ÊÎ = 55;
-CONST.µÀ¾ßÀàÐÍ_³èÎïË®¾§ = 56;
-CONST.µÀ¾ßÀàÐÍ_³èÎïÊÎÆ· = 57;
-CONST.µÀ¾ßÀàÐÍ_³èÎï×°¼× = 58;
-CONST.µÀ¾ßÀàÐÍ_³èÎï·þÊÎ = 59;
-CONST.µÀ¾ßÀàÐÍ_³èÎï¾±È¦ = 60;
-CONST.µÀ¾ßÀàÐÍ_³èÎï»¤·û = 61;
+CONST.é“å…·ç±»åž‹_å‰‘ = 0;
+CONST.é“å…·ç±»åž‹_æ–§ = 1;
+CONST.é“å…·ç±»åž‹_æžª = 2;
+CONST.é“å…·ç±»åž‹_æ– = 3;
+CONST.é“å…·ç±»åž‹_å¼“ = 4;
+CONST.é“å…·ç±»åž‹_å°åˆ€ = 5;
+CONST.é“å…·ç±»åž‹_å›žåŠ›é•– = 6;
+CONST.é“å…·ç±»åž‹_ç›¾ = 7;
+CONST.é“å…·ç±»åž‹_ç›” = 8;
+CONST.é“å…·ç±»åž‹_å¸½ = 9;
+CONST.é“å…·ç±»åž‹_é“  = 10;
+CONST.é“å…·ç±»åž‹_è¡£ = 11;
+CONST.é“å…·ç±»åž‹_è¢ = 12;
+CONST.é“å…·ç±»åž‹_é´ = 13;
+CONST.é“å…·ç±»åž‹_éž‹ = 14;
+CONST.é“å…·ç±»åž‹_æ‰‹çŽ¯ = 15;
+CONST.é“å…·ç±»åž‹_ä¹å™¨ = 16;
+CONST.é“å…·ç±»åž‹_é¡¹é“¾ = 17;
+CONST.é“å…·ç±»åž‹_æˆ’æŒ‡ = 18;
+CONST.é“å…·ç±»åž‹_å¤´å¸¦ = 19;
+CONST.é“å…·ç±»åž‹_è€³çŽ¯ = 20;
+CONST.é“å…·ç±»åž‹_æŠ¤èº«ç¬¦ = 21;
+CONST.é“å…·ç±»åž‹_æ°´æ™¶ = 22;
+CONST.é“å…·ç±»åž‹_æ–™ç† = 23;
+CONST.é“å…·ç±»åž‹_å®¶å…· = 24;
+CONST.é“å…·ç±»åž‹_æžœçš® = 25;
+CONST.é“å…·ç±»åž‹_ä¸æ˜Ž = 26;
+CONST.é“å…·ç±»åž‹_å®ç®± = 27;
+CONST.é“å…·ç±»åž‹_é’¥åŒ™ = 28;
+CONST.é“å…·ç±»åž‹_çŸ¿çŸ³ = 29;
+CONST.é“å…·ç±»åž‹_æœ¨æ = 30;
+CONST.é“å…·ç±»åž‹_å¸ƒå· = 31;
+CONST.é“å…·ç±»åž‹_è‚‰ç±» = 32;
+CONST.é“å…·ç±»åž‹_æµ·é²œ = 33;
+CONST.é“å…·ç±»åž‹_è”¬èœ = 34;
+CONST.é“å…·ç±»åž‹_å…¶ä»–é£Ÿæ = 35;
+CONST.é“å…·ç±»åž‹_é¦™è‰ = 36;
+CONST.é“å…·ç±»åž‹_è¯è‰ = 37;
+CONST.é“å…·ç±»åž‹_å®çŸ³ = 38;
+CONST.é“å…·ç±»åž‹_Bç±»ææ–™ = 39;
+CONST.é“å…·ç±»åž‹_å°å°å¡ = 40;
+CONST.é“å…·ç±»åž‹_å…¶ä»–å¡ç‰‡ = 41;
+CONST.é“å…·ç±»åž‹_ç‚¹å¿ƒ = 42;
+CONST.é“å…·ç±»åž‹_è¯å“ = 43;
+CONST.é“å…·ç±»åž‹_ä¹¦ç± = 44;
+CONST.é“å…·ç±»åž‹_åœ°å›¾ = 45;
+CONST.é“å…·ç±»åž‹_é£žè¡Œ = 46;
+CONST.é“å…·ç±»åž‹_å½©ç¥¨ = 47;
+CONST.é“å…·ç±»åž‹_å…¶ä»– = 48;
+CONST.é“å…·ç±»åž‹_é‚®ç¥¨ = 48;
+CONST.é“å…·ç±»åž‹_æ”¹é€ ææ–™ = 49;
+CONST.é“å…·ç±»åž‹_å›¾é‰´ = 50;
+CONST.é“å…·ç±»åž‹_ç‚¸è¯ = 51;
+CONST.é“å…·ç±»åž‹_ç²ªä¾¿ = 52;
+CONST.é“å…·ç±»åž‹_å°åƒ = 53;
+CONST.é“å…·ç±»åž‹_å„ç§ = 54;
+CONST.é“å…·ç±»åž‹_å¤´é¥° = 55;
+CONST.é“å…·ç±»åž‹_å® ç‰©æ°´æ™¶ = 56;
+CONST.é“å…·ç±»åž‹_å® ç‰©é¥°å“ = 57;
+CONST.é“å…·ç±»åž‹_å® ç‰©è£…ç”² = 58;
+CONST.é“å…·ç±»åž‹_å® ç‰©æœé¥° = 59;
+CONST.é“å…·ç±»åž‹_å® ç‰©é¢ˆåœˆ = 60;
+CONST.é“å…·ç±»åž‹_å® ç‰©æŠ¤ç¬¦ = 61;
 
 --[[
-¶ÔÏóÊôÐÔ£¬º¬Íæ¼Ò¡¢NPC¡¢³èÎï¡¢¹ÖÎï, ÓÃÓÚChar.GetData
+å¯¹è±¡å±žæ€§ï¼Œå«çŽ©å®¶ã€NPCã€å® ç‰©ã€æ€ªç‰©, ç”¨äºŽChar.GetData
 ]]
-CONST.¶ÔÏó_ÀàÐÍ = 3;
-CONST.¶ÔÏó_Ðò = 3;
-CONST.¶ÔÏó_ÐÎÏó = 4;
-CONST.¶ÔÏó_¿ÉÊÓ = 4;
-CONST.¶ÔÏó_Ô­ÐÎ = 5;
-CONST.¶ÔÏó_µØÍ¼ÀàÐÍ = 6;
-CONST.¶ÔÏó_MAP = 6;
-CONST.¶ÔÏó_µØÍ¼ = 7;
-CONST.¶ÔÏó_X = 8;
-CONST.¶ÔÏó_Y = 9;
-CONST.¶ÔÏó_·½Ïò = 10;
-CONST.¶ÔÏó_µÈ¼¶ = 11;
-CONST.¶ÔÏó_Ñª = 12;
-CONST.¶ÔÏó_Ä§ = 13;
-CONST.¶ÔÏó_ÌåÁ¦ = 14;
-CONST.¶ÔÏó_Á¦Á¿ = 15;
-CONST.¶ÔÏó_Ç¿¶È = 16;
-CONST.¶ÔÏó_ËÙ¶È = 17;
-CONST.¶ÔÏó_Ä§·¨ = 18;
-CONST.¶ÔÏó_ÔË = 19;
-CONST.¶ÔÏó_ÔËÆø = 19;
-CONST.¶ÔÏó_ÖÖ×å = 20;
-CONST.¶ÔÏó_µØÊôÐÔ = 21;
-CONST.¶ÔÏó_Ë®ÊôÐÔ = 22;
-CONST.¶ÔÏó_»ðÊôÐÔ = 23;
-CONST.¶ÔÏó_·çÊôÐÔ = 24;
-CONST.¶ÔÏó_¿¹¶¾ = 25;
-CONST.¶ÔÏó_¿¹Ë¯ = 26;
-CONST.¶ÔÏó_¿¹Ê¯ = 27;
-CONST.¶ÔÏó_¿¹×í = 28;
-CONST.¶ÔÏó_¿¹ÂÒ = 29;
-CONST.¶ÔÏó_¿¹Íü = 30;
-CONST.¶ÔÏó_±ØÉ± = 31;
-CONST.¶ÔÏó_·´»÷ = 32;
-CONST.¶ÔÏó_ÃüÖÐ = 33;
-CONST.¶ÔÏó_ÉÁ¶ã = 34;
-CONST.¶ÔÏó_µÀ¾ßÀ¸ = 35;
-CONST.¶ÔÏó_¼¼ÄÜÀ¸ = 36;
-CONST.¶ÔÏó_ËÀÍöÊý = 37;
-CONST.¶ÔÏó_ÉËº¦Êý = 38;
-CONST.¶ÔÏó_É±³èÊý = 39;
-CONST.¶ÔÏó_Õ¼²·Ê±¼ä = 40;
-CONST.¶ÔÏó_ÊÜÉË = 41;
-CONST.¶ÔÏó_ÒÆ¼ä = 42;
-CONST.¶ÔÏó_Ñ­Ê± = 43;
-CONST.¶ÔÏó_¾­Ñé = 44;
-CONST.¶ÔÏó_Éý¼¶µã = 45;
-CONST.¶ÔÏó_Í¼Àà = 46;
-CONST.¶ÔÏó_ÃûÉ« = 47;
-CONST.¶ÔÏó_ALLOCPOINT = 48;
-CONST.¶ÔÏó_³ÔÊ± = 49;
-CONST.¶ÔÏó_DataPN = 51;
-CONST.¶ÔÏó_RegistNumber = 52;
-CONST.¶ÔÏó_Ö°Òµ = 53;
-CONST.¶ÔÏó_Ö°½× = 54;
-CONST.¶ÔÏó_Ö°ÀàID = 55;
-CONST.¶ÔÏó_Á³ = 56;
-CONST.¶ÔÏó_½ð±Ò = 57;
-CONST.¶ÔÏó_ÒøÐÐ½ð±Ò = 58;
-CONST.¶ÔÏó_ÄÍÁ¦ = 59;
-CONST.¶ÔÏó_ÁéÇÉ = 60;
-CONST.¶ÔÏó_EnemyBaseId = 61;
-CONST.¶ÔÏó_ÖÇÁ¦ = 61;
-CONST.¶ÔÏó_÷ÈÁ¦ = 62;
-CONST.¶ÔÏó_ÉùÍû = 63;
-CONST.¶ÔÏó_³ÆºÅ = 64;
-CONST.¶ÔÏó_¼ÇÂ¼µã = 65;
-CONST.¶ÔÏó_Õ½³è = 66;
-CONST.¶ÔÏó_ÁÄÌì¾àÀë = 67;
-CONST.¶ÔÏó_HelpPoint = 68;
-CONST.¶ÔÏó_µÇÂ½´ÎÊý = 69;
-CONST.¶ÔÏó_Ëµ»°´ÎÊý = 70;
-CONST.¶ÔÏó_Ëµ´Î = 70;
-CONST.¶ÔÏó_»ñµÃ³èÊý = 71;
-CONST.¶ÔÏó_³èµÃÊý = 71;
-CONST.¶ÔÏó_ÓÊÊý = 72;
-CONST.¶ÔÏó_PET_DepartureBattleStatus = 73;
-CONST.¶ÔÏó_Éú²úÊý = 73;
-CONST.¶ÔÏó_×ß¶¯´ÎÊý = 74;
-CONST.¶ÔÏó_×ß´Î = 74;
-CONST.¶ÔÏó_³èËÀÍöÊý = 75;
-CONST.¶ÔÏó_³èËÀÊý = 75;
-CONST.¶ÔÏó_³è¸´»îÊý = 76;
-CONST.¶ÔÏó_³è¸´Êý = 76;
-CONST.¶ÔÏó_³èÖÎÁÆÊý = 77;
-CONST.¶ÔÏó_³èÖÎÊý = 77;
-CONST.¶ÔÏó_·âÓ¡Êý = 78;
-CONST.¶ÔÏó_OtherFlg = 79;
-CONST.¶ÔÏó_ÈÕÉùÍûÉÏÏÞ = 80;
-CONST.¶ÔÏó_ÉùÍû»ñÈ¡Ê±¼ä = 81;
-CONST.¶ÔÏó_ÉùÍûÏÂ½µÊ±¼ä = 82;
-CONST.¶ÔÏó_Renewalflg = 84;
-CONST.¶ÔÏó_ÒøÐÐ×î´ó³èÊý = 245;
-CONST.¶ÔÏó_ÒøÐÐ×î´óÎïÊý = 246;
-CONST.¶ÔÏó_DP = 247;
-CONST.¶ÔÏó_»°É« = 248;
-CONST.¶ÔÏó_Î»ÖÃ = 249;
-CONST.¶ÔÏó_GM = 250;
-CONST.¶ÔÏó_µô»ê = 256;
-CONST.¶ÔÏó_µÇÂ½µã = 257;
-CONST.¶ÔÏó_¿¨Ê± = 259;
-CONST.¶ÔÏó_·¿×ÓID = 260;
-CONST.¶ÔÏó_·¿×ÓÆÚÏÞ = 261;
-CONST.¶ÔÏó_Ô­Ê¼Í¼µµ = 264;
-CONST.¶ÔÏó_Õ½¶·ÖÐ = 442;
-CONST.¶ÔÏó_Õ½¶·×´Ì¬ = 442;
-CONST.¶ÔÏó_BattleIndex = 443;
-CONST.¶ÔÏó_Õ½¶·Index = 443;
-CONST.¶ÔÏó_Õ½¶·Side = 444;
-CONST.¶ÔÏó_×î´óÑª = 457;
-CONST.¶ÔÏó_×î´óÄ§ = 458;
-CONST.¶ÔÏó_¹¥»÷Á¦ = 459;
-CONST.¶ÔÏó_·ÀÓùÁ¦ = 460;
-CONST.¶ÔÏó_Ãô½Ý = 461;
-CONST.¶ÔÏó_¾«Éñ = 462;
-CONST.¶ÔÏó_»Ø¸´ = 463;
-CONST.¶ÔÏó_DamageAbsrob = 481;
-CONST.¶ÔÏó_DamageReflec = 482;
-CONST.¶ÔÏó_DamageVanish = 483;
-CONST.¶ÔÏó_DamageMagicAbsrob = 484;
-CONST.¶ÔÏó_DamageMagicReflec = 485;
-CONST.¶ÔÏó_DamageMagicVanish = 486;
-CONST.¶ÔÏó_LpRecovery = 487;
-CONST.¶ÔÏó_Reverse = 489;
-CONST.¶ÔÏó_Êµ¼Ê¿¹¶¾ = 490;
-CONST.¶ÔÏó_Poison = 490;
-CONST.¶ÔÏó_Êµ¼Ê¿¹Ë¯ = 491;
-CONST.¶ÔÏó_Sleep = 491;
-CONST.¶ÔÏó_Êµ¼Ê¿¹Ê¯ = 492;
-CONST.¶ÔÏó_Stone = 492;
-CONST.¶ÔÏó_Êµ¼Ê¿¹×í = 493;
-CONST.¶ÔÏó_Drunk = 493;
-CONST.¶ÔÏó_Êµ¼Ê¿¹ÂÒ = 494;
-CONST.¶ÔÏó_Confusion = 494;
-CONST.¶ÔÏó_Êµ¼Ê¿¹Íü = 495;
-CONST.¶ÔÏó_Amnesia = 495;
-CONST.¶ÔÏó_ModPoison = 496;
-CONST.¶ÔÏó_ModSleep = 497;
-CONST.¶ÔÏó_ModStone = 498;
-CONST.¶ÔÏó_ModDrunk = 499;
-CONST.¶ÔÏó_ModConfusion = 500;
-CONST.¶ÔÏó_ModAmnesia = 501;
-CONST.¶ÔÏó_Êµ¼Ê±ØÉ± = 502;
-CONST.¶ÔÏó_Êµ¼Ê·´»÷ = 503;
-CONST.¶ÔÏó_Êµ¼ÊÃüÖÐ = 504;
-CONST.¶ÔÏó_Êµ¼ÊÉÁ¶ã = 505;
-CONST.¶ÔÏó_OBJ = 507;
-CONST.¶ÔÏó_»ñµÃ¾­Ñé = 514;
-CONST.¶ÔÏó_»ñµÃDP = 514;
-CONST.¶ÔÏó_ÒÆËÙ = 546;
-CONST.¶ÔÏó_ENEMY_PetFlg = 560;
-CONST.¶ÔÏó_FD = 560;
-CONST.¶ÔÏó_ENEMY_ActionFlag = 561;
-CONST.¶ÔÏó_×é¶ÓÄ£Ê½ = 561;
-CONST.¶ÔÏó_NPC_EVENT_TYPE = 562;
-CONST.¶ÔÏó_ENEMY_BossFlg = 562;
-CONST.¶ÔÏó_×îµÍÓöµÐÂÊ = 562;
-CONST.¶ÔÏó_ENEMY_ModCaptureDefault = 563;
-CONST.¶ÔÏó_×î¸ßÓöµÐÂÊ = 563;
-CONST.¶ÔÏó_ENEMY_Tactics = 564;
-CONST.¶ÔÏó_ENEMY_Summon1 = 565;
-CONST.¶ÔÏó_ENEMY_Summon2 = 566;
-CONST.¶ÔÏó_NPC_HeadGraNo = 567;
-CONST.¶ÔÏó_ENEMY_Escape = 567;
-CONST.¶ÔÏó_ENEMY_Msg = 568;
-CONST.¶ÔÏó_rideImage = 569;
-CONST.¶ÔÏó_ENEMY_BattleAction = 570;
-CONST.¶ÔÏó_Ä§¹¥ = 573;
-CONST.¶ÔÏó_Ä§·¨¹¥»÷Á¦ = 573;
-CONST.¶ÔÏó_Ä§Ç¿ = 573;
-CONST.¶ÔÏó_Ä§¿¹ = 574;
-CONST.¶ÔÏó_Ä§·¨·ÀÓùÁ¦ = 574;
-CONST.¶ÔÏó_Ä§·¨¿¹ÐÔ = 574;
-CONST.¶ÔÏó_PET_HeadGraNo = 583;
-CONST.¶ÔÏó_ENEMY_ID = 587;
-CONST.¶ÔÏó_ÏãÏÂÏÞ = 589;
-CONST.¶ÔÏó_ÏãÉÏÏÞ = 590;
-CONST.¶ÔÏó_Ïã²½Êý = 591;
-CONST.¶ÔÏó_ENEMY_HeadGraNo = 593;
-CONST.¶ÔÏó_ENEMY_STYLE = 594;
-CONST.¶ÔÏó_WindowBuffer1 = 594;
-CONST.¶ÔÏó_WindowBuffer2 = 595;
-CONST.¶ÔÏó_WindowBuffer3 = 596;
-CONST.¶ÔÏó_Ãû×Ö = 4000;
-CONST.¶ÔÏó_Ô­Ãû = 4000;
-CONST.¶ÔÏó_Íæ¼Ò³ÆºÅ = 4001;
-CONST.¶ÔÏó_³èÃû = 4001;
-CONST.¶ÔÏó_CDK = 4002;
-CONST.¶ÔÏó_ÕËºÅ = 4002;
-CONST.¶ÔÏó_Ö÷ÈËCDK = 4003;
-CONST.¶ÔÏó_Ö÷ÈËÃû×Ö = 4004;
-CONST.¶ÔÏó_Ö÷ÈËÔ­Ãû = 4004;
-CONST.¶ÔÏó_Õ½ËÀ = 6000;
-CONST.¶ÔÏó_Õ½¶·ÐÅÏ¢¿ª¹Ø = 6001;
-CONST.¶ÔÏó_µÇÂ½¸»ºÀ°ñ = 6002;
-CONST.¶ÔÏó_×é¶Ó¿ª¹Ø = 6003;
-CONST.¶ÔÏó_PK¿ª¹Ø = 6004;
-CONST.¶ÔÏó_¶ÔÕ½¿ª¹Ø = 6004;
-CONST.¶ÔÏó_¶ÓÁÄ¿ª¹Ø = 6005;
-CONST.¶ÔÏó_ÃûÆ¬¿ª¹Ø = 6006;
-CONST.¶ÔÏó_½»Ò×¿ª¹Ø = 6007;
-CONST.¶ÔÏó_´ò¿¨ = 6008;
-CONST.¶ÔÏó_ÍøÂç³¬Ê± = 6009;
-CONST.¶ÔÏó_¼Ò×å¿ª¹Ø = 6010;
-CONST.¶ÔÏó_DEBUG¿ª¹Ø = 8000;
-CONST.¶ÔÏó_Ê¹ÓÃMIC = 8001;
-CONST.¶ÔÏó_ÒÑ±£´æ = 8002;
-CONST.¶ÔÏó_²»ÓöµÐ¿ª¹Ø = 8003;
-CONST.¶ÔÏó_×Ô¶¯Õ½¶·¿ª¹Ø = 0;
-CONST.¶ÔÏó_×Ô¶¯Õ½¶·×¼±¸×´Ì¬ = 0;
-CONST.¶ÔÏó_Ô­µÇMAP = 12000;
-CONST.¶ÔÏó_Ô­µÇµØÍ¼ = 12001;
-CONST.¶ÔÏó_Ô­µÇX = 12002;
-CONST.¶ÔÏó_Ô­µÇY = 12003;
-CONST.¶ÔÏó_RebirthSkill = 0;
-CONST.¶ÔÏó_RebirthFlag = 0;
-CONST.¶ÔÏó_RebirthView = 0;
-CONST.¶ÔÏó_RebirthLevel = 0;
-CONST.¶ÔÏó_RebirthAttr = 0;
-CONST.¶ÔÏó_RebirthBaseImage = 0;
-CONST.¶ÔÏó_Æï³è = 0;
+CONST.å¯¹è±¡_ç±»åž‹ = 3;
+CONST.å¯¹è±¡_åº = 3;
+CONST.å¯¹è±¡_å½¢è±¡ = 4;
+CONST.å¯¹è±¡_å¯è§† = 4;
+CONST.å¯¹è±¡_åŽŸå½¢ = 5;
+CONST.å¯¹è±¡_åœ°å›¾ç±»åž‹ = 6;
+CONST.å¯¹è±¡_MAP = 6;
+CONST.å¯¹è±¡_åœ°å›¾ = 7;
+CONST.å¯¹è±¡_X = 8;
+CONST.å¯¹è±¡_Y = 9;
+CONST.å¯¹è±¡_æ–¹å‘ = 10;
+CONST.å¯¹è±¡_ç­‰çº§ = 11;
+CONST.å¯¹è±¡_è¡€ = 12;
+CONST.å¯¹è±¡_é­” = 13;
+CONST.å¯¹è±¡_ä½“åŠ› = 14;
+CONST.å¯¹è±¡_åŠ›é‡ = 15;
+CONST.å¯¹è±¡_å¼ºåº¦ = 16;
+CONST.å¯¹è±¡_é€Ÿåº¦ = 17;
+CONST.å¯¹è±¡_é­”æ³• = 18;
+CONST.å¯¹è±¡_è¿ = 19;
+CONST.å¯¹è±¡_è¿æ°” = 19;
+CONST.å¯¹è±¡_ç§æ— = 20;
+CONST.å¯¹è±¡_åœ°å±žæ€§ = 21;
+CONST.å¯¹è±¡_æ°´å±žæ€§ = 22;
+CONST.å¯¹è±¡_ç«å±žæ€§ = 23;
+CONST.å¯¹è±¡_é£Žå±žæ€§ = 24;
+CONST.å¯¹è±¡_æŠ—æ¯’ = 25;
+CONST.å¯¹è±¡_æŠ—ç¡ = 26;
+CONST.å¯¹è±¡_æŠ—çŸ³ = 27;
+CONST.å¯¹è±¡_æŠ—é†‰ = 28;
+CONST.å¯¹è±¡_æŠ—ä¹± = 29;
+CONST.å¯¹è±¡_æŠ—å¿˜ = 30;
+CONST.å¯¹è±¡_å¿…æ€ = 31;
+CONST.å¯¹è±¡_åå‡» = 32;
+CONST.å¯¹è±¡_å‘½ä¸­ = 33;
+CONST.å¯¹è±¡_é—ªèº² = 34;
+CONST.å¯¹è±¡_é“å…·æ  = 35;
+CONST.å¯¹è±¡_æŠ€èƒ½æ  = 36;
+CONST.å¯¹è±¡_æ­»äº¡æ•° = 37;
+CONST.å¯¹è±¡_ä¼¤å®³æ•° = 38;
+CONST.å¯¹è±¡_æ€å® æ•° = 39;
+CONST.å¯¹è±¡_å åœæ—¶é—´ = 40;
+CONST.å¯¹è±¡_å—ä¼¤ = 41;
+CONST.å¯¹è±¡_ç§»é—´ = 42;
+CONST.å¯¹è±¡_å¾ªæ—¶ = 43;
+CONST.å¯¹è±¡_ç»éªŒ = 44;
+CONST.å¯¹è±¡_å‡çº§ç‚¹ = 45;
+CONST.å¯¹è±¡_å›¾ç±» = 46;
+CONST.å¯¹è±¡_åè‰² = 47;
+CONST.å¯¹è±¡_ALLOCPOINT = 48;
+CONST.å¯¹è±¡_åƒæ—¶ = 49;
+CONST.å¯¹è±¡_DataPN = 51;
+CONST.å¯¹è±¡_RegistNumber = 52;
+CONST.å¯¹è±¡_èŒä¸š = 53;
+CONST.å¯¹è±¡_èŒé˜¶ = 54;
+CONST.å¯¹è±¡_èŒç±»ID = 55;
+CONST.å¯¹è±¡_è„¸ = 56;
+CONST.å¯¹è±¡_é‡‘å¸ = 57;
+CONST.å¯¹è±¡_é“¶è¡Œé‡‘å¸ = 58;
+CONST.å¯¹è±¡_è€åŠ› = 59;
+CONST.å¯¹è±¡_çµå·§ = 60;
+CONST.å¯¹è±¡_EnemyBaseId = 61;
+CONST.å¯¹è±¡_æ™ºåŠ› = 61;
+CONST.å¯¹è±¡_é­…åŠ› = 62;
+CONST.å¯¹è±¡_å£°æœ› = 63;
+CONST.å¯¹è±¡_ç§°å· = 64;
+CONST.å¯¹è±¡_è®°å½•ç‚¹ = 65;
+CONST.å¯¹è±¡_æˆ˜å®  = 66;
+CONST.å¯¹è±¡_èŠå¤©è·ç¦» = 67;
+CONST.å¯¹è±¡_HelpPoint = 68;
+CONST.å¯¹è±¡_ç™»é™†æ¬¡æ•° = 69;
+CONST.å¯¹è±¡_è¯´è¯æ¬¡æ•° = 70;
+CONST.å¯¹è±¡_è¯´æ¬¡ = 70;
+CONST.å¯¹è±¡_èŽ·å¾—å® æ•° = 71;
+CONST.å¯¹è±¡_å® å¾—æ•° = 71;
+CONST.å¯¹è±¡_é‚®æ•° = 72;
+CONST.å¯¹è±¡_PET_DepartureBattleStatus = 73;
+CONST.å¯¹è±¡_ç”Ÿäº§æ•° = 73;
+CONST.å¯¹è±¡_èµ°åŠ¨æ¬¡æ•° = 74;
+CONST.å¯¹è±¡_èµ°æ¬¡ = 74;
+CONST.å¯¹è±¡_å® æ­»äº¡æ•° = 75;
+CONST.å¯¹è±¡_å® æ­»æ•° = 75;
+CONST.å¯¹è±¡_å® å¤æ´»æ•° = 76;
+CONST.å¯¹è±¡_å® å¤æ•° = 76;
+CONST.å¯¹è±¡_å® æ²»ç–—æ•° = 77;
+CONST.å¯¹è±¡_å® æ²»æ•° = 77;
+CONST.å¯¹è±¡_å°å°æ•° = 78;
+CONST.å¯¹è±¡_OtherFlg = 79;
+CONST.å¯¹è±¡_æ—¥å£°æœ›ä¸Šé™ = 80;
+CONST.å¯¹è±¡_å£°æœ›èŽ·å–æ—¶é—´ = 81;
+CONST.å¯¹è±¡_å£°æœ›ä¸‹é™æ—¶é—´ = 82;
+CONST.å¯¹è±¡_Renewalflg = 84;
+CONST.å¯¹è±¡_é“¶è¡Œæœ€å¤§å® æ•° = 245;
+CONST.å¯¹è±¡_é“¶è¡Œæœ€å¤§ç‰©æ•° = 246;
+CONST.å¯¹è±¡_DP = 247;
+CONST.å¯¹è±¡_è¯è‰² = 248;
+CONST.å¯¹è±¡_ä½ç½® = 249;
+CONST.å¯¹è±¡_GM = 250;
+CONST.å¯¹è±¡_æŽ‰é­‚ = 256;
+CONST.å¯¹è±¡_ç™»é™†ç‚¹ = 257;
+CONST.å¯¹è±¡_å¡æ—¶ = 259;
+CONST.å¯¹è±¡_æˆ¿å­ID = 260;
+CONST.å¯¹è±¡_æˆ¿å­æœŸé™ = 261;
+CONST.å¯¹è±¡_åŽŸå§‹å›¾æ¡£ = 264;
+CONST.å¯¹è±¡_æˆ˜æ–—ä¸­ = 442;
+CONST.å¯¹è±¡_æˆ˜æ–—çŠ¶æ€ = 442;
+CONST.å¯¹è±¡_BattleIndex = 443;
+CONST.å¯¹è±¡_æˆ˜æ–—Index = 443;
+CONST.å¯¹è±¡_æˆ˜æ–—Side = 444;
+CONST.å¯¹è±¡_æœ€å¤§è¡€ = 457;
+CONST.å¯¹è±¡_æœ€å¤§é­” = 458;
+CONST.å¯¹è±¡_æ”»å‡»åŠ› = 459;
+CONST.å¯¹è±¡_é˜²å¾¡åŠ› = 460;
+CONST.å¯¹è±¡_æ•æ· = 461;
+CONST.å¯¹è±¡_ç²¾ç¥ž = 462;
+CONST.å¯¹è±¡_å›žå¤ = 463;
+CONST.å¯¹è±¡_DamageAbsrob = 481;
+CONST.å¯¹è±¡_DamageReflec = 482;
+CONST.å¯¹è±¡_DamageVanish = 483;
+CONST.å¯¹è±¡_DamageMagicAbsrob = 484;
+CONST.å¯¹è±¡_DamageMagicReflec = 485;
+CONST.å¯¹è±¡_DamageMagicVanish = 486;
+CONST.å¯¹è±¡_LpRecovery = 487;
+CONST.å¯¹è±¡_Reverse = 489;
+CONST.å¯¹è±¡_å®žé™…æŠ—æ¯’ = 490;
+CONST.å¯¹è±¡_Poison = 490;
+CONST.å¯¹è±¡_å®žé™…æŠ—ç¡ = 491;
+CONST.å¯¹è±¡_Sleep = 491;
+CONST.å¯¹è±¡_å®žé™…æŠ—çŸ³ = 492;
+CONST.å¯¹è±¡_Stone = 492;
+CONST.å¯¹è±¡_å®žé™…æŠ—é†‰ = 493;
+CONST.å¯¹è±¡_Drunk = 493;
+CONST.å¯¹è±¡_å®žé™…æŠ—ä¹± = 494;
+CONST.å¯¹è±¡_Confusion = 494;
+CONST.å¯¹è±¡_å®žé™…æŠ—å¿˜ = 495;
+CONST.å¯¹è±¡_Amnesia = 495;
+CONST.å¯¹è±¡_ModPoison = 496;
+CONST.å¯¹è±¡_ModSleep = 497;
+CONST.å¯¹è±¡_ModStone = 498;
+CONST.å¯¹è±¡_ModDrunk = 499;
+CONST.å¯¹è±¡_ModConfusion = 500;
+CONST.å¯¹è±¡_ModAmnesia = 501;
+CONST.å¯¹è±¡_å®žé™…å¿…æ€ = 502;
+CONST.å¯¹è±¡_å®žé™…åå‡» = 503;
+CONST.å¯¹è±¡_å®žé™…å‘½ä¸­ = 504;
+CONST.å¯¹è±¡_å®žé™…é—ªèº² = 505;
+CONST.å¯¹è±¡_OBJ = 507;
+CONST.å¯¹è±¡_èŽ·å¾—ç»éªŒ = 514;
+CONST.å¯¹è±¡_èŽ·å¾—DP = 514;
+CONST.å¯¹è±¡_ç§»é€Ÿ = 546;
+CONST.å¯¹è±¡_ENEMY_PetFlg = 560;
+CONST.å¯¹è±¡_FD = 560;
+CONST.å¯¹è±¡_ENEMY_ActionFlag = 561;
+CONST.å¯¹è±¡_ç»„é˜Ÿæ¨¡å¼ = 561;
+CONST.å¯¹è±¡_NPC_EVENT_TYPE = 562;
+CONST.å¯¹è±¡_ENEMY_BossFlg = 562;
+CONST.å¯¹è±¡_æœ€ä½Žé‡æ•ŒçŽ‡ = 562;
+CONST.å¯¹è±¡_ENEMY_ModCaptureDefault = 563;
+CONST.å¯¹è±¡_æœ€é«˜é‡æ•ŒçŽ‡ = 563;
+CONST.å¯¹è±¡_ENEMY_Tactics = 564;
+CONST.å¯¹è±¡_ENEMY_Summon1 = 565;
+CONST.å¯¹è±¡_ENEMY_Summon2 = 566;
+CONST.å¯¹è±¡_NPC_HeadGraNo = 567;
+CONST.å¯¹è±¡_ENEMY_Escape = 567;
+CONST.å¯¹è±¡_ENEMY_Msg = 568;
+CONST.å¯¹è±¡_rideImage = 569;
+CONST.å¯¹è±¡_ENEMY_BattleAction = 570;
+CONST.å¯¹è±¡_é­”æ”» = 573;
+CONST.å¯¹è±¡_é­”æ³•æ”»å‡»åŠ› = 573;
+CONST.å¯¹è±¡_é­”å¼º = 573;
+CONST.å¯¹è±¡_é­”æŠ— = 574;
+CONST.å¯¹è±¡_é­”æ³•é˜²å¾¡åŠ› = 574;
+CONST.å¯¹è±¡_é­”æ³•æŠ—æ€§ = 574;
+CONST.å¯¹è±¡_PET_HeadGraNo = 583;
+CONST.å¯¹è±¡_ENEMY_ID = 587;
+CONST.å¯¹è±¡_é¦™ä¸‹é™ = 589;
+CONST.å¯¹è±¡_é¦™ä¸Šé™ = 590;
+CONST.å¯¹è±¡_é¦™æ­¥æ•° = 591;
+CONST.å¯¹è±¡_ENEMY_HeadGraNo = 593;
+CONST.å¯¹è±¡_ENEMY_STYLE = 594;
+CONST.å¯¹è±¡_WindowBuffer1 = 594;
+CONST.å¯¹è±¡_WindowBuffer2 = 595;
+CONST.å¯¹è±¡_WindowBuffer3 = 596;
+CONST.å¯¹è±¡_åå­— = 4000;
+CONST.å¯¹è±¡_åŽŸå = 4000;
+CONST.å¯¹è±¡_çŽ©å®¶ç§°å· = 4001;
+CONST.å¯¹è±¡_å® å = 4001;
+CONST.å¯¹è±¡_CDK = 4002;
+CONST.å¯¹è±¡_è´¦å· = 4002;
+CONST.å¯¹è±¡_ä¸»äººCDK = 4003;
+CONST.å¯¹è±¡_ä¸»äººåå­— = 4004;
+CONST.å¯¹è±¡_ä¸»äººåŽŸå = 4004;
+CONST.å¯¹è±¡_æˆ˜æ­» = 6000;
+CONST.å¯¹è±¡_æˆ˜æ–—ä¿¡æ¯å¼€å…³ = 6001;
+CONST.å¯¹è±¡_ç™»é™†å¯Œè±ªæ¦œ = 6002;
+CONST.å¯¹è±¡_ç»„é˜Ÿå¼€å…³ = 6003;
+CONST.å¯¹è±¡_PKå¼€å…³ = 6004;
+CONST.å¯¹è±¡_å¯¹æˆ˜å¼€å…³ = 6004;
+CONST.å¯¹è±¡_é˜ŸèŠå¼€å…³ = 6005;
+CONST.å¯¹è±¡_åç‰‡å¼€å…³ = 6006;
+CONST.å¯¹è±¡_äº¤æ˜“å¼€å…³ = 6007;
+CONST.å¯¹è±¡_æ‰“å¡ = 6008;
+CONST.å¯¹è±¡_ç½‘ç»œè¶…æ—¶ = 6009;
+CONST.å¯¹è±¡_å®¶æ—å¼€å…³ = 6010;
+CONST.å¯¹è±¡_DEBUGå¼€å…³ = 8000;
+CONST.å¯¹è±¡_ä½¿ç”¨MIC = 8001;
+CONST.å¯¹è±¡_å·²ä¿å­˜ = 8002;
+CONST.å¯¹è±¡_ä¸é‡æ•Œå¼€å…³ = 8003;
+CONST.å¯¹è±¡_è‡ªåŠ¨æˆ˜æ–—å¼€å…³ = 0;
+CONST.å¯¹è±¡_è‡ªåŠ¨æˆ˜æ–—å‡†å¤‡çŠ¶æ€ = 0;
+CONST.å¯¹è±¡_åŽŸç™»MAP = 12000;
+CONST.å¯¹è±¡_åŽŸç™»åœ°å›¾ = 12001;
+CONST.å¯¹è±¡_åŽŸç™»X = 12002;
+CONST.å¯¹è±¡_åŽŸç™»Y = 12003;
+CONST.å¯¹è±¡_RebirthSkill = 0;
+CONST.å¯¹è±¡_RebirthFlag = 0;
+CONST.å¯¹è±¡_RebirthView = 0;
+CONST.å¯¹è±¡_RebirthLevel = 0;
+CONST.å¯¹è±¡_RebirthAttr = 0;
+CONST.å¯¹è±¡_RebirthBaseImage = 0;
+CONST.å¯¹è±¡_éª‘å®  = 0;
 
 --[[
-µÀ¾ßÊôÐÔ ÓÃÓÚ Item.GetData
+é“å…·å±žæ€§ ç”¨äºŽ Item.GetData
 ]]
-CONST.µÀ¾ß_Ðò = 0;
-CONST.µÀ¾ß_ID = 0;
-CONST.µÀ¾ß_Í¼ = 1;
-CONST.µÀ¾ß_¼Û¸ñ = 2;
-CONST.µÀ¾ß_ÀàÐÍ = 3;
-CONST.µÀ¾ß_OTHERFLG = 4;
-CONST.µÀ¾ß_Ë«ÊÖ = 5;
-CONST.µÀ¾ß_Ë«»÷ = 6;
-CONST.µÀ¾ß_¿ÉË«»÷ = 6;
-CONST.µÀ¾ß_Õ½¶·¿ÉÓÃ = 7;
-CONST.µÀ¾ß_Ê¹ÓÃ·¶Î§ = 8;
-CONST.µÀ¾ß_¶ÑµþÊý = 9;
-CONST.µÀ¾ß_×î´ó¶ÑµþÊý = 10;
-CONST.µÀ¾ß_µÈ¼¶ = 11;
-CONST.µÀ¾ß_×î´óÄÍ¾Ã = 13;
-CONST.µÀ¾ß_×îÐ¡¹¥»÷ÊýÁ¿ = 14;
-CONST.µÀ¾ß_×î´ó¹¥»÷ÊýÁ¿ = 15;
-CONST.µÀ¾ß_ÊôÐÔÀàÐÍ = 17;
-CONST.µÀ¾ß_¹¥»÷ = 18;
-CONST.µÀ¾ß_·ÀÓù = 19;
-CONST.µÀ¾ß_Ãô½Ý = 20;
-CONST.µÀ¾ß_¾«Éñ = 21;
-CONST.µÀ¾ß_»Ø¸´ = 22;
-CONST.µÀ¾ß_±ØÉ± = 23;
-CONST.µÀ¾ß_·´»÷ = 24;
-CONST.µÀ¾ß_ÃüÖÐ = 25;
-CONST.µÀ¾ß_ÉÁ¶ã = 26;
-CONST.µÀ¾ß_ÉúÃü = 27;
-CONST.µÀ¾ß_HP = 27;
-CONST.µÀ¾ß_Ä§Á¦ = 28;
-CONST.µÀ¾ß_MP = 28;
-CONST.µÀ¾ß_ÐÒÔË = 29;
-CONST.µÀ¾ß_÷ÈÁ¦ = 31;
-CONST.µÀ¾ß_ÊôÐÔÒ» = 32;
-CONST.µÀ¾ß_ÊôÐÔ¶þ = 33;
-CONST.µÀ¾ß_ÊôÐÔÒ»Öµ = 34;
-CONST.µÀ¾ß_ÊôÐÔ¶þÖµ = 35;
-CONST.µÀ¾ß_ÄÍÁ¦ = 36;
-CONST.µÀ¾ß_ÁéÇÉ = 37;
-CONST.µÀ¾ß_ÖÇÁ¦ = 38;
-CONST.µÀ¾ß_¶¾¿¹ = 39;
-CONST.µÀ¾ß_Ë¯¿¹ = 40;
-CONST.µÀ¾ß_Ê¯¿¹ = 41;
-CONST.µÀ¾ß_×í¿¹ = 42;
-CONST.µÀ¾ß_ÂÒ¿¹ = 43;
-CONST.µÀ¾ß_Íü¿¹ = 44;
-CONST.µÀ¾ß_ÌØÊâÀàÐÍ = 45;
-CONST.µÀ¾ß_×Ó²ÎÒ» = 46;
-CONST.µÀ¾ß_×Ó²Î¶þ = 47;
-CONST.µÀ¾ß_±¦Ê¯Îä = 48;
-CONST.µÀ¾ß_±¦Ê¯·À = 49;
-CONST.µÀ¾ß_µÇ³öÏûÊ§ = 52;
-CONST.µÀ¾ß_¶ªµØÏûÊ§ = 53;
-CONST.µÀ¾ß_³èÓÊ = 54;
-CONST.µÀ¾ß_Ä§¿¹ = 55;
-CONST.µÀ¾ß_¿É³öÊÛ = 56;
-CONST.µÀ¾ß_ÒÑ¼ø¶¨ = 63;
-CONST.µÀ¾ß_ÄÍ¾Ã = 65;
-CONST.µÀ¾ß_TIMELIMIT = 68;
-CONST.µÀ¾ß_ENDTIME = 69;
-CONST.µÀ¾ß_VAR1 = 70;
-CONST.µÀ¾ß_VAR2 = 71;
-CONST.µÀ¾ß_VAR3 = 72;
-CONST.µÀ¾ß_VAR4 = 73;
-CONST.µÀ¾ß_Ä§¹¥ = 74;
-CONST.µÀ¾ß_³è°ïID = 77;
-CONST.µÀ¾ß_ÖØÁ¿ = 78;
-CONST.µÀ¾ß_ËùÓÐÕß = 186;
-CONST.µÀ¾ß_¼øÇ°Ãû = 4000;
-CONST.µÀ¾ß_Î´¼ø¶¨Ãû = 4000;
-CONST.µÀ¾ß_ÒÑ¼ø¶¨Ãû = 4001;
-CONST.µÀ¾ß_Ãû×Ö = 4001;
-CONST.µÀ¾ß_¿ÌÓ¡ = 4002;
-CONST.µÀ¾ß_×ÔÓÃ²ÎÊý = 4003;
-CONST.µÀ¾ß_¿ÌÓ¡Íæ¼Ò = 4004;
-CONST.µÀ¾ß_FIRSTFUNCTION = 4005;
-CONST.µÀ¾ß_INITFUNC = 4005;
-CONST.µÀ¾ß_WATCHFUNC = 4006;
-CONST.µÀ¾ß_USEFUNC = 4007;
-CONST.µÀ¾ß_ATTACHFUNC = 4008;
-CONST.µÀ¾ß_DETACHFUNC = 4009;
-CONST.µÀ¾ß_DROPFUNC = 4010;
-CONST.µÀ¾ß_PREPICKUPFUNC = 4011;
-CONST.µÀ¾ß_PICKUPFUNC = 4012;
-CONST.µÀ¾ß_LASTFUNCTION = 4013;
-CONST.µÀ¾ß_ObjË÷Òý = 6000;
-CONST.µÀ¾ß_ÒÑ×°±¸ = 6002;
+CONST.é“å…·_åº = 0;
+CONST.é“å…·_ID = 0;
+CONST.é“å…·_å›¾ = 1;
+CONST.é“å…·_ä»·æ ¼ = 2;
+CONST.é“å…·_ç±»åž‹ = 3;
+CONST.é“å…·_OTHERFLG = 4;
+CONST.é“å…·_åŒæ‰‹ = 5;
+CONST.é“å…·_åŒå‡» = 6;
+CONST.é“å…·_å¯åŒå‡» = 6;
+CONST.é“å…·_æˆ˜æ–—å¯ç”¨ = 7;
+CONST.é“å…·_ä½¿ç”¨èŒƒå›´ = 8;
+CONST.é“å…·_å †å æ•° = 9;
+CONST.é“å…·_æœ€å¤§å †å æ•° = 10;
+CONST.é“å…·_ç­‰çº§ = 11;
+CONST.é“å…·_æœ€å¤§è€ä¹… = 13;
+CONST.é“å…·_æœ€å°æ”»å‡»æ•°é‡ = 14;
+CONST.é“å…·_æœ€å¤§æ”»å‡»æ•°é‡ = 15;
+CONST.é“å…·_å±žæ€§ç±»åž‹ = 17;
+CONST.é“å…·_æ”»å‡» = 18;
+CONST.é“å…·_é˜²å¾¡ = 19;
+CONST.é“å…·_æ•æ· = 20;
+CONST.é“å…·_ç²¾ç¥ž = 21;
+CONST.é“å…·_å›žå¤ = 22;
+CONST.é“å…·_å¿…æ€ = 23;
+CONST.é“å…·_åå‡» = 24;
+CONST.é“å…·_å‘½ä¸­ = 25;
+CONST.é“å…·_é—ªèº² = 26;
+CONST.é“å…·_ç”Ÿå‘½ = 27;
+CONST.é“å…·_HP = 27;
+CONST.é“å…·_é­”åŠ› = 28;
+CONST.é“å…·_MP = 28;
+CONST.é“å…·_å¹¸è¿ = 29;
+CONST.é“å…·_é­…åŠ› = 31;
+CONST.é“å…·_å±žæ€§ä¸€ = 32;
+CONST.é“å…·_å±žæ€§äºŒ = 33;
+CONST.é“å…·_å±žæ€§ä¸€å€¼ = 34;
+CONST.é“å…·_å±žæ€§äºŒå€¼ = 35;
+CONST.é“å…·_è€åŠ› = 36;
+CONST.é“å…·_çµå·§ = 37;
+CONST.é“å…·_æ™ºåŠ› = 38;
+CONST.é“å…·_æ¯’æŠ— = 39;
+CONST.é“å…·_ç¡æŠ— = 40;
+CONST.é“å…·_çŸ³æŠ— = 41;
+CONST.é“å…·_é†‰æŠ— = 42;
+CONST.é“å…·_ä¹±æŠ— = 43;
+CONST.é“å…·_å¿˜æŠ— = 44;
+CONST.é“å…·_ç‰¹æ®Šç±»åž‹ = 45;
+CONST.é“å…·_å­å‚ä¸€ = 46;
+CONST.é“å…·_å­å‚äºŒ = 47;
+CONST.é“å…·_å®çŸ³æ­¦ = 48;
+CONST.é“å…·_å®çŸ³é˜² = 49;
+CONST.é“å…·_ç™»å‡ºæ¶ˆå¤± = 52;
+CONST.é“å…·_ä¸¢åœ°æ¶ˆå¤± = 53;
+CONST.é“å…·_å® é‚® = 54;
+CONST.é“å…·_é­”æŠ— = 55;
+CONST.é“å…·_å¯å‡ºå”® = 56;
+CONST.é“å…·_å·²é‰´å®š = 63;
+CONST.é“å…·_è€ä¹… = 65;
+CONST.é“å…·_TIMELIMIT = 68;
+CONST.é“å…·_ENDTIME = 69;
+CONST.é“å…·_VAR1 = 70;
+CONST.é“å…·_VAR2 = 71;
+CONST.é“å…·_VAR3 = 72;
+CONST.é“å…·_VAR4 = 73;
+CONST.é“å…·_é­”æ”» = 74;
+CONST.é“å…·_å® å¸®ID = 77;
+CONST.é“å…·_é‡é‡ = 78;
+CONST.é“å…·_æ‰€æœ‰è€… = 186;
+CONST.é“å…·_é‰´å‰å = 4000;
+CONST.é“å…·_æœªé‰´å®šå = 4000;
+CONST.é“å…·_å·²é‰´å®šå = 4001;
+CONST.é“å…·_åå­— = 4001;
+CONST.é“å…·_åˆ»å° = 4002;
+CONST.é“å…·_è‡ªç”¨å‚æ•° = 4003;
+CONST.é“å…·_åˆ»å°çŽ©å®¶ = 4004;
+CONST.é“å…·_FIRSTFUNCTION = 4005;
+CONST.é“å…·_INITFUNC = 4005;
+CONST.é“å…·_WATCHFUNC = 4006;
+CONST.é“å…·_USEFUNC = 4007;
+CONST.é“å…·_ATTACHFUNC = 4008;
+CONST.é“å…·_DETACHFUNC = 4009;
+CONST.é“å…·_DROPFUNC = 4010;
+CONST.é“å…·_PREPICKUPFUNC = 4011;
+CONST.é“å…·_PICKUPFUNC = 4012;
+CONST.é“å…·_LASTFUNCTION = 4013;
+CONST.é“å…·_Objç´¢å¼• = 6000;
+CONST.é“å…·_å·²è£…å¤‡ = 6002;
 
 --[[
-Õ½¶·ÐÅÏ¢ÊôÐÔ£¬ÓÃÓÚBattle.GetEntryData
+æˆ˜æ–—ä¿¡æ¯å±žæ€§ï¼Œç”¨äºŽBattle.GetEntryData
 ]]
 CONST.BATTLE_ENTRY_BID = 2;
 CONST.BATTLE_ENTRY_SIDE = 3;
@@ -992,7 +1019,7 @@ CONST.BATTLE_ENTRY_GETITEM2 = 86;
 CONST.BATTLE_ENTRY_GETITEM3 = 87;
 
 --[[
-¶ÔÏóµÄ¶¯×÷ÀàÐÍ ÓÃÓÚ NLG.SetAction
+å¯¹è±¡çš„åŠ¨ä½œç±»åž‹ ç”¨äºŽ NLG.SetAction
 ]]
 CONST.CHAR_ACTSTAND = 0;
 CONST.CHAR_ACTWALK = 1;
@@ -1038,7 +1065,7 @@ CONST.CHAR_ACTVEHICLE_ARRIVAL = 82;
 CONST.CHAR_ACTSTALL = 200;
 
 --[[
-JOBS ÓÃÓÚ Data.GetJobData
+JOBS ç”¨äºŽ Data.GetJobData
 ]]
 CONST.JOBS_ID = 0;
 CONST.JOBS_ANCESTRY_ID = 0;
@@ -1071,114 +1098,114 @@ CONST.JOBS_ANCESTRY_NAME = 4000;
 CONST.JOBS_SYSTEMNAME = 4001;
 
 --[[
-OBJTYPE ÓÃÓÚ Obj.GetType
+OBJTYPE ç”¨äºŽ Obj.GetType
 ]]
-CONST.Îï¼þ_Ã» = 0;
-CONST.Îï¼þ_ÈË = 1;
-CONST.Îï¼þ_µÀ = 2;
-CONST.Îï¼þ_±Ò = 3;
-CONST.Îï¼þ_´« = 4;
-CONST.Îï¼þ_´¬ = 5;
-CONST.Îï¼þ_ÂëÍ· = 6;
+CONST.ç‰©ä»¶_æ²¡ = 0;
+CONST.ç‰©ä»¶_äºº = 1;
+CONST.ç‰©ä»¶_é“ = 2;
+CONST.ç‰©ä»¶_å¸ = 3;
+CONST.ç‰©ä»¶_ä¼  = 4;
+CONST.ç‰©ä»¶_èˆ¹ = 5;
+CONST.ç‰©ä»¶_ç å¤´ = 6;
 
-CONST.°´Å¥_ÎÞ = 0;
-CONST.°´Å¥_È·ÈÏ = 1;
-CONST.°´Å¥_È·¶¨ = 1;
-CONST.°´Å¥_¹Ø±Õ = 2;
-CONST.°´Å¥_È·¶¨¹Ø±Õ = 3;
-CONST.°´Å¥_ÊÇ = 4;
-CONST.°´Å¥_·ñ = 8;
-CONST.°´Å¥_ÊÇ·ñ = 12;
-CONST.°´Å¥_ÉÏÒ»Ò³ = 16;
-CONST.°´Å¥_ÉÏÈ¡Ïû = 18;
-CONST.°´Å¥_ÏÂÒ»Ò³ = 32;
-CONST.°´Å¥_ÏÂÈ¡Ïû = 34;
-CONST.°´Å¥_ÉÏÏÂÈ¡Ïû = 50;
-
---[[
-³èÎïÊôÐÔ ÓÃÓÚ Char.GetData
-]]
-CONST.³èÎï_Ö÷ÈËRegistNumber = 51;
-CONST.³èÎï_²¶×½ÄÑ¶È = 53;
-CONST.³èÎï_»ù´¡ÖÒ³Ï = 54;
-CONST.³èÎï_¼¼ÄÜÀ¸ = 55;
-CONST.³èÎï_»ñÈ¡Ê±µÈ¼¶ = 56;
-CONST.³èÎï_PETID = 72;
-CONST.³èÎï_ÖÒ³Ï = 560;
-CONST.³èÎï_Weight = 584;
-CONST.³èÎï_MaxWeight = 585;
+CONST.æŒ‰é’®_æ—  = 0;
+CONST.æŒ‰é’®_ç¡®è®¤ = 1;
+CONST.æŒ‰é’®_ç¡®å®š = 1;
+CONST.æŒ‰é’®_å…³é—­ = 2;
+CONST.æŒ‰é’®_ç¡®å®šå…³é—­ = 3;
+CONST.æŒ‰é’®_æ˜¯ = 4;
+CONST.æŒ‰é’®_å¦ = 8;
+CONST.æŒ‰é’®_æ˜¯å¦ = 12;
+CONST.æŒ‰é’®_ä¸Šä¸€é¡µ = 16;
+CONST.æŒ‰é’®_ä¸Šå–æ¶ˆ = 18;
+CONST.æŒ‰é’®_ä¸‹ä¸€é¡µ = 32;
+CONST.æŒ‰é’®_ä¸‹å–æ¶ˆ = 34;
+CONST.æŒ‰é’®_ä¸Šä¸‹å–æ¶ˆ = 50;
 
 --[[
-³èÎïÕ½¶·×´Ì¬ ÓÃÓÚ Char.SetPetDepartureState
+å® ç‰©å±žæ€§ ç”¨äºŽ Char.GetData
 ]]
-CONST.³èÎï×´Ì¬_ÎÞ = 0;
-CONST.³èÎï×´Ì¬_´ýÃü = 1;
-CONST.³èÎï×´Ì¬_Õ½¶· = 2;
-CONST.³èÎï×´Ì¬_ÐÝÏ¢ = 3;
-CONST.³èÎï×´Ì¬_É¢²½ = 16;
+CONST.å® ç‰©_ä¸»äººRegistNumber = 51;
+CONST.å® ç‰©_æ•æ‰éš¾åº¦ = 53;
+CONST.å® ç‰©_åŸºç¡€å¿ è¯š = 54;
+CONST.å® ç‰©_æŠ€èƒ½æ  = 55;
+CONST.å® ç‰©_èŽ·å–æ—¶ç­‰çº§ = 56;
+CONST.å® ç‰©_PETID = 72;
+CONST.å® ç‰©_å¿ è¯š = 560;
+CONST.å® ç‰©_Weight = 584;
+CONST.å® ç‰©_MaxWeight = 585;
 
 --[[
-¶ÔÏóÀàÐÍ ÓÃÓÚ CONST.¶ÔÏó_ÀàÐÍ
+å® ç‰©æˆ˜æ–—çŠ¶æ€ ç”¨äºŽ Char.SetPetDepartureState
 ]]
-CONST.¶ÔÏóÀàÐÍ_ÎÞ = 0;
-CONST.¶ÔÏóÀàÐÍ_È«²¿ = 0;
-CONST.¶ÔÏóÀàÐÍ_ÈË = 1;
-CONST.¶ÔÏóÀàÐÍ_¹Ö = 2;
-CONST.¶ÔÏóÀàÐÍ_³è = 3;
-CONST.¶ÔÏóÀàÐÍ_NPC = 80;
+CONST.å® ç‰©çŠ¶æ€_æ—  = 0;
+CONST.å® ç‰©çŠ¶æ€_å¾…å‘½ = 1;
+CONST.å® ç‰©çŠ¶æ€_æˆ˜æ–— = 2;
+CONST.å® ç‰©çŠ¶æ€_ä¼‘æ¯ = 3;
+CONST.å® ç‰©çŠ¶æ€_æ•£æ­¥ = 16;
 
 --[[
-Íæ¼Ò×°±¸µÄµÀ¾ßÀ¸Î»ÖÃ
+å¯¹è±¡ç±»åž‹ ç”¨äºŽ CONST.å¯¹è±¡_ç±»åž‹
 ]]
-CONST.Î»ÖÃ_Í· = 0;
-CONST.Î»ÖÃ_Éí = 1;
-CONST.Î»ÖÃ_×óÊÖ = 2;
-CONST.Î»ÖÃ_ÓÒÊÖ = 3;
-CONST.Î»ÖÃ_ÍÈ = 4;
-CONST.Î»ÖÃ_Ê×ÊÎ1 = 5;
-CONST.Î»ÖÃ_Ê×ÊÎ2 = 6;
-CONST.Î»ÖÃ_Ë®¾§ = 7;
+CONST.å¯¹è±¡ç±»åž‹_æ—  = 0;
+CONST.å¯¹è±¡ç±»åž‹_å…¨éƒ¨ = 0;
+CONST.å¯¹è±¡ç±»åž‹_äºº = 1;
+CONST.å¯¹è±¡ç±»åž‹_æ€ª = 2;
+CONST.å¯¹è±¡ç±»åž‹_å®  = 3;
+CONST.å¯¹è±¡ç±»åž‹_NPC = 80;
 
 --[[
-Íæ¼Ò×é¶ÓÄ£Ê½
+çŽ©å®¶è£…å¤‡çš„é“å…·æ ä½ç½®
 ]]
-CONST.×é¶ÓÄ£Ê½_ÎÞ = 0;
-CONST.×é¶ÓÄ£Ê½_¶Ó³¤ = 1;
-CONST.×é¶ÓÄ£Ê½_¶ÓÔ± = 2;
-CONST.×é¶ÓÄ£Ê½_³èÎï = 3;
+CONST.ä½ç½®_å¤´ = 0;
+CONST.ä½ç½®_èº« = 1;
+CONST.ä½ç½®_å·¦æ‰‹ = 2;
+CONST.ä½ç½®_å³æ‰‹ = 3;
+CONST.ä½ç½®_è…¿ = 4;
+CONST.ä½ç½®_é¦–é¥°1 = 5;
+CONST.ä½ç½®_é¦–é¥°2 = 6;
+CONST.ä½ç½®_æ°´æ™¶ = 7;
 
 --[[
-µØÍ¼ÀàÐÍ ÓÃÓÚ CONST.¶ÔÏó_µØÍ¼ÀàÐÍ
+çŽ©å®¶ç»„é˜Ÿæ¨¡å¼
 ]]
-CONST.µØÍ¼ÀàÐÍ_ÆÕÍ¨ = 0;
-CONST.µØÍ¼ÀàÐÍ_ÃÔ¹¬ = 1;
-CONST.µØÍ¼ÀàÐÍ_¼Ò×å = 2;
-CONST.µØÍ¼ÀàÐÍ_·¿ÎÝ = 3;
-CONST.µØÍ¼ÀàÐÍ_LUAMAP = 5;
+CONST.ç»„é˜Ÿæ¨¡å¼_æ—  = 0;
+CONST.ç»„é˜Ÿæ¨¡å¼_é˜Ÿé•¿ = 1;
+CONST.ç»„é˜Ÿæ¨¡å¼_é˜Ÿå‘˜ = 2;
+CONST.ç»„é˜Ÿæ¨¡å¼_å® ç‰© = 3;
 
 --[[
-¶ÔÏóÖÖ×å
+åœ°å›¾ç±»åž‹ ç”¨äºŽ CONST.å¯¹è±¡_åœ°å›¾ç±»åž‹
 ]]
-CONST.ÖÖ×å_ÈËÐÍ = 0;
-CONST.ÖÖ×å_Áú = 1;
-CONST.ÖÖ×å_²»ËÀ = 2;
-CONST.ÖÖ×å_·ÉÐÐ = 3;
-CONST.ÖÖ×å_À¥³æ = 4;
-CONST.ÖÖ×å_Ö²Îï = 5;
-CONST.ÖÖ×å_Ò°ÊÞ = 6;
-CONST.ÖÖ×å_ÌØÊâ = 7;
-CONST.ÖÖ×å_½ðÊô = 8;
-CONST.ÖÖ×å_Ð°Ä§ = 9;
-CONST.ÖÖ×å_Éñ×å = 10;
-CONST.ÖÖ×å_¾«Áé = 11;
+CONST.åœ°å›¾ç±»åž‹_æ™®é€š = 0;
+CONST.åœ°å›¾ç±»åž‹_è¿·å®« = 1;
+CONST.åœ°å›¾ç±»åž‹_å®¶æ— = 2;
+CONST.åœ°å›¾ç±»åž‹_æˆ¿å±‹ = 3;
+CONST.åœ°å›¾ç±»åž‹_LUAMAP = 5;
 
 --[[
-ÊôÐÔ³£Á¿
+å¯¹è±¡ç§æ—
 ]]
-CONST.ÊôÐÔ_µØ = 0;
-CONST.ÊôÐÔ_Ë® = 1;
-CONST.ÊôÐÔ_»ð = 2;
-CONST.ÊôÐÔ_·ç = 3;
+CONST.ç§æ—_äººåž‹ = 0;
+CONST.ç§æ—_é¾™ = 1;
+CONST.ç§æ—_ä¸æ­» = 2;
+CONST.ç§æ—_é£žè¡Œ = 3;
+CONST.ç§æ—_æ˜†è™« = 4;
+CONST.ç§æ—_æ¤ç‰© = 5;
+CONST.ç§æ—_é‡Žå…½ = 6;
+CONST.ç§æ—_ç‰¹æ®Š = 7;
+CONST.ç§æ—_é‡‘å±ž = 8;
+CONST.ç§æ—_é‚ªé­” = 9;
+CONST.ç§æ—_ç¥žæ— = 10;
+CONST.ç§æ—_ç²¾çµ = 11;
+
+--[[
+å±žæ€§å¸¸é‡
+]]
+CONST.å±žæ€§_åœ° = 0;
+CONST.å±žæ€§_æ°´ = 1;
+CONST.å±žæ€§_ç« = 2;
+CONST.å±žæ€§_é£Ž = 3;
 
 CONST.DUNGEON_CLR_1 = 251;
 CONST.DUNGEON_CLR_2 = 252;
@@ -1187,100 +1214,100 @@ CONST.DUNGEON_CLR_3 = 253;
 CONST.FEVER_RESETTIME = 258;
 
 --[[
-¹ÖÎï»ù´¡ÊôÐÔ ÓÃÓÚData.EnemyBaseGetData
+æ€ªç‰©åŸºç¡€å±žæ€§ ç”¨äºŽData.EnemyBaseGetData
 ]]
-CONST.EnemyBase_±àºÅ = 0;
+CONST.EnemyBase_ç¼–å· = 0;
 CONST.EnemyBase_BP = 1;
-CONST.EnemyBase_¸¡¶¯ = 2;
-CONST.EnemyBase_ÖÖ×å = 3;
-CONST.EnemyBase_ÌåÁ¦ = 4;
-CONST.EnemyBase_Á¦Á¿ = 5;
-CONST.EnemyBase_Ç¿¶È = 6;
-CONST.EnemyBase_ËÙ¶È = 7;
-CONST.EnemyBase_Ä§·¨ = 8;
-CONST.EnemyBase_²¶×½ÄÑ¶È = 9;
-CONST.EnemyBase_Í¼¼øµÈ¼¶ = 10;
-CONST.EnemyBase_÷ÈÁ¦ÒªÇó = 11;
-CONST.EnemyBase_ÃüÖÐ = 12;
-CONST.EnemyBase_±ØÉ± = 13;
-CONST.EnemyBase_µØÊôÐÔ = 14;
-CONST.EnemyBase_Ë®ÊôÐÔ = 15;
-CONST.EnemyBase_»ðÊôÐÔ = 16;
-CONST.EnemyBase_·çÊôÐÔ = 17;
-CONST.EnemyBase_¿¹¶¾ = 18;
-CONST.EnemyBase_¿¹×í = 19;
-CONST.EnemyBase_¿¹Ë¯ = 20;
-CONST.EnemyBase_¿¹»ìÂÒ = 21;
-CONST.EnemyBase_¿¹Ê¯»¯ = 22;
-CONST.EnemyBase_¿¹ÒÅÍü = 23;
-CONST.EnemyBase_Í¼¼øµÈ¼¶2 = 24;
-CONST.EnemyBase_ÉÁ¶ã = 26;
-CONST.EnemyBase_·´»÷ = 27;
-CONST.EnemyBase_¼¼ÄÜÀ¸ = 28;
-CONST.EnemyBase_ÐÎÏó = 29;
+CONST.EnemyBase_æµ®åŠ¨ = 2;
+CONST.EnemyBase_ç§æ— = 3;
+CONST.EnemyBase_ä½“åŠ› = 4;
+CONST.EnemyBase_åŠ›é‡ = 5;
+CONST.EnemyBase_å¼ºåº¦ = 6;
+CONST.EnemyBase_é€Ÿåº¦ = 7;
+CONST.EnemyBase_é­”æ³• = 8;
+CONST.EnemyBase_æ•æ‰éš¾åº¦ = 9;
+CONST.EnemyBase_å›¾é‰´ç­‰çº§ = 10;
+CONST.EnemyBase_é­…åŠ›è¦æ±‚ = 11;
+CONST.EnemyBase_å‘½ä¸­ = 12;
+CONST.EnemyBase_å¿…æ€ = 13;
+CONST.EnemyBase_åœ°å±žæ€§ = 14;
+CONST.EnemyBase_æ°´å±žæ€§ = 15;
+CONST.EnemyBase_ç«å±žæ€§ = 16;
+CONST.EnemyBase_é£Žå±žæ€§ = 17;
+CONST.EnemyBase_æŠ—æ¯’ = 18;
+CONST.EnemyBase_æŠ—é†‰ = 19;
+CONST.EnemyBase_æŠ—ç¡ = 20;
+CONST.EnemyBase_æŠ—æ··ä¹± = 21;
+CONST.EnemyBase_æŠ—çŸ³åŒ– = 22;
+CONST.EnemyBase_æŠ—é—å¿˜ = 23;
+CONST.EnemyBase_å›¾é‰´ç­‰çº§2 = 24;
+CONST.EnemyBase_é—ªèº² = 26;
+CONST.EnemyBase_åå‡» = 27;
+CONST.EnemyBase_æŠ€èƒ½æ  = 28;
+CONST.EnemyBase_å½¢è±¡ = 29;
 CONST.EnemyBase_MODEXP = 30;
-CONST.EnemyBase_Í¼¼ø±àºÅ = 32;
-CONST.EnemyBase_ÄÜ·ñ²¶×½ = 34;
-CONST.EnemyBase_³öÉú¼¼ÄÜ1 = 35;
-CONST.EnemyBase_³öÉú¼¼ÄÜ2 = 36;
-CONST.EnemyBase_³öÉú¼¼ÄÜ3 = 37;
-CONST.EnemyBase_³öÉú¼¼ÄÜ4 = 38;
-CONST.EnemyBase_³öÉú¼¼ÄÜ5 = 39;
-CONST.EnemyBase_³öÉú¼¼ÄÜ6 = 40;
-CONST.EnemyBase_³öÉú¼¼ÄÜ7 = 41;
-CONST.EnemyBase_³öÉú¼¼ÄÜ8 = 42;
-CONST.EnemyBase_³öÉú¼¼ÄÜ9 = 43;
-CONST.EnemyBase_³öÉú¼¼ÄÜ10 = 44;
-CONST.EnemyBase_Ãû×Ö = 4000;
+CONST.EnemyBase_å›¾é‰´ç¼–å· = 32;
+CONST.EnemyBase_èƒ½å¦æ•æ‰ = 34;
+CONST.EnemyBase_å‡ºç”ŸæŠ€èƒ½1 = 35;
+CONST.EnemyBase_å‡ºç”ŸæŠ€èƒ½2 = 36;
+CONST.EnemyBase_å‡ºç”ŸæŠ€èƒ½3 = 37;
+CONST.EnemyBase_å‡ºç”ŸæŠ€èƒ½4 = 38;
+CONST.EnemyBase_å‡ºç”ŸæŠ€èƒ½5 = 39;
+CONST.EnemyBase_å‡ºç”ŸæŠ€èƒ½6 = 40;
+CONST.EnemyBase_å‡ºç”ŸæŠ€èƒ½7 = 41;
+CONST.EnemyBase_å‡ºç”ŸæŠ€èƒ½8 = 42;
+CONST.EnemyBase_å‡ºç”ŸæŠ€èƒ½9 = 43;
+CONST.EnemyBase_å‡ºç”ŸæŠ€èƒ½10 = 44;
+CONST.EnemyBase_åå­— = 4000;
 
 --[[
-Enemy ÓÃÓÚ Data.EnemyGetData
+Enemy ç”¨äºŽ Data.EnemyGetData
 ]]
-CONST.Enemy_±àºÅ = 0;
-CONST.Enemy_Base±àºÅ = 1;
-CONST.Enemy_×îµÍµÈ¼¶ = 2;
-CONST.Enemy_×î¸ßµÈ¼¶ = 3;
-CONST.Enemy_×îµÍÊýÁ¿ = 4;
-CONST.Enemy_×î¸ßÊýÁ¿ = 5;
+CONST.Enemy_ç¼–å· = 0;
+CONST.Enemy_Baseç¼–å· = 1;
+CONST.Enemy_æœ€ä½Žç­‰çº§ = 2;
+CONST.Enemy_æœ€é«˜ç­‰çº§ = 3;
+CONST.Enemy_æœ€ä½Žæ•°é‡ = 4;
+CONST.Enemy_æœ€é«˜æ•°é‡ = 5;
 CONST.Enemy_AI = 6;
-CONST.Enemy_Õ½¶·¾­Ñé = 7;
-CONST.Enemy_Õ½¼¨ = 8;
-CONST.Enemy_¹¥»÷Ä£Ê½ = 9;
-CONST.Enemy_¿É·ñ²¶×½ = 10;
-CONST.Enemy_µôÂäÎïÆ·1 = 11;
-CONST.Enemy_µôÂäÎïÆ·2 = 12;
-CONST.Enemy_µôÂäÎïÆ·3 = 13;
-CONST.Enemy_µôÂäÎïÆ·4 = 14;
-CONST.Enemy_µôÂäÎïÆ·5 = 15;
-CONST.Enemy_µôÂäÎïÆ·6 = 16;
-CONST.Enemy_µôÂäÎïÆ·7 = 17;
-CONST.Enemy_µôÂäÎïÆ·8 = 18;
-CONST.Enemy_µôÂäÎïÆ·9 = 19;
-CONST.Enemy_µôÂäÎïÆ·10 = 20;
-CONST.Enemy_µôÂä¼¸ÂÊ1 = 21;
-CONST.Enemy_µôÂä¼¸ÂÊ2 = 22;
-CONST.Enemy_µôÂä¼¸ÂÊ3 = 23;
-CONST.Enemy_µôÂä¼¸ÂÊ4 = 24;
-CONST.Enemy_µôÂä¼¸ÂÊ5 = 25;
-CONST.Enemy_µôÂä¼¸ÂÊ6 = 26;
-CONST.Enemy_µôÂä¼¸ÂÊ7 = 27;
-CONST.Enemy_µôÂä¼¸ÂÊ8 = 28;
-CONST.Enemy_µôÂä¼¸ÂÊ9 = 29;
-CONST.Enemy_µôÂä¼¸ÂÊ10 = 30;
-CONST.Enemy_ÍµÇÔÎïÆ·1 = 31;
-CONST.Enemy_ÍµÇÔÎïÆ·2 = 32;
-CONST.Enemy_ÍµÇÔÎïÆ·3 = 33;
-CONST.Enemy_ÍµÇÔÎïÆ·4 = 34;
-CONST.Enemy_ÍµÇÔÎïÆ·5 = 35;
-CONST.Enemy_ÍµÇÔ¼¸ÂÊ1 = 36;
-CONST.Enemy_ÍµÇÔ¼¸ÂÊ2 = 37;
-CONST.Enemy_ÍµÇÔ¼¸ÂÊ3 = 38;
-CONST.Enemy_ÍµÇÔ¼¸ÂÊ4 = 39;
-CONST.Enemy_ÍµÇÔ¼¸ÂÊ5 = 40;
-CONST.Enemy_ÊÇ·ñ¶þ¶¯ = 41;
-CONST.Enemy_ÊÇ·ñBOSS = 42;
-CONST.Enemy_ÕÙ»½Enemy1 = 43;
-CONST.Enemy_ÕÙ»½Enemy2 = 44;
-CONST.Enemy_Talk±àºÅ = 45;
-CONST.Enemy_Ãû×Ö = 4000;
-CONST.Enemy_Õ½Êõ = 4001;
+CONST.Enemy_æˆ˜æ–—ç»éªŒ = 7;
+CONST.Enemy_æˆ˜ç»© = 8;
+CONST.Enemy_æ”»å‡»æ¨¡å¼ = 9;
+CONST.Enemy_å¯å¦æ•æ‰ = 10;
+CONST.Enemy_æŽ‰è½ç‰©å“1 = 11;
+CONST.Enemy_æŽ‰è½ç‰©å“2 = 12;
+CONST.Enemy_æŽ‰è½ç‰©å“3 = 13;
+CONST.Enemy_æŽ‰è½ç‰©å“4 = 14;
+CONST.Enemy_æŽ‰è½ç‰©å“5 = 15;
+CONST.Enemy_æŽ‰è½ç‰©å“6 = 16;
+CONST.Enemy_æŽ‰è½ç‰©å“7 = 17;
+CONST.Enemy_æŽ‰è½ç‰©å“8 = 18;
+CONST.Enemy_æŽ‰è½ç‰©å“9 = 19;
+CONST.Enemy_æŽ‰è½ç‰©å“10 = 20;
+CONST.Enemy_æŽ‰è½å‡ çŽ‡1 = 21;
+CONST.Enemy_æŽ‰è½å‡ çŽ‡2 = 22;
+CONST.Enemy_æŽ‰è½å‡ çŽ‡3 = 23;
+CONST.Enemy_æŽ‰è½å‡ çŽ‡4 = 24;
+CONST.Enemy_æŽ‰è½å‡ çŽ‡5 = 25;
+CONST.Enemy_æŽ‰è½å‡ çŽ‡6 = 26;
+CONST.Enemy_æŽ‰è½å‡ çŽ‡7 = 27;
+CONST.Enemy_æŽ‰è½å‡ çŽ‡8 = 28;
+CONST.Enemy_æŽ‰è½å‡ çŽ‡9 = 29;
+CONST.Enemy_æŽ‰è½å‡ çŽ‡10 = 30;
+CONST.Enemy_å·çªƒç‰©å“1 = 31;
+CONST.Enemy_å·çªƒç‰©å“2 = 32;
+CONST.Enemy_å·çªƒç‰©å“3 = 33;
+CONST.Enemy_å·çªƒç‰©å“4 = 34;
+CONST.Enemy_å·çªƒç‰©å“5 = 35;
+CONST.Enemy_å·çªƒå‡ çŽ‡1 = 36;
+CONST.Enemy_å·çªƒå‡ çŽ‡2 = 37;
+CONST.Enemy_å·çªƒå‡ çŽ‡3 = 38;
+CONST.Enemy_å·çªƒå‡ çŽ‡4 = 39;
+CONST.Enemy_å·çªƒå‡ çŽ‡5 = 40;
+CONST.Enemy_æ˜¯å¦äºŒåŠ¨ = 41;
+CONST.Enemy_æ˜¯å¦BOSS = 42;
+CONST.Enemy_å¬å”¤Enemy1 = 43;
+CONST.Enemy_å¬å”¤Enemy2 = 44;
+CONST.Enemy_Talkç¼–å· = 45;
+CONST.Enemy_åå­— = 4000;
+CONST.Enemy_æˆ˜æœ¯ = 4001;
