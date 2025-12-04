@@ -109,6 +109,12 @@ function Char.FindItemId(charIndex, itemID) end
 ---@return number @
 function Char.AddGold(charIndex, amount) end
 
+---为目标增加水晶货币。
+---@param charIndex number 目标的 对象index。
+---@param amount number 增加的数量，负数为减少。
+---@return number @
+function Char.AddCrystal(charIndex, amount) end
+
 ---删除目标对象道具。
 ---@param CharIndex number 目标的 对象index。
 ---@param ItemID number 道具ID。

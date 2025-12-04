@@ -12,7 +12,7 @@ function Module:onLoad()
   end
   self.dmg = nil;
   self.dmg2 = nil;
-  local adminCommands = getModule('adminCommands')--[[@as AdminCommands]];
+  local adminCommands = getModule('adminCommands') --[[@as AdminCommands]];
   adminCommands:regCommand('dmg', function(c, args)
     if args[1] == 'off' then
       NLG.SystemMessage(c, '关闭攻击伤害修改')
@@ -65,19 +65,39 @@ function Module:onLoad()
     end
     return 1
   end)
-  self:regCallback('DamageCalculateEvent', OrderedCallback(function(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
-    local admin = getModule('admin')--[[@as Admin]]
-    if admin:isAdmin(charIndex) and self.dmg ~= nil then
-      return self.dmg
+  adminCommands:regCommand('state', function(c, args)
+    if args[1] == 'auto' then
+      ---@type CharStatusExtend
+      local m = getModule("charStatusExtend")
+      m:addCharStatus(c, CONST.对象_最大血, 999999);
+      m:addCharStatus(c, CONST.对象_最大魔, 999999);
+      m:addCharStatus(c, CONST.对象_攻击力, 999999);
+      m:addCharStatus(c, CONST.对象_敏捷, 999999);
+      m:addCharStatus(c, CONST.对象_闪躲, 999999);
+      m:addCharStatus(c, CONST.对象_必杀, 50);
+      m:addCharStatus(c, CONST.对象_命中, 999);
+      NLG.UpChar(c)
+      Char.SetData(c, CONST.CHAR_血, Char.GetData(c, CONST.CHAR_最大血));
+      Char.SetData(c, CONST.对象_魔, Char.GetData(c, CONST.对象_最大魔));
+      NLG.UpChar(c)
     end
-    if admin:isAdmin(defCharIndex) then
-      self:logDebug('DMG', oriDamage, damage)
-      if self.dmg2 ~= nil then
-        return self.dmg2
+    return 1
+  end)
+  self:regCallback('DamageCalculateEvent',
+    OrderedCallback(
+    function(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
+      local admin = getModule('admin') --[[@as Admin]]
+      if admin:isAdmin(charIndex) and self.dmg ~= nil then
+        return self.dmg
       end
-    end
-    return damage
-  end, -1))
+      if admin:isAdmin(defCharIndex) then
+        self:logDebug('DMG', oriDamage, damage)
+        if self.dmg2 ~= nil then
+          return self.dmg2
+        end
+      end
+      return damage
+    end, -1))
 end
 
 --- 卸载模块钩子

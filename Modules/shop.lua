@@ -63,9 +63,10 @@ function Shop:onLoad()
   self:NPC_createShop('≤ ∆±∑∑¬Ù', 104863, { map = 1000, mapType = 0, x = 225, y = 91, direction = 0 }, shopConfig, {
     47763, 16000, 16001, 16002, 45950, 45981, 45969
   });
-  self:NPC_createShop('±‰…Ì∑∑¬Ù', 104863, { map = 1000, mapType = 0, x = 223, y = 91, direction = 0 }, shopConfig, {
-    46329, 70001,
-  });
+  self:NPC_createShopCrystal('±‰…Ì∑∑¬Ù', 104863, { map = 1000, mapType = 0, x = 223, y = 91, direction = 0 },
+    { sellTypes = 'all', shopType = CONST.SHOP_TYPE_SELL + CONST.SHOP_TYPE_CRYSTAL }, {
+      { id = 46329, price = 3, qty = -1 }, { id = 47763, price = 1, qty = 50 },
+    });
 end
 
 function Shop:onUnload()

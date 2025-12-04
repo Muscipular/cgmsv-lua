@@ -114,8 +114,17 @@ function NPCPart:NPC_createNormal(name, image, positionInfo) end
 ---@param image number
 ---@param positionInfo NpcPosition
 ---@param shopBaseInfo ShopBaseInfo
+---@param items number[] 20¸öÎïÆ·id
 ---@return CharIndex
 function NPCPart:NPC_createShop(name, image, positionInfo, shopBaseInfo, items) end
+
+---@param name string
+---@param image number
+---@param positionInfo NpcPosition
+---@param shopBaseInfo ShopBaseInfo
+---@param items {id:number,price:number,qty:number}[] 
+---@return CharIndex
+function NPCPart:NPC_createShopCrystal(name, image, positionInfo, shopBaseInfo, items) end
 
 ---@param name string
 ---@param image number

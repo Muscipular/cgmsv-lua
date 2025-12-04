@@ -18,6 +18,7 @@ end
 ---@param image number
 ---@param positionInfo NpcPosition
 ---@param shopBaseInfo ShopBaseInfo
+---@param items number[] 20个物品id
 ---@return CharIndex
 function NPCPart:NPC_createShop(name, image, positionInfo, shopBaseInfo, items)
   local shopNpcPrefix = table.join({
@@ -33,6 +34,38 @@ function NPCPart:NPC_createShop(name, image, positionInfo, shopBaseInfo, items)
     table.unpack(fillShopSellType(shopBaseInfo.sellTypes or {})),
   }, '|');
   local ret = NL.CreateArgNpc("Itemshop2", shopNpcPrefix .. '|' .. table.join(items or {}, '|'), name, image,
+    positionInfo.mapType, positionInfo.map, positionInfo.x, positionInfo.y, positionInfo.direction);
+  if ret >= 0 then
+    table.insert(self.npcList, ret);
+  end
+  return ret;
+end
+
+---@param name string
+---@param image number
+---@param positionInfo NpcPosition
+---@param shopBaseInfo ShopBaseInfo
+---@param items {id:number,price:number,qty:number}[] 
+---@return CharIndex
+function NPCPart:NPC_createShopCrystal(name, image, positionInfo, shopBaseInfo, items)
+  local shopNpcPrefix = table.join({
+    shopBaseInfo.buyRate or 100,
+    shopBaseInfo.sellRate or 100,
+    CONST.SHOP_TYPE_SELL,
+    shopBaseInfo.msgBuySell or '10146',
+    shopBaseInfo.msgBuy or '10147',
+    shopBaseInfo.msgMoneyNotEnough or '10148',
+    shopBaseInfo.msgBagFull or '10149',
+    shopBaseInfo.msgSell or '10150',
+    shopBaseInfo.msgAfterSell or '10151',
+  }, '|');
+  local s = "";
+  for i = 1, 20 do
+    if items[i] then
+      s = s.. string.format("%d|%d|%d|", items[i].id, items[i].price, items[i].qty or -1);
+    end
+  end
+  local ret = NL.CreateArgNpc("Itemshop3", shopNpcPrefix .. '|' .. s, name, image,
     positionInfo.mapType, positionInfo.map, positionInfo.x, positionInfo.y, positionInfo.direction);
   if ret >= 0 then
     table.insert(self.npcList, ret);
@@ -174,10 +207,10 @@ end
 ---@param SeqNo  number 自定义数值，用于识别不同的对话框事件响应, 具体会在WindowTalkedCallBack中调用
 ---@param Data  string 对话框的内容,根据不同的对话框类别,有不同的格式,具体会在附录中说明
 ---@return number CharIndex
----@return number TargetCharIndex 
----@return number SeqNo 
----@return number Select 
----@return string Data 
+---@return number TargetCharIndex
+---@return number SeqNo
+---@return number Select
+---@return string Data
 function CO:next(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data)
   NLG.ShowWindowTalked(ToIndex, WinTalkIndex, WindowType, ButtonType, SeqNo, Data);
   return coroutine.yield()

@@ -11,6 +11,7 @@ moduleInitial();
 -- loadModule('tech15') --15¼¶¼¼ÄÜ
 loadModule('admin')
 loadModule('adminCommands')
+loadModule('charStatusExtend')
 loadModule('ng')
 loadModule('cron')
 loadModule('co')

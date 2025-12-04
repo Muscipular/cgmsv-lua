@@ -871,6 +871,7 @@ CONST.对象_RebirthLevel = 0;
 CONST.对象_RebirthAttr = 0;
 CONST.对象_RebirthBaseImage = 0;
 CONST.对象_骑宠 = 0;
+CONST.对象_水晶货币 = 0;
 
 --[[
 道具属性 用于 Item.GetData
