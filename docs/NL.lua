@@ -1516,3 +1516,31 @@ function NL.RegBattlePetLeaveCheckEvent(Dofile, InitFuncName) end
 ---@param com3 number TechId
 ---@return number @新的type
 function BattlePetLeaveCheckEventCallback(battleIndex, charIndex, type, com1, com2, com3) end
+
+---战斗ACTION前事件
+---[@group NL.RegBattleBeforeActionEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称，参考[BattleBeforeActionEventCallback]
+function NL.RegBattleBeforeActionEvent(Dofile, InitFuncName) end
+
+---战斗ACTION前事件回调
+---[@group NL.RegBattleBeforeActionEvent]
+---@param battleIndex number BattleIndex
+---@param charIndex number CharIndex
+---@return number @返回0即可
+function BattleBeforeActionEventCallback(battleIndex, charIndex) end
+
+---战斗ACTION后事件
+---[@group NL.RegBattleAfterActionEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称，参考[BattleAfterActionEventCallback]
+function NL.RegBattleAfterActionEvent(Dofile, InitFuncName) end
+
+---战斗ACTION后事件回调
+---[@group NL.RegBattleAfterActionEvent]
+---@param battleIndex number BattleIndex
+---@param charIndex number CharIndex
+---@param addAction fun(charIndex:number, com1:number, com2:number, com3:number) 追加Action函数
+---@return number @返回0即可
+function BattleAfterActionEventCallback(battleIndex, charIndex, addAction) end
+

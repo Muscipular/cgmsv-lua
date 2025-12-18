@@ -31,6 +31,10 @@ local Allow = {
   [CONST.CHAR_抗睡] = CONST.CHAR_实际抗睡,
   [CONST.CHAR_抗石] = CONST.CHAR_实际抗石,
   [CONST.CHAR_抗醉] = CONST.CHAR_实际抗醉,
+  [CONST.CHAR_地属性] = CONST.CHAR_地属性,
+  [CONST.CHAR_水属性] = CONST.CHAR_水属性,
+  [CONST.CHAR_火属性] = CONST.CHAR_火属性,
+  [CONST.CHAR_风属性] = CONST.CHAR_风属性,
 };
 
 function CharStatusExtend:onLoad()
