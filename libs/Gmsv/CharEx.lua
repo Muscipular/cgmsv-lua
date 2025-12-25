@@ -1,5 +1,5 @@
 ---获取装备的武器 ItemIndex及位置
----@return number 装备位置 ,number 装备类型, number itemIndex
+---@return number itemIndex, number 装备位置 ,number 装备类型
 function Char.GetWeapon(charIndex)
   local ItemIndex = Char.GetItemIndex(charIndex, CONST.EQUIP_左手);
   if ItemIndex >= 0 and Item.isWeapon(ItemIndex) then

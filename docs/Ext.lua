@@ -72,9 +72,9 @@ function SQL.querySQL(sql, returnNil) end
 
 ---获取装备的武器 ItemIndex及位置
 ---@param charIndex number
+---@return number @itemIndex
 ---@return number @装备位置
 ---@return number @装备类型
----@return number @itemIndex
 function Char.GetWeapon(charIndex) end
 
 ---检测index是否正确
