@@ -223,7 +223,7 @@ function Battle.AppendBattleMsg(msg) end
 ---获取战斗信息
 ---@param battleIndex  number 战斗对象index
 ---@param charIndex number
----@param dataline  number 对应栏CONST.BATTLE_ENTRY_* 
+---@param dataline  number 对应栏CONST.BATTLE_ENTRY_* CONST.战属_*
 ---@return number @战斗信息
 function Battle.GetEntryData(battleIndex,charIndex,dataline) end
 
