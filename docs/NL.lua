@@ -1527,8 +1527,9 @@ function NL.RegBattleBeforeActionEvent(Dofile, InitFuncName) end
 ---[@group NL.RegBattleBeforeActionEvent]
 ---@param battleIndex number BattleIndex
 ---@param charIndex number CharIndex
+---@param addAction fun(charIndex:number, com1:number, com2:number, com3:number) 追加Action函数，行动前执行
 ---@return number @返回0即可
-function BattleBeforeActionEventCallback(battleIndex, charIndex) end
+function BattleBeforeActionEventCallback(battleIndex, charIndex, addAction) end
 
 ---战斗ACTION后事件
 ---[@group NL.RegBattleAfterActionEvent]
