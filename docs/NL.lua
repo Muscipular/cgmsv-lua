@@ -1544,3 +1544,18 @@ function NL.RegBattleAfterActionEvent(Dofile, InitFuncName) end
 ---@return number @返回0即可
 function BattleAfterActionEventCallback(battleIndex, charIndex, addAction) end
 
+---战斗异常状态事件
+---[@group NL.RegBattleStatusResistanceEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称，参考[BattleStatusResistanceEventCallback]
+function NL.RegBattleStatusResistanceEvent(Dofile, InitFuncName) end
+
+---战斗异常状态事件回调
+---[@group NL.RegBattleStatusResistanceEvent]
+---@param battleIndex number BattleIndex
+---@param aCharIndex number 进攻方Index
+---@param dCharIndex number 防御方Index
+---@param type number 异常类型
+---@param rate number rate万份率
+---@return number @返回概率,万份率
+function BattleStatusResistanceEventCallback(battleIndex, aCharIndex, dCharIndex, type, rate) end
