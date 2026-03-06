@@ -9,6 +9,15 @@ function Http.Init() end
 ---@return number @成功返回1
 function Http.Start(addr, port) end
 
+---发起Http请求(不支持https)
+---@param url string 请求地址
+---@param httpMethod string 请求方法,例如 "GET"、"POST"
+---@param contentType string 请求内容类型
+---@param body string 请求内容
+---@param timeout number 超时时间(毫秒)
+---@return number @返回reqId
+function Http.Send(url, httpMethod, contentType, body, timeout) end
+
 ---关闭Http服务器，需要注意，在请求中停止会导致请求响应502并且强制关闭所有未处理的请求
 ---@return number @成功返回1
 function Http.Stop() end

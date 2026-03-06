@@ -1148,6 +1148,22 @@ function NL.RegHttpRequestEvent(Dofile, InitFuncName) end
 ---@return string @返回内容
 function HttpRequestCallBack(method, api, params, body) end
 
+---注册Http请求结果回调
+---[@group NL.RegHttpResultEvent]
+---@param Dofile?  string 要加载的脚本文件名称,如果为当前文件,则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称
+function NL.RegHttpResultEvent(Dofile, InitFuncName) end
+
+---Http请求结果回调
+---[@group NL.RegHttpResultEvent]
+---@param reqId number 请求ID
+---@param url string 请求地址
+---@param success boolean 是否成功
+---@param statusCode number 状态码
+---@param responseBody string 响应内容
+---@param errMsg string 错误信息
+function HttpResultCallBack(reqId, url, success, statusCode, responseBody, errMsg) end
+
 ---创建一个治疗时触发的事件
 ---[@group NL.RegBattleHealCalculateEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
