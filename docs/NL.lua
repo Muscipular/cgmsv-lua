@@ -878,12 +878,13 @@ function NL.RegBattleInjuryEvent(Dofile, InitFuncName) end
 
 ---BattleInjuryEvent的回调事件
 ---[@group NL.BattleInjuryCallBack]
----@param fIndex number 防御者的index
+---@param dIndex number 防御者的index
 ---@param aIndex number 攻击者的index
 ---@param battleIndex number 战斗的index
----@param inject number 受伤程度
+---@param inject number 受伤程度(原始)
+---@param newVal number 受伤程度(修改后)
 ---@return any @返回受伤程度，范围0~100
-function BattleInjuryCallBack(fIndex, aIndex, battleIndex, inject) end
+function BattleInjuryCallBack(dIndex, aIndex, battleIndex, inject, newVal) end
 
 ---创建一个战斗结算画面出现时触发的事件
 ---[@group NL.RegResetCharaBattleStateEvent]
