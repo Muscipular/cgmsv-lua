@@ -1,6 +1,25 @@
 ---模块类
 ---@class AdminDamage: ModuleType
 local Module = ModuleBase:createModule('adminDamage')
+
+---判断角色是否为管理员或管理员宠物
+---@param charIndex number
+---@param admin Admin
+---@return boolean
+local function isAdminOrAdminPet(charIndex, admin)
+  if admin:isAdmin(charIndex) then
+    return true
+  end
+
+  if Char.GetData(charIndex, CONST.对象_类型) == CONST.对象类型_宠 then
+    local ok, owner = pcall(Pet.GetOwner, charIndex)
+    if ok and owner and owner >= 0 and admin:isAdmin(owner) then
+      return true
+    end
+  end
+  return false
+end
+
 --- 加载模块钩子
 function Module:onLoad()
   self:logInfo('load')
@@ -85,19 +104,19 @@ function Module:onLoad()
   end)
   self:regCallback('DamageCalculateEvent',
     OrderedCallback(
-    function(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
-      local admin = getModule('admin') --[[@as Admin]]
-      if admin:isAdmin(charIndex) and self.dmg ~= nil then
-        return self.dmg
-      end
-      if admin:isAdmin(defCharIndex) then
-        self:logDebug('DMG', oriDamage, damage)
-        if self.dmg2 ~= nil then
-          return self.dmg2
+      function(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg)
+        local admin = getModule('admin') --[[@as Admin]]
+        if isAdminOrAdminPet(charIndex, admin) and self.dmg ~= nil then
+          return self.dmg
         end
-      end
-      return damage
-    end, -1))
+        if isAdminOrAdminPet(defCharIndex, admin) then
+          self:logDebug('DMG', oriDamage, damage)
+          if self.dmg2 ~= nil then
+            return self.dmg2
+          end
+        end
+        return damage
+      end, -1))
 end
 
 --- 卸载模块钩子

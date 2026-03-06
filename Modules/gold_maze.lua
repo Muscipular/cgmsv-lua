@@ -124,7 +124,7 @@ function GoldMazeModule:createMap(level)
     for i = 1, 100 do
         -- 创建传送点
         local tx, ty = Map.GetAvailablePos(CONST.地图类型_LUAMAP, floor)
-        if tx >= 0 or ty >= 0 then
+        if tx >= 0 and ty >= 0 then
             self:logDebug("create warp", i, tx, ty);
             if Map.IsWalkable(CONST.地图类型_LUAMAP, floor, tx - 2, ty + 2) == 1 or i == 100 then
                 wx, wy = tx, ty
@@ -229,7 +229,7 @@ function GoldMazeModule:onItemBoxLoot(charIndex, mapId, floor, x, y, boxType)
     return 0;
 end
 
-function GoldMazeModule:onItemBoxEncountRate(charIndex, mapId, floor, X, Y, rate, boxType)
+function GoldMazeModule:onItemBoxEncountRate(charIndex, mapId, floor, X, Y, itemIndex, rate, boxType)
     if Map.GetExtData(mapId, floor, "GoldMapVar") == 1 then
         return 0 -- 关闭默认遇敌
     end
@@ -424,8 +424,8 @@ function GoldMazeModule:startNextMap(leaderIndex)
     local x, y = Map.GetAvailablePos(CONST.地图类型_LUAMAP, newFloor)
     for _, member in ipairs(partyMembers) do
         Char.SetTempData(member, "GoldMapLevel", level);
-        Char.SetTempData(charIndex, "GoldMapLastX", nil)
-        Char.SetTempData(charIndex, "GoldMapLastY", nil)
+        Char.SetTempData(member, "GoldMapLastX", nil)
+        Char.SetTempData(member, "GoldMapLastY", nil)
     end
     if level > MAX_LEVEL then
         Char.Warp(partyMembers[1], BOSS_MAP, BOSS_FLOOR, BOSS_FLOOR_X, BOSS_FLOOR_Y)

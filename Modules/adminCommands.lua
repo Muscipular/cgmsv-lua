@@ -8,6 +8,20 @@ function commands.addGold(charIndex, args)
   Char.AddGold(charIndex, tonumber(args[1]))
 end
 
+function commands.crystal(charIndex, args)
+  local amount = tonumber(args[1])
+  if amount == nil then
+    NLG.SystemMessage(charIndex, 'usage: /crystal 123')
+    return
+  end
+  if amount <= 0 then
+    NLG.SystemMessage(charIndex, 'crystal amount must > 0')
+    return
+  end
+  Char.AddCrystal(charIndex, amount)
+  NLG.SystemMessage(charIndex, string.format('crystal +%d', amount))
+end
+
 function commands.giveItem(charIndex, args)
   local itemIndex = Char.GiveItem(charIndex, tonumber(args[1]), tonumber(args[2]), args[3] ~= '0')
   if args[4] ~= nil and itemIndex >= 0 then
