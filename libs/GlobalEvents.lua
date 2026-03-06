@@ -79,7 +79,7 @@ local function normalizeBattleInjury(val)
   return math.floor(val);
 end
 local chained = {
-  -- 事件参数: TalkEvent(talker, meindex, color, msg, area)
+  -- 事件参数: TalkEvent(charIndex, msg, color, range, size)
   -- 链式规则: 任一回调返回值不为 1 时立即返回该值，否则返回 1
   TalkEvent = function(list, ...)
     local res = 1;
@@ -129,19 +129,20 @@ local chained = {
   -- 链式参数位置: 4，对应参数 damage
   BattleHealCalculateEvent = makeReduceValueChain(4, acceptNumber, normalizeBattleHeal),
 
-  -- 事件参数: BattleInjuryEvent(charIndex, battleIndex, oVal, val)
-  -- 链式参数位置: 4，对应参数 val
-  BattleInjuryEvent = function(list, charIndex, battleIndex, oVal, val)
+  -- 事件参数: BattleInjuryEvent(dIndex, aIndex, battleIndex, inject, newVal)
+  -- 链式参数位置: 5，对应参数 newVal
+  BattleInjuryEvent = function(list, dIndex, aIndex, battleIndex, inject, newVal)
+    newVal = inject;
     for _, fn in ipairs(list) do
-      local res = fn(charIndex, battleIndex, oVal, val);
+      local res = fn(dIndex, aIndex, battleIndex, inject, newVal);
       if acceptNumber(res) then
-        val = normalizeBattleInjury(res);
-        if val <= 0 then
-          return val;
+        newVal = normalizeBattleInjury(res);
+        if newVal <= 0 then
+          return newVal;
         end
       end
     end
-    return val;
+    return newVal;
   end,
 
   -- 事件参数: TechOptionEvent(charIndex, option, techID, val)
@@ -156,7 +157,7 @@ local chained = {
   -- 链式参数位置: 3，对应参数 ret
   BattleNextEnemyEvent = makeReduceValueChain(3, acceptTable),
 
-  -- 事件参数: Init(fnList, ...)
+  -- 事件参数: Init(...)
   -- 链式规则: 按顺序执行所有回调，返回最后一个回调的返回值
   Init = function(fnList, ...)
     fnList = table.copy(fnList)
