@@ -1,13 +1,13 @@
----Ä£¿éÀà
+---æ¨¡å—ç±»
 ---@class ngModule: ModuleType
 local ngModule = ModuleBase:createModule('ng')
 
--- ÆÕÍ¨Íæ¼ÒÃüÁî
+-- æ™®é€šç©å®¶å‘½ä»¤
 local commandsNormal = {}
 
 local function addFrame(charIndex)
   --Char.DischargeParty(charIndex);
-  Char.SetData(charIndex, CONST.CHAR_ÉùÍû, 200000);
+  Char.SetData(charIndex, CONST.CHAR_å£°æœ›, 200000);
 end
 
 local function identity(player)
@@ -15,15 +15,15 @@ local function identity(player)
   for itemSlot = 8, 27 do
     local ItemIndex = Char.GetItemIndex(player, itemSlot)
     if ItemIndex > 0 then
-      local money = Char.GetData(player, CONST.CHAR_½ğ±Ò);
-      local itemLv = Item.GetData(ItemIndex, CONST.µÀ¾ß_µÈ¼¶);
+      local money = Char.GetData(player, CONST.CHAR_é‡‘å¸);
+      local itemLv = Item.GetData(ItemIndex, CONST.é“å…·_ç­‰çº§);
       local price = itemLv * 200;
-      if Item.GetData(ItemIndex, CONST.µÀ¾ß_ÒÑ¼ø¶¨) == 0 and money >= (itemLv * 200) then
+      if Item.GetData(ItemIndex, CONST.é“å…·_å·²é‰´å®š) == 0 and money >= (itemLv * 200) then
         Count = Count + 1
-        Char.SetData(player, CONST.CHAR_½ğ±Ò, money - price);
-        Item.SetData(ItemIndex, CONST.µÀ¾ß_ÒÑ¼ø¶¨, 1)
-        NLG.SystemMessage(player, "[ÏµÍ³] Äú¼ø¶¨µÄµÀ¾ßµÈ¼¶Îª" .. itemLv .. "¼¶¡£¿Û³ıÄ§±Ò" .. price .. "G");
-        NLG.SystemMessage(player, "[ÏµÍ³] ÄãÉíÉÏµÄ " .. Item.GetData(ItemIndex, CONST.µÀ¾ß_¼øÇ°Ãû) .. "ÒÑ¼ø¶¨Îª " .. Item.GetData(ItemIndex, CONST.µÀ¾ß_Ãû×Ö))
+        Char.SetData(player, CONST.CHAR_é‡‘å¸, money - price);
+        Item.SetData(ItemIndex, CONST.é“å…·_å·²é‰´å®š, 1)
+        NLG.SystemMessage(player, "[ç³»ç»Ÿ] æ‚¨é‰´å®šçš„é“å…·ç­‰çº§ä¸º" .. itemLv .. "çº§ã€‚æ‰£é™¤é­”å¸" .. price .. "G");
+        NLG.SystemMessage(player, "[ç³»ç»Ÿ] ä½ èº«ä¸Šçš„ " .. Item.GetData(ItemIndex, CONST.é“å…·_é‰´å‰å) .. "å·²é‰´å®šä¸º " .. Item.GetData(ItemIndex, CONST.é“å…·_åå­—))
         Item.UpItem(player, itemSlot);
         NLG.UpChar(player);
         return ;
@@ -31,7 +31,7 @@ local function identity(player)
     end
   end
   if Count == 0 then
-    NLG.SystemMessage(player, "[ÏµÍ³] ÄãÉíÉÏÃ»ÓĞĞèÒª¼ø¶¨µÄÎïÆ·¡¾»òÄãµÄÇ®²»×ãÒÔ¼ø¶¨´ËµÀ¾ß¡¿");
+    NLG.SystemMessage(player, "[ç³»ç»Ÿ] ä½ èº«ä¸Šæ²¡æœ‰éœ€è¦é‰´å®šçš„ç‰©å“ã€æˆ–ä½ çš„é’±ä¸è¶³ä»¥é‰´å®šæ­¤é“å…·ã€‘");
     return ;
   end
   return
@@ -41,102 +41,102 @@ local function repairEquipment(player)
   local Count = 0
   for ItemSlot = 8, 8 do
     local ItemIndex = Char.GetItemIndex(player, ItemSlot)
-    local money = Char.GetData(player, CONST.CHAR_½ğ±Ò);
-    local itemLv = Item.GetData(ItemIndex, CONST.µÀ¾ß_µÈ¼¶);
-    local itemName = Item.GetData(ItemIndex, CONST.µÀ¾ß_Ãû×Ö);
-    local itemDur = Item.GetData(ItemIndex, CONST.µÀ¾ß_ÄÍ¾Ã);
-    local itemMaxDur = Item.GetData(ItemIndex, CONST.µÀ¾ß_×î´óÄÍ¾Ã);
+    local money = Char.GetData(player, CONST.CHAR_é‡‘å¸);
+    local itemLv = Item.GetData(ItemIndex, CONST.é“å…·_ç­‰çº§);
+    local itemName = Item.GetData(ItemIndex, CONST.é“å…·_åå­—);
+    local itemDur = Item.GetData(ItemIndex, CONST.é“å…·_è€ä¹…);
+    local itemMaxDur = Item.GetData(ItemIndex, CONST.é“å…·_æœ€å¤§è€ä¹…);
     local repairedDur = itemMaxDur - itemDur
     --local decMaxDur = repairedDur * 1
     local price = repairedDur * 10
-    local itemType = Item.GetData(ItemIndex, CONST.µÀ¾ß_ÀàĞÍ);
+    local itemType = Item.GetData(ItemIndex, CONST.é“å…·_ç±»å‹);
     if money > price and itemMaxDur > itemDur and itemType >= 0 and itemType <= 14 then
       Count = Count + 1
-      Char.SetData(player, CONST.CHAR_½ğ±Ò, money - price);
-      --Item.SetData(ItemIndex, CONST.µÀ¾ß_ÄÍ¾Ã, itemDur + xhnj);
+      Char.SetData(player, CONST.CHAR_é‡‘å¸, money - price);
+      --Item.SetData(ItemIndex, CONST.é“å…·_è€ä¹…, itemDur + xhnj);
       --Item.UpItem(player, ItemSlot);
-      -- local djnj1 = Item.GetData(ItemIndex,CONST.µÀ¾ß_ÄÍ¾Ã);
-      -- local djzdnj1 = Item.GetData(ItemIndex,CONST.µÀ¾ß_×î´óÄÍ¾Ã);
-      Item.SetData(ItemIndex, CONST.µÀ¾ß_ÄÍ¾Ã, itemMaxDur);
-      Item.SetData(ItemIndex, CONST.µÀ¾ß_×î´óÄÍ¾Ã, itemMaxDur);
-      NLG.SystemMessage(player, "[ÏµÍ³] ÄúĞŞÀíµÄ×°±¸¡¾" .. itemName .. "¡¿»Ö¸´ÁË¡¾" .. repairedDur .. "¡¿ÄÍ¾Ã¡£¿Û³ıÄ§±Ò¡¾" .. price .. "G¡¿");
+      -- local djnj1 = Item.GetData(ItemIndex,CONST.é“å…·_è€ä¹…);
+      -- local djzdnj1 = Item.GetData(ItemIndex,CONST.é“å…·_æœ€å¤§è€ä¹…);
+      Item.SetData(ItemIndex, CONST.é“å…·_è€ä¹…, itemMaxDur);
+      Item.SetData(ItemIndex, CONST.é“å…·_æœ€å¤§è€ä¹…, itemMaxDur);
+      NLG.SystemMessage(player, "[ç³»ç»Ÿ] æ‚¨ä¿®ç†çš„è£…å¤‡ã€" .. itemName .. "ã€‘æ¢å¤äº†ã€" .. repairedDur .. "ã€‘è€ä¹…ã€‚æ‰£é™¤é­”å¸ã€" .. price .. "Gã€‘");
       Item.UpItem(player, ItemSlot);
       NLG.UpChar(player);
       return
     end
   end
   if Count == 0 then
-    NLG.SystemMessage(player, "[ÏµÍ³] ÄãµÀ¾ßÀ¸µÚÒ»¸ñÃ»ÓĞÒª»Ö¸´ÄÍ¾ÃµÄ×°±¸»òÕßÄúµÄĞŞÀíÄ§±Ò²»×ã¡£");
+    NLG.SystemMessage(player, "[ç³»ç»Ÿ] ä½ é“å…·æ ç¬¬ä¸€æ ¼æ²¡æœ‰è¦æ¢å¤è€ä¹…çš„è£…å¤‡æˆ–è€…æ‚¨çš„ä¿®ç†é­”å¸ä¸è¶³ã€‚");
     return
   end
   return
 end
 
 local function spriteRepair(player)
-  local ZH = Char.GetData(player, CONST.CHAR_µô»ê);
-  local money = Char.GetData(player, CONST.CHAR_½ğ±Ò);
-  local LV = Char.GetData(player, CONST.CHAR_µÈ¼¶);
+  local ZH = Char.GetData(player, CONST.CHAR_æ‰é­‚);
+  local money = Char.GetData(player, CONST.CHAR_é‡‘å¸);
+  local LV = Char.GetData(player, CONST.CHAR_ç­‰çº§);
   local ZHMB = ZH * 200;
   local ZHMBKC = ZHMB * LV
   if ZH <= 0 then
-    NLG.SystemMessage(player, "ÄãÃ»ÓĞµô»ê¡£");
+    NLG.SystemMessage(player, "ä½ æ²¡æœ‰æ‰é­‚ã€‚");
   end
   if money >= ZHMBKC and ZH > 0 then
-    Char.SetData(player, CONST.CHAR_½ğ±Ò, money - ZHMBKC);
-    Char.SetData(player, CONST.CHAR_µô»ê, 0);
+    Char.SetData(player, CONST.CHAR_é‡‘å¸, money - ZHMBKC);
+    Char.SetData(player, CONST.CHAR_æ‰é­‚, 0);
     Char.FeverStop(player);
     NLG.UpChar(player);
-    NLG.SystemMessage(player, "ÕĞ»êÍê³É¡£ÕĞ»êÊıÁ¿Îª¡¾" .. ZH .. "¡¿·ÑÓÃÎª¡¾" .. ZHMBKC .. "¡¿Ä§±Ò¡£");
+    NLG.SystemMessage(player, "æ‹›é­‚å®Œæˆã€‚æ‹›é­‚æ•°é‡ä¸ºã€" .. ZH .. "ã€‘è´¹ç”¨ä¸ºã€" .. ZHMBKC .. "ã€‘é­”å¸ã€‚");
   end
   if money < ZHMBKC then
-    NLG.SystemMessage(player, "Á¬Ç®¶¼Ã»ÓĞÄã»¹ÕĞ»ê£¬Ò»±ßÄòÄòÍæÄà°ÍÈ¥°É¡£¡¾ÕĞ»ê¼Û¸ñ¼ÆËã µô»ê*1000*µÈ¼¶¡¿");
+    NLG.SystemMessage(player, "è¿é’±éƒ½æ²¡æœ‰ä½ è¿˜æ‹›é­‚ï¼Œä¸€è¾¹å°¿å°¿ç©æ³¥å·´å»å§ã€‚ã€æ‹›é­‚ä»·æ ¼è®¡ç®— æ‰é­‚*1000*ç­‰çº§ã€‘");
   end
 end
 
 local function healthRepair(player)
-  local i = Char.GetData(player, CONST.CHAR_ÊÜÉË);
-  local money = Char.GetData(player, CONST.CHAR_½ğ±Ò);
-  if (Char.GetData(player, CONST.CHAR_ÊÜÉË) < 1) then
-    NLG.SystemMessage(player, "ÄúÎ´ÊÜÉË¡£");
+  local i = Char.GetData(player, CONST.CHAR_å—ä¼¤);
+  local money = Char.GetData(player, CONST.CHAR_é‡‘å¸);
+  if (Char.GetData(player, CONST.CHAR_å—ä¼¤) < 1) then
+    NLG.SystemMessage(player, "æ‚¨æœªå—ä¼¤ã€‚");
     return ;
   end
-  if (money >= 200) and (Char.GetData(player, CONST.CHAR_ÊÜÉË) > 0 and Char.GetData(player, CONST.CHAR_ÊÜÉË) < 26) then
-    Char.SetData(player, CONST.CHAR_ÊÜÉË, 0);
-    Char.SetData(player, CONST.CHAR_½ğ±Ò, money - 200);
+  if (money >= 200) and (Char.GetData(player, CONST.CHAR_å—ä¼¤) > 0 and Char.GetData(player, CONST.CHAR_å—ä¼¤) < 26) then
+    Char.SetData(player, CONST.CHAR_å—ä¼¤, 0);
+    Char.SetData(player, CONST.CHAR_é‡‘å¸, money - 200);
     NLG.UpdateParty(player);
     NLG.UpChar(player);
-    NLG.SystemMessage(player, "¹§Ï²ÄãÖÎÁÆÍê±Ï¡£");
-    NLG.SystemMessage(player, "¿Û³ı200Ä§±Ò¡£");
+    NLG.SystemMessage(player, "æ­å–œä½ æ²»ç–—å®Œæ¯•ã€‚");
+    NLG.SystemMessage(player, "æ‰£é™¤200é­”å¸ã€‚");
     return ;
   end
-  if (money >= 400) and (Char.GetData(player, CONST.CHAR_ÊÜÉË) > 24 and Char.GetData(player, CONST.CHAR_ÊÜÉË) < 51) then
-    Char.SetData(player, CONST.CHAR_ÊÜÉË, 0);
-    Char.SetData(player, CONST.CHAR_½ğ±Ò, money - 400);
+  if (money >= 400) and (Char.GetData(player, CONST.CHAR_å—ä¼¤) > 24 and Char.GetData(player, CONST.CHAR_å—ä¼¤) < 51) then
+    Char.SetData(player, CONST.CHAR_å—ä¼¤, 0);
+    Char.SetData(player, CONST.CHAR_é‡‘å¸, money - 400);
     NLG.UpdateParty(player);
     NLG.UpChar(player);
-    NLG.SystemMessage(player, "¹§Ï²ÄãÖÎÁÆÍê±Ï¡£");
-    NLG.SystemMessage(player, "¿Û³ı400Ä§±Ò¡£");
+    NLG.SystemMessage(player, "æ­å–œä½ æ²»ç–—å®Œæ¯•ã€‚");
+    NLG.SystemMessage(player, "æ‰£é™¤400é­”å¸ã€‚");
     return ;
   end
-  if (money >= 800) and (Char.GetData(player, CONST.CHAR_ÊÜÉË) > 49 and Char.GetData(player, CONST.CHAR_ÊÜÉË) < 76) then
-    Char.SetData(player, CONST.CHAR_ÊÜÉË, 0);
-    Char.SetData(player, CONST.CHAR_½ğ±Ò, money - 800);
+  if (money >= 800) and (Char.GetData(player, CONST.CHAR_å—ä¼¤) > 49 and Char.GetData(player, CONST.CHAR_å—ä¼¤) < 76) then
+    Char.SetData(player, CONST.CHAR_å—ä¼¤, 0);
+    Char.SetData(player, CONST.CHAR_é‡‘å¸, money - 800);
     NLG.UpdateParty(player);
     NLG.UpChar(player);
-    NLG.SystemMessage(player, "¹§Ï²ÄãÖÎÁÆÍê±Ï¡£");
-    NLG.SystemMessage(player, "¿Û³ı800Ä§±Ò¡£");
+    NLG.SystemMessage(player, "æ­å–œä½ æ²»ç–—å®Œæ¯•ã€‚");
+    NLG.SystemMessage(player, "æ‰£é™¤800é­”å¸ã€‚");
     return ;
   end
-  if (money >= 1000) and (Char.GetData(player, CONST.CHAR_ÊÜÉË) > 74 and Char.GetData(player, CONST.CHAR_ÊÜÉË) < 101) then
-    Char.SetData(player, CONST.CHAR_ÊÜÉË, 0);
-    Char.SetData(player, CONST.CHAR_½ğ±Ò, money - 1000);
+  if (money >= 1000) and (Char.GetData(player, CONST.CHAR_å—ä¼¤) > 74 and Char.GetData(player, CONST.CHAR_å—ä¼¤) < 101) then
+    Char.SetData(player, CONST.CHAR_å—ä¼¤, 0);
+    Char.SetData(player, CONST.CHAR_é‡‘å¸, money - 1000);
     NLG.UpdateParty(player);
     NLG.UpChar(player);
-    NLG.SystemMessage(player, "¹§Ï²ÄãÖÎÁÆÍê±Ï¡£");
-    NLG.SystemMessage(player, "¿Û³ı1000Ä§±Ò¡£");
+    NLG.SystemMessage(player, "æ­å–œä½ æ²»ç–—å®Œæ¯•ã€‚");
+    NLG.SystemMessage(player, "æ‰£é™¤1000é­”å¸ã€‚");
     return ;
   else
-    NLG.SystemMessage(player, "¶Ô²»Æğ£¡ÄúµÄÄ§±Ò²»×ã£¬ÖÎÁÆ¼Û¸ñÎª¡¾°×ÉË200¡¿¡¾»ÆÉË400¡¿¡¾×ÏÉË800¡¿¡¾ºìÉË1000¡¿£¡");
+    NLG.SystemMessage(player, "å¯¹ä¸èµ·ï¼æ‚¨çš„é­”å¸ä¸è¶³ï¼Œæ²»ç–—ä»·æ ¼ä¸ºã€ç™½ä¼¤200ã€‘ã€é»„ä¼¤400ã€‘ã€ç´«ä¼¤800ã€‘ã€çº¢ä¼¤1000ã€‘ï¼");
     return ;
   end
   return 0
@@ -148,10 +148,10 @@ function commandsNormal.where(charIndex, args)
     target = tonumber(args[1])
   end
   NLG.TalkToCli(charIndex, -1, target ..
-    ' µØÍ¼:' .. tostring(Char.GetData(target, CONST.CHAR_µØÍ¼)) .. '/' .. tostring(Char.GetData(target, CONST.CHAR_µØÍ¼ÀàĞÍ)) ..
+    ' åœ°å›¾:' .. tostring(Char.GetData(target, CONST.CHAR_åœ°å›¾)) .. '/' .. tostring(Char.GetData(target, CONST.CHAR_åœ°å›¾ç±»å‹)) ..
     ', X:' .. tostring(Char.GetData(target, CONST.CHAR_X)) ..
     ', Y:' .. tostring(Char.GetData(target, CONST.CHAR_Y)) ..
-    ', ·½Ïò:' .. tostring(Char.GetData(target, CONST.CHAR_·½Ïò))
+    ', æ–¹å‘:' .. tostring(Char.GetData(target, CONST.CHAR_æ–¹å‘))
   )
 end
 
@@ -166,9 +166,9 @@ function commandsNormal.char(charIndex, args)
 end
 
 -- function commandsNormal.rank4(charIndex)
---   if Char.GetData(charIndex, CONST.CHAR_Ö°½×) == 3 and Char.GetData(charIndex, CONST.CHAR_µÈ¼¶) >= 100 then
---     Char.SetData(charIndex, CONST.CHAR_Ö°½×, 4);
---     Char.SetData(charIndex, CONST.CHAR_Ö°Òµ, Char.GetData(charIndex, CONST.CHAR_Ö°Òµ) + 1);
+--   if Char.GetData(charIndex, CONST.CHAR_èŒé˜¶) == 3 and Char.GetData(charIndex, CONST.CHAR_ç­‰çº§) >= 100 then
+--     Char.SetData(charIndex, CONST.CHAR_èŒé˜¶, 4);
+--     Char.SetData(charIndex, CONST.CHAR_èŒä¸š, Char.GetData(charIndex, CONST.CHAR_èŒä¸š) + 1);
 --     NLG.UpChar(charIndex);
 --   end
 -- end
@@ -185,16 +185,16 @@ function commandsNormal.item(charIndex, args)
 end
 
 --function commandsNormal.changeSex(charIndex, args)
---  print( Char.GetData(charIndex, CONST.CHAR_ĞÎÏó), Char.GetData(charIndex, CONST.CHAR_Ô­ĞÎ), Char.GetData(charIndex, CONST.CHAR_Ô­Ê¼Í¼µµ))
+--  print( Char.GetData(charIndex, CONST.CHAR_å½¢è±¡), Char.GetData(charIndex, CONST.CHAR_åŸå½¢), Char.GetData(charIndex, CONST.CHAR_åŸå§‹å›¾æ¡£))
 --  --if args[1] then
---  --  Char.SetData(charIndex, CONST.CHAR_ĞÎÏó, args[1]);
+--  --  Char.SetData(charIndex, CONST.CHAR_å½¢è±¡, args[1]);
 --  --else
---  --  Char.SetData(charIndex, CONST.CHAR_ĞÎÏó, Char.GetData(charIndex, CONST.CHAR_Ô­ĞÎ));
+--  --  Char.SetData(charIndex, CONST.CHAR_å½¢è±¡, Char.GetData(charIndex, CONST.CHAR_åŸå½¢));
 --  --end
 --end
 
 function commandsNormal.daka(charIndex)
-  Char.SetData(charIndex, CONST.CHAR_¿¨Ê±, 99 * 3600);
+  Char.SetData(charIndex, CONST.CHAR_å¡æ—¶, 99 * 3600);
   if Char.IsFeverTime(charIndex) == 1 then
     Char.FeverStop(charIndex)
   else
@@ -204,17 +204,29 @@ function commandsNormal.daka(charIndex)
 end
 
 function commandsNormal.redoDp(charIndex)
-  local total = (Char.GetData(charIndex, CONST.CHAR_µÈ¼¶) - 1) * 4 + 30;
-  local s = { CONST.CHAR_ÌåÁ¦, CONST.CHAR_Á¦Á¿, CONST.CHAR_Ç¿¶È, CONST.CHAR_ËÙ¶È, CONST.CHAR_Ä§·¨ }
+  local total = (Char.GetData(charIndex, CONST.CHAR_ç­‰çº§) - 1) * 4 + 30;
+  local s = { CONST.CHAR_ä½“åŠ›, CONST.CHAR_åŠ›é‡, CONST.CHAR_å¼ºåº¦, CONST.CHAR_é€Ÿåº¦, CONST.CHAR_é­”æ³• }
   for i, v in pairs(s) do
     Char.SetData(charIndex, v, 0);
   end
-  Char.SetData(charIndex, CONST.CHAR_Éı¼¶µã, total);
+  Char.SetData(charIndex, CONST.CHAR_å‡çº§ç‚¹, total);
   NLG.UpChar(charIndex)
 end
 
 function commandsNormal.encount(charIndex)
   Battle.Encount(charIndex, charIndex);
+end
+
+function commandsNormal.noEncount(charIndex)
+  local kg = Char.GetData(charIndex,CONST.å¯¹è±¡_ä¸é‡æ•Œå¼€å…³);
+  if kg == 0 then
+    Char.SetData(charIndex, CONST.å¯¹è±¡_ä¸é‡æ•Œå¼€å…³, 1)
+	NLG.SystemMessage(charIndex, "ä¸é‡æ•Œå·²ç»å¼€å¯ï¼");
+  else
+    Char.SetData(charIndex, CONST.å¯¹è±¡_ä¸é‡æ•Œå¼€å…³, 0)
+	NLG.SystemMessage(charIndex, "ä¸é‡æ•Œå·²ç»å…³é—­ï¼");
+  end
+  NLG.UpChar(charIndex)
 end
 
 function commandsNormal.goHome(charIndex)
@@ -228,16 +240,16 @@ local function getPetBp(player, args)
     local pet = Char.GetPet(player, i);
     if (pet >= 0) then
       hasPet = true;
-      local arr_rank1 = Pet.GetArtRank(pet, CONST.PET_Ìå³É);
-      local arr_rank11 = Pet.FullArtRank(pet, CONST.PET_Ìå³É);
-      local arr_rank2 = Pet.GetArtRank(pet, CONST.PET_Á¦³É);
-      local arr_rank21 = Pet.FullArtRank(pet, CONST.PET_Á¦³É);
-      local arr_rank3 = Pet.GetArtRank(pet, CONST.PET_Ç¿³É);
-      local arr_rank31 = Pet.FullArtRank(pet, CONST.PET_Ç¿³É);
-      local arr_rank4 = Pet.GetArtRank(pet, CONST.PET_Ãô³É);
-      local arr_rank41 = Pet.FullArtRank(pet, CONST.PET_Ãô³É);
-      local arr_rank5 = Pet.GetArtRank(pet, CONST.PET_Ä§³É);
-      local arr_rank51 = Pet.FullArtRank(pet, CONST.PET_Ä§³É);
+      local arr_rank1 = Pet.GetArtRank(pet, CONST.PET_ä½“æˆ);
+      local arr_rank11 = Pet.FullArtRank(pet, CONST.PET_ä½“æˆ);
+      local arr_rank2 = Pet.GetArtRank(pet, CONST.PET_åŠ›æˆ);
+      local arr_rank21 = Pet.FullArtRank(pet, CONST.PET_åŠ›æˆ);
+      local arr_rank3 = Pet.GetArtRank(pet, CONST.PET_å¼ºæˆ);
+      local arr_rank31 = Pet.FullArtRank(pet, CONST.PET_å¼ºæˆ);
+      local arr_rank4 = Pet.GetArtRank(pet, CONST.PET_æ•æˆ);
+      local arr_rank41 = Pet.FullArtRank(pet, CONST.PET_æ•æˆ);
+      local arr_rank5 = Pet.GetArtRank(pet, CONST.PET_é­”æˆ);
+      local arr_rank51 = Pet.FullArtRank(pet, CONST.PET_é­”æˆ);
       local a1 = (arr_rank1 - arr_rank11);
       local a2 = (arr_rank2 - arr_rank21);
       local a3 = (arr_rank3 - arr_rank31);
@@ -245,16 +257,16 @@ local function getPetBp(player, args)
       local a5 = (arr_rank5 - arr_rank51);
       local a6 = a1 + a2 + a3 + a4 + a5;
       local a61 = arr_rank1 + arr_rank2 + arr_rank3 + arr_rank4 + arr_rank5;
-      NLG.SystemMessage(player, Char.GetData(pet, CONST.CHAR_Ãû×Ö) .. "×Ü:" .. a61 .. "£¨" .. a6 .. ')')
-      NLG.SystemMessage(player, "Ìå:" .. arr_rank1 .. "(" .. a1 .. ") Á¦:" .. arr_rank2 .. "(" .. a2 .. ") Ç¿:" .. arr_rank3 .. "(" .. a3 .. ") Ãô:" ..
-        arr_rank4 .. "(" .. a4 .. ") Ä§:" .. arr_rank5 .. "(" .. a5 .. ")");
+      NLG.SystemMessage(player, Char.GetData(pet, CONST.CHAR_åå­—) .. "æ€»:" .. a61 .. "ï¼ˆ" .. a6 .. ')')
+      NLG.SystemMessage(player, "ä½“:" .. arr_rank1 .. "(" .. a1 .. ") åŠ›:" .. arr_rank2 .. "(" .. a2 .. ") å¼º:" .. arr_rank3 .. "(" .. a3 .. ") æ•:" ..
+        arr_rank4 .. "(" .. a4 .. ") é­”:" .. arr_rank5 .. "(" .. a5 .. ")");
     end
   end
   if not args[2] then
     if hasPet then
       NLG.SystemMessage(player, "-----------------------------------");
     else
-      NLG.SystemMessage(player, "Ã»ÓĞ³èÎï");
+      NLG.SystemMessage(player, "æ²¡æœ‰å® ç‰©");
     end
   end
 end
@@ -262,22 +274,22 @@ end
 local function petRebirth(player, args)
   local pet = Char.GetPet(player, tonumber(args[2]));
   if pet >= 0 then
-    local s = { CONST.PET_Ìå³É, CONST.PET_Á¦³É, CONST.PET_Ç¿³É, CONST.PET_Ãô³É, CONST.PET_Ä§³É };
+    local s = { CONST.PET_ä½“æˆ, CONST.PET_åŠ›æˆ, CONST.PET_å¼ºæˆ, CONST.PET_æ•æˆ, CONST.PET_é­”æˆ };
     for i, v in pairs(s) do
       local r = Pet.FullArtRank(pet, v);
       Pet.SetArtRank(pet, v, r - math.random(0, 4))
     end
     Pet.ReBirth(player, pet);
-    local arr_rank1 = Pet.GetArtRank(pet, CONST.PET_Ìå³É);
-    local arr_rank11 = Pet.FullArtRank(pet, CONST.PET_Ìå³É);
-    local arr_rank2 = Pet.GetArtRank(pet, CONST.PET_Á¦³É);
-    local arr_rank21 = Pet.FullArtRank(pet, CONST.PET_Á¦³É);
-    local arr_rank3 = Pet.GetArtRank(pet, CONST.PET_Ç¿³É);
-    local arr_rank31 = Pet.FullArtRank(pet, CONST.PET_Ç¿³É);
-    local arr_rank4 = Pet.GetArtRank(pet, CONST.PET_Ãô³É);
-    local arr_rank41 = Pet.FullArtRank(pet, CONST.PET_Ãô³É);
-    local arr_rank5 = Pet.GetArtRank(pet, CONST.PET_Ä§³É);
-    local arr_rank51 = Pet.FullArtRank(pet, CONST.PET_Ä§³É);
+    local arr_rank1 = Pet.GetArtRank(pet, CONST.PET_ä½“æˆ);
+    local arr_rank11 = Pet.FullArtRank(pet, CONST.PET_ä½“æˆ);
+    local arr_rank2 = Pet.GetArtRank(pet, CONST.PET_åŠ›æˆ);
+    local arr_rank21 = Pet.FullArtRank(pet, CONST.PET_åŠ›æˆ);
+    local arr_rank3 = Pet.GetArtRank(pet, CONST.PET_å¼ºæˆ);
+    local arr_rank31 = Pet.FullArtRank(pet, CONST.PET_å¼ºæˆ);
+    local arr_rank4 = Pet.GetArtRank(pet, CONST.PET_æ•æˆ);
+    local arr_rank41 = Pet.FullArtRank(pet, CONST.PET_æ•æˆ);
+    local arr_rank5 = Pet.GetArtRank(pet, CONST.PET_é­”æˆ);
+    local arr_rank51 = Pet.FullArtRank(pet, CONST.PET_é­”æˆ);
     local a1 = (arr_rank1 - arr_rank11);
     local a2 = (arr_rank2 - arr_rank21);
     local a3 = (arr_rank3 - arr_rank31);
@@ -285,9 +297,9 @@ local function petRebirth(player, args)
     local a5 = (arr_rank5 - arr_rank51);
     local a6 = a1 + a2 + a3 + a4 + a5;
     local a61 = arr_rank1 + arr_rank2 + arr_rank3 + arr_rank4 + arr_rank5;
-    NLG.SystemMessage(player, Char.GetData(pet, CONST.CHAR_Ãû×Ö) .. "×Ü:" .. a61 .. "£¨" .. a6 .. ')')
-    NLG.SystemMessage(player, "Ìå:" .. arr_rank1 .. "(" .. a1 .. ") Á¦:" .. arr_rank2 .. "(" .. a2 .. ") Ç¿:" .. arr_rank3 .. "(" .. a3 .. ") Ãô:" ..
-      arr_rank4 .. "(" .. a4 .. ") Ä§:" .. arr_rank5 .. "(" .. a5 .. ")");
+    NLG.SystemMessage(player, Char.GetData(pet, CONST.CHAR_åå­—) .. "æ€»:" .. a61 .. "ï¼ˆ" .. a6 .. ')')
+    NLG.SystemMessage(player, "ä½“:" .. arr_rank1 .. "(" .. a1 .. ") åŠ›:" .. arr_rank2 .. "(" .. a2 .. ") å¼º:" .. arr_rank3 .. "(" .. a3 .. ") æ•:" ..
+      arr_rank4 .. "(" .. a4 .. ") é­”:" .. arr_rank5 .. "(" .. a5 .. ")");
   end
 end
 
@@ -315,15 +327,16 @@ function ngModule:handleTalkEvent(charIndex, msg)
   return 1;
 end
 
---- ¼ÓÔØÄ£¿é¹³×Ó
+--- åŠ è½½æ¨¡å—é’©å­
 function ngModule:onLoad()
   self:logInfo('load')
   self:regCallback('TalkEvent', Func.bind(self.handleTalkEvent, self))
 end
 
---- Ğ¶ÔØÄ£¿é¹³×Ó
+--- å¸è½½æ¨¡å—é’©å­
 function ngModule:onUnload()
   self:logInfo('unload')
 end
 
 return ngModule;
+
