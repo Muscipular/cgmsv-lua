@@ -19,8 +19,8 @@ local function makeStopOnNegativeChain(blockedResult)
   end
 end
 
--- carryIndex 表示链式值位于回调参数中的位置，从 1 开始计数。
--- 例如 makeReduceValueChain(4, ...) 表示把上一个回调产出的值回写到第 4 个参数。
+-- carryIndex 表示链式值位于回调参数中的位置，从 1 开始计数
+-- 例如 makeReduceValueChain(4, ...) 表示将上一轮回调处理后的值写回第 4 个参数
 local function makeReduceValueChain(carryIndex, shouldAccept, normalize)
   return function(list, ...)
     local args = { ... };
@@ -36,7 +36,6 @@ local function makeReduceValueChain(carryIndex, shouldAccept, normalize)
     return args[carryIndex];
   end
 end
-
 local function acceptAnyNonNil(res)
   return res ~= nil;
 end
@@ -49,14 +48,12 @@ local function acceptTable(res)
   return type(res) == 'table';
 end
 
+-- 事件参数: BattleDamageEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
+-- 链式参数位置: args[4] 对应 damage，args[13] 对应 flg
 local function normalizeBattleDamage(dmg, _, args)
   dmg = math.floor(dmg);
   if dmg <= 0 then
-    -- 事件参数: DamageCalculateEvent/BattleDamageEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
-    -- 链式参数位置: args[13]，对应参数 flg
     local flg = args[13];
-    -- 事件参数: DamageCalculateEvent/BattleDamageEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
-    -- 链式参数位置: args[4]，对应参数 damage
     local damage = args[4];
     if flg == CONST.DamageFlags.Miss or flg == CONST.DamageFlags.Dodge or damage == 0 then
       return 0;
@@ -66,6 +63,8 @@ local function normalizeBattleDamage(dmg, _, args)
   return dmg;
 end
 
+-- 事件参数: BattleHealCalculateEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
+-- 链式参数位置: damage 归一化为向下取整，最小为 0
 local function normalizeBattleHeal(dmg)
   dmg = math.floor(dmg);
   if dmg <= 0 then
@@ -74,11 +73,14 @@ local function normalizeBattleHeal(dmg)
   return dmg;
 end
 
+-- 事件参数: BattleInjuryEvent(charIndex, battleIndex, oVal, val)
+-- 链式参数位置: val 归一化为向下取整
 local function normalizeBattleInjury(val)
   return math.floor(val);
 end
-
 local chained = {
+  -- 事件参数: TalkEvent(talker, meindex, color, msg, area)
+  -- 链式规则: 任一回调返回值不为 1 时立即返回该值，否则返回 1
   TalkEvent = function(list, ...)
     local res = 1;
     for _, fn in ipairs(list) do
@@ -92,6 +94,9 @@ local chained = {
     end
     return res;
   end,
+
+  -- 事件参数: BeforeBattleTurnEvent(battleIndex)
+  -- 链式规则: 任一回调返回 true 时结果为 true
   BeforeBattleTurnEvent = function(list, ...)
     local res = false;
     for _, fn in ipairs(list) do
@@ -99,48 +104,60 @@ local chained = {
     end
     return res;
   end,
+
+  -- 事件参数: ProtocolOnRecv(fd, head, data)
+  -- 链式规则: 返回值小于 0 时拦截，其他返回值继续执行
   ProtocolOnRecv = makeStopOnNegativeChain(),
+
   -- 事件参数: BattleDamageEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
   -- 链式参数位置: 4，对应参数 damage
   BattleDamageEvent = makeReduceValueChain(4, acceptNumber, normalizeBattleDamage),
+
   -- 事件参数: ItemExpansionEvent(itemIndex, type, msg, charIndex, slot)
   -- 链式参数位置: 3，对应参数 msg
   ItemExpansionEvent = makeReduceValueChain(3, acceptAnyNonNil),
+
   -- 事件参数: BattleSurpriseEvent(battleIndex, result)
   -- 链式参数位置: 2，对应参数 result
   BattleSurpriseEvent = makeReduceValueChain(2, acceptNumber),
+
   -- 事件参数: DamageCalculateEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
   -- 链式参数位置: 4，对应参数 damage
   DamageCalculateEvent = makeReduceValueChain(4, acceptNumber, normalizeBattleDamage),
+
   -- 事件参数: BattleHealCalculateEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
   -- 链式参数位置: 4，对应参数 damage
   BattleHealCalculateEvent = makeReduceValueChain(4, acceptNumber, normalizeBattleHeal),
-  BattleInjuryEvent = function(list, ...)
-    local args = { ... };
+
+  -- 事件参数: BattleInjuryEvent(charIndex, battleIndex, oVal, val)
+  -- 链式参数位置: 4，对应参数 val
+  BattleInjuryEvent = function(list, charIndex, battleIndex, oVal, val)
     for _, fn in ipairs(list) do
-      local res = fn(unpack(args));
+      local res = fn(charIndex, battleIndex, oVal, val);
       if acceptNumber(res) then
-        -- 事件参数: BattleInjuryEvent(charIndex, battleIndex, oVal, val)
-        -- 链式参数位置: args[4]，对应参数 val
-        args[4] = normalizeBattleInjury(res);
-        -- 事件参数: BattleInjuryEvent(charIndex, battleIndex, oVal, val)
-        -- 链式参数位置: args[4]，对应参数 val
-        if args[4] <= 0 then
-          return args[4];
+        val = normalizeBattleInjury(res);
+        if val <= 0 then
+          return val;
         end
       end
     end
-    return args[4];
+    return val;
   end,
+
   -- 事件参数: TechOptionEvent(charIndex, option, techID, val)
   -- 链式参数位置: 4，对应参数 val
   TechOptionEvent = makeReduceValueChain(4, acceptNumber),
+
   -- 事件参数: BattleSummonEnemyEvent(battleIndex, charIndex, enemyId, ret)
   -- 链式参数位置: 4，对应参数 ret
   BattleSummonEnemyEvent = makeReduceValueChain(4, acceptTable),
+
   -- 事件参数: BattleNextEnemyEvent(battleIndex, flg, ret)
   -- 链式参数位置: 3，对应参数 ret
   BattleNextEnemyEvent = makeReduceValueChain(3, acceptTable),
+
+  -- 事件参数: Init(fnList, ...)
+  -- 链式规则: 按顺序执行所有回调，返回最后一个回调的返回值
   Init = function(fnList, ...)
     fnList = table.copy(fnList)
     local res;
@@ -150,20 +167,44 @@ local chained = {
     return res
   end,
 }
+-- 事件参数: ItemPickUpEvent(charIndex, itemIndex)
+-- 链式规则: 返回值小于 0 时拦截，其他返回值继续执行
+chained.ItemPickUpEvent = makeStopOnNegativeChain(-1);
 
-for _, eventName in ipairs({
-  'ItemPickUpEvent', 'ItemDropEvent', 'ItemAttachEvent', 'ItemUseEvent',
-  'PreItemDropEvent', 'PreItemPickUpEvent',
-}) do
-  chained[eventName] = makeStopOnNegativeChain(-1);
-end
+-- 事件参数: ItemDropEvent(charIndex, itemIndex)
+-- 链式规则: 返回值小于 0 时拦截，其他返回值继续执行
+chained.ItemDropEvent = makeStopOnNegativeChain(-1);
 
-for _, eventName in ipairs({
-  'LoginGateEvent', 'LogoutEvent', 'LoginEvent',
-}) do
-  chained[eventName] = makeBroadcastChain(0);
-end
+-- 事件参数: ItemAttachEvent(charIndex, fromItemIndex)
+-- 链式规则: 返回值小于 0 时拦截，其他返回值继续执行
+chained.ItemAttachEvent = makeStopOnNegativeChain(-1);
 
+-- 事件参数: ItemUseEvent(charIndex, targetCharIndex, itemSlot)
+-- 链式规则: 返回值小于 0 时拦截，其他返回值继续执行
+chained.ItemUseEvent = makeStopOnNegativeChain(-1);
+
+-- 事件参数: PreItemDropEvent(charIndex, itemIndex)
+-- 链式规则: 返回值小于 0 时拦截，其他返回值继续执行
+chained.PreItemDropEvent = makeStopOnNegativeChain(-1);
+
+-- 事件参数: PreItemPickUpEvent(charIndex, itemIndex)
+-- 链式规则: 返回值小于 0 时拦截，其他返回值继续执行
+chained.PreItemPickUpEvent = makeStopOnNegativeChain(-1);
+
+-- 事件参数: LoginGateEvent(charIndex)
+-- 链式规则: 广播执行，不消费返回值
+chained.LoginGateEvent = makeBroadcastChain(0);
+
+-- 事件参数: LogoutEvent(charIndex)
+-- 链式规则: 广播执行，不消费返回值
+chained.LogoutEvent = makeBroadcastChain(0);
+
+-- 事件参数: LoginEvent(charIndex)
+-- 链式规则: 广播执行，不消费返回值
+chained.LoginEvent = makeBroadcastChain(0);
+
+-- 事件参数: ItemOverLapEvent(charIndex, fromItemIndex, targetItemIndex, num)
+-- 链式规则: 任一回调返回非 0 时立即返回 1，否则返回 0
 chained.ItemOverLapEvent = function(list, ...)
   for _, fn in ipairs(list) do
     local res = tonumber(fn(...)) or 0;
@@ -174,6 +215,8 @@ chained.ItemOverLapEvent = function(list, ...)
   return 0;
 end
 
+-- 事件参数: PartyEvent(charIndex, targetCharIndex, type)
+-- 链式规则: 任一回调返回 0 时立即返回 0，否则返回 1
 chained.PartyEvent = function(list, ...)
   for _, fn in ipairs(list) do
     local res = tonumberEx(fn(...)) or 0;
@@ -186,80 +229,84 @@ end
 
 -- 事件参数: GetExpEvent(charIndex, exp)
 -- 链式参数位置: 2，对应参数 exp
-for _, eventName in ipairs({ 'GetExpEvent', }) do
-  chained[eventName] = makeReduceValueChain(2, acceptAnyNonNil);
-end
+chained.GetExpEvent = makeReduceValueChain(2, acceptAnyNonNil);
 
--- 事件参数: ProductSkillExpEvent/BattleSkillExpEvent(charIndex, skillID, exp)
+-- 事件参数: ProductSkillExpEvent(charIndex, skillID, exp)
 -- 链式参数位置: 3，对应参数 exp
-for _, eventName in ipairs({ 'ProductSkillExpEvent', 'BattleSkillExpEvent', }) do
-  chained[eventName] = makeReduceValueChain(3, acceptAnyNonNil);
-end
+chained.ProductSkillExpEvent = makeReduceValueChain(3, acceptAnyNonNil);
 
-local reduceNumberCarryIndexMap = {
-  -- 事件参数: BattleSealRateEvent(battleIndex, charIndex, enemyIndex, rate)
-  -- 链式参数位置: 4，对应参数 rate
-  BattleSealRateEvent = 4,
-  -- 事件参数: CalcCriticalRateEvent(aIndex, fIndex, rate)
-  -- 链式参数位置: 3，对应参数 rate
-  CalcCriticalRateEvent = 3,
-  -- 事件参数: BattleDodgeRateEvent(battleIndex, aIndex, fIndex, rate)
-  -- 链式参数位置: 4，对应参数 rate
-  BattleDodgeRateEvent = 4,
-  -- 事件参数: BattleCounterRateEvent(battleIndex, aIndex, fIndex, rate)
-  -- 链式参数位置: 4，对应参数 rate
-  BattleCounterRateEvent = 4,
-  -- 事件参数: BattleMagicDamageRateEvent(battleIndex, aIndex, fIndex, rate)
-  -- 链式参数位置: 4，对应参数 rate
-  BattleMagicDamageRateEvent = 4,
-  -- 事件参数: BattleMagicRssRateEvent(battleIndex, aIndex, fIndex, rate)
-  -- 链式参数位置: 4，对应参数 rate
-  BattleMagicRssRateEvent = 4,
-  -- 事件参数: ItemBoxEncountRateEvent(charaIndex, mapId, floor, X, Y, itemIndex, rate, boxType)
-  -- 链式参数位置: 7，对应参数 rate
-  ItemBoxEncountRateEvent = 7,
-  -- 事件参数: BattleGetProfitEvent(battleIndex, side, pos, charaIndex, type, reward)
-  -- 链式参数位置: 6，对应参数 reward
-  BattleGetProfitEvent = 6,
-  -- 事件参数: BattleCalcDexEvent(battleIndex, charaIndex, action, flg, dex)
-  -- 链式参数位置: 5，对应参数 dex
-  BattleCalcDexEvent = 5,
-  -- 事件参数: StealItemEmitRateEvent(battleIndex, enemyIndex, charaIndex, itemId, rate)
-  -- 链式参数位置: 5，对应参数 rate
-  StealItemEmitRateEvent = 5,
-  -- 事件参数: ItemDropRateEvent(battleIndex, enemyIndex, charaIndex, itemId, rate)
-  -- 链式参数位置: 5，对应参数 rate
-  ItemDropRateEvent = 5,
-  -- 事件参数: BattlePetLeaveCheckEvent(battleIndex, charIndex, type, com1, com2, com3)
-  -- 链式参数位置: 3，对应参数 type
-  BattlePetLeaveCheckEvent = 3,
-  -- 事件参数: BattleStatusResistanceEvent(battleIndex, aCharIndex, dCharIndex, type, rate)
-  -- 链式参数位置: 5，对应参数 rate
-  BattleStatusResistanceEvent = 5,
-  -- 事件参数: ItemConsumeEvent(charIndex, itemIndex, slot, amount)
-  -- 链式参数位置: 4，对应参数 amount
-  ItemConsumeEvent = 4,
-  -- 事件参数: ItemDurabilityChangedEvent(itemIndex, oldDurability, newDurability, value, mode)
-  -- 链式参数位置: 5，对应参数 mode
-  ItemDurabilityChangedEvent = 5,
-}
+-- 事件参数: BattleSkillExpEvent(charIndex, skillID, exp)
+-- 链式参数位置: 3，对应参数 exp
+chained.BattleSkillExpEvent = makeReduceValueChain(3, acceptAnyNonNil);
 
-for eventName, carryIndex in pairs(reduceNumberCarryIndexMap) do
-  chained[eventName] = makeReduceValueChain(carryIndex, acceptNumber);
-end
+-- 事件参数: BattleSealRateEvent(battleIndex, charIndex, enemyIndex, rate)
+-- 链式参数位置: 4，对应参数 rate
+chained.BattleSealRateEvent = makeReduceValueChain(4, acceptNumber);
 
-local reduceTableCarryIndexMap = {
-  -- 事件参数: BattleActionTargetEvent(charIndex, battleIndex, com1, com2, com3, targetList)
-  -- 链式参数位置: 6，对应参数 targetList
-  BattleActionTargetEvent = 6,
-  -- 事件参数: BattleSkillCheckEvent(charIndex, battleIndex, arrayOfSkillEnable)
-  -- 链式参数位置: 3，对应参数 arrayOfSkillEnable
-  BattleSkillCheckEvent = 3,
-}
+-- 事件参数: CalcCriticalRateEvent(aIndex, fIndex, rate)
+-- 链式参数位置: 3，对应参数 rate
+chained.CalcCriticalRateEvent = makeReduceValueChain(3, acceptNumber);
 
-for eventName, carryIndex in pairs(reduceTableCarryIndexMap) do
-  chained[eventName] = makeReduceValueChain(carryIndex, acceptTable);
-end
+-- 事件参数: BattleDodgeRateEvent(battleIndex, aIndex, fIndex, rate)
+-- 链式参数位置: 4，对应参数 rate
+chained.BattleDodgeRateEvent = makeReduceValueChain(4, acceptNumber);
+
+-- 事件参数: BattleCounterRateEvent(battleIndex, aIndex, fIndex, rate)
+-- 链式参数位置: 4，对应参数 rate
+chained.BattleCounterRateEvent = makeReduceValueChain(4, acceptNumber);
+
+-- 事件参数: BattleMagicDamageRateEvent(battleIndex, aIndex, fIndex, rate)
+-- 链式参数位置: 4，对应参数 rate
+chained.BattleMagicDamageRateEvent = makeReduceValueChain(4, acceptNumber);
+
+-- 事件参数: BattleMagicRssRateEvent(battleIndex, aIndex, fIndex, rate)
+-- 链式参数位置: 4，对应参数 rate
+chained.BattleMagicRssRateEvent = makeReduceValueChain(4, acceptNumber);
+
+-- 事件参数: ItemBoxEncountRateEvent(charaIndex, mapId, floor, X, Y, itemIndex, rate, boxType)
+-- 链式参数位置: 7，对应参数 rate
+chained.ItemBoxEncountRateEvent = makeReduceValueChain(7, acceptNumber);
+
+-- 事件参数: BattleGetProfitEvent(battleIndex, side, pos, charaIndex, type, reward)
+-- 链式参数位置: 6，对应参数 reward
+chained.BattleGetProfitEvent = makeReduceValueChain(6, acceptNumber);
+
+-- 事件参数: BattleCalcDexEvent(battleIndex, charaIndex, action, flg, dex)
+-- 链式参数位置: 5，对应参数 dex
+chained.BattleCalcDexEvent = makeReduceValueChain(5, acceptNumber);
+
+-- 事件参数: StealItemEmitRateEvent(battleIndex, enemyIndex, charaIndex, itemId, rate)
+-- 链式参数位置: 5，对应参数 rate
+chained.StealItemEmitRateEvent = makeReduceValueChain(5, acceptNumber);
+
+-- 事件参数: ItemDropRateEvent(battleIndex, enemyIndex, charaIndex, itemId, rate)
+-- 链式参数位置: 5，对应参数 rate
+chained.ItemDropRateEvent = makeReduceValueChain(5, acceptNumber);
+
+-- 事件参数: BattlePetLeaveCheckEvent(battleIndex, charIndex, type, com1, com2, com3)
+-- 链式参数位置: 3，对应参数 type
+chained.BattlePetLeaveCheckEvent = makeReduceValueChain(3, acceptNumber);
+
+-- 事件参数: BattleStatusResistanceEvent(battleIndex, aCharIndex, dCharIndex, type, rate)
+-- 链式参数位置: 5，对应参数 rate
+chained.BattleStatusResistanceEvent = makeReduceValueChain(5, acceptNumber);
+
+-- 事件参数: ItemConsumeEvent(charIndex, itemIndex, slot, amount)
+-- 链式参数位置: 4，对应参数 amount
+chained.ItemConsumeEvent = makeReduceValueChain(4, acceptNumber);
+
+-- 事件参数: ItemDurabilityChangedEvent(itemIndex, oldDurability, newDurability, value, mode)
+-- 链式参数位置: 5，对应参数 mode
+chained.ItemDurabilityChangedEvent = makeReduceValueChain(5, acceptNumber);
+
+-- 事件参数: BattleActionTargetEvent(charIndex, battleIndex, com1, com2, com3, targetList)
+-- 链式参数位置: 6，对应参数 targetList
+chained.BattleActionTargetEvent = makeReduceValueChain(6, acceptTable);
+
+-- 事件参数: BattleSkillCheckEvent(charIndex, battleIndex, arrayOfSkillEnable)
+-- 链式参数位置: 3，对应参数 arrayOfSkillEnable
+chained.BattleSkillCheckEvent = makeReduceValueChain(3, acceptTable);
+
 local defaultChain = function(fnList, ...)
   local res;
   for i, v in ipairs(fnList) do
