@@ -36,8 +36,9 @@ loadModule('adminDamage')
 --loadModule('summonDemo')
 -- loadModule('setupMagicAttr')
 loadModule('http')
+loadModule('mcp') --MCP服务器实现
 loadModule('test')
-loadModule('sqltest')
+--loadModule('sqltest')
 --loadModule('itembox') --黑白宝箱概率调整lua
 --loadModule('petBPExtend')
 --useModule('Welcome2')
