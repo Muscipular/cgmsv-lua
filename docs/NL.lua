@@ -1560,3 +1560,37 @@ function NL.RegBattleStatusResistanceEvent(Dofile, InitFuncName) end
 ---@param rate number rate万份率
 ---@return number @返回概率,万份率
 function BattleStatusResistanceEventCallback(battleIndex, aCharIndex, dCharIndex, type, rate) end
+
+---玩家鉴定事件
+---[@group NL.RegJudgeItemEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称，参考[JudgeItemEventCallback]
+function NL.RegJudgeItemEvent(Dofile, InitFuncName) end
+
+---玩家鉴定事件回调
+---[@group NL.RegJudgeItemEvent]
+---@param charIndex number
+---@param skillid number
+---@param skilllv number
+---@param itemindex number 
+---@param prob number 成功率，万份率, -1为技能等级不足
+---@param flg number 1为鉴定成功, 0为鉴定失败
+---@return number @1为鉴定成功, 0为鉴定失败
+function JudgeItemEventCallback(charIndex, skillid, skilllv, itemindex, prob, flg) end
+
+---玩家修理事件
+---[@group NL.RegRepairItemEvent]
+---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
+---@param InitFuncName  string 指向的Lua函数的名称，参考[RepairItemEventCallback]
+function NL.RegRepairItemEvent(Dofile, InitFuncName) end
+
+---玩家修理事件回调
+---[@group NL.RegRepairItemEvent]
+---@param charIndex number
+---@param skillid number
+---@param skilllv number
+---@param itemindex number 
+---@param prob number 成功率，万份率, -1为技能等级不足
+---@param flg number 1为修理成功, 0为修理失败
+---@return number @1为修理成功, 0为修理失败
+function RepairItemEventCallback(charIndex, skillid, skilllv, itemindex, prob, flg) end
