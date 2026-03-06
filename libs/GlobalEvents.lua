@@ -1,9 +1,88 @@
+local function makeBroadcastChain(returnValue)
+  return function(list, ...)
+    for _, fn in ipairs(list) do
+      fn(...);
+    end
+    return returnValue;
+  end
+end
+
+local function makeStopOnNegativeChain(blockedResult)
+  return function(list, ...)
+    for _, fn in ipairs(list) do
+      local res = tonumber(fn(...)) or 0;
+      if res < 0 then
+        return blockedResult or res;
+      end
+    end
+    return 0;
+  end
+end
+
+-- carryIndex 表示链式值位于回调参数中的位置，从 1 开始计数。
+-- 例如 makeReduceValueChain(4, ...) 表示把上一个回调产出的值回写到第 4 个参数。
+local function makeReduceValueChain(carryIndex, shouldAccept, normalize)
+  return function(list, ...)
+    local args = { ... };
+    for _, fn in ipairs(list) do
+      local res = fn(unpack(args));
+      if shouldAccept(res, args[carryIndex], args) then
+        if normalize then
+          res = normalize(res, args[carryIndex], args);
+        end
+        args[carryIndex] = res;
+      end
+    end
+    return args[carryIndex];
+  end
+end
+
+local function acceptAnyNonNil(res)
+  return res ~= nil;
+end
+
+local function acceptNumber(res)
+  return type(res) == 'number';
+end
+
+local function acceptTable(res)
+  return type(res) == 'table';
+end
+
+local function normalizeBattleDamage(dmg, _, args)
+  dmg = math.floor(dmg);
+  if dmg <= 0 then
+    -- 事件参数: DamageCalculateEvent/BattleDamageEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
+    -- 链式参数位置: args[13]，对应参数 flg
+    local flg = args[13];
+    -- 事件参数: DamageCalculateEvent/BattleDamageEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
+    -- 链式参数位置: args[4]，对应参数 damage
+    local damage = args[4];
+    if flg == CONST.DamageFlags.Miss or flg == CONST.DamageFlags.Dodge or damage == 0 then
+      return 0;
+    end
+    return 1;
+  end
+  return dmg;
+end
+
+local function normalizeBattleHeal(dmg)
+  dmg = math.floor(dmg);
+  if dmg <= 0 then
+    return 0;
+  end
+  return dmg;
+end
+
+local function normalizeBattleInjury(val)
+  return math.floor(val);
+end
+
 local chained = {
   TalkEvent = function(list, ...)
     local res = 1;
-    --print('TalkEventChain', ...)
-    for i, v in ipairs(list) do
-      res = v(...)
+    for _, fn in ipairs(list) do
+      res = fn(...);
       if res == nil then
         res = 1;
       end
@@ -11,137 +90,57 @@ local chained = {
         return res;
       end
     end
-    return res
+    return res;
   end,
   BeforeBattleTurnEvent = function(list, ...)
     local res = false;
-    for i, v in ipairs(list) do
-      res = v(...) or res;
+    for _, fn in ipairs(list) do
+      res = fn(...) or res;
     end
-    return res
+    return res;
   end,
-  ProtocolOnRecv = function(list, ...)
-    local res = 0;
-    for i, v in ipairs(list) do
-      res = v(...) or res;
-      if res < 0 then
-        return res;
-      end
-    end
-    return res
-  end,
-  BattleDamageEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlag)
-    local dmg = Damage;
-    for i, v in ipairs(list) do
-      dmg = v(CharIndex, DefCharIndex, OriDamage, dmg, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlag)
-      if type(dmg) ~= 'number' or dmg <= 0 then
-        if Flg == CONST.DamageFlags.Miss or Flg == CONST.DamageFlags.Dodge or Damage == 0 then
-          dmg = 0
-        else
-          dmg = 1
+  ProtocolOnRecv = makeStopOnNegativeChain(),
+  -- 事件参数: BattleDamageEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
+  -- 链式参数位置: 4，对应参数 damage
+  BattleDamageEvent = makeReduceValueChain(4, acceptNumber, normalizeBattleDamage),
+  -- 事件参数: ItemExpansionEvent(itemIndex, type, msg, charIndex, slot)
+  -- 链式参数位置: 3，对应参数 msg
+  ItemExpansionEvent = makeReduceValueChain(3, acceptAnyNonNil),
+  -- 事件参数: BattleSurpriseEvent(battleIndex, result)
+  -- 链式参数位置: 2，对应参数 result
+  BattleSurpriseEvent = makeReduceValueChain(2, acceptNumber),
+  -- 事件参数: DamageCalculateEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
+  -- 链式参数位置: 4，对应参数 damage
+  DamageCalculateEvent = makeReduceValueChain(4, acceptNumber, normalizeBattleDamage),
+  -- 事件参数: BattleHealCalculateEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
+  -- 链式参数位置: 4，对应参数 damage
+  BattleHealCalculateEvent = makeReduceValueChain(4, acceptNumber, normalizeBattleHeal),
+  BattleInjuryEvent = function(list, ...)
+    local args = { ... };
+    for _, fn in ipairs(list) do
+      local res = fn(unpack(args));
+      if acceptNumber(res) then
+        -- 事件参数: BattleInjuryEvent(charIndex, battleIndex, oVal, val)
+        -- 链式参数位置: args[4]，对应参数 val
+        args[4] = normalizeBattleInjury(res);
+        -- 事件参数: BattleInjuryEvent(charIndex, battleIndex, oVal, val)
+        -- 链式参数位置: args[4]，对应参数 val
+        if args[4] <= 0 then
+          return args[4];
         end
       end
     end
-    return dmg
+    return args[4];
   end,
-  ItemExpansionEvent = function(list, itemIndex, type, msg, charIndex, slot)
-    for i, v in ipairs(list) do
-      local m = v(itemIndex, type, msg, charIndex, slot);
-      if m == nil then
-        m = msg;
-      end
-      msg = m;
-    end
-    return msg;
-  end,
-  BattleSurpriseEvent = function(list, battleIndex, result)
-    for i, v in ipairs(list) do
-      local m = v(battleIndex, result);
-      if type(m) == 'number' then
-        result = m;
-      end
-    end
-    return result;
-  end,
-  DamageCalculateEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlag)
-    for i, v in ipairs(list) do
-      local m = v(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlag);
-      if type(m) == 'number' then
-        m = math.floor(m);
-        if m <= 0 then
-          if Flg == CONST.DamageFlags.Miss or Flg == CONST.DamageFlags.Dodge or Damage == 0 then
-            m = 0
-          else
-            m = 1
-          end
-        end
-        Damage = m;
-      end
-    end
-    --if math.type and math.type(Damage) == 'float' then
-    --  Damage = math.tointeger(Damage)
-    --end
-    --print('dmg', OriDamage, Damage);
-    return Damage;
-  end,
-  BattleHealCalculateEvent = function(list, CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlag)
-    for i, v in ipairs(list) do
-      local m = v(CharIndex, DefCharIndex, OriDamage, Damage, BattleIndex, Com1, Com2, Com3, DefCom1, DefCom2, DefCom3, Flg, ExFlag);
-      if type(m) == 'number' then
-        m = math.floor(m);
-        if m <= 0 then
-          m = 0;
-        end
-        Damage = m;
-      end
-    end
-    --if math.type and math.type(Damage) == 'float' then
-    --  Damage = math.tointeger(Damage)
-    --end
-    return Damage;
-  end,
-  BattleInjuryEvent = function(list, charIndex, battleIndex, oVal, val)
-    for i, v in ipairs(list) do
-      local m = v(charIndex, battleIndex, oVal, val);
-      if type(m) == 'number' then
-        m = math.floor(m);
-        if m <= 0 then
-          return m;
-        end
-        val = m;
-      end
-    end
-    return val;
-  end,
-  TechOptionEvent = function(list, charIndex, option, techID, val)
-    for i, v in ipairs(list) do
-      local m = v(charIndex, option, techID, val);
-      if type(m) == 'number' then
-        val = m;
-      end
-    end
-    return val;
-  end,
-  BattleSummonEnemyEvent = function(list, battleIndex, charIndex, enemyId)
-    local ret = nil;
-    for i, v in ipairs(list) do
-      local m = v(battleIndex, charIndex, enemyId);
-      if type(m) == 'table' then
-        ret = m;
-      end
-    end
-    return ret;
-  end,
-  BattleNextEnemyEvent = function(list, battleIndex, flg)
-    local ret = nil;
-    for i, v in ipairs(list) do
-      local m = v(battleIndex, flg);
-      if type(m) == 'table' then
-        ret = m;
-      end
-    end
-    return ret;
-  end,
+  -- 事件参数: TechOptionEvent(charIndex, option, techID, val)
+  -- 链式参数位置: 4，对应参数 val
+  TechOptionEvent = makeReduceValueChain(4, acceptNumber),
+  -- 事件参数: BattleSummonEnemyEvent(battleIndex, charIndex, enemyId, ret)
+  -- 链式参数位置: 4，对应参数 ret
+  BattleSummonEnemyEvent = makeReduceValueChain(4, acceptTable),
+  -- 事件参数: BattleNextEnemyEvent(battleIndex, flg, ret)
+  -- 链式参数位置: 3，对应参数 ret
+  BattleNextEnemyEvent = makeReduceValueChain(3, acceptTable),
   Init = function(fnList, ...)
     fnList = table.copy(fnList)
     local res;
@@ -152,83 +151,115 @@ local chained = {
   end,
 }
 
-for i, v in ipairs({
+for _, eventName in ipairs({
   'ItemPickUpEvent', 'ItemDropEvent', 'ItemAttachEvent', 'ItemUseEvent',
+  'PreItemDropEvent', 'PreItemPickUpEvent',
 }) do
-  chained[v] = function(list, ...)
-    for _i, fn in ipairs(list) do
-      local res = tonumber(fn(...)) or 0;
-      if res < 0 then
-        return -1;
-      end
-    end
-    return 0
-  end
+  chained[eventName] = makeStopOnNegativeChain(-1);
 end
 
-for i, v in ipairs({
+for _, eventName in ipairs({
   'LoginGateEvent', 'LogoutEvent', 'LoginEvent',
 }) do
-  chained[v] = function(list, ...)
-    for i, v in ipairs(list) do
-      v(...);
-    end
-    return 0
-  end
+  chained[eventName] = makeBroadcastChain(0);
 end
 
-for i, v in ipairs({ 'ItemOverLapEvent', }) do
-  chained[v] = function(list, ...)
-    for _i, fn in ipairs(list) do
-      local res = tonumber(fn(...)) or 0;
-      if res ~= 0 then
-        return 1;
-      end
+chained.ItemOverLapEvent = function(list, ...)
+  for _, fn in ipairs(list) do
+    local res = tonumber(fn(...)) or 0;
+    if res ~= 0 then
+      return 1;
     end
-    return 0
   end
+  return 0;
 end
 
-for i, v in ipairs({ 'PartyEvent', }) do
-  chained[v] = function(list, ...)
-    for _i, fn in ipairs(list) do
-      local res = tonumberEx(fn(...)) or 0;
-      if res == 0 then
-        return 0;
-      end
+chained.PartyEvent = function(list, ...)
+  for _, fn in ipairs(list) do
+    local res = tonumberEx(fn(...)) or 0;
+    if res == 0 then
+      return 0;
     end
-    return 1
   end
+  return 1;
 end
 
-for i, v in ipairs({ 'GetExpEvent', }) do
-  chained[v] = function(list, CharIndex, Exp)
-    local res = Exp;
-    for _, fn in ipairs(list) do
-      res = fn(CharIndex, Exp);
-      if res == nil then
-        res = Exp;
-      end
-      Exp = res;
-    end
-    return res
-  end
+-- 事件参数: GetExpEvent(charIndex, exp)
+-- 链式参数位置: 2，对应参数 exp
+for _, eventName in ipairs({ 'GetExpEvent', }) do
+  chained[eventName] = makeReduceValueChain(2, acceptAnyNonNil);
 end
 
-for i, v in ipairs({ 'ProductSkillExpEvent', 'BattleSkillExpEvent', }) do
-  chained[v] = function(list, CharIndex, SkillID, Exp)
-    local res = Exp;
-    for _, fn in ipairs(list) do
-      res = fn(CharIndex, SkillID, Exp);
-      if res == nil then
-        res = Exp;
-      end
-      Exp = res;
-    end
-    return res
-  end
+-- 事件参数: ProductSkillExpEvent/BattleSkillExpEvent(charIndex, skillID, exp)
+-- 链式参数位置: 3，对应参数 exp
+for _, eventName in ipairs({ 'ProductSkillExpEvent', 'BattleSkillExpEvent', }) do
+  chained[eventName] = makeReduceValueChain(3, acceptAnyNonNil);
 end
 
+local reduceNumberCarryIndexMap = {
+  -- 事件参数: BattleSealRateEvent(battleIndex, charIndex, enemyIndex, rate)
+  -- 链式参数位置: 4，对应参数 rate
+  BattleSealRateEvent = 4,
+  -- 事件参数: CalcCriticalRateEvent(aIndex, fIndex, rate)
+  -- 链式参数位置: 3，对应参数 rate
+  CalcCriticalRateEvent = 3,
+  -- 事件参数: BattleDodgeRateEvent(battleIndex, aIndex, fIndex, rate)
+  -- 链式参数位置: 4，对应参数 rate
+  BattleDodgeRateEvent = 4,
+  -- 事件参数: BattleCounterRateEvent(battleIndex, aIndex, fIndex, rate)
+  -- 链式参数位置: 4，对应参数 rate
+  BattleCounterRateEvent = 4,
+  -- 事件参数: BattleMagicDamageRateEvent(battleIndex, aIndex, fIndex, rate)
+  -- 链式参数位置: 4，对应参数 rate
+  BattleMagicDamageRateEvent = 4,
+  -- 事件参数: BattleMagicRssRateEvent(battleIndex, aIndex, fIndex, rate)
+  -- 链式参数位置: 4，对应参数 rate
+  BattleMagicRssRateEvent = 4,
+  -- 事件参数: ItemBoxEncountRateEvent(charaIndex, mapId, floor, X, Y, itemIndex, rate, boxType)
+  -- 链式参数位置: 7，对应参数 rate
+  ItemBoxEncountRateEvent = 7,
+  -- 事件参数: BattleGetProfitEvent(battleIndex, side, pos, charaIndex, type, reward)
+  -- 链式参数位置: 6，对应参数 reward
+  BattleGetProfitEvent = 6,
+  -- 事件参数: BattleCalcDexEvent(battleIndex, charaIndex, action, flg, dex)
+  -- 链式参数位置: 5，对应参数 dex
+  BattleCalcDexEvent = 5,
+  -- 事件参数: StealItemEmitRateEvent(battleIndex, enemyIndex, charaIndex, itemId, rate)
+  -- 链式参数位置: 5，对应参数 rate
+  StealItemEmitRateEvent = 5,
+  -- 事件参数: ItemDropRateEvent(battleIndex, enemyIndex, charaIndex, itemId, rate)
+  -- 链式参数位置: 5，对应参数 rate
+  ItemDropRateEvent = 5,
+  -- 事件参数: BattlePetLeaveCheckEvent(battleIndex, charIndex, type, com1, com2, com3)
+  -- 链式参数位置: 3，对应参数 type
+  BattlePetLeaveCheckEvent = 3,
+  -- 事件参数: BattleStatusResistanceEvent(battleIndex, aCharIndex, dCharIndex, type, rate)
+  -- 链式参数位置: 5，对应参数 rate
+  BattleStatusResistanceEvent = 5,
+  -- 事件参数: ItemConsumeEvent(charIndex, itemIndex, slot, amount)
+  -- 链式参数位置: 4，对应参数 amount
+  ItemConsumeEvent = 4,
+  -- 事件参数: ItemDurabilityChangedEvent(itemIndex, oldDurability, newDurability, value, mode)
+  -- 链式参数位置: 5，对应参数 mode
+  ItemDurabilityChangedEvent = 5,
+}
+
+for eventName, carryIndex in pairs(reduceNumberCarryIndexMap) do
+  chained[eventName] = makeReduceValueChain(carryIndex, acceptNumber);
+end
+
+local reduceTableCarryIndexMap = {
+  -- 事件参数: BattleActionTargetEvent(charIndex, battleIndex, com1, com2, com3, targetList)
+  -- 链式参数位置: 6，对应参数 targetList
+  BattleActionTargetEvent = 6,
+  -- 事件参数: BattleSkillCheckEvent(charIndex, battleIndex, arrayOfSkillEnable)
+  -- 链式参数位置: 3，对应参数 arrayOfSkillEnable
+  BattleSkillCheckEvent = 3,
+}
+
+for eventName, carryIndex in pairs(reduceTableCarryIndexMap) do
+  chained[eventName] = makeReduceValueChain(carryIndex, acceptTable);
+end
 local defaultChain = function(fnList, ...)
   local res;
   for i, v in ipairs(fnList) do
