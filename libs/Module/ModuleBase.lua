@@ -86,9 +86,9 @@ function ModuleBase:createPart(name)
   return SubModule;
 end
 
----@param version number °æ±¾ºÅ
----@param name string Ãû×Ö
----@param value function|string ¾ßÌåÇ¨ÒÆ·½·¨»òsql
+---@param version number ï¿½æ±¾ï¿½ï¿½
+---@param name string ï¿½ï¿½ï¿½ï¿½
+---@param value function|string ï¿½ï¿½ï¿½ï¿½Ç¨ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½sql
 function ModuleBase:addMigration(version, name, value)
   local migrations = rawget(self, 'migrations')
   --self:logDebug('addMigration', migrations);
@@ -99,6 +99,7 @@ function ModuleBase:addMigration(version, name, value)
   table.insert(migrations, { version = version, name = name, value = value });
 end
 
+---@alias EventName string|"ProtocolOnRecv"|"EnemyCommandEvent"|"BattleCalcDexEvent"|"ItemInitEvent"|"CheckDummyDollEvent"|"ItemUseEvent"|"ItemAttachEvent"|"ItemDetachEvent"|"ResetCharaBattleStateEvent"|"CharaSavedEvent"|"PetFieldEvent"|"BeforeCharaSaveEvent"|"CharaDeletedEvent"|"DamageCalculateEvent"|"ScriptCallEvent"|"DropRateEvent"|"LoginEvent"|"BattleEscapeEvent"|"LoginGateEvent"|"BattleSealRateEvent"|"LogoutEvent"|"CalcCriticalRateEvent"|"TalkEvent"|"BattleDodgeRateEvent"|"BattleCounterRateEvent"|"BattleMagicDamageRateEvent"|"BattleMagicRssRateEvent"|"ItemBoxGenerateEvent"|"LevelUpEvent"|"BattleStartEvent"|"ItemBoxLootEvent"|"BattleOverEvent"|"WarpEvent"|"AfterWarpEvent"|"ItemBoxEncountRateEvent"|"ItemBoxEncountEvent"|"TribeRateEvent"|"HttpRequestEvent"|"DropEvent"|"TitleChangedEvent"|"BattleHealCalculateEvent"|"GetExpEvent"|"BattleSkillExpEvent"|"ProductSkillExpEvent"|"PetLevelUpEvent"|"BattleExitEvent"|"PreItemPickUpEvent"|"RightClickEvent"|"PreItemDropEvent"|"BattleInjuryEvent"|"ShutDownEvent"|"ItemExpansionEvent"|"PartyEvent"|"TitleCheckCallEvent"|"SealEvent"|"RankUpEvent"|"TechOptionEvent"|"GatherItemEvent"|"BattleActionEvent"|"PetTimeDeleteEvent"|"ItemDropEvent"|"BattleSurpriseEvent"|"VSEnemyCreateEvent"|"ItemOverLapEvent"|"CharActionEvent"|"BattleSummonEnemyEvent"|"CalcFpConsumeEvent"|"MergeItemEvent"|"BattleActionTargetEvent"|"BattleSummonedEnemyEvent"|"BattleSkillCheckEvent"|"BattleNextEnemyEvent"|"ItemString"|"BattleLuaSkillEvent"|"BattleNextEnemyInitEvent"|"ItemPickUpEvent"|"BeforeBattleTurnEvent"|"GetLoginPointEvent"|"BeforeBattleTurnStartEvent"|"PetPickUpEvent"|"AfterBattleTurnEvent"|"ItemDurabilityChangedEvent"|"AfterCalcCharaBpEvent"|"HeadCoverEvent"|"AfterCalcCharaStatusEvent"|"PetDropEvent"|"StatusCalcEvent"|"BattleGetProfitEvent"|"ItemConsumeEvent"
 ---@alias EventName string|"ProtocolOnRecv"|"EnemyCommandEvent"|"BattleCalcDexEvent"|"ItemInitEvent"|"CheckDummyDollEvent"|"ItemUseEvent"|"ItemAttachEvent"|"ItemDetachEvent"|"ResetCharaBattleStateEvent"|"CharaSavedEvent"|"PetFieldEvent"|"BeforeCharaSaveEvent"|"CharaDeletedEvent"|"DamageCalculateEvent"|"ScriptCallEvent"|"DropRateEvent"|"LoginEvent"|"BattleEscapeEvent"|"LoginGateEvent"|"BattleSealRateEvent"|"LogoutEvent"|"CalcCriticalRateEvent"|"TalkEvent"|"BattleDodgeRateEvent"|"BattleCounterRateEvent"|"BattleMagicDamageRateEvent"|"BattleMagicRssRateEvent"|"ItemBoxGenerateEvent"|"LevelUpEvent"|"BattleStartEvent"|"ItemBoxLootEvent"|"BattleOverEvent"|"WarpEvent"|"AfterWarpEvent"|"ItemBoxEncountRateEvent"|"ItemBoxEncountEvent"|"TribeRateEvent"|"HttpRequestEvent"|"DropEvent"|"TitleChangedEvent"|"BattleHealCalculateEvent"|"GetExpEvent"|"BattleSkillExpEvent"|"ProductSkillExpEvent"|"PetLevelUpEvent"|"BattleExitEvent"|"PreItemPickUpEvent"|"RightClickEvent"|"PreItemDropEvent"|"BattleInjuryEvent"|"ShutDownEvent"|"ItemExpansionEvent"|"PartyEvent"|"TitleCheckCallEvent"|"SealEvent"|"RankUpEvent"|"TechOptionEvent"|"GatherItemEvent"|"BattleActionEvent"|"PetTimeDeleteEvent"|"ItemDropEvent"|"BattleSurpriseEvent"|"VSEnemyCreateEvent"|"ItemOverLapEvent"|"CharActionEvent"|"BattleSummonEnemyEvent"|"CalcFpConsumeEvent"|"MergeItemEvent"|"BattleActionTargetEvent"|"BattleSummonedEnemyEvent"|"BattleSkillCheckEvent"|"BattleNextEnemyEvent"|"ItemString"|"BattleLuaSkillEvent"|"BattleNextEnemyInitEvent"|"ItemPickUpEvent"|"BeforeBattleTurnEvent"|"GetLoginPointEvent"|"BeforeBattleTurnStartEvent"|"PetPickUpEvent"|"AfterBattleTurnEvent"|"ItemDurabilityChangedEvent"|"AfterCalcCharaBpEvent"|"HeadCoverEvent"|"AfterCalcCharaStatusEvent"|"PetDropEvent"|"StatusCalcEvent"|"BattleGetProfitEvent"|"ItemConsumeEvent"|"CharaStallSoldEvent"|"CharaStallStartEvent"|"CharaStallEndEvent"|"CharaStallBrowseEvent"
 
 ---@param eventName EventName
@@ -111,9 +112,20 @@ function ModuleBase:regCallback(eventName, fn, extSign)
     fn = eventName;
     eventName = '_' .. self.name .. '_cb_' .. self.lastIx;
   end
-  local fnIndex = regGlobalEvent(eventName, fn, self.name, extSign);
-  self:logDebug('regCallback', eventName, self.lastIx, fnIndex, fn);
-  self.callbacks[self.lastIx] = { key = eventName, fnIndex = fnIndex, fn = fn, extSign = extSign };
+  local selfModule = self;
+  local wrappedFn = function(...)
+    local prevCtx = _G.currentExecutingModule;
+    _G.currentExecutingModule = selfModule;
+    local r1, r2, r3, r4 = pcall(fn, ...);
+    _G.currentExecutingModule = prevCtx;
+    if not r1 then
+      error(r2);
+    end
+    return r2, r3, r4;
+  end
+  local fnIndex = regGlobalEvent(eventName, wrappedFn, self.name, extSign);
+  self:logDebug('regCallback', eventName, self.lastIx, fnIndex, wrappedFn);
+  self.callbacks[self.lastIx] = { key = eventName, fnIndex = fnIndex, fn = wrappedFn, extSign = extSign };
   return eventName, self.lastIx, fnIndex;
 end
 
@@ -233,13 +245,26 @@ end
 
 function ModuleBase:unload()
   for i, part in pairs(self.parts) do
-    part.onUnload(self);
+    if part.onUnload then
+      pcall(function() part.onUnload(self) end);
+    end
   end
-  self:onUnload()
+  if self.onUnload then
+    pcall(function() self:onUnload() end);
+  end
   for i, fnCb in pairs(self.callbacks) do
-    removeGlobalEvent(fnCb.key, fnCb.fnIndex, self.name, fnCb.extSign);
+    pcall(function() removeGlobalEvent(fnCb.key, fnCb.fnIndex, self.name, fnCb.extSign) end);
   end
   self.callbacks = {};
+  if _G.NpcManager then
+    pcall(function() _G.NpcManager.unloadModuleNpcs(self.name) end);
+  end
+  if self.npcList then
+    for i, v in pairs(self.npcList) do
+      pcall(function() NL.DelNpc(v) end);
+    end
+    self.npcList = {};
+  end
 end
 
 function ModuleBase:onLoad()

@@ -1,10 +1,9 @@
----@class Admin:ModuleBase|ModuleType
+---@class Admin:ModuleBase|NPCPart|AssetsPart
 local Admin = ModuleBase:createModule('admin')
--- gm命令
-local commands = {}
---GM账号列表
-local gmList = { 'u01', 'u02', 'u03', 'u04', 'u05', 'aaa' };
+local commands = {};
+local gmList = { 'cgml001', 'cgml002', 'cgml003'};
 local gmDict = {};
+
 table.forEach(gmList, function(e)
   gmDict[e] = true
 end)
@@ -12,10 +11,19 @@ end)
 function commands.module(charIndex, args)
   if args[1] == 'reload' then
     reloadModule(args[2]);
+  elseif args[1] == 'hotswap' or args[1] == 'hs' then
+    hotswapModule(args[2]);
   elseif args[1] == 'unload' then
     unloadModule(args[2]);
   elseif args[1] == 'load' then
     loadModule(args[2]);
+  end
+end
+
+function commands.reloadcom(charIndex, args)
+  local subModule = args[1];
+  if subModule and subModule ~= '' then
+    hotswapModule(subModule);
   end
 end
 
@@ -26,9 +34,6 @@ function commands.dofile(charIndex, args)
   end
 end
 
----是否管理员
----@param charIndex CharIndex
----@return boolean
 function Admin:isAdmin(charIndex)
   local cdKey = Char.GetData(charIndex, CONST.CHAR_CDK)
   if not gmDict[cdKey] then
