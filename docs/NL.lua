@@ -1302,11 +1302,12 @@ function NL.RegBattleLuaSkillEvent(Dofile, InitFuncName) end
 
 ---BattleLuaSkillEvent的回调函数
 ---[@group NL.RegBattleLuaSkillEvent]
----@param charIndex number 对象index
 ---@param battleIndex number 战斗Index
+---@param charIndex number 对象index
 ---@param SKLFunc function 发送SKL技能封包，所有参数可选,参考[SKLFunc]
----@param DMGFunc function 发送伤害封包，参考[DMGFunc]
-function BattleLuaSkillEventCallback(battleIndex, charIndex, SKLFunc, DMGFunc) end
+---@param ActFunc function 发送技能动作数据节，参考[ActFunc]
+---@param MsgFunc function 发送战斗消息封包，参考[MsgFunc]
+function BattleLuaSkillEventCallback(battleIndex, charIndex, SKLFunc, ActFunc, MsgFunc) end
 
 ---发送SKL技能封包，支持0-3个参数
 ---[@group NL.RegBattleLuaSkillEvent]
@@ -1330,12 +1331,32 @@ function SKLFunc(TechId) end
 ---发送SKL技能封包，支持0-3个参数
 function SKLFunc() end
 
----发送伤害封包
+---发送技能动作数据节，type决定后续参数
 ---[@group NL.RegBattleLuaSkillEvent]
----@param pos number 目标位置
----@param flg number 攻击效果旗标，参考CONST.TECH_CONST.BM_FLAG_XXX
----@param dmg number 伤害/治疗数值
-function DMGFunc(pos, flg, dmg) end
+---TechLua_ACT_DAMAGE: ActFunc(type, target, flag, damage)
+---TechLua_ACT_EFFECT: ActFunc(type, target, flag)
+---TechLua_ACT_ACTION: ActFunc(type, target, flag)
+---TechLua_ACT_REVIVE: ActFunc(type, target, flag, hp)
+---TechLua_ACT_BREAK: ActFunc(type, target, flag, damage)
+---TechLua_ACT_DETECT: ActFunc(type, target, flag)
+---TechLua_ACT_ALLOWANCE: ActFunc(type, target, value, flag)
+---TechLua_ACT_VALUE: ActFunc(type, value)
+---TechLua_ACT_STATUS_ATTACK: ActFunc(type, target, flag, damage)
+---@param type number 动作类型，使用CONST.TechLua_ACT_*常量
+---@param arg1 number 第一个动作参数
+---@param arg2? number 第二个动作参数
+---@param arg3? number 第三个动作参数
+function ActFunc(type, arg1, arg2, arg3) end
+
+---发送战斗消息封包：CHT|<battlePos>|<color>|<font>|<durationTicks>|<text>|
+---数字字段按大写十六进制写入封包
+---[@group NL.RegBattleLuaSkillEvent]
+---@param battlePos number 战斗位置
+---@param text string 聊天内容，最多保留255字节
+---@param color? number 聊天颜色，默认4，正常范围0x0-0xC
+---@param font? number 字体类型，默认3，正常范围0x0-0xD
+---@param durationTicks? number 持续计数，默认0；按战斗场景更新递减，不是毫秒
+function MsgFunc(battlePos, text, color, font, durationTicks) end
 
 ---物品耐久变化事件
 ---[@group NL.RegItemDurabilityChangedEvent]
