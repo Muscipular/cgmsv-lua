@@ -271,6 +271,39 @@ function Char.GetSkillLv(CharIndex, Slot) end
 ---@return number @返回-1代表失败，其他为技能栏位置，参数数据类型不对返回-2，对象index无效返回-3，技能的ID错误返回-4。
 function Char.HaveSkill(CharIndex, SkillID) end
 
+---将 Tech 绑定到玩家已有的 Skill，并接管该 Skill 的 Tech 列表。
+---此接口不校验技能等级或职业。
+---@param charIndex number 目标玩家的对象 index，必须为整数。
+---@param skillId number 玩家已有的 Skill ID。
+---@param techId number Tech ID。
+---@param persistent boolean 必须为布尔值；true 表示在玩家保存时写入永久关系并在登录时恢复，false 表示临时关系，不写入存档。
+---@return number ret @成功返回从 0 开始的实际 Tech 槽位；重复绑定且持久性相同返回当前槽位。-1 为玩家无效；-2 为 ID 超出业务范围或定义不存在；-3 为 Skill ID 在多个槽位重复或同一 Tech 的持久性冲突；-4 为玩家未持有该 Skill；-5 为 Skill 槽位超出可用容量、Tech 绑定已满或重复绑定没有可用槽位；-6 为类别、操作或处理器不相容；-8 为存储内存绑定失败。
+function Char.BindTech(charIndex, skillId, techId, persistent) end
+
+---解除指定 Skill 的一条动态 Tech 绑定。
+---@param charIndex number 目标玩家的对象 index，必须为整数。
+---@param skillId number Skill ID。
+---@param techId number Tech ID。
+---@return number ret @成功返回 0，无对应绑定时也返回 0；-1 为玩家无效；-2 为 ID 超出业务范围；-8 为存储内存绑定失败。
+function Char.UnbindTech(charIndex, skillId, techId) end
+
+---@class CharTechBinding
+---@field techId number Tech ID。
+---@field slot number 从 0 开始的实际 Tech 槽位；当前没有可用槽位或未出现在 Tech 列表中时为 -1。
+---@field persistent boolean 是否为永久关系；永久关系在玩家保存时写入存档，临时关系不保存。
+---@field available boolean 当前定义相容、对应 Skill 槽位有效且该绑定位于 Tech 容量内时为 true。
+
+---@class CharSkillBinding
+---@field skillId number 原有 Skill 的 ID。
+---@field slot number 从 0 开始的 Skill 槽位；玩家未持有该 Skill 或同一 ID 在多个槽位重复时为 -1。
+---@field available boolean Skill 定义属于支持的类别、玩家唯一持有该 Skill 且槽位在可用容量内时为 true。
+---@field techs CharTechBinding[] 按绑定顺序排列、从 1 开始的连续数组，包含永久和临时关系。
+
+---查询玩家当前的动态 Tech 绑定记录，包含定义失效或槽位不可用的历史记录。
+---@param charIndex number 目标玩家的对象 index。
+---@return CharSkillBinding[]|number bindings @成功返回从 1 开始的连续数组；无绑定时为空表，玩家无效时返回 -1。
+function Char.GetSkillBindings(charIndex) end
+
 ---获取指定玩家的指定位置的技能ID。
 ---@param CharIndex  number 目标的 对象index。
 ---@param Slot  number 技能位置，不能大于人物自身的技能栏位数量。
@@ -793,6 +826,18 @@ function Char.SimpleLogout(charIndex) end
 ---封号
 ---@param charIndex CharIndex
 function Char.Ban(charIndex) end
+
+---检查用户密码是否正确
+---@param cdkey string 用户CDKey
+---@param password string 原文密码
+---@return boolean @密码正确返回true，否则返回false
+function Char.CheckPassword(cdkey, password) end
+
+---生成用户密码哈希
+---@param cdkey string 用户CDKey
+---@param password string 原文密码
+---@return string @密码哈希
+function Char.HashPassword(cdkey, password) end
 
 ---设置对象自动移动
 ---@param charaIndex number
