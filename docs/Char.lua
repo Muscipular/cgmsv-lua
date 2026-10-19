@@ -397,6 +397,22 @@ function Char.FeverStart(CharIndex) end
 ---@return number @1结束打卡成功，0结束打卡失败，参数数据类型不对返回-2，对象index无效返回-3。
 function Char.FeverStop(CharIndex) end
 
+---设置或更换玩家的虚拟坐骑外观。
+---仅在普通场景且未骑乘真实宠物时显示；战斗及观战期间保留选择，返回普通场景后恢复。
+---真实骑宠优先显示，解除真实骑宠后恢复虚拟外观；战斗中调用只更新选择。
+---不占宠物栏，不改变真实骑宠、宠物属性或移动速度；。
+---@param charIndex number 玩家对象index。
+---@param animeNo number 虚拟骑宠图档号。
+---@return number @0设置成功，-1玩家索引无效或对象不是有效玩家，-2图档号错误。
+function Char.FakeRideStart(charIndex, animeNo) end
+
+---清除玩家的虚拟坐骑选择及显示。
+---不会解除真实骑宠。
+---未启用虚拟坐骑时重复调用仍成功。。
+---@param charIndex number 玩家对象index。
+---@return number @0停止成功或本来未启用，-1玩家索引无效或对象不是有效玩家。
+function Char.FakeRideStop(charIndex) end
+
 ---为对象index设置行走前事件的回调函数，对象在行走前会触发该函数，由Lua引擎将Callback的参数传递给指定的Callback并执行。
 ---[@group Char.SetWalkPreEvent]
 ---@param Dofile?  string 要加载的脚本文件名，如果为当前文件，则定义nil即可
