@@ -121,6 +121,32 @@ local chained = {
   -- 链式规则: 返回值小于 0 时拦截，其他返回值继续执行
   ProtocolOnRecv = makeStopBoolOrNoneZeroChain(1),
 
+  -- 事件参数: ProtocolOnSend(fd, head, data)
+  -- 链式规则: 数字非 0 时拦截；返回表替换参数并传给后续回调
+  ProtocolOnSend = function(list, fd, head, data)
+    local packet = data;
+    local replaced = false;
+    for _, fn in ipairs(list) do
+      -- 传入副本，未返回表时不保留对参数的就地修改
+      local current = {};
+      for key, value in pairs(packet) do
+        current[key] = value;
+      end
+      local res = fn(fd, head, current);
+      if type(res) == 'number' and res ~= 0 then
+        return res;
+      end
+      if type(res) == 'table' then
+        packet = res;
+        replaced = true;
+      end
+    end
+    if replaced then
+      return packet;
+    end
+    return 0;
+  end,
+
   -- 事件参数: BattleDamageEvent(charIndex, defCharIndex, oriDamage, damage, battleIndex, com1, com2, com3, defCom1, defCom2, defCom3, flg, exFlag)
   -- 链式参数位置: 4，对应参数 damage
   BattleDamageEvent = makeReduceValueChain(4, acceptNumber, normalizeBattleDamage),
@@ -361,6 +387,8 @@ local function takeCallbacks(eventName, extraSign, shouldInit)
       end
     elseif eventName == 'ProtocolOnRecv' then
       Protocol.OnRecv(nil, name, extraSign);
+    elseif eventName == 'ProtocolOnSend' then
+      Protocol.OnSend(nil, name, extraSign);
     end
     return list, name, fn1;
   end
