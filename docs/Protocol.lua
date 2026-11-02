@@ -16,6 +16,21 @@ function Protocol.OnRecv(Dofile, FuncName, PacketID) end
 ---@return number @返回0则不拦截该封包，返回1则拦截该封包（服务端将不会进一步处理该封包，等同于中转封包过滤）。
 function OnRecvCallBack(Fd, Head, Packet) end
 
+---注册指定封包头的发送回调
+---[@group Protocol.OnSend]
+---@param Dofile string|nil 要加载的脚本文件；传nil表示不加载。
+---@param FuncName string 全局回调函数名，签名见[OnSendCallBack]。
+---@param PacketID string 发送封包头。
+function Protocol.OnSend(Dofile, FuncName, PacketID) end
+
+---发送封包前触发
+---[@group Protocol.OnSend]
+---@param Fd number 接收封包的客户端连接号。
+---@param Head string 封包头。
+---@param Packet (number|string)[] 封包内容。
+---@return any @非零数字阻止原包；零、nil及其他非表值放行原包；返回table则替换内容。
+function OnSendCallBack(Fd, Head, Packet) end
+
 ---根据玩家客户端连接号获取玩家对象
 ---@param Fd  number 网络套接字ID。
 ---@return number @成功返回对象index，失败返回-1。
